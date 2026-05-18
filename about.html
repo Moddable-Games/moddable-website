@@ -1,0 +1,70 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>About — Moddable.Games</title>
+<link rel="stylesheet" href="_mg.css">
+<style>body{background:#f5f4ef}</style>
+</head>
+<body>
+<div id="nav-root"></div>
+<div id="page-hero"></div>
+
+<section style="background:#f5f4ef;padding:72px 32px 96px">
+  <div style="max-width:720px;margin:0 auto">
+    <div style="font-family:var(--mg-font-body);font-size:19px;line-height:1.65;color:#1f2228;display:flex;flex-direction:column;gap:32px">
+      <p style="font-size:23px;line-height:1.5;color:#14161c;font-style:italic"><em>Moddable.Games</em> is a workshop publishing open-source rulebook mods for the board games already on your shelf — and three original games designed to be modded from day one.</p>
+
+      <div>
+        <h2 style="font-family:var(--mg-font-display);font-weight:600;font-size:32px;line-height:1.15;letter-spacing:-0.4px;color:#14161c;margin:0 0 16px">The premise.</h2>
+        <p style="margin:0 0 16px">Tabletop publishing is conservative. Rules are copyrighted, artwork owned, trademarks defended — for understandable reasons. But that defensive crouch leaves a lot on the table. Half the fun of a game is the way your group plays it, not the way the publisher intended.</p>
+        <p style="margin:0">We do two things. We write rules patches you can run with the components in the box you already own — no expansions to buy, no replacement parts to print, just a PDF and a flat surface. And we design original games whose entire rulebook is in a git repo so anyone can fork it.</p>
+      </div>
+
+      <div>
+        <h2 style="font-family:var(--mg-font-display);font-weight:600;font-size:32px;line-height:1.15;letter-spacing:-0.4px;color:#14161c;margin:0 0 16px">What we don't do.</h2>
+        <p style="margin:0">We don't sell boards. We don't run a Kickstarter. We don't manufacture meeples. The whole operation is digital — the only physical thing we make is the conversation around your kitchen table.</p>
+      </div>
+
+      <div>
+        <h2 style="font-family:var(--mg-font-display);font-weight:600;font-size:32px;line-height:1.15;letter-spacing:-0.4px;color:#14161c;margin:0 0 16px">Where to find us.</h2>
+        <div style="display:grid;grid-template-columns:1fr 1fr;gap:12px;margin-top:4px" id="links-grid"></div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<div id="footer-root"></div>
+<script src="_mg.js"></script>
+<script>
+const { el, navbar, footer, pageHero } = MG;
+document.getElementById('nav-root').appendChild(navbar('About'));
+document.getElementById('footer-root').appendChild(footer());
+document.getElementById('page-hero').appendChild(pageHero({
+  eyebrow:'▲ ABOUT MODDABLE',
+  title:'Creating games you already own.',
+  lede:'A workshop of designers, modders and rule-tinkerers reshaping the boards already on your shelf.',
+  withHorizon:true,
+}));
+
+const links = [
+  { label:'Discord', sub:'2,400+ members', color:'#5865f2', href:'community.html' },
+  { label:'Team',    sub:'Six humans, no AI', color:'#0c4f8d', href:'team.html' },
+  { label:'News',    sub:'Strictly written by humans', color:'#3a9928', href:'news.html' },
+  { label:'Mods',    sub:'12 open-source mods', color:'#d11a1a', href:'mods.html' },
+];
+const lg = document.getElementById('links-grid');
+links.forEach(l => {
+  const a = el('a',{href:l.href,style:{display:'flex',alignItems:'center',gap:'12px',padding:'18px',background:'#fff',border:'1px solid #e6e3d8',borderRadius:'14px',textDecoration:'none',color:'inherit',transition:'border-color 150ms'}});
+  a.addEventListener('mouseenter',()=>a.style.borderColor='#14161c');
+  a.addEventListener('mouseleave',()=>a.style.borderColor='#e6e3d8');
+  a.appendChild(el('div',{style:{width:'32px',height:'32px',background:l.color,borderRadius:'8px',flex:'none'}}));
+  const t = el('div');
+  t.appendChild(el('div',{style:{fontFamily:'var(--mg-font-display)',fontWeight:600,fontSize:'15px',color:'#14161c'}},l.label));
+  t.appendChild(el('div',{style:{fontFamily:'var(--mg-font-mono)',fontSize:'12px',color:'#7a8290'}},l.sub));
+  a.appendChild(t); lg.appendChild(a);
+});
+</script>
+</body>
+</html>

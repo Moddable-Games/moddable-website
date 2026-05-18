@@ -1,0 +1,160 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>All mods — Moddable.Games</title>
+<link rel="stylesheet" href="_mg.css">
+<style>body { background:#f5f4ef; }</style>
+</head>
+<body>
+<div id="nav-root"></div>
+
+<!-- Page hero -->
+<section style="background:#000;color:#fff;padding:64px 32px 88px;position:relative;overflow:hidden">
+  <div style="position:absolute;right:-150px;top:10%;width:700px;height:700px;background:radial-gradient(circle,rgba(58,123,232,0.28) 0%,transparent 65%);pointer-events:none"></div>
+  <div style="max-width:1200px;margin:0 auto;position:relative">
+    <div style="font-family:var(--mg-font-pixel);font-size:10px;color:#6fb5ff;letter-spacing:2px;margin-bottom:22px">▲ THE LIBRARY</div>
+    <h1 style="font-family:var(--mg-font-display);font-weight:600;font-size:clamp(48px,7vw,96px);line-height:0.95;letter-spacing:-0.025em;margin:0 0 20px">All mods. One library.</h1>
+    <p style="font-family:var(--mg-font-body);font-size:18px;line-height:1.55;color:rgba(255,255,255,0.82);max-width:600px;margin:0" id="hero-sub"></p>
+  </div>
+</section>
+
+<!-- Filter + grid -->
+<section style="background:#f5f4ef;padding:40px 32px 96px">
+  <div style="max-width:1200px;margin:0 auto">
+    <div style="display:flex;gap:16px;margin-bottom:32px;flex-wrap:wrap;align-items:center">
+      <div style="position:relative;flex:1 1 280px;max-width:360px">
+        <input id="search-input" type="search" placeholder="Search mods or a base game…" style="width:100%;height:44px;padding:0 16px 0 44px;border:1px solid #e6e3d8;border-radius:9999px;font-family:var(--mg-font-body);font-size:14px;background:#fff;outline:none">
+        <span style="position:absolute;left:16px;top:50%;transform:translateY(-50%);opacity:0.4;font-size:16px;pointer-events:none">⌕</span>
+      </div>
+      <div id="cat-filters" style="display:flex;gap:8px;flex-wrap:wrap;margin-left:auto"></div>
+    </div>
+    <div style="display:flex;justify-content:space-between;align-items:center;margin-bottom:16px;flex-wrap:wrap;gap:8px">
+      <div id="count-label" style="font-family:var(--mg-font-pixel);font-size:9px;color:#14161c;letter-spacing:1.5px"></div>
+      <div style="font-family:var(--mg-font-mono);font-size:12px;color:#7a8290">Sorted by base game</div>
+    </div>
+    <div id="mods-grid" style="display:grid;grid-template-columns:repeat(auto-fit,minmax(280px,1fr));gap:20px"></div>
+    <div id="empty-state" style="display:none;background:#fff;border:1px solid #e6e3d8;border-radius:16px;padding:48px;text-align:center;margin-top:16px">
+      <div style="font-family:var(--mg-font-pixel);font-size:10px;color:#d11a1a;letter-spacing:1.5px;margin-bottom:12px">▲ NO MATCH</div>
+      <h3 style="font-family:var(--mg-font-display);font-weight:600;font-size:24px;color:#14161c;margin:0 0 8px">Nothing in the library matches.</h3>
+      <p style="font-family:var(--mg-font-body);font-size:15px;color:#4f5764;margin:0 0 20px">Want to write the mod yourself?</p>
+      <a href="submit.html" style="display:inline-flex;align-items:center;height:48px;padding:0 22px;background:#14161c;color:#fff;border-radius:9999px;font-family:var(--mg-font-body);font-weight:600;font-size:15px;text-decoration:none">Submit a mod</a>
+    </div>
+  </div>
+</section>
+
+<div id="footer-root"></div>
+<script src="_mg.js"></script>
+<script>
+const { navbar, footer, modCard } = MG;
+document.getElementById('nav-root').appendChild(navbar('Mods'));
+document.getElementById('footer-root').appendChild(footer());
+
+const ALL_MODS = [
+  // ── Moddable originals ──────────────────────────────────────────────────
+  { category:'Reskin',           baseGame:'Talisman 4e',
+    title:'Talisman: Hexed',
+    body:"Replaces the Talisman boards with 61 hexagonal tiles arranged in concentric rings — open-world hex system, every game lays out differently.",
+    stats:'2–6 players · 90 min · 13+', href:'mod-detail.html', source:'Moddable.Games' },
+
+  { category:'Rebalance',        baseGame:'Twilight Imperium 4e',
+    title:'Hyper Imperium',
+    body:"Hyper Movement, Hyper Trades, Hyper Objectives. A faster ruleset for TI4 + Prophecy of Kings that keeps the politics intact.",
+    stats:'3–6 players · 4–6 hr · 14+', source:'Moddable.Games' },
+
+  { category:'Total conversion', baseGame:'Catan',
+    title:'Nuke Catan',
+    body:"Post-apocalyptic overhaul. Sheep are scarce, brick is currency. Once per game, a player may press The Button — one hex is permanently irradiated.",
+    stats:'3–5 players · 60 min · 12+', source:'Moddable.Games' },
+
+  // ── Community & publicly available variants ────────────────────────────
+  { category:'Total conversion', baseGame:'Chess',
+    title:'Fog of War Chess',
+    body:"Players see only the squares their own pieces can legally move to — no checks, no checkmates, only capture the king. Invented by Jens Bæk Nielsen & Torben Osted (1989).",
+    stats:'2 players · 20–40 min · 10+', source:'chessvariants.com' },
+
+  { category:'Reskin',           baseGame:'Chess',
+    title:'4-Player Chess',
+    body:"Four players, four armies, one board. Free-for-all or teams. The de facto standard for multi-player chess — widely available on chess.com and as PnP.",
+    stats:'4 players · 30 min · 10+', source:'chess.com/variants' },
+
+  { category:'Total conversion', baseGame:'Chess',
+    title:'Hexagonal Chess (Glinski)',
+    body:"Władysław Gliński's 1936 hex-board variant. 91 hexagonal cells, 9 pawns per side, bishops that each stay on one of three cell colours. Fully documented and free to print.",
+    stats:'2 players · 30–60 min · 12+', source:'chessvariants.com' },
+
+  { category:'Rebalance',        baseGame:'Monopoly',
+    title:'Auction Monopoly',
+    body:"Every unowned property that a player lands on must immediately go to auction — the official rule most players never use. Dramatically faster, dramatically more strategic.",
+    stats:'2–6 players · 60 min · 8+', source:'Monopoly official rules' },
+
+  { category:'Total conversion', baseGame:'Monopoly',
+    title:'Anti-Monopoly',
+    body:"Two teams play by different rules on the same board: Monopolists charge high rent on monopolies; Competitors charge cost-price only. Published by Ralph Anspach in 1973.",
+    stats:'2–6 players · 60 min · 10+', source:'Public domain variant' },
+
+  { category:'Rebalance',        baseGame:'Catan',
+    title:'Flooded Catan',
+    body:"Community variant from the Catan Wiki: tiles flood every few rounds. Players can win by being the last settlement standing, not just by hitting 10 VP.",
+    stats:'3–4 players · 75 min · 10+', source:'catan.fandom.com' },
+
+  { category:'Total conversion', baseGame:'Catan',
+    title:'The Diamond Mine',
+    body:"A single-hex unofficial expansion: swap one pasture for the diamond mine. Diamonds substitute for ore in development card purchases. Self-contained rules, free to print.",
+    stats:'3–4 players · 60 min · 10+', source:'scribd.com — meepleeater' },
+
+  { category:'Rebalance',        baseGame:'Twilight Imperium 4e',
+    title:'Shattered Ascension',
+    body:"PsiComa's decade-long TI3 remix — rebalanced factions, overhauled agenda phase, new card sets. The most thorough community TI variant in existence. Tabletop Simulator module available.",
+    stats:'3–8 players · 6–12 hr · 16+', source:'boardgamegeek.com' },
+
+  { category:'Rebalance',        baseGame:'Risk',
+    title:'CivRisk',
+    body:"Risk rewritten to play like Civilisation: choose a civilisation and leader, build through growth tiers, discover ruins and barbarian camps. Chris Grey, 2023. ePub rules free to download.",
+    stats:'3–5 players · 180 min · 14+', source:'Chris Grey — self-published' },
+
+  { category:'Reskin',           baseGame:'Risk',
+    title:'Custom World Risk',
+    body:"Replace the standard board with your own map — Middle-earth, a fantasy continent, your neighbourhood. The rules stay identical, only the geography changes.",
+    stats:'2–6 players · 120 min · 12+', source:'Community / BGG' },
+];
+
+const filters = ['All','Total conversion','Rebalance','Reskin'];
+let activeCat = 'All', searchVal = '';
+
+document.getElementById('hero-sub').textContent = `${ALL_MODS.length} rulebook mods across ${new Set(ALL_MODS.map(m=>m.baseGame)).size} base games. Filter by mod-type, or search for the one you already own.`;
+
+function renderFilters() {
+  const el2 = document.getElementById('cat-filters');
+  el2.innerHTML = '';
+  filters.forEach(f => {
+    const a = f === activeCat;
+    const b = document.createElement('button');
+    b.textContent = f;
+    Object.assign(b.style, { fontFamily:'var(--mg-font-body)', fontWeight:600, fontSize:'13px', height:'36px', padding:'0 14px', borderRadius:'9999px', border: a?'none':'1px solid #c3c5cc', background: a?'#000':'transparent', color: a?'#fff':'#14161c', cursor:'pointer', transition:'all 150ms' });
+    b.addEventListener('click', () => { activeCat = f; renderFilters(); renderGrid(); });
+    el2.appendChild(b);
+  });
+}
+
+function renderGrid() {
+  const q = searchVal.toLowerCase();
+  const visible = ALL_MODS.filter(m =>
+    (activeCat === 'All' || m.category === activeCat) &&
+    (!q || m.title.toLowerCase().includes(q) || m.baseGame.toLowerCase().includes(q))
+  );
+  const grid = document.getElementById('mods-grid');
+  const empty = document.getElementById('empty-state');
+  grid.innerHTML = '';
+  document.getElementById('count-label').textContent = `▲ ${visible.length} OF ${ALL_MODS.length} MODS`;
+  if (visible.length === 0) { empty.style.display = 'block'; return; }
+  empty.style.display = 'none';
+  visible.forEach(m => grid.appendChild(MG.modCard(m)));
+}
+
+document.getElementById('search-input').addEventListener('input', e => { searchVal = e.target.value; renderGrid(); });
+renderFilters(); renderGrid();
+</script>
+</body>
+</html>

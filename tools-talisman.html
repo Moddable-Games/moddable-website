@@ -1,0 +1,248 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Talisman tools — Moddable.Games</title>
+<link rel="stylesheet" href="_mg.css">
+<style>
+body { background:#f5f4ef; }
+.tog-btn { width:36px;height:36px;border-radius:9999px;cursor:pointer;font-family:var(--mg-font-mono);font-weight:600;font-size:13px;border:1px solid #e6e3d8;transition:all 120ms; }
+</style>
+</head>
+<body>
+<div id="nav-root"></div>
+
+<section style="background:#000;color:#fff;padding:56px 32px 72px;position:relative;overflow:hidden">
+  <div style="position:absolute;right:-80px;top:20%;width:500px;height:500px;background:radial-gradient(circle,rgba(93,42,138,0.3) 0%,transparent 65%);pointer-events:none"></div>
+  <div style="max-width:1200px;margin:0 auto;position:relative">
+    <a href="tools.html" style="font-family:var(--mg-font-mono);font-size:12px;color:rgba(255,255,255,0.65);text-decoration:none">← All tools</a>
+    <div style="font-family:var(--mg-font-pixel);font-size:10px;color:#c97afb;letter-spacing:1.5px;margin:20px 0 16px">▲ TALISMAN: HEXED</div>
+    <h1 style="font-family:var(--mg-font-display);font-weight:600;font-size:clamp(44px,5.5vw,80px);line-height:1.0;letter-spacing:-0.025em;margin:0 0 18px">Talisman tools.</h1>
+    <p style="font-family:var(--mg-font-body);font-size:17px;line-height:1.55;color:rgba(255,255,255,0.75);max-width:560px;margin:0">Character lottery, hex board generator, and encounter quick-draw. Built for <em>Talisman: Hexed</em> — the 61-tile open-world variant.</p>
+  </div>
+</section>
+
+<section style="background:#f5f4ef;padding:48px 32px 96px">
+  <div style="max-width:900px;margin:0 auto;display:flex;flex-direction:column;gap:24px">
+
+    <!-- Character Lottery -->
+    <div style="background:#fff;border:1px solid #e6e3d8;border-radius:20px;padding:32px">
+      <div style="display:flex;align-items:flex-start;gap:16px;margin-bottom:22px;padding-bottom:22px;border-bottom:1px solid #e6e3d8">
+        <div style="width:6px;height:48px;background:#5d2a8a;border-radius:3px;flex:none"></div>
+        <div>
+          <div style="font-family:var(--mg-font-pixel);font-size:9px;color:#5d2a8a;letter-spacing:1.5px;margin-bottom:6px">▲ CHARACTER DRAFT</div>
+          <h3 style="font-family:var(--mg-font-display);font-weight:600;font-size:24px;color:#14161c;margin:0;letter-spacing:-0.3px">Character lottery</h3>
+          <p style="font-family:var(--mg-font-body);font-size:14px;color:#4f5764;margin:4px 0 0">Random character draw from the Talisman 4e (revised) base set.</p>
+        </div>
+      </div>
+      <div style="display:flex;gap:10px;align-items:center;margin-bottom:20px;flex-wrap:wrap">
+        <span style="font-family:var(--mg-font-mono);font-size:12px;color:#7a8290;text-transform:uppercase;letter-spacing:0.5px">Players:</span>
+        <div id="char-player-btns" style="display:flex;gap:6px"></div>
+        <div id="char-draw-btn" style="margin-left:auto"></div>
+      </div>
+      <div id="char-grid" style="display:grid;grid-template-columns:repeat(2,1fr);gap:10px"></div>
+    </div>
+
+    <!-- Hex Board Generator -->
+    <div style="background:#fff;border:1px solid #e6e3d8;border-radius:20px;padding:32px">
+      <div style="display:flex;align-items:flex-start;gap:16px;margin-bottom:22px;padding-bottom:22px;border-bottom:1px solid #e6e3d8">
+        <div style="width:6px;height:48px;background:#0c4f8d;border-radius:3px;flex:none"></div>
+        <div>
+          <div style="font-family:var(--mg-font-pixel);font-size:9px;color:#0c4f8d;letter-spacing:1.5px;margin-bottom:6px">▲ BOARD SETUP</div>
+          <h3 style="font-family:var(--mg-font-display);font-weight:600;font-size:24px;color:#14161c;margin:0;letter-spacing:-0.3px">Hex board generator</h3>
+          <p style="font-family:var(--mg-font-body);font-size:14px;color:#4f5764;margin:4px 0 0">A fresh 4-ring layout on each shuffle. Visual reference for building the Hexed map.</p>
+        </div>
+      </div>
+      <div style="display:flex;justify-content:space-between;align-items:center;margin-bottom:16px">
+        <div id="board-seed" style="font-family:var(--mg-font-mono);font-size:12px;color:#7a8290"></div>
+        <div id="board-reshuffle-btn"></div>
+      </div>
+      <div id="board-wrap" style="background:#0a0d2a;border-radius:14px;padding:20px;overflow:hidden">
+        <svg id="board-svg" width="100%" viewBox="-220 -220 440 440"></svg>
+      </div>
+      <div style="display:flex;gap:12px;margin-top:14px;flex-wrap:wrap" id="board-legend"></div>
+    </div>
+
+    <!-- Encounter Quick-draw -->
+    <div style="background:#fff;border:1px solid #e6e3d8;border-radius:20px;padding:32px">
+      <div style="display:flex;align-items:flex-start;gap:16px;margin-bottom:22px;padding-bottom:22px;border-bottom:1px solid #e6e3d8">
+        <div style="width:6px;height:48px;background:#3a9928;border-radius:3px;flex:none"></div>
+        <div>
+          <div style="font-family:var(--mg-font-pixel);font-size:9px;color:#3a9928;letter-spacing:1.5px;margin-bottom:6px">▲ ENCOUNTER</div>
+          <h3 style="font-family:var(--mg-font-display);font-weight:600;font-size:24px;color:#14161c;margin:0;letter-spacing:-0.3px">Encounter quick-draw</h3>
+          <p style="font-family:var(--mg-font-body);font-size:14px;color:#4f5764;margin:4px 0 0">Draw a random encounter for any ring. Flavour text from the Hexed adventure deck.</p>
+        </div>
+      </div>
+      <div style="display:flex;gap:8px;flex-wrap:wrap;margin-bottom:20px" id="ring-filters"></div>
+      <div id="encounter-card" style="min-height:160px"></div>
+      <div style="margin-top:20px" id="encounter-draw-btn"></div>
+    </div>
+
+  </div>
+</section>
+
+<div id="footer-root"></div>
+<script src="_mg.js"></script>
+<script>
+const { T, el, btn, navbar, footer } = MG;
+document.getElementById('nav-root').appendChild(navbar('Tools'));
+document.getElementById('footer-root').appendChild(footer());
+
+/* ── CHARACTER LOTTERY ── */
+const CHARS = [
+  { name:'Warrior',   str:4, cft:2, lives:4 },
+  { name:'Wizard',    str:2, cft:4, lives:4 },
+  { name:'Druid',     str:3, cft:3, lives:4 },
+  { name:'Priest',    str:2, cft:4, lives:4 },
+  { name:'Sorceress', str:2, cft:4, lives:3 },
+  { name:'Thief',     str:2, cft:3, lives:4 },
+  { name:'Troll',     str:5, cft:1, lives:5 },
+  { name:'Ghoul',     str:3, cft:3, lives:4 },
+  { name:'Assassin',  str:3, cft:2, lives:4 },
+  { name:'Minstrel',  str:2, cft:3, lives:4 },
+  { name:'Monk',      str:3, cft:3, lives:4 },
+  { name:'Dwarf',     str:4, cft:2, lives:5 },
+];
+let charCount = 4;
+
+function mkTog(label, active, onClick) {
+  const b = document.createElement('button');
+  b.className = 'tog-btn';
+  b.textContent = label;
+  Object.assign(b.style, { background: active?'#14161c':'#f5f4ef', color: active?'#fff':'#14161c' });
+  b.addEventListener('click', onClick); return b;
+}
+
+function renderCharBtns() {
+  const w = document.getElementById('char-player-btns'); w.innerHTML = '';
+  [2,3,4,5,6].forEach(n => w.appendChild(mkTog(n, n===charCount, ()=>{ charCount=n; renderCharBtns(); drawChars(); })));
+}
+
+function drawChars() {
+  const picks = [...CHARS].sort(()=>Math.random()-0.5).slice(0,charCount);
+  const grid = document.getElementById('char-grid'); grid.innerHTML = '';
+  picks.forEach((c,i) => {
+    const card = el('div',{style:{background:'#f5f4ef',borderRadius:'12px',padding:'14px 18px',display:'flex',alignItems:'center',gap:'14px'}});
+    const av = el('div',{style:{width:'40px',height:'40px',borderRadius:'9999px',background:'#5d2a8a',display:'flex',alignItems:'center',justifyContent:'center',fontFamily:'var(--mg-font-pixel)',fontSize:'10px',color:'#fff',letterSpacing:'0.5px',flex:'none'}},`P${i+1}`);
+    const info = el('div',{style:{flex:1}});
+    info.appendChild(el('div',{style:{fontFamily:'var(--mg-font-display)',fontWeight:600,fontSize:'17px',color:'#14161c'}},c.name));
+    info.appendChild(el('div',{style:{fontFamily:'var(--mg-font-mono)',fontSize:'11px',color:'#4f5764',marginTop:'2px'}},`STR ${c.str} · CRAFT ${c.cft} · LIVES ${c.lives}`));
+    card.appendChild(av); card.appendChild(info); grid.appendChild(card);
+  });
+}
+
+renderCharBtns(); drawChars();
+document.getElementById('char-draw-btn').appendChild(btn('Draw characters','dark',drawChars));
+
+/* ── HEX BOARD GENERATOR ── */
+let boardSeed = Math.floor(Math.random()*9999);
+const RING_META = [
+  { count:1,  radius:0,   color:'#d11a1a', label:'Crown of Command' },
+  { count:6,  radius:58,  color:'#5d2a8a', label:'Inner (dungeon approach)' },
+  { count:12, radius:116, color:'#0c4f8d', label:'Middle (highlands)' },
+  { count:18, radius:174, color:'#3a9928', label:'Outer (world)' },
+];
+
+function drawBoard() {
+  document.getElementById('board-seed').textContent = `seed: ${boardSeed.toString().padStart(4,'0')}`;
+  const svg = document.getElementById('board-svg');
+  const ns = 'http://www.w3.org/2000/svg';
+  svg.innerHTML = '';
+  RING_META.forEach((ring,ri) => {
+    for (let i=0; i<ring.count; i++) {
+      const angle = (i/ring.count)*Math.PI*2 - Math.PI/2;
+      const cx = Math.round(Math.cos(angle)*ring.radius);
+      const cy = Math.round(Math.sin(angle)*ring.radius);
+      const g = document.createElementNS(ns,'g');
+      const poly = document.createElementNS(ns,'polygon');
+      poly.setAttribute('transform',`translate(${cx},${cy})`);
+      poly.setAttribute('points','0,-22 19,-11 19,11 0,22 -19,11 -19,-11');
+      const type = ((boardSeed*7+ri*13+i)%5);
+      const alpha = 0.5 + type*0.1;
+      poly.setAttribute('fill', ring.color + Math.round(alpha*255).toString(16).padStart(2,'0'));
+      poly.setAttribute('stroke', ring.color);
+      poly.setAttribute('stroke-width','1.5');
+      poly.setAttribute('stroke-opacity','0.6');
+      g.appendChild(poly);
+      if (ri===0) {
+        const txt = document.createElementNS(ns,'text');
+        txt.setAttribute('x',cx); txt.setAttribute('y',cy+5);
+        txt.setAttribute('font-size','11'); txt.setAttribute('fill','#fff');
+        txt.setAttribute('text-anchor','middle'); txt.setAttribute('pointer-events','none');
+        txt.textContent = '♛'; g.appendChild(txt);
+      }
+      svg.appendChild(g);
+    }
+  });
+  // Legend
+  const legend = document.getElementById('board-legend'); legend.innerHTML = '';
+  RING_META.forEach(r => {
+    const chip = el('div',{style:{display:'flex',alignItems:'center',gap:'6px'}});
+    chip.appendChild(el('div',{style:{width:'12px',height:'12px',background:r.color,borderRadius:'2px'}}));
+    chip.appendChild(el('span',{style:{fontFamily:'var(--mg-font-body)',fontSize:'12px',color:'#4f5764'}}),r.label);
+    chip.lastChild.textContent = r.label;
+    legend.appendChild(chip);
+  });
+}
+
+drawBoard();
+document.getElementById('board-reshuffle-btn').appendChild(btn('Reshuffle','dark',()=>{ boardSeed=Math.floor(Math.random()*9999); drawBoard(); }));
+
+/* ── ENCOUNTER QUICK-DRAW ── */
+const ENCOUNTERS = {
+  outer: [
+    { title:'Wandering Merchant',   text:"A merchant with a cart of dubious wares. You may buy 1 item from the purchase deck at half price. If you refuse, he curses you — lose 1 Strength until your next turn." },
+    { title:'The River',            text:"You approach the riverbank. Without a boat token or the Swim ability, you must roll 1d6. On a 1–2, lose 1 life to the current." },
+    { title:'Village Elder',        text:"An elder recognises your crest. Gain 2 gold. She warns you that the crown corrupts all who claim it." },
+    { title:'Goblin Scout',         text:"Craft 1. Strength 2. Reward: 1 gold and 1 Adventure card." },
+  ],
+  middle: [
+    { title:'The Highland Pass',    text:"Treacherous footing. Roll 1d6 — on a 1, lose 1 life falling. On a 5–6, you discover a hidden cache: 3 gold." },
+    { title:'Stone Circle',         text:"Ancient runes hum underfoot. Draw 2 Spell cards and keep one. Discard the other." },
+    { title:'Wandering Knight',     text:"Strength 4. Craft 1. If you defeat them, gain their Talisman. They leave a note: 'It was not worth it.'" },
+    { title:'Mountain Witch',       text:"She offers to trade. Give up 1 Craft to gain 2 Strength, or vice versa." },
+  ],
+  inner: [
+    { title:'Portal of Power',      text:"You stand at the threshold. Roll 1d6: 1–3, you are flung back to the Outer Ring; 4–6, pass freely." },
+    { title:'The Warlock',          text:"He demands a Quest. Draw a Warlock Quest card. You must complete it before claiming the Crown." },
+    { title:'Dark Elf Assassin',    text:"Craft 4. Strength 3. If she defeats you, she steals your Talisman and vanishes." },
+    { title:'Graveyard',            text:"Lose 1 life. Draw an Adventure card — it may be an ally or a further curse." },
+  ],
+  crown: [
+    { title:'Crown of Command',     text:"You hold the Crown at last. Every turn, cast the Command spell on one opponent. They lose 1 life unless they pass a Strength vs. Craft test against you. First to reduce all opponents to 0 lives wins." },
+  ],
+};
+let activeRing = 'outer';
+const RING_LABELS = { outer:'Outer', middle:'Middle', inner:'Inner', crown:'Crown' };
+const RING_COLORS = { outer:'#3a9928', middle:'#0c4f8d', inner:'#5d2a8a', crown:'#d11a1a' };
+
+function renderRingFilters() {
+  const rf = document.getElementById('ring-filters'); rf.innerHTML = '';
+  Object.entries(RING_LABELS).forEach(([key,label]) => {
+    const isA = key===activeRing;
+    const b = document.createElement('button');
+    b.textContent = label;
+    Object.assign(b.style,{fontFamily:'var(--mg-font-body)',fontWeight:600,fontSize:'13px',height:'34px',padding:'0 14px',borderRadius:'9999px',border:isA?'none':'1px solid #c3c5cc',background:isA?RING_COLORS[key]:'transparent',color:isA?'#fff':'#14161c',cursor:'pointer',transition:'all 150ms'});
+    b.addEventListener('click',()=>{ activeRing=key; renderRingFilters(); drawEncounter(); });
+    rf.appendChild(b);
+  });
+}
+
+function drawEncounter() {
+  const pool = ENCOUNTERS[activeRing];
+  const enc = pool[Math.floor(Math.random()*pool.length)];
+  const card = document.getElementById('encounter-card');
+  card.innerHTML = '';
+  const c = el('div',{style:{background:'#f5f4ef',borderRadius:'14px',padding:'24px',borderLeft:`4px solid ${RING_COLORS[activeRing]}`}});
+  c.appendChild(el('div',{style:{fontFamily:'var(--mg-font-pixel)',fontSize:'9px',color:RING_COLORS[activeRing],letterSpacing:'1.5px',marginBottom:'10px'}},`▲ ${RING_LABELS[activeRing].toUpperCase()} RING`));
+  c.appendChild(el('h4',{style:{fontFamily:'var(--mg-font-display)',fontWeight:600,fontSize:'22px',letterSpacing:'-0.3px',color:'#14161c',margin:'0 0 12px'}},enc.title));
+  c.appendChild(el('p',{style:{fontFamily:'var(--mg-font-body)',fontSize:'15px',lineHeight:'1.65',color:'#1f2228',margin:0}},enc.text));
+  card.appendChild(c);
+}
+
+renderRingFilters(); drawEncounter();
+document.getElementById('encounter-draw-btn').appendChild(btn('Draw encounter','dark',drawEncounter));
+</script>
+</body>
+</html>

@@ -1,0 +1,58 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Team — Moddable.Games</title>
+<link rel="stylesheet" href="_mg.css">
+<style>body{background:#f5f4ef}</style>
+</head>
+<body>
+<div id="nav-root"></div>
+<div id="page-hero"></div>
+
+<section style="background:#f5f4ef;padding:72px 32px 96px">
+  <div style="max-width:1200px;margin:0 auto">
+    <div id="team-grid" style="display:grid;grid-template-columns:repeat(auto-fit,minmax(280px,1fr));gap:20px"></div>
+  </div>
+</section>
+
+<div id="footer-root"></div>
+<script src="_mg.js"></script>
+<script>
+const { el, navbar, footer, pageHero } = MG;
+document.getElementById('nav-root').appendChild(navbar('About'));
+document.getElementById('footer-root').appendChild(footer());
+document.getElementById('page-hero').appendChild(pageHero({
+  eyebrow:'▲ THE TEAM',
+  title:'Six humans. Zero AI.',
+  lede:'The people who write the rules, draw the tiles, and lose every game of Nuke Catan.',
+}));
+
+const TEAM = [
+  { handle:'@ascelot',   name:'Riley', role:'Founder · rules',   bio:"Designs the mods, runs the playtests, refuses to use Comic Sans on the PDFs.", color:'#d11a1a' },
+  { handle:'@cobalt',    name:'Sam',   role:'Original games',    bio:"Lead on Endless Skies + Mongo. Holds the only spreadsheet that explains TI4 in one row.", color:'#0c4f8d' },
+  { handle:'@hexbear',   name:'Joel',  role:'Art + components',  bio:"Hexagonal everything. Drew 61 tiles for Talisman: Hexed in three weeks.", color:'#3a9928' },
+  { handle:'@tessellate',name:'Tess',  role:'Community',         bio:"Runs the Discord. Runs the mod jams. Has read every house-rule thread on BoardGameGeek.", color:'#e89a1a' },
+  { handle:'@nukular',   name:'Kit',   role:'Tools + dev',       bio:"Built the dice roller. Maintains the modding hooks repo. Loses every game of Nuke Catan.", color:'#5d2a8a' },
+  { handle:'@longest',   name:'Ben',   role:'Words',             bio:"Writes the news posts you actually read. Strictly written by humans, including this bio.", color:'#936d62' },
+];
+
+const grid = document.getElementById('team-grid');
+TEAM.forEach(m => {
+  const card = el('article',{style:{background:'#fff',border:'1px solid #e6e3d8',borderRadius:'20px',padding:'24px',display:'flex',flexDirection:'column',gap:'14px'}});
+  const hrow = el('div',{style:{display:'flex',alignItems:'center',gap:'14px'}});
+  const avatar = el('div',{style:{width:'56px',height:'56px',borderRadius:'9999px',background:`linear-gradient(135deg,${m.color},${m.color}88)`,display:'flex',alignItems:'center',justifyContent:'center',fontFamily:'var(--mg-font-pixel)',fontSize:'16px',color:'#fff',flex:'none'}},m.name[0]);
+  hrow.appendChild(avatar);
+  const info = el('div');
+  info.appendChild(el('div',{style:{fontFamily:'var(--mg-font-display)',fontWeight:600,fontSize:'20px',letterSpacing:'-0.25px',color:'#14161c'}},m.name));
+  info.appendChild(el('div',{style:{fontFamily:'var(--mg-font-mono)',fontSize:'12px',color:'#7a8290',marginTop:'2px'}},m.role));
+  hrow.appendChild(info);
+  card.appendChild(hrow);
+  card.appendChild(el('p',{style:{fontFamily:'var(--mg-font-body)',fontSize:'14px',lineHeight:'1.6',color:'#3a3d44',margin:0}},m.bio));
+  card.appendChild(el('div',{style:{fontFamily:'var(--mg-font-mono)',fontSize:'12px',color:m.color,marginTop:'auto'}},m.handle));
+  grid.appendChild(card);
+});
+</script>
+</body>
+</html>

@@ -1,0 +1,228 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Submit a mod — Moddable.Games</title>
+<link rel="stylesheet" href="_mg.css">
+<style>
+body { background:#f5f4ef; }
+.field-input { width:100%;padding:14px 16px;border:1px solid #e6e3d8;border-radius:12px;font-family:var(--mg-font-body);font-size:16px;color:#14161c;background:#fff;outline:none;transition:border-color 150ms;box-sizing:border-box; }
+.field-input:focus { border-color:#0c4f8d; }
+textarea.field-input { resize:vertical;min-height:120px; }
+</style>
+</head>
+<body>
+<div id="nav-root"></div>
+
+<!-- Header -->
+<section style="background:#000;color:#fff;padding:64px 32px 72px;position:relative;overflow:hidden">
+  <div style="position:absolute;right:-100px;top:20%;width:500px;height:500px;background:radial-gradient(circle,rgba(58,123,232,0.2) 0%,transparent 65%);pointer-events:none"></div>
+  <div style="max-width:760px;margin:0 auto;position:relative">
+    <a href="mods.html" style="font-family:var(--mg-font-mono);font-size:12px;color:rgba(255,255,255,0.7);text-decoration:none">← Back to mods</a>
+    <div style="font-family:var(--mg-font-pixel);font-size:10px;color:#6fb5ff;letter-spacing:1.5px;margin:24px 0 18px">▲ SUBMIT A MOD</div>
+    <h1 style="font-family:var(--mg-font-display);font-weight:600;font-size:clamp(44px,6vw,80px);line-height:1.0;letter-spacing:-0.025em;margin:0 0 20px">Ship your rules.</h1>
+    <p style="font-family:var(--mg-font-body);font-size:18px;line-height:1.6;color:rgba(255,255,255,0.78);margin:0">Tell us about your mod. We'll review it, play it, and if it works at the table — publish it.</p>
+  </div>
+</section>
+
+<!-- Step indicator -->
+<div style="background:#fff;border-bottom:1px solid #e6e3d8;padding:0 32px">
+  <div style="max-width:760px;margin:0 auto;display:flex;align-items:center">
+    <div id="step-1-tab" class="step-tab" style="display:flex;align-items:center;gap:10px;padding:20px 0 18px;border-bottom:2px solid #0c4f8d;margin-right:24px;cursor:pointer">
+      <span id="s1-num" style="width:26px;height:26px;border-radius:9999px;background:#0c4f8d;color:#fff;font-family:var(--mg-font-mono);font-size:12px;font-weight:600;display:flex;align-items:center;justify-content:center">1</span>
+      <span style="font-family:var(--mg-font-body);font-weight:600;font-size:14px;color:#14161c">The basics</span>
+    </div>
+    <div id="step-2-tab" class="step-tab" style="display:flex;align-items:center;gap:10px;padding:20px 0 18px;border-bottom:2px solid transparent;margin-right:24px;cursor:pointer;opacity:0.5">
+      <span id="s2-num" style="width:26px;height:26px;border-radius:9999px;background:#c3c5cc;color:#fff;font-family:var(--mg-font-mono);font-size:12px;font-weight:600;display:flex;align-items:center;justify-content:center">2</span>
+      <span style="font-family:var(--mg-font-body);font-weight:600;font-size:14px;color:#14161c">The rules</span>
+    </div>
+    <div id="step-3-tab" class="step-tab" style="display:flex;align-items:center;gap:10px;padding:20px 0 18px;border-bottom:2px solid transparent;cursor:pointer;opacity:0.5">
+      <span id="s3-num" style="width:26px;height:26px;border-radius:9999px;background:#c3c5cc;color:#fff;font-family:var(--mg-font-mono);font-size:12px;font-weight:600;display:flex;align-items:center;justify-content:center">3</span>
+      <span style="font-family:var(--mg-font-body);font-weight:600;font-size:14px;color:#14161c">Submit</span>
+    </div>
+  </div>
+</div>
+
+<!-- Form -->
+<section style="background:#f5f4ef;padding:56px 32px 96px">
+  <div style="max-width:760px;margin:0 auto">
+
+    <!-- Step 1 -->
+    <div id="step-1">
+      <div style="display:flex;flex-direction:column;gap:24px">
+        <div id="field-title"></div>
+        <div id="field-game"></div>
+        <div id="field-cat"></div>
+        <div id="field-stats"></div>
+        <div id="field-desc"></div>
+        <div style="display:flex;justify-content:flex-end"><div id="next-1-btn"></div></div>
+      </div>
+    </div>
+
+    <!-- Step 2 -->
+    <div id="step-2" style="display:none">
+      <div style="display:flex;flex-direction:column;gap:24px">
+        <div id="field-rulespdf"></div>
+        <div id="field-pnp"></div>
+        <div id="field-version"></div>
+        <div id="field-designer"></div>
+        <div style="display:flex;justify-content:space-between" id="step2-nav"></div>
+      </div>
+    </div>
+
+    <!-- Step 3 -->
+    <div id="step-3" style="display:none">
+      <div id="submit-preview" style="background:#fff;border:1px solid #e6e3d8;border-radius:16px;padding:28px;margin-bottom:32px"></div>
+      <div id="step3-agree" style="display:flex;gap:12px;align-items:flex-start;background:#fff;border:1px solid #e6e3d8;border-radius:12px;padding:20px;margin-bottom:28px">
+        <input type="checkbox" id="agree-check" style="margin-top:3px;width:18px;height:18px;cursor:pointer">
+        <label for="agree-check" style="font-family:var(--mg-font-body);font-size:14px;color:#1f2228;line-height:1.5;cursor:pointer">I confirm this mod is my own original work or that I have permission to share it. I understand it will be published openly under a Creative Commons licence unless otherwise agreed.</label>
+      </div>
+      <div style="display:flex;justify-content:space-between" id="step3-nav"></div>
+    </div>
+
+    <!-- Success -->
+    <div id="step-success" style="display:none;text-align:center;padding:64px 0">
+      <div style="font-family:var(--mg-font-pixel);font-size:11px;color:#3a9928;letter-spacing:2px;margin-bottom:20px">▲ SUBMITTED</div>
+      <h2 style="font-family:var(--mg-font-display);font-weight:600;font-size:48px;line-height:1.05;letter-spacing:-0.6px;color:#14161c;margin:0 0 16px">The dice are cast.</h2>
+      <p style="font-family:var(--mg-font-body);font-size:18px;line-height:1.6;color:#4f5764;max-width:520px;margin:0 auto 32px">We'll review your submission and get back to you within a fortnight. Keep an eye on Discord for updates.</p>
+      <div id="success-btns" style="display:flex;gap:12px;justify-content:center;flex-wrap:wrap"></div>
+    </div>
+
+  </div>
+</section>
+
+<div id="footer-root"></div>
+<script src="_mg.js"></script>
+<script>
+const { T, el, btn, linkBtn, navbar, footer } = MG;
+document.getElementById('nav-root').appendChild(navbar('Mods'));
+document.getElementById('footer-root').appendChild(footer());
+
+const formData = { title:'', baseGame:'', category:'', stats:'', desc:'', rulesPdf:null, pnp:null, version:'', designer:'' };
+let currentStep = 1;
+
+// Field builder
+function field(id, label, hint, required, childFn) {
+  const wrap = el('div',{style:{display:'flex',flexDirection:'column',gap:'6px'}});
+  const lbl = el('label',{for:id,style:{fontFamily:'var(--mg-font-body)',fontWeight:600,fontSize:'14px',color:'#14161c'}});
+  lbl.innerHTML = label + (required ? '<span style="color:#d11a1a;margin-left:4px">*</span>' : '');
+  wrap.appendChild(lbl);
+  if (hint) wrap.appendChild(el('span',{style:{fontFamily:'var(--mg-font-body)',fontSize:'13px',color:'#4f5764'}},hint));
+  wrap.appendChild(childFn(id));
+  return wrap;
+}
+function textInput(id, placeholder, key) {
+  return () => {
+    const i = el('input',{type:'text',id,class:'field-input',placeholder});
+    i.value = formData[key] || '';
+    i.addEventListener('input',()=>{ formData[key]=i.value; });
+    return i;
+  };
+}
+function textArea(id, placeholder, key) {
+  return () => {
+    const t = el('textarea',{id,class:'field-input',placeholder});
+    t.value = formData[key] || '';
+    t.addEventListener('input',()=>{ formData[key]=t.value; });
+    return t;
+  };
+}
+
+// Build step 1
+document.getElementById('field-title').appendChild(field('mod-title','Mod title',"What's it called?",true,textInput('mod-title','e.g. Talisman: Hexed','title')));
+document.getElementById('field-game').appendChild(field('base-game','Base game','Which published game does your mod use?',true,textInput('base-game','e.g. Talisman 4e (revised)','baseGame')));
+
+// Category picker
+const catWrap = el('div',{style:{display:'flex',flexDirection:'column',gap:'6px'}});
+const catLbl = el('label',{style:{fontFamily:'var(--mg-font-body)',fontWeight:600,fontSize:'14px',color:'#14161c'}});
+catLbl.innerHTML = 'Mod category <span style="color:#d11a1a;margin-left:4px">*</span>';
+catWrap.appendChild(catLbl);
+catWrap.appendChild(el('span',{style:{fontFamily:'var(--mg-font-body)',fontSize:'13px',color:'#4f5764'}},'Pick the one that fits best.'));
+const catGrid = el('div',{style:{display:'grid',gridTemplateColumns:'1fr 1fr 1fr',gap:'10px'}});
+const CATS = [{v:'Reskin',c:T.blue,desc:'Same rules, new theme or board layout.'},{v:'Rebalance',c:T.green,desc:'Same theme, tuned rules — pacing, fairness, length.'},{v:'Total conversion',c:T.red,desc:'New rules, new theme, components only.'}];
+CATS.forEach(o => {
+  const b = document.createElement('button');
+  b.type = 'button';
+  Object.assign(b.style,{background:'#fff',color:'#14161c',border:`2px solid ${T.hairlineLight}`,borderRadius:'14px',padding:'16px',textAlign:'left',cursor:'pointer',transition:'all 150ms',display:'flex',flexDirection:'column',gap:'6px'});
+  b.innerHTML = `<span style="font-family:var(--mg-font-display);font-weight:600;font-size:17px;letter-spacing:-0.2px">${o.v}</span><span style="font-family:var(--mg-font-body);font-size:12px;color:#4f5764;line-height:1.4">${o.desc}</span>`;
+  b.addEventListener('click',()=>{
+    formData.category = o.v;
+    catGrid.querySelectorAll('button').forEach(x=>{Object.assign(x.style,{background:'#fff',color:'#14161c',border:`2px solid ${T.hairlineLight}`});x.querySelector('span:last-child').style.color='#4f5764';});
+    Object.assign(b.style,{background:o.c,color:'#fff',border:`2px solid ${o.c}`});
+    b.querySelector('span:last-child').style.color='rgba(255,255,255,0.82)';
+  });
+  catGrid.appendChild(b);
+});
+catWrap.appendChild(catGrid);
+document.getElementById('field-cat').appendChild(catWrap);
+
+document.getElementById('field-stats').appendChild(field('mod-stats','Player count & time','Mono format, e.g. 3–5 players · 45 min · 12+',false,textInput('mod-stats','3–5 players · 45 min · 12+','stats')));
+document.getElementById('field-desc').appendChild(field('mod-desc','Pitch it in two sentences','What does your mod do and why should someone play it?',true,textArea('mod-desc','Replaces the standard Monopoly board with a fully functional Euro-game economy. No bankruptcy, just resource management and victory points.','desc')));
+
+const n1 = document.getElementById('next-1-btn');
+n1.appendChild(btn('Next: the rules →','primary',()=>goStep(2)));
+
+// Step 2
+function fileField(id, label, hint) {
+  return field(id, label, hint, false, () => {
+    const inp = el('input',{type:'file',id,accept:'.pdf',style:{fontFamily:'var(--mg-font-body)',fontSize:'14px',color:'#14161c',padding:'10px 0',cursor:'pointer'}});
+    return inp;
+  });
+}
+document.getElementById('field-rulespdf').appendChild(fileField('rules-pdf','Rules PDF','The main rulebook. PDF only, under 20 MB.'));
+document.getElementById('field-pnp').appendChild(fileField('pnp-pdf','Print-and-play pack','Any printable components — tiles, cards, tokens.'));
+document.getElementById('field-version').appendChild(field('version','Version','Semantic versioning preferred.',false,textInput('version','v1.0.0','version')));
+document.getElementById('field-designer').appendChild(field('designer','Your handle','How should we credit you?',false,textInput('designer','@yourhandle','designer')));
+
+const s2n = document.getElementById('step2-nav');
+s2n.appendChild(btn('← Back','outline-light',()=>goStep(1),{color:'#14161c'}));
+s2n.appendChild(btn('Next: submit →','primary',()=>goStep(3)));
+
+// Step 3 preview
+function buildPreview() {
+  const p = document.getElementById('submit-preview');
+  p.innerHTML = '';
+  p.appendChild(el('div',{style:{fontFamily:'var(--mg-font-pixel)',fontSize:'9px',color:'#0c4f8d',letterSpacing:'1.5px',marginBottom:'14px'}},'▲ YOUR SUBMISSION'));
+  const rows = [['Title',formData.title||'—'],['Base game',formData.baseGame||'—'],['Category',formData.category||'—'],['Stats',formData.stats||'—'],['Designer',formData.designer||'—'],['Version',formData.version||'—']];
+  rows.forEach(([k,v])=>{
+    const row = el('div',{style:{display:'flex',gap:'16px',padding:'8px 0',borderBottom:'1px solid #e6e3d8',flexWrap:'wrap'}});
+    row.appendChild(el('span',{style:{fontFamily:'var(--mg-font-mono)',fontSize:'12px',color:'#7a8290',minWidth:'100px'}},k));
+    row.appendChild(el('span',{style:{fontFamily:'var(--mg-font-body)',fontSize:'14px',color:'#14161c',flex:1}},v));
+    p.appendChild(row);
+  });
+  if (formData.desc) {
+    p.appendChild(el('div',{style:{marginTop:'14px',padding:'14px',background:'#f5f4ef',borderRadius:'10px',fontFamily:'var(--mg-font-body)',fontSize:'14px',lineHeight:'1.55',color:'#1f2228'}},formData.desc));
+  }
+}
+
+const s3n = document.getElementById('step3-nav');
+s3n.appendChild(btn('← Back','outline-light',()=>goStep(2),{color:'#14161c'}));
+const submitBtn = btn('Submit mod','green',()=>{
+  if (!document.getElementById('agree-check').checked) { alert('Please confirm the agreement first.'); return; }
+  goStep('success');
+});
+s3n.appendChild(submitBtn);
+
+// Success
+const sbw = document.getElementById('success-btns');
+sbw.appendChild(linkBtn('Back to the library','mods.html','dark'));
+sbw.appendChild(linkBtn('Join Discord','community.html','outline-light',{color:'#14161c',border:'1px solid #3a3d44'}));
+
+function goStep(n) {
+  currentStep = n;
+  ['step-1','step-2','step-3','step-success'].forEach(id => {
+    const el2 = document.getElementById(id);
+    if (el2) el2.style.display = 'none';
+  });
+  const tabs = document.querySelectorAll('.step-tab');
+  tabs.forEach((t,i)=>{t.style.borderBottomColor='transparent';t.style.opacity='0.5';});
+
+  if (n === 1) { document.getElementById('step-1').style.display='block'; tabs[0].style.borderBottomColor='#0c4f8d';tabs[0].style.opacity='1'; }
+  if (n === 2) { document.getElementById('step-2').style.display='block'; tabs[1].style.borderBottomColor='#0c4f8d';tabs[1].style.opacity='1'; }
+  if (n === 3) { buildPreview(); document.getElementById('step-3').style.display='block'; tabs[2].style.borderBottomColor='#0c4f8d';tabs[2].style.opacity='1'; }
+  if (n === 'success') { document.getElementById('step-success').style.display='block'; }
+}
+</script>
+</body>
+</html>

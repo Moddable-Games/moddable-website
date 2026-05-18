@@ -1,0 +1,2908 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Moddable.Games — Preview</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&family=Inter+Tight:wght@500;600;700&family=Press+Start+2P&family=JetBrains+Mono:wght@400;500;600&display=swap">
+<style>
+*, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+html, body { height: 100%; overflow: hidden; background: #1a1a1a; font-family: system-ui, sans-serif; }
+#preview-shell { display: flex; flex-direction: column; height: 100vh; }
+#preview-bar { flex: none; height: 44px; background: #111; border-bottom: 1px solid #2a2a2a; display: flex; align-items: center; }
+#preview-bar-brand { display: flex; align-items: center; gap: 8px; padding: 0 14px; border-right: 1px solid #2a2a2a; height: 100%; flex: none; }
+#preview-bar-brand span { font-size: 11px; font-weight: 600; color: #666; letter-spacing: 0.5px; text-transform: uppercase; }
+#preview-bar-pages { display: flex; align-items: center; overflow-x: auto; flex: 1; scrollbar-width: none; padding: 0 6px; gap: 1px; }
+#preview-bar-pages::-webkit-scrollbar { display: none; }
+.pbtn { flex: none; height: 28px; padding: 0 10px; border-radius: 5px; border: none; background: transparent; color: #555; font-size: 12px; font-weight: 500; cursor: pointer; white-space: nowrap; transition: all 100ms; }
+.pbtn:hover { background: #222; color: #bbb; }
+.pbtn.active { background: #2a2a2a; color: #fff; }
+#preview-bar-back { flex: none; height: 28px; padding: 0 12px; margin-right: 8px; border-radius: 5px; border: 1px solid #333; background: transparent; color: #666; font-size: 12px; cursor: pointer; white-space: nowrap; display: none; }
+#preview-bar-back:hover { color: #fff; border-color: #555; }
+#preview-viewport { flex: 1; overflow: hidden; }
+#preview-frame { width: 100%; height: 100%; overflow-y: auto; overflow-x: hidden; background: #000; }
+#page-style {}
+@import url("https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&family=Inter+Tight:wght@500;600;700&family=Press+Start+2P&family=JetBrains+Mono:wght@400;500;600&display=swap");
+
+*, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+html { scroll-behavior: smooth; }
+body { font-family: "Inter", system-ui, sans-serif; -webkit-font-smoothing: antialiased; }
+em { font-style: italic; }
+img { display: block; max-width: 100%; }
+
+button:focus-visible, a:focus-visible, input:focus-visible, textarea:focus-visible, select:focus-visible {
+  outline: 2px solid #6fb5ff;
+  outline-offset: 3px;
+  border-radius: 4px;
+}
+
+:root {
+  --mg-red: #d11a1a;
+  --mg-red-bright: #e63232;
+  --mg-green: #3a9928;
+  --mg-blue: #0c4f8d;
+  --mg-blue-bright: #1a6dc4;
+  --mg-cosmic-deep: #0a0d2a;
+  --mg-cosmic-mid: #1a3680;
+  --mg-cosmic-bright: #3a7be8;
+  --mg-cosmic-glow: #6fb5ff;
+  --mg-canvas-light: #f5f4ef;
+  --mg-surface-elevated: #161721;
+  --mg-hairline-light: #e6e3d8;
+  --mg-ink: #14161c;
+  --mg-body-color: #1f2228;
+  --mg-mute: #4f5764;
+  --mg-stone: #7a8290;
+  --mg-faint: #c3c5cc;
+  --mg-font-display: "Inter Tight", system-ui, sans-serif;
+  --mg-font-body: "Inter", system-ui, sans-serif;
+  --mg-font-mono: "JetBrains Mono", monospace;
+  --mg-font-pixel: "Press Start 2P", monospace;
+}
+
+@keyframes hexFloat {
+  from { background-position: 0 0; }
+  to   { background-position: 56px 64px; }
+}
+@keyframes fadeRise {
+  from { opacity: 0; transform: translateY(18px); }
+  to   { opacity: 1; transform: translateY(0); }
+}
+
+/* Prose styles for article pages */
+.prose { font-family: var(--mg-font-body); font-size: 19px; line-height: 1.65; color: var(--mg-body-color); }
+.prose p { margin: 0 0 24px; }
+.prose p.lede { font-size: 23px; line-height: 1.5; color: var(--mg-ink); font-style: italic; }
+.prose h2 { font-family: var(--mg-font-display); font-weight: 600; font-size: 32px; line-height: 1.15; letter-spacing: -0.4px; margin: 40px 0 16px; color: var(--mg-ink); }
+.prose blockquote { margin: 32px 0; padding: 20px 24px; border-left: 4px solid var(--mg-red); background: #fff; font-style: italic; color: var(--mg-ink); font-size: 20px; line-height: 1.5; }
+.prose ul { padding-left: 22px; margin: 0 0 24px; }
+.prose li { margin: 0 0 8px; }
+
+/* Responsive helpers */
+@media (max-width: 768px) {
+  .hide-mobile { display: none !important; }
+  .mg-grid-3 { grid-template-columns: 1fr !important; }
+  .mg-grid-2 { grid-template-columns: 1fr !important; }
+  .mg-grid-4 { grid-template-columns: 1fr 1fr !important; }
+}
+@media (max-width: 540px) {
+  .mg-grid-4 { grid-template-columns: 1fr !important; }
+  section, .section-pad { padding-left: 20px !important; padding-right: 20px !important; }
+}
+
+</style>
+</head>
+<body>
+<div id="preview-shell">
+  <div id="preview-bar">
+    <div id="preview-bar-brand"><div id="brand-cube"></div><span>Preview</span></div>
+    <div id="preview-bar-pages"></div>
+    <button id="preview-bar-back">↑ Back</button>
+  </div>
+  <div id="preview-viewport">
+    <div id="preview-frame">
+      <div id="nav-root"></div>
+      <div id="page-root"></div>
+      <div id="footer-root"></div>
+    </div>
+  </div>
+</div>
+<script>/* =========================================================================
+   Moddable.Games — Shared Component Library
+   Vanilla JS, zero dependencies. All components write DOM directly.
+   ========================================================================= */
+
+const MG = (() => {
+
+  /* ── Tokens ──────────────────────────────────────────────────────────── */
+  const T = {
+    red:"#d11a1a", redBright:"#e63232", redDeep:"#a31212",
+    green:"#3a9928", greenBright:"#4eb735",
+    blue:"#0c4f8d", blueBright:"#1a6dc4", blueDeep:"#07335c",
+    cosmicDeep:"#0a0d2a", cosmicMid:"#1a3680", cosmicBright:"#3a7be8",
+    cosmicGlow:"#6fb5ff",
+    canvasLight:"#f5f4ef", canvasDark:"#000000",
+    surfaceElevated:"#161721",
+    hairlineLight:"#e6e3d8",
+    ink:"#14161c", body:"#1f2228", charcoal:"#3a3d44",
+    mute:"#4f5764", stone:"#7a8290", faint:"#c3c5cc",
+  };
+
+  const CATEGORY_COLORS = {
+    "Total conversion": T.red,
+    "Rebalance": T.green,
+    "Reskin": T.blue,
+  };
+
+  const HEX_BG = `url("data:image/svg+xml;utf8,<svg xmlns='http://www.w3.org/2000/svg' width='56' height='64' viewBox='0 0 56 64'><path d='M28 1 54 16v32L28 63 2 48V16z' fill='none' stroke='%233a7be8' stroke-opacity='0.18' stroke-width='1'/></svg>")`;
+
+  const F = {
+    display: `"Inter Tight", system-ui, sans-serif`,
+    body: `"Inter", system-ui, sans-serif`,
+    mono: `"JetBrains Mono", monospace`,
+    pixel: `"Press Start 2P", monospace`,
+  };
+
+  /* ── Helpers ─────────────────────────────────────────────────────────── */
+  function el(tag, attrs, ...children) {
+    const e = document.createElement(tag);
+    if (attrs) {
+      for (const [k, v] of Object.entries(attrs)) {
+        if (k === 'style' && typeof v === 'object') {
+          Object.assign(e.style, v);
+        } else if (k === 'html') {
+          e.innerHTML = v;
+        } else if (k.startsWith('on')) {
+          e.addEventListener(k.slice(2).toLowerCase(), v);
+        } else {
+          e.setAttribute(k, v);
+        }
+      }
+    }
+    for (const c of children) {
+      if (c == null) continue;
+      e.appendChild(typeof c === 'string' ? document.createTextNode(c) : c);
+    }
+    return e;
+  }
+
+  function css(obj) { return obj; } // passthrough — used for readability
+
+  /* ── Cube SVG ─────────────────────────────────────────────────────────── */
+  function cubeSVG(size = 32) {
+    const ns = 'http://www.w3.org/2000/svg';
+    const svg = document.createElementNS(ns, 'svg');
+    svg.setAttribute('width', size);
+    svg.setAttribute('height', Math.round(size * 1.1));
+    svg.setAttribute('viewBox', '0 0 100 110');
+    svg.setAttribute('aria-hidden', 'true');
+    const polys = [
+      ['50,5 92,30 50,55 8,30', T.red],
+      ['8,30 50,55 50,105 8,80', T.green],
+      ['92,30 50,55 50,105 92,80', T.blue],
+    ];
+    for (const [pts, fill] of polys) {
+      const p = document.createElementNS(ns, 'polygon');
+      p.setAttribute('points', pts);
+      p.setAttribute('fill', fill);
+      p.setAttribute('stroke', '#000');
+      p.setAttribute('stroke-width', '2.5');
+      svg.appendChild(p);
+    }
+    return svg;
+  }
+
+  /* ── Btn ─────────────────────────────────────────────────────────────── */
+  const BTN_VARIANTS = {
+    primary:      { bg:'#fff', fg:'#000', border:'none' },
+    dark:         { bg:'#14161c', fg:'#fff', border:'none' },
+    blue:         { bg:T.blue, fg:'#fff', border:'none' },
+    green:        { bg:T.green, fg:'#fff', border:'none' },
+    red:          { bg:T.red, fg:'#fff', border:'none' },
+    'outline-dark': { bg:'transparent', fg:'#fff', border:'1px solid rgba(255,255,255,0.35)' },
+    'outline-light':{ bg:'transparent', fg:T.ink, border:`1px solid ${T.hairlineLight}` },
+  };
+  const BTN_HOVER = {
+    primary:'#e8e8e8', dark:'#2a2d36', blue:T.blueBright,
+    green:T.greenBright, red:T.redBright,
+    'outline-dark':'rgba(255,255,255,0.1)', 'outline-light':'rgba(0,0,0,0.04)',
+  };
+
+  function btn(label, variant = 'primary', onClick, extraStyle = {}) {
+    const v = BTN_VARIANTS[variant] || BTN_VARIANTS.primary;
+    const b = el('button', {
+      style: css({
+        display:'inline-flex', alignItems:'center', justifyContent:'center',
+        height:'48px', padding:'0 22px', borderRadius:'9999px',
+        border: v.border || 'none',
+        background: v.bg, color: v.fg,
+        fontFamily: F.body, fontWeight:600, fontSize:'15px',
+        letterSpacing:'0.2px', cursor:'pointer',
+        textDecoration:'none', whiteSpace:'nowrap',
+        transition:'background 180ms cubic-bezier(.2,.8,.2,1), transform 180ms',
+        ...extraStyle,
+      }),
+    });
+    b.innerHTML = label;
+    b.addEventListener('mouseenter', () => b.style.background = BTN_HOVER[variant] || v.bg);
+    b.addEventListener('mouseleave', () => b.style.background = v.bg);
+    if (onClick) b.addEventListener('click', onClick);
+    return b;
+  }
+
+  function linkBtn(label, href, variant = 'primary', extraStyle = {}) {
+    const v = BTN_VARIANTS[variant] || BTN_VARIANTS.primary;
+    const a = el('a', {
+      href,
+      style: css({
+        display:'inline-flex', alignItems:'center', justifyContent:'center',
+        height:'48px', padding:'0 22px', borderRadius:'9999px',
+        border: v.border || 'none',
+        background: v.bg, color: v.fg,
+        fontFamily: F.body, fontWeight:600, fontSize:'15px',
+        letterSpacing:'0.2px', cursor:'pointer',
+        textDecoration:'none', whiteSpace:'nowrap',
+        transition:'background 180ms cubic-bezier(.2,.8,.2,1)',
+        ...extraStyle,
+      }),
+    });
+    a.innerHTML = label;
+    a.addEventListener('mouseenter', () => a.style.background = BTN_HOVER[variant] || v.bg);
+    a.addEventListener('mouseleave', () => a.style.background = v.bg);
+    return a;
+  }
+
+  /* ── NavBar ──────────────────────────────────────────────────────────── */
+  function navbar(activeId) {
+    const NAV_ITEMS = [
+      { id:'Mods', href:'mods.html' },
+      { id:'Games', href:'game-detail.html' },
+      { id:'Tools', href:'tools.html' },
+      { id:'News', href:'news.html' },
+      { id:'About', href:'about.html' },
+    ];
+
+    const header = el('header', { style: css({
+      height:'64px', background:'#000', position:'sticky', top:0, zIndex:50,
+      borderBottom:'1px solid rgba(255,255,255,0.08)',
+      display:'flex', alignItems:'center', padding:'0 24px', gap:'24px',
+      boxSizing:'border-box',
+    })});
+
+    // Logo
+    const logoWrap = el('a', { href:'index.html', style:{ display:'flex', alignItems:'center', gap:'10px', textDecoration:'none' }});
+    logoWrap.appendChild(cubeSVG(28));
+    logoWrap.appendChild(el('span', { style:{ fontFamily:F.display, fontWeight:700, fontSize:'17px', color:'#fff', letterSpacing:'-0.3px' }}, 'Moddable.Games'));
+    header.appendChild(logoWrap);
+
+    // Desktop nav
+    const nav = el('nav', { style:{ display:'flex', gap:'24px', marginLeft:'12px' }});
+    for (const item of NAV_ITEMS) {
+      const isActive = activeId === item.id;
+      const a = el('a', {
+        href: item.href,
+        style: css({
+          fontFamily:F.body, fontWeight:500, fontSize:'14px',
+          color: isActive ? '#fff' : 'rgba(255,255,255,0.6)',
+          textDecoration:'none', letterSpacing:'0.2px',
+          position:'relative', paddingBottom:'4px',
+        }),
+      }, item.id);
+      if (isActive) {
+        a.appendChild(el('span', { style:{ position:'absolute', bottom:'-22px', left:0, right:0, height:'2px', background:T.cosmicGlow }}));
+      }
+      nav.appendChild(a);
+    }
+    header.appendChild(nav);
+
+    // Right side
+    const right = el('div', { style:{ marginLeft:'auto', display:'flex', gap:'12px', alignItems:'center' }});
+    const discordLink = el('a', { href:'community.html', style:{ fontFamily:F.pixel, fontSize:'8px', color:T.cosmicGlow, letterSpacing:'1.5px', textDecoration:'none' }}, '▲ DISCORD');
+    right.appendChild(discordLink);
+    right.appendChild(linkBtn('Mod a game', 'submit.html', 'primary', { height:'38px', fontSize:'13px', padding:'0 16px' }));
+    header.appendChild(right);
+
+    // Mobile hamburger (CSS media query shows/hides)
+    const style = el('style');
+    style.textContent = `
+      @media (max-width:900px) {
+        #mg-nav-desktop { display:none !important; }
+        #mg-nav-right-full { display:none !important; }
+        #mg-hamburger { display:flex !important; }
+      }
+      @media (min-width:901px) {
+        #mg-mobile-drawer { display:none !important; }
+      }
+    `;
+    document.head.appendChild(style);
+    nav.id = 'mg-nav-desktop';
+    right.id = 'mg-nav-right-full';
+
+    const hamburger = el('button', {
+      id:'mg-hamburger',
+      'aria-label':'Menu',
+      style: css({ display:'none', marginLeft:'auto', width:'40px', height:'40px', background:'transparent', color:'#fff', border:'1px solid rgba(255,255,255,0.2)', borderRadius:'9999px', cursor:'pointer', alignItems:'center', justifyContent:'center', fontSize:'18px' }),
+    }, '☰');
+    header.appendChild(hamburger);
+
+    const drawer = el('div', {
+      id:'mg-mobile-drawer',
+      style: css({ position:'fixed', top:'64px', left:0, right:0, bottom:0, background:'#000', zIndex:49, padding:'32px 24px', overflowY:'auto' }),
+    });
+    const drawerNav = el('nav', { style:{ display:'flex', flexDirection:'column', gap:'4px' }});
+    for (const item of NAV_ITEMS) {
+      drawerNav.appendChild(el('a', { href:item.href, style:{ fontFamily:F.body, fontWeight:600, fontSize:'20px', color: activeId===item.id?'#fff':'rgba(255,255,255,0.65)', textDecoration:'none', padding:'12px 0', display:'block' }}, item.id));
+    }
+    drawer.appendChild(drawerNav);
+
+    let drawerOpen = false;
+    hamburger.addEventListener('click', () => {
+      drawerOpen = !drawerOpen;
+      drawer.style.display = drawerOpen ? 'block' : 'none';
+      hamburger.textContent = drawerOpen ? '✕' : '☰';
+    });
+
+    return el('div', { style:{ position:'sticky', top:0, zIndex:50 }}, header, drawer);
+  }
+
+  /* ── Footer ──────────────────────────────────────────────────────────── */
+  function footer() {
+    const COLS = [
+      { title:'Mods',      links:[['All mods','mods.html'],['Submit a mod','submit.html']] },
+      { title:'Games',     links:[['Endless Skies','game-detail.html'],['Mongo','game-mongo.html'],['Nukes','game-nukes.html']] },
+      { title:'Tools',     links:[['Workbench','tools.html']] },
+      { title:'Community', links:[['Discord','community.html'],['News','news.html'],['About','about.html'],['Team','team.html']] },
+    ];
+
+    const f = el('footer', { style:{ background:'#000', color:'#fff', padding:'80px 24px 40px', boxSizing:'border-box' }});
+    const inner = el('div', { style:{ maxWidth:'1200px', margin:'0 auto' }});
+
+    const grid = el('div', { style:{ display:'grid', gridTemplateColumns:'repeat(auto-fit,minmax(180px,1fr))', gap:'32px', paddingBottom:'56px', borderBottom:'1px solid rgba(255,255,255,0.12)' }});
+
+    // Brand column
+    const brand = el('div');
+    const logoWrap = el('div', { style:{ display:'flex', alignItems:'center', gap:'10px', marginBottom:'18px' }});
+    logoWrap.appendChild(cubeSVG(28));
+    logoWrap.appendChild(el('span', { style:{ fontFamily:F.display, fontWeight:700, fontSize:'16px', color:'#fff', letterSpacing:'-0.3px' }}, 'Moddable.Games'));
+    brand.appendChild(logoWrap);
+    brand.appendChild(el('p', { style:{ fontFamily:F.body, fontSize:'14px', lineHeight:'1.6', color:'rgba(255,255,255,0.65)', maxWidth:'280px', margin:0 }}, 'Creating games you already own. Twelve mods. Three originals. One Discord.'));
+    grid.appendChild(brand);
+
+    for (const col of COLS) {
+      const c = el('div');
+      c.appendChild(el('h4', { style:{ fontFamily:F.body, fontWeight:600, fontSize:'12px', color:'#fff', letterSpacing:'0.8px', textTransform:'uppercase', margin:'0 0 18px' }}, col.title));
+      const ul = el('ul', { style:{ listStyle:'none', padding:0, margin:0, display:'flex', flexDirection:'column', gap:'10px' }});
+      for (const [text, href] of col.links) {
+        ul.appendChild(el('li', {}, el('a', { href, style:{ fontFamily:F.body, fontSize:'14px', color:'rgba(255,255,255,0.65)', textDecoration:'none' }}, text)));
+      }
+      c.appendChild(ul);
+      grid.appendChild(c);
+    }
+    inner.appendChild(grid);
+
+    const bottom = el('div', { style:{ paddingTop:'40px', display:'flex', flexWrap:'wrap', gap:'16px', justifyContent:'space-between', fontFamily:F.mono, fontSize:'12px', color:'rgba(255,255,255,0.45)', lineHeight:'1.6' }});
+    bottom.appendChild(el('span', {}, '© 2026 Moddable.Games'));
+    bottom.appendChild(el('span', { style:{ maxWidth:'700px', textAlign:'right' }}, 'Fan-made. Not affiliated with Hasbro, Asmodee, Fantasy Flight, or any rights-holder of the games we mod. All trademarks belong to their respective owners.'));
+    inner.appendChild(bottom);
+    f.appendChild(inner);
+    return f;
+  }
+
+  /* ── ModCard ─────────────────────────────────────────────────────────── */
+  function modCard({ category, title, baseGame, stats, body, href = '#', source = '' }) {
+    const accent = CATEGORY_COLORS[category] || T.blue;
+    const card = el('article', { style: css({
+      background:'#fff', borderRadius:'20px', overflow:'hidden',
+      border:`1px solid ${T.hairlineLight}`,
+      display:'flex', flexDirection:'column',
+      transition:'border-color 180ms cubic-bezier(.2,.8,.2,1), transform 180ms',
+      cursor:'pointer',
+    })});
+
+    card.addEventListener('mouseenter', () => { card.style.borderColor = accent; card.style.transform = 'translateY(-3px)'; });
+    card.addEventListener('mouseleave', () => { card.style.borderColor = T.hairlineLight; card.style.transform = 'translateY(0)'; });
+
+    // Top stripe
+    card.appendChild(el('div', { style:{ height:'4px', background:accent }}));
+
+    const inner = el('div', { style:{ padding:'20px', display:'flex', flexDirection:'column', gap:'14px', flex:1 }});
+
+    // Thumb
+    const thumb = el('div', { style:{ width:'100%', aspectRatio:'1.6', borderRadius:'12px', overflow:'hidden', position:'relative', background:`linear-gradient(135deg, #0a0d2a 0%, ${accent} 100%)` }});
+    const hexPat = el('div', { style:{ position:'absolute', inset:0, backgroundImage:`url("data:image/svg+xml;utf8,<svg xmlns='http://www.w3.org/2000/svg' width='28' height='32' viewBox='0 0 56 64'><path d='M28 1 54 16v32L28 63 2 48V16z' fill='none' stroke='%23fff' stroke-opacity='0.25' stroke-width='1'/></svg>")`, backgroundSize:'28px 32px' }});
+    thumb.appendChild(hexPat);
+    inner.appendChild(thumb);
+
+    // Meta row
+    const meta = el('div', { style:{ display:'flex', alignItems:'center', justifyContent:'space-between', gap:'10px' }});
+    meta.appendChild(el('span', { style:{ fontFamily:F.body, fontWeight:600, fontSize:'11px', background:accent, color:'#fff', padding:'4px 10px', borderRadius:'9999px', letterSpacing:'0.2px' }}, category));
+    meta.appendChild(el('span', { style:{ fontFamily:F.mono, fontSize:'11px', color:T.stone }}, baseGame));
+    inner.appendChild(meta);
+
+    // Title
+    inner.appendChild(el('h3', { html: title, style:{ fontFamily:F.display, fontWeight:600, fontSize:'22px', lineHeight:'1.2', letterSpacing:'-0.25px', color:T.ink, margin:0 }}));
+
+    // Body
+    inner.appendChild(el('p', { style:{ fontFamily:F.body, fontSize:'14px', lineHeight:'1.55', color:T.mute, margin:0, flex:1 }}, body));
+
+    // Stats + source
+    const statsRow = el('div',{style:{fontFamily:F.mono, fontSize:'12px', color:T.mute, paddingTop:'12px', borderTop:`1px solid ${T.hairlineLight}`, display:'flex', flexDirection:'column', gap:'4px'}});
+    statsRow.appendChild(document.createTextNode(stats));
+    if (source) {
+      statsRow.appendChild(el('span',{style:{fontSize:'11px',color:T.stone}},`via ${source}`));
+    }
+    inner.appendChild(statsRow);
+
+    // Link
+    const link = el('a', { href, style:{ fontFamily:F.body, fontWeight:600, fontSize:'14px', color:accent, textDecoration:'none', display:'inline-flex', alignItems:'center', gap:'6px' }});
+    link.innerHTML = 'View the rules <span aria-hidden="true">→</span>';
+    inner.appendChild(link);
+
+    card.appendChild(inner);
+    return card;
+  }
+
+  /* ── PageHero (dark banner with optional hex horizon) ────────────────── */
+  function pageHero({ eyebrow, title, lede, accent = T.cosmicGlow, withHorizon = false, minHeight = 420 }) {
+    const sec = el('section', { style:{ position:'relative', background:'#000', color:'#fff', overflow:'hidden', isolation:'isolate', minHeight:minHeight+'px' }});
+
+    if (withHorizon) {
+      const bg = el('div', { style:{ position:'absolute', inset:0, background:`linear-gradient(180deg, ${T.cosmicDeep} 0%, ${T.cosmicMid} 50%, #000 100%)` }});
+      const hexLayer = el('div', { style:{ position:'absolute', inset:0, backgroundImage:HEX_BG, backgroundSize:'56px 64px', opacity:'0.6' }});
+      const fade = el('div', { style:{ position:'absolute', inset:0, background:'linear-gradient(180deg, rgba(8,10,30,0.5) 0%, transparent 60%)', pointerEvents:'none' }});
+      const fadeBottom = el('div', { style:{ position:'absolute', inset:0, background:'linear-gradient(180deg, transparent 60%, #000 100%)', pointerEvents:'none' }});
+      sec.appendChild(bg); sec.appendChild(hexLayer); sec.appendChild(fade); sec.appendChild(fadeBottom);
+    } else {
+      const glow = el('div', { style:{ position:'absolute', right:'-150px', top:'30%', width:'700px', height:'700px', background:`radial-gradient(circle, rgba(58,123,232,0.22) 0%, transparent 65%)`, pointerEvents:'none' }});
+      sec.appendChild(glow);
+    }
+
+    const content = el('div', { style:{ position:'relative', zIndex:2, padding:'72px 32px 96px', maxWidth:'1200px', margin:'0 auto', boxSizing:'border-box' }});
+    content.appendChild(el('div', { style:{ fontFamily:F.pixel, fontSize:'10px', color:accent, letterSpacing:'1.5px', marginBottom:'18px', textShadow:`0 0 12px ${accent}55` }}, eyebrow));
+    const h = el('h1', { html:title, style:{ fontFamily:F.display, fontWeight:600, fontSize:'clamp(48px, 6.5vw, 88px)', lineHeight:'1.0', letterSpacing:'-0.025em', margin:'0 0 20px' }});
+    content.appendChild(h);
+    if (lede) content.appendChild(el('p', { style:{ fontFamily:F.body, fontStyle:'italic', fontSize:'20px', lineHeight:'1.5', color:'rgba(255,255,255,0.82)', margin:0, maxWidth:'680px' }}, lede));
+    sec.appendChild(content);
+    return sec;
+  }
+
+  /* ── Expose ──────────────────────────────────────────────────────────── */
+  return { T, F, HEX_BG, CATEGORY_COLORS, el, btn, linkBtn, navbar, footer, modCard, pageHero, cubeSVG };
+
+})();
+</script>
+<script>
+const NAV_GROUPS = {"Mods": ["index", "mods", "mod-detail", "submit"], "Games": ["game-detail", "game-mongo", "game-nukes"], "News": ["news", "news-post"], "Tools": ["tools", "tools-ti", "tools-talisman", "tools-nukes"], "About": ["about", "team", "community"]};
+const PAGE_ORDER = ["index", "mods", "mod-detail", "game-detail", "game-mongo", "game-nukes", "news", "news-post", "tools", "tools-ti", "tools-talisman", "tools-nukes", "submit", "about", "team", "community"];
+const PAGES = {
+  "index": {
+    label: "Home",
+    nav:   "Mods",
+    style: "body { background: #000; color: #fff; }\n  #hero { position:relative; min-height:780px; background:#000; overflow:hidden; isolation:isolate; }\n  #hero-bg { position:absolute; top:0; left:0; right:0; height:130%; background:linear-gradient(180deg,#0a0d2a 0%,#1a3680 45%,#000 100%); will-change:transform; }\n  #hero-bg::after { content:''; position:absolute; inset:0; background:radial-gradient(ellipse 80% 40% at 50% 100%,rgba(58,123,232,0.55) 0%,transparent 70%); }\n  #hero-hex { position:absolute; inset:0; background-image:url(\"data:image/svg+xml;utf8,<svg xmlns='http://www.w3.org/2000/svg' width='56' height='64' viewBox='0 0 56 64'><path d='M28 1 54 16v32L28 63 2 48V16z' fill='none' stroke='%233a7be8' stroke-opacity='0.18' stroke-width='1'/></svg>\"); background-size:56px 64px; animation:hexFloat 30s linear infinite; z-index:1; pointer-events:none; }\n  #hero-glow { position:absolute; bottom:22%; left:0; right:0; height:60px; background:radial-gradient(ellipse 60% 100% at 50% 0%,rgba(58,123,232,0.3) 0%,transparent 100%); z-index:2; pointer-events:none; }\n  #hero-glow::before { content:''; position:absolute; bottom:100%; left:0; right:0; height:1px; background:linear-gradient(90deg,transparent,#3a7be8,rgba(111,181,255,0.8),#3a7be8,transparent); filter:blur(1px); }\n  #hero-top-fade { position:absolute; inset:0; background:linear-gradient(180deg,rgba(8,10,30,0.5) 0%,transparent 40%); z-index:3; pointer-events:none; }\n  #hero-bot-fade { position:absolute; inset:0; background:linear-gradient(180deg,transparent 65%,rgba(0,0,0,0.5) 85%,#000 100%); z-index:3; pointer-events:none; }\n  #hero-content { position:relative; z-index:4; padding:120px 24px 200px; max-width:1200px; margin:0 auto; text-align:center; animation:fadeRise 0.8s cubic-bezier(.2,.8,.2,1) both; }",
+    html: `<section id="hero">
+  <div id="hero-bg"></div>
+  <div id="hero-hex"></div>
+  <div id="hero-glow"></div>
+  <div id="hero-top-fade"></div>
+  <div id="hero-bot-fade"></div>
+  <div id="hero-content">
+    <div style="font-family:var(--mg-font-pixel);font-size:9px;color:#6fb5ff;letter-spacing:2.5px;margin-bottom:28px;text-shadow:0 0 14px rgba(111,181,255,0.55)">▲ MODDABLE.GAMES</div>
+    <h1 style="font-family:var(--mg-font-display);font-weight:600;font-size:clamp(52px,8.5vw,120px);line-height:1.0;letter-spacing:-0.025em;color:#fff;margin:0 auto 32px;max-width:1000px;text-shadow:0 4px 40px rgba(0,0,0,0.6)">Creating games<br>you already own.</h1>
+    <p style="font-family:var(--mg-font-body);font-size:18px;line-height:1.65;color:rgba(255,255,255,0.86);max-width:560px;margin:0 auto 40px;text-shadow:0 2px 16px rgba(0,0,0,0.7)">Twelve community-built rulebook mods for the boards collecting dust on your shelf — plus three original games built to be modded from day one.</p>
+    <div style="display:flex;gap:12px;flex-wrap:wrap;justify-content:center" id="hero-btns"></div>
+  </div>
+</section>
+
+<!-- Mod Gallery -->
+<section style="background:#f5f4ef;padding:88px 24px">
+  <div style="max-width:1200px;margin:0 auto">
+    <div style="display:flex;align-items:flex-end;justify-content:space-between;flex-wrap:wrap;gap:24px;margin-bottom:40px">
+      <div>
+        <div style="font-family:var(--mg-font-pixel);font-size:9px;color:#0c4f8d;letter-spacing:1.5px;margin-bottom:14px">▲ THE LIBRARY</div>
+        <h2 style="font-family:var(--mg-font-display);font-weight:600;font-size:clamp(36px,5vw,60px);line-height:1.05;letter-spacing:-0.025em;color:#14161c">Mods for games<br>you already own.</h2>
+      </div>
+      <div id="gallery-filters" style="display:flex;gap:8px;flex-wrap:wrap"></div>
+    </div>
+    <div id="gallery-grid" class="mg-grid-3" style="display:grid;grid-template-columns:repeat(auto-fit,minmax(280px,1fr));gap:20px"></div>
+    <div style="text-align:center;margin-top:48px"><a href="mods.html" style="display:inline-flex;align-items:center;justify-content:center;height:48px;padding:0 22px;border-radius:9999px;border:1px solid #3a3d44;background:transparent;color:#14161c;font-family:var(--mg-font-body);font-weight:600;font-size:15px;text-decoration:none">Browse all 12 mods →</a></div>
+  </div>
+</section>
+
+<!-- Nuke Catan -->
+<section style="background:#000;color:#fff;padding:100px 24px;position:relative;overflow:hidden;text-align:center">
+  <div style="position:absolute;left:50%;top:55%;transform:translateX(-50%);width:1100px;height:420px;background:radial-gradient(ellipse,rgba(209,26,26,0.38) 0%,transparent 65%);pointer-events:none;filter:blur(24px)"></div>
+  <div style="position:relative;max-width:1200px;margin:0 auto">
+    <div style="font-family:var(--mg-font-pixel);font-size:9px;color:#e63232;letter-spacing:2px;margin-bottom:32px;text-shadow:0 0 14px rgba(230,50,50,0.5)">▲ TOTAL CONVERSION · CATAN</div>
+    <div id="nuke-cube" style="margin:0 auto 40px;display:flex;align-items:center;justify-content:center"></div>
+    <h2 style="font-family:var(--mg-font-display);font-weight:600;font-size:clamp(44px,7vw,96px);line-height:0.95;letter-spacing:-0.025em;margin:0 auto 24px;max-width:900px;text-shadow:0 4px 30px rgba(0,0,0,0.6)">Are you ready<br>to <em style="color:#e63232">nuke</em> Catan?</h2>
+    <p style="font-family:var(--mg-font-body);font-size:18px;line-height:1.65;color:rgba(255,255,255,0.82);max-width:540px;margin:0 auto 36px">A family-friendly post-apocalyptic rules overhaul. Same tiles, same dice, brand new economy — and yes, your kids are going to love arguing about who set fire to the road network.</p>
+    <div style="display:flex;gap:12px;justify-content:center;flex-wrap:wrap" id="nuke-btns"></div>
+  </div>
+</section>
+
+<!-- Featured Mod -->
+<section style="background:#000;color:#fff;padding:120px 24px;overflow:hidden;isolation:isolate;position:relative">
+  <div style="position:absolute;right:-120px;top:50%;transform:translateY(-50%);width:600px;height:600px;background:radial-gradient(circle,rgba(58,123,232,0.22) 0%,transparent 60%);pointer-events:none"></div>
+  <div style="max-width:1200px;margin:0 auto;position:relative;display:grid;grid-template-columns:1fr auto;gap:64px;align-items:center" id="featured-inner">
+    <div>
+      <div style="font-family:var(--mg-font-pixel);font-size:9px;color:#6fb5ff;letter-spacing:1.5px;margin-bottom:18px">▲ MOD OF THE MONTH</div>
+      <h2 style="font-family:var(--mg-font-display);font-weight:600;font-size:clamp(36px,5.5vw,72px);line-height:1.05;letter-spacing:-0.025em;margin:0 0 24px">Hyper Imperium</h2>
+      <p style="font-family:var(--mg-font-body);font-size:18px;line-height:1.65;color:rgba(255,255,255,0.78);max-width:560px;margin:0 0 32px">Our homebrew for <em>Twilight Imperium 4e</em> + <em>Prophecy of Kings</em>. Hyper Movement, Hyper Trades, Hyper Objectives, Hyper Factions, Hyper Agendas — a faster ruleset that keeps the politics intact.</p>
+      <div style="display:flex;gap:12px;margin-bottom:36px" id="featured-btns"></div>
+      <div style="display:flex;gap:0;align-items:center;flex-wrap:wrap;padding-top:18px;border-top:1px solid rgba(255,255,255,0.18)" id="featured-stats"></div>
+    </div>
+    <div id="featured-cube" style="filter:drop-shadow(0 8px 50px rgba(58,123,232,0.4))"></div>
+  </div>
+</section>
+
+<!-- News Row -->
+<section style="background:#f5f4ef;padding:88px 24px;border-top:1px solid #e6e3d8">
+  <div style="max-width:1200px;margin:0 auto">
+    <div style="display:flex;justify-content:space-between;align-items:flex-end;flex-wrap:wrap;gap:16px;margin-bottom:32px">
+      <h2 style="font-family:var(--mg-font-display);font-weight:600;font-size:clamp(30px,4vw,48px);line-height:1.1;letter-spacing:-0.4px;color:#14161c">From the table.</h2>
+      <a href="news.html" style="font-family:var(--mg-font-body);font-weight:600;font-size:14px;color:#0c4f8d;text-decoration:none">All posts →</a>
+    </div>
+    <div id="news-grid" class="mg-grid-3" style="display:grid;grid-template-columns:repeat(auto-fit,minmax(280px,1fr));gap:20px"></div>
+  </div>
+</section>
+
+<!-- Community Band -->
+<section style="position:relative;min-height:520px;background:#000;color:#fff;overflow:hidden;isolation:isolate">
+  <div style="position:absolute;inset:0;background:linear-gradient(180deg,rgba(0,0,0,0.7) 0%,#1a3680 50%,#0a0d2a 100%)"></div>
+  <div style="position:absolute;bottom:28%;left:0;right:0;height:1px;background:linear-gradient(90deg,transparent,#3a7be8,rgba(111,181,255,0.8),#3a7be8,transparent);filter:blur(1px)"></div>
+  <div style="position:absolute;inset:0;background-image:url('data:image/svg+xml;utf8,<svg xmlns=\\'http://www.w3.org/2000/svg\\' width=\\'56\\' height=\\'64\\' viewBox=\\'0 0 56 64\\'><path d=\\'M28 1 54 16v32L28 63 2 48V16z\\' fill=\\'none\\' stroke=\\'%233a7be8\\' stroke-opacity=\\'0.18\\' stroke-width=\\'1\\'/></svg>');background-size:56px 64px;opacity:0.5"></div>
+  <div style="position:absolute;inset:0;background:linear-gradient(180deg,#000 0%,transparent 20%,transparent 80%,#000 100%);pointer-events:none"></div>
+  <div style="position:relative;z-index:2;padding:120px 24px;max-width:760px;margin:0 auto;text-align:center">
+    <div style="font-family:var(--mg-font-pixel);font-size:9px;color:#6fb5ff;letter-spacing:1.5px;margin-bottom:22px;text-shadow:0 0 12px rgba(111,181,255,0.5)">▲ JOIN THE TABLE</div>
+    <h2 style="font-family:var(--mg-font-display);font-weight:600;font-size:clamp(36px,5.5vw,72px);line-height:1.05;letter-spacing:-0.025em;margin:0 0 24px;text-shadow:0 4px 24px rgba(0,0,0,0.6)">Mod a game with us.</h2>
+    <p style="font-family:var(--mg-font-body);font-size:18px;line-height:1.65;color:rgba(255,255,255,0.86);margin:0 0 36px;text-shadow:0 2px 14px rgba(0,0,0,0.6)">2,400+ rule-tinkerers, designers and PnP enthusiasts in the Discord. Pitch a mod, test someone else's, or just argue about <em>Catan</em>'s longest road rule.</p>
+    <div style="display:flex;gap:12px;justify-content:center;flex-wrap:wrap" id="community-btns"></div>
+  </div>
+</section>`,
+    init(container) {
+      const { T, el, btn, linkBtn, navbar, footer, modCard, cubeSVG } = MG;
+
+// Nav + Footer
+
+// Hero parallax
+const heroBg = document.getElementById('hero-bg');
+window.addEventListener('scroll', () => { heroBg.style.transform = `translateY(${window.scrollY * -0.3}px)`; }, { passive:true });
+
+// Hero buttons
+const hb = document.getElementById('hero-btns');
+hb.appendChild(linkBtn('Browse the mods', 'mods.html', 'primary'));
+hb.appendChild(linkBtn('Read the manifesto', 'about.html', 'outline-dark'));
+
+// Mod gallery
+const MODS = [
+  { category:'Reskin',           baseGame:'Talisman 4e',         title:'Talisman: Hexed',                    body:"Replaces the Talisman boards with 61 hexagonal tiles arranged in concentric rings. Open-world hex system — every game lays out differently.", stats:'2–6 players · 90 min · 13+', href:'mod-detail.html', source:'Moddable.Games' },
+  { category:'Rebalance',        baseGame:'Twilight Imperium 4e',title:'Hyper Imperium',                     body:"Hyper Movement · Hyper Trades · Hyper Objectives · Hyper Factions · Hyper Agendas. A faster ruleset for TI4 that keeps the politics intact.", stats:'3–6 players · 4–6 hr · 14+', source:'Moddable.Games' },
+  { category:'Total conversion', baseGame:'Catan',               title:'Nuke Catan',                         body:"Post-apocalyptic overhaul. Sheep are scarce, brick is currency. Once per game, someone presses The Button — one hex is permanently irradiated.", stats:'3–5 players · 60 min · 12+', source:'Moddable.Games' },
+  { category:'Total conversion', baseGame:'Chess',               title:'Fog of War Chess',                   body:"Players see only squares their pieces can legally move to. No checks, no checkmates — only capture the king. Invented 1989, rules freely available.", stats:'2 players · 20–40 min · 10+', source:'chessvariants.com' },
+  { category:'Rebalance',        baseGame:'Twilight Imperium 4e',title:'Shattered Ascension',                body:"PsiComa's decade-long TI3 community remix — rebalanced factions, overhauled agenda phase, new card sets. Tabletop Simulator module available.", stats:'3–8 players · 6–12 hr · 16+', source:'boardgamegeek.com' },
+  { category:'Rebalance',        baseGame:'Risk',                title:'CivRisk',                            body:"Risk rewritten to play like Civilisation: 20 civilisations, leaders, growth tiers, ancient ruins. Chris Grey, 2023 — rules free to download.", stats:'3–5 players · 180 min · 14+', source:'Chris Grey' },
+];
+
+const filters = ['All','Total conversion','Rebalance','Reskin'];
+let activeFilter = 'All';
+const filtersEl = document.getElementById('gallery-filters');
+const gridEl = document.getElementById('gallery-grid');
+
+function renderFilter() {
+  filtersEl.innerHTML = '';
+  filters.forEach(f => {
+    const isActive = f === activeFilter;
+    const b = el('button', { style:{ fontFamily:'var(--mg-font-body)', fontWeight:600, fontSize:'13px', height:'36px', padding:'0 14px', borderRadius:'9999px', border: isActive?'none':'1px solid #c3c5cc', background: isActive?'#000':'transparent', color: isActive?'#fff':'#14161c', cursor:'pointer', transition:'all 150ms' }}, f);
+    b.addEventListener('click', () => { activeFilter = f; renderFilter(); renderGrid(); });
+    filtersEl.appendChild(b);
+  });
+}
+
+function renderGrid() {
+  gridEl.innerHTML = '';
+  const visible = activeFilter === 'All' ? MODS : MODS.filter(m => m.category === activeFilter);
+  visible.forEach(m => gridEl.appendChild(modCard(m)));
+}
+
+renderFilter(); renderGrid();
+
+// Nuke Catan cube
+const nc = document.getElementById('nuke-cube');
+const bigCube = cubeSVG(240);
+bigCube.style.filter = 'drop-shadow(0 20px 40px rgba(209,26,26,0.5))';
+nc.appendChild(bigCube);
+const nb2 = document.getElementById('nuke-btns');
+nb2.appendChild(linkBtn('Download the rules', '#', 'red'));
+nb2.appendChild(linkBtn('Read the brief', '#', 'outline-dark'));
+
+// Featured mod cube + buttons
+document.getElementById('featured-cube').appendChild(cubeSVG(220));
+const fb = document.getElementById('featured-btns');
+fb.appendChild(linkBtn('Download the rules', '#', 'primary'));
+fb.appendChild(linkBtn('View the components', '#', 'outline-dark'));
+
+// Featured stats
+const stats = [['Players','3–6'],['Time','4–6 hr'],['Age','14+'],['Version','v2.0.1']];
+const sEl = document.getElementById('featured-stats');
+stats.forEach(([k,v], i) => {
+  if (i > 0) sEl.appendChild(el('span', { style:{ width:'1px', height:'24px', background:'rgba(255,255,255,0.18)', margin:'0 20px' }}));
+  const d = el('div', { style:{ display:'flex', flexDirection:'column' }});
+  d.appendChild(el('span', { style:{ fontFamily:'var(--mg-font-body)', fontSize:'10px', textTransform:'uppercase', letterSpacing:'1px', color:'rgba(255,255,255,0.55)' }}, k));
+  d.appendChild(el('span', { style:{ fontFamily:'var(--mg-font-mono)', fontWeight:600, fontSize:'18px', color:'#fff' }}, v));
+  sEl.appendChild(d);
+});
+
+// News grid
+const NEWS = [
+  { tag:'Devlog', date:'May 12', title:'Mongo enters open playtest', body:'Our second original game opens its playtest doors. 200 spots.' },
+  { tag:'Mod update', date:'May 09', title:'Econopoly v1.4: the audit patch', body:'Cash-pile tax cap raised. Bankruptcy chain reactions buffed.' },
+  { tag:'Community', date:'May 02', title:'Mod jam #3 wraps up', body:'Twelve submissions. One won a literal trophy made of meeples.' },
+];
+const ng = document.getElementById('news-grid');
+NEWS.forEach(n => {
+  const a = el('a', { href:'news-post.html', style:{ display:'flex', flexDirection:'column', gap:'14px', padding:'24px', background:'#fff', border:'1px solid #e6e3d8', borderRadius:'20px', textDecoration:'none', color:'inherit', transition:'border-color 180ms' }});
+  a.addEventListener('mouseenter', () => a.style.borderColor = '#14161c');
+  a.addEventListener('mouseleave', () => a.style.borderColor = '#e6e3d8');
+  const row = el('div', { style:{ display:'flex', justifyContent:'space-between', alignItems:'center' }});
+  row.appendChild(el('span', { style:{ fontFamily:'var(--mg-font-body)', fontWeight:600, fontSize:'11px', background:'#14161c', color:'#fff', padding:'3px 10px', borderRadius:'9999px' }}, n.tag));
+  row.appendChild(el('span', { style:{ fontFamily:'var(--mg-font-mono)', fontSize:'12px', color:'#7a8290' }}, n.date));
+  a.appendChild(row);
+  a.appendChild(el('h3', { style:{ fontFamily:'var(--mg-font-display)', fontWeight:600, fontSize:'21px', lineHeight:'1.25', letterSpacing:'-0.25px', color:'#14161c' }}, n.title));
+  a.appendChild(el('p', { style:{ fontFamily:'var(--mg-font-body)', fontSize:'14px', lineHeight:'1.55', color:'#4f5764', margin:0 }}, n.body));
+  a.appendChild(el('span', { style:{ fontFamily:'var(--mg-font-body)', fontWeight:600, fontSize:'13px', color:'#0c4f8d', marginTop:'auto' }}, 'Read more →'));
+  ng.appendChild(a);
+});
+
+// Community band buttons
+const cb = document.getElementById('community-btns');
+cb.appendChild(linkBtn('Open the Discord', 'community.html', 'primary'));
+cb.appendChild(linkBtn('Submit a mod', 'submit.html', 'outline-dark'));
+    },
+  },
+  "mods": {
+    label: "Mods index",
+    nav:   "Mods",
+    style: "body { background:#f5f4ef; }",
+    html: `<!-- Page hero -->
+<section style="background:#000;color:#fff;padding:64px 32px 88px;position:relative;overflow:hidden">
+  <div style="position:absolute;right:-150px;top:10%;width:700px;height:700px;background:radial-gradient(circle,rgba(58,123,232,0.28) 0%,transparent 65%);pointer-events:none"></div>
+  <div style="max-width:1200px;margin:0 auto;position:relative">
+    <div style="font-family:var(--mg-font-pixel);font-size:10px;color:#6fb5ff;letter-spacing:2px;margin-bottom:22px">▲ THE LIBRARY</div>
+    <h1 style="font-family:var(--mg-font-display);font-weight:600;font-size:clamp(48px,7vw,96px);line-height:0.95;letter-spacing:-0.025em;margin:0 0 20px">All mods. One library.</h1>
+    <p style="font-family:var(--mg-font-body);font-size:18px;line-height:1.55;color:rgba(255,255,255,0.82);max-width:600px;margin:0" id="hero-sub"></p>
+  </div>
+</section>
+
+<!-- Filter + grid -->
+<section style="background:#f5f4ef;padding:40px 32px 96px">
+  <div style="max-width:1200px;margin:0 auto">
+    <div style="display:flex;gap:16px;margin-bottom:32px;flex-wrap:wrap;align-items:center">
+      <div style="position:relative;flex:1 1 280px;max-width:360px">
+        <input id="search-input" type="search" placeholder="Search mods or a base game…" style="width:100%;height:44px;padding:0 16px 0 44px;border:1px solid #e6e3d8;border-radius:9999px;font-family:var(--mg-font-body);font-size:14px;background:#fff;outline:none">
+        <span style="position:absolute;left:16px;top:50%;transform:translateY(-50%);opacity:0.4;font-size:16px;pointer-events:none">⌕</span>
+      </div>
+      <div id="cat-filters" style="display:flex;gap:8px;flex-wrap:wrap;margin-left:auto"></div>
+    </div>
+    <div style="display:flex;justify-content:space-between;align-items:center;margin-bottom:16px;flex-wrap:wrap;gap:8px">
+      <div id="count-label" style="font-family:var(--mg-font-pixel);font-size:9px;color:#14161c;letter-spacing:1.5px"></div>
+      <div style="font-family:var(--mg-font-mono);font-size:12px;color:#7a8290">Sorted by base game</div>
+    </div>
+    <div id="mods-grid" style="display:grid;grid-template-columns:repeat(auto-fit,minmax(280px,1fr));gap:20px"></div>
+    <div id="empty-state" style="display:none;background:#fff;border:1px solid #e6e3d8;border-radius:16px;padding:48px;text-align:center;margin-top:16px">
+      <div style="font-family:var(--mg-font-pixel);font-size:10px;color:#d11a1a;letter-spacing:1.5px;margin-bottom:12px">▲ NO MATCH</div>
+      <h3 style="font-family:var(--mg-font-display);font-weight:600;font-size:24px;color:#14161c;margin:0 0 8px">Nothing in the library matches.</h3>
+      <p style="font-family:var(--mg-font-body);font-size:15px;color:#4f5764;margin:0 0 20px">Want to write the mod yourself?</p>
+      <a href="submit.html" style="display:inline-flex;align-items:center;height:48px;padding:0 22px;background:#14161c;color:#fff;border-radius:9999px;font-family:var(--mg-font-body);font-weight:600;font-size:15px;text-decoration:none">Submit a mod</a>
+    </div>
+  </div>
+</section>`,
+    init(container) {
+      const { navbar, footer, modCard } = MG;
+
+const ALL_MODS = [
+  // ── Moddable originals ──────────────────────────────────────────────────
+  { category:'Reskin',           baseGame:'Talisman 4e',
+    title:'Talisman: Hexed',
+    body:"Replaces the Talisman boards with 61 hexagonal tiles arranged in concentric rings — open-world hex system, every game lays out differently.",
+    stats:'2–6 players · 90 min · 13+', href:'mod-detail.html', source:'Moddable.Games' },
+
+  { category:'Rebalance',        baseGame:'Twilight Imperium 4e',
+    title:'Hyper Imperium',
+    body:"Hyper Movement, Hyper Trades, Hyper Objectives. A faster ruleset for TI4 + Prophecy of Kings that keeps the politics intact.",
+    stats:'3–6 players · 4–6 hr · 14+', source:'Moddable.Games' },
+
+  { category:'Total conversion', baseGame:'Catan',
+    title:'Nuke Catan',
+    body:"Post-apocalyptic overhaul. Sheep are scarce, brick is currency. Once per game, a player may press The Button — one hex is permanently irradiated.",
+    stats:'3–5 players · 60 min · 12+', source:'Moddable.Games' },
+
+  // ── Community & publicly available variants ────────────────────────────
+  { category:'Total conversion', baseGame:'Chess',
+    title:'Fog of War Chess',
+    body:"Players see only the squares their own pieces can legally move to — no checks, no checkmates, only capture the king. Invented by Jens Bæk Nielsen & Torben Osted (1989).",
+    stats:'2 players · 20–40 min · 10+', source:'chessvariants.com' },
+
+  { category:'Reskin',           baseGame:'Chess',
+    title:'4-Player Chess',
+    body:"Four players, four armies, one board. Free-for-all or teams. The de facto standard for multi-player chess — widely available on chess.com and as PnP.",
+    stats:'4 players · 30 min · 10+', source:'chess.com/variants' },
+
+  { category:'Total conversion', baseGame:'Chess',
+    title:'Hexagonal Chess (Glinski)',
+    body:"Władysław Gliński's 1936 hex-board variant. 91 hexagonal cells, 9 pawns per side, bishops that each stay on one of three cell colours. Fully documented and free to print.",
+    stats:'2 players · 30–60 min · 12+', source:'chessvariants.com' },
+
+  { category:'Rebalance',        baseGame:'Monopoly',
+    title:'Auction Monopoly',
+    body:"Every unowned property that a player lands on must immediately go to auction — the official rule most players never use. Dramatically faster, dramatically more strategic.",
+    stats:'2–6 players · 60 min · 8+', source:'Monopoly official rules' },
+
+  { category:'Total conversion', baseGame:'Monopoly',
+    title:'Anti-Monopoly',
+    body:"Two teams play by different rules on the same board: Monopolists charge high rent on monopolies; Competitors charge cost-price only. Published by Ralph Anspach in 1973.",
+    stats:'2–6 players · 60 min · 10+', source:'Public domain variant' },
+
+  { category:'Rebalance',        baseGame:'Catan',
+    title:'Flooded Catan',
+    body:"Community variant from the Catan Wiki: tiles flood every few rounds. Players can win by being the last settlement standing, not just by hitting 10 VP.",
+    stats:'3–4 players · 75 min · 10+', source:'catan.fandom.com' },
+
+  { category:'Total conversion', baseGame:'Catan',
+    title:'The Diamond Mine',
+    body:"A single-hex unofficial expansion: swap one pasture for the diamond mine. Diamonds substitute for ore in development card purchases. Self-contained rules, free to print.",
+    stats:'3–4 players · 60 min · 10+', source:'scribd.com — meepleeater' },
+
+  { category:'Rebalance',        baseGame:'Twilight Imperium 4e',
+    title:'Shattered Ascension',
+    body:"PsiComa's decade-long TI3 remix — rebalanced factions, overhauled agenda phase, new card sets. The most thorough community TI variant in existence. Tabletop Simulator module available.",
+    stats:'3–8 players · 6–12 hr · 16+', source:'boardgamegeek.com' },
+
+  { category:'Rebalance',        baseGame:'Risk',
+    title:'CivRisk',
+    body:"Risk rewritten to play like Civilisation: choose a civilisation and leader, build through growth tiers, discover ruins and barbarian camps. Chris Grey, 2023. ePub rules free to download.",
+    stats:'3–5 players · 180 min · 14+', source:'Chris Grey — self-published' },
+
+  { category:'Reskin',           baseGame:'Risk',
+    title:'Custom World Risk',
+    body:"Replace the standard board with your own map — Middle-earth, a fantasy continent, your neighbourhood. The rules stay identical, only the geography changes.",
+    stats:'2–6 players · 120 min · 12+', source:'Community / BGG' },
+];
+
+const filters = ['All','Total conversion','Rebalance','Reskin'];
+let activeCat = 'All', searchVal = '';
+
+document.getElementById('hero-sub').textContent = `${ALL_MODS.length} rulebook mods across ${new Set(ALL_MODS.map(m=>m.baseGame)).size} base games. Filter by mod-type, or search for the one you already own.`;
+
+function renderFilters() {
+  const el2 = document.getElementById('cat-filters');
+  el2.innerHTML = '';
+  filters.forEach(f => {
+    const a = f === activeCat;
+    const b = document.createElement('button');
+    b.textContent = f;
+    Object.assign(b.style, { fontFamily:'var(--mg-font-body)', fontWeight:600, fontSize:'13px', height:'36px', padding:'0 14px', borderRadius:'9999px', border: a?'none':'1px solid #c3c5cc', background: a?'#000':'transparent', color: a?'#fff':'#14161c', cursor:'pointer', transition:'all 150ms' });
+    b.addEventListener('click', () => { activeCat = f; renderFilters(); renderGrid(); });
+    el2.appendChild(b);
+  });
+}
+
+function renderGrid() {
+  const q = searchVal.toLowerCase();
+  const visible = ALL_MODS.filter(m =>
+    (activeCat === 'All' || m.category === activeCat) &&
+    (!q || m.title.toLowerCase().includes(q) || m.baseGame.toLowerCase().includes(q))
+  );
+  const grid = document.getElementById('mods-grid');
+  const empty = document.getElementById('empty-state');
+  grid.innerHTML = '';
+  document.getElementById('count-label').textContent = `▲ ${visible.length} OF ${ALL_MODS.length} MODS`;
+  if (visible.length === 0) { empty.style.display = 'block'; return; }
+  empty.style.display = 'none';
+  visible.forEach(m => grid.appendChild(MG.modCard(m)));
+}
+
+document.getElementById('search-input').addEventListener('input', e => { searchVal = e.target.value; renderGrid(); });
+renderFilters(); renderGrid();
+    },
+  },
+  "mod-detail": {
+    label: "Mod detail",
+    nav:   "Mods",
+    style: "body { background:#000; }\n.rules-sidebar { position:sticky; top:96px; align-self:start; }\n@media(max-width:768px){ .rules-layout { grid-template-columns:1fr !important; } .rules-sidebar { position:static; } }",
+    html: `<!-- Header -->
+<section style="position:relative;color:#fff;overflow:hidden;isolation:isolate;background:#000">
+  <div style="position:absolute;right:-200px;top:40%;width:700px;height:700px;background:radial-gradient(circle,rgba(12,79,141,0.5) 0%,transparent 60%);pointer-events:none"></div>
+  <div style="position:relative;z-index:2;padding:56px 32px 100px;max-width:1200px;margin:0 auto;box-sizing:border-box">
+    <a href="mods.html" style="font-family:var(--mg-font-mono);font-size:12px;color:rgba(255,255,255,0.7);text-decoration:none">← All mods</a>
+    <div style="display:flex;gap:10px;margin-top:24px;flex-wrap:wrap;align-items:center">
+      <span style="font-family:var(--mg-font-body);font-weight:600;font-size:11px;background:#0c4f8d;color:#fff;padding:4px 10px;border-radius:9999px">Reskin</span>
+      <span style="font-family:var(--mg-font-mono);font-size:11px;color:rgba(255,255,255,0.7);padding:4px 10px;border:1px solid rgba(255,255,255,0.2);border-radius:9999px">base: Talisman 4e (revised)</span>
+      <span style="font-family:var(--mg-font-pixel);font-size:9px;color:#6fb5ff;padding:5px 10px;letter-spacing:1px">v1.0.0</span>
+    </div>
+    <h1 style="font-family:var(--mg-font-display);font-weight:600;font-size:clamp(48px,7vw,96px);line-height:1.0;letter-spacing:-0.025em;margin:20px 0 24px;max-width:1000px">Talisman: <em style="color:#6fb5ff">Hexed</em>.</h1>
+    <p style="font-family:var(--mg-font-body);font-size:19px;line-height:1.55;color:rgba(255,255,255,0.78);max-width:720px;margin:0 0 36px">An open-world hex system that replaces the Talisman game boards with 61 individual hexagonal tiles — arranged in concentric rings so every game lays out differently. Built for <em>Talisman 4th Edition (revised)</em> by Fantasy Flight Games.</p>
+    <div style="display:flex;gap:12px;flex-wrap:wrap;margin-bottom:40px" id="header-btns"></div>
+    <!-- Stats row -->
+    <div id="stats-row" style="display:flex;gap:0;align-items:center;flex-wrap:wrap;padding-top:28px;border-top:1px solid rgba(255,255,255,0.12)"></div>
+  </div>
+</section>
+
+<!-- Rules sections -->
+<section style="background:#f5f4ef;padding:88px 32px">
+  <div class="rules-layout" style="max-width:1200px;margin:0 auto;display:grid;grid-template-columns:240px 1fr;gap:64px">
+    <aside class="rules-sidebar">
+      <div style="font-family:var(--mg-font-pixel);font-size:9px;color:#0c4f8d;letter-spacing:1.5px;margin-bottom:18px">▲ THE RULES</div>
+      <ol id="toc" style="list-style:none;padding:0;margin:0;display:flex;flex-direction:column;gap:10px"></ol>
+    </aside>
+    <div id="rules-body"></div>
+  </div>
+</section>
+
+<!-- Components list -->
+<section style="background:#f5f4ef;padding:0 32px 88px">
+  <div style="max-width:1200px;margin:0 auto">
+    <h2 style="font-family:var(--mg-font-display);font-weight:600;font-size:48px;line-height:1.1;letter-spacing:-0.6px;color:#14161c;margin:0 0 32px">What you'll need.</h2>
+    <div id="components-grid" class="mg-grid-3" style="display:grid;grid-template-columns:repeat(3,1fr);gap:16px"></div>
+  </div>
+</section>
+
+<!-- Related mods -->
+<section style="background:#fff;padding:88px 32px;border-top:1px solid #e6e3d8">
+  <div style="max-width:1200px;margin:0 auto">
+    <h2 style="font-family:var(--mg-font-display);font-weight:600;font-size:40px;line-height:1.15;letter-spacing:-0.5px;color:#14161c;margin:0 0 32px">More from the library.</h2>
+    <div id="related-grid" class="mg-grid-3" style="display:grid;grid-template-columns:repeat(3,1fr);gap:20px"></div>
+  </div>
+</section>`,
+    init(container) {
+      const { T, el, linkBtn, navbar, footer, modCard } = MG;
+
+// Header buttons
+const hb = document.getElementById('header-btns');
+hb.appendChild(linkBtn('⬇ Download rules', '#', 'primary'));
+hb.appendChild(linkBtn('Print-and-play pack', '#', 'outline-dark'));
+
+// Stats row
+const STATS = [['Players','2–6'],['Time','90 min'],['Age','13+'],['Tiles','61 hex'],['Designer','Moddable team'],['Updated','Apr 2024']];
+const sr = document.getElementById('stats-row');
+STATS.forEach(([k,v],i) => {
+  if (i>0) sr.appendChild(el('span',{style:{width:'1px',height:'24px',background:'rgba(255,255,255,0.12)',margin:'0 20px'}}));
+  const d = el('div',{style:{display:'flex',flexDirection:'column'}});
+  d.appendChild(el('span',{style:{fontFamily:'var(--mg-font-body)',fontSize:'10px',color:'rgba(255,255,255,0.5)',textTransform:'uppercase',letterSpacing:'1px'}},k));
+  d.appendChild(el('span',{style:{fontFamily:'var(--mg-font-mono)',fontWeight:600,fontSize:'16px',color:'#fff',marginTop:'4px'}},v));
+  sr.appendChild(d);
+});
+
+// Rules
+const SECTIONS = [
+  { id:'1', title:'Why hex?', body:"The square Talisman board gets boring fast — same path, same encounters, same finale every game. Hexagonal tiles let us deal a new map each session and keep the journey unpredictable." },
+  { id:'2', title:'The four rings', body:"61 tiles arranged in concentric rings: 24 outer (the world), 18 river, 12 middle (the highlands), 6 inner (the dungeon approach), plus one central tile (the Crown of Command)." },
+  { id:'3', title:'Special tiles', body:"10 water tiles connect across rings via the river. 4 desert tiles act as Talisman's traditional 'Desert' region. The rest map onto the original board's encounter spaces, redistributed each game." },
+  { id:'4', title:'Movement', body:"Roll 1d6 and move that many tiles in any direction along legal edges. You may cross river tiles only with a boat token, raft, or relevant character ability." },
+  { id:'5', title:"What hasn't changed", body:"All Talisman 4e (revised) cards, characters, spell decks, and adventure cards work as-is. Hexed only replaces the board — your encounter library is untouched." },
+];
+
+const toc = document.getElementById('toc');
+const body2 = document.getElementById('rules-body');
+SECTIONS.forEach(s => {
+  // TOC
+  const li = el('li');
+  const a = el('a',{href:`#s${s.id}`,style:{display:'flex',gap:'10px',alignItems:'baseline',fontFamily:'var(--mg-font-body)',fontSize:'14px',color:'#14161c',textDecoration:'none',padding:'4px 0'}});
+  a.appendChild(el('span',{style:{fontFamily:'var(--mg-font-mono)',fontSize:'11px',color:'#7a8290',minWidth:'18px'}},s.id.padStart(2,'0')));
+  a.appendChild(document.createTextNode(s.title));
+  li.appendChild(a); toc.appendChild(li);
+  // Body
+  const art = el('article',{id:`s${s.id}`,style:{paddingBottom:'48px',marginBottom:'48px',borderBottom:'1px solid #e6e3d8'}});
+  art.appendChild(el('div',{style:{fontFamily:'var(--mg-font-mono)',fontSize:'12px',color:'#7a8290',letterSpacing:'0.5px',marginBottom:'10px'}},`SECTION ${s.id.padStart(2,'0')}`));
+  art.appendChild(el('h2',{style:{fontFamily:'var(--mg-font-display)',fontWeight:600,fontSize:'40px',lineHeight:'1.15',letterSpacing:'-0.5px',color:'#14161c',margin:'0 0 16px'}},s.title));
+  art.appendChild(el('p',{style:{fontFamily:'var(--mg-font-body)',fontSize:'17px',lineHeight:'1.6',color:'#3a3d44',margin:0,maxWidth:'640px'}},s.body));
+  body2.appendChild(art);
+});
+
+// Components
+const COMPONENTS = [
+  { kind:'Required', list:['Talisman 4e (revised) base game','Card decks (Adventure, Spell, Purchase, Stranger, Warlock Quest)','Character cards + miniatures'] },
+  { kind:'Printable', list:['61 × hexagonal tiles (PDF, included)','Tile inventory + assembly diagram','River movement tokens'] },
+  { kind:'House', list:['1d6 standard die','A large flat surface — 4ft × 3ft minimum','Patience for tile shuffling'] },
+];
+const cg = document.getElementById('components-grid');
+COMPONENTS.forEach(({kind,list}) => {
+  const c = el('div',{style:{background:'#fff',border:'1px solid #e6e3d8',borderRadius:'16px',padding:'24px'}});
+  c.appendChild(el('div',{style:{fontFamily:'var(--mg-font-pixel)',fontSize:'9px',color:'#0c4f8d',letterSpacing:'1px',marginBottom:'14px'}},kind.toUpperCase()));
+  const ul = el('ul',{style:{listStyle:'none',padding:0,margin:0,display:'flex',flexDirection:'column',gap:'10px'}});
+  list.forEach(x => {
+    const li = el('li',{style:{display:'flex',gap:'10px',alignItems:'flex-start',fontFamily:'var(--mg-font-body)',fontSize:'14px',color:'#1f2228',lineHeight:'1.45'}});
+    li.appendChild(el('span',{style:{width:'6px',height:'6px',marginTop:'8px',background:'#0c4f8d',borderRadius:'1px',flex:'none'}}));
+    li.appendChild(document.createTextNode(x));
+    ul.appendChild(li);
+  });
+  c.appendChild(ul); cg.appendChild(c);
+});
+
+// Related
+const RELATED = [
+  { category:'Rebalance', baseGame:'Twilight Imperium 4e', title:'Hyper Imperium', body:"Hyper Movement · Hyper Trades · Hyper Agendas. A faster TI4 ruleset that keeps the politics intact.", stats:'3–6 players · 4–6 hr · 14+' },
+  { category:'Total conversion', baseGame:'Monopoly', title:'Econopoly', body:"Monopoly converted into a family-friendly Euro-game. Resource management, victory points.", stats:'2–4 players · 60 min · 10+' },
+  { category:'Total conversion', baseGame:'Catan', title:'Are you ready to <em>nuke</em> Catan?', body:"Post-apocalyptic rules overhaul. Sheep are scarce, brick is currency.", stats:'3–5 players · 60 min · 12+' },
+];
+const rg = document.getElementById('related-grid');
+RELATED.forEach(m => rg.appendChild(modCard(m)));
+    },
+  },
+  "game-detail": {
+    label: "Endless Skies",
+    nav:   "Games",
+    style: "body{background:#000}",
+    html: `<!-- Hero -->
+<section style="position:relative;color:#fff;overflow:hidden;isolation:isolate;background:#000;min-height:620px">
+  <div style="position:absolute;inset:0;background:linear-gradient(180deg,#0a0d2a 0%,#1a3680 45%,#000 100%)"></div>
+  <div style="position:absolute;inset:0;background-image:url('data:image/svg+xml;utf8,<svg xmlns=\\'http://www.w3.org/2000/svg\\' width=\\'56\\' height=\\'64\\' viewBox=\\'0 0 56 64\\'><path d=\\'M28 1 54 16v32L28 63 2 48V16z\\' fill=\\'none\\' stroke=\\'%233a7be8\\' stroke-opacity=\\'0.18\\' stroke-width=\\'1\\'/></svg>');background-size:56px 64px;animation:hexFloat 30s linear infinite"></div>
+  <div style="position:absolute;inset:0;background:linear-gradient(180deg,rgba(0,0,0,0.5) 0%,transparent 50%,rgba(0,0,0,0.5) 100%);pointer-events:none"></div>
+  <div style="position:relative;padding:64px 32px 100px;max-width:1200px;margin:0 auto;box-sizing:border-box">
+    <a href="index.html" style="font-family:var(--mg-font-mono);font-size:12px;color:rgba(255,255,255,0.72);text-decoration:none">← All games</a>
+    <div style="display:flex;gap:10px;margin-top:28px;flex-wrap:wrap;align-items:center">
+      <span style="font-family:var(--mg-font-body);font-weight:600;font-size:11px;background:#3a9928;color:#fff;padding:4px 10px;border-radius:9999px">Original</span>
+      <span style="font-family:var(--mg-font-mono);font-size:11px;color:rgba(255,255,255,0.7);padding:4px 10px;border:1px solid rgba(255,255,255,0.2);border-radius:9999px">CC BY-NC-SA · Print-and-play</span>
+      <span style="font-family:var(--mg-font-pixel);font-size:9px;color:#6fb5ff;padding:5px 10px;letter-spacing:1px;text-shadow:0 0 8px rgba(111,181,255,0.5)">v1.3.0</span>
+    </div>
+    <h1 style="font-family:var(--mg-font-display);font-weight:600;font-size:clamp(56px,8vw,124px);line-height:0.95;letter-spacing:-0.03em;margin:24px 0;text-shadow:0 4px 30px rgba(0,0,0,0.6)">Endless<br>Skies.</h1>
+    <p style="font-family:var(--mg-font-body);font-size:19px;line-height:1.55;color:rgba(255,255,255,0.86);max-width:640px;margin:0 0 36px;text-shadow:0 2px 16px rgba(0,0,0,0.7)">A hex-tile exploration game built to be modded. Three biomes, twelve faction decks, one rulebook with version control — so the community can ship expansions without asking permission.</p>
+    <div style="display:flex;gap:12px;flex-wrap:wrap" id="hero-btns"></div>
+  </div>
+</section>
+
+<!-- Stats bar -->
+<section style="background:#000;color:#fff;padding:0 32px 56px">
+  <div style="max-width:1200px;margin:0 auto;display:flex;gap:0;align-items:center;flex-wrap:wrap;padding-top:28px;border-top:1px solid rgba(255,255,255,0.12)" id="stats-bar"></div>
+</section>
+
+<!-- How it plays -->
+<section style="background:#f5f4ef;padding:88px 32px">
+  <div style="max-width:1200px;margin:0 auto">
+    <h2 style="font-family:var(--mg-font-display);font-weight:600;font-size:clamp(36px,4.5vw,56px);line-height:1.05;letter-spacing:-0.025em;color:#14161c;margin:0 0 48px">How it plays.</h2>
+    <div id="steps-grid" class="mg-grid-4" style="display:grid;grid-template-columns:repeat(4,1fr);gap:16px"></div>
+  </div>
+</section>
+
+<!-- Mod hooks -->
+<section style="background:#000;color:#fff;padding:88px 32px;position:relative;overflow:hidden">
+  <div style="position:absolute;left:-100px;top:30%;width:500px;height:500px;background:radial-gradient(circle,rgba(58,123,232,0.18) 0%,transparent 65%);pointer-events:none"></div>
+  <div style="max-width:1200px;margin:0 auto;position:relative">
+    <div style="font-family:var(--mg-font-pixel);font-size:10px;color:#6fb5ff;letter-spacing:1.5px;margin-bottom:18px">▲ MOD HOOKS</div>
+    <h2 style="font-family:var(--mg-font-display);font-weight:600;font-size:clamp(36px,4.5vw,56px);line-height:1.05;letter-spacing:-0.025em;margin:0 0 16px;max-width:800px">The whole rulebook is in a git repo.</h2>
+    <p style="font-family:var(--mg-font-body);font-size:17px;line-height:1.6;color:rgba(255,255,255,0.78);margin:0 0 48px;max-width:700px">Endless Skies ships with four hookable files. Fork the repo, change the file, send us a PR — or run your variant privately and never tell us.</p>
+    <div id="hooks-grid" class="mg-grid-2" style="display:grid;grid-template-columns:repeat(2,1fr);gap:14px"></div>
+  </div>
+</section>
+
+<!-- Community mods -->
+<section style="background:#fff;padding:88px 32px;border-top:1px solid #e6e3d8">
+  <div style="max-width:1200px;margin:0 auto">
+    <div style="display:flex;justify-content:space-between;align-items:flex-end;flex-wrap:wrap;gap:16px;margin-bottom:32px">
+      <h2 style="font-family:var(--mg-font-display);font-weight:600;font-size:clamp(36px,4.5vw,56px);line-height:1.05;letter-spacing:-0.025em;color:#14161c;margin:0">Community mods for <em>Endless Skies</em>.</h2>
+      <a href="submit.html" style="font-family:var(--mg-font-body);font-weight:600;font-size:14px;color:#0c4f8d;text-decoration:none">Submit yours →</a>
+    </div>
+    <div id="comm-grid" class="mg-grid-3" style="display:grid;grid-template-columns:repeat(3,1fr);gap:20px"></div>
+  </div>
+</section>`,
+    init(container) {
+      const { T, el, linkBtn, navbar, footer, modCard } = MG;
+
+document.getElementById('hero-btns').appendChild(linkBtn('Download Print-and-Play','#','primary'));
+document.getElementById('hero-btns').appendChild(linkBtn('Browse community mods','mods.html','outline-dark'));
+
+const STATS = [['Players','2–4'],['Time','60–90 min'],['Age','12+'],['Designer','Moddable team'],['Released','Mar 2025'],['Mods','8 community']];
+const sb = document.getElementById('stats-bar');
+STATS.forEach(([k,v],i) => {
+  if(i>0) sb.appendChild(el('span',{style:{width:'1px',height:'24px',background:'rgba(255,255,255,0.12)',margin:'0 20px'}}));
+  const d = el('div',{style:{display:'flex',flexDirection:'column'}});
+  d.appendChild(el('span',{style:{fontFamily:'var(--mg-font-body)',fontSize:'10px',color:'rgba(255,255,255,0.5)',textTransform:'uppercase',letterSpacing:'1px'}},k));
+  d.appendChild(el('span',{style:{fontFamily:'var(--mg-font-mono)',fontWeight:600,fontSize:'16px',color:'#fff',marginTop:'4px'}},v));
+  sb.appendChild(d);
+});
+
+const STEPS = [
+  {n:'01',title:'Lay the world',body:'19 hex tiles dealt face-down into a 3-ring spiral. No two games start the same.'},
+  {n:'02',title:'Pick a faction',body:'Twelve faction decks: Cartographers, Storm-callers, Salvagers, Iron Banks… each breaks one rule.'},
+  {n:'03',title:'Trade and tile',body:"Flip a tile to reveal a biome (sky, sea, surface). Trade resources — the speaker can veto one deal per round."},
+  {n:'04',title:'End in the void',body:'Whoever reaches the Void first triggers endgame. Two more full rounds, then count points.'},
+];
+const sg = document.getElementById('steps-grid');
+STEPS.forEach(s => {
+  const a = el('article',{style:{background:'#fff',border:'1px solid #e6e3d8',borderRadius:'16px',padding:'24px'}});
+  a.appendChild(el('div',{style:{fontFamily:'var(--mg-font-pixel)',fontSize:'10px',color:'#3a9928',letterSpacing:'1.5px',marginBottom:'14px'}},`▲ ${s.n}`));
+  a.appendChild(el('h3',{style:{fontFamily:'var(--mg-font-display)',fontWeight:600,fontSize:'22px',lineHeight:'1.2',letterSpacing:'-0.25px',color:'#14161c',margin:'0 0 10px'}},s.title));
+  a.appendChild(el('p',{style:{fontFamily:'var(--mg-font-body)',fontSize:'14px',lineHeight:'1.55',color:'#3a3d44',margin:0}},s.body));
+  sg.appendChild(a);
+});
+
+const HOOKS = [
+  {name:'factions.yaml',desc:'Add a faction deck with one rule-breaker line. Validates against the base ruleset.'},
+  {name:'biomes.yaml',desc:'Define new tile biomes — terrain, resources, victory contribution.'},
+  {name:'endgame.lua',desc:'Override how the endgame is triggered. Useful for short-game variants.'},
+  {name:'rules.md',desc:'Your version of the rulebook. Diffs are reviewed by the maintainers.'},
+];
+const hg = document.getElementById('hooks-grid');
+HOOKS.forEach(h => {
+  const d = el('div',{style:{background:'#161721',border:'1px solid rgba(255,255,255,0.08)',borderRadius:'16px',padding:'24px',display:'flex',gap:'18px',alignItems:'flex-start'}});
+  const icon = el('div',{style:{width:'40px',height:'40px',background:'#0c4f8d',borderRadius:'10px',display:'flex',alignItems:'center',justifyContent:'center',flex:'none',fontSize:'18px',color:'#fff'}});
+  icon.textContent = '◈';
+  d.appendChild(icon);
+  const txt = el('div');
+  txt.appendChild(el('div',{style:{fontFamily:'var(--mg-font-mono)',fontWeight:600,fontSize:'15px',color:'#6fb5ff'}},h.name));
+  txt.appendChild(el('div',{style:{fontFamily:'var(--mg-font-body)',fontSize:'14px',color:'rgba(255,255,255,0.78)',lineHeight:'1.5',marginTop:'6px'}},h.desc));
+  d.appendChild(txt); hg.appendChild(d);
+});
+
+const COMM = [
+  {category:'Reskin',baseGame:'Endless Skies',title:'Endless Skies: Inkwell',body:'All-monochrome tile set. Every faction recoloured into Edo-period woodblock palette.',stats:'2–4 players · 90 min · 12+'},
+  {category:'Rebalance',baseGame:'Endless Skies',title:'Solo Skies',body:'A solo-mode bot using a 32-card AI deck. Three difficulty tiers.',stats:'1 player · 60 min · 14+'},
+  {category:'Total conversion',baseGame:'Endless Skies',title:'Subterranean',body:'Same engine, underground theme. The Void becomes the Magma Heart. Hex tiles flipped sides.',stats:'2–4 players · 90 min · 12+'},
+];
+const cg = document.getElementById('comm-grid');
+COMM.forEach(m => cg.appendChild(modCard(m)));
+    },
+  },
+  "game-mongo": {
+    label: "Mongo",
+    nav:   "Games",
+    style: "body{background:#000}",
+    html: `<!-- Hero -->
+<section style="position:relative;color:#fff;overflow:hidden;isolation:isolate;background:#000;min-height:580px">
+  <div style="position:absolute;inset:0;background:linear-gradient(180deg,#0a2a10 0%,#0d3a15 40%,#000 100%)"></div>
+  <div style="position:absolute;inset:0;background-image:url('data:image/svg+xml;utf8,<svg xmlns=\\'http://www.w3.org/2000/svg\\' width=\\'56\\' height=\\'64\\' viewBox=\\'0 0 56 64\\'><path d=\\'M28 1 54 16v32L28 63 2 48V16z\\' fill=\\'none\\' stroke=\\'%233a9928\\' stroke-opacity=\\'0.18\\' stroke-width=\\'1\\'/></svg>');background-size:56px 64px;animation:hexFloat 30s linear infinite"></div>
+  <div style="position:absolute;inset:0;background:linear-gradient(180deg,rgba(0,0,0,0.4) 0%,transparent 50%,rgba(0,0,0,0.5) 100%);pointer-events:none"></div>
+  <div style="position:relative;padding:64px 32px 100px;max-width:1200px;margin:0 auto;box-sizing:border-box">
+    <a href="index.html" style="font-family:var(--mg-font-mono);font-size:12px;color:rgba(255,255,255,0.7);text-decoration:none">← All games</a>
+    <div style="display:flex;gap:10px;margin-top:28px;flex-wrap:wrap;align-items:center">
+      <span style="font-family:var(--mg-font-body);font-weight:600;font-size:11px;background:#3a9928;color:#fff;padding:4px 10px;border-radius:9999px">Original</span>
+      <span style="font-family:var(--mg-font-mono);font-size:11px;color:rgba(255,255,255,0.7);padding:4px 10px;border:1px solid rgba(255,255,255,0.2);border-radius:9999px">Open playtest · CC BY-NC-SA</span>
+      <span style="font-family:var(--mg-font-pixel);font-size:9px;color:#4eb735;padding:5px 10px;letter-spacing:1px;text-shadow:0 0 8px rgba(78,183,53,0.5)">v0.8.2 beta</span>
+    </div>
+    <h1 style="font-family:var(--mg-font-display);font-weight:600;font-size:clamp(56px,8vw,128px);line-height:0.92;letter-spacing:-0.03em;margin:24px 0;text-shadow:0 4px 30px rgba(0,0,0,0.6)">Mongo.</h1>
+    <p style="font-family:var(--mg-font-body);font-size:19px;line-height:1.55;color:rgba(255,255,255,0.86);max-width:640px;margin:0 0 36px;text-shadow:0 2px 16px rgba(0,0,0,0.7)">A trick-taking card game where every hand changes the rules for the next one. Built for modders — the full rulebook is on GitHub, the card art is CC-licensed, and we actively want your pull requests.</p>
+    <div style="display:flex;gap:12px;flex-wrap:wrap" id="hero-btns"></div>
+  </div>
+</section>
+
+<!-- Stats bar -->
+<section style="background:#000;color:#fff;padding:0 32px 56px">
+  <div style="max-width:1200px;margin:0 auto;display:flex;gap:0;align-items:center;flex-wrap:wrap;padding-top:28px;border-top:1px solid rgba(255,255,255,0.10)" id="stats-bar"></div>
+</section>
+
+<!-- How it plays -->
+<section style="background:#f5f4ef;padding:88px 32px">
+  <div style="max-width:1200px;margin:0 auto">
+    <h2 style="font-family:var(--mg-font-display);font-weight:600;font-size:clamp(36px,4.5vw,56px);line-height:1.05;letter-spacing:-0.025em;color:#14161c;margin:0 0 48px">How it plays.</h2>
+    <div id="steps-grid" class="mg-grid-4" style="display:grid;grid-template-columns:repeat(4,1fr);gap:16px"></div>
+  </div>
+</section>
+
+<!-- Playtest CTA -->
+<section style="background:#000;color:#fff;padding:88px 32px;position:relative;overflow:hidden">
+  <div style="position:absolute;left:50%;top:50%;transform:translate(-50%,-50%);width:900px;height:400px;background:radial-gradient(ellipse,rgba(58,153,40,0.25) 0%,transparent 65%);pointer-events:none;filter:blur(20px)"></div>
+  <div style="max-width:760px;margin:0 auto;text-align:center;position:relative">
+    <div style="font-family:var(--mg-font-pixel);font-size:9px;color:#4eb735;letter-spacing:1.5px;margin-bottom:16px">▲ OPEN PLAYTEST</div>
+    <h2 style="font-family:var(--mg-font-display);font-weight:600;font-size:clamp(36px,5vw,64px);line-height:1.05;letter-spacing:-0.025em;margin:0 0 18px">200 spots. First come.</h2>
+    <p style="font-family:var(--mg-font-body);font-size:17px;line-height:1.6;color:rgba(255,255,255,0.78);margin:0 0 32px">We want real feedback from real tables. Fill out the form, get the cards PDF and a private Discord channel. Play it once, tell us what broke.</p>
+    <div style="display:flex;gap:12px;justify-content:center;flex-wrap:wrap" id="playtest-btns"></div>
+  </div>
+</section>
+
+<!-- Mod hooks -->
+<section style="background:#f5f4ef;padding:88px 32px">
+  <div style="max-width:1200px;margin:0 auto">
+    <div style="font-family:var(--mg-font-pixel);font-size:9px;color:#3a9928;letter-spacing:1.5px;margin-bottom:16px">▲ MOD HOOKS</div>
+    <h2 style="font-family:var(--mg-font-display);font-weight:600;font-size:clamp(32px,4vw,48px);line-height:1.05;letter-spacing:-0.025em;color:#14161c;margin:0 0 12px">Fork the deck.</h2>
+    <p style="font-family:var(--mg-font-body);font-size:16px;line-height:1.55;color:#4f5764;margin:0 0 32px;max-width:600px">Mongo ships with three moddable layers. Change any one without touching the others.</p>
+    <div id="hooks-grid" class="mg-grid-3" style="display:grid;grid-template-columns:repeat(3,1fr);gap:14px"></div>
+  </div>
+</section>`,
+    init(container) {
+      const { T, el, linkBtn, navbar, footer } = MG;
+
+document.getElementById('hero-btns').appendChild(linkBtn('Sign up for playtest','#','green'));
+document.getElementById('hero-btns').appendChild(linkBtn('Browse the GitHub','#','outline-dark'));
+
+const STATS = [['Players','3–5'],['Time','30–45 min'],['Age','12+'],['Mechanism','Trick-taking'],['Status','Open beta'],['Spots left','143 / 200']];
+const sb = document.getElementById('stats-bar');
+STATS.forEach(([k,v],i) => {
+  if(i>0) sb.appendChild(el('span',{style:{width:'1px',height:'24px',background:'rgba(255,255,255,0.12)',margin:'0 20px'}}));
+  const d = el('div',{style:{display:'flex',flexDirection:'column'}});
+  d.appendChild(el('span',{style:{fontFamily:'var(--mg-font-body)',fontSize:'10px',color:'rgba(255,255,255,0.5)',textTransform:'uppercase',letterSpacing:'1px'}},k));
+  d.appendChild(el('span',{style:{fontFamily:'var(--mg-font-mono)',fontWeight:600,fontSize:'16px',color:'#fff',marginTop:'4px'}},v));
+  sb.appendChild(d);
+});
+
+const STEPS = [
+  {n:'01', title:'Deal the deck',     body:'54 cards, shuffled. Each player gets 7. The remaining stack is the Mongo pile — it changes shape every round.'},
+  {n:'02', title:'Name the rule',     body:'The winner of the previous trick names one new rule for the next trick only. Anything within the Rule Book bounds.'},
+  {n:'03', title:'Play a trick',      body:'Standard trick-taking: lead a card, follow suit if you can, highest card wins. Except the rule from step 2 overrides.'},
+  {n:'04', title:'Stack the Mongo',   body:'Tricks are worth points based on cards played, not cards won. After 7 tricks, score. First to 50 wins.'},
+];
+const sg = document.getElementById('steps-grid');
+STEPS.forEach(s => {
+  const a = el('article',{style:{background:'#fff',border:'1px solid #e6e3d8',borderRadius:'16px',padding:'24px'}});
+  a.appendChild(el('div',{style:{fontFamily:'var(--mg-font-pixel)',fontSize:'9px',color:'#3a9928',letterSpacing:'1.5px',marginBottom:'14px'}},`▲ ${s.n}`));
+  a.appendChild(el('h3',{style:{fontFamily:'var(--mg-font-display)',fontWeight:600,fontSize:'22px',lineHeight:'1.2',letterSpacing:'-0.25px',color:'#14161c',margin:'0 0 10px'}},s.title));
+  a.appendChild(el('p',{style:{fontFamily:'var(--mg-font-body)',fontSize:'14px',lineHeight:'1.55',color:'#3a3d44',margin:0}},s.body));
+  sg.appendChild(a);
+});
+
+const pb = document.getElementById('playtest-btns');
+pb.appendChild(linkBtn('Sign up for playtest','#','green'));
+pb.appendChild(linkBtn('Download the beta rules','#','outline-dark'));
+
+const HOOKS = [
+  {name:'rules.md',    desc:'The Rule Book: the constraints a rule-namer must stay within. Fork it to expand or restrict what rules are legal.'},
+  {name:'deck.yaml',   desc:'Card definitions — suits, values, special behaviours. Add a fifth suit, remove the Jokers, invent wildcards.'},
+  {name:'scoring.lua', desc:'The points formula. Default is pip-based. Override it to make tricks matter more, or turns, or anything else.'},
+];
+const hg = document.getElementById('hooks-grid');
+HOOKS.forEach(h => {
+  const d = el('div',{style:{background:'#fff',border:'1px solid #e6e3d8',borderRadius:'14px',padding:'24px',display:'flex',gap:'16px',alignItems:'flex-start'}});
+  const icon = el('div',{style:{width:'36px',height:'36px',background:'#3a9928',borderRadius:'8px',display:'flex',alignItems:'center',justifyContent:'center',color:'#fff',fontSize:'16px',flex:'none'}});
+  icon.textContent = '◈';
+  d.appendChild(icon);
+  const txt = el('div');
+  txt.appendChild(el('div',{style:{fontFamily:'var(--mg-font-mono)',fontWeight:600,fontSize:'14px',color:'#3a9928'}},h.name));
+  txt.appendChild(el('div',{style:{fontFamily:'var(--mg-font-body)',fontSize:'13px',color:'#3a3d44',lineHeight:'1.5',marginTop:'6px'}},h.desc));
+  d.appendChild(txt); hg.appendChild(d);
+});
+    },
+  },
+  "game-nukes": {
+    label: "Nukes",
+    nav:   "Games",
+    style: "body{background:#000}",
+    html: `<!-- Hero -->
+<section style="position:relative;color:#fff;overflow:hidden;isolation:isolate;background:#000;min-height:580px">
+  <div style="position:absolute;inset:0;background:linear-gradient(180deg,#2a0a0a 0%,#3a0d0d 40%,#000 100%)"></div>
+  <div style="position:absolute;left:50%;bottom:-100px;transform:translateX(-50%);width:1200px;height:500px;background:radial-gradient(ellipse,rgba(209,26,26,0.4) 0%,transparent 65%);pointer-events:none;filter:blur(30px)"></div>
+  <div style="position:absolute;inset:0;background-image:url('data:image/svg+xml;utf8,<svg xmlns=\\'http://www.w3.org/2000/svg\\' width=\\'56\\' height=\\'64\\' viewBox=\\'0 0 56 64\\'><path d=\\'M28 1 54 16v32L28 63 2 48V16z\\' fill=\\'none\\' stroke=\\'%23d11a1a\\' stroke-opacity=\\'0.15\\' stroke-width=\\'1\\'/></svg>');background-size:56px 64px;animation:hexFloat 30s linear infinite"></div>
+  <div style="position:absolute;inset:0;background:linear-gradient(180deg,rgba(0,0,0,0.4) 0%,transparent 50%,rgba(0,0,0,0.5) 100%);pointer-events:none"></div>
+  <div style="position:relative;padding:64px 32px 100px;max-width:1200px;margin:0 auto;box-sizing:border-box">
+    <a href="index.html" style="font-family:var(--mg-font-mono);font-size:12px;color:rgba(255,255,255,0.7);text-decoration:none">← All games</a>
+    <div style="display:flex;gap:10px;margin-top:28px;flex-wrap:wrap;align-items:center">
+      <span style="font-family:var(--mg-font-body);font-weight:600;font-size:11px;background:#d11a1a;color:#fff;padding:4px 10px;border-radius:9999px">Original</span>
+      <span style="font-family:var(--mg-font-mono);font-size:11px;color:rgba(255,255,255,0.7);padding:4px 10px;border:1px solid rgba(255,255,255,0.2);border-radius:9999px">CC BY-NC-SA · Print-and-play</span>
+      <span style="font-family:var(--mg-font-pixel);font-size:9px;color:#e63232;padding:5px 10px;letter-spacing:1px;text-shadow:0 0 8px rgba(230,50,50,0.5)">v1.1.0</span>
+    </div>
+    <h1 style="font-family:var(--mg-font-display);font-weight:600;font-size:clamp(56px,8vw,128px);line-height:0.92;letter-spacing:-0.03em;margin:24px 0;text-shadow:0 4px 30px rgba(0,0,0,0.6)">Nukes.</h1>
+    <p style="font-family:var(--mg-font-body);font-size:19px;line-height:1.55;color:rgba(255,255,255,0.86);max-width:640px;margin:0 0 36px;text-shadow:0 2px 16px rgba(0,0,0,0.7)">Cold-war territory control on a hex map. Three superpowers, fifteen turns, one button that ends everything. Designed to be modded — swap the superpowers, change the fallout rules, rewrite the endgame.</p>
+    <div style="display:flex;gap:12px;flex-wrap:wrap" id="hero-btns"></div>
+  </div>
+</section>
+
+<!-- Stats bar -->
+<section style="background:#000;color:#fff;padding:0 32px 56px">
+  <div style="max-width:1200px;margin:0 auto;display:flex;gap:0;align-items:center;flex-wrap:wrap;padding-top:28px;border-top:1px solid rgba(255,255,255,0.10)" id="stats-bar"></div>
+</section>
+
+<!-- How it plays -->
+<section style="background:#f5f4ef;padding:88px 32px">
+  <div style="max-width:1200px;margin:0 auto">
+    <h2 style="font-family:var(--mg-font-display);font-weight:600;font-size:clamp(36px,4.5vw,56px);line-height:1.05;letter-spacing:-0.025em;color:#14161c;margin:0 0 48px">How it plays.</h2>
+    <div id="steps-grid" class="mg-grid-4" style="display:grid;grid-template-columns:repeat(4,1fr);gap:16px"></div>
+  </div>
+</section>
+
+<!-- The button -->
+<section style="background:#000;color:#fff;padding:88px 32px;position:relative;overflow:hidden;text-align:center">
+  <div style="position:absolute;left:50%;top:50%;transform:translate(-50%,-50%);width:800px;height:400px;background:radial-gradient(ellipse,rgba(209,26,26,0.35) 0%,transparent 65%);pointer-events:none;filter:blur(24px)"></div>
+  <div style="position:relative">
+    <div style="font-family:var(--mg-font-pixel);font-size:9px;color:#e63232;letter-spacing:1.5px;margin-bottom:16px;text-shadow:0 0 12px rgba(230,50,50,0.5)">▲ THE BUTTON</div>
+    <h2 style="font-family:var(--mg-font-display);font-weight:600;font-size:clamp(36px,5vw,64px);line-height:1.05;letter-spacing:-0.025em;margin:0 0 18px">Once per game.<br>Never take it back.</h2>
+    <p style="font-family:var(--mg-font-body);font-size:17px;line-height:1.6;color:rgba(255,255,255,0.78);margin:0 auto 32px;max-width:540px">Any superpower can press The Button on any turn. Every hex within two rings of the target is permanently fallout — no resources, no movement, no rebuilding. The presser gains 5 points and the game ends two turns early.</p>
+    <div style="display:flex;gap:12px;justify-content:center;flex-wrap:wrap" id="button-cta"></div>
+  </div>
+</section>
+
+<!-- Mod hooks -->
+<section style="background:#f5f4ef;padding:88px 32px">
+  <div style="max-width:1200px;margin:0 auto">
+    <div style="font-family:var(--mg-font-pixel);font-size:9px;color:#d11a1a;letter-spacing:1.5px;margin-bottom:16px">▲ MOD HOOKS</div>
+    <h2 style="font-family:var(--mg-font-display);font-weight:600;font-size:clamp(32px,4vw,48px);line-height:1.05;letter-spacing:-0.025em;color:#14161c;margin:0 0 12px">Change the superpower. Change the stakes.</h2>
+    <p style="font-family:var(--mg-font-body);font-size:16px;line-height:1.55;color:#4f5764;margin:0 0 32px;max-width:600px">Nukes ships with four moddable files. All in version control.</p>
+    <div id="hooks-grid" class="mg-grid-2" style="display:grid;grid-template-columns:repeat(2,1fr);gap:14px"></div>
+  </div>
+</section>`,
+    init(container) {
+      const { T, el, linkBtn, navbar, footer } = MG;
+
+document.getElementById('hero-btns').appendChild(linkBtn('Download Print-and-Play','#','red'));
+document.getElementById('hero-btns').appendChild(linkBtn('Browse on GitHub','#','outline-dark'));
+
+const STATS = [['Players','3'],['Turns','15'],['Time','60–90 min'],['Age','14+'],['Designer','Moddable team'],['Released','Jan 2026']];
+const sb = document.getElementById('stats-bar');
+STATS.forEach(([k,v],i) => {
+  if(i>0) sb.appendChild(el('span',{style:{width:'1px',height:'24px',background:'rgba(255,255,255,0.12)',margin:'0 20px'}}));
+  const d = el('div',{style:{display:'flex',flexDirection:'column'}});
+  d.appendChild(el('span',{style:{fontFamily:'var(--mg-font-body)',fontSize:'10px',color:'rgba(255,255,255,0.5)',textTransform:'uppercase',letterSpacing:'1px'}},k));
+  d.appendChild(el('span',{style:{fontFamily:'var(--mg-font-mono)',fontWeight:600,fontSize:'16px',color:'#fff',marginTop:'4px'}},v));
+  sb.appendChild(d);
+});
+
+const STEPS = [
+  {n:'01', title:'Divide the map',    body:'61 hexes dealt face-down. Each superpower places its capital on a starting hex. Claim three adjacent hexes as your heartland.'},
+  {n:'02', title:'Build and expand',  body:'Spend resources to build units, fortify hexes, or research the one upgrade your superpower gets. Expand by conquest or diplomacy.'},
+  {n:'03', title:'Negotiate',         body:"Every turn has a diplomacy phase before combat. Superpowers can form two-turn non-aggression pacts. They can break them. That's the game."},
+  {n:'04', title:'Press or survive',  body:'After turn 15, or when The Button is pressed, the game ends. Points for hexes held, capitals standing, and alliances honoured.'},
+];
+const sg = document.getElementById('steps-grid');
+STEPS.forEach(s => {
+  const a = el('article',{style:{background:'#fff',border:'1px solid #e6e3d8',borderRadius:'16px',padding:'24px'}});
+  a.appendChild(el('div',{style:{fontFamily:'var(--mg-font-pixel)',fontSize:'9px',color:'#d11a1a',letterSpacing:'1.5px',marginBottom:'14px'}},`▲ ${s.n}`));
+  a.appendChild(el('h3',{style:{fontFamily:'var(--mg-font-display)',fontWeight:600,fontSize:'22px',lineHeight:'1.2',letterSpacing:'-0.25px',color:'#14161c',margin:'0 0 10px'}},s.title));
+  a.appendChild(el('p',{style:{fontFamily:'var(--mg-font-body)',fontSize:'14px',lineHeight:'1.55',color:'#3a3d44',margin:0}},s.body));
+  sg.appendChild(a);
+});
+
+document.getElementById('button-cta').appendChild(linkBtn('Download the rules','#','red'));
+document.getElementById('button-cta').appendChild(linkBtn('See the tools','tools-nukes.html','outline-dark'));
+
+const HOOKS = [
+  {name:'superpowers.yaml', desc:'Three factions with asymmetric abilities. Add a fourth, reshape all three, or make them symmetric for a purer strategy game.'},
+  {name:'map.yaml',         desc:'The starting hex layout and heartland rules. Change it to a linear strip, concentric rings, or a randomised deal.'},
+  {name:'button.lua',       desc:'The Button rules — when it can be pressed, how large the fallout radius is, what the point penalty for losing your capital is.'},
+  {name:'endgame.md',       desc:'Victory conditions and scoring formula. Default scores hexes + capitals. Override to make alliances worth more, or war worth less.'},
+];
+const hg = document.getElementById('hooks-grid');
+HOOKS.forEach(h => {
+  const d = el('div',{style:{background:'#fff',border:'1px solid #e6e3d8',borderRadius:'14px',padding:'24px',display:'flex',gap:'16px',alignItems:'flex-start'}});
+  const icon = el('div',{style:{width:'36px',height:'36px',background:'#d11a1a',borderRadius:'8px',display:'flex',alignItems:'center',justifyContent:'center',color:'#fff',fontSize:'16px',flex:'none'}});
+  icon.textContent = '◈';
+  d.appendChild(icon);
+  const txt = el('div');
+  txt.appendChild(el('div',{style:{fontFamily:'var(--mg-font-mono)',fontWeight:600,fontSize:'14px',color:'#d11a1a'}},h.name));
+  txt.appendChild(el('div',{style:{fontFamily:'var(--mg-font-body)',fontSize:'13px',color:'#3a3d44',lineHeight:'1.5',marginTop:'6px'}},h.desc));
+  d.appendChild(txt); hg.appendChild(d);
+});
+    },
+  },
+  "news": {
+    label: "News index",
+    nav:   "News",
+    style: "body{background:#f5f4ef}",
+    html: `<div id="page-hero"></div>
+
+<!-- Main content -->
+<section style="background:#f5f4ef;padding:56px 32px 96px">
+  <div style="max-width:1200px;margin:0 auto;display:grid;grid-template-columns:1fr 280px;gap:56px;align-items:start" id="news-layout">
+    <div>
+      <!-- Featured post -->
+      <div id="featured-post" style="margin-bottom:48px"></div>
+      <!-- Search input (mobile) -->
+      <div style="position:relative;margin-bottom:24px;display:none" id="mobile-search">
+        <input type="search" placeholder="Search the archive…" id="mobile-search-input" style="width:100%;height:44px;padding:0 16px 0 44px;border:1px solid #e6e3d8;border-radius:12px;font-family:var(--mg-font-body);font-size:14px;background:#fff;outline:none">
+        <span style="position:absolute;left:16px;top:50%;transform:translateY(-50%);opacity:0.4;font-size:16px;pointer-events:none">⌕</span>
+      </div>
+      <!-- Category filters -->
+      <div id="cat-filters" style="display:flex;gap:8px;flex-wrap:wrap;margin-bottom:28px"></div>
+      <!-- Post grid -->
+      <div id="posts-grid" style="display:grid;grid-template-columns:repeat(auto-fit,minmax(260px,1fr));gap:20px"></div>
+    </div>
+    <!-- Sidebar -->
+    <aside style="position:sticky;top:88px;display:flex;flex-direction:column;gap:32px" id="sidebar"></aside>
+  </div>
+</section>`,
+    init(container) {
+      const { T, el, linkBtn, navbar, footer, pageHero } = MG;
+document.getElementById('page-hero').appendChild(pageHero({
+  eyebrow: '▲ NEWS & UPDATES',
+  title: 'News &amp; updates.',
+  lede: 'Strictly written by humans.',
+}));
+
+const POSTS = [
+  { slug:'nuking-catan',    cat:'Catan',       date:'Sep 12, 2025', cover:'#d11a1a', title:'Nuking Catan',                      excerpt:'A meditation on the gateway game, 45 million boxes deep — and what we did to it.' },
+  { slug:'mongo-playtest',  cat:'Devlog',      date:'May 12, 2026', cover:'#3a9928', title:'Mongo enters open playtest',         excerpt:'Our second original game opens its playtest doors. 200 spots, first come first served.' },
+  { slug:'econopoly-v14',   cat:'Mod update',  date:'May 9, 2026',  cover:'#0c4f8d', title:'Econopoly v1.4: the audit patch',    excerpt:'Cash-pile tax cap raised. Bankruptcy chain reactions buffed. Longer games, better games.' },
+  { slug:'mod-jam-3',       cat:'Community',   date:'May 2, 2026',  cover:'#1a3680', title:'Mod jam #3 wraps up',                excerpt:'Twelve submissions. One won a literal trophy made of meeples. Results inside.' },
+  { slug:'hyper-v2',        cat:'Mod update',  date:'Apr 18, 2026', cover:'#5d2a8a', title:'Hyper Imperium v2.0.1 released',    excerpt:'Faction balance pass. Hyper Agenda timing fix. Updated print sheets included.' },
+  { slug:'endless-skies',   cat:'Devlog',      date:'Mar 5, 2026',  cover:'#3a7be8', title:'Endless Skies is out in the world', excerpt:'Fourteen months of playtesting. 61 hex tiles. One final answer to "how do we make a game that wants to be modded?"' },
+  { slug:'talisman-hexed',  cat:'Mod update',  date:'Apr 2024',     cover:'#0c4f8d', title:'Talisman: Hexed — river rules update', excerpt:'The river crossing rules got a full rewrite. Boats are now a proper sub-system.' },
+  { slug:'jam-2',           cat:'Community',   date:'Jan 2026',     cover:'#e89a1a', title:'Mod jam #2: Risk edition',           excerpt:'22 entries, five finalists, one very long night of voting. Risk will never be the same.' },
+];
+
+const CATS = ['All',...new Set(POSTS.map(p=>p.cat))];
+let activeCat = 'All', searchVal = '';
+
+function postCover(color, big=false) {
+  const sz = big ? 56 : 28;
+  const d = el('div',{style:{width:'100%',aspectRatio: big?'1.7':'1.65',background:`linear-gradient(135deg,#0a0d2a 0%,${color} 100%)`,borderRadius:'12px',overflow:'hidden',position:'relative'}});
+  d.appendChild(el('div',{style:{position:'absolute',inset:0,backgroundImage:`url("data:image/svg+xml;utf8,<svg xmlns='http://www.w3.org/2000/svg' width='${sz}' height='${sz*8/7}' viewBox='0 0 56 64'><path d='M28 1 54 16v32L28 63 2 48V16z' fill='none' stroke='%23fff' stroke-opacity='0.2' stroke-width='1'/></svg>")`,backgroundSize:`${sz}px ${sz*8/7}px`}}));
+  return d;
+}
+
+// Featured post
+const fp = document.getElementById('featured-post');
+const feat = POSTS[0];
+const fa = el('a',{href:'news-post.html',style:{display:'grid',gridTemplateColumns:'1.1fr 1fr',gap:'40px',alignItems:'center',background:'#fff',border:'1px solid #e6e3d8',borderRadius:'20px',padding:'32px',textDecoration:'none',color:'inherit',transition:'border-color 180ms'}});
+fa.addEventListener('mouseenter',()=>fa.style.borderColor='#14161c');
+fa.addEventListener('mouseleave',()=>fa.style.borderColor='#e6e3d8');
+fa.appendChild(postCover(feat.cover, true));
+const fd = el('div');
+const fm = el('div',{style:{display:'flex',gap:'10px',alignItems:'center',marginBottom:'14px',flexWrap:'wrap'}});
+fm.appendChild(el('span',{style:{fontFamily:'var(--mg-font-body)',fontWeight:600,fontSize:'11px',background:'#14161c',color:'#fff',padding:'4px 10px',borderRadius:'9999px'}}, 'FEATURED'));
+fm.appendChild(el('span',{style:{fontFamily:'var(--mg-font-mono)',fontSize:'12px',color:'#7a8290'}},`${feat.cat} · ${feat.date}`));
+fd.appendChild(fm);
+fd.appendChild(el('h2',{style:{fontFamily:'var(--mg-font-display)',fontWeight:600,fontSize:'40px',lineHeight:'1.1',letterSpacing:'-0.5px',color:'#14161c',margin:'0 0 14px'}},feat.title));
+fd.appendChild(el('p',{style:{fontFamily:'var(--mg-font-body)',fontSize:'16px',lineHeight:'1.55',color:'#3a3d44',margin:'0 0 18px'}},feat.excerpt));
+fd.appendChild(el('span',{style:{fontFamily:'var(--mg-font-body)',fontWeight:600,fontSize:'14px',color:'#0c4f8d'}},'Read the article →'));
+fa.appendChild(fd); fp.appendChild(fa);
+
+// Category filters
+function renderFilters() {
+  const el2 = document.getElementById('cat-filters');
+  el2.innerHTML = '';
+  CATS.forEach(c => {
+    const isA = c === activeCat;
+    const b = document.createElement('button');
+    b.textContent = c;
+    Object.assign(b.style,{fontFamily:'var(--mg-font-body)',fontWeight:600,fontSize:'13px',height:'34px',padding:'0 14px',borderRadius:'9999px',border:isA?'none':'1px solid #c3c5cc',background:isA?'#000':'transparent',color:isA?'#fff':'#14161c',cursor:'pointer',transition:'all 150ms'});
+    b.addEventListener('click',()=>{activeCat=c;renderFilters();renderPosts();});
+    el2.appendChild(b);
+  });
+}
+
+function renderPosts() {
+  const q = searchVal.toLowerCase();
+  const visible = POSTS.slice(1).filter(p =>
+    (activeCat === 'All' || p.cat === activeCat) &&
+    (!q || p.title.toLowerCase().includes(q))
+  );
+  const grid = document.getElementById('posts-grid');
+  grid.innerHTML = '';
+  visible.forEach(p => {
+    const a = el('a',{href:'news-post.html',style:{display:'flex',flexDirection:'column',gap:'16px',padding:'20px',background:'#fff',border:'1px solid #e6e3d8',borderRadius:'16px',textDecoration:'none',color:'inherit',transition:'border-color 180ms'}});
+    a.addEventListener('mouseenter',()=>a.style.borderColor='#14161c');
+    a.addEventListener('mouseleave',()=>a.style.borderColor='#e6e3d8');
+    a.appendChild(postCover(p.cover));
+    const meta = el('div',{style:{display:'flex',gap:'8px',alignItems:'center',flexWrap:'wrap'}});
+    meta.appendChild(el('span',{style:{fontFamily:'var(--mg-font-mono)',fontSize:'11px',color:'#7a8290',letterSpacing:'0.3px'}},p.cat.toUpperCase()));
+    meta.appendChild(el('span',{style:{width:'3px',height:'3px',background:'#c3c5cc',borderRadius:'50%'}}));
+    meta.appendChild(el('span',{style:{fontFamily:'var(--mg-font-mono)',fontSize:'11px',color:'#7a8290'}},p.date));
+    a.appendChild(meta);
+    a.appendChild(el('h3',{style:{fontFamily:'var(--mg-font-display)',fontWeight:600,fontSize:'22px',lineHeight:'1.2',letterSpacing:'-0.25px',color:'#14161c',margin:0}},p.title));
+    a.appendChild(el('p',{style:{fontFamily:'var(--mg-font-body)',fontSize:'14px',lineHeight:'1.55',color:'#4f5764',margin:0}},p.excerpt));
+    grid.appendChild(a);
+  });
+}
+
+renderFilters(); renderPosts();
+
+// Sidebar
+const sidebar = document.getElementById('sidebar');
+// Search
+const searchWrap = el('div');
+searchWrap.appendChild(el('div',{style:{fontFamily:'var(--mg-font-pixel)',fontSize:'9px',color:'#0c4f8d',letterSpacing:'1.5px',marginBottom:'12px'}},'▲ SEARCH'));
+const si = el('div',{style:{position:'relative'}});
+const inp = el('input',{type:'search',placeholder:'Search the archive…',style:{width:'100%',height:'48px',padding:'0 16px 0 44px',border:'1px solid #e6e3d8',borderRadius:'12px',fontFamily:'var(--mg-font-body)',fontSize:'14px',background:'#fff',outline:'none'}});
+inp.addEventListener('input',e=>{searchVal=e.target.value;renderPosts();});
+si.appendChild(el('span',{style:{position:'absolute',left:'16px',top:'50%',transform:'translateY(-50%)',opacity:'0.4',fontSize:'16px',pointerEvents:'none'}},'⌕'));
+si.appendChild(inp); searchWrap.appendChild(si); sidebar.appendChild(searchWrap);
+
+// Hot topics
+const TOPICS = [['Catan',23],['TI4',18],['Devlog',12],['Community',9],['Monopoly',7],['Chess',4]];
+const ht = el('div');
+ht.appendChild(el('div',{style:{fontFamily:'var(--mg-font-pixel)',fontSize:'9px',color:'#0c4f8d',letterSpacing:'1.5px',marginBottom:'14px'}},'▲ HOT TOPICS'));
+const tul = el('ul',{style:{listStyle:'none',padding:0,margin:0,display:'flex',flexDirection:'column',gap:'6px'}});
+TOPICS.forEach(([t,n]) => {
+  const li = el('li');
+  const a = el('a',{href:'#',style:{display:'flex',justifyContent:'space-between',alignItems:'center',padding:'8px 12px',background:'#fff',border:'1px solid #e6e3d8',borderRadius:'8px',textDecoration:'none',color:'inherit',transition:'border-color 150ms'}});
+  a.addEventListener('mouseenter',()=>a.style.borderColor='#14161c');
+  a.addEventListener('mouseleave',()=>a.style.borderColor='#e6e3d8');
+  a.appendChild(el('span',{style:{fontFamily:'var(--mg-font-body)',fontSize:'14px',color:'#14161c'}},t));
+  a.appendChild(el('span',{style:{fontFamily:'var(--mg-font-mono)',fontSize:'12px',color:'#7a8290'}},String(n)));
+  li.appendChild(a); tul.appendChild(li);
+});
+ht.appendChild(tul); sidebar.appendChild(ht);
+
+// Archive
+const ARCHIVE = [['May 2026',3],['April 2026',2],['March 2026',2],['January 2026',1]];
+const arc = el('div');
+arc.appendChild(el('div',{style:{fontFamily:'var(--mg-font-pixel)',fontSize:'9px',color:'#0c4f8d',letterSpacing:'1.5px',marginBottom:'14px'}},'▲ ARCHIVE'));
+const aul = el('ul',{style:{listStyle:'none',padding:0,margin:0,display:'flex',flexDirection:'column',gap:'6px'}});
+ARCHIVE.forEach(([m,n]) => {
+  const li = el('li');
+  const a = el('a',{href:'#',style:{display:'flex',justifyContent:'space-between',fontFamily:'var(--mg-font-body)',fontSize:'14px',color:'#14161c',textDecoration:'none',padding:'6px 0',borderBottom:'1px solid #e6e3d8'}});
+  a.appendChild(document.createTextNode(m));
+  a.appendChild(el('span',{style:{fontFamily:'var(--mg-font-mono)',fontSize:'12px',color:'#7a8290'}},String(n)));
+  li.appendChild(a); aul.appendChild(li);
+});
+arc.appendChild(aul); sidebar.appendChild(arc);
+    },
+  },
+  "news-post": {
+    label: "News post",
+    nav:   "News",
+    style: "body { background:#f5f4ef; }\n.prose p { margin:0 0 24px; }\n.prose p.lede { font-size:23px;line-height:1.5;color:#14161c;font-style:italic; }\n.prose h2 { font-family:\"Inter Tight\",system-ui,sans-serif;font-weight:600;font-size:32px;line-height:1.15;letter-spacing:-0.4px;margin:40px 0 16px;color:#14161c; }\n.prose blockquote { margin:32px 0;padding:20px 24px;border-left:4px solid #d11a1a;background:#fff;font-style:italic;color:#14161c;font-size:20px;line-height:1.5; }\n.prose ul { padding-left:22px;margin:0 0 24px; }\n.prose li { margin:0 0 8px; }\n@media(max-width:900px){.post-layout{grid-template-columns:1fr !important}.post-rail{display:none !important}}",
+    html: `<!-- Post header -->
+<section style="position:relative;color:#fff;overflow:hidden;background:#000">
+  <div style="position:absolute;left:50%;bottom:-200px;transform:translateX(-50%);width:1100px;height:500px;background:radial-gradient(ellipse,rgba(209,26,26,0.4) 0%,transparent 65%);pointer-events:none;filter:blur(20px)"></div>
+  <div style="position:relative;padding:48px 32px 88px;max-width:800px;margin:0 auto;text-align:center;box-sizing:border-box">
+    <a href="news.html" style="font-family:var(--mg-font-mono);font-size:12px;color:rgba(255,255,255,0.7);text-decoration:none">← All posts</a>
+    <div style="display:flex;gap:8px;justify-content:center;margin-top:28px;flex-wrap:wrap">
+      <span style="font-family:var(--mg-font-body);font-weight:600;font-size:11px;background:#d11a1a;color:#fff;padding:4px 10px;border-radius:9999px">CATAN</span>
+      <span style="font-family:var(--mg-font-mono);font-size:11px;color:rgba(255,255,255,0.7);padding:4px 10px;border:1px solid rgba(255,255,255,0.18);border-radius:9999px">Sep 12, 2025 · 6 min read</span>
+    </div>
+    <h1 style="font-family:var(--mg-font-display);font-weight:600;font-size:clamp(48px,7vw,96px);line-height:0.95;letter-spacing:-0.025em;margin:24px 0;text-shadow:0 4px 30px rgba(0,0,0,0.6)">Nuking <em style="color:#e63232">Catan</em>.</h1>
+    <p style="font-family:var(--mg-font-body);font-style:italic;font-size:18px;color:rgba(255,255,255,0.78);margin:0">A meditation on the gateway game, 45 million boxes deep — and what we did to it.</p>
+  </div>
+</section>
+
+<!-- Post body -->
+<section style="background:#f5f4ef;padding:72px 32px 96px">
+  <div class="post-layout" style="max-width:1200px;margin:0 auto;display:grid;grid-template-columns:200px 1fr 220px;gap:56px;align-items:start">
+
+    <!-- Left rail -->
+    <aside class="post-rail" style="position:sticky;top:96px">
+      <div style="font-family:var(--mg-font-pixel);font-size:9px;color:#0c4f8d;letter-spacing:1.5px;margin-bottom:14px">▲ AUTHOR</div>
+      <div style="display:flex;gap:10px;align-items:center;margin-bottom:20px">
+        <div style="width:40px;height:40px;border-radius:9999px;background:linear-gradient(135deg,#d11a1a,#0c4f8d);flex:none"></div>
+        <div>
+          <div style="font-family:var(--mg-font-display);font-weight:600;font-size:15px;color:#14161c;letter-spacing:-0.2px">ascelot</div>
+          <div style="font-family:var(--mg-font-mono);font-size:11px;color:#7a8290">@ascelot · moddable team</div>
+        </div>
+      </div>
+      <div style="font-family:var(--mg-font-pixel);font-size:9px;color:#3a9928;letter-spacing:1.5px;margin-top:32px;margin-bottom:12px">▲ SHARE</div>
+      <div style="display:flex;gap:6px;flex-wrap:wrap" id="share-btns"></div>
+    </aside>
+
+    <!-- Article -->
+    <article class="prose" style="font-family:var(--mg-font-body);font-size:19px;line-height:1.65;color:#1f2228">
+      <p class="lede"><em>Catan</em> is popular. By some accounts, it's the most popular game of the modern era — a gateway game that's sold over 45 million copies and introduced countless families to a life of board-games beyond Monopoly.</p>
+      <p>It's a game that enforces interaction between players. No silent solo turns. No retreating to a corner with a deck of cards. Every roll is a negotiation, every settlement a quiet provocation. You can't win <em>Catan</em> without talking to the people you're trying to beat — which is, when you think about it, both its genius and its source of all known dining-table arguments.</p>
+      <h2>So we set it on fire.</h2>
+      <p><em>Nuke Catan</em> is a total conversion of the base game. Same tiles, same dice, same little wooden settlers. Brand new economy.</p>
+      <p>The premise: it's 2049. The island is now a contested post-nuclear wasteland. Sheep are extinct. Brick is currency. Wheat has been replaced by Rations. Wool by Scrap. And once per game, on your turn, you may — and probably should — play the Nuke card.</p>
+      <blockquote>"You may play the Nuke card. Pick any hex. It produces no resources for the rest of the game."</blockquote>
+      <p>The rule is short. The effect is permanent. And the ripple it sends through a four-player negotiation is, to put it mildly, instructive.</p>
+      <h2>What we left intact.</h2>
+      <ul>
+        <li>The hex board. Same 19 tiles, same number tokens, same robber.</li>
+        <li>The card decks. Resource cards are reskinned (Sheep → Scrap), but the development cards are untouched.</li>
+        <li>The longest road and largest army awards. Both still grant 2 VP.</li>
+        <li>The trading mechanic. You can still bank-trade 4:1, port-trade 3:1, and player-trade however you want.</li>
+      </ul>
+      <h2>What you'll need.</h2>
+      <p>Your standard <em>Catan</em> base game and four printable cards (PDF in the download). That's it. No new tiles, no replacement components, no expansions required. It's a pure rules patch — which is, frankly, the whole point of what we do.</p>
+      <p><em>Nuke Catan v2.1.0 is in open playtest. Download the rules, run it at your next table, and tell us how badly we've broken something on Discord.</em></p>
+    </article>
+
+    <!-- Right rail -->
+    <aside class="post-rail" style="position:sticky;top:96px">
+      <div style="font-family:var(--mg-font-pixel);font-size:9px;color:#0c4f8d;letter-spacing:1.5px;margin-bottom:14px">▲ IN THIS POST</div>
+      <ul id="toc-list" style="list-style:none;padding:0;margin:0 0 32px;display:flex;flex-direction:column;gap:8px;border-left:1px solid #e6e3d8"></ul>
+      <div style="background:#000;color:#fff;padding:20px;border-radius:16px">
+        <div style="font-family:var(--mg-font-pixel);font-size:9px;color:#e63232;letter-spacing:1.5px;margin-bottom:10px">▲ THE MOD</div>
+        <div style="font-family:var(--mg-font-display);font-weight:600;font-size:18px;line-height:1.2;margin-bottom:6px">Nuke Catan</div>
+        <div style="font-family:var(--mg-font-mono);font-size:11px;color:rgba(255,255,255,0.6);margin-bottom:14px">v2.1.0 · Total Conversion</div>
+        <div id="mod-dl-btn"></div>
+      </div>
+    </aside>
+  </div>
+</section>
+
+<!-- More posts -->
+<section style="background:#fff;border-top:1px solid #e6e3d8;padding:80px 32px">
+  <div style="max-width:1200px;margin:0 auto">
+    <h2 style="font-family:var(--mg-font-display);font-weight:600;font-size:40px;line-height:1.1;letter-spacing:-0.5px;color:#14161c;margin:0 0 32px">More from the archive.</h2>
+    <div id="more-posts" class="mg-grid-3" style="display:grid;grid-template-columns:repeat(3,1fr);gap:20px"></div>
+  </div>
+</section>`,
+    init(container) {
+      const { el, linkBtn, navbar, footer } = MG;
+
+// Share buttons
+['X','FB','LI','Copy'].forEach(s => {
+  const b = document.createElement('button');
+  b.textContent = s;
+  Object.assign(b.style,{fontFamily:'var(--mg-font-mono)',fontSize:'11px',fontWeight:600,width:'38px',height:'38px',borderRadius:'9999px',background:'#fff',color:'#14161c',border:'1px solid #e6e3d8',cursor:'pointer'});
+  document.getElementById('share-btns').appendChild(b);
+});
+
+// TOC
+const TOC = ['So we set it on fire','What we left intact',"What you'll need"];
+const tul = document.getElementById('toc-list');
+TOC.forEach((t,i) => {
+  const li = el('li',{style:{paddingLeft:'14px',borderLeft: i===0?'2px solid #d11a1a':'none',marginLeft:'-1px'}});
+  li.appendChild(el('a',{href:'#',style:{fontFamily:'var(--mg-font-body)',fontSize:'13px',color: i===0?'#14161c':'#4f5764',textDecoration:'none',fontWeight: i===0?600:400}},t));
+  tul.appendChild(li);
+});
+
+document.getElementById('mod-dl-btn').appendChild(linkBtn('Download rules','#','red',{height:'38px',fontSize:'13px',width:'100%'}));
+
+// More posts
+const MORE = [
+  {cover:'#3a9928', cat:'Devlog',     date:'May 12, 2026', title:'Mongo enters open playtest'},
+  {cover:'#0c4f8d', cat:'Mod update', date:'May 9, 2026',  title:'Econopoly v1.4: the audit patch'},
+  {cover:'#1a3680', cat:'Community',  date:'May 2, 2026',  title:'Mod jam #3 wraps up'},
+];
+const mp = document.getElementById('more-posts');
+MORE.forEach(p => {
+  const a = el('a',{href:'news-post.html',style:{display:'flex',flexDirection:'column',gap:'14px',padding:'20px',background:'#f5f4ef',borderRadius:'16px',textDecoration:'none',color:'inherit'}});
+  const cover = el('div',{style:{height:'120px',background:`linear-gradient(135deg,#0a0d2a 0%,${p.cover} 100%)`,borderRadius:'12px'}});
+  a.appendChild(cover);
+  a.appendChild(el('div',{style:{fontFamily:'var(--mg-font-mono)',fontSize:'11px',color:'#7a8290',letterSpacing:'0.3px'}},`${p.cat.toUpperCase()} · ${p.date}`));
+  a.appendChild(el('h3',{style:{fontFamily:'var(--mg-font-display)',fontWeight:600,fontSize:'20px',lineHeight:'1.2',letterSpacing:'-0.2px',color:'#14161c',margin:0}},p.title));
+  mp.appendChild(a);
+});
+    },
+  },
+  "tools": {
+    label: "Tools",
+    nav:   "Tools",
+    style: "body { background:#f5f4ef; }\n.die-face { width:64px;height:64px;border-radius:10px;background:#161721;border:1px solid rgba(255,255,255,0.15);display:flex;align-items:center;justify-content:center;cursor:pointer;transition:all 120ms;user-select:none; }\n.die-face:hover { border-color:#6fb5ff;transform:scale(1.06); }\n.die-face.rolling { animation:dieRoll 0.4s cubic-bezier(.2,.8,.2,1); }\n@keyframes dieRoll { 0%{transform:rotate(-20deg) scale(0.8)} 60%{transform:rotate(10deg) scale(1.1)} 100%{transform:rotate(0) scale(1)} }\ninput[type=range] { width:100%;accent-color:#0c4f8d; }",
+    html: `<!-- Header -->
+<section style="background:#000;color:#fff;padding:64px 32px 88px;position:relative;overflow:hidden">
+  <div style="position:absolute;left:-150px;top:30%;width:600px;height:600px;background:radial-gradient(circle,rgba(58,123,232,0.22) 0%,transparent 65%);pointer-events:none"></div>
+  <div style="max-width:1200px;margin:0 auto;position:relative">
+    <div style="font-family:var(--mg-font-pixel);font-size:10px;color:#6fb5ff;letter-spacing:1.5px;margin-bottom:18px">▲ THE WORKBENCH</div>
+    <h1 style="font-family:var(--mg-font-display);font-weight:600;font-size:clamp(48px,6vw,88px);line-height:1.0;letter-spacing:-0.025em;margin:0 0 24px;max-width:900px">The toys we built<br>for the table.</h1>
+    <p style="font-family:var(--mg-font-body);font-size:18px;line-height:1.55;color:rgba(255,255,255,0.78);max-width:600px;margin:0">A dice roller for when you've lost yours under the couch. A name generator for hex-tile heroes. A scoreboard for everything else.</p>
+  </div>
+</section>
+
+<section style="background:#f5f4ef;padding:64px 32px 88px">
+  <div style="max-width:960px;margin:0 auto;display:flex;flex-direction:column;gap:48px">
+
+    <!-- Specialist tool links -->
+    <div style="margin-bottom:48px">
+      <h2 style="font-family:var(--mg-font-display);font-weight:600;font-size:36px;line-height:1.15;letter-spacing:-0.5px;color:#14161c;margin:0 0 8px">Mod-specific tools.</h2>
+      <p style="font-family:var(--mg-font-body);font-size:15px;color:#4f5764;margin:0 0 24px">Built for individual mods. Pick yours.</p>
+      <div style="display:grid;grid-template-columns:repeat(3,1fr);gap:12px" id="mod-tools-grid"></div>
+    </div>
+    <div style="background:#000;color:#fff;border-radius:20px;padding:32px;position:relative;overflow:hidden">
+      <div style="position:absolute;right:-60px;top:50%;transform:translateY(-50%);width:300px;height:300px;background:radial-gradient(circle,rgba(58,123,232,0.18) 0%,transparent 65%);pointer-events:none"></div>
+      <div style="position:relative">
+        <div style="font-family:var(--mg-font-pixel);font-size:10px;color:#6fb5ff;letter-spacing:1.5px;margin-bottom:16px">▲ DICE ROLLER</div>
+        <h2 style="font-family:var(--mg-font-display);font-weight:600;font-size:32px;line-height:1.1;letter-spacing:-0.5px;margin:0 0 24px">Roll anything.</h2>
+
+        <div style="display:flex;gap:12px;flex-wrap:wrap;margin-bottom:24px" id="dice-row">
+          <!-- dice buttons injected by JS -->
+        </div>
+
+        <div style="display:flex;align-items:center;gap:16px;margin-bottom:20px;flex-wrap:wrap">
+          <label style="font-family:var(--mg-font-body);font-size:14px;color:rgba(255,255,255,0.7)">Count:</label>
+          <input type="range" min="1" max="10" value="1" id="dice-count" style="width:120px">
+          <span id="dice-count-label" style="font-family:var(--mg-font-mono);font-size:16px;color:#fff;min-width:20px">1</span>
+          <div id="modifier-wrap" style="display:flex;align-items:center;gap:8px;margin-left:auto">
+            <label style="font-family:var(--mg-font-body);font-size:14px;color:rgba(255,255,255,0.7)">Modifier:</label>
+            <button id="mod-minus" style="width:32px;height:32px;border-radius:9999px;background:rgba(255,255,255,0.1);border:1px solid rgba(255,255,255,0.2);color:#fff;font-size:18px;cursor:pointer;line-height:1">−</button>
+            <span id="modifier-val" style="font-family:var(--mg-font-mono);font-size:16px;color:#fff;min-width:28px;text-align:center">0</span>
+            <button id="mod-plus" style="width:32px;height:32px;border-radius:9999px;background:rgba(255,255,255,0.1);border:1px solid rgba(255,255,255,0.2);color:#fff;font-size:18px;cursor:pointer;line-height:1">+</button>
+          </div>
+        </div>
+
+        <div id="roll-result" style="font-family:var(--mg-font-display);font-weight:600;font-size:80px;line-height:1;letter-spacing:-2px;color:#fff;margin-bottom:8px;min-height:88px">—</div>
+        <div id="roll-breakdown" style="font-family:var(--mg-font-mono);font-size:13px;color:rgba(255,255,255,0.5);margin-bottom:20px;min-height:20px"></div>
+        <div id="roll-btn-wrap"></div>
+      </div>
+    </div>
+
+    <!-- Name Generator -->
+    <div style="background:#fff;border:1px solid #e6e3d8;border-radius:20px;padding:32px">
+      <div style="font-family:var(--mg-font-pixel);font-size:10px;color:#0c4f8d;letter-spacing:1.5px;margin-bottom:16px">▲ NAME GENERATOR</div>
+      <h2 style="font-family:var(--mg-font-display);font-weight:600;font-size:32px;line-height:1.1;letter-spacing:-0.5px;color:#14161c;margin:0 0 8px">Name your character.</h2>
+      <p style="font-family:var(--mg-font-body);font-size:15px;color:#4f5764;margin:0 0 24px">Works for any hex-tile explorer, faction leader, or rule-bending rogue.</p>
+
+      <div style="display:flex;gap:10px;flex-wrap:wrap;margin-bottom:20px" id="style-filters"></div>
+
+      <div id="generated-name" style="font-family:var(--mg-font-display);font-weight:600;font-size:56px;line-height:1.0;letter-spacing:-1px;color:#14161c;margin-bottom:6px;min-height:64px">—</div>
+      <div id="name-sub" style="font-family:var(--mg-font-mono);font-size:13px;color:#7a8290;margin-bottom:24px;min-height:20px"></div>
+      <div id="name-btn-wrap" style="display:flex;gap:10px;flex-wrap:wrap"></div>
+    </div>
+
+    <!-- Score Tracker -->
+    <div style="background:#fff;border:1px solid #e6e3d8;border-radius:20px;padding:32px">
+      <div style="font-family:var(--mg-font-pixel);font-size:10px;color:#3a9928;letter-spacing:1.5px;margin-bottom:16px">▲ SCORE TRACKER</div>
+      <h2 style="font-family:var(--mg-font-display);font-weight:600;font-size:32px;line-height:1.1;letter-spacing:-0.5px;color:#14161c;margin:0 0 8px">Keep the count.</h2>
+      <p style="font-family:var(--mg-font-body);font-size:15px;color:#4f5764;margin:0 0 24px">Tracks up to 6 players. Good for Catan VP, TI4 objectives, anything with points.</p>
+      <div id="score-board" style="display:grid;grid-template-columns:repeat(auto-fit,minmax(140px,1fr));gap:12px;margin-bottom:20px"></div>
+      <div style="display:flex;gap:10px;flex-wrap:wrap" id="score-btns"></div>
+    </div>
+
+  </div>
+</section>`,
+    init(container) {
+      const { el, btn, linkBtn, navbar, footer } = MG;
+
+// Mod-specific tool links
+const MOD_TOOLS = [
+  { title:'Twilight Imperium', sub:'Faction picker · Objective tracker · Agenda voter', color:'#0c4f8d', href:'tools-ti.html' },
+  { title:'Talisman: Hexed',   sub:'Character lottery · Hex board · Encounter draw', color:'#5d2a8a', href:'tools-talisman.html' },
+  { title:'Nuke Catan',        sub:'Target picker · Fallout tracker · Resource converter', color:'#d11a1a', href:'tools-nukes.html' },
+];
+const mtg = document.getElementById('mod-tools-grid');
+MOD_TOOLS.forEach(t => {
+  const a = el('a',{href:t.href,style:{display:'flex',flexDirection:'column',gap:'10px',padding:'20px',background:'#fff',border:'1px solid #e6e3d8',borderRadius:'14px',textDecoration:'none',color:'inherit',transition:'border-color 150ms, transform 150ms'}});
+  a.addEventListener('mouseenter',()=>{ a.style.borderColor=t.color; a.style.transform='translateY(-2px)'; });
+  a.addEventListener('mouseleave',()=>{ a.style.borderColor='#e6e3d8'; a.style.transform='translateY(0)'; });
+  a.appendChild(el('div',{style:{width:'32px',height:'4px',background:t.color,borderRadius:'2px'}}));
+  a.appendChild(el('div',{style:{fontFamily:'var(--mg-font-display)',fontWeight:600,fontSize:'18px',color:'#14161c',letterSpacing:'-0.2px'}},t.title));
+  a.appendChild(el('div',{style:{fontFamily:'var(--mg-font-body)',fontSize:'13px',color:'#4f5764',lineHeight:'1.45'}},t.sub));
+  a.appendChild(el('div',{style:{fontFamily:'var(--mg-font-body)',fontWeight:600,fontSize:'13px',color:t.color,marginTop:'auto'}},'Open tools →'));
+  mtg.appendChild(a);
+});
+
+/* ── DICE ROLLER ── */
+const DICE = [4,6,8,10,12,20,100];
+let selectedDie = 6, diceCount = 1, modifier = 0;
+
+const diceRow = document.getElementById('dice-row');
+DICE.forEach(d => {
+  const b = document.createElement('button');
+  b.className = 'die-face';
+  b.setAttribute('data-d', d);
+  b.innerHTML = `<span style="font-family:var(--mg-font-pixel);font-size:${d===100?8:10}px;color:#6fb5ff">d${d}</span>`;
+  b.addEventListener('click', () => { selectedDie = d; updateDiceButtons(); });
+  diceRow.appendChild(b);
+});
+
+function updateDiceButtons() {
+  document.querySelectorAll('.die-face').forEach(b => {
+    const d = parseInt(b.getAttribute('data-d'));
+    b.style.borderColor = d === selectedDie ? '#6fb5ff' : 'rgba(255,255,255,0.15)';
+    b.style.background = d === selectedDie ? '#161721' : '#0a0a0a';
+  });
+}
+updateDiceButtons();
+
+const countSlider = document.getElementById('dice-count');
+const countLabel = document.getElementById('dice-count-label');
+countSlider.addEventListener('input', e => { diceCount = parseInt(e.target.value); countLabel.textContent = diceCount; });
+document.getElementById('mod-minus').addEventListener('click', () => { modifier--; document.getElementById('modifier-val').textContent = modifier >= 0 ? '+'+modifier : modifier; });
+document.getElementById('mod-plus').addEventListener('click', () => { modifier++; document.getElementById('modifier-val').textContent = modifier >= 0 ? '+'+modifier : modifier; });
+
+const rollResult = document.getElementById('roll-result');
+const rollBreak = document.getElementById('roll-breakdown');
+
+function rollDice() {
+  const rolls = Array.from({length: diceCount}, () => Math.floor(Math.random() * selectedDie) + 1);
+  const total = rolls.reduce((a,b)=>a+b,0) + modifier;
+  rollResult.textContent = total;
+  rollBreak.textContent = `[${rolls.join(', ')}]${modifier !== 0 ? (modifier>0?'+':'')+modifier : ''} = ${total}`;
+  // Animate dice buttons
+  document.querySelectorAll('.die-face').forEach(b => {
+    if (parseInt(b.getAttribute('data-d')) === selectedDie) {
+      b.classList.add('rolling');
+      setTimeout(() => b.classList.remove('rolling'), 400);
+    }
+  });
+}
+
+document.getElementById('roll-btn-wrap').appendChild(btn('Roll the dice', 'primary', rollDice));
+
+/* ── NAME GENERATOR ── */
+const NAME_PARTS = {
+  fantasy:  { first:['Aerin','Brax','Calder','Dusk','Evren','Fenn','Gara','Hex','Ivar','Jora'], last:['of the Outer Ring','the Unmapped','Voidwalker','Stormcaller','Ironquill','the Hexed','Far-Shore'] },
+  sci_fi:   { first:['Vega','Krix','Oryn','Zael','Pyx','Cade','Thorn','Sola','Nx-7','Clio'],    last:['of Sector Nine','Drifter','Null-Class','the Salvager','Protocol-Break','Station-Born'] },
+  tabletop: { first:['The Merchant','The Cartographer','The Bandit','The Diplomat','The Engineer','The Warlord'], last:['of Catan','of the Void','of House Salvager','of the Outer Colonies','the Undefeated'] },
+};
+let nameStyle = 'fantasy';
+
+const styleFilters = document.getElementById('style-filters');
+Object.keys(NAME_PARTS).forEach(s => {
+  const label = s.replace('_',' ').replace(/\b\w/g,c=>c.toUpperCase());
+  const isA = s === nameStyle;
+  const b = document.createElement('button');
+  b.textContent = label; b.setAttribute('data-style', s);
+  Object.assign(b.style, {fontFamily:'var(--mg-font-body)',fontWeight:600,fontSize:'13px',height:'34px',padding:'0 14px',borderRadius:'9999px',border:isA?'none':'1px solid #c3c5cc',background:isA?'#000':'transparent',color:isA?'#fff':'#14161c',cursor:'pointer',transition:'all 150ms'});
+  b.addEventListener('click', () => { nameStyle=s; refreshStyleBtns(); generateName(); });
+  styleFilters.appendChild(b);
+});
+function refreshStyleBtns(){document.querySelectorAll('[data-style]').forEach(b=>{const a=b.getAttribute('data-style')===nameStyle;b.style.background=a?'#000':'transparent';b.style.color=a?'#fff':'#14161c';b.style.border=a?'none':'1px solid #c3c5cc';});}
+
+function generateName() {
+  const parts = NAME_PARTS[nameStyle];
+  const first = parts.first[Math.floor(Math.random()*parts.first.length)];
+  const last = parts.last[Math.floor(Math.random()*parts.last.length)];
+  document.getElementById('generated-name').textContent = first;
+  document.getElementById('name-sub').textContent = last;
+}
+generateName();
+const nbw = document.getElementById('name-btn-wrap');
+nbw.appendChild(btn('Generate', 'primary', generateName));
+nbw.appendChild(btn('Regenerate first', 'outline-light', () => {
+  const parts = NAME_PARTS[nameStyle];
+  document.getElementById('generated-name').textContent = parts.first[Math.floor(Math.random()*parts.first.length)];
+}));
+
+/* ── SCORE TRACKER ── */
+const MAX_PLAYERS = 6;
+const PLAYER_COLORS = ['#d11a1a','#0c4f8d','#3a9928','#e89a1a','#5d2a8a','#936d62'];
+let players = [
+  {name:'Player 1',score:0,color:PLAYER_COLORS[0]},
+  {name:'Player 2',score:0,color:PLAYER_COLORS[1]},
+];
+
+function renderScoreboard() {
+  const board = document.getElementById('score-board');
+  board.innerHTML = '';
+  players.forEach((p,i) => {
+    const c = el('div',{style:{background:'#f5f4ef',borderRadius:'16px',padding:'16px',display:'flex',flexDirection:'column',gap:'8px',position:'relative',border:`2px solid ${p.color}22`}});
+    const nameEl = el('div',{contenteditable:'true',style:{fontFamily:'var(--mg-font-body)',fontWeight:600,fontSize:'14px',color:'#14161c',outline:'none',borderBottom:'1px dashed #c3c5cc',paddingBottom:'4px'}},p.name);
+    nameEl.addEventListener('blur',()=>{players[i].name=nameEl.textContent.trim()||`Player ${i+1}`;});
+    c.appendChild(nameEl);
+    const score = el('div',{style:{fontFamily:'var(--mg-font-display)',fontWeight:600,fontSize:'48px',lineHeight:'1',letterSpacing:'-1px',color:p.color,textAlign:'center'}},p.score.toString());
+    c.appendChild(score);
+    const btns = el('div',{style:{display:'flex',gap:'8px'}});
+    const minus = el('button',{style:{flex:1,height:'36px',borderRadius:'9999px',background:'#fff',border:`1px solid ${T.hairlineLight}`,fontFamily:'var(--mg-font-body)',fontWeight:600,fontSize:'18px',cursor:'pointer',color:'#14161c'}},'-');
+    minus.addEventListener('click',()=>{players[i].score=Math.max(0,players[i].score-1);renderScoreboard();});
+    const plus = el('button',{style:{flex:1,height:'36px',borderRadius:'9999px',background:p.color,border:'none',color:'#fff',fontFamily:'var(--mg-font-body)',fontWeight:600,fontSize:'18px',cursor:'pointer'}},'+');
+    plus.addEventListener('click',()=>{players[i].score++;renderScoreboard();});
+    btns.appendChild(minus); btns.appendChild(plus);
+    c.appendChild(btns);
+    board.appendChild(c);
+  });
+}
+const {T} = MG;
+renderScoreboard();
+
+const sb2 = document.getElementById('score-btns');
+sb2.appendChild(btn('Add player', 'dark', () => {
+  if (players.length < MAX_PLAYERS) {
+    players.push({name:`Player ${players.length+1}`,score:0,color:PLAYER_COLORS[players.length]});
+    renderScoreboard();
+  }
+}));
+sb2.appendChild(btn('Reset scores', 'outline-light', () => {
+  players.forEach(p => p.score = 0); renderScoreboard();
+}));
+    },
+  },
+  "tools-ti": {
+    label: "TI tools",
+    nav:   "Tools",
+    style: "body { background:#f5f4ef; }\n.tog-btn { width:36px;height:36px;border-radius:9999px;cursor:pointer;font-family:var(--mg-font-mono);font-weight:600;font-size:13px;transition:all 120ms; }",
+    html: `<section style="background:#000;color:#fff;padding:56px 32px 72px;position:relative;overflow:hidden">
+  <div style="position:absolute;left:-100px;top:20%;width:600px;height:600px;background:radial-gradient(circle,rgba(12,79,141,0.3) 0%,transparent 65%);pointer-events:none"></div>
+  <div style="max-width:1200px;margin:0 auto;position:relative">
+    <a href="tools.html" style="font-family:var(--mg-font-mono);font-size:12px;color:rgba(255,255,255,0.65);text-decoration:none">← All tools</a>
+    <div style="font-family:var(--mg-font-pixel);font-size:10px;color:#6fb5ff;letter-spacing:1.5px;margin:20px 0 16px">▲ HYPER IMPERIUM</div>
+    <h1 style="font-family:var(--mg-font-display);font-weight:600;font-size:clamp(44px,5.5vw,80px);line-height:1.0;letter-spacing:-0.025em;margin:0 0 18px">Twilight Imperium<br>tools.</h1>
+    <p style="font-family:var(--mg-font-body);font-size:17px;line-height:1.55;color:rgba(255,255,255,0.75);max-width:560px;margin:0">Faction picker, objective tracker, and agenda voter. Tuned for Hyper Imperium — TI4 + PoK at speed.</p>
+  </div>
+</section>
+
+<section style="background:#f5f4ef;padding:48px 32px 96px">
+  <div style="max-width:900px;margin:0 auto;display:flex;flex-direction:column;gap:24px">
+
+    <!-- Faction Picker -->
+    <div class="tool-card" style="background:#fff;border:1px solid #e6e3d8;border-radius:20px;padding:32px">
+      <div style="display:flex;align-items:flex-start;gap:16px;margin-bottom:22px;padding-bottom:22px;border-bottom:1px solid #e6e3d8">
+        <div style="width:6px;height:48px;background:#0c4f8d;border-radius:3px;flex:none"></div>
+        <div>
+          <div style="font-family:var(--mg-font-pixel);font-size:9px;color:#0c4f8d;letter-spacing:1.5px;margin-bottom:6px">▲ FACTION DRAFT</div>
+          <h3 style="font-family:var(--mg-font-display);font-weight:600;font-size:24px;color:#14161c;margin:0;letter-spacing:-0.3px">Faction picker</h3>
+          <p style="font-family:var(--mg-font-body);font-size:14px;color:#4f5764;margin:4px 0 0">Deal each player a hand of factions. They pick one — banker's-draft style.</p>
+        </div>
+      </div>
+      <div style="display:flex;gap:14px;align-items:center;margin-bottom:20px;flex-wrap:wrap">
+        <div style="display:flex;gap:8px;align-items:center">
+          <span style="font-family:var(--mg-font-mono);font-size:12px;color:#7a8290;text-transform:uppercase;letter-spacing:0.5px">Players:</span>
+          <div id="player-btns" style="display:flex;gap:6px"></div>
+        </div>
+        <div style="display:flex;gap:8px;align-items:center">
+          <span style="font-family:var(--mg-font-mono);font-size:12px;color:#7a8290;text-transform:uppercase;letter-spacing:0.5px">Per hand:</span>
+          <div id="hand-btns" style="display:flex;gap:6px"></div>
+        </div>
+        <div id="deal-btn" style="margin-left:auto"></div>
+      </div>
+      <div id="faction-hands"></div>
+    </div>
+
+    <!-- Objective Tracker -->
+    <div class="tool-card" style="background:#fff;border:1px solid #e6e3d8;border-radius:20px;padding:32px">
+      <div style="display:flex;align-items:flex-start;gap:16px;margin-bottom:22px;padding-bottom:22px;border-bottom:1px solid #e6e3d8">
+        <div style="width:6px;height:48px;background:#3a9928;border-radius:3px;flex:none"></div>
+        <div>
+          <div style="font-family:var(--mg-font-pixel);font-size:9px;color:#3a9928;letter-spacing:1.5px;margin-bottom:6px">▲ VICTORY POINTS</div>
+          <h3 style="font-family:var(--mg-font-display);font-weight:600;font-size:24px;color:#14161c;margin:0;letter-spacing:-0.3px">Objective tracker</h3>
+          <p style="font-family:var(--mg-font-body);font-size:14px;color:#4f5764;margin:4px 0 0">Stage I and II public objectives. Tick them off as they're scored.</p>
+        </div>
+      </div>
+      <div style="display:grid;grid-template-columns:1fr 1fr;gap:20px" id="objectives-grid"></div>
+    </div>
+
+    <!-- Agenda Voter -->
+    <div class="tool-card" style="background:#fff;border:1px solid #e6e3d8;border-radius:20px;padding:32px">
+      <div style="display:flex;align-items:flex-start;gap:16px;margin-bottom:22px;padding-bottom:22px;border-bottom:1px solid #e6e3d8">
+        <div style="width:6px;height:48px;background:#d11a1a;border-radius:3px;flex:none"></div>
+        <div>
+          <div style="font-family:var(--mg-font-pixel);font-size:9px;color:#d11a1a;letter-spacing:1.5px;margin-bottom:6px">▲ AGENDA PHASE</div>
+          <h3 style="font-family:var(--mg-font-display);font-weight:600;font-size:24px;color:#14161c;margin:0;letter-spacing:-0.3px">Agenda voter</h3>
+          <p style="font-family:var(--mg-font-body);font-size:14px;color:#4f5764;margin:4px 0 0">Draw an agenda, cast votes, track the outcome.</p>
+        </div>
+      </div>
+      <div id="agenda-section"></div>
+    </div>
+
+  </div>
+</section>`,
+    init(container) {
+      const { T, el, btn, navbar, footer } = MG;
+
+/* ── FACTION PICKER ── */
+const FACTIONS = [
+  { name:'Federation of Sol',   color:'#c8d400', flag:'FoS' },
+  { name:'Mentak Coalition',    color:'#e89a1a', flag:'MC'  },
+  { name:'Yin Brotherhood',     color:'#a4a4a4', flag:'YB'  },
+  { name:'Embers of Muaat',     color:'#d11a1a', flag:'EM'  },
+  { name:'Arborec',             color:'#3a9928', flag:'AR'  },
+  { name:'L1Z1X Mindnet',       color:'#1a1a3a', flag:'L1'  },
+  { name:'Winnu',               color:'#c97afb', flag:'WN'  },
+  { name:'Naalu Collective',    color:'#3a7be8', flag:'NA'  },
+  { name:'Barony of Letnev',    color:'#5d2a8a', flag:'BL'  },
+  { name:'Xxcha Kingdom',       color:'#0c4f8d', flag:'XX'  },
+  { name:'Empyrean',            color:'#e63232', flag:'EP'  },
+  { name:'Argent Flight',       color:'#6fb5ff', flag:'AF'  },
+  { name:"Vuil'raith Cabal",    color:'#7a8290', flag:'VR'  },
+  { name:'Naaz-Rokha Alliance', color:'#428619', flag:'NR'  },
+  { name:'Titans of Ul',        color:'#936d62', flag:'TU'  },
+];
+let playerCount = 4, handSize = 3;
+
+function mkTogBtn(label, active, onClick) {
+  const b = document.createElement('button');
+  b.className = 'tog-btn';
+  b.textContent = label;
+  Object.assign(b.style, { background: active?'#14161c':'#f5f4ef', color: active?'#fff':'#14161c', border: `1px solid ${active?'#14161c':'#e6e3d8'}` });
+  b.addEventListener('click', onClick);
+  return b;
+}
+
+function renderPlayerBtns() {
+  const wrap = document.getElementById('player-btns'); wrap.innerHTML = '';
+  [3,4,5,6].forEach(n => wrap.appendChild(mkTogBtn(n, n===playerCount, () => { playerCount=n; renderPlayerBtns(); renderHandBtns(); deal(); })));
+}
+function renderHandBtns() {
+  const wrap = document.getElementById('hand-btns'); wrap.innerHTML = '';
+  [2,3,4].forEach(n => wrap.appendChild(mkTogBtn(n, n===handSize, () => { handSize=n; renderHandBtns(); deal(); })));
+}
+
+function deal() {
+  const shuffled = [...FACTIONS].sort(() => Math.random()-0.5);
+  const hands = document.getElementById('faction-hands'); hands.innerHTML = '';
+  for (let p=0; p<playerCount; p++) {
+    const row = shuffled.slice(p*handSize, p*handSize+handSize);
+    const wrap = el('div',{style:{background:'#f5f4ef',borderRadius:'12px',padding:'14px',marginBottom:'10px'}});
+    wrap.appendChild(el('div',{style:{fontFamily:'var(--mg-font-pixel)',fontSize:'9px',color:'#0c4f8d',letterSpacing:'1.5px',marginBottom:'10px'}},`▲ PLAYER ${p+1}`));
+    const row2 = el('div',{style:{display:'flex',gap:'8px',flexWrap:'wrap'}});
+    row.forEach(f => {
+      const card = el('div',{style:{flex:'1 1 0',minWidth:'120px',padding:'12px 14px',background:'#fff',border:`2px solid ${f.color}`,borderRadius:'10px',display:'flex',alignItems:'center',gap:'10px'}});
+      const badge = el('div',{style:{width:'26px',height:'26px',background:f.color,borderRadius:'6px',display:'flex',alignItems:'center',justifyContent:'center',fontFamily:'var(--mg-font-pixel)',fontSize:'7px',color: f.name==='L1Z1X Mindnet'?'#fff':'#000',flex:'none'}},f.flag);
+      card.appendChild(badge);
+      card.appendChild(el('div',{style:{fontFamily:'var(--mg-font-display)',fontWeight:600,fontSize:'13px',color:'#14161c',lineHeight:'1.2'}},f.name));
+      row2.appendChild(card);
+    });
+    wrap.appendChild(row2); hands.appendChild(wrap);
+  }
+}
+
+document.getElementById('deal-btn').appendChild(btn('Deal factions','dark', deal));
+renderPlayerBtns(); renderHandBtns(); deal();
+
+/* ── OBJECTIVE TRACKER ── */
+const STAGE_I = ['Corner the Market','Erect a Monument','Establish a Perimeter','Found a Golden Age','Grow Exploration','Imperial Point','Intimidate Council','Lead from the Front','Negotiate Trade Routes','Sway the Council'];
+const STAGE_II = ['Centralize Galactic Trade','Conquer the Weak','Form Galactic Brain Trust','Found the Council','Galvanize the People','Manipulate Galactic Law','Master the Laws of War','Revolutionize Warfare','Subdue the Galaxy','Unify the Colonies'];
+
+function objectiveSection(title, objs, accent) {
+  const wrap = el('div');
+  wrap.appendChild(el('div',{style:{fontFamily:'var(--mg-font-pixel)',fontSize:'9px',color:accent,letterSpacing:'1.5px',marginBottom:'14px'}},title));
+  const list = el('div',{style:{display:'flex',flexDirection:'column',gap:'6px'}});
+  const state = objs.map(()=>false);
+  objs.forEach((obj, i) => {
+    const row = el('div',{style:{display:'flex',alignItems:'center',gap:'10px',padding:'8px 12px',borderRadius:'8px',cursor:'pointer',background:'#f5f4ef',transition:'background 150ms'}});
+    const check = el('div',{style:{width:'18px',height:'18px',borderRadius:'4px',border:`2px solid ${accent}`,flex:'none',display:'flex',alignItems:'center',justifyContent:'center',fontSize:'12px',transition:'all 120ms'}});
+    const label = el('span',{style:{fontFamily:'var(--mg-font-body)',fontSize:'13px',color:'#14161c',lineHeight:'1.3'}},obj);
+    row.appendChild(check); row.appendChild(label);
+    row.addEventListener('click',()=>{
+      state[i] = !state[i];
+      check.style.background = state[i] ? accent : 'transparent';
+      check.style.borderColor = accent;
+      check.textContent = state[i] ? '✓' : '';
+      check.style.color = '#fff';
+      row.style.background = state[i] ? accent+'18' : '#f5f4ef';
+      label.style.textDecoration = state[i] ? 'line-through' : 'none';
+      label.style.color = state[i] ? '#7a8290' : '#14161c';
+    });
+    list.appendChild(row);
+  });
+  wrap.appendChild(list);
+  return wrap;
+}
+
+const og = document.getElementById('objectives-grid');
+og.appendChild(objectiveSection('▲ STAGE I', STAGE_I, '#3a9928'));
+og.appendChild(objectiveSection('▲ STAGE II', STAGE_II, '#0c4f8d'));
+
+/* ── AGENDA VOTER ── */
+const AGENDAS = [
+  { title:'Classified Document Leaks', type:'Law', for:'Attach a politics rider to any planet in Mecatol Rex system', against:'Player with most planets loses 1 VP' },
+  { title:'Conventions of War', type:'Law', for:'No player may use their faction abilities during combat', against:'For the rest of the round, players may use war sun fighters' },
+  { title:'Core Mining', type:'Directive', for:'Each player destroys one of their space docks; gains 2 trade goods', against:'Each player draws 1 action card' },
+  { title:'Demilitarized Zone', type:'Law', for:'Mecatol Rex becomes demilitarized — no units may land', against:'Current speaker gains 3 command tokens' },
+  { title:'Galactic Crisis Pact', type:'Law', for:'All players vote simultaneously and publicly', against:'Votes this round count double' },
+  { title:'Holy Planet of Ixth', type:'Law', for:'Attach Holy Planet of Ixth card to one cultural planet', against:'Each player exhausts one of their planets' },
+];
+
+let currentAgenda = null, votes = {for:0, against:0};
+
+function drawAgenda() {
+  currentAgenda = AGENDAS[Math.floor(Math.random()*AGENDAS.length)];
+  votes = {for:0, against:0};
+  renderAgenda();
+}
+
+function renderAgenda() {
+  const sec = document.getElementById('agenda-section');
+  sec.innerHTML = '';
+  if (!currentAgenda) {
+    const b = el('div',{style:{textAlign:'center',padding:'32px 0'}});
+    b.appendChild(btn('Draw agenda','dark',drawAgenda));
+    sec.appendChild(b); return;
+  }
+  const card = el('div',{style:{background:'#f5f4ef',borderRadius:'14px',padding:'24px',marginBottom:'20px'}});
+  const typeTag = el('span',{style:{fontFamily:'var(--mg-font-mono)',fontSize:'11px',fontWeight:600,background:'#d11a1a',color:'#fff',padding:'3px 10px',borderRadius:'9999px',marginBottom:'12px',display:'inline-block'}},currentAgenda.type.toUpperCase());
+  card.appendChild(typeTag);
+  card.appendChild(el('h4',{style:{fontFamily:'var(--mg-font-display)',fontWeight:600,fontSize:'22px',letterSpacing:'-0.3px',color:'#14161c',margin:'8px 0 16px'}},currentAgenda.title));
+  const opts = el('div',{style:{display:'grid',gridTemplateColumns:'1fr 1fr',gap:'12px'}});
+  [['FOR',currentAgenda.for,'#3a9928'],['AGAINST',currentAgenda.against,'#d11a1a']].forEach(([label,text,c]) => {
+    const o = el('div',{style:{background:'#fff',border:`1px solid ${c}44`,borderRadius:'10px',padding:'14px'}});
+    o.appendChild(el('div',{style:{fontFamily:'var(--mg-font-mono)',fontSize:'10px',color:c,fontWeight:600,letterSpacing:'1px',marginBottom:'6px'}},label));
+    o.appendChild(el('div',{style:{fontFamily:'var(--mg-font-body)',fontSize:'13px',color:'#1f2228',lineHeight:'1.5'}},text));
+    opts.appendChild(o);
+  });
+  card.appendChild(opts); sec.appendChild(card);
+
+  // Vote tallies
+  const tally = el('div',{style:{display:'flex',gap:'16px',alignItems:'center',flexWrap:'wrap',marginBottom:'16px'}});
+  ['for','against'].forEach(side => {
+    const c = side==='for'?'#3a9928':'#d11a1a';
+    const group = el('div',{style:{display:'flex',alignItems:'center',gap:'10px',background:'#fff',border:`1px solid ${T.hairlineLight}`,borderRadius:'12px',padding:'12px 16px',flex:'1 1 0'}});
+    group.appendChild(el('span',{style:{fontFamily:'var(--mg-font-mono)',fontSize:'12px',color:'#7a8290',textTransform:'uppercase'}},side));
+    const count = el('span',{style:{fontFamily:'var(--mg-font-display)',fontWeight:600,fontSize:'28px',color:c,margin:'0 8px',minWidth:'32px',textAlign:'center'}},votes[side]);
+    group.appendChild(count);
+    const minus = document.createElement('button');
+    minus.textContent='−'; Object.assign(minus.style,{width:'28px',height:'28px',borderRadius:'9999px',border:`1px solid ${T.hairlineLight}`,background:'#f5f4ef',cursor:'pointer',fontSize:'16px',lineHeight:'1'});
+    minus.addEventListener('click',()=>{ if(votes[side]>0){votes[side]--;count.textContent=votes[side];} });
+    const plus = document.createElement('button');
+    plus.textContent='+'; Object.assign(plus.style,{width:'28px',height:'28px',borderRadius:'9999px',border:'none',background:c,color:'#fff',cursor:'pointer',fontSize:'16px',lineHeight:'1'});
+    plus.addEventListener('click',()=>{ votes[side]++;count.textContent=votes[side]; });
+    group.appendChild(minus); group.appendChild(plus); tally.appendChild(group);
+  });
+  sec.appendChild(tally);
+
+  const btns2 = el('div',{style:{display:'flex',gap:'10px',flexWrap:'wrap'}});
+  btns2.appendChild(btn('Draw new agenda','dark',drawAgenda));
+  btns2.appendChild(btn('Reset votes','outline-light',()=>{ votes={for:0,against:0};renderAgenda(); },{color:'#14161c'}));
+  sec.appendChild(btns2);
+}
+
+drawAgenda();
+    },
+  },
+  "tools-talisman": {
+    label: "Talisman tools",
+    nav:   "Tools",
+    style: "body { background:#f5f4ef; }\n.tog-btn { width:36px;height:36px;border-radius:9999px;cursor:pointer;font-family:var(--mg-font-mono);font-weight:600;font-size:13px;border:1px solid #e6e3d8;transition:all 120ms; }",
+    html: `<section style="background:#000;color:#fff;padding:56px 32px 72px;position:relative;overflow:hidden">
+  <div style="position:absolute;right:-80px;top:20%;width:500px;height:500px;background:radial-gradient(circle,rgba(93,42,138,0.3) 0%,transparent 65%);pointer-events:none"></div>
+  <div style="max-width:1200px;margin:0 auto;position:relative">
+    <a href="tools.html" style="font-family:var(--mg-font-mono);font-size:12px;color:rgba(255,255,255,0.65);text-decoration:none">← All tools</a>
+    <div style="font-family:var(--mg-font-pixel);font-size:10px;color:#c97afb;letter-spacing:1.5px;margin:20px 0 16px">▲ TALISMAN: HEXED</div>
+    <h1 style="font-family:var(--mg-font-display);font-weight:600;font-size:clamp(44px,5.5vw,80px);line-height:1.0;letter-spacing:-0.025em;margin:0 0 18px">Talisman tools.</h1>
+    <p style="font-family:var(--mg-font-body);font-size:17px;line-height:1.55;color:rgba(255,255,255,0.75);max-width:560px;margin:0">Character lottery, hex board generator, and encounter quick-draw. Built for <em>Talisman: Hexed</em> — the 61-tile open-world variant.</p>
+  </div>
+</section>
+
+<section style="background:#f5f4ef;padding:48px 32px 96px">
+  <div style="max-width:900px;margin:0 auto;display:flex;flex-direction:column;gap:24px">
+
+    <!-- Character Lottery -->
+    <div style="background:#fff;border:1px solid #e6e3d8;border-radius:20px;padding:32px">
+      <div style="display:flex;align-items:flex-start;gap:16px;margin-bottom:22px;padding-bottom:22px;border-bottom:1px solid #e6e3d8">
+        <div style="width:6px;height:48px;background:#5d2a8a;border-radius:3px;flex:none"></div>
+        <div>
+          <div style="font-family:var(--mg-font-pixel);font-size:9px;color:#5d2a8a;letter-spacing:1.5px;margin-bottom:6px">▲ CHARACTER DRAFT</div>
+          <h3 style="font-family:var(--mg-font-display);font-weight:600;font-size:24px;color:#14161c;margin:0;letter-spacing:-0.3px">Character lottery</h3>
+          <p style="font-family:var(--mg-font-body);font-size:14px;color:#4f5764;margin:4px 0 0">Random character draw from the Talisman 4e (revised) base set.</p>
+        </div>
+      </div>
+      <div style="display:flex;gap:10px;align-items:center;margin-bottom:20px;flex-wrap:wrap">
+        <span style="font-family:var(--mg-font-mono);font-size:12px;color:#7a8290;text-transform:uppercase;letter-spacing:0.5px">Players:</span>
+        <div id="char-player-btns" style="display:flex;gap:6px"></div>
+        <div id="char-draw-btn" style="margin-left:auto"></div>
+      </div>
+      <div id="char-grid" style="display:grid;grid-template-columns:repeat(2,1fr);gap:10px"></div>
+    </div>
+
+    <!-- Hex Board Generator -->
+    <div style="background:#fff;border:1px solid #e6e3d8;border-radius:20px;padding:32px">
+      <div style="display:flex;align-items:flex-start;gap:16px;margin-bottom:22px;padding-bottom:22px;border-bottom:1px solid #e6e3d8">
+        <div style="width:6px;height:48px;background:#0c4f8d;border-radius:3px;flex:none"></div>
+        <div>
+          <div style="font-family:var(--mg-font-pixel);font-size:9px;color:#0c4f8d;letter-spacing:1.5px;margin-bottom:6px">▲ BOARD SETUP</div>
+          <h3 style="font-family:var(--mg-font-display);font-weight:600;font-size:24px;color:#14161c;margin:0;letter-spacing:-0.3px">Hex board generator</h3>
+          <p style="font-family:var(--mg-font-body);font-size:14px;color:#4f5764;margin:4px 0 0">A fresh 4-ring layout on each shuffle. Visual reference for building the Hexed map.</p>
+        </div>
+      </div>
+      <div style="display:flex;justify-content:space-between;align-items:center;margin-bottom:16px">
+        <div id="board-seed" style="font-family:var(--mg-font-mono);font-size:12px;color:#7a8290"></div>
+        <div id="board-reshuffle-btn"></div>
+      </div>
+      <div id="board-wrap" style="background:#0a0d2a;border-radius:14px;padding:20px;overflow:hidden">
+        <svg id="board-svg" width="100%" viewBox="-220 -220 440 440"></svg>
+      </div>
+      <div style="display:flex;gap:12px;margin-top:14px;flex-wrap:wrap" id="board-legend"></div>
+    </div>
+
+    <!-- Encounter Quick-draw -->
+    <div style="background:#fff;border:1px solid #e6e3d8;border-radius:20px;padding:32px">
+      <div style="display:flex;align-items:flex-start;gap:16px;margin-bottom:22px;padding-bottom:22px;border-bottom:1px solid #e6e3d8">
+        <div style="width:6px;height:48px;background:#3a9928;border-radius:3px;flex:none"></div>
+        <div>
+          <div style="font-family:var(--mg-font-pixel);font-size:9px;color:#3a9928;letter-spacing:1.5px;margin-bottom:6px">▲ ENCOUNTER</div>
+          <h3 style="font-family:var(--mg-font-display);font-weight:600;font-size:24px;color:#14161c;margin:0;letter-spacing:-0.3px">Encounter quick-draw</h3>
+          <p style="font-family:var(--mg-font-body);font-size:14px;color:#4f5764;margin:4px 0 0">Draw a random encounter for any ring. Flavour text from the Hexed adventure deck.</p>
+        </div>
+      </div>
+      <div style="display:flex;gap:8px;flex-wrap:wrap;margin-bottom:20px" id="ring-filters"></div>
+      <div id="encounter-card" style="min-height:160px"></div>
+      <div style="margin-top:20px" id="encounter-draw-btn"></div>
+    </div>
+
+  </div>
+</section>`,
+    init(container) {
+      const { T, el, btn, navbar, footer } = MG;
+
+/* ── CHARACTER LOTTERY ── */
+const CHARS = [
+  { name:'Warrior',   str:4, cft:2, lives:4 },
+  { name:'Wizard',    str:2, cft:4, lives:4 },
+  { name:'Druid',     str:3, cft:3, lives:4 },
+  { name:'Priest',    str:2, cft:4, lives:4 },
+  { name:'Sorceress', str:2, cft:4, lives:3 },
+  { name:'Thief',     str:2, cft:3, lives:4 },
+  { name:'Troll',     str:5, cft:1, lives:5 },
+  { name:'Ghoul',     str:3, cft:3, lives:4 },
+  { name:'Assassin',  str:3, cft:2, lives:4 },
+  { name:'Minstrel',  str:2, cft:3, lives:4 },
+  { name:'Monk',      str:3, cft:3, lives:4 },
+  { name:'Dwarf',     str:4, cft:2, lives:5 },
+];
+let charCount = 4;
+
+function mkTog(label, active, onClick) {
+  const b = document.createElement('button');
+  b.className = 'tog-btn';
+  b.textContent = label;
+  Object.assign(b.style, { background: active?'#14161c':'#f5f4ef', color: active?'#fff':'#14161c' });
+  b.addEventListener('click', onClick); return b;
+}
+
+function renderCharBtns() {
+  const w = document.getElementById('char-player-btns'); w.innerHTML = '';
+  [2,3,4,5,6].forEach(n => w.appendChild(mkTog(n, n===charCount, ()=>{ charCount=n; renderCharBtns(); drawChars(); })));
+}
+
+function drawChars() {
+  const picks = [...CHARS].sort(()=>Math.random()-0.5).slice(0,charCount);
+  const grid = document.getElementById('char-grid'); grid.innerHTML = '';
+  picks.forEach((c,i) => {
+    const card = el('div',{style:{background:'#f5f4ef',borderRadius:'12px',padding:'14px 18px',display:'flex',alignItems:'center',gap:'14px'}});
+    const av = el('div',{style:{width:'40px',height:'40px',borderRadius:'9999px',background:'#5d2a8a',display:'flex',alignItems:'center',justifyContent:'center',fontFamily:'var(--mg-font-pixel)',fontSize:'10px',color:'#fff',letterSpacing:'0.5px',flex:'none'}},`P${i+1}`);
+    const info = el('div',{style:{flex:1}});
+    info.appendChild(el('div',{style:{fontFamily:'var(--mg-font-display)',fontWeight:600,fontSize:'17px',color:'#14161c'}},c.name));
+    info.appendChild(el('div',{style:{fontFamily:'var(--mg-font-mono)',fontSize:'11px',color:'#4f5764',marginTop:'2px'}},`STR ${c.str} · CRAFT ${c.cft} · LIVES ${c.lives}`));
+    card.appendChild(av); card.appendChild(info); grid.appendChild(card);
+  });
+}
+
+renderCharBtns(); drawChars();
+document.getElementById('char-draw-btn').appendChild(btn('Draw characters','dark',drawChars));
+
+/* ── HEX BOARD GENERATOR ── */
+let boardSeed = Math.floor(Math.random()*9999);
+const RING_META = [
+  { count:1,  radius:0,   color:'#d11a1a', label:'Crown of Command' },
+  { count:6,  radius:58,  color:'#5d2a8a', label:'Inner (dungeon approach)' },
+  { count:12, radius:116, color:'#0c4f8d', label:'Middle (highlands)' },
+  { count:18, radius:174, color:'#3a9928', label:'Outer (world)' },
+];
+
+function drawBoard() {
+  document.getElementById('board-seed').textContent = `seed: ${boardSeed.toString().padStart(4,'0')}`;
+  const svg = document.getElementById('board-svg');
+  const ns = 'http://www.w3.org/2000/svg';
+  svg.innerHTML = '';
+  RING_META.forEach((ring,ri) => {
+    for (let i=0; i<ring.count; i++) {
+      const angle = (i/ring.count)*Math.PI*2 - Math.PI/2;
+      const cx = Math.round(Math.cos(angle)*ring.radius);
+      const cy = Math.round(Math.sin(angle)*ring.radius);
+      const g = document.createElementNS(ns,'g');
+      const poly = document.createElementNS(ns,'polygon');
+      poly.setAttribute('transform',`translate(${cx},${cy})`);
+      poly.setAttribute('points','0,-22 19,-11 19,11 0,22 -19,11 -19,-11');
+      const type = ((boardSeed*7+ri*13+i)%5);
+      const alpha = 0.5 + type*0.1;
+      poly.setAttribute('fill', ring.color + Math.round(alpha*255).toString(16).padStart(2,'0'));
+      poly.setAttribute('stroke', ring.color);
+      poly.setAttribute('stroke-width','1.5');
+      poly.setAttribute('stroke-opacity','0.6');
+      g.appendChild(poly);
+      if (ri===0) {
+        const txt = document.createElementNS(ns,'text');
+        txt.setAttribute('x',cx); txt.setAttribute('y',cy+5);
+        txt.setAttribute('font-size','11'); txt.setAttribute('fill','#fff');
+        txt.setAttribute('text-anchor','middle'); txt.setAttribute('pointer-events','none');
+        txt.textContent = '♛'; g.appendChild(txt);
+      }
+      svg.appendChild(g);
+    }
+  });
+  // Legend
+  const legend = document.getElementById('board-legend'); legend.innerHTML = '';
+  RING_META.forEach(r => {
+    const chip = el('div',{style:{display:'flex',alignItems:'center',gap:'6px'}});
+    chip.appendChild(el('div',{style:{width:'12px',height:'12px',background:r.color,borderRadius:'2px'}}));
+    chip.appendChild(el('span',{style:{fontFamily:'var(--mg-font-body)',fontSize:'12px',color:'#4f5764'}}),r.label);
+    chip.lastChild.textContent = r.label;
+    legend.appendChild(chip);
+  });
+}
+
+drawBoard();
+document.getElementById('board-reshuffle-btn').appendChild(btn('Reshuffle','dark',()=>{ boardSeed=Math.floor(Math.random()*9999); drawBoard(); }));
+
+/* ── ENCOUNTER QUICK-DRAW ── */
+const ENCOUNTERS = {
+  outer: [
+    { title:'Wandering Merchant',   text:"A merchant with a cart of dubious wares. You may buy 1 item from the purchase deck at half price. If you refuse, he curses you — lose 1 Strength until your next turn." },
+    { title:'The River',            text:"You approach the riverbank. Without a boat token or the Swim ability, you must roll 1d6. On a 1–2, lose 1 life to the current." },
+    { title:'Village Elder',        text:"An elder recognises your crest. Gain 2 gold. She warns you that the crown corrupts all who claim it." },
+    { title:'Goblin Scout',         text:"Craft 1. Strength 2. Reward: 1 gold and 1 Adventure card." },
+  ],
+  middle: [
+    { title:'The Highland Pass',    text:"Treacherous footing. Roll 1d6 — on a 1, lose 1 life falling. On a 5–6, you discover a hidden cache: 3 gold." },
+    { title:'Stone Circle',         text:"Ancient runes hum underfoot. Draw 2 Spell cards and keep one. Discard the other." },
+    { title:'Wandering Knight',     text:"Strength 4. Craft 1. If you defeat them, gain their Talisman. They leave a note: 'It was not worth it.'" },
+    { title:'Mountain Witch',       text:"She offers to trade. Give up 1 Craft to gain 2 Strength, or vice versa." },
+  ],
+  inner: [
+    { title:'Portal of Power',      text:"You stand at the threshold. Roll 1d6: 1–3, you are flung back to the Outer Ring; 4–6, pass freely." },
+    { title:'The Warlock',          text:"He demands a Quest. Draw a Warlock Quest card. You must complete it before claiming the Crown." },
+    { title:'Dark Elf Assassin',    text:"Craft 4. Strength 3. If she defeats you, she steals your Talisman and vanishes." },
+    { title:'Graveyard',            text:"Lose 1 life. Draw an Adventure card — it may be an ally or a further curse." },
+  ],
+  crown: [
+    { title:'Crown of Command',     text:"You hold the Crown at last. Every turn, cast the Command spell on one opponent. They lose 1 life unless they pass a Strength vs. Craft test against you. First to reduce all opponents to 0 lives wins." },
+  ],
+};
+let activeRing = 'outer';
+const RING_LABELS = { outer:'Outer', middle:'Middle', inner:'Inner', crown:'Crown' };
+const RING_COLORS = { outer:'#3a9928', middle:'#0c4f8d', inner:'#5d2a8a', crown:'#d11a1a' };
+
+function renderRingFilters() {
+  const rf = document.getElementById('ring-filters'); rf.innerHTML = '';
+  Object.entries(RING_LABELS).forEach(([key,label]) => {
+    const isA = key===activeRing;
+    const b = document.createElement('button');
+    b.textContent = label;
+    Object.assign(b.style,{fontFamily:'var(--mg-font-body)',fontWeight:600,fontSize:'13px',height:'34px',padding:'0 14px',borderRadius:'9999px',border:isA?'none':'1px solid #c3c5cc',background:isA?RING_COLORS[key]:'transparent',color:isA?'#fff':'#14161c',cursor:'pointer',transition:'all 150ms'});
+    b.addEventListener('click',()=>{ activeRing=key; renderRingFilters(); drawEncounter(); });
+    rf.appendChild(b);
+  });
+}
+
+function drawEncounter() {
+  const pool = ENCOUNTERS[activeRing];
+  const enc = pool[Math.floor(Math.random()*pool.length)];
+  const card = document.getElementById('encounter-card');
+  card.innerHTML = '';
+  const c = el('div',{style:{background:'#f5f4ef',borderRadius:'14px',padding:'24px',borderLeft:`4px solid ${RING_COLORS[activeRing]}`}});
+  c.appendChild(el('div',{style:{fontFamily:'var(--mg-font-pixel)',fontSize:'9px',color:RING_COLORS[activeRing],letterSpacing:'1.5px',marginBottom:'10px'}},`▲ ${RING_LABELS[activeRing].toUpperCase()} RING`));
+  c.appendChild(el('h4',{style:{fontFamily:'var(--mg-font-display)',fontWeight:600,fontSize:'22px',letterSpacing:'-0.3px',color:'#14161c',margin:'0 0 12px'}},enc.title));
+  c.appendChild(el('p',{style:{fontFamily:'var(--mg-font-body)',fontSize:'15px',lineHeight:'1.65',color:'#1f2228',margin:0}},enc.text));
+  card.appendChild(c);
+}
+
+renderRingFilters(); drawEncounter();
+document.getElementById('encounter-draw-btn').appendChild(btn('Draw encounter','dark',drawEncounter));
+    },
+  },
+  "tools-nukes": {
+    label: "Nukes tools",
+    nav:   "Tools",
+    style: "body { background:#f5f4ef; }\n#hex-map { background:#0a0d2a; border-radius:14px; padding:24px; position:relative; overflow:hidden; margin-bottom:14px; cursor:pointer; }\n#hex-map-inner { position:absolute; inset:0; background:radial-gradient(circle at 50% 50%,rgba(209,26,26,0.18) 0%,transparent 70%); pointer-events:none; }",
+    html: `<section style="background:#000;color:#fff;padding:56px 32px 72px;position:relative;overflow:hidden">
+  <div style="position:absolute;left:50%;top:60%;transform:translateX(-50%);width:800px;height:300px;background:radial-gradient(ellipse,rgba(209,26,26,0.25) 0%,transparent 65%);pointer-events:none;filter:blur(20px)"></div>
+  <div style="max-width:1200px;margin:0 auto;position:relative">
+    <a href="tools.html" style="font-family:var(--mg-font-mono);font-size:12px;color:rgba(255,255,255,0.65);text-decoration:none">← All tools</a>
+    <div style="font-family:var(--mg-font-pixel);font-size:10px;color:#e63232;letter-spacing:1.5px;margin:20px 0 16px">▲ NUKE CATAN</div>
+    <h1 style="font-family:var(--mg-font-display);font-weight:600;font-size:clamp(44px,5.5vw,80px);line-height:1.0;letter-spacing:-0.025em;margin:0 0 18px">Nukes tools.</h1>
+    <p style="font-family:var(--mg-font-body);font-size:17px;line-height:1.55;color:rgba(255,255,255,0.75);max-width:560px;margin:0">Target picker and fallout tracker for <em>Nuke Catan</em>. Plan your strike. Live with the consequences.</p>
+  </div>
+</section>
+
+<section style="background:#f5f4ef;padding:48px 32px 96px">
+  <div style="max-width:900px;margin:0 auto;display:flex;flex-direction:column;gap:24px">
+
+    <!-- Target Picker -->
+    <div style="background:#fff;border:1px solid #e6e3d8;border-radius:20px;padding:32px">
+      <div style="display:flex;align-items:flex-start;gap:16px;margin-bottom:22px;padding-bottom:22px;border-bottom:1px solid #e6e3d8">
+        <div style="width:6px;height:48px;background:#d11a1a;border-radius:3px;flex:none"></div>
+        <div>
+          <div style="font-family:var(--mg-font-pixel);font-size:9px;color:#d11a1a;letter-spacing:1.5px;margin-bottom:6px">▲ NUKES</div>
+          <h3 style="font-family:var(--mg-font-display);font-weight:600;font-size:24px;color:#14161c;margin:0;letter-spacing:-0.3px">Target picker</h3>
+          <p style="font-family:var(--mg-font-body);font-size:14px;color:#4f5764;margin:4px 0 0">Click a hex to launch. Adjacent hexes pick up fallout markers automatically.</p>
+        </div>
+      </div>
+      <div id="hex-map"><div id="hex-map-inner"></div><svg id="hex-svg" width="100%" viewBox="0 0 370 200"></svg></div>
+      <div style="display:flex;justify-content:space-between;align-items:center;flex-wrap:wrap;gap:8px">
+        <div id="strike-count" style="font-family:var(--mg-font-mono);font-size:13px;color:#4f5764">Strikes: <strong style="color:#d11a1a">0</strong> · Fallout hexes: <strong>0</strong></div>
+        <div id="clear-btn"></div>
+      </div>
+    </div>
+
+    <!-- Fallout Tracker -->
+    <div style="background:#fff;border:1px solid #e6e3d8;border-radius:20px;padding:32px">
+      <div style="display:flex;align-items:flex-start;gap:16px;margin-bottom:22px;padding-bottom:22px;border-bottom:1px solid #e6e3d8">
+        <div style="width:6px;height:48px;background:#e89a1a;border-radius:3px;flex:none"></div>
+        <div>
+          <div style="font-family:var(--mg-font-pixel);font-size:9px;color:#e89a1a;letter-spacing:1.5px;margin-bottom:6px">▲ FALLOUT</div>
+          <h3 style="font-family:var(--mg-font-display);font-weight:600;font-size:24px;color:#14161c;margin:0;letter-spacing:-0.3px">Fallout tracker</h3>
+          <p style="font-family:var(--mg-font-body);font-size:14px;color:#4f5764;margin:4px 0 0">Track contaminated zones and count down their recovery.</p>
+        </div>
+      </div>
+      <div id="fallout-list" style="display:flex;flex-direction:column;gap:10px;margin-bottom:16px"></div>
+      <div id="fallout-btns" style="display:flex;gap:10px;flex-wrap:wrap"></div>
+    </div>
+
+    <!-- Resource Economy -->
+    <div style="background:#fff;border:1px solid #e6e3d8;border-radius:20px;padding:32px">
+      <div style="display:flex;align-items:flex-start;gap:16px;margin-bottom:22px;padding-bottom:22px;border-bottom:1px solid #e6e3d8">
+        <div style="width:6px;height:48px;background:#0c4f8d;border-radius:3px;flex:none"></div>
+        <div>
+          <div style="font-family:var(--mg-font-pixel);font-size:9px;color:#0c4f8d;letter-spacing:1.5px;margin-bottom:6px">▲ NUKE CATAN ECONOMY</div>
+          <h3 style="font-family:var(--mg-font-display);font-weight:600;font-size:24px;color:#14161c;margin:0;letter-spacing:-0.3px">Resource converter</h3>
+          <p style="font-family:var(--mg-font-body);font-size:14px;color:#4f5764;margin:4px 0 0">The Nuke Catan resource rename cheatsheet. Keep it open at the table.</p>
+        </div>
+      </div>
+      <div id="resource-table" style="display:grid;grid-template-columns:1fr 1fr 1fr;gap:1px;background:#e6e3d8;border-radius:10px;overflow:hidden"></div>
+    </div>
+
+  </div>
+</section>`,
+    init(container) {
+      const { T, el, btn, navbar, footer } = MG;
+
+/* ── HEX TARGET PICKER ── */
+const COLS = 9, ROWS = 5;
+const hexes = [];
+for (let r=0; r<ROWS; r++) {
+  for (let c=0; c<COLS; c++) {
+    hexes.push({ r, c, x: c*36 + (r%2)*18 + 25, y: r*31 + 22, id:`${r}-${c}` });
+  }
+}
+const strikes = new Set();
+
+function isFallout(h) {
+  return [...strikes].some(id => {
+    const [sr,sc] = id.split('-').map(Number);
+    return (Math.abs(sr-h.r)+Math.abs(sc-h.c))===1;
+  });
+}
+
+function renderHexMap() {
+  const svg = document.getElementById('hex-svg');
+  svg.innerHTML = '';
+  const ns = 'http://www.w3.org/2000/svg';
+  hexes.forEach(h => {
+    const struck = strikes.has(h.id);
+    const fall = !struck && isFallout(h);
+    const g = document.createElementNS(ns,'g');
+    g.style.cursor = 'pointer';
+    const poly = document.createElementNS(ns,'polygon');
+    poly.setAttribute('transform',`translate(${h.x},${h.y})`);
+    poly.setAttribute('points','0,-16 14,-8 14,8 0,16 -14,8 -14,-8');
+    poly.setAttribute('fill', struck?'#d11a1a': fall?'#7a3a18':'rgba(255,255,255,0.06)');
+    poly.setAttribute('stroke', struck?'#e63232':'rgba(255,255,255,0.25)');
+    poly.setAttribute('stroke-width', struck?'2':'1');
+    g.appendChild(poly);
+    if (struck) {
+      const t = document.createElementNS(ns,'text');
+      t.setAttribute('x',h.x); t.setAttribute('y',h.y+5);
+      t.setAttribute('font-size','14'); t.setAttribute('fill','#fff');
+      t.setAttribute('text-anchor','middle'); t.setAttribute('pointer-events','none');
+      t.textContent='☢'; g.appendChild(t);
+    }
+    if (fall) {
+      const c2 = document.createElementNS(ns,'circle');
+      c2.setAttribute('cx',h.x); c2.setAttribute('cy',h.y);
+      c2.setAttribute('r','4'); c2.setAttribute('fill','#e89a1a');
+      c2.setAttribute('pointer-events','none'); g.appendChild(c2);
+    }
+    g.addEventListener('click',()=>{
+      if (!strikes.has(h.id)) { strikes.add(h.id); renderHexMap(); updateCount(); }
+    });
+    svg.appendChild(g);
+  });
+}
+
+function updateCount() {
+  const fallCount = hexes.filter(h => !strikes.has(h.id) && isFallout(h)).length;
+  document.getElementById('strike-count').innerHTML = `Strikes: <strong style="color:#d11a1a">${strikes.size}</strong> · Fallout hexes: <strong>${fallCount}</strong>`;
+}
+
+document.getElementById('clear-btn').appendChild(btn('Clear board','outline-light',()=>{ strikes.clear(); renderHexMap(); updateCount(); },{color:'#14161c'}));
+renderHexMap();
+
+/* ── FALLOUT TRACKER ── */
+let zones = [
+  { name:'Sector 4-Charlie', turns:3, severity:3 },
+  { name:'Sector 7-Foxtrot', turns:2, severity:2 },
+  { name:'Ore Mountains', turns:1, severity:1 },
+];
+const SEV_COLORS = ['#3a9928','#e89a1a','#d11a1a'];
+const SEV_LABELS = ['Light','Moderate','Heavy'];
+
+function renderFallout() {
+  const list = document.getElementById('fallout-list');
+  list.innerHTML = '';
+  zones.forEach((z,i) => {
+    const row = el('div',{style:{display:'grid',gridTemplateColumns:'1fr auto auto',gap:'12px',alignItems:'center',padding:'14px 16px',background:'#f5f4ef',borderRadius:'10px',borderLeft:`4px solid ${SEV_COLORS[z.severity-1]}`}});
+    const info = el('div');
+    info.appendChild(el('div',{style:{fontFamily:'var(--mg-font-body)',fontWeight:600,fontSize:'15px',color:'#14161c'}},z.name));
+    info.appendChild(el('div',{style:{fontFamily:'var(--mg-font-mono)',fontSize:'11px',color:'#7a8290',marginTop:'2px'}},`${SEV_LABELS[z.severity-1]} fallout · ${z.turns} turn${z.turns===1?'':'s'} remaining`));
+    row.appendChild(info);
+    const advBtn = document.createElement('button');
+    advBtn.textContent='Next turn'; Object.assign(advBtn.style,{fontFamily:'var(--mg-font-body)',fontWeight:600,fontSize:'13px',padding:'6px 14px',borderRadius:'9999px',border:'none',background:'#14161c',color:'#fff',cursor:'pointer'});
+    advBtn.addEventListener('click',()=>{ zones[i].turns=Math.max(0,zones[i].turns-1); if(zones[i].turns===0) zones.splice(i,1); renderFallout(); });
+    const rmBtn = document.createElement('button');
+    rmBtn.textContent='✕'; Object.assign(rmBtn.style,{width:'30px',height:'30px',borderRadius:'9999px',border:'1px solid #e6e3d8',background:'#fff',cursor:'pointer',fontSize:'14px',color:'#7a8290'});
+    rmBtn.addEventListener('click',()=>{ zones.splice(i,1); renderFallout(); });
+    row.appendChild(advBtn); row.appendChild(rmBtn); list.appendChild(row);
+  });
+  if (zones.length===0) {
+    list.appendChild(el('div',{style:{padding:'24px',textAlign:'center',fontFamily:'var(--mg-font-mono)',fontSize:'13px',color:'#7a8290'}},'No active fallout zones.'));
+  }
+}
+
+const fb = document.getElementById('fallout-btns');
+fb.appendChild(btn('Add zone','dark',()=>{
+  const name = prompt('Zone name:','Sector '+(zones.length+1));
+  if (name) { zones.push({name,turns:3,severity:2}); renderFallout(); }
+}));
+fb.appendChild(btn('Advance all turns','outline-light',()=>{
+  zones = zones.map(z=>({...z,turns:z.turns-1})).filter(z=>z.turns>0); renderFallout();
+},{color:'#14161c'}));
+renderFallout();
+
+/* ── RESOURCE TABLE ── */
+const RESOURCES = [
+  ['Original','Nuke Catan','Notes'],
+  ['Sheep','Scrap','Extinct post-event'],
+  ['Wheat','Rations','Rationed per turn'],
+  ['Wool','Salvage','Pulled from ruins'],
+  ['Ore','Ore','Unchanged — still mined'],
+  ['Brick','Currency','Now literal currency'],
+  ['Wood','Timber','Pre-war stockpile only'],
+];
+const rt = document.getElementById('resource-table');
+RESOURCES.forEach((row,ri) => {
+  row.forEach((cell,ci) => {
+    const d = el('div',{style:{fontFamily: ri===0?'var(--mg-font-mono)':'var(--mg-font-body)',fontWeight: ri===0||ci===1?600:400,fontSize: ri===0?'11px':'14px',color: ri===0?'#7a8290': ci===1?'#d11a1a':'#14161c',padding:'10px 14px',background:'#fff',textTransform: ri===0?'uppercase':'none',letterSpacing: ri===0?'0.5px':'0'}},cell);
+    rt.appendChild(d);
+  });
+});
+    },
+  },
+  "submit": {
+    label: "Submit a mod",
+    nav:   "Mods",
+    style: "body { background:#f5f4ef; }\n.field-input { width:100%;padding:14px 16px;border:1px solid #e6e3d8;border-radius:12px;font-family:var(--mg-font-body);font-size:16px;color:#14161c;background:#fff;outline:none;transition:border-color 150ms;box-sizing:border-box; }\n.field-input:focus { border-color:#0c4f8d; }\ntextarea.field-input { resize:vertical;min-height:120px; }",
+    html: `<!-- Header -->
+<section style="background:#000;color:#fff;padding:64px 32px 72px;position:relative;overflow:hidden">
+  <div style="position:absolute;right:-100px;top:20%;width:500px;height:500px;background:radial-gradient(circle,rgba(58,123,232,0.2) 0%,transparent 65%);pointer-events:none"></div>
+  <div style="max-width:760px;margin:0 auto;position:relative">
+    <a href="mods.html" style="font-family:var(--mg-font-mono);font-size:12px;color:rgba(255,255,255,0.7);text-decoration:none">← Back to mods</a>
+    <div style="font-family:var(--mg-font-pixel);font-size:10px;color:#6fb5ff;letter-spacing:1.5px;margin:24px 0 18px">▲ SUBMIT A MOD</div>
+    <h1 style="font-family:var(--mg-font-display);font-weight:600;font-size:clamp(44px,6vw,80px);line-height:1.0;letter-spacing:-0.025em;margin:0 0 20px">Ship your rules.</h1>
+    <p style="font-family:var(--mg-font-body);font-size:18px;line-height:1.6;color:rgba(255,255,255,0.78);margin:0">Tell us about your mod. We'll review it, play it, and if it works at the table — publish it.</p>
+  </div>
+</section>
+
+<!-- Step indicator -->
+<div style="background:#fff;border-bottom:1px solid #e6e3d8;padding:0 32px">
+  <div style="max-width:760px;margin:0 auto;display:flex;align-items:center">
+    <div id="step-1-tab" class="step-tab" style="display:flex;align-items:center;gap:10px;padding:20px 0 18px;border-bottom:2px solid #0c4f8d;margin-right:24px;cursor:pointer">
+      <span id="s1-num" style="width:26px;height:26px;border-radius:9999px;background:#0c4f8d;color:#fff;font-family:var(--mg-font-mono);font-size:12px;font-weight:600;display:flex;align-items:center;justify-content:center">1</span>
+      <span style="font-family:var(--mg-font-body);font-weight:600;font-size:14px;color:#14161c">The basics</span>
+    </div>
+    <div id="step-2-tab" class="step-tab" style="display:flex;align-items:center;gap:10px;padding:20px 0 18px;border-bottom:2px solid transparent;margin-right:24px;cursor:pointer;opacity:0.5">
+      <span id="s2-num" style="width:26px;height:26px;border-radius:9999px;background:#c3c5cc;color:#fff;font-family:var(--mg-font-mono);font-size:12px;font-weight:600;display:flex;align-items:center;justify-content:center">2</span>
+      <span style="font-family:var(--mg-font-body);font-weight:600;font-size:14px;color:#14161c">The rules</span>
+    </div>
+    <div id="step-3-tab" class="step-tab" style="display:flex;align-items:center;gap:10px;padding:20px 0 18px;border-bottom:2px solid transparent;cursor:pointer;opacity:0.5">
+      <span id="s3-num" style="width:26px;height:26px;border-radius:9999px;background:#c3c5cc;color:#fff;font-family:var(--mg-font-mono);font-size:12px;font-weight:600;display:flex;align-items:center;justify-content:center">3</span>
+      <span style="font-family:var(--mg-font-body);font-weight:600;font-size:14px;color:#14161c">Submit</span>
+    </div>
+  </div>
+</div>
+
+<!-- Form -->
+<section style="background:#f5f4ef;padding:56px 32px 96px">
+  <div style="max-width:760px;margin:0 auto">
+
+    <!-- Step 1 -->
+    <div id="step-1">
+      <div style="display:flex;flex-direction:column;gap:24px">
+        <div id="field-title"></div>
+        <div id="field-game"></div>
+        <div id="field-cat"></div>
+        <div id="field-stats"></div>
+        <div id="field-desc"></div>
+        <div style="display:flex;justify-content:flex-end"><div id="next-1-btn"></div></div>
+      </div>
+    </div>
+
+    <!-- Step 2 -->
+    <div id="step-2" style="display:none">
+      <div style="display:flex;flex-direction:column;gap:24px">
+        <div id="field-rulespdf"></div>
+        <div id="field-pnp"></div>
+        <div id="field-version"></div>
+        <div id="field-designer"></div>
+        <div style="display:flex;justify-content:space-between" id="step2-nav"></div>
+      </div>
+    </div>
+
+    <!-- Step 3 -->
+    <div id="step-3" style="display:none">
+      <div id="submit-preview" style="background:#fff;border:1px solid #e6e3d8;border-radius:16px;padding:28px;margin-bottom:32px"></div>
+      <div id="step3-agree" style="display:flex;gap:12px;align-items:flex-start;background:#fff;border:1px solid #e6e3d8;border-radius:12px;padding:20px;margin-bottom:28px">
+        <input type="checkbox" id="agree-check" style="margin-top:3px;width:18px;height:18px;cursor:pointer">
+        <label for="agree-check" style="font-family:var(--mg-font-body);font-size:14px;color:#1f2228;line-height:1.5;cursor:pointer">I confirm this mod is my own original work or that I have permission to share it. I understand it will be published openly under a Creative Commons licence unless otherwise agreed.</label>
+      </div>
+      <div style="display:flex;justify-content:space-between" id="step3-nav"></div>
+    </div>
+
+    <!-- Success -->
+    <div id="step-success" style="display:none;text-align:center;padding:64px 0">
+      <div style="font-family:var(--mg-font-pixel);font-size:11px;color:#3a9928;letter-spacing:2px;margin-bottom:20px">▲ SUBMITTED</div>
+      <h2 style="font-family:var(--mg-font-display);font-weight:600;font-size:48px;line-height:1.05;letter-spacing:-0.6px;color:#14161c;margin:0 0 16px">The dice are cast.</h2>
+      <p style="font-family:var(--mg-font-body);font-size:18px;line-height:1.6;color:#4f5764;max-width:520px;margin:0 auto 32px">We'll review your submission and get back to you within a fortnight. Keep an eye on Discord for updates.</p>
+      <div id="success-btns" style="display:flex;gap:12px;justify-content:center;flex-wrap:wrap"></div>
+    </div>
+
+  </div>
+</section>`,
+    init(container) {
+      const { T, el, btn, linkBtn, navbar, footer } = MG;
+
+const formData = { title:'', baseGame:'', category:'', stats:'', desc:'', rulesPdf:null, pnp:null, version:'', designer:'' };
+let currentStep = 1;
+
+// Field builder
+function field(id, label, hint, required, childFn) {
+  const wrap = el('div',{style:{display:'flex',flexDirection:'column',gap:'6px'}});
+  const lbl = el('label',{for:id,style:{fontFamily:'var(--mg-font-body)',fontWeight:600,fontSize:'14px',color:'#14161c'}});
+  lbl.innerHTML = label + (required ? '<span style="color:#d11a1a;margin-left:4px">*</span>' : '');
+  wrap.appendChild(lbl);
+  if (hint) wrap.appendChild(el('span',{style:{fontFamily:'var(--mg-font-body)',fontSize:'13px',color:'#4f5764'}},hint));
+  wrap.appendChild(childFn(id));
+  return wrap;
+}
+function textInput(id, placeholder, key) {
+  return () => {
+    const i = el('input',{type:'text',id,class:'field-input',placeholder});
+    i.value = formData[key] || '';
+    i.addEventListener('input',()=>{ formData[key]=i.value; });
+    return i;
+  };
+}
+function textArea(id, placeholder, key) {
+  return () => {
+    const t = el('textarea',{id,class:'field-input',placeholder});
+    t.value = formData[key] || '';
+    t.addEventListener('input',()=>{ formData[key]=t.value; });
+    return t;
+  };
+}
+
+// Build step 1
+document.getElementById('field-title').appendChild(field('mod-title','Mod title',"What's it called?",true,textInput('mod-title','e.g. Talisman: Hexed','title')));
+document.getElementById('field-game').appendChild(field('base-game','Base game','Which published game does your mod use?',true,textInput('base-game','e.g. Talisman 4e (revised)','baseGame')));
+
+// Category picker
+const catWrap = el('div',{style:{display:'flex',flexDirection:'column',gap:'6px'}});
+const catLbl = el('label',{style:{fontFamily:'var(--mg-font-body)',fontWeight:600,fontSize:'14px',color:'#14161c'}});
+catLbl.innerHTML = 'Mod category <span style="color:#d11a1a;margin-left:4px">*</span>';
+catWrap.appendChild(catLbl);
+catWrap.appendChild(el('span',{style:{fontFamily:'var(--mg-font-body)',fontSize:'13px',color:'#4f5764'}},'Pick the one that fits best.'));
+const catGrid = el('div',{style:{display:'grid',gridTemplateColumns:'1fr 1fr 1fr',gap:'10px'}});
+const CATS = [{v:'Reskin',c:T.blue,desc:'Same rules, new theme or board layout.'},{v:'Rebalance',c:T.green,desc:'Same theme, tuned rules — pacing, fairness, length.'},{v:'Total conversion',c:T.red,desc:'New rules, new theme, components only.'}];
+CATS.forEach(o => {
+  const b = document.createElement('button');
+  b.type = 'button';
+  Object.assign(b.style,{background:'#fff',color:'#14161c',border:`2px solid ${T.hairlineLight}`,borderRadius:'14px',padding:'16px',textAlign:'left',cursor:'pointer',transition:'all 150ms',display:'flex',flexDirection:'column',gap:'6px'});
+  b.innerHTML = `<span style="font-family:var(--mg-font-display);font-weight:600;font-size:17px;letter-spacing:-0.2px">${o.v}</span><span style="font-family:var(--mg-font-body);font-size:12px;color:#4f5764;line-height:1.4">${o.desc}</span>`;
+  b.addEventListener('click',()=>{
+    formData.category = o.v;
+    catGrid.querySelectorAll('button').forEach(x=>{Object.assign(x.style,{background:'#fff',color:'#14161c',border:`2px solid ${T.hairlineLight}`});x.querySelector('span:last-child').style.color='#4f5764';});
+    Object.assign(b.style,{background:o.c,color:'#fff',border:`2px solid ${o.c}`});
+    b.querySelector('span:last-child').style.color='rgba(255,255,255,0.82)';
+  });
+  catGrid.appendChild(b);
+});
+catWrap.appendChild(catGrid);
+document.getElementById('field-cat').appendChild(catWrap);
+
+document.getElementById('field-stats').appendChild(field('mod-stats','Player count & time','Mono format, e.g. 3–5 players · 45 min · 12+',false,textInput('mod-stats','3–5 players · 45 min · 12+','stats')));
+document.getElementById('field-desc').appendChild(field('mod-desc','Pitch it in two sentences','What does your mod do and why should someone play it?',true,textArea('mod-desc','Replaces the standard Monopoly board with a fully functional Euro-game economy. No bankruptcy, just resource management and victory points.','desc')));
+
+const n1 = document.getElementById('next-1-btn');
+n1.appendChild(btn('Next: the rules →','primary',()=>goStep(2)));
+
+// Step 2
+function fileField(id, label, hint) {
+  return field(id, label, hint, false, () => {
+    const inp = el('input',{type:'file',id,accept:'.pdf',style:{fontFamily:'var(--mg-font-body)',fontSize:'14px',color:'#14161c',padding:'10px 0',cursor:'pointer'}});
+    return inp;
+  });
+}
+document.getElementById('field-rulespdf').appendChild(fileField('rules-pdf','Rules PDF','The main rulebook. PDF only, under 20 MB.'));
+document.getElementById('field-pnp').appendChild(fileField('pnp-pdf','Print-and-play pack','Any printable components — tiles, cards, tokens.'));
+document.getElementById('field-version').appendChild(field('version','Version','Semantic versioning preferred.',false,textInput('version','v1.0.0','version')));
+document.getElementById('field-designer').appendChild(field('designer','Your handle','How should we credit you?',false,textInput('designer','@yourhandle','designer')));
+
+const s2n = document.getElementById('step2-nav');
+s2n.appendChild(btn('← Back','outline-light',()=>goStep(1),{color:'#14161c'}));
+s2n.appendChild(btn('Next: submit →','primary',()=>goStep(3)));
+
+// Step 3 preview
+function buildPreview() {
+  const p = document.getElementById('submit-preview');
+  p.innerHTML = '';
+  p.appendChild(el('div',{style:{fontFamily:'var(--mg-font-pixel)',fontSize:'9px',color:'#0c4f8d',letterSpacing:'1.5px',marginBottom:'14px'}},'▲ YOUR SUBMISSION'));
+  const rows = [['Title',formData.title||'—'],['Base game',formData.baseGame||'—'],['Category',formData.category||'—'],['Stats',formData.stats||'—'],['Designer',formData.designer||'—'],['Version',formData.version||'—']];
+  rows.forEach(([k,v])=>{
+    const row = el('div',{style:{display:'flex',gap:'16px',padding:'8px 0',borderBottom:'1px solid #e6e3d8',flexWrap:'wrap'}});
+    row.appendChild(el('span',{style:{fontFamily:'var(--mg-font-mono)',fontSize:'12px',color:'#7a8290',minWidth:'100px'}},k));
+    row.appendChild(el('span',{style:{fontFamily:'var(--mg-font-body)',fontSize:'14px',color:'#14161c',flex:1}},v));
+    p.appendChild(row);
+  });
+  if (formData.desc) {
+    p.appendChild(el('div',{style:{marginTop:'14px',padding:'14px',background:'#f5f4ef',borderRadius:'10px',fontFamily:'var(--mg-font-body)',fontSize:'14px',lineHeight:'1.55',color:'#1f2228'}},formData.desc));
+  }
+}
+
+const s3n = document.getElementById('step3-nav');
+s3n.appendChild(btn('← Back','outline-light',()=>goStep(2),{color:'#14161c'}));
+const submitBtn = btn('Submit mod','green',()=>{
+  if (!document.getElementById('agree-check').checked) { alert('Please confirm the agreement first.'); return; }
+  goStep('success');
+});
+s3n.appendChild(submitBtn);
+
+// Success
+const sbw = document.getElementById('success-btns');
+sbw.appendChild(linkBtn('Back to the library','mods.html','dark'));
+sbw.appendChild(linkBtn('Join Discord','community.html','outline-light',{color:'#14161c',border:'1px solid #3a3d44'}));
+
+function goStep(n) {
+  currentStep = n;
+  ['step-1','step-2','step-3','step-success'].forEach(id => {
+    const el2 = document.getElementById(id);
+    if (el2) el2.style.display = 'none';
+  });
+  const tabs = document.querySelectorAll('.step-tab');
+  tabs.forEach((t,i)=>{t.style.borderBottomColor='transparent';t.style.opacity='0.5';});
+
+  if (n === 1) { document.getElementById('step-1').style.display='block'; tabs[0].style.borderBottomColor='#0c4f8d';tabs[0].style.opacity='1'; }
+  if (n === 2) { document.getElementById('step-2').style.display='block'; tabs[1].style.borderBottomColor='#0c4f8d';tabs[1].style.opacity='1'; }
+  if (n === 3) { buildPreview(); document.getElementById('step-3').style.display='block'; tabs[2].style.borderBottomColor='#0c4f8d';tabs[2].style.opacity='1'; }
+  if (n === 'success') { document.getElementById('step-success').style.display='block'; }
+}
+    },
+  },
+  "about": {
+    label: "About",
+    nav:   "About",
+    style: "body{background:#f5f4ef}",
+    html: `<div id="page-hero"></div>
+
+<section style="background:#f5f4ef;padding:72px 32px 96px">
+  <div style="max-width:720px;margin:0 auto">
+    <div style="font-family:var(--mg-font-body);font-size:19px;line-height:1.65;color:#1f2228;display:flex;flex-direction:column;gap:32px">
+      <p style="font-size:23px;line-height:1.5;color:#14161c;font-style:italic"><em>Moddable.Games</em> is a workshop publishing open-source rulebook mods for the board games already on your shelf — and three original games designed to be modded from day one.</p>
+
+      <div>
+        <h2 style="font-family:var(--mg-font-display);font-weight:600;font-size:32px;line-height:1.15;letter-spacing:-0.4px;color:#14161c;margin:0 0 16px">The premise.</h2>
+        <p style="margin:0 0 16px">Tabletop publishing is conservative. Rules are copyrighted, artwork owned, trademarks defended — for understandable reasons. But that defensive crouch leaves a lot on the table. Half the fun of a game is the way your group plays it, not the way the publisher intended.</p>
+        <p style="margin:0">We do two things. We write rules patches you can run with the components in the box you already own — no expansions to buy, no replacement parts to print, just a PDF and a flat surface. And we design original games whose entire rulebook is in a git repo so anyone can fork it.</p>
+      </div>
+
+      <div>
+        <h2 style="font-family:var(--mg-font-display);font-weight:600;font-size:32px;line-height:1.15;letter-spacing:-0.4px;color:#14161c;margin:0 0 16px">What we don't do.</h2>
+        <p style="margin:0">We don't sell boards. We don't run a Kickstarter. We don't manufacture meeples. The whole operation is digital — the only physical thing we make is the conversation around your kitchen table.</p>
+      </div>
+
+      <div>
+        <h2 style="font-family:var(--mg-font-display);font-weight:600;font-size:32px;line-height:1.15;letter-spacing:-0.4px;color:#14161c;margin:0 0 16px">Where to find us.</h2>
+        <div style="display:grid;grid-template-columns:1fr 1fr;gap:12px;margin-top:4px" id="links-grid"></div>
+      </div>
+    </div>
+  </div>
+</section>`,
+    init(container) {
+      const { el, navbar, footer, pageHero } = MG;
+document.getElementById('page-hero').appendChild(pageHero({
+  eyebrow:'▲ ABOUT MODDABLE',
+  title:'Creating games you already own.',
+  lede:'A workshop of designers, modders and rule-tinkerers reshaping the boards already on your shelf.',
+  withHorizon:true,
+}));
+
+const links = [
+  { label:'Discord', sub:'2,400+ members', color:'#5865f2', href:'community.html' },
+  { label:'Team',    sub:'Six humans, no AI', color:'#0c4f8d', href:'team.html' },
+  { label:'News',    sub:'Strictly written by humans', color:'#3a9928', href:'news.html' },
+  { label:'Mods',    sub:'12 open-source mods', color:'#d11a1a', href:'mods.html' },
+];
+const lg = document.getElementById('links-grid');
+links.forEach(l => {
+  const a = el('a',{href:l.href,style:{display:'flex',alignItems:'center',gap:'12px',padding:'18px',background:'#fff',border:'1px solid #e6e3d8',borderRadius:'14px',textDecoration:'none',color:'inherit',transition:'border-color 150ms'}});
+  a.addEventListener('mouseenter',()=>a.style.borderColor='#14161c');
+  a.addEventListener('mouseleave',()=>a.style.borderColor='#e6e3d8');
+  a.appendChild(el('div',{style:{width:'32px',height:'32px',background:l.color,borderRadius:'8px',flex:'none'}}));
+  const t = el('div');
+  t.appendChild(el('div',{style:{fontFamily:'var(--mg-font-display)',fontWeight:600,fontSize:'15px',color:'#14161c'}},l.label));
+  t.appendChild(el('div',{style:{fontFamily:'var(--mg-font-mono)',fontSize:'12px',color:'#7a8290'}},l.sub));
+  a.appendChild(t); lg.appendChild(a);
+});
+    },
+  },
+  "team": {
+    label: "Team",
+    nav:   "About",
+    style: "body{background:#f5f4ef}",
+    html: `<div id="page-hero"></div>
+
+<section style="background:#f5f4ef;padding:72px 32px 96px">
+  <div style="max-width:1200px;margin:0 auto">
+    <div id="team-grid" style="display:grid;grid-template-columns:repeat(auto-fit,minmax(280px,1fr));gap:20px"></div>
+  </div>
+</section>`,
+    init(container) {
+      const { el, navbar, footer, pageHero } = MG;
+document.getElementById('page-hero').appendChild(pageHero({
+  eyebrow:'▲ THE TEAM',
+  title:'Six humans. Zero AI.',
+  lede:'The people who write the rules, draw the tiles, and lose every game of Nuke Catan.',
+}));
+
+const TEAM = [
+  { handle:'@ascelot',   name:'Riley', role:'Founder · rules',   bio:"Designs the mods, runs the playtests, refuses to use Comic Sans on the PDFs.", color:'#d11a1a' },
+  { handle:'@cobalt',    name:'Sam',   role:'Original games',    bio:"Lead on Endless Skies + Mongo. Holds the only spreadsheet that explains TI4 in one row.", color:'#0c4f8d' },
+  { handle:'@hexbear',   name:'Joel',  role:'Art + components',  bio:"Hexagonal everything. Drew 61 tiles for Talisman: Hexed in three weeks.", color:'#3a9928' },
+  { handle:'@tessellate',name:'Tess',  role:'Community',         bio:"Runs the Discord. Runs the mod jams. Has read every house-rule thread on BoardGameGeek.", color:'#e89a1a' },
+  { handle:'@nukular',   name:'Kit',   role:'Tools + dev',       bio:"Built the dice roller. Maintains the modding hooks repo. Loses every game of Nuke Catan.", color:'#5d2a8a' },
+  { handle:'@longest',   name:'Ben',   role:'Words',             bio:"Writes the news posts you actually read. Strictly written by humans, including this bio.", color:'#936d62' },
+];
+
+const grid = document.getElementById('team-grid');
+TEAM.forEach(m => {
+  const card = el('article',{style:{background:'#fff',border:'1px solid #e6e3d8',borderRadius:'20px',padding:'24px',display:'flex',flexDirection:'column',gap:'14px'}});
+  const hrow = el('div',{style:{display:'flex',alignItems:'center',gap:'14px'}});
+  const avatar = el('div',{style:{width:'56px',height:'56px',borderRadius:'9999px',background:`linear-gradient(135deg,${m.color},${m.color}88)`,display:'flex',alignItems:'center',justifyContent:'center',fontFamily:'var(--mg-font-pixel)',fontSize:'16px',color:'#fff',flex:'none'}},m.name[0]);
+  hrow.appendChild(avatar);
+  const info = el('div');
+  info.appendChild(el('div',{style:{fontFamily:'var(--mg-font-display)',fontWeight:600,fontSize:'20px',letterSpacing:'-0.25px',color:'#14161c'}},m.name));
+  info.appendChild(el('div',{style:{fontFamily:'var(--mg-font-mono)',fontSize:'12px',color:'#7a8290',marginTop:'2px'}},m.role));
+  hrow.appendChild(info);
+  card.appendChild(hrow);
+  card.appendChild(el('p',{style:{fontFamily:'var(--mg-font-body)',fontSize:'14px',lineHeight:'1.6',color:'#3a3d44',margin:0}},m.bio));
+  card.appendChild(el('div',{style:{fontFamily:'var(--mg-font-mono)',fontSize:'12px',color:m.color,marginTop:'auto'}},m.handle));
+  grid.appendChild(card);
+});
+    },
+  },
+  "community": {
+    label: "Community",
+    nav:   "About",
+    style: "body{background:#f5f4ef}",
+    html: `<div id="page-hero"></div>
+
+<section style="background:#f5f4ef;padding:72px 32px 96px">
+  <div style="max-width:1200px;margin:0 auto;display:flex;flex-direction:column;gap:56px">
+
+    <!-- Stats -->
+    <div>
+      <div style="font-family:var(--mg-font-pixel);font-size:9px;color:#0c4f8d;letter-spacing:1.5px;margin-bottom:20px">▲ BY THE NUMBERS</div>
+      <div id="stats-grid" style="display:grid;grid-template-columns:repeat(auto-fit,minmax(160px,1fr));gap:16px"></div>
+    </div>
+
+    <!-- Discord channels -->
+    <div>
+      <div style="font-family:var(--mg-font-pixel);font-size:9px;color:#0c4f8d;letter-spacing:1.5px;margin-bottom:20px">▲ DISCORD CHANNELS</div>
+      <h2 style="font-family:var(--mg-font-display);font-weight:600;font-size:clamp(32px,4vw,48px);line-height:1.05;letter-spacing:-0.025em;color:#14161c;margin:0 0 24px">Where the table talk happens.</h2>
+      <div id="channels-list" style="display:flex;flex-direction:column;gap:10px"></div>
+    </div>
+
+    <!-- Mod jams -->
+    <div>
+      <div style="font-family:var(--mg-font-pixel);font-size:9px;color:#3a9928;letter-spacing:1.5px;margin-bottom:20px">▲ MOD JAMS</div>
+      <h2 style="font-family:var(--mg-font-display);font-weight:600;font-size:clamp(32px,4vw,48px);line-height:1.05;letter-spacing:-0.025em;color:#14161c;margin:0 0 24px">48 hours. One base game. Go.</h2>
+      <div id="jams-grid" style="display:grid;grid-template-columns:repeat(auto-fit,minmax(240px,1fr));gap:16px"></div>
+    </div>
+
+    <!-- CTA -->
+    <div style="background:#000;color:#fff;border-radius:20px;padding:48px 40px;text-align:center;position:relative;overflow:hidden">
+      <div style="position:absolute;inset:0;background-image:url('data:image/svg+xml;utf8,<svg xmlns=\\'http://www.w3.org/2000/svg\\' width=\\'56\\' height=\\'64\\' viewBox=\\'0 0 56 64\\'><path d=\\'M28 1 54 16v32L28 63 2 48V16z\\' fill=\\'none\\' stroke=\\'%233a7be8\\' stroke-opacity=\\'0.18\\' stroke-width=\\'1\\'/></svg>');background-size:56px 64px;animation:hexFloat 30s linear infinite;opacity:0.5"></div>
+      <div style="position:relative">
+        <div style="font-family:var(--mg-font-pixel);font-size:9px;color:#6fb5ff;letter-spacing:1.5px;margin-bottom:16px">▲ JOIN UP</div>
+        <h3 style="font-family:var(--mg-font-display);font-weight:600;font-size:clamp(32px,4vw,48px);line-height:1.05;letter-spacing:-0.025em;margin:0 0 16px">Pull up a chair.</h3>
+        <p style="font-family:var(--mg-font-body);font-size:17px;line-height:1.6;color:rgba(255,255,255,0.78);max-width:500px;margin:0 auto 28px">2,400 moddable minds. Free to join. Bring your own dice.</p>
+        <div id="cta-btns" style="display:flex;gap:12px;justify-content:center;flex-wrap:wrap"></div>
+      </div>
+    </div>
+  </div>
+</section>`,
+    init(container) {
+      const { el, btn, linkBtn, navbar, footer, pageHero } = MG;
+document.getElementById('page-hero').appendChild(pageHero({
+  eyebrow:'▲ COMMUNITY',
+  title:'2,400 moddables<br>and counting.',
+  lede:'The Discord, the mod jams, the never-ending argument about whether Catan needs the Seafarers expansion.',
+  withHorizon:true,
+}));
+
+// Stats
+const STATS = [['2,400+','Discord members'],['12','published mods'],['3','mod jams run'],['6','team humans']];
+const sg = document.getElementById('stats-grid');
+STATS.forEach(([n,l]) => {
+  const c = el('div',{style:{background:'#fff',border:'1px solid #e6e3d8',borderRadius:'16px',padding:'24px',textAlign:'center'}});
+  c.appendChild(el('div',{style:{fontFamily:'var(--mg-font-display)',fontWeight:600,fontSize:'56px',lineHeight:'1',color:'#14161c',letterSpacing:'-1px'}},n));
+  c.appendChild(el('div',{style:{fontFamily:'var(--mg-font-mono)',fontSize:'12px',color:'#7a8290',textTransform:'uppercase',letterSpacing:'0.8px',marginTop:'8px'}},l));
+  sg.appendChild(c);
+});
+
+// Channels
+const CHANNELS = [
+  { name:'general',       desc:'The main table. Everything welcome.', members:342, accent:'#3a9928' },
+  { name:'mod-pitches',   desc:'Share a mod idea. Get feedback.',       members:88,  accent:'#0c4f8d' },
+  { name:'rules-debates', desc:'Rules arguments. Refereed by Tess.',    members:57,  accent:'#d11a1a' },
+  { name:'playtesting',   desc:'Looking for testers, finding testers.', members:44,  accent:'#e89a1a' },
+  { name:'nuke-catan',    desc:"It's its own channel. It needs it.",    members:210, accent:'#d11a1a' },
+];
+const cl = document.getElementById('channels-list');
+CHANNELS.forEach(ch => {
+  const a = el('a',{href:'#',style:{display:'grid',gridTemplateColumns:'auto 1fr auto',gap:'16px',alignItems:'center',padding:'18px 20px',background:'#fff',border:'1px solid #e6e3d8',borderRadius:'12px',textDecoration:'none',color:'inherit',transition:'border-color 150ms'}});
+  a.addEventListener('mouseenter',()=>a.style.borderColor='#14161c');
+  a.addEventListener('mouseleave',()=>a.style.borderColor='#e6e3d8');
+  a.appendChild(el('div',{style:{width:'8px',height:'32px',background:ch.accent,borderRadius:'4px'}}));
+  const txt = el('div');
+  txt.appendChild(el('div',{style:{fontFamily:'var(--mg-font-mono)',fontWeight:600,fontSize:'15px',color:'#14161c'}},`#${ch.name}`));
+  txt.appendChild(el('div',{style:{fontFamily:'var(--mg-font-body)',fontSize:'13px',color:'#4f5764',marginTop:'2px'}},ch.desc));
+  a.appendChild(txt);
+  a.appendChild(el('div',{style:{fontFamily:'var(--mg-font-mono)',fontSize:'12px',color:'#7a8290',textAlign:'right'}},`${ch.members} online`));
+  cl.appendChild(a);
+});
+
+// Jams
+const JAMS = [
+  { n:'#1', title:'Carcassonne',  date:'Oct 2025', entries:8,  winner:'Infinite Meeple (by @hexbear)', color:'#3a9928' },
+  { n:'#2', title:'Risk',         date:'Jan 2026',  entries:22, winner:'Geo-political Risk (by @tessellate)', color:'#0c4f8d' },
+  { n:'#3', title:'Catan',        date:'Apr 2026',  entries:12, winner:'Nuke Catan v0.9 (by @ascelot)', color:'#d11a1a' },
+];
+const jg = document.getElementById('jams-grid');
+JAMS.forEach(j => {
+  const c = el('div',{style:{background:'#fff',border:'1px solid #e6e3d8',borderRadius:'16px',padding:'24px',display:'flex',flexDirection:'column',gap:'12px'}});
+  c.appendChild(el('div',{style:{fontFamily:'var(--mg-font-pixel)',fontSize:'9px',color:j.color,letterSpacing:'1.5px'}},`▲ JAM ${j.n}`));
+  c.appendChild(el('h3',{style:{fontFamily:'var(--mg-font-display)',fontWeight:600,fontSize:'24px',lineHeight:'1.2',letterSpacing:'-0.25px',color:'#14161c',margin:0}},j.title));
+  const meta = el('div',{style:{fontFamily:'var(--mg-font-mono)',fontSize:'12px',color:'#7a8290'}});
+  meta.textContent = `${j.date} · ${j.entries} entries`;
+  c.appendChild(meta);
+  const winner = el('div',{style:{background:'#f5f4ef',borderRadius:'10px',padding:'12px',fontFamily:'var(--mg-font-body)',fontSize:'13px',color:'#1f2228',lineHeight:'1.45'}});
+  winner.innerHTML = `<span style="font-weight:600;color:${j.color}">Winner:</span> ${j.winner}`;
+  c.appendChild(winner);
+  jg.appendChild(c);
+});
+
+// CTA buttons
+const cb = document.getElementById('cta-btns');
+cb.appendChild(linkBtn('Open the Discord','#','primary'));
+cb.appendChild(linkBtn('Submit a mod','submit.html','outline-dark'));
+    },
+  },
+};
+</script>
+<script>
+(function() {
+  let history2 = ['index'];
+  const barPages  = document.getElementById('preview-bar-pages');
+  const backBtn   = document.getElementById('preview-bar-back');
+  const frame     = document.getElementById('preview-frame');
+  const navRoot   = document.getElementById('nav-root');
+  const pageRoot  = document.getElementById('page-root');
+  const footerRoot = document.getElementById('footer-root');
+
+  document.getElementById('brand-cube').appendChild(MG.cubeSVG(20));
+
+  let prevNav = null;
+  PAGE_ORDER.forEach(pid => {
+    const p = PAGES[pid];
+    const b = document.createElement('button');
+    b.className = 'pbtn';
+    if (prevNav && p.nav !== prevNav) b.style.marginLeft = '8px';
+    b.setAttribute('data-pid', pid);
+    b.textContent = p.label;
+    b.addEventListener('click', () => navigateTo(pid));
+    barPages.appendChild(b);
+    prevNav = p.nav;
+  });
+
+  backBtn.addEventListener('click', () => {
+    if (history2.length > 1) { history2.pop(); navigateTo(history2[history2.length - 1], true); }
+  });
+
+  function interceptLinks(root) {
+    root.querySelectorAll('a[href]').forEach(a => {
+      const href = a.getAttribute('href');
+      if (!href || href.startsWith('http') || href.startsWith('#') || href.startsWith('mailto')) return;
+      const pid = href.replace('.html', '').replace(/^\.\//, '');
+      if (PAGES[pid]) a.addEventListener('click', e => { e.preventDefault(); navigateTo(pid); });
+    });
+  }
+
+  function navigateTo(pid, isBack) {
+    if (!PAGES[pid]) return;
+    if (!isBack) history2.push(pid);
+    const p = PAGES[pid];
+
+    let styleEl = document.getElementById('page-style');
+    if (!styleEl) { styleEl = document.createElement('style'); styleEl.id = 'page-style'; document.head.appendChild(styleEl); }
+    styleEl.textContent = p.style || '';
+
+    navRoot.innerHTML = '';
+    navRoot.appendChild(MG.navbar(p.nav));
+
+    pageRoot.innerHTML = p.html;
+
+    footerRoot.innerHTML = '';
+    footerRoot.appendChild(MG.footer());
+
+    interceptLinks(navRoot);
+    interceptLinks(pageRoot);
+    interceptLinks(footerRoot);
+
+    try {
+      p.init(pageRoot);
+      setTimeout(() => {
+        interceptLinks(navRoot);
+        interceptLinks(pageRoot);
+        interceptLinks(footerRoot);
+      }, 60);
+    } catch (e) {
+      console.error('Page init error for', pid, ':', e);
+    }
+
+    document.querySelectorAll('.pbtn').forEach(b =>
+      b.classList.toggle('active', b.getAttribute('data-pid') === pid)
+    );
+    backBtn.style.display = history2.length > 1 ? 'block' : 'none';
+    frame.scrollTop = 0;
+  }
+
+  navigateTo('index');
+})();
+</script>
+</body>
+</html>

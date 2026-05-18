@@ -1,0 +1,168 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>News — Moddable.Games</title>
+<link rel="stylesheet" href="_mg.css">
+<style>body{background:#f5f4ef}</style>
+</head>
+<body>
+<div id="nav-root"></div>
+
+<div id="page-hero"></div>
+
+<!-- Main content -->
+<section style="background:#f5f4ef;padding:56px 32px 96px">
+  <div style="max-width:1200px;margin:0 auto;display:grid;grid-template-columns:1fr 280px;gap:56px;align-items:start" id="news-layout">
+    <div>
+      <!-- Featured post -->
+      <div id="featured-post" style="margin-bottom:48px"></div>
+      <!-- Search input (mobile) -->
+      <div style="position:relative;margin-bottom:24px;display:none" id="mobile-search">
+        <input type="search" placeholder="Search the archive…" id="mobile-search-input" style="width:100%;height:44px;padding:0 16px 0 44px;border:1px solid #e6e3d8;border-radius:12px;font-family:var(--mg-font-body);font-size:14px;background:#fff;outline:none">
+        <span style="position:absolute;left:16px;top:50%;transform:translateY(-50%);opacity:0.4;font-size:16px;pointer-events:none">⌕</span>
+      </div>
+      <!-- Category filters -->
+      <div id="cat-filters" style="display:flex;gap:8px;flex-wrap:wrap;margin-bottom:28px"></div>
+      <!-- Post grid -->
+      <div id="posts-grid" style="display:grid;grid-template-columns:repeat(auto-fit,minmax(260px,1fr));gap:20px"></div>
+    </div>
+    <!-- Sidebar -->
+    <aside style="position:sticky;top:88px;display:flex;flex-direction:column;gap:32px" id="sidebar"></aside>
+  </div>
+</section>
+
+<div id="footer-root"></div>
+<script src="_mg.js"></script>
+<script>
+const { T, el, linkBtn, navbar, footer, pageHero } = MG;
+document.getElementById('nav-root').appendChild(navbar('News'));
+document.getElementById('footer-root').appendChild(footer());
+document.getElementById('page-hero').appendChild(pageHero({
+  eyebrow: '▲ NEWS & UPDATES',
+  title: 'News &amp; updates.',
+  lede: 'Strictly written by humans.',
+}));
+
+const POSTS = [
+  { slug:'nuking-catan',    cat:'Catan',       date:'Sep 12, 2025', cover:'#d11a1a', title:'Nuking Catan',                      excerpt:'A meditation on the gateway game, 45 million boxes deep — and what we did to it.' },
+  { slug:'mongo-playtest',  cat:'Devlog',      date:'May 12, 2026', cover:'#3a9928', title:'Mongo enters open playtest',         excerpt:'Our second original game opens its playtest doors. 200 spots, first come first served.' },
+  { slug:'econopoly-v14',   cat:'Mod update',  date:'May 9, 2026',  cover:'#0c4f8d', title:'Econopoly v1.4: the audit patch',    excerpt:'Cash-pile tax cap raised. Bankruptcy chain reactions buffed. Longer games, better games.' },
+  { slug:'mod-jam-3',       cat:'Community',   date:'May 2, 2026',  cover:'#1a3680', title:'Mod jam #3 wraps up',                excerpt:'Twelve submissions. One won a literal trophy made of meeples. Results inside.' },
+  { slug:'hyper-v2',        cat:'Mod update',  date:'Apr 18, 2026', cover:'#5d2a8a', title:'Hyper Imperium v2.0.1 released',    excerpt:'Faction balance pass. Hyper Agenda timing fix. Updated print sheets included.' },
+  { slug:'endless-skies',   cat:'Devlog',      date:'Mar 5, 2026',  cover:'#3a7be8', title:'Endless Skies is out in the world', excerpt:'Fourteen months of playtesting. 61 hex tiles. One final answer to "how do we make a game that wants to be modded?"' },
+  { slug:'talisman-hexed',  cat:'Mod update',  date:'Apr 2024',     cover:'#0c4f8d', title:'Talisman: Hexed — river rules update', excerpt:'The river crossing rules got a full rewrite. Boats are now a proper sub-system.' },
+  { slug:'jam-2',           cat:'Community',   date:'Jan 2026',     cover:'#e89a1a', title:'Mod jam #2: Risk edition',           excerpt:'22 entries, five finalists, one very long night of voting. Risk will never be the same.' },
+];
+
+const CATS = ['All',...new Set(POSTS.map(p=>p.cat))];
+let activeCat = 'All', searchVal = '';
+
+function postCover(color, big=false) {
+  const sz = big ? 56 : 28;
+  const d = el('div',{style:{width:'100%',aspectRatio: big?'1.7':'1.65',background:`linear-gradient(135deg,#0a0d2a 0%,${color} 100%)`,borderRadius:'12px',overflow:'hidden',position:'relative'}});
+  d.appendChild(el('div',{style:{position:'absolute',inset:0,backgroundImage:`url("data:image/svg+xml;utf8,<svg xmlns='http://www.w3.org/2000/svg' width='${sz}' height='${sz*8/7}' viewBox='0 0 56 64'><path d='M28 1 54 16v32L28 63 2 48V16z' fill='none' stroke='%23fff' stroke-opacity='0.2' stroke-width='1'/></svg>")`,backgroundSize:`${sz}px ${sz*8/7}px`}}));
+  return d;
+}
+
+// Featured post
+const fp = document.getElementById('featured-post');
+const feat = POSTS[0];
+const fa = el('a',{href:'news-post.html',style:{display:'grid',gridTemplateColumns:'1.1fr 1fr',gap:'40px',alignItems:'center',background:'#fff',border:'1px solid #e6e3d8',borderRadius:'20px',padding:'32px',textDecoration:'none',color:'inherit',transition:'border-color 180ms'}});
+fa.addEventListener('mouseenter',()=>fa.style.borderColor='#14161c');
+fa.addEventListener('mouseleave',()=>fa.style.borderColor='#e6e3d8');
+fa.appendChild(postCover(feat.cover, true));
+const fd = el('div');
+const fm = el('div',{style:{display:'flex',gap:'10px',alignItems:'center',marginBottom:'14px',flexWrap:'wrap'}});
+fm.appendChild(el('span',{style:{fontFamily:'var(--mg-font-body)',fontWeight:600,fontSize:'11px',background:'#14161c',color:'#fff',padding:'4px 10px',borderRadius:'9999px'}}, 'FEATURED'));
+fm.appendChild(el('span',{style:{fontFamily:'var(--mg-font-mono)',fontSize:'12px',color:'#7a8290'}},`${feat.cat} · ${feat.date}`));
+fd.appendChild(fm);
+fd.appendChild(el('h2',{style:{fontFamily:'var(--mg-font-display)',fontWeight:600,fontSize:'40px',lineHeight:'1.1',letterSpacing:'-0.5px',color:'#14161c',margin:'0 0 14px'}},feat.title));
+fd.appendChild(el('p',{style:{fontFamily:'var(--mg-font-body)',fontSize:'16px',lineHeight:'1.55',color:'#3a3d44',margin:'0 0 18px'}},feat.excerpt));
+fd.appendChild(el('span',{style:{fontFamily:'var(--mg-font-body)',fontWeight:600,fontSize:'14px',color:'#0c4f8d'}},'Read the article →'));
+fa.appendChild(fd); fp.appendChild(fa);
+
+// Category filters
+function renderFilters() {
+  const el2 = document.getElementById('cat-filters');
+  el2.innerHTML = '';
+  CATS.forEach(c => {
+    const isA = c === activeCat;
+    const b = document.createElement('button');
+    b.textContent = c;
+    Object.assign(b.style,{fontFamily:'var(--mg-font-body)',fontWeight:600,fontSize:'13px',height:'34px',padding:'0 14px',borderRadius:'9999px',border:isA?'none':'1px solid #c3c5cc',background:isA?'#000':'transparent',color:isA?'#fff':'#14161c',cursor:'pointer',transition:'all 150ms'});
+    b.addEventListener('click',()=>{activeCat=c;renderFilters();renderPosts();});
+    el2.appendChild(b);
+  });
+}
+
+function renderPosts() {
+  const q = searchVal.toLowerCase();
+  const visible = POSTS.slice(1).filter(p =>
+    (activeCat === 'All' || p.cat === activeCat) &&
+    (!q || p.title.toLowerCase().includes(q))
+  );
+  const grid = document.getElementById('posts-grid');
+  grid.innerHTML = '';
+  visible.forEach(p => {
+    const a = el('a',{href:'news-post.html',style:{display:'flex',flexDirection:'column',gap:'16px',padding:'20px',background:'#fff',border:'1px solid #e6e3d8',borderRadius:'16px',textDecoration:'none',color:'inherit',transition:'border-color 180ms'}});
+    a.addEventListener('mouseenter',()=>a.style.borderColor='#14161c');
+    a.addEventListener('mouseleave',()=>a.style.borderColor='#e6e3d8');
+    a.appendChild(postCover(p.cover));
+    const meta = el('div',{style:{display:'flex',gap:'8px',alignItems:'center',flexWrap:'wrap'}});
+    meta.appendChild(el('span',{style:{fontFamily:'var(--mg-font-mono)',fontSize:'11px',color:'#7a8290',letterSpacing:'0.3px'}},p.cat.toUpperCase()));
+    meta.appendChild(el('span',{style:{width:'3px',height:'3px',background:'#c3c5cc',borderRadius:'50%'}}));
+    meta.appendChild(el('span',{style:{fontFamily:'var(--mg-font-mono)',fontSize:'11px',color:'#7a8290'}},p.date));
+    a.appendChild(meta);
+    a.appendChild(el('h3',{style:{fontFamily:'var(--mg-font-display)',fontWeight:600,fontSize:'22px',lineHeight:'1.2',letterSpacing:'-0.25px',color:'#14161c',margin:0}},p.title));
+    a.appendChild(el('p',{style:{fontFamily:'var(--mg-font-body)',fontSize:'14px',lineHeight:'1.55',color:'#4f5764',margin:0}},p.excerpt));
+    grid.appendChild(a);
+  });
+}
+
+renderFilters(); renderPosts();
+
+// Sidebar
+const sidebar = document.getElementById('sidebar');
+// Search
+const searchWrap = el('div');
+searchWrap.appendChild(el('div',{style:{fontFamily:'var(--mg-font-pixel)',fontSize:'9px',color:'#0c4f8d',letterSpacing:'1.5px',marginBottom:'12px'}},'▲ SEARCH'));
+const si = el('div',{style:{position:'relative'}});
+const inp = el('input',{type:'search',placeholder:'Search the archive…',style:{width:'100%',height:'48px',padding:'0 16px 0 44px',border:'1px solid #e6e3d8',borderRadius:'12px',fontFamily:'var(--mg-font-body)',fontSize:'14px',background:'#fff',outline:'none'}});
+inp.addEventListener('input',e=>{searchVal=e.target.value;renderPosts();});
+si.appendChild(el('span',{style:{position:'absolute',left:'16px',top:'50%',transform:'translateY(-50%)',opacity:'0.4',fontSize:'16px',pointerEvents:'none'}},'⌕'));
+si.appendChild(inp); searchWrap.appendChild(si); sidebar.appendChild(searchWrap);
+
+// Hot topics
+const TOPICS = [['Catan',23],['TI4',18],['Devlog',12],['Community',9],['Monopoly',7],['Chess',4]];
+const ht = el('div');
+ht.appendChild(el('div',{style:{fontFamily:'var(--mg-font-pixel)',fontSize:'9px',color:'#0c4f8d',letterSpacing:'1.5px',marginBottom:'14px'}},'▲ HOT TOPICS'));
+const tul = el('ul',{style:{listStyle:'none',padding:0,margin:0,display:'flex',flexDirection:'column',gap:'6px'}});
+TOPICS.forEach(([t,n]) => {
+  const li = el('li');
+  const a = el('a',{href:'#',style:{display:'flex',justifyContent:'space-between',alignItems:'center',padding:'8px 12px',background:'#fff',border:'1px solid #e6e3d8',borderRadius:'8px',textDecoration:'none',color:'inherit',transition:'border-color 150ms'}});
+  a.addEventListener('mouseenter',()=>a.style.borderColor='#14161c');
+  a.addEventListener('mouseleave',()=>a.style.borderColor='#e6e3d8');
+  a.appendChild(el('span',{style:{fontFamily:'var(--mg-font-body)',fontSize:'14px',color:'#14161c'}},t));
+  a.appendChild(el('span',{style:{fontFamily:'var(--mg-font-mono)',fontSize:'12px',color:'#7a8290'}},String(n)));
+  li.appendChild(a); tul.appendChild(li);
+});
+ht.appendChild(tul); sidebar.appendChild(ht);
+
+// Archive
+const ARCHIVE = [['May 2026',3],['April 2026',2],['March 2026',2],['January 2026',1]];
+const arc = el('div');
+arc.appendChild(el('div',{style:{fontFamily:'var(--mg-font-pixel)',fontSize:'9px',color:'#0c4f8d',letterSpacing:'1.5px',marginBottom:'14px'}},'▲ ARCHIVE'));
+const aul = el('ul',{style:{listStyle:'none',padding:0,margin:0,display:'flex',flexDirection:'column',gap:'6px'}});
+ARCHIVE.forEach(([m,n]) => {
+  const li = el('li');
+  const a = el('a',{href:'#',style:{display:'flex',justifyContent:'space-between',fontFamily:'var(--mg-font-body)',fontSize:'14px',color:'#14161c',textDecoration:'none',padding:'6px 0',borderBottom:'1px solid #e6e3d8'}});
+  a.appendChild(document.createTextNode(m));
+  a.appendChild(el('span',{style:{fontFamily:'var(--mg-font-mono)',fontSize:'12px',color:'#7a8290'}},String(n)));
+  li.appendChild(a); aul.appendChild(li);
+});
+arc.appendChild(aul); sidebar.appendChild(arc);
+</script>
+</body>
+</html>

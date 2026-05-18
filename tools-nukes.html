@@ -1,0 +1,205 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Nukes tools — Moddable.Games</title>
+<link rel="stylesheet" href="_mg.css">
+<style>
+body { background:#f5f4ef; }
+#hex-map { background:#0a0d2a; border-radius:14px; padding:24px; position:relative; overflow:hidden; margin-bottom:14px; cursor:pointer; }
+#hex-map-inner { position:absolute; inset:0; background:radial-gradient(circle at 50% 50%,rgba(209,26,26,0.18) 0%,transparent 70%); pointer-events:none; }
+</style>
+</head>
+<body>
+<div id="nav-root"></div>
+
+<section style="background:#000;color:#fff;padding:56px 32px 72px;position:relative;overflow:hidden">
+  <div style="position:absolute;left:50%;top:60%;transform:translateX(-50%);width:800px;height:300px;background:radial-gradient(ellipse,rgba(209,26,26,0.25) 0%,transparent 65%);pointer-events:none;filter:blur(20px)"></div>
+  <div style="max-width:1200px;margin:0 auto;position:relative">
+    <a href="tools.html" style="font-family:var(--mg-font-mono);font-size:12px;color:rgba(255,255,255,0.65);text-decoration:none">← All tools</a>
+    <div style="font-family:var(--mg-font-pixel);font-size:10px;color:#e63232;letter-spacing:1.5px;margin:20px 0 16px">▲ NUKE CATAN</div>
+    <h1 style="font-family:var(--mg-font-display);font-weight:600;font-size:clamp(44px,5.5vw,80px);line-height:1.0;letter-spacing:-0.025em;margin:0 0 18px">Nukes tools.</h1>
+    <p style="font-family:var(--mg-font-body);font-size:17px;line-height:1.55;color:rgba(255,255,255,0.75);max-width:560px;margin:0">Target picker and fallout tracker for <em>Nuke Catan</em>. Plan your strike. Live with the consequences.</p>
+  </div>
+</section>
+
+<section style="background:#f5f4ef;padding:48px 32px 96px">
+  <div style="max-width:900px;margin:0 auto;display:flex;flex-direction:column;gap:24px">
+
+    <!-- Target Picker -->
+    <div style="background:#fff;border:1px solid #e6e3d8;border-radius:20px;padding:32px">
+      <div style="display:flex;align-items:flex-start;gap:16px;margin-bottom:22px;padding-bottom:22px;border-bottom:1px solid #e6e3d8">
+        <div style="width:6px;height:48px;background:#d11a1a;border-radius:3px;flex:none"></div>
+        <div>
+          <div style="font-family:var(--mg-font-pixel);font-size:9px;color:#d11a1a;letter-spacing:1.5px;margin-bottom:6px">▲ NUKES</div>
+          <h3 style="font-family:var(--mg-font-display);font-weight:600;font-size:24px;color:#14161c;margin:0;letter-spacing:-0.3px">Target picker</h3>
+          <p style="font-family:var(--mg-font-body);font-size:14px;color:#4f5764;margin:4px 0 0">Click a hex to launch. Adjacent hexes pick up fallout markers automatically.</p>
+        </div>
+      </div>
+      <div id="hex-map"><div id="hex-map-inner"></div><svg id="hex-svg" width="100%" viewBox="0 0 370 200"></svg></div>
+      <div style="display:flex;justify-content:space-between;align-items:center;flex-wrap:wrap;gap:8px">
+        <div id="strike-count" style="font-family:var(--mg-font-mono);font-size:13px;color:#4f5764">Strikes: <strong style="color:#d11a1a">0</strong> · Fallout hexes: <strong>0</strong></div>
+        <div id="clear-btn"></div>
+      </div>
+    </div>
+
+    <!-- Fallout Tracker -->
+    <div style="background:#fff;border:1px solid #e6e3d8;border-radius:20px;padding:32px">
+      <div style="display:flex;align-items:flex-start;gap:16px;margin-bottom:22px;padding-bottom:22px;border-bottom:1px solid #e6e3d8">
+        <div style="width:6px;height:48px;background:#e89a1a;border-radius:3px;flex:none"></div>
+        <div>
+          <div style="font-family:var(--mg-font-pixel);font-size:9px;color:#e89a1a;letter-spacing:1.5px;margin-bottom:6px">▲ FALLOUT</div>
+          <h3 style="font-family:var(--mg-font-display);font-weight:600;font-size:24px;color:#14161c;margin:0;letter-spacing:-0.3px">Fallout tracker</h3>
+          <p style="font-family:var(--mg-font-body);font-size:14px;color:#4f5764;margin:4px 0 0">Track contaminated zones and count down their recovery.</p>
+        </div>
+      </div>
+      <div id="fallout-list" style="display:flex;flex-direction:column;gap:10px;margin-bottom:16px"></div>
+      <div id="fallout-btns" style="display:flex;gap:10px;flex-wrap:wrap"></div>
+    </div>
+
+    <!-- Resource Economy -->
+    <div style="background:#fff;border:1px solid #e6e3d8;border-radius:20px;padding:32px">
+      <div style="display:flex;align-items:flex-start;gap:16px;margin-bottom:22px;padding-bottom:22px;border-bottom:1px solid #e6e3d8">
+        <div style="width:6px;height:48px;background:#0c4f8d;border-radius:3px;flex:none"></div>
+        <div>
+          <div style="font-family:var(--mg-font-pixel);font-size:9px;color:#0c4f8d;letter-spacing:1.5px;margin-bottom:6px">▲ NUKE CATAN ECONOMY</div>
+          <h3 style="font-family:var(--mg-font-display);font-weight:600;font-size:24px;color:#14161c;margin:0;letter-spacing:-0.3px">Resource converter</h3>
+          <p style="font-family:var(--mg-font-body);font-size:14px;color:#4f5764;margin:4px 0 0">The Nuke Catan resource rename cheatsheet. Keep it open at the table.</p>
+        </div>
+      </div>
+      <div id="resource-table" style="display:grid;grid-template-columns:1fr 1fr 1fr;gap:1px;background:#e6e3d8;border-radius:10px;overflow:hidden"></div>
+    </div>
+
+  </div>
+</section>
+
+<div id="footer-root"></div>
+<script src="_mg.js"></script>
+<script>
+const { T, el, btn, navbar, footer } = MG;
+document.getElementById('nav-root').appendChild(navbar('Tools'));
+document.getElementById('footer-root').appendChild(footer());
+
+/* ── HEX TARGET PICKER ── */
+const COLS = 9, ROWS = 5;
+const hexes = [];
+for (let r=0; r<ROWS; r++) {
+  for (let c=0; c<COLS; c++) {
+    hexes.push({ r, c, x: c*36 + (r%2)*18 + 25, y: r*31 + 22, id:`${r}-${c}` });
+  }
+}
+const strikes = new Set();
+
+function isFallout(h) {
+  return [...strikes].some(id => {
+    const [sr,sc] = id.split('-').map(Number);
+    return (Math.abs(sr-h.r)+Math.abs(sc-h.c))===1;
+  });
+}
+
+function renderHexMap() {
+  const svg = document.getElementById('hex-svg');
+  svg.innerHTML = '';
+  const ns = 'http://www.w3.org/2000/svg';
+  hexes.forEach(h => {
+    const struck = strikes.has(h.id);
+    const fall = !struck && isFallout(h);
+    const g = document.createElementNS(ns,'g');
+    g.style.cursor = 'pointer';
+    const poly = document.createElementNS(ns,'polygon');
+    poly.setAttribute('transform',`translate(${h.x},${h.y})`);
+    poly.setAttribute('points','0,-16 14,-8 14,8 0,16 -14,8 -14,-8');
+    poly.setAttribute('fill', struck?'#d11a1a': fall?'#7a3a18':'rgba(255,255,255,0.06)');
+    poly.setAttribute('stroke', struck?'#e63232':'rgba(255,255,255,0.25)');
+    poly.setAttribute('stroke-width', struck?'2':'1');
+    g.appendChild(poly);
+    if (struck) {
+      const t = document.createElementNS(ns,'text');
+      t.setAttribute('x',h.x); t.setAttribute('y',h.y+5);
+      t.setAttribute('font-size','14'); t.setAttribute('fill','#fff');
+      t.setAttribute('text-anchor','middle'); t.setAttribute('pointer-events','none');
+      t.textContent='☢'; g.appendChild(t);
+    }
+    if (fall) {
+      const c2 = document.createElementNS(ns,'circle');
+      c2.setAttribute('cx',h.x); c2.setAttribute('cy',h.y);
+      c2.setAttribute('r','4'); c2.setAttribute('fill','#e89a1a');
+      c2.setAttribute('pointer-events','none'); g.appendChild(c2);
+    }
+    g.addEventListener('click',()=>{
+      if (!strikes.has(h.id)) { strikes.add(h.id); renderHexMap(); updateCount(); }
+    });
+    svg.appendChild(g);
+  });
+}
+
+function updateCount() {
+  const fallCount = hexes.filter(h => !strikes.has(h.id) && isFallout(h)).length;
+  document.getElementById('strike-count').innerHTML = `Strikes: <strong style="color:#d11a1a">${strikes.size}</strong> · Fallout hexes: <strong>${fallCount}</strong>`;
+}
+
+document.getElementById('clear-btn').appendChild(btn('Clear board','outline-light',()=>{ strikes.clear(); renderHexMap(); updateCount(); },{color:'#14161c'}));
+renderHexMap();
+
+/* ── FALLOUT TRACKER ── */
+let zones = [
+  { name:'Sector 4-Charlie', turns:3, severity:3 },
+  { name:'Sector 7-Foxtrot', turns:2, severity:2 },
+  { name:'Ore Mountains', turns:1, severity:1 },
+];
+const SEV_COLORS = ['#3a9928','#e89a1a','#d11a1a'];
+const SEV_LABELS = ['Light','Moderate','Heavy'];
+
+function renderFallout() {
+  const list = document.getElementById('fallout-list');
+  list.innerHTML = '';
+  zones.forEach((z,i) => {
+    const row = el('div',{style:{display:'grid',gridTemplateColumns:'1fr auto auto',gap:'12px',alignItems:'center',padding:'14px 16px',background:'#f5f4ef',borderRadius:'10px',borderLeft:`4px solid ${SEV_COLORS[z.severity-1]}`}});
+    const info = el('div');
+    info.appendChild(el('div',{style:{fontFamily:'var(--mg-font-body)',fontWeight:600,fontSize:'15px',color:'#14161c'}},z.name));
+    info.appendChild(el('div',{style:{fontFamily:'var(--mg-font-mono)',fontSize:'11px',color:'#7a8290',marginTop:'2px'}},`${SEV_LABELS[z.severity-1]} fallout · ${z.turns} turn${z.turns===1?'':'s'} remaining`));
+    row.appendChild(info);
+    const advBtn = document.createElement('button');
+    advBtn.textContent='Next turn'; Object.assign(advBtn.style,{fontFamily:'var(--mg-font-body)',fontWeight:600,fontSize:'13px',padding:'6px 14px',borderRadius:'9999px',border:'none',background:'#14161c',color:'#fff',cursor:'pointer'});
+    advBtn.addEventListener('click',()=>{ zones[i].turns=Math.max(0,zones[i].turns-1); if(zones[i].turns===0) zones.splice(i,1); renderFallout(); });
+    const rmBtn = document.createElement('button');
+    rmBtn.textContent='✕'; Object.assign(rmBtn.style,{width:'30px',height:'30px',borderRadius:'9999px',border:'1px solid #e6e3d8',background:'#fff',cursor:'pointer',fontSize:'14px',color:'#7a8290'});
+    rmBtn.addEventListener('click',()=>{ zones.splice(i,1); renderFallout(); });
+    row.appendChild(advBtn); row.appendChild(rmBtn); list.appendChild(row);
+  });
+  if (zones.length===0) {
+    list.appendChild(el('div',{style:{padding:'24px',textAlign:'center',fontFamily:'var(--mg-font-mono)',fontSize:'13px',color:'#7a8290'}},'No active fallout zones.'));
+  }
+}
+
+const fb = document.getElementById('fallout-btns');
+fb.appendChild(btn('Add zone','dark',()=>{
+  const name = prompt('Zone name:','Sector '+(zones.length+1));
+  if (name) { zones.push({name,turns:3,severity:2}); renderFallout(); }
+}));
+fb.appendChild(btn('Advance all turns','outline-light',()=>{
+  zones = zones.map(z=>({...z,turns:z.turns-1})).filter(z=>z.turns>0); renderFallout();
+},{color:'#14161c'}));
+renderFallout();
+
+/* ── RESOURCE TABLE ── */
+const RESOURCES = [
+  ['Original','Nuke Catan','Notes'],
+  ['Sheep','Scrap','Extinct post-event'],
+  ['Wheat','Rations','Rationed per turn'],
+  ['Wool','Salvage','Pulled from ruins'],
+  ['Ore','Ore','Unchanged — still mined'],
+  ['Brick','Currency','Now literal currency'],
+  ['Wood','Timber','Pre-war stockpile only'],
+];
+const rt = document.getElementById('resource-table');
+RESOURCES.forEach((row,ri) => {
+  row.forEach((cell,ci) => {
+    const d = el('div',{style:{fontFamily: ri===0?'var(--mg-font-mono)':'var(--mg-font-body)',fontWeight: ri===0||ci===1?600:400,fontSize: ri===0?'11px':'14px',color: ri===0?'#7a8290': ci===1?'#d11a1a':'#14161c',padding:'10px 14px',background:'#fff',textTransform: ri===0?'uppercase':'none',letterSpacing: ri===0?'0.5px':'0'}},cell);
+    rt.appendChild(d);
+  });
+});
+</script>
+</body>
+</html>

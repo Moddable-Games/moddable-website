@@ -1,0 +1,210 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Moddable.Games — Creating games you already own</title>
+<link rel="stylesheet" href="_mg.css">
+<style>
+  body { background: #000; color: #fff; }
+  #hero { position:relative; min-height:780px; background:#000; overflow:hidden; isolation:isolate; }
+  #hero-bg { position:absolute; top:0; left:0; right:0; height:130%; background:linear-gradient(180deg,#0a0d2a 0%,#1a3680 45%,#000 100%); will-change:transform; }
+  #hero-bg::after { content:''; position:absolute; inset:0; background:radial-gradient(ellipse 80% 40% at 50% 100%,rgba(58,123,232,0.55) 0%,transparent 70%); }
+  #hero-hex { position:absolute; inset:0; background-image:url("data:image/svg+xml;utf8,<svg xmlns='http://www.w3.org/2000/svg' width='56' height='64' viewBox='0 0 56 64'><path d='M28 1 54 16v32L28 63 2 48V16z' fill='none' stroke='%233a7be8' stroke-opacity='0.18' stroke-width='1'/></svg>"); background-size:56px 64px; animation:hexFloat 30s linear infinite; z-index:1; pointer-events:none; }
+  #hero-glow { position:absolute; bottom:22%; left:0; right:0; height:60px; background:radial-gradient(ellipse 60% 100% at 50% 0%,rgba(58,123,232,0.3) 0%,transparent 100%); z-index:2; pointer-events:none; }
+  #hero-glow::before { content:''; position:absolute; bottom:100%; left:0; right:0; height:1px; background:linear-gradient(90deg,transparent,#3a7be8,rgba(111,181,255,0.8),#3a7be8,transparent); filter:blur(1px); }
+  #hero-top-fade { position:absolute; inset:0; background:linear-gradient(180deg,rgba(8,10,30,0.5) 0%,transparent 40%); z-index:3; pointer-events:none; }
+  #hero-bot-fade { position:absolute; inset:0; background:linear-gradient(180deg,transparent 65%,rgba(0,0,0,0.5) 85%,#000 100%); z-index:3; pointer-events:none; }
+  #hero-content { position:relative; z-index:4; padding:120px 24px 200px; max-width:1200px; margin:0 auto; text-align:center; animation:fadeRise 0.8s cubic-bezier(.2,.8,.2,1) both; }
+</style>
+</head>
+<body>
+<div id="nav-root"></div>
+
+<section id="hero">
+  <div id="hero-bg"></div>
+  <div id="hero-hex"></div>
+  <div id="hero-glow"></div>
+  <div id="hero-top-fade"></div>
+  <div id="hero-bot-fade"></div>
+  <div id="hero-content">
+    <div style="font-family:var(--mg-font-pixel);font-size:9px;color:#6fb5ff;letter-spacing:2.5px;margin-bottom:28px;text-shadow:0 0 14px rgba(111,181,255,0.55)">▲ MODDABLE.GAMES</div>
+    <h1 style="font-family:var(--mg-font-display);font-weight:600;font-size:clamp(52px,8.5vw,120px);line-height:1.0;letter-spacing:-0.025em;color:#fff;margin:0 auto 32px;max-width:1000px;text-shadow:0 4px 40px rgba(0,0,0,0.6)">Creating games<br>you already own.</h1>
+    <p style="font-family:var(--mg-font-body);font-size:18px;line-height:1.65;color:rgba(255,255,255,0.86);max-width:560px;margin:0 auto 40px;text-shadow:0 2px 16px rgba(0,0,0,0.7)">Twelve community-built rulebook mods for the boards collecting dust on your shelf — plus three original games built to be modded from day one.</p>
+    <div style="display:flex;gap:12px;flex-wrap:wrap;justify-content:center" id="hero-btns"></div>
+  </div>
+</section>
+
+<!-- Mod Gallery -->
+<section style="background:#f5f4ef;padding:88px 24px">
+  <div style="max-width:1200px;margin:0 auto">
+    <div style="display:flex;align-items:flex-end;justify-content:space-between;flex-wrap:wrap;gap:24px;margin-bottom:40px">
+      <div>
+        <div style="font-family:var(--mg-font-pixel);font-size:9px;color:#0c4f8d;letter-spacing:1.5px;margin-bottom:14px">▲ THE LIBRARY</div>
+        <h2 style="font-family:var(--mg-font-display);font-weight:600;font-size:clamp(36px,5vw,60px);line-height:1.05;letter-spacing:-0.025em;color:#14161c">Mods for games<br>you already own.</h2>
+      </div>
+      <div id="gallery-filters" style="display:flex;gap:8px;flex-wrap:wrap"></div>
+    </div>
+    <div id="gallery-grid" class="mg-grid-3" style="display:grid;grid-template-columns:repeat(auto-fit,minmax(280px,1fr));gap:20px"></div>
+    <div style="text-align:center;margin-top:48px"><a href="mods.html" style="display:inline-flex;align-items:center;justify-content:center;height:48px;padding:0 22px;border-radius:9999px;border:1px solid #3a3d44;background:transparent;color:#14161c;font-family:var(--mg-font-body);font-weight:600;font-size:15px;text-decoration:none">Browse all 12 mods →</a></div>
+  </div>
+</section>
+
+<!-- Nuke Catan -->
+<section style="background:#000;color:#fff;padding:100px 24px;position:relative;overflow:hidden;text-align:center">
+  <div style="position:absolute;left:50%;top:55%;transform:translateX(-50%);width:1100px;height:420px;background:radial-gradient(ellipse,rgba(209,26,26,0.38) 0%,transparent 65%);pointer-events:none;filter:blur(24px)"></div>
+  <div style="position:relative;max-width:1200px;margin:0 auto">
+    <div style="font-family:var(--mg-font-pixel);font-size:9px;color:#e63232;letter-spacing:2px;margin-bottom:32px;text-shadow:0 0 14px rgba(230,50,50,0.5)">▲ TOTAL CONVERSION · CATAN</div>
+    <div id="nuke-cube" style="margin:0 auto 40px;display:flex;align-items:center;justify-content:center"></div>
+    <h2 style="font-family:var(--mg-font-display);font-weight:600;font-size:clamp(44px,7vw,96px);line-height:0.95;letter-spacing:-0.025em;margin:0 auto 24px;max-width:900px;text-shadow:0 4px 30px rgba(0,0,0,0.6)">Are you ready<br>to <em style="color:#e63232">nuke</em> Catan?</h2>
+    <p style="font-family:var(--mg-font-body);font-size:18px;line-height:1.65;color:rgba(255,255,255,0.82);max-width:540px;margin:0 auto 36px">A family-friendly post-apocalyptic rules overhaul. Same tiles, same dice, brand new economy — and yes, your kids are going to love arguing about who set fire to the road network.</p>
+    <div style="display:flex;gap:12px;justify-content:center;flex-wrap:wrap" id="nuke-btns"></div>
+  </div>
+</section>
+
+<!-- Featured Mod -->
+<section style="background:#000;color:#fff;padding:120px 24px;overflow:hidden;isolation:isolate;position:relative">
+  <div style="position:absolute;right:-120px;top:50%;transform:translateY(-50%);width:600px;height:600px;background:radial-gradient(circle,rgba(58,123,232,0.22) 0%,transparent 60%);pointer-events:none"></div>
+  <div style="max-width:1200px;margin:0 auto;position:relative;display:grid;grid-template-columns:1fr auto;gap:64px;align-items:center" id="featured-inner">
+    <div>
+      <div style="font-family:var(--mg-font-pixel);font-size:9px;color:#6fb5ff;letter-spacing:1.5px;margin-bottom:18px">▲ MOD OF THE MONTH</div>
+      <h2 style="font-family:var(--mg-font-display);font-weight:600;font-size:clamp(36px,5.5vw,72px);line-height:1.05;letter-spacing:-0.025em;margin:0 0 24px">Hyper Imperium</h2>
+      <p style="font-family:var(--mg-font-body);font-size:18px;line-height:1.65;color:rgba(255,255,255,0.78);max-width:560px;margin:0 0 32px">Our homebrew for <em>Twilight Imperium 4e</em> + <em>Prophecy of Kings</em>. Hyper Movement, Hyper Trades, Hyper Objectives, Hyper Factions, Hyper Agendas — a faster ruleset that keeps the politics intact.</p>
+      <div style="display:flex;gap:12px;margin-bottom:36px" id="featured-btns"></div>
+      <div style="display:flex;gap:0;align-items:center;flex-wrap:wrap;padding-top:18px;border-top:1px solid rgba(255,255,255,0.18)" id="featured-stats"></div>
+    </div>
+    <div id="featured-cube" style="filter:drop-shadow(0 8px 50px rgba(58,123,232,0.4))"></div>
+  </div>
+</section>
+
+<!-- News Row -->
+<section style="background:#f5f4ef;padding:88px 24px;border-top:1px solid #e6e3d8">
+  <div style="max-width:1200px;margin:0 auto">
+    <div style="display:flex;justify-content:space-between;align-items:flex-end;flex-wrap:wrap;gap:16px;margin-bottom:32px">
+      <h2 style="font-family:var(--mg-font-display);font-weight:600;font-size:clamp(30px,4vw,48px);line-height:1.1;letter-spacing:-0.4px;color:#14161c">From the table.</h2>
+      <a href="news.html" style="font-family:var(--mg-font-body);font-weight:600;font-size:14px;color:#0c4f8d;text-decoration:none">All posts →</a>
+    </div>
+    <div id="news-grid" class="mg-grid-3" style="display:grid;grid-template-columns:repeat(auto-fit,minmax(280px,1fr));gap:20px"></div>
+  </div>
+</section>
+
+<!-- Community Band -->
+<section style="position:relative;min-height:520px;background:#000;color:#fff;overflow:hidden;isolation:isolate">
+  <div style="position:absolute;inset:0;background:linear-gradient(180deg,rgba(0,0,0,0.7) 0%,#1a3680 50%,#0a0d2a 100%)"></div>
+  <div style="position:absolute;bottom:28%;left:0;right:0;height:1px;background:linear-gradient(90deg,transparent,#3a7be8,rgba(111,181,255,0.8),#3a7be8,transparent);filter:blur(1px)"></div>
+  <div style="position:absolute;inset:0;background-image:url('data:image/svg+xml;utf8,<svg xmlns=\'http://www.w3.org/2000/svg\' width=\'56\' height=\'64\' viewBox=\'0 0 56 64\'><path d=\'M28 1 54 16v32L28 63 2 48V16z\' fill=\'none\' stroke=\'%233a7be8\' stroke-opacity=\'0.18\' stroke-width=\'1\'/></svg>');background-size:56px 64px;opacity:0.5"></div>
+  <div style="position:absolute;inset:0;background:linear-gradient(180deg,#000 0%,transparent 20%,transparent 80%,#000 100%);pointer-events:none"></div>
+  <div style="position:relative;z-index:2;padding:120px 24px;max-width:760px;margin:0 auto;text-align:center">
+    <div style="font-family:var(--mg-font-pixel);font-size:9px;color:#6fb5ff;letter-spacing:1.5px;margin-bottom:22px;text-shadow:0 0 12px rgba(111,181,255,0.5)">▲ JOIN THE TABLE</div>
+    <h2 style="font-family:var(--mg-font-display);font-weight:600;font-size:clamp(36px,5.5vw,72px);line-height:1.05;letter-spacing:-0.025em;margin:0 0 24px;text-shadow:0 4px 24px rgba(0,0,0,0.6)">Mod a game with us.</h2>
+    <p style="font-family:var(--mg-font-body);font-size:18px;line-height:1.65;color:rgba(255,255,255,0.86);margin:0 0 36px;text-shadow:0 2px 14px rgba(0,0,0,0.6)">2,400+ rule-tinkerers, designers and PnP enthusiasts in the Discord. Pitch a mod, test someone else's, or just argue about <em>Catan</em>'s longest road rule.</p>
+    <div style="display:flex;gap:12px;justify-content:center;flex-wrap:wrap" id="community-btns"></div>
+  </div>
+</section>
+
+<div id="footer-root"></div>
+
+<script src="_mg.js"></script>
+<script>
+const { T, el, btn, linkBtn, navbar, footer, modCard, cubeSVG } = MG;
+
+// Nav + Footer
+document.getElementById('nav-root').appendChild(navbar('Mods'));
+document.getElementById('footer-root').appendChild(footer());
+
+// Hero parallax
+const heroBg = document.getElementById('hero-bg');
+window.addEventListener('scroll', () => { heroBg.style.transform = `translateY(${window.scrollY * -0.3}px)`; }, { passive:true });
+
+// Hero buttons
+const hb = document.getElementById('hero-btns');
+hb.appendChild(linkBtn('Browse the mods', 'mods.html', 'primary'));
+hb.appendChild(linkBtn('Read the manifesto', 'about.html', 'outline-dark'));
+
+// Mod gallery
+const MODS = [
+  { category:'Reskin',           baseGame:'Talisman 4e',         title:'Talisman: Hexed',                    body:"Replaces the Talisman boards with 61 hexagonal tiles arranged in concentric rings. Open-world hex system — every game lays out differently.", stats:'2–6 players · 90 min · 13+', href:'mod-detail.html', source:'Moddable.Games' },
+  { category:'Rebalance',        baseGame:'Twilight Imperium 4e',title:'Hyper Imperium',                     body:"Hyper Movement · Hyper Trades · Hyper Objectives · Hyper Factions · Hyper Agendas. A faster ruleset for TI4 that keeps the politics intact.", stats:'3–6 players · 4–6 hr · 14+', source:'Moddable.Games' },
+  { category:'Total conversion', baseGame:'Catan',               title:'Nuke Catan',                         body:"Post-apocalyptic overhaul. Sheep are scarce, brick is currency. Once per game, someone presses The Button — one hex is permanently irradiated.", stats:'3–5 players · 60 min · 12+', source:'Moddable.Games' },
+  { category:'Total conversion', baseGame:'Chess',               title:'Fog of War Chess',                   body:"Players see only squares their pieces can legally move to. No checks, no checkmates — only capture the king. Invented 1989, rules freely available.", stats:'2 players · 20–40 min · 10+', source:'chessvariants.com' },
+  { category:'Rebalance',        baseGame:'Twilight Imperium 4e',title:'Shattered Ascension',                body:"PsiComa's decade-long TI3 community remix — rebalanced factions, overhauled agenda phase, new card sets. Tabletop Simulator module available.", stats:'3–8 players · 6–12 hr · 16+', source:'boardgamegeek.com' },
+  { category:'Rebalance',        baseGame:'Risk',                title:'CivRisk',                            body:"Risk rewritten to play like Civilisation: 20 civilisations, leaders, growth tiers, ancient ruins. Chris Grey, 2023 — rules free to download.", stats:'3–5 players · 180 min · 14+', source:'Chris Grey' },
+];
+
+const filters = ['All','Total conversion','Rebalance','Reskin'];
+let activeFilter = 'All';
+const filtersEl = document.getElementById('gallery-filters');
+const gridEl = document.getElementById('gallery-grid');
+
+function renderFilter() {
+  filtersEl.innerHTML = '';
+  filters.forEach(f => {
+    const isActive = f === activeFilter;
+    const b = el('button', { style:{ fontFamily:'var(--mg-font-body)', fontWeight:600, fontSize:'13px', height:'36px', padding:'0 14px', borderRadius:'9999px', border: isActive?'none':'1px solid #c3c5cc', background: isActive?'#000':'transparent', color: isActive?'#fff':'#14161c', cursor:'pointer', transition:'all 150ms' }}, f);
+    b.addEventListener('click', () => { activeFilter = f; renderFilter(); renderGrid(); });
+    filtersEl.appendChild(b);
+  });
+}
+
+function renderGrid() {
+  gridEl.innerHTML = '';
+  const visible = activeFilter === 'All' ? MODS : MODS.filter(m => m.category === activeFilter);
+  visible.forEach(m => gridEl.appendChild(modCard(m)));
+}
+
+renderFilter(); renderGrid();
+
+// Nuke Catan cube
+const nc = document.getElementById('nuke-cube');
+const bigCube = cubeSVG(240);
+bigCube.style.filter = 'drop-shadow(0 20px 40px rgba(209,26,26,0.5))';
+nc.appendChild(bigCube);
+const nb2 = document.getElementById('nuke-btns');
+nb2.appendChild(linkBtn('Download the rules', '#', 'red'));
+nb2.appendChild(linkBtn('Read the brief', '#', 'outline-dark'));
+
+// Featured mod cube + buttons
+document.getElementById('featured-cube').appendChild(cubeSVG(220));
+const fb = document.getElementById('featured-btns');
+fb.appendChild(linkBtn('Download the rules', '#', 'primary'));
+fb.appendChild(linkBtn('View the components', '#', 'outline-dark'));
+
+// Featured stats
+const stats = [['Players','3–6'],['Time','4–6 hr'],['Age','14+'],['Version','v2.0.1']];
+const sEl = document.getElementById('featured-stats');
+stats.forEach(([k,v], i) => {
+  if (i > 0) sEl.appendChild(el('span', { style:{ width:'1px', height:'24px', background:'rgba(255,255,255,0.18)', margin:'0 20px' }}));
+  const d = el('div', { style:{ display:'flex', flexDirection:'column' }});
+  d.appendChild(el('span', { style:{ fontFamily:'var(--mg-font-body)', fontSize:'10px', textTransform:'uppercase', letterSpacing:'1px', color:'rgba(255,255,255,0.55)' }}, k));
+  d.appendChild(el('span', { style:{ fontFamily:'var(--mg-font-mono)', fontWeight:600, fontSize:'18px', color:'#fff' }}, v));
+  sEl.appendChild(d);
+});
+
+// News grid
+const NEWS = [
+  { tag:'Devlog', date:'May 12', title:'Mongo enters open playtest', body:'Our second original game opens its playtest doors. 200 spots.' },
+  { tag:'Mod update', date:'May 09', title:'Econopoly v1.4: the audit patch', body:'Cash-pile tax cap raised. Bankruptcy chain reactions buffed.' },
+  { tag:'Community', date:'May 02', title:'Mod jam #3 wraps up', body:'Twelve submissions. One won a literal trophy made of meeples.' },
+];
+const ng = document.getElementById('news-grid');
+NEWS.forEach(n => {
+  const a = el('a', { href:'news-post.html', style:{ display:'flex', flexDirection:'column', gap:'14px', padding:'24px', background:'#fff', border:'1px solid #e6e3d8', borderRadius:'20px', textDecoration:'none', color:'inherit', transition:'border-color 180ms' }});
+  a.addEventListener('mouseenter', () => a.style.borderColor = '#14161c');
+  a.addEventListener('mouseleave', () => a.style.borderColor = '#e6e3d8');
+  const row = el('div', { style:{ display:'flex', justifyContent:'space-between', alignItems:'center' }});
+  row.appendChild(el('span', { style:{ fontFamily:'var(--mg-font-body)', fontWeight:600, fontSize:'11px', background:'#14161c', color:'#fff', padding:'3px 10px', borderRadius:'9999px' }}, n.tag));
+  row.appendChild(el('span', { style:{ fontFamily:'var(--mg-font-mono)', fontSize:'12px', color:'#7a8290' }}, n.date));
+  a.appendChild(row);
+  a.appendChild(el('h3', { style:{ fontFamily:'var(--mg-font-display)', fontWeight:600, fontSize:'21px', lineHeight:'1.25', letterSpacing:'-0.25px', color:'#14161c' }}, n.title));
+  a.appendChild(el('p', { style:{ fontFamily:'var(--mg-font-body)', fontSize:'14px', lineHeight:'1.55', color:'#4f5764', margin:0 }}, n.body));
+  a.appendChild(el('span', { style:{ fontFamily:'var(--mg-font-body)', fontWeight:600, fontSize:'13px', color:'#0c4f8d', marginTop:'auto' }}, 'Read more →'));
+  ng.appendChild(a);
+});
+
+// Community band buttons
+const cb = document.getElementById('community-btns');
+cb.appendChild(linkBtn('Open the Discord', 'community.html', 'primary'));
+cb.appendChild(linkBtn('Submit a mod', 'submit.html', 'outline-dark'));
+</script>
+</body>
+</html>

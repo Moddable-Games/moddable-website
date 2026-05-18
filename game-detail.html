@@ -1,0 +1,128 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Endless Skies — Moddable.Games</title>
+<link rel="stylesheet" href="_mg.css">
+<style>body{background:#000}</style>
+</head>
+<body>
+<div id="nav-root"></div>
+
+<!-- Hero -->
+<section style="position:relative;color:#fff;overflow:hidden;isolation:isolate;background:#000;min-height:620px">
+  <div style="position:absolute;inset:0;background:linear-gradient(180deg,#0a0d2a 0%,#1a3680 45%,#000 100%)"></div>
+  <div style="position:absolute;inset:0;background-image:url('data:image/svg+xml;utf8,<svg xmlns=\'http://www.w3.org/2000/svg\' width=\'56\' height=\'64\' viewBox=\'0 0 56 64\'><path d=\'M28 1 54 16v32L28 63 2 48V16z\' fill=\'none\' stroke=\'%233a7be8\' stroke-opacity=\'0.18\' stroke-width=\'1\'/></svg>');background-size:56px 64px;animation:hexFloat 30s linear infinite"></div>
+  <div style="position:absolute;inset:0;background:linear-gradient(180deg,rgba(0,0,0,0.5) 0%,transparent 50%,rgba(0,0,0,0.5) 100%);pointer-events:none"></div>
+  <div style="position:relative;padding:64px 32px 100px;max-width:1200px;margin:0 auto;box-sizing:border-box">
+    <a href="index.html" style="font-family:var(--mg-font-mono);font-size:12px;color:rgba(255,255,255,0.72);text-decoration:none">← All games</a>
+    <div style="display:flex;gap:10px;margin-top:28px;flex-wrap:wrap;align-items:center">
+      <span style="font-family:var(--mg-font-body);font-weight:600;font-size:11px;background:#3a9928;color:#fff;padding:4px 10px;border-radius:9999px">Original</span>
+      <span style="font-family:var(--mg-font-mono);font-size:11px;color:rgba(255,255,255,0.7);padding:4px 10px;border:1px solid rgba(255,255,255,0.2);border-radius:9999px">CC BY-NC-SA · Print-and-play</span>
+      <span style="font-family:var(--mg-font-pixel);font-size:9px;color:#6fb5ff;padding:5px 10px;letter-spacing:1px;text-shadow:0 0 8px rgba(111,181,255,0.5)">v1.3.0</span>
+    </div>
+    <h1 style="font-family:var(--mg-font-display);font-weight:600;font-size:clamp(56px,8vw,124px);line-height:0.95;letter-spacing:-0.03em;margin:24px 0;text-shadow:0 4px 30px rgba(0,0,0,0.6)">Endless<br>Skies.</h1>
+    <p style="font-family:var(--mg-font-body);font-size:19px;line-height:1.55;color:rgba(255,255,255,0.86);max-width:640px;margin:0 0 36px;text-shadow:0 2px 16px rgba(0,0,0,0.7)">A hex-tile exploration game built to be modded. Three biomes, twelve faction decks, one rulebook with version control — so the community can ship expansions without asking permission.</p>
+    <div style="display:flex;gap:12px;flex-wrap:wrap" id="hero-btns"></div>
+  </div>
+</section>
+
+<!-- Stats bar -->
+<section style="background:#000;color:#fff;padding:0 32px 56px">
+  <div style="max-width:1200px;margin:0 auto;display:flex;gap:0;align-items:center;flex-wrap:wrap;padding-top:28px;border-top:1px solid rgba(255,255,255,0.12)" id="stats-bar"></div>
+</section>
+
+<!-- How it plays -->
+<section style="background:#f5f4ef;padding:88px 32px">
+  <div style="max-width:1200px;margin:0 auto">
+    <h2 style="font-family:var(--mg-font-display);font-weight:600;font-size:clamp(36px,4.5vw,56px);line-height:1.05;letter-spacing:-0.025em;color:#14161c;margin:0 0 48px">How it plays.</h2>
+    <div id="steps-grid" class="mg-grid-4" style="display:grid;grid-template-columns:repeat(4,1fr);gap:16px"></div>
+  </div>
+</section>
+
+<!-- Mod hooks -->
+<section style="background:#000;color:#fff;padding:88px 32px;position:relative;overflow:hidden">
+  <div style="position:absolute;left:-100px;top:30%;width:500px;height:500px;background:radial-gradient(circle,rgba(58,123,232,0.18) 0%,transparent 65%);pointer-events:none"></div>
+  <div style="max-width:1200px;margin:0 auto;position:relative">
+    <div style="font-family:var(--mg-font-pixel);font-size:10px;color:#6fb5ff;letter-spacing:1.5px;margin-bottom:18px">▲ MOD HOOKS</div>
+    <h2 style="font-family:var(--mg-font-display);font-weight:600;font-size:clamp(36px,4.5vw,56px);line-height:1.05;letter-spacing:-0.025em;margin:0 0 16px;max-width:800px">The whole rulebook is in a git repo.</h2>
+    <p style="font-family:var(--mg-font-body);font-size:17px;line-height:1.6;color:rgba(255,255,255,0.78);margin:0 0 48px;max-width:700px">Endless Skies ships with four hookable files. Fork the repo, change the file, send us a PR — or run your variant privately and never tell us.</p>
+    <div id="hooks-grid" class="mg-grid-2" style="display:grid;grid-template-columns:repeat(2,1fr);gap:14px"></div>
+  </div>
+</section>
+
+<!-- Community mods -->
+<section style="background:#fff;padding:88px 32px;border-top:1px solid #e6e3d8">
+  <div style="max-width:1200px;margin:0 auto">
+    <div style="display:flex;justify-content:space-between;align-items:flex-end;flex-wrap:wrap;gap:16px;margin-bottom:32px">
+      <h2 style="font-family:var(--mg-font-display);font-weight:600;font-size:clamp(36px,4.5vw,56px);line-height:1.05;letter-spacing:-0.025em;color:#14161c;margin:0">Community mods for <em>Endless Skies</em>.</h2>
+      <a href="submit.html" style="font-family:var(--mg-font-body);font-weight:600;font-size:14px;color:#0c4f8d;text-decoration:none">Submit yours →</a>
+    </div>
+    <div id="comm-grid" class="mg-grid-3" style="display:grid;grid-template-columns:repeat(3,1fr);gap:20px"></div>
+  </div>
+</section>
+
+<div id="footer-root"></div>
+<script src="_mg.js"></script>
+<script>
+const { T, el, linkBtn, navbar, footer, modCard } = MG;
+document.getElementById('nav-root').appendChild(navbar('Games'));
+document.getElementById('footer-root').appendChild(footer());
+
+document.getElementById('hero-btns').appendChild(linkBtn('Download Print-and-Play','#','primary'));
+document.getElementById('hero-btns').appendChild(linkBtn('Browse community mods','mods.html','outline-dark'));
+
+const STATS = [['Players','2–4'],['Time','60–90 min'],['Age','12+'],['Designer','Moddable team'],['Released','Mar 2025'],['Mods','8 community']];
+const sb = document.getElementById('stats-bar');
+STATS.forEach(([k,v],i) => {
+  if(i>0) sb.appendChild(el('span',{style:{width:'1px',height:'24px',background:'rgba(255,255,255,0.12)',margin:'0 20px'}}));
+  const d = el('div',{style:{display:'flex',flexDirection:'column'}});
+  d.appendChild(el('span',{style:{fontFamily:'var(--mg-font-body)',fontSize:'10px',color:'rgba(255,255,255,0.5)',textTransform:'uppercase',letterSpacing:'1px'}},k));
+  d.appendChild(el('span',{style:{fontFamily:'var(--mg-font-mono)',fontWeight:600,fontSize:'16px',color:'#fff',marginTop:'4px'}},v));
+  sb.appendChild(d);
+});
+
+const STEPS = [
+  {n:'01',title:'Lay the world',body:'19 hex tiles dealt face-down into a 3-ring spiral. No two games start the same.'},
+  {n:'02',title:'Pick a faction',body:'Twelve faction decks: Cartographers, Storm-callers, Salvagers, Iron Banks… each breaks one rule.'},
+  {n:'03',title:'Trade and tile',body:"Flip a tile to reveal a biome (sky, sea, surface). Trade resources — the speaker can veto one deal per round."},
+  {n:'04',title:'End in the void',body:'Whoever reaches the Void first triggers endgame. Two more full rounds, then count points.'},
+];
+const sg = document.getElementById('steps-grid');
+STEPS.forEach(s => {
+  const a = el('article',{style:{background:'#fff',border:'1px solid #e6e3d8',borderRadius:'16px',padding:'24px'}});
+  a.appendChild(el('div',{style:{fontFamily:'var(--mg-font-pixel)',fontSize:'10px',color:'#3a9928',letterSpacing:'1.5px',marginBottom:'14px'}},`▲ ${s.n}`));
+  a.appendChild(el('h3',{style:{fontFamily:'var(--mg-font-display)',fontWeight:600,fontSize:'22px',lineHeight:'1.2',letterSpacing:'-0.25px',color:'#14161c',margin:'0 0 10px'}},s.title));
+  a.appendChild(el('p',{style:{fontFamily:'var(--mg-font-body)',fontSize:'14px',lineHeight:'1.55',color:'#3a3d44',margin:0}},s.body));
+  sg.appendChild(a);
+});
+
+const HOOKS = [
+  {name:'factions.yaml',desc:'Add a faction deck with one rule-breaker line. Validates against the base ruleset.'},
+  {name:'biomes.yaml',desc:'Define new tile biomes — terrain, resources, victory contribution.'},
+  {name:'endgame.lua',desc:'Override how the endgame is triggered. Useful for short-game variants.'},
+  {name:'rules.md',desc:'Your version of the rulebook. Diffs are reviewed by the maintainers.'},
+];
+const hg = document.getElementById('hooks-grid');
+HOOKS.forEach(h => {
+  const d = el('div',{style:{background:'#161721',border:'1px solid rgba(255,255,255,0.08)',borderRadius:'16px',padding:'24px',display:'flex',gap:'18px',alignItems:'flex-start'}});
+  const icon = el('div',{style:{width:'40px',height:'40px',background:'#0c4f8d',borderRadius:'10px',display:'flex',alignItems:'center',justifyContent:'center',flex:'none',fontSize:'18px',color:'#fff'}});
+  icon.textContent = '◈';
+  d.appendChild(icon);
+  const txt = el('div');
+  txt.appendChild(el('div',{style:{fontFamily:'var(--mg-font-mono)',fontWeight:600,fontSize:'15px',color:'#6fb5ff'}},h.name));
+  txt.appendChild(el('div',{style:{fontFamily:'var(--mg-font-body)',fontSize:'14px',color:'rgba(255,255,255,0.78)',lineHeight:'1.5',marginTop:'6px'}},h.desc));
+  d.appendChild(txt); hg.appendChild(d);
+});
+
+const COMM = [
+  {category:'Reskin',baseGame:'Endless Skies',title:'Endless Skies: Inkwell',body:'All-monochrome tile set. Every faction recoloured into Edo-period woodblock palette.',stats:'2–4 players · 90 min · 12+'},
+  {category:'Rebalance',baseGame:'Endless Skies',title:'Solo Skies',body:'A solo-mode bot using a 32-card AI deck. Three difficulty tiers.',stats:'1 player · 60 min · 14+'},
+  {category:'Total conversion',baseGame:'Endless Skies',title:'Subterranean',body:'Same engine, underground theme. The Void becomes the Magma Heart. Hex tiles flipped sides.',stats:'2–4 players · 90 min · 12+'},
+];
+const cg = document.getElementById('comm-grid');
+COMM.forEach(m => cg.appendChild(modCard(m)));
+</script>
+</body>
+</html>

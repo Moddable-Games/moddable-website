@@ -1,0 +1,140 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Nuking Catan — Moddable.Games</title>
+<link rel="stylesheet" href="_mg.css">
+<style>
+body { background:#f5f4ef; }
+.prose p { margin:0 0 24px; }
+.prose p.lede { font-size:23px;line-height:1.5;color:#14161c;font-style:italic; }
+.prose h2 { font-family:"Inter Tight",system-ui,sans-serif;font-weight:600;font-size:32px;line-height:1.15;letter-spacing:-0.4px;margin:40px 0 16px;color:#14161c; }
+.prose blockquote { margin:32px 0;padding:20px 24px;border-left:4px solid #d11a1a;background:#fff;font-style:italic;color:#14161c;font-size:20px;line-height:1.5; }
+.prose ul { padding-left:22px;margin:0 0 24px; }
+.prose li { margin:0 0 8px; }
+@media(max-width:900px){.post-layout{grid-template-columns:1fr !important}.post-rail{display:none !important}}
+</style>
+</head>
+<body>
+<div id="nav-root"></div>
+
+<!-- Post header -->
+<section style="position:relative;color:#fff;overflow:hidden;background:#000">
+  <div style="position:absolute;left:50%;bottom:-200px;transform:translateX(-50%);width:1100px;height:500px;background:radial-gradient(ellipse,rgba(209,26,26,0.4) 0%,transparent 65%);pointer-events:none;filter:blur(20px)"></div>
+  <div style="position:relative;padding:48px 32px 88px;max-width:800px;margin:0 auto;text-align:center;box-sizing:border-box">
+    <a href="news.html" style="font-family:var(--mg-font-mono);font-size:12px;color:rgba(255,255,255,0.7);text-decoration:none">← All posts</a>
+    <div style="display:flex;gap:8px;justify-content:center;margin-top:28px;flex-wrap:wrap">
+      <span style="font-family:var(--mg-font-body);font-weight:600;font-size:11px;background:#d11a1a;color:#fff;padding:4px 10px;border-radius:9999px">CATAN</span>
+      <span style="font-family:var(--mg-font-mono);font-size:11px;color:rgba(255,255,255,0.7);padding:4px 10px;border:1px solid rgba(255,255,255,0.18);border-radius:9999px">Sep 12, 2025 · 6 min read</span>
+    </div>
+    <h1 style="font-family:var(--mg-font-display);font-weight:600;font-size:clamp(48px,7vw,96px);line-height:0.95;letter-spacing:-0.025em;margin:24px 0;text-shadow:0 4px 30px rgba(0,0,0,0.6)">Nuking <em style="color:#e63232">Catan</em>.</h1>
+    <p style="font-family:var(--mg-font-body);font-style:italic;font-size:18px;color:rgba(255,255,255,0.78);margin:0">A meditation on the gateway game, 45 million boxes deep — and what we did to it.</p>
+  </div>
+</section>
+
+<!-- Post body -->
+<section style="background:#f5f4ef;padding:72px 32px 96px">
+  <div class="post-layout" style="max-width:1200px;margin:0 auto;display:grid;grid-template-columns:200px 1fr 220px;gap:56px;align-items:start">
+
+    <!-- Left rail -->
+    <aside class="post-rail" style="position:sticky;top:96px">
+      <div style="font-family:var(--mg-font-pixel);font-size:9px;color:#0c4f8d;letter-spacing:1.5px;margin-bottom:14px">▲ AUTHOR</div>
+      <div style="display:flex;gap:10px;align-items:center;margin-bottom:20px">
+        <div style="width:40px;height:40px;border-radius:9999px;background:linear-gradient(135deg,#d11a1a,#0c4f8d);flex:none"></div>
+        <div>
+          <div style="font-family:var(--mg-font-display);font-weight:600;font-size:15px;color:#14161c;letter-spacing:-0.2px">ascelot</div>
+          <div style="font-family:var(--mg-font-mono);font-size:11px;color:#7a8290">@ascelot · moddable team</div>
+        </div>
+      </div>
+      <div style="font-family:var(--mg-font-pixel);font-size:9px;color:#3a9928;letter-spacing:1.5px;margin-top:32px;margin-bottom:12px">▲ SHARE</div>
+      <div style="display:flex;gap:6px;flex-wrap:wrap" id="share-btns"></div>
+    </aside>
+
+    <!-- Article -->
+    <article class="prose" style="font-family:var(--mg-font-body);font-size:19px;line-height:1.65;color:#1f2228">
+      <p class="lede"><em>Catan</em> is popular. By some accounts, it's the most popular game of the modern era — a gateway game that's sold over 45 million copies and introduced countless families to a life of board-games beyond Monopoly.</p>
+      <p>It's a game that enforces interaction between players. No silent solo turns. No retreating to a corner with a deck of cards. Every roll is a negotiation, every settlement a quiet provocation. You can't win <em>Catan</em> without talking to the people you're trying to beat — which is, when you think about it, both its genius and its source of all known dining-table arguments.</p>
+      <h2>So we set it on fire.</h2>
+      <p><em>Nuke Catan</em> is a total conversion of the base game. Same tiles, same dice, same little wooden settlers. Brand new economy.</p>
+      <p>The premise: it's 2049. The island is now a contested post-nuclear wasteland. Sheep are extinct. Brick is currency. Wheat has been replaced by Rations. Wool by Scrap. And once per game, on your turn, you may — and probably should — play the Nuke card.</p>
+      <blockquote>"You may play the Nuke card. Pick any hex. It produces no resources for the rest of the game."</blockquote>
+      <p>The rule is short. The effect is permanent. And the ripple it sends through a four-player negotiation is, to put it mildly, instructive.</p>
+      <h2>What we left intact.</h2>
+      <ul>
+        <li>The hex board. Same 19 tiles, same number tokens, same robber.</li>
+        <li>The card decks. Resource cards are reskinned (Sheep → Scrap), but the development cards are untouched.</li>
+        <li>The longest road and largest army awards. Both still grant 2 VP.</li>
+        <li>The trading mechanic. You can still bank-trade 4:1, port-trade 3:1, and player-trade however you want.</li>
+      </ul>
+      <h2>What you'll need.</h2>
+      <p>Your standard <em>Catan</em> base game and four printable cards (PDF in the download). That's it. No new tiles, no replacement components, no expansions required. It's a pure rules patch — which is, frankly, the whole point of what we do.</p>
+      <p><em>Nuke Catan v2.1.0 is in open playtest. Download the rules, run it at your next table, and tell us how badly we've broken something on Discord.</em></p>
+    </article>
+
+    <!-- Right rail -->
+    <aside class="post-rail" style="position:sticky;top:96px">
+      <div style="font-family:var(--mg-font-pixel);font-size:9px;color:#0c4f8d;letter-spacing:1.5px;margin-bottom:14px">▲ IN THIS POST</div>
+      <ul id="toc-list" style="list-style:none;padding:0;margin:0 0 32px;display:flex;flex-direction:column;gap:8px;border-left:1px solid #e6e3d8"></ul>
+      <div style="background:#000;color:#fff;padding:20px;border-radius:16px">
+        <div style="font-family:var(--mg-font-pixel);font-size:9px;color:#e63232;letter-spacing:1.5px;margin-bottom:10px">▲ THE MOD</div>
+        <div style="font-family:var(--mg-font-display);font-weight:600;font-size:18px;line-height:1.2;margin-bottom:6px">Nuke Catan</div>
+        <div style="font-family:var(--mg-font-mono);font-size:11px;color:rgba(255,255,255,0.6);margin-bottom:14px">v2.1.0 · Total Conversion</div>
+        <div id="mod-dl-btn"></div>
+      </div>
+    </aside>
+  </div>
+</section>
+
+<!-- More posts -->
+<section style="background:#fff;border-top:1px solid #e6e3d8;padding:80px 32px">
+  <div style="max-width:1200px;margin:0 auto">
+    <h2 style="font-family:var(--mg-font-display);font-weight:600;font-size:40px;line-height:1.1;letter-spacing:-0.5px;color:#14161c;margin:0 0 32px">More from the archive.</h2>
+    <div id="more-posts" class="mg-grid-3" style="display:grid;grid-template-columns:repeat(3,1fr);gap:20px"></div>
+  </div>
+</section>
+
+<div id="footer-root"></div>
+<script src="_mg.js"></script>
+<script>
+const { el, linkBtn, navbar, footer } = MG;
+document.getElementById('nav-root').appendChild(navbar('News'));
+document.getElementById('footer-root').appendChild(footer());
+
+// Share buttons
+['X','FB','LI','Copy'].forEach(s => {
+  const b = document.createElement('button');
+  b.textContent = s;
+  Object.assign(b.style,{fontFamily:'var(--mg-font-mono)',fontSize:'11px',fontWeight:600,width:'38px',height:'38px',borderRadius:'9999px',background:'#fff',color:'#14161c',border:'1px solid #e6e3d8',cursor:'pointer'});
+  document.getElementById('share-btns').appendChild(b);
+});
+
+// TOC
+const TOC = ['So we set it on fire','What we left intact',"What you'll need"];
+const tul = document.getElementById('toc-list');
+TOC.forEach((t,i) => {
+  const li = el('li',{style:{paddingLeft:'14px',borderLeft: i===0?'2px solid #d11a1a':'none',marginLeft:'-1px'}});
+  li.appendChild(el('a',{href:'#',style:{fontFamily:'var(--mg-font-body)',fontSize:'13px',color: i===0?'#14161c':'#4f5764',textDecoration:'none',fontWeight: i===0?600:400}},t));
+  tul.appendChild(li);
+});
+
+document.getElementById('mod-dl-btn').appendChild(linkBtn('Download rules','#','red',{height:'38px',fontSize:'13px',width:'100%'}));
+
+// More posts
+const MORE = [
+  {cover:'#3a9928', cat:'Devlog',     date:'May 12, 2026', title:'Mongo enters open playtest'},
+  {cover:'#0c4f8d', cat:'Mod update', date:'May 9, 2026',  title:'Econopoly v1.4: the audit patch'},
+  {cover:'#1a3680', cat:'Community',  date:'May 2, 2026',  title:'Mod jam #3 wraps up'},
+];
+const mp = document.getElementById('more-posts');
+MORE.forEach(p => {
+  const a = el('a',{href:'news-post.html',style:{display:'flex',flexDirection:'column',gap:'14px',padding:'20px',background:'#f5f4ef',borderRadius:'16px',textDecoration:'none',color:'inherit'}});
+  const cover = el('div',{style:{height:'120px',background:`linear-gradient(135deg,#0a0d2a 0%,${p.cover} 100%)`,borderRadius:'12px'}});
+  a.appendChild(cover);
+  a.appendChild(el('div',{style:{fontFamily:'var(--mg-font-mono)',fontSize:'11px',color:'#7a8290',letterSpacing:'0.3px'}},`${p.cat.toUpperCase()} · ${p.date}`));
+  a.appendChild(el('h3',{style:{fontFamily:'var(--mg-font-display)',fontWeight:600,fontSize:'20px',lineHeight:'1.2',letterSpacing:'-0.2px',color:'#14161c',margin:0}},p.title));
+  mp.appendChild(a);
+});
+</script>
+</body>
+</html>

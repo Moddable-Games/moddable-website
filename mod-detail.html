@@ -1,0 +1,141 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Talisman: Hexed — Moddable.Games</title>
+<link rel="stylesheet" href="_mg.css">
+<style>
+body { background:#000; }
+.rules-sidebar { position:sticky; top:96px; align-self:start; }
+@media(max-width:768px){ .rules-layout { grid-template-columns:1fr !important; } .rules-sidebar { position:static; } }
+</style>
+</head>
+<body>
+<div id="nav-root"></div>
+
+<!-- Header -->
+<section style="position:relative;color:#fff;overflow:hidden;isolation:isolate;background:#000">
+  <div style="position:absolute;right:-200px;top:40%;width:700px;height:700px;background:radial-gradient(circle,rgba(12,79,141,0.5) 0%,transparent 60%);pointer-events:none"></div>
+  <div style="position:relative;z-index:2;padding:56px 32px 100px;max-width:1200px;margin:0 auto;box-sizing:border-box">
+    <a href="mods.html" style="font-family:var(--mg-font-mono);font-size:12px;color:rgba(255,255,255,0.7);text-decoration:none">← All mods</a>
+    <div style="display:flex;gap:10px;margin-top:24px;flex-wrap:wrap;align-items:center">
+      <span style="font-family:var(--mg-font-body);font-weight:600;font-size:11px;background:#0c4f8d;color:#fff;padding:4px 10px;border-radius:9999px">Reskin</span>
+      <span style="font-family:var(--mg-font-mono);font-size:11px;color:rgba(255,255,255,0.7);padding:4px 10px;border:1px solid rgba(255,255,255,0.2);border-radius:9999px">base: Talisman 4e (revised)</span>
+      <span style="font-family:var(--mg-font-pixel);font-size:9px;color:#6fb5ff;padding:5px 10px;letter-spacing:1px">v1.0.0</span>
+    </div>
+    <h1 style="font-family:var(--mg-font-display);font-weight:600;font-size:clamp(48px,7vw,96px);line-height:1.0;letter-spacing:-0.025em;margin:20px 0 24px;max-width:1000px">Talisman: <em style="color:#6fb5ff">Hexed</em>.</h1>
+    <p style="font-family:var(--mg-font-body);font-size:19px;line-height:1.55;color:rgba(255,255,255,0.78);max-width:720px;margin:0 0 36px">An open-world hex system that replaces the Talisman game boards with 61 individual hexagonal tiles — arranged in concentric rings so every game lays out differently. Built for <em>Talisman 4th Edition (revised)</em> by Fantasy Flight Games.</p>
+    <div style="display:flex;gap:12px;flex-wrap:wrap;margin-bottom:40px" id="header-btns"></div>
+    <!-- Stats row -->
+    <div id="stats-row" style="display:flex;gap:0;align-items:center;flex-wrap:wrap;padding-top:28px;border-top:1px solid rgba(255,255,255,0.12)"></div>
+  </div>
+</section>
+
+<!-- Rules sections -->
+<section style="background:#f5f4ef;padding:88px 32px">
+  <div class="rules-layout" style="max-width:1200px;margin:0 auto;display:grid;grid-template-columns:240px 1fr;gap:64px">
+    <aside class="rules-sidebar">
+      <div style="font-family:var(--mg-font-pixel);font-size:9px;color:#0c4f8d;letter-spacing:1.5px;margin-bottom:18px">▲ THE RULES</div>
+      <ol id="toc" style="list-style:none;padding:0;margin:0;display:flex;flex-direction:column;gap:10px"></ol>
+    </aside>
+    <div id="rules-body"></div>
+  </div>
+</section>
+
+<!-- Components list -->
+<section style="background:#f5f4ef;padding:0 32px 88px">
+  <div style="max-width:1200px;margin:0 auto">
+    <h2 style="font-family:var(--mg-font-display);font-weight:600;font-size:48px;line-height:1.1;letter-spacing:-0.6px;color:#14161c;margin:0 0 32px">What you'll need.</h2>
+    <div id="components-grid" class="mg-grid-3" style="display:grid;grid-template-columns:repeat(3,1fr);gap:16px"></div>
+  </div>
+</section>
+
+<!-- Related mods -->
+<section style="background:#fff;padding:88px 32px;border-top:1px solid #e6e3d8">
+  <div style="max-width:1200px;margin:0 auto">
+    <h2 style="font-family:var(--mg-font-display);font-weight:600;font-size:40px;line-height:1.15;letter-spacing:-0.5px;color:#14161c;margin:0 0 32px">More from the library.</h2>
+    <div id="related-grid" class="mg-grid-3" style="display:grid;grid-template-columns:repeat(3,1fr);gap:20px"></div>
+  </div>
+</section>
+
+<div id="footer-root"></div>
+<script src="_mg.js"></script>
+<script>
+const { T, el, linkBtn, navbar, footer, modCard } = MG;
+document.getElementById('nav-root').appendChild(navbar('Mods'));
+document.getElementById('footer-root').appendChild(footer());
+
+// Header buttons
+const hb = document.getElementById('header-btns');
+hb.appendChild(linkBtn('⬇ Download rules', '#', 'primary'));
+hb.appendChild(linkBtn('Print-and-play pack', '#', 'outline-dark'));
+
+// Stats row
+const STATS = [['Players','2–6'],['Time','90 min'],['Age','13+'],['Tiles','61 hex'],['Designer','Moddable team'],['Updated','Apr 2024']];
+const sr = document.getElementById('stats-row');
+STATS.forEach(([k,v],i) => {
+  if (i>0) sr.appendChild(el('span',{style:{width:'1px',height:'24px',background:'rgba(255,255,255,0.12)',margin:'0 20px'}}));
+  const d = el('div',{style:{display:'flex',flexDirection:'column'}});
+  d.appendChild(el('span',{style:{fontFamily:'var(--mg-font-body)',fontSize:'10px',color:'rgba(255,255,255,0.5)',textTransform:'uppercase',letterSpacing:'1px'}},k));
+  d.appendChild(el('span',{style:{fontFamily:'var(--mg-font-mono)',fontWeight:600,fontSize:'16px',color:'#fff',marginTop:'4px'}},v));
+  sr.appendChild(d);
+});
+
+// Rules
+const SECTIONS = [
+  { id:'1', title:'Why hex?', body:"The square Talisman board gets boring fast — same path, same encounters, same finale every game. Hexagonal tiles let us deal a new map each session and keep the journey unpredictable." },
+  { id:'2', title:'The four rings', body:"61 tiles arranged in concentric rings: 24 outer (the world), 18 river, 12 middle (the highlands), 6 inner (the dungeon approach), plus one central tile (the Crown of Command)." },
+  { id:'3', title:'Special tiles', body:"10 water tiles connect across rings via the river. 4 desert tiles act as Talisman's traditional 'Desert' region. The rest map onto the original board's encounter spaces, redistributed each game." },
+  { id:'4', title:'Movement', body:"Roll 1d6 and move that many tiles in any direction along legal edges. You may cross river tiles only with a boat token, raft, or relevant character ability." },
+  { id:'5', title:"What hasn't changed", body:"All Talisman 4e (revised) cards, characters, spell decks, and adventure cards work as-is. Hexed only replaces the board — your encounter library is untouched." },
+];
+
+const toc = document.getElementById('toc');
+const body2 = document.getElementById('rules-body');
+SECTIONS.forEach(s => {
+  // TOC
+  const li = el('li');
+  const a = el('a',{href:`#s${s.id}`,style:{display:'flex',gap:'10px',alignItems:'baseline',fontFamily:'var(--mg-font-body)',fontSize:'14px',color:'#14161c',textDecoration:'none',padding:'4px 0'}});
+  a.appendChild(el('span',{style:{fontFamily:'var(--mg-font-mono)',fontSize:'11px',color:'#7a8290',minWidth:'18px'}},s.id.padStart(2,'0')));
+  a.appendChild(document.createTextNode(s.title));
+  li.appendChild(a); toc.appendChild(li);
+  // Body
+  const art = el('article',{id:`s${s.id}`,style:{paddingBottom:'48px',marginBottom:'48px',borderBottom:'1px solid #e6e3d8'}});
+  art.appendChild(el('div',{style:{fontFamily:'var(--mg-font-mono)',fontSize:'12px',color:'#7a8290',letterSpacing:'0.5px',marginBottom:'10px'}},`SECTION ${s.id.padStart(2,'0')}`));
+  art.appendChild(el('h2',{style:{fontFamily:'var(--mg-font-display)',fontWeight:600,fontSize:'40px',lineHeight:'1.15',letterSpacing:'-0.5px',color:'#14161c',margin:'0 0 16px'}},s.title));
+  art.appendChild(el('p',{style:{fontFamily:'var(--mg-font-body)',fontSize:'17px',lineHeight:'1.6',color:'#3a3d44',margin:0,maxWidth:'640px'}},s.body));
+  body2.appendChild(art);
+});
+
+// Components
+const COMPONENTS = [
+  { kind:'Required', list:['Talisman 4e (revised) base game','Card decks (Adventure, Spell, Purchase, Stranger, Warlock Quest)','Character cards + miniatures'] },
+  { kind:'Printable', list:['61 × hexagonal tiles (PDF, included)','Tile inventory + assembly diagram','River movement tokens'] },
+  { kind:'House', list:['1d6 standard die','A large flat surface — 4ft × 3ft minimum','Patience for tile shuffling'] },
+];
+const cg = document.getElementById('components-grid');
+COMPONENTS.forEach(({kind,list}) => {
+  const c = el('div',{style:{background:'#fff',border:'1px solid #e6e3d8',borderRadius:'16px',padding:'24px'}});
+  c.appendChild(el('div',{style:{fontFamily:'var(--mg-font-pixel)',fontSize:'9px',color:'#0c4f8d',letterSpacing:'1px',marginBottom:'14px'}},kind.toUpperCase()));
+  const ul = el('ul',{style:{listStyle:'none',padding:0,margin:0,display:'flex',flexDirection:'column',gap:'10px'}});
+  list.forEach(x => {
+    const li = el('li',{style:{display:'flex',gap:'10px',alignItems:'flex-start',fontFamily:'var(--mg-font-body)',fontSize:'14px',color:'#1f2228',lineHeight:'1.45'}});
+    li.appendChild(el('span',{style:{width:'6px',height:'6px',marginTop:'8px',background:'#0c4f8d',borderRadius:'1px',flex:'none'}}));
+    li.appendChild(document.createTextNode(x));
+    ul.appendChild(li);
+  });
+  c.appendChild(ul); cg.appendChild(c);
+});
+
+// Related
+const RELATED = [
+  { category:'Rebalance', baseGame:'Twilight Imperium 4e', title:'Hyper Imperium', body:"Hyper Movement · Hyper Trades · Hyper Agendas. A faster TI4 ruleset that keeps the politics intact.", stats:'3–6 players · 4–6 hr · 14+' },
+  { category:'Total conversion', baseGame:'Monopoly', title:'Econopoly', body:"Monopoly converted into a family-friendly Euro-game. Resource management, victory points.", stats:'2–4 players · 60 min · 10+' },
+  { category:'Total conversion', baseGame:'Catan', title:'Are you ready to <em>nuke</em> Catan?', body:"Post-apocalyptic rules overhaul. Sheep are scarce, brick is currency.", stats:'3–5 players · 60 min · 12+' },
+];
+const rg = document.getElementById('related-grid');
+RELATED.forEach(m => rg.appendChild(modCard(m)));
+</script>
+</body>
+</html>
