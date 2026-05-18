@@ -3,8 +3,9 @@
 <head>
 <meta charset="utf-8">
 <meta name="viewport" content="width=device-width, initial-scale=1">
+<meta name="mg-base" content="/MODDABLE/moddable-website">
 <title>Nuking Catan — Moddable.Games</title>
-<link rel="stylesheet" href="_mg.css">
+<link rel="stylesheet" href="../../_mg.css">
 <style>
 body { background:#f5f4ef; }
 .prose p { margin:0 0 24px; }
@@ -23,7 +24,7 @@ body { background:#f5f4ef; }
 <section style="position:relative;color:#fff;overflow:hidden;background:#000">
   <div style="position:absolute;left:50%;bottom:-200px;transform:translateX(-50%);width:1100px;height:500px;background:radial-gradient(ellipse,rgba(209,26,26,0.4) 0%,transparent 65%);pointer-events:none;filter:blur(20px)"></div>
   <div style="position:relative;padding:48px 32px 88px;max-width:800px;margin:0 auto;text-align:center;box-sizing:border-box">
-    <a href="news.html" style="font-family:var(--mg-font-mono);font-size:12px;color:rgba(255,255,255,0.7);text-decoration:none">← All posts</a>
+    <a href="/news/" style="font-family:var(--mg-font-mono);font-size:12px;color:rgba(255,255,255,0.7);text-decoration:none">← All posts</a>
     <div style="display:flex;gap:8px;justify-content:center;margin-top:28px;flex-wrap:wrap">
       <span style="font-family:var(--mg-font-body);font-weight:600;font-size:11px;background:#d11a1a;color:#fff;padding:4px 10px;border-radius:9999px">CATAN</span>
       <span style="font-family:var(--mg-font-mono);font-size:11px;color:rgba(255,255,255,0.7);padding:4px 10px;border:1px solid rgba(255,255,255,0.18);border-radius:9999px">Sep 12, 2025 · 6 min read</span>
@@ -95,9 +96,9 @@ body { background:#f5f4ef; }
 </section>
 
 <div id="footer-root"></div>
-<script src="_mg.js"></script>
+<script src="../../_mg.js"></script>
 <script>
-const { el, linkBtn, navbar, footer } = MG;
+const { el, linkBtn, navbar, footer, url } = MG;
 document.getElementById('nav-root').appendChild(navbar('News'));
 document.getElementById('footer-root').appendChild(footer());
 
@@ -128,7 +129,7 @@ const MORE = [
 ];
 const mp = document.getElementById('more-posts');
 MORE.forEach(p => {
-  const a = el('a',{href:'news-post.html',style:{display:'flex',flexDirection:'column',gap:'14px',padding:'20px',background:'#f5f4ef',borderRadius:'16px',textDecoration:'none',color:'inherit'}});
+  const a = el('a',{href:url('/news/nuking-catan/'),style:{display:'flex',flexDirection:'column',gap:'14px',padding:'20px',background:'#f5f4ef',borderRadius:'16px',textDecoration:'none',color:'inherit'}});
   const cover = el('div',{style:{height:'120px',background:`linear-gradient(135deg,#0a0d2a 0%,${p.cover} 100%)`,borderRadius:'12px'}});
   a.appendChild(cover);
   a.appendChild(el('div',{style:{fontFamily:'var(--mg-font-mono)',fontSize:'11px',color:'#7a8290',letterSpacing:'0.3px'}},`${p.cat.toUpperCase()} · ${p.date}`));

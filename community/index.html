@@ -3,8 +3,9 @@
 <head>
 <meta charset="utf-8">
 <meta name="viewport" content="width=device-width, initial-scale=1">
+<meta name="mg-base" content="/MODDABLE/moddable-website">
 <title>Community — Moddable.Games</title>
-<link rel="stylesheet" href="_mg.css">
+<link rel="stylesheet" href="../_mg.css">
 <style>body{background:#f5f4ef}</style>
 </head>
 <body>
@@ -48,7 +49,7 @@
 </section>
 
 <div id="footer-root"></div>
-<script src="_mg.js"></script>
+<script src="../_mg.js"></script>
 <script>
 const { el, btn, linkBtn, navbar, footer, pageHero } = MG;
 document.getElementById('nav-root').appendChild(navbar('About'));
@@ -115,7 +116,7 @@ JAMS.forEach(j => {
 // CTA buttons
 const cb = document.getElementById('cta-btns');
 cb.appendChild(linkBtn('Open the Discord','#','primary'));
-cb.appendChild(linkBtn('Submit a mod','submit.html','outline-dark'));
+cb.appendChild(linkBtn('Submit a mod','/submit/','outline-dark'));
 </script>
 </body>
 </html>

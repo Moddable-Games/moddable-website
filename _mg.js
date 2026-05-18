@@ -5,6 +5,9 @@
 
 const MG = (() => {
 
+  const BASE = (document.querySelector('meta[name="mg-base"]') || {}).content || '';
+  function url(path) { return BASE + path; }
+
   /* ── Tokens ──────────────────────────────────────────────────────────── */
   const T = {
     red:"#d11a1a", redBright:"#e63232", redDeep:"#a31212",
@@ -124,7 +127,7 @@ const MG = (() => {
   function linkBtn(label, href, variant = 'primary', extraStyle = {}) {
     const v = BTN_VARIANTS[variant] || BTN_VARIANTS.primary;
     const a = el('a', {
-      href,
+      href: href.startsWith('/') ? url(href) : href,
       style: css({
         display:'inline-flex', alignItems:'center', justifyContent:'center',
         height:'48px', padding:'0 22px', borderRadius:'9999px',
@@ -146,11 +149,11 @@ const MG = (() => {
   /* ── NavBar ──────────────────────────────────────────────────────────── */
   function navbar(activeId) {
     const NAV_ITEMS = [
-      { id:'Mods', href:'mods.html' },
-      { id:'Games', href:'game-detail.html' },
-      { id:'Tools', href:'tools.html' },
-      { id:'News', href:'news.html' },
-      { id:'About', href:'about.html' },
+      { id:'Mods', href:url('/mods/') },
+      { id:'Games', href:url('/games/endless-skies/') },
+      { id:'Tools', href:url('/tools/') },
+      { id:'News', href:url('/news/') },
+      { id:'About', href:url('/about/') },
     ];
 
     const header = el('header', { style: css({
@@ -161,7 +164,7 @@ const MG = (() => {
     })});
 
     // Logo
-    const logoWrap = el('a', { href:'index.html', style:{ display:'flex', alignItems:'center', gap:'10px', textDecoration:'none' }});
+    const logoWrap = el('a', { href:url('/'), style:{ display:'flex', alignItems:'center', gap:'10px', textDecoration:'none' }});
     logoWrap.appendChild(cubeSVG(28));
     logoWrap.appendChild(el('span', { style:{ fontFamily:F.display, fontWeight:700, fontSize:'17px', color:'#fff', letterSpacing:'-0.3px' }}, 'Moddable.Games'));
     header.appendChild(logoWrap);
@@ -188,9 +191,9 @@ const MG = (() => {
 
     // Right side
     const right = el('div', { style:{ marginLeft:'auto', display:'flex', gap:'12px', alignItems:'center' }});
-    const discordLink = el('a', { href:'community.html', style:{ fontFamily:F.pixel, fontSize:'8px', color:T.cosmicGlow, letterSpacing:'1.5px', textDecoration:'none' }}, '▲ DISCORD');
+    const discordLink = el('a', { href:url('/community/'), style:{ fontFamily:F.pixel, fontSize:'8px', color:T.cosmicGlow, letterSpacing:'1.5px', textDecoration:'none' }}, '▲ DISCORD');
     right.appendChild(discordLink);
-    right.appendChild(linkBtn('Mod a game', 'submit.html', 'primary', { height:'38px', fontSize:'13px', padding:'0 16px' }));
+    right.appendChild(linkBtn('Mod a game', url('/submit/'), 'primary', { height:'38px', fontSize:'13px', padding:'0 16px' }));
     header.appendChild(right);
 
     // Mobile hamburger (CSS media query shows/hides)
@@ -239,10 +242,10 @@ const MG = (() => {
   /* ── Footer ──────────────────────────────────────────────────────────── */
   function footer() {
     const COLS = [
-      { title:'Mods',      links:[['All mods','mods.html'],['Submit a mod','submit.html']] },
-      { title:'Games',     links:[['Endless Skies','game-detail.html'],['Mongo','game-mongo.html'],['Nukes','game-nukes.html']] },
-      { title:'Tools',     links:[['Workbench','tools.html']] },
-      { title:'Community', links:[['Discord','community.html'],['News','news.html'],['About','about.html'],['Team','team.html']] },
+      { title:'Mods',      links:[['All mods',url('/mods/')],['Submit a mod',url('/submit/')]] },
+      { title:'Games',     links:[['Endless Skies',url('/games/endless-skies/')],['Mongo',url('/games/mongo/')],['Nukes',url('/games/nukes/')]] },
+      { title:'Tools',     links:[['Workbench',url('/tools/')]] },
+      { title:'Community', links:[['Discord',url('/community/')],['News',url('/news/')],['About',url('/about/')],['Team',url('/team/')]] },
     ];
 
     const f = el('footer', { style:{ background:'#000', color:'#fff', padding:'80px 24px 40px', boxSizing:'border-box' }});
@@ -325,7 +328,7 @@ const MG = (() => {
     inner.appendChild(statsRow);
 
     // Link
-    const link = el('a', { href, style:{ fontFamily:F.body, fontWeight:600, fontSize:'14px', color:accent, textDecoration:'none', display:'inline-flex', alignItems:'center', gap:'6px' }});
+    const link = el('a', { href: href.startsWith('/') ? url(href) : href, style:{ fontFamily:F.body, fontWeight:600, fontSize:'14px', color:accent, textDecoration:'none', display:'inline-flex', alignItems:'center', gap:'6px' }});
     link.innerHTML = 'View the rules <span aria-hidden="true">→</span>';
     inner.appendChild(link);
 
@@ -357,7 +360,20 @@ const MG = (() => {
     return sec;
   }
 
+  if (BASE) {
+    document.addEventListener('DOMContentLoaded', () => {
+      document.querySelectorAll('a[href^="/"]').forEach(a => {
+        const h = a.getAttribute('href');
+        if (!h.startsWith(BASE + '/')) a.setAttribute('href', BASE + h);
+      });
+      document.querySelectorAll('link[href^="/"]').forEach(l => {
+        const h = l.getAttribute('href');
+        if (!h.startsWith(BASE + '/')) l.setAttribute('href', BASE + h);
+      });
+    });
+  }
+
   /* ── Expose ──────────────────────────────────────────────────────────── */
-  return { T, F, HEX_BG, CATEGORY_COLORS, el, btn, linkBtn, navbar, footer, modCard, pageHero, cubeSVG };
+  return { T, F, HEX_BG, CATEGORY_COLORS, el, btn, linkBtn, navbar, footer, modCard, pageHero, cubeSVG, url };
 
 })();

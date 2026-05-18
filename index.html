@@ -3,6 +3,7 @@
 <head>
 <meta charset="utf-8">
 <meta name="viewport" content="width=device-width, initial-scale=1">
+<meta name="mg-base" content="/MODDABLE/moddable-website">
 <title>Moddable.Games — Creating games you already own</title>
 <link rel="stylesheet" href="_mg.css">
 <style>
@@ -46,7 +47,7 @@
       <div id="gallery-filters" style="display:flex;gap:8px;flex-wrap:wrap"></div>
     </div>
     <div id="gallery-grid" class="mg-grid-3" style="display:grid;grid-template-columns:repeat(auto-fit,minmax(280px,1fr));gap:20px"></div>
-    <div style="text-align:center;margin-top:48px"><a href="mods.html" style="display:inline-flex;align-items:center;justify-content:center;height:48px;padding:0 22px;border-radius:9999px;border:1px solid #3a3d44;background:transparent;color:#14161c;font-family:var(--mg-font-body);font-weight:600;font-size:15px;text-decoration:none">Browse all 12 mods →</a></div>
+    <div style="text-align:center;margin-top:48px"><a href="/mods/" style="display:inline-flex;align-items:center;justify-content:center;height:48px;padding:0 22px;border-radius:9999px;border:1px solid #3a3d44;background:transparent;color:#14161c;font-family:var(--mg-font-body);font-weight:600;font-size:15px;text-decoration:none">Browse all 12 mods →</a></div>
   </div>
 </section>
 
@@ -82,7 +83,7 @@
   <div style="max-width:1200px;margin:0 auto">
     <div style="display:flex;justify-content:space-between;align-items:flex-end;flex-wrap:wrap;gap:16px;margin-bottom:32px">
       <h2 style="font-family:var(--mg-font-display);font-weight:600;font-size:clamp(30px,4vw,48px);line-height:1.1;letter-spacing:-0.4px;color:#14161c">From the table.</h2>
-      <a href="news.html" style="font-family:var(--mg-font-body);font-weight:600;font-size:14px;color:#0c4f8d;text-decoration:none">All posts →</a>
+      <a href="/news/" style="font-family:var(--mg-font-body);font-weight:600;font-size:14px;color:#0c4f8d;text-decoration:none">All posts →</a>
     </div>
     <div id="news-grid" class="mg-grid-3" style="display:grid;grid-template-columns:repeat(auto-fit,minmax(280px,1fr));gap:20px"></div>
   </div>
@@ -106,7 +107,7 @@
 
 <script src="_mg.js"></script>
 <script>
-const { T, el, btn, linkBtn, navbar, footer, modCard, cubeSVG } = MG;
+const { T, el, btn, linkBtn, navbar, footer, modCard, cubeSVG, url } = MG;
 
 // Nav + Footer
 document.getElementById('nav-root').appendChild(navbar('Mods'));
@@ -118,12 +119,12 @@ window.addEventListener('scroll', () => { heroBg.style.transform = `translateY($
 
 // Hero buttons
 const hb = document.getElementById('hero-btns');
-hb.appendChild(linkBtn('Browse the mods', 'mods.html', 'primary'));
-hb.appendChild(linkBtn('Read the manifesto', 'about.html', 'outline-dark'));
+hb.appendChild(linkBtn('Browse the mods', '/mods/', 'primary'));
+hb.appendChild(linkBtn('Read the manifesto', '/about/', 'outline-dark'));
 
 // Mod gallery
 const MODS = [
-  { category:'Reskin',           baseGame:'Talisman 4e',         title:'Talisman: Hexed',                    body:"Replaces the Talisman boards with 61 hexagonal tiles arranged in concentric rings. Open-world hex system — every game lays out differently.", stats:'2–6 players · 90 min · 13+', href:'mod-detail.html', source:'Moddable.Games' },
+  { category:'Reskin',           baseGame:'Talisman 4e',         title:'Talisman: Hexed',                    body:"Replaces the Talisman boards with 61 hexagonal tiles arranged in concentric rings. Open-world hex system — every game lays out differently.", stats:'2–6 players · 90 min · 13+', href:url('/mods/talisman-hexed/'), source:'Moddable.Games' },
   { category:'Rebalance',        baseGame:'Twilight Imperium 4e',title:'Hyper Imperium',                     body:"Hyper Movement · Hyper Trades · Hyper Objectives · Hyper Factions · Hyper Agendas. A faster ruleset for TI4 that keeps the politics intact.", stats:'3–6 players · 4–6 hr · 14+', source:'Moddable.Games' },
   { category:'Total conversion', baseGame:'Catan',               title:'Nuke Catan',                         body:"Post-apocalyptic overhaul. Sheep are scarce, brick is currency. Once per game, someone presses The Button — one hex is permanently irradiated.", stats:'3–5 players · 60 min · 12+', source:'Moddable.Games' },
   { category:'Total conversion', baseGame:'Chess',               title:'Fog of War Chess',                   body:"Players see only squares their pieces can legally move to. No checks, no checkmates — only capture the king. Invented 1989, rules freely available.", stats:'2 players · 20–40 min · 10+', source:'chessvariants.com' },
@@ -188,7 +189,7 @@ const NEWS = [
 ];
 const ng = document.getElementById('news-grid');
 NEWS.forEach(n => {
-  const a = el('a', { href:'news-post.html', style:{ display:'flex', flexDirection:'column', gap:'14px', padding:'24px', background:'#fff', border:'1px solid #e6e3d8', borderRadius:'20px', textDecoration:'none', color:'inherit', transition:'border-color 180ms' }});
+  const a = el('a', { href:url('/news/nuking-catan/'), style:{ display:'flex', flexDirection:'column', gap:'14px', padding:'24px', background:'#fff', border:'1px solid #e6e3d8', borderRadius:'20px', textDecoration:'none', color:'inherit', transition:'border-color 180ms' }});
   a.addEventListener('mouseenter', () => a.style.borderColor = '#14161c');
   a.addEventListener('mouseleave', () => a.style.borderColor = '#e6e3d8');
   const row = el('div', { style:{ display:'flex', justifyContent:'space-between', alignItems:'center' }});
@@ -203,8 +204,8 @@ NEWS.forEach(n => {
 
 // Community band buttons
 const cb = document.getElementById('community-btns');
-cb.appendChild(linkBtn('Open the Discord', 'community.html', 'primary'));
-cb.appendChild(linkBtn('Submit a mod', 'submit.html', 'outline-dark'));
+cb.appendChild(linkBtn('Open the Discord', '/community/', 'primary'));
+cb.appendChild(linkBtn('Submit a mod', '/submit/', 'outline-dark'));
 </script>
 </body>
 </html>

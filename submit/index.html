@@ -3,8 +3,9 @@
 <head>
 <meta charset="utf-8">
 <meta name="viewport" content="width=device-width, initial-scale=1">
+<meta name="mg-base" content="/MODDABLE/moddable-website">
 <title>Submit a mod — Moddable.Games</title>
-<link rel="stylesheet" href="_mg.css">
+<link rel="stylesheet" href="../_mg.css">
 <style>
 body { background:#f5f4ef; }
 .field-input { width:100%;padding:14px 16px;border:1px solid #e6e3d8;border-radius:12px;font-family:var(--mg-font-body);font-size:16px;color:#14161c;background:#fff;outline:none;transition:border-color 150ms;box-sizing:border-box; }
@@ -19,7 +20,7 @@ textarea.field-input { resize:vertical;min-height:120px; }
 <section style="background:#000;color:#fff;padding:64px 32px 72px;position:relative;overflow:hidden">
   <div style="position:absolute;right:-100px;top:20%;width:500px;height:500px;background:radial-gradient(circle,rgba(58,123,232,0.2) 0%,transparent 65%);pointer-events:none"></div>
   <div style="max-width:760px;margin:0 auto;position:relative">
-    <a href="mods.html" style="font-family:var(--mg-font-mono);font-size:12px;color:rgba(255,255,255,0.7);text-decoration:none">← Back to mods</a>
+    <a href="/mods/" style="font-family:var(--mg-font-mono);font-size:12px;color:rgba(255,255,255,0.7);text-decoration:none">← Back to mods</a>
     <div style="font-family:var(--mg-font-pixel);font-size:10px;color:#6fb5ff;letter-spacing:1.5px;margin:24px 0 18px">▲ SUBMIT A MOD</div>
     <h1 style="font-family:var(--mg-font-display);font-weight:600;font-size:clamp(44px,6vw,80px);line-height:1.0;letter-spacing:-0.025em;margin:0 0 20px">Ship your rules.</h1>
     <p style="font-family:var(--mg-font-body);font-size:18px;line-height:1.6;color:rgba(255,255,255,0.78);margin:0">Tell us about your mod. We'll review it, play it, and if it works at the table — publish it.</p>
@@ -93,7 +94,7 @@ textarea.field-input { resize:vertical;min-height:120px; }
 </section>
 
 <div id="footer-root"></div>
-<script src="_mg.js"></script>
+<script src="../_mg.js"></script>
 <script>
 const { T, el, btn, linkBtn, navbar, footer } = MG;
 document.getElementById('nav-root').appendChild(navbar('Mods'));
@@ -206,8 +207,8 @@ s3n.appendChild(submitBtn);
 
 // Success
 const sbw = document.getElementById('success-btns');
-sbw.appendChild(linkBtn('Back to the library','mods.html','dark'));
-sbw.appendChild(linkBtn('Join Discord','community.html','outline-light',{color:'#14161c',border:'1px solid #3a3d44'}));
+sbw.appendChild(linkBtn('Back to the library','/mods/','dark'));
+sbw.appendChild(linkBtn('Join Discord','/community/','outline-light',{color:'#14161c',border:'1px solid #3a3d44'}));
 
 function goStep(n) {
   currentStep = n;

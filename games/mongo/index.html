@@ -3,8 +3,9 @@
 <head>
 <meta charset="utf-8">
 <meta name="viewport" content="width=device-width, initial-scale=1">
+<meta name="mg-base" content="/MODDABLE/moddable-website">
 <title>Mongo — Moddable.Games</title>
-<link rel="stylesheet" href="_mg.css">
+<link rel="stylesheet" href="../../_mg.css">
 <style>body{background:#000}</style>
 </head>
 <body>
@@ -16,7 +17,7 @@
   <div style="position:absolute;inset:0;background-image:url('data:image/svg+xml;utf8,<svg xmlns=\'http://www.w3.org/2000/svg\' width=\'56\' height=\'64\' viewBox=\'0 0 56 64\'><path d=\'M28 1 54 16v32L28 63 2 48V16z\' fill=\'none\' stroke=\'%233a9928\' stroke-opacity=\'0.18\' stroke-width=\'1\'/></svg>');background-size:56px 64px;animation:hexFloat 30s linear infinite"></div>
   <div style="position:absolute;inset:0;background:linear-gradient(180deg,rgba(0,0,0,0.4) 0%,transparent 50%,rgba(0,0,0,0.5) 100%);pointer-events:none"></div>
   <div style="position:relative;padding:64px 32px 100px;max-width:1200px;margin:0 auto;box-sizing:border-box">
-    <a href="index.html" style="font-family:var(--mg-font-mono);font-size:12px;color:rgba(255,255,255,0.7);text-decoration:none">← All games</a>
+    <a href="/" style="font-family:var(--mg-font-mono);font-size:12px;color:rgba(255,255,255,0.7);text-decoration:none">← All games</a>
     <div style="display:flex;gap:10px;margin-top:28px;flex-wrap:wrap;align-items:center">
       <span style="font-family:var(--mg-font-body);font-weight:600;font-size:11px;background:#3a9928;color:#fff;padding:4px 10px;border-radius:9999px">Original</span>
       <span style="font-family:var(--mg-font-mono);font-size:11px;color:rgba(255,255,255,0.7);padding:4px 10px;border:1px solid rgba(255,255,255,0.2);border-radius:9999px">Open playtest · CC BY-NC-SA</span>
@@ -63,7 +64,7 @@
 </section>
 
 <div id="footer-root"></div>
-<script src="_mg.js"></script>
+<script src="../../_mg.js"></script>
 <script>
 const { T, el, linkBtn, navbar, footer } = MG;
 document.getElementById('nav-root').appendChild(navbar('Games'));

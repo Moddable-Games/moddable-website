@@ -3,8 +3,9 @@
 <head>
 <meta charset="utf-8">
 <meta name="viewport" content="width=device-width, initial-scale=1">
+<meta name="mg-base" content="/MODDABLE/moddable-website">
 <title>News — Moddable.Games</title>
-<link rel="stylesheet" href="_mg.css">
+<link rel="stylesheet" href="../_mg.css">
 <style>body{background:#f5f4ef}</style>
 </head>
 <body>
@@ -34,9 +35,9 @@
 </section>
 
 <div id="footer-root"></div>
-<script src="_mg.js"></script>
+<script src="../_mg.js"></script>
 <script>
-const { T, el, linkBtn, navbar, footer, pageHero } = MG;
+const { T, el, linkBtn, navbar, footer, pageHero, url } = MG;
 document.getElementById('nav-root').appendChild(navbar('News'));
 document.getElementById('footer-root').appendChild(footer());
 document.getElementById('page-hero').appendChild(pageHero({
@@ -69,7 +70,7 @@ function postCover(color, big=false) {
 // Featured post
 const fp = document.getElementById('featured-post');
 const feat = POSTS[0];
-const fa = el('a',{href:'news-post.html',style:{display:'grid',gridTemplateColumns:'1.1fr 1fr',gap:'40px',alignItems:'center',background:'#fff',border:'1px solid #e6e3d8',borderRadius:'20px',padding:'32px',textDecoration:'none',color:'inherit',transition:'border-color 180ms'}});
+const fa = el('a',{href:url('/news/nuking-catan/'),style:{display:'grid',gridTemplateColumns:'1.1fr 1fr',gap:'40px',alignItems:'center',background:'#fff',border:'1px solid #e6e3d8',borderRadius:'20px',padding:'32px',textDecoration:'none',color:'inherit',transition:'border-color 180ms'}});
 fa.addEventListener('mouseenter',()=>fa.style.borderColor='#14161c');
 fa.addEventListener('mouseleave',()=>fa.style.borderColor='#e6e3d8');
 fa.appendChild(postCover(feat.cover, true));
@@ -106,7 +107,7 @@ function renderPosts() {
   const grid = document.getElementById('posts-grid');
   grid.innerHTML = '';
   visible.forEach(p => {
-    const a = el('a',{href:'news-post.html',style:{display:'flex',flexDirection:'column',gap:'16px',padding:'20px',background:'#fff',border:'1px solid #e6e3d8',borderRadius:'16px',textDecoration:'none',color:'inherit',transition:'border-color 180ms'}});
+    const a = el('a',{href:url('/news/nuking-catan/'),style:{display:'flex',flexDirection:'column',gap:'16px',padding:'20px',background:'#fff',border:'1px solid #e6e3d8',borderRadius:'16px',textDecoration:'none',color:'inherit',transition:'border-color 180ms'}});
     a.addEventListener('mouseenter',()=>a.style.borderColor='#14161c');
     a.addEventListener('mouseleave',()=>a.style.borderColor='#e6e3d8');
     a.appendChild(postCover(p.cover));

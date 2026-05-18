@@ -3,8 +3,9 @@
 <head>
 <meta charset="utf-8">
 <meta name="viewport" content="width=device-width, initial-scale=1">
+<meta name="mg-base" content="/MODDABLE/moddable-website">
 <title>All mods — Moddable.Games</title>
-<link rel="stylesheet" href="_mg.css">
+<link rel="stylesheet" href="../_mg.css">
 <style>body { background:#f5f4ef; }</style>
 </head>
 <body>
@@ -39,15 +40,15 @@
       <div style="font-family:var(--mg-font-pixel);font-size:10px;color:#d11a1a;letter-spacing:1.5px;margin-bottom:12px">▲ NO MATCH</div>
       <h3 style="font-family:var(--mg-font-display);font-weight:600;font-size:24px;color:#14161c;margin:0 0 8px">Nothing in the library matches.</h3>
       <p style="font-family:var(--mg-font-body);font-size:15px;color:#4f5764;margin:0 0 20px">Want to write the mod yourself?</p>
-      <a href="submit.html" style="display:inline-flex;align-items:center;height:48px;padding:0 22px;background:#14161c;color:#fff;border-radius:9999px;font-family:var(--mg-font-body);font-weight:600;font-size:15px;text-decoration:none">Submit a mod</a>
+      <a href="/submit/" style="display:inline-flex;align-items:center;height:48px;padding:0 22px;background:#14161c;color:#fff;border-radius:9999px;font-family:var(--mg-font-body);font-weight:600;font-size:15px;text-decoration:none">Submit a mod</a>
     </div>
   </div>
 </section>
 
 <div id="footer-root"></div>
-<script src="_mg.js"></script>
+<script src="../_mg.js"></script>
 <script>
-const { navbar, footer, modCard } = MG;
+const { navbar, footer, modCard, url } = MG;
 document.getElementById('nav-root').appendChild(navbar('Mods'));
 document.getElementById('footer-root').appendChild(footer());
 
@@ -56,7 +57,7 @@ const ALL_MODS = [
   { category:'Reskin',           baseGame:'Talisman 4e',
     title:'Talisman: Hexed',
     body:"Replaces the Talisman boards with 61 hexagonal tiles arranged in concentric rings — open-world hex system, every game lays out differently.",
-    stats:'2–6 players · 90 min · 13+', href:'mod-detail.html', source:'Moddable.Games' },
+    stats:'2–6 players · 90 min · 13+', href:url('/mods/talisman-hexed/'), source:'Moddable.Games' },
 
   { category:'Rebalance',        baseGame:'Twilight Imperium 4e',
     title:'Hyper Imperium',

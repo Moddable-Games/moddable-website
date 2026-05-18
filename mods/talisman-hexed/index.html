@@ -3,8 +3,9 @@
 <head>
 <meta charset="utf-8">
 <meta name="viewport" content="width=device-width, initial-scale=1">
+<meta name="mg-base" content="/MODDABLE/moddable-website">
 <title>Talisman: Hexed — Moddable.Games</title>
-<link rel="stylesheet" href="_mg.css">
+<link rel="stylesheet" href="../../_mg.css">
 <style>
 body { background:#000; }
 .rules-sidebar { position:sticky; top:96px; align-self:start; }
@@ -18,7 +19,7 @@ body { background:#000; }
 <section style="position:relative;color:#fff;overflow:hidden;isolation:isolate;background:#000">
   <div style="position:absolute;right:-200px;top:40%;width:700px;height:700px;background:radial-gradient(circle,rgba(12,79,141,0.5) 0%,transparent 60%);pointer-events:none"></div>
   <div style="position:relative;z-index:2;padding:56px 32px 100px;max-width:1200px;margin:0 auto;box-sizing:border-box">
-    <a href="mods.html" style="font-family:var(--mg-font-mono);font-size:12px;color:rgba(255,255,255,0.7);text-decoration:none">← All mods</a>
+    <a href="/mods/" style="font-family:var(--mg-font-mono);font-size:12px;color:rgba(255,255,255,0.7);text-decoration:none">← All mods</a>
     <div style="display:flex;gap:10px;margin-top:24px;flex-wrap:wrap;align-items:center">
       <span style="font-family:var(--mg-font-body);font-weight:600;font-size:11px;background:#0c4f8d;color:#fff;padding:4px 10px;border-radius:9999px">Reskin</span>
       <span style="font-family:var(--mg-font-mono);font-size:11px;color:rgba(255,255,255,0.7);padding:4px 10px;border:1px solid rgba(255,255,255,0.2);border-radius:9999px">base: Talisman 4e (revised)</span>
@@ -60,7 +61,7 @@ body { background:#000; }
 </section>
 
 <div id="footer-root"></div>
-<script src="_mg.js"></script>
+<script src="../../_mg.js"></script>
 <script>
 const { T, el, linkBtn, navbar, footer, modCard } = MG;
 document.getElementById('nav-root').appendChild(navbar('Mods'));
