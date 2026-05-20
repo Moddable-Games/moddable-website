@@ -46,6 +46,16 @@
   </div>
 </section>
 
+<section class="mg-section mg-section--white" id="dungeon-chess">
+  <div class="mg-container">
+    <div class="mg-eyebrow mg-eyebrow--green">&#9650; FEATURED VARIANT</div>
+    <h2 class="mg-heading-lg">Dungeon Chess.</h2>
+    <p class="mg-body-sub">Chess as an asymmetric skirmish and dungeon crawler. Four races, XP, spells, modular boards — our catalyst for crowdfunding the catalogue.</p>
+    <div id="dc-races" class="mg-grid-2"></div>
+    <div id="dc-hooks" class="mg-grid-2" data-reveal="up"></div>
+  </div>
+</section>
+
 <section class="mg-dark-center">
   <div class="mg-dark-center__bloom" data-bloom="blue"></div>
   <div class="mg-dark-center__inner">
@@ -111,6 +121,52 @@ VARIANTS.forEach(s => {
     a.appendChild(link);
   }
   vg.appendChild(a);
+});
+
+// Dungeon Chess races
+const DC_RACES = [
+  {name:'Demonics',  accent:'#d11a1a', desc:'Burn everything. Capturing pieces fuels area-of-effect hellfire.'},
+  {name:'Wraiths',   accent:'#6b4fa0', desc:'Phase through walls. Haunt tiles, making them dangerous for enemies.'},
+  {name:'Knights',   accent:'#c5a022', desc:'Hold the line. Adjacent allies strengthen each other defensively.'},
+  {name:'Verdants',  accent:'#3a9928', desc:'Grow the board. Place new tiles, heal allies, turn hazards into advantages.'},
+];
+const dcr = document.getElementById('dc-races');
+DC_RACES.forEach(r => {
+  const d = el('div',{class:'mg-card mg-card--light mg-card--row'});
+  const icon = el('div',{class:'mg-card__icon'});
+  icon.style.background = r.accent;
+  icon.textContent = '♟';
+  d.appendChild(icon);
+  const txt = el('div');
+  const title = el('div',{class:'mg-card__mono-title'});
+  title.style.color = r.accent;
+  title.textContent = r.name;
+  txt.appendChild(title);
+  txt.appendChild(el('div',{class:'mg-card__desc'},r.desc));
+  d.appendChild(txt); dcr.appendChild(d);
+});
+
+// Dungeon Chess hooks
+const DC_HOOKS = [
+  {name:'races.yaml',    desc:'Four playable races with distinct piece types, spells, and XP trees.'},
+  {name:'board.lua',     desc:'Dungeon tile generation — traps vs treasures, board shape, new tile types.'},
+  {name:'campaign.yaml', desc:'Legacy progression — XP persistence, carry-over, campaign end conditions.'},
+  {name:'spells.yaml',   desc:'Every racial spell with costs, effects, and targeting rules.'},
+];
+const dch = document.getElementById('dc-hooks');
+DC_HOOKS.forEach(h => {
+  const d = el('div',{class:'mg-card mg-card--row'});
+  const icon = el('div',{class:'mg-card__icon'});
+  icon.style.background = T.green;
+  icon.textContent = '◈';
+  d.appendChild(icon);
+  const txt = el('div');
+  const title = el('div',{class:'mg-card__mono-title'});
+  title.style.color = T.green;
+  title.textContent = h.name;
+  txt.appendChild(title);
+  txt.appendChild(el('div',{class:'mg-card__desc'},h.desc));
+  d.appendChild(txt); dch.appendChild(d);
 });
 
 const FEATURES = ['Private sessions','Cross-device','Async play'];
