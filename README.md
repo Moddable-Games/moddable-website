@@ -12,7 +12,7 @@ A multi-page marketing site and tools platform for an open-source board game mod
 HTML + Vanilla JS + Zero dependencies + Zero build step
 ```
 
-One shared component library (`_mg.js` + `_mg.css`), one `index.html` per route.
+One shared component library (`js/_mg.js` + `css/_mg.css`), one `index.html` per route.
 
 ---
 
@@ -22,18 +22,22 @@ One shared component library (`_mg.js` + `_mg.css`), one `index.html` per route.
 |-----|------|
 | `/` | Home |
 | `/mods/` | Filterable mod library |
-| `/mods/talisman-hexed/` | Mod detail (sticky TOC, rule sections) |
-| `/games/endless-skies/` | Endless Skies game page |
-| `/games/mongo/` | Mongo game page |
-| `/games/nukes/` | Nukes game page |
+| `/mods/[slug]/` | 12 mod detail pages |
+| `/games/` | Games hub |
+| `/games/nukes/` | Nukes |
+| `/games/mongo/` | Mongo |
+| `/games/endless-skies/` | Endless Skies |
+| `/games/moddable-chess/` | Moddable Chess |
+| `/games/dungeon-chess/` | Dungeon Chess |
 | `/news/` | News index |
-| `/news/nuking-catan/` | Article: Nuking Catan |
+| `/news/[slug]/` | 12 article pages |
 | `/tools/` | Tools hub (dice, names, scores) |
 | `/tools/ti/` | Twilight Imperium tools |
 | `/tools/talisman/` | Talisman tools |
 | `/tools/nukes/` | Nukes tools |
-| `/submit/` | 3-step mod submission form |
+| `/submit/` | Mod submission form |
 | `/about/` | About |
+| `/about/roadmap/` | 18-month roadmap |
 | `/team/` | Team |
 | `/community/` | Community / Discord |
 
@@ -97,6 +101,24 @@ MG.btn(label, variant, onClick)   // Pill button
 MG.cubeSVG(size)           // Tri-colour cube logo
 MG.url(path)               // Base-path-aware URL helper
 ```
+
+---
+
+### Changelog
+
+#### 2026-05-20
+- Scroll-reveal animation system, hero entrance choreography, button micro-interactions
+- Game page heroes: two-column layout with floating logos
+- Homepage: nuked-family illustration, Hyper Imperium logo, glowing section dividers
+- All 12 news articles created from WordPress, news index linked correctly
+- Nav dropdowns upgraded with animation and blue accent states
+- Removed all inline style attributes; semantic BEM class system throughout
+- Created 12 mod detail pages, games hub, Moddable Chess, Dungeon Chess, roadmap
+- Fixed double-url bug, removed redundant nav items, cleaned unused assets
+
+#### 2026-05-19
+- Restructured for clean URLs and GitHub Pages deployment
+- Initial site commit
 
 ---
 
