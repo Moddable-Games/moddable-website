@@ -7,14 +7,8 @@
 <title>Moddable Chess — Moddable.Games</title>
 <link rel="stylesheet" href="../../css/_mg.css">
 <style>
-.spinning-cube {
-  animation: spinCube 8s linear infinite;
-  filter: drop-shadow(0 8px 40px rgba(58,123,232,0.5));
-}
-@keyframes spinCube {
-  0% { transform: rotateY(0deg) rotateX(5deg); }
-  100% { transform: rotateY(360deg) rotateX(5deg); }
-}
+#hero-cube { width: clamp(180px, 22vw, 280px); height: clamp(180px, 22vw, 280px); }
+#hero-cube canvas { width: 100% !important; height: 100% !important; }
 </style>
 </head>
 <body class="mg-section--dark">
@@ -101,16 +95,56 @@
 </section>
 
 <div id="footer-root"></div>
+<script src="https://cdn.jsdelivr.net/npm/three@0.160.0/build/three.min.js"></script>
 <script src="../../js/_mg.js"></script>
 <script>
 const { T, el, linkBtn, navbar, footer, url } = MG;
 document.getElementById('nav-root').appendChild(navbar('Games'));
 document.getElementById('footer-root').appendChild(footer());
 
-// Hero cube
-const heroCube = MG.cubeSVG(220);
-heroCube.classList.add('spinning-cube');
-document.getElementById('hero-cube').appendChild(heroCube);
+// 3D Hero cube (Three.js)
+(function(){
+  const container = document.getElementById('hero-cube');
+  const w = container.clientWidth || 260, h = container.clientHeight || 260;
+  const scene = new THREE.Scene();
+  const camera = new THREE.PerspectiveCamera(40, w/h, 0.1, 100);
+  camera.position.set(0, 0.5, 4);
+  const renderer = new THREE.WebGLRenderer({ alpha:true, antialias:true });
+  renderer.setSize(w, h);
+  renderer.setPixelRatio(Math.min(window.devicePixelRatio, 2));
+  container.appendChild(renderer.domElement);
+
+  const geo = new THREE.BoxGeometry(1.6, 1.6, 1.6);
+  const mats = [
+    new THREE.MeshStandardMaterial({color:0x0c4f8d, metalness:0.3, roughness:0.4}),
+    new THREE.MeshStandardMaterial({color:0x0c4f8d, metalness:0.3, roughness:0.4}),
+    new THREE.MeshStandardMaterial({color:0xd11a1a, metalness:0.3, roughness:0.4}),
+    new THREE.MeshStandardMaterial({color:0xd11a1a, metalness:0.3, roughness:0.4}),
+    new THREE.MeshStandardMaterial({color:0x3a9928, metalness:0.3, roughness:0.4}),
+    new THREE.MeshStandardMaterial({color:0x3a9928, metalness:0.3, roughness:0.4}),
+  ];
+  const cube = new THREE.Mesh(geo, mats);
+  scene.add(cube);
+
+  const edges = new THREE.LineSegments(
+    new THREE.EdgesGeometry(geo),
+    new THREE.LineBasicMaterial({color:0xffffff, transparent:true, opacity:0.3})
+  );
+  cube.add(edges);
+
+  scene.add(new THREE.AmbientLight(0xffffff, 0.6));
+  const dir = new THREE.DirectionalLight(0x6fb5ff, 1.2);
+  dir.position.set(2, 3, 4);
+  scene.add(dir);
+
+  function animate(){
+    requestAnimationFrame(animate);
+    cube.rotation.y += 0.008;
+    cube.rotation.x += 0.003;
+    renderer.render(scene, camera);
+  }
+  animate();
+})();
 
 document.querySelector('[data-gradient]').style.background = 'linear-gradient(180deg,#0a0d2a 0%,#0c2e5a 40%,#000 100%)';
 document.querySelector('[data-hex]').style.backgroundImage = `url('../../img/hex-grid-blue.svg')`;
