@@ -71,8 +71,8 @@
 <!-- Nuke Catan -->
 <section class="home-nuke">
   <div class="home-nuke__bloom"></div>
-  <div class="home-nuke__inner hero-anim">
-    <div class="mg-eyebrow mg-eyebrow--red">&#9650; TOTAL CONVERSION &middot; CATAN</div>
+  <div class="home-nuke__inner">
+    <div class="mg-eyebrow mg-eyebrow--red" data-reveal="fade">&#9650; TOTAL CONVERSION &middot; CATAN</div>
     <img src="img/nuked-family.png" alt="Family playing a board game with a mushroom cloud" class="home-nuke__img" data-reveal="scale">
     <h2 class="home-nuke__heading" data-reveal="up">Are you ready<br>to <em>nuke</em> Catan?</h2>
     <p class="home-nuke__body" data-reveal="up">A family-friendly post-apocalyptic rules overhaul. Same tiles, same dice, brand new economy — and yes, your kids are going to love arguing about who set fire to the road network.</p>
@@ -202,18 +202,19 @@ function renderGrid() {
   gridEl.innerHTML = '';
   const visible = activeFilter === 'All' ? MODS : MODS.filter(m => m.category === activeFilter);
   visible.forEach(m => gridEl.appendChild(modCard(m)));
+  MG.initReveal();
 }
 
 renderFilter(); renderGrid();
 
 const nb2 = document.getElementById('nuke-btns');
 nb2.appendChild(linkBtn('Download the rules', '#', 'red'));
-nb2.appendChild(linkBtn('Read the brief', '#', 'outline-dark'));
+nb2.appendChild(linkBtn('Read the brief', '/mods/nuke-catan/', 'outline-dark'));
 
 // Featured mod buttons
 const fb = document.getElementById('featured-btns');
 fb.appendChild(linkBtn('Download the rules', '#', 'primary'));
-fb.appendChild(linkBtn('View the components', '#', 'outline-dark'));
+fb.appendChild(linkBtn('View the components', '/mods/hyper-imperium/', 'outline-dark'));
 
 // Featured stats
 const stats = [['Players','3–6'],['Time','4–6 hr'],['Age','14+'],['Version','v2.0.1']];
@@ -228,13 +229,13 @@ stats.forEach(([k,v], i) => {
 
 // News grid
 const NEWS = [
-  { tag:'Devlog', date:'May 12', title:'Mongo enters open playtest', body:'Our second original game opens its playtest doors. 200 spots.' },
-  { tag:'Mod update', date:'May 09', title:'Econopoly v1.4: the audit patch', body:'Cash-pile tax cap raised. Bankruptcy chain reactions buffed.' },
-  { tag:'Community', date:'May 02', title:'Mod jam #3 wraps up', body:'Twelve submissions. One won a literal trophy made of meeples.' },
+  { tag:'Essay', date:'May 2026', title:'Beyond The Box', body:'The art of board game design begins and ends with the box — but what happens when we open it?', slug:'beyond-the-box' },
+  { tag:'Essay', date:'Apr 2026', title:'The Ancients', body:'We rarely pause to consider what has already endured — games older than history itself.', slug:'the-ancients' },
+  { tag:'Philosophy', date:'Mar 2026', title:'Making Mods Matter', body:'Those who tinker, tailor and say lore beyond casual play — and why they deserve better tools.', slug:'making-mods-matter' },
 ];
 const ng = document.getElementById('news-grid');
 NEWS.forEach(n => {
-  const a = el('a', { href:url('/news/nuking-catan/'), class:'news-card mg-lift', 'data-reveal':'up' });
+  const a = el('a', { href:url(`/news/${n.slug}/`), class:'news-card mg-lift', 'data-reveal':'up' });
   const row = el('div', { class:'news-card__header' });
   row.appendChild(el('span', { class:'news-card__tag' }, n.tag));
   row.appendChild(el('span', { class:'news-card__date' }, n.date));

@@ -155,7 +155,7 @@ const MG = (() => {
   /* ── NavBar ──────────────────────────────────────────────────────────── */
   function navbar(activeId) {
     const NAV_ITEMS = [
-      { id:'Mods', href:url('/mods/'), children:[['Total conversions',url('/mods/')],['Rebalances',url('/mods/')],['Reskins',url('/mods/')],['Submit a mod',url('/submit/')]] },
+      { id:'Mods', href:url('/mods/'), children:[['Total conversions',url('/mods/#Total conversion')],['Rebalances',url('/mods/#Rebalance')],['Reskins',url('/mods/#Reskin')],['Submit a mod',url('/submit/')]] },
       { id:'Games', href:url('/games/'), children:[['Nukes',url('/games/nukes/')],['Mongo',url('/games/mongo/')],['Endless Skies',url('/games/endless-skies/')],['Moddable Chess',url('/games/moddable-chess/')],['Dungeon Chess',url('/games/dungeon-chess/')]] },
       { id:'Tools', href:url('/tools/'), children:[['Workbench',url('/tools/')],['TI tools',url('/tools/ti/')],['Talisman tools',url('/tools/talisman/')],['Nukes tools',url('/tools/nukes/')]] },
       { id:'News', href:url('/news/') },
@@ -266,7 +266,7 @@ const MG = (() => {
   /* ── Footer ──────────────────────────────────────────────────────────── */
   function footer() {
     const COLS = [
-      { title:'Mods',      links:[['Total conversions',url('/mods/')],['Rebalances',url('/mods/')],['Reskins',url('/mods/')],['Submit a mod',url('/submit/')]] },
+      { title:'Mods',      links:[['Total conversions',url('/mods/#Total conversion')],['Rebalances',url('/mods/#Rebalance')],['Reskins',url('/mods/#Reskin')],['Submit a mod',url('/submit/')]] },
       { title:'Games',     links:[['Endless Skies',url('/games/endless-skies/')],['Mongo',url('/games/mongo/')],['Nukes',url('/games/nukes/')],['Moddable Chess',url('/games/moddable-chess/')],['Dungeon Chess',url('/games/dungeon-chess/')]] },
       { title:'Tools',     links:[['Workbench',url('/tools/')],['TI4 tools',url('/tools/ti/')],['Talisman tools',url('/tools/talisman/')],['Nukes tools',url('/tools/nukes/')]] },
       { title:'Community', links:[['Discord',url('/community/')],['News',url('/news/')],['About',url('/about/')],['Team',url('/team/')],['Roadmap',url('/about/roadmap/')]] },

@@ -200,7 +200,7 @@ si.appendChild(el('span',{class:'news-search-wrap__icon'},'⌕'));
 si.appendChild(inp); searchWrap.appendChild(si); sidebar.appendChild(searchWrap);
 
 // Hot topics
-const TOPICS = [['Catan',23],['TI4',18],['Devlog',12],['Community',9],['Monopoly',7],['Chess',4]];
+const TOPICS = [['Chess',2],['Philosophy',3],['Essay',2],['Catan',1],['TI4',1],['Talisman',1],['Monopoly',1],['Community',1]];
 const ht = el('div');
 ht.appendChild(el('div',{class:'mg-eyebrow mg-eyebrow--blue'},'▲ HOT TOPICS'));
 const tul = el('ul',{class:'news-topic-list'});
@@ -209,12 +209,13 @@ TOPICS.forEach(([t,n]) => {
   const a = el('a',{href:'#',class:'news-topic-list__link'});
   a.appendChild(el('span',{class:'news-topic-list__name'},t));
   a.appendChild(el('span',{class:'news-topic-list__count'},String(n)));
+  a.addEventListener('click',(e)=>{e.preventDefault();activeCat=t;renderFilters();renderPosts();});
   li.appendChild(a); tul.appendChild(li);
 });
 ht.appendChild(tul); sidebar.appendChild(ht);
 
 // Archive
-const ARCHIVE = [['May 2026',3],['April 2026',2],['March 2026',2],['January 2026',1]];
+const ARCHIVE = [['May 2026',1],['April 2026',1],['March 2026',4],['October 2025',2],['July 2025',3],['June 2025',1]];
 const arc = el('div');
 arc.appendChild(el('div',{class:'mg-eyebrow mg-eyebrow--blue'},'▲ ARCHIVE'));
 const aul = el('ul',{class:'news-archive-list'});

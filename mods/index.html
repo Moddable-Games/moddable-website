@@ -173,9 +173,14 @@ function renderGrid() {
   if (visible.length === 0) { empty.style.display = 'block'; return; }
   empty.style.display = 'none';
   visible.forEach(m => grid.appendChild(MG.modCard(m)));
+  MG.initReveal();
 }
 
 document.getElementById('search-input').addEventListener('input', e => { searchVal = e.target.value; renderGrid(); });
+
+// Pre-filter from URL hash (e.g. /mods/#Total%20conversion)
+const hashCat = decodeURIComponent(location.hash.slice(1));
+if (hashCat && filters.includes(hashCat)) activeCat = hashCat;
 renderFilters(); renderGrid();
 </script>
 </body>
