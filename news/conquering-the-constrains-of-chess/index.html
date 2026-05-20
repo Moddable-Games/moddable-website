@@ -10,9 +10,11 @@
 body { background: #f5f4ef; }
 
 /* Post header */
-.post-header { position: relative; color: #fff; overflow: hidden; background: #000; }
+.post-header { position: relative; color: #fff; overflow: hidden; background: #000; min-height: 520px; display: flex; align-items: center; justify-content: center; }
+.post-header__img { position: absolute; inset: 0; width: 100%; height: 100%; object-fit: cover; object-position: center top; opacity: 0.5; pointer-events: none; transform: scale(1.08); transform-origin: center center; will-change: transform, opacity; }
+.post-header__inner { transition: transform 0.1s linear, opacity 0.1s linear; will-change: transform, opacity; }
 .post-header__bloom { position: absolute; left: 50%; bottom: -200px; transform: translateX(-50%); width: 1100px; height: 500px; background: radial-gradient(ellipse, rgba(209,26,26,0.4) 0%, transparent 65%); pointer-events: none; filter: blur(20px); }
-.post-header__inner { position: relative; padding: 48px 32px 88px; max-width: 800px; margin: 0 auto; text-align: center; box-sizing: border-box; }
+.post-header__inner { position: relative; padding: 96px 32px 96px; max-width: 800px; width: 100%; text-align: center; box-sizing: border-box; }
 .post-header__back { font-family: var(--mg-font-mono); font-size: 12px; color: rgba(255,255,255,0.7); text-decoration: none; }
 .post-header__tags { display: flex; gap: 8px; justify-content: center; margin-top: 28px; flex-wrap: wrap; }
 .post-header__cat { font-family: var(--mg-font-body); font-weight: 600; font-size: 11px; background: #d11a1a; color: #fff; padding: 4px 10px; border-radius: 9999px; }
@@ -55,7 +57,8 @@ body { background: #f5f4ef; }
 .post-more__heading { font-family: var(--mg-font-display); font-weight: 600; font-size: 40px; line-height: 1.1; letter-spacing: -0.5px; color: #14161c; margin: 0 0 32px; }
 .post-more__grid { display: grid; grid-template-columns: repeat(3, 1fr); gap: 20px; }
 .post-more-card { display: flex; flex-direction: column; gap: 14px; padding: 20px; background: #f5f4ef; border-radius: 16px; text-decoration: none; color: inherit; }
-.post-more-card__cover { height: 120px; border-radius: 12px; }
+.post-more-card__cover { height: 120px; border-radius: 12px; overflow: hidden; position: relative; }
+.post-more-card__img { position: absolute; inset: 0; width: 100%; height: 100%; object-fit: cover; }
 .post-more-card__meta { font-family: var(--mg-font-mono); font-size: 11px; color: #7a8290; letter-spacing: 0.3px; }
 .post-more-card__title { font-family: var(--mg-font-display); font-weight: 600; font-size: 20px; line-height: 1.2; letter-spacing: -0.2px; color: #14161c; margin: 0; }
 
@@ -71,6 +74,7 @@ body { background: #f5f4ef; }
 
 <!-- Post header -->
 <section class="post-header">
+  <img src="../../img/news/conquering-the-constrains-of-chess.jpg" alt="" class="post-header__img">
   <div class="post-header__bloom"></div>
   <div class="post-header__inner">
     <a href="/news/" class="post-header__back">&larr; All posts</a>
@@ -105,17 +109,17 @@ body { background: #f5f4ef; }
     <article class="prose">
       <p class="lede">If chess was designed today, how would the game differ? It's a question that has occupied a decade of thinking &mdash; and it starts with understanding where deterministic strategy games came from.</p>
       <p>Checkers appeared approximately 5,000 years ago. Go followed around 4,000 years ago. Chess arrived roughly 1,500 years ago. Each represented a leap in strategic complexity, but all three share a common constraint: they are games for exactly two players, played on a static board.</p>
-      <h2>The problem with predictability.</h2>
+      <h2 id="the-problem-with-predictability">The problem with predictability.</h2>
       <p>Chess's opening theory is so deeply mapped that grandmasters routinely play 15-20 moves from memory before original thought begins. The static 8x8 grid with fixed starting positions means the game's possibility space, while enormous, is ultimately finite and increasingly charted.</p>
       <p>This is not a flaw &mdash; it's a feature that has sustained the game for centuries. But it does raise the question: what would a modern designer do differently?</p>
-      <h2>Hexagons and infinite setups.</h2>
+      <h2 id="hexagons-and-infinite-setups">Hexagons and infinite setups.</h2>
       <p>The proposed solution begins with the board itself. Replace squares with hexagons. Introduce diverse biomes &mdash; terrain types that modify movement and engagement rules. Suddenly, every game starts from a unique configuration.</p>
       <p>A hexagonal grid also removes the two-player constraint. With six natural axes instead of four, the geometry supports three, four, or six players without awkward asymmetry. The board becomes a landscape rather than a battlefield.</p>
       <blockquote>"If you change the board, you change the game. If you make the board modular, you make the game infinite."</blockquote>
-      <h2>Accessibility as a design principle.</h2>
+      <h2 id="accessibility-as-a-design-principle">Accessibility as a design principle.</h2>
       <p>Modern board games have trended toward increasing complexity and cost. A single game can require hundreds of miniatures, a 60-page rulebook, and a four-figure investment. Chess's genius was always its accessibility: 32 pieces, 64 squares, rules you can teach in ten minutes.</p>
       <p>Any modern reimagining must honour that accessibility while expanding the strategic depth. Fewer components, more emergent complexity. Simple rules, infinite expression.</p>
-      <h2>What Moddable.Games is building.</h2>
+      <h2 id="what-moddablegames-is-building">What Moddable.Games is building.</h2>
       <p>This philosophy &mdash; modular boards, emergent strategy, open-source rules &mdash; is the foundation of everything we publish. Not just chess variants, but an entire ecosystem of games designed to be modified, remixed, and owned by their communities.</p>
       <p><em>Explore our chess mods in the library: Fog of War Chess, 4-Player Chess, and Hexagonal Chess (Glinski) are all available for download now.</em></p>
     </article>
@@ -158,29 +162,80 @@ document.getElementById('footer-root').appendChild(footer());
 });
 
 // TOC
-const TOC = ['The problem with predictability','Hexagons and infinite setups','Accessibility as a design principle','What Moddable.Games is building'];
+const TOC = [{label:'The problem with predictability', id:'the-problem-with-predictability'}, {label:'Hexagons and infinite setups', id:'hexagons-and-infinite-setups'}, {label:'Accessibility as a design principle', id:'accessibility-as-a-design-principle'}, {label:'What Moddable.Games is building', id:'what-moddablegames-is-building'}];
 const tul = document.getElementById('toc-list');
 TOC.forEach((t,i) => {
-  const li = el('li',{class: i===0 ? 'post-toc__item post-toc__item--active' : 'post-toc__item'});
-  li.appendChild(el('a',{href:'#',class: i===0 ? 'post-toc__link post-toc__link--active' : 'post-toc__link post-toc__link--inactive'},t));
+  const li = el('li',{class:'post-toc__item'});
+  const a = el('a',{href:'#'+t.id, class:'post-toc__link post-toc__link--inactive'},t.label);
+  a.addEventListener('click', function(e) { e.preventDefault(); document.getElementById(t.id).scrollIntoView({behavior:'smooth', block:'start'}); });
+  li.appendChild(a);
   tul.appendChild(li);
 });
+(function() {
+  const items = tul.querySelectorAll('.post-toc__item');
+  const links = tul.querySelectorAll('.post-toc__link');
+  const ids = TOC.map(t => t.id);
+  function setActive(idx) {
+    items.forEach((li, i) => {
+      li.classList.toggle('post-toc__item--active', i === idx);
+      links[i].classList.toggle('post-toc__link--active', i === idx);
+      links[i].classList.toggle('post-toc__link--inactive', i !== idx);
+    });
+  }
+  setActive(0);
+  const observer = new IntersectionObserver(entries => {
+    entries.forEach(entry => {
+      if (entry.isIntersecting) {
+        const idx = ids.indexOf(entry.target.id);
+        if (idx !== -1) setActive(idx);
+      }
+    });
+  }, {rootMargin: '-20% 0px -60% 0px'});
+  ids.forEach(id => { const el = document.getElementById(id); if (el) observer.observe(el); });
+})();
 
 const dlBtn = linkBtn('Browse mods','#','red');
 dlBtn.classList.add('post-mod-card__dl');
 document.getElementById('mod-dl-btn').appendChild(dlBtn);
 
+// Hero parallax — slow zoom + scroll fade
+(function() {
+  const header = document.querySelector('.post-header');
+  const img = document.querySelector('.post-header__img');
+  const inner = document.querySelector('.post-header__inner');
+  if (!header || !img || !inner) return;
+  let ticking = false;
+  window.addEventListener('scroll', function() {
+    if (ticking) return;
+    ticking = true;
+    requestAnimationFrame(function() {
+      const rect = header.getBoundingClientRect();
+      const h = header.offsetHeight;
+      const progress = Math.max(0, Math.min(1, -rect.top / h));
+      const scale = 1.08 + progress * 0.12;
+      img.style.transform = 'scale(' + scale + ')';
+      img.style.opacity = 0.5 - progress * 0.35;
+      inner.style.transform = 'translateY(' + (progress * -40) + 'px)';
+      inner.style.opacity = 1 - progress * 0.9;
+      ticking = false;
+    });
+  });
+})();
 // More posts
 const MORE = [
-  {cover:'#0c4f8d', cat:'History',    date:'Oct 8, 2025',  title:'Making a Masterpiece by Modification', href:url('/news/making-a-masterpiece-by-modification/')},
-  {cover:'#d11a1a', cat:'Deep dive',  date:'Sep 12, 2025', title:'Nuking Catan', href:url('/news/nuking-catan/')},
-  {cover:'#3a9928', cat:'History',    date:'Jul 18, 2025', title:'Spiralling Paths of Power and Peril', href:url('/news/spiralling-paths-of-power-and-peril/')},
+  {cover:'#0c4f8d', cat:'Essay', date:'May 2026', title:'Beyond The Box', img:'beyond-the-box.jpg', href:url('/news/beyond-the-box/')},
+  {cover:'#3a9928', cat:'Philosophy', date:'Mar 2026', title:'The House Always Wins!', img:'the-house-always-wins.jpg', href:url('/news/the-house-always-wins/')},
+  {cover:'#0c4f8d', cat:'TI4', date:'Oct 2025', title:"Twilight's Prophecies Thunder On!", img:'twilights-prophecies-thunder-on.png', href:url('/news/twilights-prophecies-thunder-on/')},
 ];
 const mp = document.getElementById('more-posts');
 MORE.forEach(p => {
   const a = el('a',{href:p.href,class:'post-more-card'});
   const cover = el('div',{class:'post-more-card__cover'});
   cover.style.background = `linear-gradient(135deg,#0a0d2a 0%,${p.cover} 100%)`;
+  if (p.img) {
+    const img = el('img',{src:url(`/img/news/${p.img}`), alt:'', class:'post-more-card__img'});
+    cover.appendChild(img);
+  }
   a.appendChild(cover);
   a.appendChild(el('div',{class:'post-more-card__meta'},`${p.cat.toUpperCase()} · ${p.date}`));
   a.appendChild(el('h3',{class:'post-more-card__title'},p.title));

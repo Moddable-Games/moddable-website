@@ -10,9 +10,11 @@
 body { background: #f5f4ef; }
 
 /* Post header */
-.post-header { position: relative; color: #fff; overflow: hidden; background: #000; }
+.post-header { position: relative; color: #fff; overflow: hidden; background: #000; min-height: 520px; display: flex; align-items: center; justify-content: center; }
+.post-header__img { position: absolute; inset: 0; width: 100%; height: 100%; object-fit: cover; object-position: center top; opacity: 0.5; pointer-events: none; transform: scale(1.08); transform-origin: center center; will-change: transform, opacity; }
+.post-header__inner { transition: transform 0.1s linear, opacity 0.1s linear; will-change: transform, opacity; }
 .post-header__bloom { position: absolute; left: 50%; bottom: -200px; transform: translateX(-50%); width: 1100px; height: 500px; background: radial-gradient(ellipse, rgba(12,79,141,0.4) 0%, transparent 65%); pointer-events: none; filter: blur(20px); }
-.post-header__inner { position: relative; padding: 48px 32px 88px; max-width: 800px; margin: 0 auto; text-align: center; box-sizing: border-box; }
+.post-header__inner { position: relative; padding: 96px 32px 96px; max-width: 800px; width: 100%; text-align: center; box-sizing: border-box; }
 .post-header__back { font-family: var(--mg-font-mono); font-size: 12px; color: rgba(255,255,255,0.7); text-decoration: none; }
 .post-header__tags { display: flex; gap: 8px; justify-content: center; margin-top: 28px; flex-wrap: wrap; }
 .post-header__cat { font-family: var(--mg-font-body); font-weight: 600; font-size: 11px; background: #0c4f8d; color: #fff; padding: 4px 10px; border-radius: 9999px; }
@@ -55,7 +57,8 @@ body { background: #f5f4ef; }
 .post-more__heading { font-family: var(--mg-font-display); font-weight: 600; font-size: 40px; line-height: 1.1; letter-spacing: -0.5px; color: #14161c; margin: 0 0 32px; }
 .post-more__grid { display: grid; grid-template-columns: repeat(3, 1fr); gap: 20px; }
 .post-more-card { display: flex; flex-direction: column; gap: 14px; padding: 20px; background: #f5f4ef; border-radius: 16px; text-decoration: none; color: inherit; }
-.post-more-card__cover { height: 120px; border-radius: 12px; }
+.post-more-card__cover { height: 120px; border-radius: 12px; overflow: hidden; position: relative; }
+.post-more-card__img { position: absolute; inset: 0; width: 100%; height: 100%; object-fit: cover; }
 .post-more-card__meta { font-family: var(--mg-font-mono); font-size: 11px; color: #7a8290; letter-spacing: 0.3px; }
 .post-more-card__title { font-family: var(--mg-font-display); font-weight: 600; font-size: 20px; line-height: 1.2; letter-spacing: -0.2px; color: #14161c; margin: 0; }
 
@@ -71,6 +74,7 @@ body { background: #f5f4ef; }
 
 <!-- Post header -->
 <section class="post-header">
+  <img src="../../img/news/twilights-prophecies-thunder-on.png" alt="" class="post-header__img">
   <div class="post-header__bloom"></div>
   <div class="post-header__inner">
     <a href="/news/" class="post-header__back">&larr; All posts</a>
@@ -105,15 +109,15 @@ body { background: #f5f4ef; }
     <article class="prose">
       <p class="lede"><em>Twilight Imperium</em> is not a game you play on a whim. It is a 10-to-20-hour odyssey of galactic politics, fleet warfare, and trade negotiations that has, since its fourth edition, cemented itself as the most ambitious board game ever published.</p>
       <p>For years, it supported a maximum of six players. Then in 2020, Fantasy Flight Games released <em>Prophecy of Kings</em> &mdash; an expansion that pushed the player count to eight and added enough new factions, mechanics, and system tiles to make an already sprawling game feel genuinely infinite.</p>
-      <h2>Thunder's Edge arrives.</h2>
+      <h2 id="thunders-edge-arrives">Thunder's Edge arrives.</h2>
       <p>In 2025, Fantasy Flight announced <em>Thunder's Edge</em>, a second major expansion that introduces new units, a disconnected universe section, and &mdash; for the first time &mdash; an official variant called <em>Twilight's Fall</em>. It is, by any measure, a signal that the publisher believes in the longevity of this system.</p>
       <p>But the official expansions are only half the story.</p>
-      <h2>The modding community.</h2>
+      <h2 id="the-modding-community">The modding community.</h2>
       <p>Twilight Imperium's sandbox nature &mdash; its open negotiation, modular map, and politically-driven victory conditions &mdash; makes it uniquely suited to community modification. And the community has delivered.</p>
       <p>The most prominent example is <em>Discordant Stars</em>: a fan-made expansion featuring 34 new factions, fully compatible with Prophecy of Kings, alongside additional system tiles, exploration cards, relics, and action cards. It's staggering in scope and quality.</p>
       <blockquote>"Balanced through negotiation, politics and the unpredictable beauty of player interaction."</blockquote>
       <p>That quote captures why TI4 mods work. The game isn't balanced through mathematics alone &mdash; it's balanced through the humans at the table. Which means you can add almost anything and the system absorbs it.</p>
-      <h2>Hyper Imperium.</h2>
+      <h2 id="hyper-imperium">Hyper Imperium.</h2>
       <p>Our own contribution to the ecosystem is <em>Hyper Imperium</em> &mdash; a rebalance mod that tightens the early game economy, accelerates scoring, and introduces a crisis deck that punishes passive play. The goal: bring a typical 12-hour game down to 8 without losing the political depth that makes TI4 what it is.</p>
       <p><em>Hyper Imperium is in active development. Follow our progress on Discord or download the current ruleset from the mods library.</em></p>
     </article>
@@ -156,29 +160,80 @@ document.getElementById('footer-root').appendChild(footer());
 });
 
 // TOC
-const TOC = ["Thunder's Edge arrives","The modding community","Hyper Imperium"];
+const TOC = [{label:"Thunder's Edge arrives", id:'thunders-edge-arrives'}, {label:'The modding community', id:'the-modding-community'}, {label:'Hyper Imperium', id:'hyper-imperium'}];
 const tul = document.getElementById('toc-list');
 TOC.forEach((t,i) => {
-  const li = el('li',{class: i===0 ? 'post-toc__item post-toc__item--active' : 'post-toc__item'});
-  li.appendChild(el('a',{href:'#',class: i===0 ? 'post-toc__link post-toc__link--active' : 'post-toc__link post-toc__link--inactive'},t));
+  const li = el('li',{class:'post-toc__item'});
+  const a = el('a',{href:'#'+t.id, class:'post-toc__link post-toc__link--inactive'},t.label);
+  a.addEventListener('click', function(e) { e.preventDefault(); document.getElementById(t.id).scrollIntoView({behavior:'smooth', block:'start'}); });
+  li.appendChild(a);
   tul.appendChild(li);
 });
+(function() {
+  const items = tul.querySelectorAll('.post-toc__item');
+  const links = tul.querySelectorAll('.post-toc__link');
+  const ids = TOC.map(t => t.id);
+  function setActive(idx) {
+    items.forEach((li, i) => {
+      li.classList.toggle('post-toc__item--active', i === idx);
+      links[i].classList.toggle('post-toc__link--active', i === idx);
+      links[i].classList.toggle('post-toc__link--inactive', i !== idx);
+    });
+  }
+  setActive(0);
+  const observer = new IntersectionObserver(entries => {
+    entries.forEach(entry => {
+      if (entry.isIntersecting) {
+        const idx = ids.indexOf(entry.target.id);
+        if (idx !== -1) setActive(idx);
+      }
+    });
+  }, {rootMargin: '-20% 0px -60% 0px'});
+  ids.forEach(id => { const el = document.getElementById(id); if (el) observer.observe(el); });
+})();
 
 const dlBtn = linkBtn('Download rules','#','blue');
 dlBtn.classList.add('post-mod-card__dl');
 document.getElementById('mod-dl-btn').appendChild(dlBtn);
 
+// Hero parallax — slow zoom + scroll fade
+(function() {
+  const header = document.querySelector('.post-header');
+  const img = document.querySelector('.post-header__img');
+  const inner = document.querySelector('.post-header__inner');
+  if (!header || !img || !inner) return;
+  let ticking = false;
+  window.addEventListener('scroll', function() {
+    if (ticking) return;
+    ticking = true;
+    requestAnimationFrame(function() {
+      const rect = header.getBoundingClientRect();
+      const h = header.offsetHeight;
+      const progress = Math.max(0, Math.min(1, -rect.top / h));
+      const scale = 1.08 + progress * 0.12;
+      img.style.transform = 'scale(' + scale + ')';
+      img.style.opacity = 0.5 - progress * 0.35;
+      inner.style.transform = 'translateY(' + (progress * -40) + 'px)';
+      inner.style.opacity = 1 - progress * 0.9;
+      ticking = false;
+    });
+  });
+})();
 // More posts
 const MORE = [
-  {cover:'#d11a1a', cat:'Deep dive',  date:'Sep 12, 2025', title:'Nuking Catan', href:url('/news/nuking-catan/')},
-  {cover:'#3a9928', cat:'History',    date:'Jul 18, 2025', title:'Spiralling Paths of Power and Peril', href:url('/news/spiralling-paths-of-power-and-peril/')},
-  {cover:'#0c4f8d', cat:'Design',     date:'Jun 4, 2025',  title:'Conquering the Constrains of Chess', href:url('/news/conquering-the-constrains-of-chess/')},
+  {cover:'#d11a1a', cat:'Catan', date:'Jul 2025', title:'Nuking Catan', img:'nuking-catan.jpg', href:url('/news/nuking-catan/')},
+  {cover:'#d11a1a', cat:'Chess', date:'Jun 2025', title:'Conquering the Constraints of Chess', img:'conquering-the-constrains-of-chess.jpg', href:url('/news/conquering-the-constrains-of-chess/')},
+  {cover:'#3a9928', cat:'Philosophy', date:'Mar 2026', title:'The House Always Wins!', img:'the-house-always-wins.jpg', href:url('/news/the-house-always-wins/')},
 ];
 const mp = document.getElementById('more-posts');
 MORE.forEach(p => {
   const a = el('a',{href:p.href,class:'post-more-card'});
   const cover = el('div',{class:'post-more-card__cover'});
   cover.style.background = `linear-gradient(135deg,#0a0d2a 0%,${p.cover} 100%)`;
+  if (p.img) {
+    const img = el('img',{src:url(`/img/news/${p.img}`), alt:'', class:'post-more-card__img'});
+    cover.appendChild(img);
+  }
   a.appendChild(cover);
   a.appendChild(el('div',{class:'post-more-card__meta'},`${p.cat.toUpperCase()} · ${p.date}`));
   a.appendChild(el('h3',{class:'post-more-card__title'},p.title));

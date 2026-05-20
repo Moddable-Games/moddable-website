@@ -10,9 +10,11 @@
 body { background: #f5f4ef; }
 
 /* Post header */
-.post-header { position: relative; color: #fff; overflow: hidden; background: #000; }
+.post-header { position: relative; color: #fff; overflow: hidden; background: #000; min-height: 520px; display: flex; align-items: center; justify-content: center; }
+.post-header__img { position: absolute; inset: 0; width: 100%; height: 100%; object-fit: cover; object-position: center top; opacity: 0.5; pointer-events: none; transform: scale(1.08); transform-origin: center center; will-change: transform, opacity; }
+.post-header__inner { transition: transform 0.1s linear, opacity 0.1s linear; will-change: transform, opacity; }
 .post-header__bloom { position: absolute; left: 50%; bottom: -200px; transform: translateX(-50%); width: 1100px; height: 500px; background: radial-gradient(ellipse, rgba(12,79,141,0.4) 0%, transparent 65%); pointer-events: none; filter: blur(20px); }
-.post-header__inner { position: relative; padding: 48px 32px 88px; max-width: 800px; margin: 0 auto; text-align: center; box-sizing: border-box; }
+.post-header__inner { position: relative; padding: 96px 32px 96px; max-width: 800px; width: 100%; text-align: center; box-sizing: border-box; }
 .post-header__back { font-family: var(--mg-font-mono); font-size: 12px; color: rgba(255,255,255,0.7); text-decoration: none; }
 .post-header__tags { display: flex; gap: 8px; justify-content: center; margin-top: 28px; flex-wrap: wrap; }
 .post-header__cat { font-family: var(--mg-font-body); font-weight: 600; font-size: 11px; background: #0c4f8d; color: #fff; padding: 4px 10px; border-radius: 9999px; }
@@ -55,7 +57,8 @@ body { background: #f5f4ef; }
 .post-more__heading { font-family: var(--mg-font-display); font-weight: 600; font-size: 40px; line-height: 1.1; letter-spacing: -0.5px; color: #14161c; margin: 0 0 32px; }
 .post-more__grid { display: grid; grid-template-columns: repeat(3, 1fr); gap: 20px; }
 .post-more-card { display: flex; flex-direction: column; gap: 14px; padding: 20px; background: #f5f4ef; border-radius: 16px; text-decoration: none; color: inherit; }
-.post-more-card__cover { height: 120px; border-radius: 12px; }
+.post-more-card__cover { height: 120px; border-radius: 12px; overflow: hidden; position: relative; }
+.post-more-card__img { position: absolute; inset: 0; width: 100%; height: 100%; object-fit: cover; }
 .post-more-card__meta { font-family: var(--mg-font-mono); font-size: 11px; color: #7a8290; letter-spacing: 0.3px; }
 .post-more-card__title { font-family: var(--mg-font-display); font-weight: 600; font-size: 20px; line-height: 1.2; letter-spacing: -0.2px; color: #14161c; margin: 0; }
 
@@ -71,6 +74,7 @@ body { background: #f5f4ef; }
 
 <!-- Post header -->
 <section class="post-header">
+  <img src="../../img/news/spiralling-paths-of-power-and-peril.jpg" alt="" class="post-header__img">
   <div class="post-header__bloom"></div>
   <div class="post-header__inner">
     <a href="/news/" class="post-header__back">&larr; All posts</a>
@@ -105,10 +109,10 @@ body { background: #f5f4ef; }
     <article class="prose">
       <p class="lede"><em>Talisman</em> looks harmless. A colourful fantasy board with wizards and warriors, a spinner of fate, a quest for the Crown of Command. But beneath the whimsy lies a game that is unpredictable, polarising, and &mdash; for a certain kind of player &mdash; utterly addictive.</p>
       <p>It plays like Monopoly's dark fantasy cousin: the dice dictate your fate, the board punishes the unlucky, and the gap between first and last can widen with nauseating speed. And yet, after 40 years and over 800,000 copies sold, people keep coming back.</p>
-      <h2>From Necromancer to Games Workshop.</h2>
+      <h2 id="from-necromancer-to-games-workshop">From Necromancer to Games Workshop.</h2>
       <p>In 1983, designer Robert Harris presented a prototype called <em>Necromancer</em> to Games Workshop. The company reimagined it as <em>Talisman</em>, and it became their first mass-market success &mdash; transforming Games Workshop from a distributor into a creative powerhouse, years before Warhammer would dominate their catalogue.</p>
       <p>The game's premise was simple: traverse a spiral board through three concentric regions, grow your character's strength and craft, and reach the Crown of Command at the centre before anyone else. The execution was anything but predictable.</p>
-      <h2>Five editions, five eras.</h2>
+      <h2 id="five-editions-five-eras">Five editions, five eras.</h2>
       <p>Talisman has been reinvented across five major editions spanning four decades:</p>
       <ul>
         <li><strong>1st Edition (1983)</strong> &mdash; Games Workshop. Black-and-white cards, hand-drawn board. Raw and unbalanced.</li>
@@ -117,10 +121,10 @@ body { background: #f5f4ef; }
         <li><strong>4th Edition (2008)</strong> &mdash; Fantasy Flight Games. Full-colour overhaul, 14 expansions over a decade.</li>
         <li><strong>5th Edition (2024)</strong> &mdash; Avalon Hill / Hasbro. 3D models, streamlined rules, modern production.</li>
       </ul>
-      <h2>Why it survives.</h2>
+      <h2 id="why-it-survives">Why it survives.</h2>
       <p>Talisman's longevity comes from its mod-friendly nature. The spiral board, the character deck, the adventure cards &mdash; every component is a slot waiting to be filled with something new. The game appeals to tinkerers, artists, and creators who see the framework as a canvas rather than a finished product.</p>
       <blockquote>"Talisman doesn't survive because it's balanced. It survives because it's moddable."</blockquote>
-      <h2>The static spiral problem.</h2>
+      <h2 id="the-static-spiral-problem">The static spiral problem.</h2>
       <p>For all its charm, Talisman's board has a mechanical flaw: the spiral is predictable. Once you've mapped the outer, middle, and inner regions, the geography never changes. The adventure deck provides randomness, but the board itself is static.</p>
       <p>This is precisely what <em>Talisman: Hexed</em> addresses. By replacing the fixed spiral with a modular hex grid, every game generates a unique geography. The regions still exist &mdash; outer, middle, inner &mdash; but their shape, their connections, and their dangers shift every session.</p>
       <p><em>Talisman: Hexed v1.0.0 is available in the mods library. Download it, shuffle the tiles, and discover a Talisman you've never played before.</em></p>
@@ -164,29 +168,80 @@ document.getElementById('footer-root').appendChild(footer());
 });
 
 // TOC
-const TOC = ['From Necromancer to Games Workshop','Five editions, five eras','Why it survives','The static spiral problem'];
+const TOC = [{label:'From Necromancer to Games Workshop', id:'from-necromancer-to-games-workshop'}, {label:'Five editions, five eras', id:'five-editions-five-eras'}, {label:'Why it survives', id:'why-it-survives'}, {label:'The static spiral problem', id:'the-static-spiral-problem'}];
 const tul = document.getElementById('toc-list');
 TOC.forEach((t,i) => {
-  const li = el('li',{class: i===0 ? 'post-toc__item post-toc__item--active' : 'post-toc__item'});
-  li.appendChild(el('a',{href:'#',class: i===0 ? 'post-toc__link post-toc__link--active' : 'post-toc__link post-toc__link--inactive'},t));
+  const li = el('li',{class:'post-toc__item'});
+  const a = el('a',{href:'#'+t.id, class:'post-toc__link post-toc__link--inactive'},t.label);
+  a.addEventListener('click', function(e) { e.preventDefault(); document.getElementById(t.id).scrollIntoView({behavior:'smooth', block:'start'}); });
+  li.appendChild(a);
   tul.appendChild(li);
 });
+(function() {
+  const items = tul.querySelectorAll('.post-toc__item');
+  const links = tul.querySelectorAll('.post-toc__link');
+  const ids = TOC.map(t => t.id);
+  function setActive(idx) {
+    items.forEach((li, i) => {
+      li.classList.toggle('post-toc__item--active', i === idx);
+      links[i].classList.toggle('post-toc__link--active', i === idx);
+      links[i].classList.toggle('post-toc__link--inactive', i !== idx);
+    });
+  }
+  setActive(0);
+  const observer = new IntersectionObserver(entries => {
+    entries.forEach(entry => {
+      if (entry.isIntersecting) {
+        const idx = ids.indexOf(entry.target.id);
+        if (idx !== -1) setActive(idx);
+      }
+    });
+  }, {rootMargin: '-20% 0px -60% 0px'});
+  ids.forEach(id => { const el = document.getElementById(id); if (el) observer.observe(el); });
+})();
 
 const dlBtn = linkBtn('Download rules','#','blue');
 dlBtn.classList.add('post-mod-card__dl');
 document.getElementById('mod-dl-btn').appendChild(dlBtn);
 
+// Hero parallax — slow zoom + scroll fade
+(function() {
+  const header = document.querySelector('.post-header');
+  const img = document.querySelector('.post-header__img');
+  const inner = document.querySelector('.post-header__inner');
+  if (!header || !img || !inner) return;
+  let ticking = false;
+  window.addEventListener('scroll', function() {
+    if (ticking) return;
+    ticking = true;
+    requestAnimationFrame(function() {
+      const rect = header.getBoundingClientRect();
+      const h = header.offsetHeight;
+      const progress = Math.max(0, Math.min(1, -rect.top / h));
+      const scale = 1.08 + progress * 0.12;
+      img.style.transform = 'scale(' + scale + ')';
+      img.style.opacity = 0.5 - progress * 0.35;
+      inner.style.transform = 'translateY(' + (progress * -40) + 'px)';
+      inner.style.opacity = 1 - progress * 0.9;
+      ticking = false;
+    });
+  });
+})();
 // More posts
 const MORE = [
-  {cover:'#d11a1a', cat:'Deep dive',  date:'Sep 12, 2025', title:'Nuking Catan', href:url('/news/nuking-catan/')},
-  {cover:'#1a3680', cat:'Monopoly',   date:'Jul 22, 2025', title:'Monopolising Modified Variations', href:url('/news/monopolising-modified-variations/')},
-  {cover:'#0c4f8d', cat:'Design',     date:'Jun 4, 2025',  title:'Conquering the Constrains of Chess', href:url('/news/conquering-the-constrains-of-chess/')},
+  {cover:'#3a9928', cat:'Monopoly', date:'Jul 2025', title:'Monopolising Modified Variations', img:'monopolising-modified-variations.jpg', href:url('/news/monopolising-modified-variations/')},
+  {cover:'#1a3680', cat:'Essay', date:'Apr 2026', title:'The Ancients', img:'the-ancients.jpg', href:url('/news/the-ancients/')},
+  {cover:'#d11a1a', cat:'Community', date:'Mar 2026', title:"'Tis the Season for Traditions", img:'tis-the-season-for-traditions.jpg', href:url('/news/tis-the-season-for-traditions/')},
 ];
 const mp = document.getElementById('more-posts');
 MORE.forEach(p => {
   const a = el('a',{href:p.href,class:'post-more-card'});
   const cover = el('div',{class:'post-more-card__cover'});
   cover.style.background = `linear-gradient(135deg,#0a0d2a 0%,${p.cover} 100%)`;
+  if (p.img) {
+    const img = el('img',{src:url(`/img/news/${p.img}`), alt:'', class:'post-more-card__img'});
+    cover.appendChild(img);
+  }
   a.appendChild(cover);
   a.appendChild(el('div',{class:'post-more-card__meta'},`${p.cat.toUpperCase()} · ${p.date}`));
   a.appendChild(el('h3',{class:'post-more-card__title'},p.title));

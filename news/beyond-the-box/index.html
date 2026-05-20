@@ -10,9 +10,11 @@
 body { background: #f5f4ef; }
 
 /* Post header */
-.post-header { position: relative; color: #fff; overflow: hidden; background: #000; }
+.post-header { position: relative; color: #fff; overflow: hidden; background: #000; min-height: 520px; display: flex; align-items: center; justify-content: center; }
+.post-header__img { position: absolute; inset: 0; width: 100%; height: 100%; object-fit: cover; object-position: center top; opacity: 0.5; pointer-events: none; transform: scale(1.08); transform-origin: center center; will-change: transform, opacity; }
+.post-header__inner { transition: transform 0.1s linear, opacity 0.1s linear; will-change: transform, opacity; }
 .post-header__bloom { position: absolute; left: 50%; bottom: -200px; transform: translateX(-50%); width: 1100px; height: 500px; background: radial-gradient(ellipse, rgba(12,79,141,0.4) 0%, transparent 65%); pointer-events: none; filter: blur(20px); }
-.post-header__inner { position: relative; padding: 48px 32px 88px; max-width: 800px; margin: 0 auto; text-align: center; box-sizing: border-box; }
+.post-header__inner { position: relative; padding: 96px 32px 96px; max-width: 800px; width: 100%; text-align: center; box-sizing: border-box; }
 .post-header__back { font-family: var(--mg-font-mono); font-size: 12px; color: rgba(255,255,255,0.7); text-decoration: none; }
 .post-header__tags { display: flex; gap: 8px; justify-content: center; margin-top: 28px; flex-wrap: wrap; }
 .post-header__cat { font-family: var(--mg-font-body); font-weight: 600; font-size: 11px; background: #0c4f8d; color: #fff; padding: 4px 10px; border-radius: 9999px; }
@@ -48,7 +50,8 @@ body { background: #f5f4ef; }
 .post-more__heading { font-family: var(--mg-font-display); font-weight: 600; font-size: 40px; line-height: 1.1; letter-spacing: -0.5px; color: #14161c; margin: 0 0 32px; }
 .post-more__grid { display: grid; grid-template-columns: repeat(3, 1fr); gap: 20px; }
 .post-more-card { display: flex; flex-direction: column; gap: 14px; padding: 20px; background: #f5f4ef; border-radius: 16px; text-decoration: none; color: inherit; }
-.post-more-card__cover { height: 120px; border-radius: 12px; }
+.post-more-card__cover { height: 120px; border-radius: 12px; overflow: hidden; position: relative; }
+.post-more-card__img { position: absolute; inset: 0; width: 100%; height: 100%; object-fit: cover; }
 .post-more-card__meta { font-family: var(--mg-font-mono); font-size: 11px; color: #7a8290; letter-spacing: 0.3px; }
 .post-more-card__title { font-family: var(--mg-font-display); font-weight: 600; font-size: 20px; line-height: 1.2; letter-spacing: -0.2px; color: #14161c; margin: 0; }
 
@@ -64,6 +67,7 @@ body { background: #f5f4ef; }
 
 <!-- Post header -->
 <section class="post-header">
+  <img src="../../img/news/beyond-the-box.jpg" alt="" class="post-header__img">
   <div class="post-header__bloom"></div>
   <div class="post-header__inner">
     <a href="/news/" class="post-header__back">← All posts</a>
@@ -102,23 +106,23 @@ body { background: #f5f4ef; }
 
       <p>What this reveals is simple, but often overlooked. Great board games are not built by artists alone, but by a team of creative roles that shape how players think, decide and interact. The box art may open the door, but it's everything inside that determines whether players stay. Although it is the illustrator whose role is most recognised, the full scope and responsibilities they hold is often overlooked.</p>
 
-      <h2>The illustrator.</h2>
+      <h2 id="the-illustrator">The illustrator.</h2>
 
       <p>They are the visualisers — creating characters, environments and thematic identity. They give a game its emotional pull. Its mood and a sense of place. However, in a moddable or expandable system, their role doesn't stop at a single cohesive vision. It extends into creating assets that can evolve; tiles that can be reskinned, factions that can be reinterpreted and visual systems that remain readable even when new content is introduced by others. Art, in this context, is not static. It's a foundation others can build upon.</p>
 
-      <h2>The graphic designer.</h2>
+      <h2 id="the-graphic-designer">The graphic designer.</h2>
 
       <p>Closely tied to this is the graphic designer, a role that is often misunderstood and routinely undervalued. Where the artist creates beauty, the graphic designer creates clarity. Every icon and every font choice. Every layout decision determines how quickly a player understands the game. In titles like <em>Catan</em>, resource symbols are instantly recognisable. In <em>Carcassonne</em>, the distinction between city and field is never ambiguous. That's not accidental. It's design thinking applied to play. Without it, even the most beautiful games can quickly become quite frustrating.</p>
 
-      <h2>The rulebook editor.</h2>
+      <h2 id="the-rulebook-editor">The rulebook editor.</h2>
 
       <p>Then there's the rulebook editor. Arguably the least visible yet an undeniably critical role in modern board game design. A rulebook is not a document; it's a user experience. It teaches, guides and resolves conflict. If done poorly, it creates friction and confusion. When done well, it disappears entirely, allowing players to flow from learning to playing without even knowing it. Anyone who has wrestled with the early learning curve of <em>Gloomhaven</em> or navigated the depth of <em>Twilight Imperium</em> understands that clarity is not optional. It is essential. In a moddable ecosystem, this becomes even more important as rules are no longer fixed. They evolve, expand and adapt. As such, the documentation must evolve with them.</p>
 
-      <h2>The worldbuilder.</h2>
+      <h2 id="the-worldbuilder">The worldbuilder.</h2>
 
       <p>Beyond these roles sits something less defined, yet increasingly important: the worldbuilder. This is the person, or sometimes the community, which gives context to mechanics. Why do these factions exist? What does this environment represent? Why does this action matter? In traditional publishing, this is often locked into a single narrative that is usually not defined by the same person that designed the game mechanics. In an open system, worldbuilding becomes collaborative. It invites reinterpretation, alternate themes and entirely new meanings to play.</p>
 
-      <h2>The community.</h2>
+      <h2 id="the-community">The community.</h2>
 
       <p>There are communities of creators. The modders, contributors and players who take what exists and push it further. They design new tiles, rebalance systems, create alternative art and sometimes even redefine the way a game is played. If you've ever seen the countless versions of <em>Monopoly</em> played across households, you've already seen this in action. The difference now is that what was once informal and local can become structured, shared and scalable.</p>
 
@@ -157,25 +161,77 @@ document.getElementById('footer-root').appendChild(footer());
 });
 
 // TOC
-const TOC = ['The illustrator','The graphic designer','The rulebook editor','The worldbuilder','The community'];
+const TOC = [{label:'The illustrator', id:'the-illustrator'}, {label:'The graphic designer', id:'the-graphic-designer'}, {label:'The rulebook editor', id:'the-rulebook-editor'}, {label:'The worldbuilder', id:'the-worldbuilder'}, {label:'The community', id:'the-community'}];
 const tul = document.getElementById('toc-list');
 TOC.forEach((t,i) => {
-  const li = el('li',{class: i===0 ? 'post-toc__item post-toc__item--active' : 'post-toc__item'});
-  li.appendChild(el('a',{href:'#',class: i===0 ? 'post-toc__link post-toc__link--active' : 'post-toc__link post-toc__link--inactive'},t));
+  const li = el('li',{class:'post-toc__item'});
+  const a = el('a',{href:'#'+t.id, class:'post-toc__link post-toc__link--inactive'},t.label);
+  a.addEventListener('click', function(e) { e.preventDefault(); document.getElementById(t.id).scrollIntoView({behavior:'smooth', block:'start'}); });
+  li.appendChild(a);
   tul.appendChild(li);
 });
+(function() {
+  const items = tul.querySelectorAll('.post-toc__item');
+  const links = tul.querySelectorAll('.post-toc__link');
+  const ids = TOC.map(t => t.id);
+  function setActive(idx) {
+    items.forEach((li, i) => {
+      li.classList.toggle('post-toc__item--active', i === idx);
+      links[i].classList.toggle('post-toc__link--active', i === idx);
+      links[i].classList.toggle('post-toc__link--inactive', i !== idx);
+    });
+  }
+  setActive(0);
+  const observer = new IntersectionObserver(entries => {
+    entries.forEach(entry => {
+      if (entry.isIntersecting) {
+        const idx = ids.indexOf(entry.target.id);
+        if (idx !== -1) setActive(idx);
+      }
+    });
+  }, {rootMargin: '-20% 0px -60% 0px'});
+  ids.forEach(id => { const el = document.getElementById(id); if (el) observer.observe(el); });
+})();
+
+// Hero parallax — slow zoom + scroll fade
+(function() {
+  const header = document.querySelector('.post-header');
+  const img = document.querySelector('.post-header__img');
+  const inner = document.querySelector('.post-header__inner');
+  if (!header || !img || !inner) return;
+  let ticking = false;
+  window.addEventListener('scroll', function() {
+    if (ticking) return;
+    ticking = true;
+    requestAnimationFrame(function() {
+      const rect = header.getBoundingClientRect();
+      const h = header.offsetHeight;
+      const progress = Math.max(0, Math.min(1, -rect.top / h));
+      const scale = 1.08 + progress * 0.12;
+      img.style.transform = 'scale(' + scale + ')';
+      img.style.opacity = 0.5 - progress * 0.35;
+      inner.style.transform = 'translateY(' + (progress * -40) + 'px)';
+      inner.style.opacity = 1 - progress * 0.9;
+      ticking = false;
+    });
+  });
+})();
 
 // More posts
 const MORE = [
-  {cover:'#d11a1a', cat:'Mod spotlight', date:'Sep 12, 2025', title:'Nuking Catan', href:url('/news/nuking-catan/')},
-  {cover:'#3a9928', cat:'Devlog',        date:'May 12, 2026', title:'Mongo enters open playtest', href:url('/news/nuking-catan/')},
-  {cover:'#1a3680', cat:'Community',     date:'May 2, 2026',  title:'Mod jam #3 wraps up', href:url('/news/nuking-catan/')},
+  {cover:'#1a3680', cat:'Essay', date:'Apr 2026', title:'The Ancients', img:'the-ancients.jpg', href:url('/news/the-ancients/')},
+  {cover:'#0c4f8d', cat:'Philosophy', date:'Mar 2026', title:'Open Sourcing Tabletop Games', img:'open-sourcing-tabletop-games.jpg', href:url('/news/open-sourcing-tabletop-games/')},
+  {cover:'#d11a1a', cat:'Catan', date:'Jul 2025', title:'Nuking Catan', img:'nuking-catan.jpg', href:url('/news/nuking-catan/')},
 ];
 const mp = document.getElementById('more-posts');
 MORE.forEach(p => {
   const a = el('a',{href:p.href,class:'post-more-card'});
   const cover = el('div',{class:'post-more-card__cover'});
   cover.style.background = `linear-gradient(135deg,#0a0d2a 0%,${p.cover} 100%)`;
+  if (p.img) {
+    const img = el('img',{src:url(`/img/news/${p.img}`), alt:'', class:'post-more-card__img'});
+    cover.appendChild(img);
+  }
   a.appendChild(cover);
   a.appendChild(el('div',{class:'post-more-card__meta'},`${p.cat.toUpperCase()} · ${p.date}`));
   a.appendChild(el('h3',{class:'post-more-card__title'},p.title));

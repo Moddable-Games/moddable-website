@@ -10,9 +10,11 @@
 body { background: #f5f4ef; }
 
 /* Post header */
-.post-header { position: relative; color: #fff; overflow: hidden; background: #000; }
+.post-header { position: relative; color: #fff; overflow: hidden; background: #000; min-height: 520px; display: flex; align-items: center; justify-content: center; }
+.post-header__img { position: absolute; inset: 0; width: 100%; height: 100%; object-fit: cover; object-position: center top; opacity: 0.5; pointer-events: none; transform: scale(1.08); transform-origin: center center; will-change: transform, opacity; }
+.post-header__inner { transition: transform 0.1s linear, opacity 0.1s linear; will-change: transform, opacity; }
 .post-header__bloom { position: absolute; left: 50%; bottom: -200px; transform: translateX(-50%); width: 1100px; height: 500px; background: radial-gradient(ellipse, rgba(58,153,40,0.4) 0%, transparent 65%); pointer-events: none; filter: blur(20px); }
-.post-header__inner { position: relative; padding: 48px 32px 88px; max-width: 800px; margin: 0 auto; text-align: center; box-sizing: border-box; }
+.post-header__inner { position: relative; padding: 96px 32px 96px; max-width: 800px; width: 100%; text-align: center; box-sizing: border-box; }
 .post-header__back { font-family: var(--mg-font-mono); font-size: 12px; color: rgba(255,255,255,0.7); text-decoration: none; }
 .post-header__tags { display: flex; gap: 8px; justify-content: center; margin-top: 28px; flex-wrap: wrap; }
 .post-header__cat { font-family: var(--mg-font-body); font-weight: 600; font-size: 11px; background: #3a9928; color: #fff; padding: 4px 10px; border-radius: 9999px; }
@@ -48,7 +50,8 @@ body { background: #f5f4ef; }
 .post-more__heading { font-family: var(--mg-font-display); font-weight: 600; font-size: 40px; line-height: 1.1; letter-spacing: -0.5px; color: #14161c; margin: 0 0 32px; }
 .post-more__grid { display: grid; grid-template-columns: repeat(3, 1fr); gap: 20px; }
 .post-more-card { display: flex; flex-direction: column; gap: 14px; padding: 20px; background: #f5f4ef; border-radius: 16px; text-decoration: none; color: inherit; }
-.post-more-card__cover { height: 120px; border-radius: 12px; }
+.post-more-card__cover { height: 120px; border-radius: 12px; overflow: hidden; position: relative; }
+.post-more-card__img { position: absolute; inset: 0; width: 100%; height: 100%; object-fit: cover; }
 .post-more-card__meta { font-family: var(--mg-font-mono); font-size: 11px; color: #7a8290; letter-spacing: 0.3px; }
 .post-more-card__title { font-family: var(--mg-font-display); font-weight: 600; font-size: 20px; line-height: 1.2; letter-spacing: -0.2px; color: #14161c; margin: 0; }
 
@@ -64,6 +67,7 @@ body { background: #f5f4ef; }
 
 <!-- Post header -->
 <section class="post-header">
+  <img src="../../img/news/tis-the-season-for-traditions.jpg" alt="" class="post-header__img">
   <div class="post-header__bloom"></div>
   <div class="post-header__inner">
     <a href="/news/" class="post-header__back">← All posts</a>
@@ -99,17 +103,17 @@ body { background: #f5f4ef; }
       <p class="lede">As the year comes to an end, something in the air starts to shift — beyond the weather and the music. Homes become louder. Tables fuller and schedules slower. Whether around a Christmas roast or during the candle-lit evenings of Hanukkah, families gather not just to exchange gifts, but to reconnect through ritual.</p>
       <p>Pagans connect at Yule time, Wiccans find solace in the Winter Solstice and the Hindu spend 5 days honouring Ganesh. Increasingly, December rituals also provide opportunities for playing games.</p>
       <p>In the UK alone, 6 out of 10 adults expect to play board games during the festive season and 42% of those asked were also planning to buy new games as gifts in support of a growing market forecasted to reach $41.63 billion by 2033. Although classics such as Monopoly and Scrabble remain the dominant choices during the festivities there has also been a rise in demand for quick party card games such as Exploding Kittens and Taco Cat Goat Cheese Pizza as well as social deductions like Codenames, Mafia and the more recent and extremely expensive variant; Blood on the Clocktower, which all benefit from having larger groups or teams.</p>
-      <h2>Presence at the table.</h2>
+      <h2 id="presence-at-the-table">Presence at the table.</h2>
       <p>For much of the year, our lives are fragmented. Different schedules dotted across different devices fostering indifferent attention spans. Nonetheless, during the year-end festivities, something remarkable happens. People sit at the same table, sometimes for hours. As the meals settle and desserts are shared, someone will inevitably say, "Shall we play something?"</p>
       <p>It may be a small sentence, but it signals something larger. It signals presence.</p>
       <p>Games help to fill the gaps between conversations and silence. They give structure to togetherness, turning a table into a shared arena. A rulebook becomes a temporary social contract and for an hour or three; everyone's engaged in the same story. What makes holiday gameplay different from a regular Saturday night session?</p>
       <p><strong>Tradition.</strong></p>
-      <h2>Games as seasonal identity.</h2>
+      <h2 id="games-as-seasonal-identity">Games as seasonal identity.</h2>
       <p>Some families replay the same game every year or pit the same teams against each other. They tweak and bend the rules. Inside jokes become embedded into everyone's strategies. Over time, the game stops being just a game. It becomes part of the family's seasonal identity.</p>
       <blockquote>"Remember the year Mum won on the very last turn with that seven letter word?"</blockquote>
       <blockquote>"Remember when the bank ran out of money and we started using real cash?"</blockquote>
       <p>In some households Da Red Gobbo might even appear for a game!</p>
-      <h2>Touch matters.</h2>
+      <h2 id="touch-matters">Touch matters.</h2>
       <p>These stories resurface every year, and act as ancestral anchors in time. We spend most of our year on screens. But during the holidays, people instinctively reach for something tactile. Cards, dice, and boards sprawling with wooden tokens. There's something grounding about physical components in a season so saturated by digital noise. Touch matters, almost as much as shared eye contact and the sound of dice hitting the table.</p>
       <p><em>Whether you celebrate Christmas, Hanukkah or simply the gift of being together, we hope you find moments around a table that feels unhurried. From all of us at Moddable, warm wishes for a restful season filled with meaningful play.</em></p>
     </article>
@@ -146,25 +150,76 @@ document.getElementById('footer-root').appendChild(footer());
 });
 
 // TOC
-const TOC = ['Presence at the table','Games as seasonal identity','Touch matters'];
+const TOC = [{label:'Presence at the table', id:'presence-at-the-table'}, {label:'Games as seasonal identity', id:'games-as-seasonal-identity'}, {label:'Touch matters', id:'touch-matters'}];
 const tul = document.getElementById('toc-list');
 TOC.forEach((t,i) => {
-  const li = el('li',{class: i===0 ? 'post-toc__item post-toc__item--active' : 'post-toc__item'});
-  li.appendChild(el('a',{href:'#',class: i===0 ? 'post-toc__link post-toc__link--active' : 'post-toc__link post-toc__link--inactive'},t));
+  const li = el('li',{class:'post-toc__item'});
+  const a = el('a',{href:'#'+t.id, class:'post-toc__link post-toc__link--inactive'},t.label);
+  a.addEventListener('click', function(e) { e.preventDefault(); document.getElementById(t.id).scrollIntoView({behavior:'smooth', block:'start'}); });
+  li.appendChild(a);
   tul.appendChild(li);
 });
+(function() {
+  const items = tul.querySelectorAll('.post-toc__item');
+  const links = tul.querySelectorAll('.post-toc__link');
+  const ids = TOC.map(t => t.id);
+  function setActive(idx) {
+    items.forEach((li, i) => {
+      li.classList.toggle('post-toc__item--active', i === idx);
+      links[i].classList.toggle('post-toc__link--active', i === idx);
+      links[i].classList.toggle('post-toc__link--inactive', i !== idx);
+    });
+  }
+  setActive(0);
+  const observer = new IntersectionObserver(entries => {
+    entries.forEach(entry => {
+      if (entry.isIntersecting) {
+        const idx = ids.indexOf(entry.target.id);
+        if (idx !== -1) setActive(idx);
+      }
+    });
+  }, {rootMargin: '-20% 0px -60% 0px'});
+  ids.forEach(id => { const el = document.getElementById(id); if (el) observer.observe(el); });
+})();
 
+// Hero parallax — slow zoom + scroll fade
+(function() {
+  const header = document.querySelector('.post-header');
+  const img = document.querySelector('.post-header__img');
+  const inner = document.querySelector('.post-header__inner');
+  if (!header || !img || !inner) return;
+  let ticking = false;
+  window.addEventListener('scroll', function() {
+    if (ticking) return;
+    ticking = true;
+    requestAnimationFrame(function() {
+      const rect = header.getBoundingClientRect();
+      const h = header.offsetHeight;
+      const progress = Math.max(0, Math.min(1, -rect.top / h));
+      const scale = 1.08 + progress * 0.12;
+      img.style.transform = 'scale(' + scale + ')';
+      img.style.opacity = 0.5 - progress * 0.35;
+      inner.style.transform = 'translateY(' + (progress * -40) + 'px)';
+      inner.style.opacity = 1 - progress * 0.9;
+      ticking = false;
+    });
+  });
+})();
 // More posts
 const MORE = [
-  {cover:'#d11a1a', cat:'Devlog',     date:'Sep 12, 2025', title:'Nuking Catan'},
-  {cover:'#0c4f8d', cat:'Mod update', date:'May 9, 2026',  title:'Econopoly v1.4: the audit patch'},
-  {cover:'#1a3680', cat:'Community',  date:'May 2, 2026',  title:'Mod jam #3 wraps up'},
+  {cover:'#d11a1a', cat:'Chess', date:'Oct 2025', title:'Making a Masterpiece by Modification', img:'making-a-masterpiece-by-modification.jpg', href:url('/news/making-a-masterpiece-by-modification/')},
+  {cover:'#0c4f8d', cat:'Talisman', date:'Jul 2025', title:'Spiralling Paths of Power and Peril', img:'spiralling-paths-of-power-and-peril.jpg', href:url('/news/spiralling-paths-of-power-and-peril/')},
+  {cover:'#1a3680', cat:'Essay', date:'Apr 2026', title:'The Ancients', img:'the-ancients.jpg', href:url('/news/the-ancients/')},
 ];
 const mp = document.getElementById('more-posts');
 MORE.forEach(p => {
-  const a = el('a',{href:url('/news/nuking-catan/'),class:'post-more-card'});
+  const a = el('a',{href:p.href,class:'post-more-card'});
   const cover = el('div',{class:'post-more-card__cover'});
   cover.style.background = `linear-gradient(135deg,#0a0d2a 0%,${p.cover} 100%)`;
+  if (p.img) {
+    const img = el('img',{src:url(`/img/news/${p.img}`), alt:'', class:'post-more-card__img'});
+    cover.appendChild(img);
+  }
   a.appendChild(cover);
   a.appendChild(el('div',{class:'post-more-card__meta'},`${p.cat.toUpperCase()} · ${p.date}`));
   a.appendChild(el('h3',{class:'post-more-card__title'},p.title));

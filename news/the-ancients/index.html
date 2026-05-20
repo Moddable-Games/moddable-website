@@ -10,9 +10,11 @@
 body { background: #f5f4ef; }
 
 /* Post header */
-.post-header { position: relative; color: #fff; overflow: hidden; background: #000; }
+.post-header { position: relative; color: #fff; overflow: hidden; background: #000; min-height: 520px; display: flex; align-items: center; justify-content: center; }
+.post-header__img { position: absolute; inset: 0; width: 100%; height: 100%; object-fit: cover; object-position: center top; opacity: 0.5; pointer-events: none; transform: scale(1.08); transform-origin: center center; will-change: transform, opacity; }
+.post-header__inner { transition: transform 0.1s linear, opacity 0.1s linear; will-change: transform, opacity; }
 .post-header__bloom { position: absolute; left: 50%; bottom: -200px; transform: translateX(-50%); width: 1100px; height: 500px; background: radial-gradient(ellipse, rgba(26,54,128,0.4) 0%, transparent 65%); pointer-events: none; filter: blur(20px); }
-.post-header__inner { position: relative; padding: 48px 32px 88px; max-width: 800px; margin: 0 auto; text-align: center; box-sizing: border-box; }
+.post-header__inner { position: relative; padding: 96px 32px 96px; max-width: 800px; width: 100%; text-align: center; box-sizing: border-box; }
 .post-header__back { font-family: var(--mg-font-mono); font-size: 12px; color: rgba(255,255,255,0.7); text-decoration: none; }
 .post-header__tags { display: flex; gap: 8px; justify-content: center; margin-top: 28px; flex-wrap: wrap; }
 .post-header__cat { font-family: var(--mg-font-body); font-weight: 600; font-size: 11px; background: #0c4f8d; color: #fff; padding: 4px 10px; border-radius: 9999px; }
@@ -48,7 +50,8 @@ body { background: #f5f4ef; }
 .post-more__heading { font-family: var(--mg-font-display); font-weight: 600; font-size: 40px; line-height: 1.1; letter-spacing: -0.5px; color: #14161c; margin: 0 0 32px; }
 .post-more__grid { display: grid; grid-template-columns: repeat(3, 1fr); gap: 20px; }
 .post-more-card { display: flex; flex-direction: column; gap: 14px; padding: 20px; background: #f5f4ef; border-radius: 16px; text-decoration: none; color: inherit; }
-.post-more-card__cover { height: 120px; border-radius: 12px; }
+.post-more-card__cover { height: 120px; border-radius: 12px; overflow: hidden; position: relative; }
+.post-more-card__img { position: absolute; inset: 0; width: 100%; height: 100%; object-fit: cover; }
 .post-more-card__meta { font-family: var(--mg-font-mono); font-size: 11px; color: #7a8290; letter-spacing: 0.3px; }
 .post-more-card__title { font-family: var(--mg-font-display); font-weight: 600; font-size: 20px; line-height: 1.2; letter-spacing: -0.2px; color: #14161c; margin: 0; }
 
@@ -64,6 +67,7 @@ body { background: #f5f4ef; }
 
 <!-- Post header -->
 <section class="post-header">
+  <img src="../../img/news/the-ancients.jpg" alt="" class="post-header__img">
   <div class="post-header__bloom"></div>
   <div class="post-header__inner">
     <a href="/news/" class="post-header__back">&larr; All posts</a>
@@ -98,22 +102,22 @@ body { background: #f5f4ef; }
     <article class="prose">
       <p class="lede">There's a phrase that floats around modern board gaming circles: the "cult of the new." It describes the endless churn of releases, the compulsive pursuit of the latest title, and the quiet anxiety of falling behind a hobby that produces thousands of new games every year. But what if we looked the other way entirely — not forward, but back?</p>
 
-      <h2>Games older than history.</h2>
+      <h2 id="games-older-than-history">Games older than history.</h2>
       <p>When we reset our sense of time, the idea of what constitutes an old game shifts dramatically. Chess, at roughly 1,500 years old, feels ancient to most players. But Go has been played continuously for over 4,000 years. Ashtapada — the grid that eventually gave rise to Chess — dates to approximately 600 BCE. And Mancala, in its earliest pit-and-pebble forms, may be 8,000 years old. These are not relics. They are living systems, still played daily by millions of people across continents.</p>
 
-      <h2>Modern mechanics, ancient origins.</h2>
+      <h2 id="modern-mechanics-ancient-origins">Modern mechanics, ancient origins.</h2>
       <p>What becomes apparent is that many of the mechanics we celebrate in modern design are not new inventions but rediscoveries. Grid-based movement comes from Ashtapada. Area control and emergent complexity from Go. Race mechanics and probability management from The Royal Game of Ur and Backgammon. Pattern-building from Nine Men's Morris and Checkers. Resource optimisation from Mancala's endless variants. These ancient systems were solving the same design problems we wrestle with today — how to make decisions meaningful, how to balance skill against chance, how to keep players engaged across repeated plays.</p>
 
-      <h2>Games as cultural fabric.</h2>
+      <h2 id="games-as-cultural-fabric">Games as cultural fabric.</h2>
       <p>Beyond mechanics, what is perhaps most compelling is the role these games played within their societies. Senet was not merely entertainment in ancient Egypt — it reflected spiritual beliefs about the journey to the afterlife. Mehen, with its coiled serpent board, carried mythological weight. In China, mastery of Go ranked alongside calligraphy, painting, and music as one of the four essential arts of the scholar. These games were woven into the fabric of culture itself, not sold as products but shared as inheritance.</p>
 
-      <h2>What made them last.</h2>
+      <h2 id="what-made-them-last">What made them last.</h2>
       <p>This brings us to a critical reflection for modern designers. The games that endured for millennia had no intellectual property protections. No monetisation funnels. No planned obsolescence. They survived because they were simple enough to be learned quickly, flexible enough to be adapted across contexts, and deep enough to remain engaging across a lifetime. They were, in the truest sense, moddable — long before that word existed. Players recreated them from memory, carved boards from whatever materials were at hand, taught them to children who taught them to their own children.</p>
 
-      <h2>Evolution over replacement.</h2>
+      <h2 id="evolution-over-replacement">Evolution over replacement.</h2>
       <p>In contrast, the modern industry often encourages replacement rather than evolution. New editions obsolete old ones. Expansions fragment communities. Innovation is framed as novelty rather than depth. But the lesson of the ancients is clear: longevity beats novelty. Community-driven adaptation — the kind that spread Mancala across an entire continent without a single publisher — creates persistence that no marketing budget can replicate.</p>
 
-      <h2>Building for a thousand years.</h2>
+      <h2 id="building-for-a-thousand-years">Building for a thousand years.</h2>
       <p>Ultimately, the question facing modern designers is not simply how to create the next successful game, but how to create something that communities will carry forward without you. The ancient games endured because they were built for people, not markets. Their communities kept them alive because the games served the players — not the other way around. That's the principle we keep coming back to. Design for modification. Design for community ownership. Design for the long game.</p>
     </article>
 
@@ -149,25 +153,76 @@ document.getElementById('footer-root').appendChild(footer());
 });
 
 // TOC
-const TOC = ['Games older than history','Modern mechanics, ancient origins','Games as cultural fabric','What made them last','Evolution over replacement','Building for a thousand years'];
+const TOC = [{label:'Games older than history', id:'games-older-than-history'}, {label:'Modern mechanics, ancient origins', id:'modern-mechanics-ancient-origins'}, {label:'Games as cultural fabric', id:'games-as-cultural-fabric'}, {label:'What made them last', id:'what-made-them-last'}, {label:'Evolution over replacement', id:'evolution-over-replacement'}, {label:'Building for a thousand years', id:'building-for-a-thousand-years'}];
 const tul = document.getElementById('toc-list');
 TOC.forEach((t,i) => {
-  const li = el('li',{class: i===0 ? 'post-toc__item post-toc__item--active' : 'post-toc__item'});
-  li.appendChild(el('a',{href:'#',class: i===0 ? 'post-toc__link post-toc__link--active' : 'post-toc__link post-toc__link--inactive'},t));
+  const li = el('li',{class:'post-toc__item'});
+  const a = el('a',{href:'#'+t.id, class:'post-toc__link post-toc__link--inactive'},t.label);
+  a.addEventListener('click', function(e) { e.preventDefault(); document.getElementById(t.id).scrollIntoView({behavior:'smooth', block:'start'}); });
+  li.appendChild(a);
   tul.appendChild(li);
 });
+(function() {
+  const items = tul.querySelectorAll('.post-toc__item');
+  const links = tul.querySelectorAll('.post-toc__link');
+  const ids = TOC.map(t => t.id);
+  function setActive(idx) {
+    items.forEach((li, i) => {
+      li.classList.toggle('post-toc__item--active', i === idx);
+      links[i].classList.toggle('post-toc__link--active', i === idx);
+      links[i].classList.toggle('post-toc__link--inactive', i !== idx);
+    });
+  }
+  setActive(0);
+  const observer = new IntersectionObserver(entries => {
+    entries.forEach(entry => {
+      if (entry.isIntersecting) {
+        const idx = ids.indexOf(entry.target.id);
+        if (idx !== -1) setActive(idx);
+      }
+    });
+  }, {rootMargin: '-20% 0px -60% 0px'});
+  ids.forEach(id => { const el = document.getElementById(id); if (el) observer.observe(el); });
+})();
 
+// Hero parallax — slow zoom + scroll fade
+(function() {
+  const header = document.querySelector('.post-header');
+  const img = document.querySelector('.post-header__img');
+  const inner = document.querySelector('.post-header__inner');
+  if (!header || !img || !inner) return;
+  let ticking = false;
+  window.addEventListener('scroll', function() {
+    if (ticking) return;
+    ticking = true;
+    requestAnimationFrame(function() {
+      const rect = header.getBoundingClientRect();
+      const h = header.offsetHeight;
+      const progress = Math.max(0, Math.min(1, -rect.top / h));
+      const scale = 1.08 + progress * 0.12;
+      img.style.transform = 'scale(' + scale + ')';
+      img.style.opacity = 0.5 - progress * 0.35;
+      inner.style.transform = 'translateY(' + (progress * -40) + 'px)';
+      inner.style.opacity = 1 - progress * 0.9;
+      ticking = false;
+    });
+  });
+})();
 // More posts
 const MORE = [
-  {cover:'#d11a1a', cat:'Design',    date:'Sep 12, 2025', title:'Nuking Catan', href:url('/news/nuking-catan/')},
-  {cover:'#3a9928', cat:'Devlog',    date:'May 12, 2026', title:'Mongo enters open playtest', href:url('/news/nuking-catan/')},
-  {cover:'#0c4f8d', cat:'Community', date:'May 2, 2026',  title:'Mod jam #3 wraps up', href:url('/news/nuking-catan/')},
+  {cover:'#3a9928', cat:'Philosophy', date:'Mar 2026', title:'Making Mods Matter', img:'making-mods-matter.jpg', href:url('/news/making-mods-matter/')},
+  {cover:'#d11a1a', cat:'Community', date:'Mar 2026', title:"'Tis the Season for Traditions", img:'tis-the-season-for-traditions.jpg', href:url('/news/tis-the-season-for-traditions/')},
+  {cover:'#0c4f8d', cat:'Talisman', date:'Jul 2025', title:'Spiralling Paths of Power and Peril', img:'spiralling-paths-of-power-and-peril.jpg', href:url('/news/spiralling-paths-of-power-and-peril/')},
 ];
 const mp = document.getElementById('more-posts');
 MORE.forEach(p => {
   const a = el('a',{href:p.href,class:'post-more-card'});
   const cover = el('div',{class:'post-more-card__cover'});
   cover.style.background = `linear-gradient(135deg,#0a0d2a 0%,${p.cover} 100%)`;
+  if (p.img) {
+    const img = el('img',{src:url(`/img/news/${p.img}`), alt:'', class:'post-more-card__img'});
+    cover.appendChild(img);
+  }
   a.appendChild(cover);
   a.appendChild(el('div',{class:'post-more-card__meta'},`${p.cat.toUpperCase()} · ${p.date}`));
   a.appendChild(el('h3',{class:'post-more-card__title'},p.title));

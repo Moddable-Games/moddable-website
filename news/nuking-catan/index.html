@@ -10,9 +10,11 @@
 body { background: #f5f4ef; }
 
 /* Post header */
-.post-header { position: relative; color: #fff; overflow: hidden; background: #000; }
+.post-header { position: relative; color: #fff; overflow: hidden; background: #000; min-height: 520px; display: flex; align-items: center; justify-content: center; }
+.post-header__img { position: absolute; inset: 0; width: 100%; height: 100%; object-fit: cover; object-position: center top; opacity: 0.5; pointer-events: none; transform: scale(1.08); transform-origin: center center; will-change: transform, opacity; }
+.post-header__inner { transition: transform 0.1s linear, opacity 0.1s linear; will-change: transform, opacity; }
 .post-header__bloom { position: absolute; left: 50%; bottom: -200px; transform: translateX(-50%); width: 1100px; height: 500px; background: radial-gradient(ellipse, rgba(209,26,26,0.4) 0%, transparent 65%); pointer-events: none; filter: blur(20px); }
-.post-header__inner { position: relative; padding: 48px 32px 88px; max-width: 800px; margin: 0 auto; text-align: center; box-sizing: border-box; }
+.post-header__inner { position: relative; padding: 96px 32px 96px; max-width: 800px; width: 100%; text-align: center; box-sizing: border-box; }
 .post-header__back { font-family: var(--mg-font-mono); font-size: 12px; color: rgba(255,255,255,0.7); text-decoration: none; }
 .post-header__tags { display: flex; gap: 8px; justify-content: center; margin-top: 28px; flex-wrap: wrap; }
 .post-header__cat { font-family: var(--mg-font-body); font-weight: 600; font-size: 11px; background: #d11a1a; color: #fff; padding: 4px 10px; border-radius: 9999px; }
@@ -55,7 +57,8 @@ body { background: #f5f4ef; }
 .post-more__heading { font-family: var(--mg-font-display); font-weight: 600; font-size: 40px; line-height: 1.1; letter-spacing: -0.5px; color: #14161c; margin: 0 0 32px; }
 .post-more__grid { display: grid; grid-template-columns: repeat(3, 1fr); gap: 20px; }
 .post-more-card { display: flex; flex-direction: column; gap: 14px; padding: 20px; background: #f5f4ef; border-radius: 16px; text-decoration: none; color: inherit; }
-.post-more-card__cover { height: 120px; border-radius: 12px; }
+.post-more-card__cover { height: 120px; border-radius: 12px; overflow: hidden; position: relative; }
+.post-more-card__img { position: absolute; inset: 0; width: 100%; height: 100%; object-fit: cover; }
 .post-more-card__meta { font-family: var(--mg-font-mono); font-size: 11px; color: #7a8290; letter-spacing: 0.3px; }
 .post-more-card__title { font-family: var(--mg-font-display); font-weight: 600; font-size: 20px; line-height: 1.2; letter-spacing: -0.2px; color: #14161c; margin: 0; }
 
@@ -71,6 +74,7 @@ body { background: #f5f4ef; }
 
 <!-- Post header -->
 <section class="post-header">
+  <img src="../../img/news/nuking-catan.jpg" alt="" class="post-header__img">
   <div class="post-header__bloom"></div>
   <div class="post-header__inner">
     <a href="/news/" class="post-header__back">← All posts</a>
@@ -105,19 +109,19 @@ body { background: #f5f4ef; }
     <article class="prose">
       <p class="lede"><em>Catan</em> is popular. By some accounts, it's the most popular game of the modern era — a gateway game that's sold over 45 million copies and introduced countless families to a life of board-games beyond Monopoly.</p>
       <p>It's a game that enforces interaction between players. No silent solo turns. No retreating to a corner with a deck of cards. Every roll is a negotiation, every settlement a quiet provocation. You can't win <em>Catan</em> without talking to the people you're trying to beat — which is, when you think about it, both its genius and its source of all known dining-table arguments.</p>
-      <h2>So we set it on fire.</h2>
+      <h2 id="so-we-set-it-on-fire">So we set it on fire.</h2>
       <p><em>Nuke Catan</em> is a total conversion of the base game. Same tiles, same dice, same little wooden settlers. Brand new economy.</p>
       <p>The premise: it's 2049. The island is now a contested post-nuclear wasteland. Sheep are extinct. Brick is currency. Wheat has been replaced by Rations. Wool by Scrap. And once per game, on your turn, you may — and probably should — play the Nuke card.</p>
       <blockquote>"You may play the Nuke card. Pick any hex. It produces no resources for the rest of the game."</blockquote>
       <p>The rule is short. The effect is permanent. And the ripple it sends through a four-player negotiation is, to put it mildly, instructive.</p>
-      <h2>What we left intact.</h2>
+      <h2 id="what-we-left-intact">What we left intact.</h2>
       <ul>
         <li>The hex board. Same 19 tiles, same number tokens, same robber.</li>
         <li>The card decks. Resource cards are reskinned (Sheep → Scrap), but the development cards are untouched.</li>
         <li>The longest road and largest army awards. Both still grant 2 VP.</li>
         <li>The trading mechanic. You can still bank-trade 4:1, port-trade 3:1, and player-trade however you want.</li>
       </ul>
-      <h2>What you'll need.</h2>
+      <h2 id="what-youll-need">What you'll need.</h2>
       <p>Your standard <em>Catan</em> base game and four printable cards (PDF in the download). That's it. No new tiles, no replacement components, no expansions required. It's a pure rules patch — which is, frankly, the whole point of what we do.</p>
       <p><em>Nuke Catan v2.1.0 is in open playtest. Download the rules, run it at your next table, and tell us how badly we've broken something on Discord.</em></p>
     </article>
@@ -160,29 +164,80 @@ document.getElementById('footer-root').appendChild(footer());
 });
 
 // TOC
-const TOC = ['So we set it on fire','What we left intact',"What you'll need"];
+const TOC = [{label:'So we set it on fire', id:'so-we-set-it-on-fire'}, {label:'What we left intact', id:'what-we-left-intact'}, {label:"What you'll need", id:'what-youll-need'}];
 const tul = document.getElementById('toc-list');
 TOC.forEach((t,i) => {
-  const li = el('li',{class: i===0 ? 'post-toc__item post-toc__item--active' : 'post-toc__item'});
-  li.appendChild(el('a',{href:'#',class: i===0 ? 'post-toc__link post-toc__link--active' : 'post-toc__link post-toc__link--inactive'},t));
+  const li = el('li',{class:'post-toc__item'});
+  const a = el('a',{href:'#'+t.id, class:'post-toc__link post-toc__link--inactive'},t.label);
+  a.addEventListener('click', function(e) { e.preventDefault(); document.getElementById(t.id).scrollIntoView({behavior:'smooth', block:'start'}); });
+  li.appendChild(a);
   tul.appendChild(li);
 });
+(function() {
+  const items = tul.querySelectorAll('.post-toc__item');
+  const links = tul.querySelectorAll('.post-toc__link');
+  const ids = TOC.map(t => t.id);
+  function setActive(idx) {
+    items.forEach((li, i) => {
+      li.classList.toggle('post-toc__item--active', i === idx);
+      links[i].classList.toggle('post-toc__link--active', i === idx);
+      links[i].classList.toggle('post-toc__link--inactive', i !== idx);
+    });
+  }
+  setActive(0);
+  const observer = new IntersectionObserver(entries => {
+    entries.forEach(entry => {
+      if (entry.isIntersecting) {
+        const idx = ids.indexOf(entry.target.id);
+        if (idx !== -1) setActive(idx);
+      }
+    });
+  }, {rootMargin: '-20% 0px -60% 0px'});
+  ids.forEach(id => { const el = document.getElementById(id); if (el) observer.observe(el); });
+})();
 
 const dlBtn = linkBtn('Download rules','#','red');
 dlBtn.classList.add('post-mod-card__dl');
 document.getElementById('mod-dl-btn').appendChild(dlBtn);
 
+// Hero parallax — slow zoom + scroll fade
+(function() {
+  const header = document.querySelector('.post-header');
+  const img = document.querySelector('.post-header__img');
+  const inner = document.querySelector('.post-header__inner');
+  if (!header || !img || !inner) return;
+  let ticking = false;
+  window.addEventListener('scroll', function() {
+    if (ticking) return;
+    ticking = true;
+    requestAnimationFrame(function() {
+      const rect = header.getBoundingClientRect();
+      const h = header.offsetHeight;
+      const progress = Math.max(0, Math.min(1, -rect.top / h));
+      const scale = 1.08 + progress * 0.12;
+      img.style.transform = 'scale(' + scale + ')';
+      img.style.opacity = 0.5 - progress * 0.35;
+      inner.style.transform = 'translateY(' + (progress * -40) + 'px)';
+      inner.style.opacity = 1 - progress * 0.9;
+      ticking = false;
+    });
+  });
+})();
 // More posts
 const MORE = [
-  {cover:'#3a9928', cat:'Devlog',     date:'May 12, 2026', title:'Mongo enters open playtest'},
-  {cover:'#0c4f8d', cat:'Mod update', date:'May 9, 2026',  title:'Econopoly v1.4: the audit patch'},
-  {cover:'#1a3680', cat:'Community',  date:'May 2, 2026',  title:'Mod jam #3 wraps up'},
+  {cover:'#0c4f8d', cat:'Talisman', date:'Jul 2025', title:'Spiralling Paths of Power and Peril', img:'spiralling-paths-of-power-and-peril.jpg', href:url('/news/spiralling-paths-of-power-and-peril/')},
+  {cover:'#0c4f8d', cat:'Essay', date:'May 2026', title:'Beyond The Box', img:'beyond-the-box.jpg', href:url('/news/beyond-the-box/')},
+  {cover:'#0c4f8d', cat:'Philosophy', date:'Mar 2026', title:'Open Sourcing Tabletop Games', img:'open-sourcing-tabletop-games.jpg', href:url('/news/open-sourcing-tabletop-games/')},
 ];
 const mp = document.getElementById('more-posts');
 MORE.forEach(p => {
-  const a = el('a',{href:url('/news/nuking-catan/'),class:'post-more-card'});
+  const a = el('a',{href:p.href,class:'post-more-card'});
   const cover = el('div',{class:'post-more-card__cover'});
   cover.style.background = `linear-gradient(135deg,#0a0d2a 0%,${p.cover} 100%)`;
+  if (p.img) {
+    const img = el('img',{src:url(`/img/news/${p.img}`), alt:'', class:'post-more-card__img'});
+    cover.appendChild(img);
+  }
   a.appendChild(cover);
   a.appendChild(el('div',{class:'post-more-card__meta'},`${p.cat.toUpperCase()} · ${p.date}`));
   a.appendChild(el('h3',{class:'post-more-card__title'},p.title));

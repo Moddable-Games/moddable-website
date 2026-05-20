@@ -10,9 +10,11 @@
 body { background: #f5f4ef; }
 
 /* Post header */
-.post-header { position: relative; color: #fff; overflow: hidden; background: #000; }
+.post-header { position: relative; color: #fff; overflow: hidden; background: #000; min-height: 520px; display: flex; align-items: center; justify-content: center; }
+.post-header__img { position: absolute; inset: 0; width: 100%; height: 100%; object-fit: cover; object-position: center top; opacity: 0.5; pointer-events: none; transform: scale(1.08); transform-origin: center center; will-change: transform, opacity; }
+.post-header__inner { transition: transform 0.1s linear, opacity 0.1s linear; will-change: transform, opacity; }
 .post-header__bloom { position: absolute; left: 50%; bottom: -200px; transform: translateX(-50%); width: 1100px; height: 500px; background: radial-gradient(ellipse, rgba(58,153,40,0.4) 0%, transparent 65%); pointer-events: none; filter: blur(20px); }
-.post-header__inner { position: relative; padding: 48px 32px 88px; max-width: 800px; margin: 0 auto; text-align: center; box-sizing: border-box; }
+.post-header__inner { position: relative; padding: 96px 32px 96px; max-width: 800px; width: 100%; text-align: center; box-sizing: border-box; }
 .post-header__back { font-family: var(--mg-font-mono); font-size: 12px; color: rgba(255,255,255,0.7); text-decoration: none; }
 .post-header__tags { display: flex; gap: 8px; justify-content: center; margin-top: 28px; flex-wrap: wrap; }
 .post-header__cat { font-family: var(--mg-font-body); font-weight: 600; font-size: 11px; background: #3a9928; color: #fff; padding: 4px 10px; border-radius: 9999px; }
@@ -55,7 +57,8 @@ body { background: #f5f4ef; }
 .post-more__heading { font-family: var(--mg-font-display); font-weight: 600; font-size: 40px; line-height: 1.1; letter-spacing: -0.5px; color: #14161c; margin: 0 0 32px; }
 .post-more__grid { display: grid; grid-template-columns: repeat(3, 1fr); gap: 20px; }
 .post-more-card { display: flex; flex-direction: column; gap: 14px; padding: 20px; background: #f5f4ef; border-radius: 16px; text-decoration: none; color: inherit; }
-.post-more-card__cover { height: 120px; border-radius: 12px; }
+.post-more-card__cover { height: 120px; border-radius: 12px; overflow: hidden; position: relative; }
+.post-more-card__img { position: absolute; inset: 0; width: 100%; height: 100%; object-fit: cover; }
 .post-more-card__meta { font-family: var(--mg-font-mono); font-size: 11px; color: #7a8290; letter-spacing: 0.3px; }
 .post-more-card__title { font-family: var(--mg-font-display); font-weight: 600; font-size: 20px; line-height: 1.2; letter-spacing: -0.2px; color: #14161c; margin: 0; }
 
@@ -71,6 +74,7 @@ body { background: #f5f4ef; }
 
 <!-- Post header -->
 <section class="post-header">
+  <img src="../../img/news/open-sourcing-tabletop-games.jpg" alt="" class="post-header__img">
   <div class="post-header__bloom"></div>
   <div class="post-header__inner">
     <a href="/news/" class="post-header__back">&larr; All posts</a>
@@ -105,7 +109,7 @@ body { background: #f5f4ef; }
     <article class="prose">
       <p class="lede"><strong>Should board games be open source?</strong> It's a slightly uncomfortable question for an industry built on intellectual property protection &mdash; but it's one of the most important questions facing tabletop gaming today.</p>
       <p>Players already modify games extensively. They rebalance mechanics, create expansions, build digital versions, and share house rules across forums and Discord servers. The modification is happening regardless of whether publishers acknowledge it. The question is not <em>if</em> players will shape games &mdash; it's whether the industry structures itself to embrace that reality.</p>
-      <h2>So what does "open-source" even mean for tabletop games?</h2>
+      <h2 id="so-what-does-open-source-even-mean">So what does "open-source" even mean for tabletop games?</h2>
       <p>In software, open-source means access to the code that makes a product work. For tabletop games, the equivalent involves a different set of layers:</p>
       <ul>
         <li>Access to master source files for editing gameplay mechanics and rules</li>
@@ -114,14 +118,14 @@ body { background: #f5f4ef; }
         <li>Access to transparent global manufacturing partnerships</li>
       </ul>
       <p>Each layer represents a different kind of openness. A publisher might open their rules but keep artwork proprietary. They might release digital assets but retain manufacturing exclusivity. Structured openness is not all-or-nothing &mdash; it's a spectrum.</p>
-      <h2>The fear and the opportunity.</h2>
+      <h2 id="the-fear-and-the-opportunity">The fear and the opportunity.</h2>
       <p>Designers, publishers, and artists have legitimate concerns. If anyone can modify and redistribute a game, what protects the creators who invested years of work? What prevents dilution of a brand? What happens to revenue?</p>
       <p>But open-source models in other industries haven't eliminated value &mdash; they've shifted where value lives. Red Hat built a multi-billion-dollar business on free software. WordPress powers 40% of the web while remaining open-source. The value moved from controlling the artifact to cultivating the ecosystem.</p>
       <blockquote>"Open-source models haven't eliminated value. They've shifted where value lives."</blockquote>
-      <h2>Enduring ecosystems over isolated hits.</h2>
+      <h2 id="enduring-ecosystems-over-isolated-hits">Enduring ecosystems over isolated hits.</h2>
       <p>The next generation of players has grown up with modded video games, remix culture, and collaborative platforms. They expect participation, not just consumption. A publisher who builds an ecosystem &mdash; tools, communities, shared standards &mdash; will outlast one who defends a single product behind walls.</p>
       <p>This doesn't mean every game should be fully open on day one. But it does mean the industry needs new models for balancing openness with sustainability. Selective openness. Tiered access. Community governance. Revenue sharing.</p>
-      <h2>What we believe.</h2>
+      <h2 id="what-we-believe">What we believe.</h2>
       <p>At Moddable.Games, every mod we publish is freely available. Every ruleset is designed to be forked. We don't believe this undermines the value of game design &mdash; we believe it amplifies it. The games that endure are the ones that communities invest in, and communities invest in things they can shape.</p>
       <p><em>The question is not whether players will shape games. It's whether we acknowledge that they already do.</em></p>
     </article>
@@ -164,29 +168,80 @@ document.getElementById('footer-root').appendChild(footer());
 });
 
 // TOC
-const TOC = ['So what does "open-source" even mean?','The fear and the opportunity','Enduring ecosystems over isolated hits','What we believe'];
+const TOC = [{label:'So what does "open-source" even mean?', id:'so-what-does-open-source-even-mean'}, {label:'The fear and the opportunity', id:'the-fear-and-the-opportunity'}, {label:'Enduring ecosystems over isolated hits', id:'enduring-ecosystems-over-isolated-hits'}, {label:'What we believe', id:'what-we-believe'}];
 const tul = document.getElementById('toc-list');
 TOC.forEach((t,i) => {
-  const li = el('li',{class: i===0 ? 'post-toc__item post-toc__item--active' : 'post-toc__item'});
-  li.appendChild(el('a',{href:'#',class: i===0 ? 'post-toc__link post-toc__link--active' : 'post-toc__link post-toc__link--inactive'},t));
+  const li = el('li',{class:'post-toc__item'});
+  const a = el('a',{href:'#'+t.id, class:'post-toc__link post-toc__link--inactive'},t.label);
+  a.addEventListener('click', function(e) { e.preventDefault(); document.getElementById(t.id).scrollIntoView({behavior:'smooth', block:'start'}); });
+  li.appendChild(a);
   tul.appendChild(li);
 });
+(function() {
+  const items = tul.querySelectorAll('.post-toc__item');
+  const links = tul.querySelectorAll('.post-toc__link');
+  const ids = TOC.map(t => t.id);
+  function setActive(idx) {
+    items.forEach((li, i) => {
+      li.classList.toggle('post-toc__item--active', i === idx);
+      links[i].classList.toggle('post-toc__link--active', i === idx);
+      links[i].classList.toggle('post-toc__link--inactive', i !== idx);
+    });
+  }
+  setActive(0);
+  const observer = new IntersectionObserver(entries => {
+    entries.forEach(entry => {
+      if (entry.isIntersecting) {
+        const idx = ids.indexOf(entry.target.id);
+        if (idx !== -1) setActive(idx);
+      }
+    });
+  }, {rootMargin: '-20% 0px -60% 0px'});
+  ids.forEach(id => { const el = document.getElementById(id); if (el) observer.observe(el); });
+})();
 
 const dlBtn = linkBtn('Browse mods','#','green');
 dlBtn.classList.add('post-mod-card__dl');
 document.getElementById('mod-dl-btn').appendChild(dlBtn);
 
+// Hero parallax — slow zoom + scroll fade
+(function() {
+  const header = document.querySelector('.post-header');
+  const img = document.querySelector('.post-header__img');
+  const inner = document.querySelector('.post-header__inner');
+  if (!header || !img || !inner) return;
+  let ticking = false;
+  window.addEventListener('scroll', function() {
+    if (ticking) return;
+    ticking = true;
+    requestAnimationFrame(function() {
+      const rect = header.getBoundingClientRect();
+      const h = header.offsetHeight;
+      const progress = Math.max(0, Math.min(1, -rect.top / h));
+      const scale = 1.08 + progress * 0.12;
+      img.style.transform = 'scale(' + scale + ')';
+      img.style.opacity = 0.5 - progress * 0.35;
+      inner.style.transform = 'translateY(' + (progress * -40) + 'px)';
+      inner.style.opacity = 1 - progress * 0.9;
+      ticking = false;
+    });
+  });
+})();
 // More posts
 const MORE = [
-  {cover:'#0c4f8d', cat:'Expansion',  date:'Oct 14, 2025', title:"Twilight's Prophecies Thunder On!", href:url('/news/twilights-prophecies-thunder-on/')},
-  {cover:'#d11a1a', cat:'Deep dive',  date:'Sep 12, 2025', title:'Nuking Catan', href:url('/news/nuking-catan/')},
-  {cover:'#3a9928', cat:'Design',     date:'Jun 4, 2025',  title:'Conquering the Constrains of Chess', href:url('/news/conquering-the-constrains-of-chess/')},
+  {cover:'#d11a1a', cat:'Community', date:'Mar 2026', title:"'Tis the Season for Traditions", img:'tis-the-season-for-traditions.jpg', href:url('/news/tis-the-season-for-traditions/')},
+  {cover:'#d11a1a', cat:'Catan', date:'Jul 2025', title:'Nuking Catan', img:'nuking-catan.jpg', href:url('/news/nuking-catan/')},
+  {cover:'#0c4f8d', cat:'Essay', date:'May 2026', title:'Beyond The Box', img:'beyond-the-box.jpg', href:url('/news/beyond-the-box/')},
 ];
 const mp = document.getElementById('more-posts');
 MORE.forEach(p => {
   const a = el('a',{href:p.href,class:'post-more-card'});
   const cover = el('div',{class:'post-more-card__cover'});
   cover.style.background = `linear-gradient(135deg,#0a0d2a 0%,${p.cover} 100%)`;
+  if (p.img) {
+    const img = el('img',{src:url(`/img/news/${p.img}`), alt:'', class:'post-more-card__img'});
+    cover.appendChild(img);
+  }
   a.appendChild(cover);
   a.appendChild(el('div',{class:'post-more-card__meta'},`${p.cat.toUpperCase()} · ${p.date}`));
   a.appendChild(el('h3',{class:'post-more-card__title'},p.title));

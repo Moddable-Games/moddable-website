@@ -10,9 +10,11 @@
 body { background: #f5f4ef; }
 
 /* Post header */
-.post-header { position: relative; color: #fff; overflow: hidden; background: #000; }
+.post-header { position: relative; color: #fff; overflow: hidden; background: #000; min-height: 520px; display: flex; align-items: center; justify-content: center; }
+.post-header__img { position: absolute; inset: 0; width: 100%; height: 100%; object-fit: cover; object-position: center top; opacity: 0.5; pointer-events: none; transform: scale(1.08); transform-origin: center center; will-change: transform, opacity; }
+.post-header__inner { transition: transform 0.1s linear, opacity 0.1s linear; will-change: transform, opacity; }
 .post-header__bloom { position: absolute; left: 50%; bottom: -200px; transform: translateX(-50%); width: 1100px; height: 500px; background: radial-gradient(ellipse, rgba(209,26,26,0.4) 0%, transparent 65%); pointer-events: none; filter: blur(20px); }
-.post-header__inner { position: relative; padding: 48px 32px 88px; max-width: 800px; margin: 0 auto; text-align: center; box-sizing: border-box; }
+.post-header__inner { position: relative; padding: 96px 32px 96px; max-width: 800px; width: 100%; text-align: center; box-sizing: border-box; }
 .post-header__back { font-family: var(--mg-font-mono); font-size: 12px; color: rgba(255,255,255,0.7); text-decoration: none; }
 .post-header__tags { display: flex; gap: 8px; justify-content: center; margin-top: 28px; flex-wrap: wrap; }
 .post-header__cat { font-family: var(--mg-font-body); font-weight: 600; font-size: 11px; background: #d11a1a; color: #fff; padding: 4px 10px; border-radius: 9999px; }
@@ -55,7 +57,8 @@ body { background: #f5f4ef; }
 .post-more__heading { font-family: var(--mg-font-display); font-weight: 600; font-size: 40px; line-height: 1.1; letter-spacing: -0.5px; color: #14161c; margin: 0 0 32px; }
 .post-more__grid { display: grid; grid-template-columns: repeat(3, 1fr); gap: 20px; }
 .post-more-card { display: flex; flex-direction: column; gap: 14px; padding: 20px; background: #f5f4ef; border-radius: 16px; text-decoration: none; color: inherit; }
-.post-more-card__cover { height: 120px; border-radius: 12px; }
+.post-more-card__cover { height: 120px; border-radius: 12px; overflow: hidden; position: relative; }
+.post-more-card__img { position: absolute; inset: 0; width: 100%; height: 100%; object-fit: cover; }
 .post-more-card__meta { font-family: var(--mg-font-mono); font-size: 11px; color: #7a8290; letter-spacing: 0.3px; }
 .post-more-card__title { font-family: var(--mg-font-display); font-weight: 600; font-size: 20px; line-height: 1.2; letter-spacing: -0.2px; color: #14161c; margin: 0; }
 
@@ -71,6 +74,7 @@ body { background: #f5f4ef; }
 
 <!-- Post header -->
 <section class="post-header">
+  <img src="../../img/news/making-a-masterpiece-by-modification.jpg" alt="" class="post-header__img">
   <div class="post-header__bloom"></div>
   <div class="post-header__inner">
     <a href="/news/" class="post-header__back">&larr; All posts</a>
@@ -105,24 +109,24 @@ body { background: #f5f4ef; }
     <article class="prose">
       <p class="lede">Chess is not one game. It is a family of games &mdash; a lineage stretching back 1,500 years across continents, cultures, and countless modifications. What we call "chess" today is simply the variant that stuck.</p>
       <p>The story begins in 6th-century India with <em>Chaturanga</em> &mdash; a four-player war simulation played on an 8x8 grid called an <em>ashtapada</em>. The pieces represented infantry, cavalry, elephants, and chariots. The rules were fluid, regional, and constantly evolving.</p>
-      <h2>The Silk Road transmissions.</h2>
+      <h2 id="the-silk-road-transmissions">The Silk Road transmissions.</h2>
       <p>As the game travelled westward along the Silk Road, it transformed. In Persia it became <em>Shatranj</em>, shedding two players and gaining the strategic depth of alternating turns. The Arabs refined it further, developing the first recorded opening theory and endgame studies.</p>
       <p>Eastward, the game evolved into <em>Xiangqi</em> (Chinese Chess), which introduced mechanics still unseen in the Western game: a river barrier dividing the board, restricted palace zones for generals, and cannons that must leap over an intervening piece to capture.</p>
-      <h2>Europe and the modern game.</h2>
+      <h2 id="europe-and-the-modern-game">Europe and the modern game.</h2>
       <p>Chess arrived in Europe between the 10th and 15th centuries, and the transformation was dramatic. The slow-moving <em>fers</em> (counsellor) became the all-powerful Queen. The elephant became the Bishop. The game accelerated &mdash; what had been a grinding siege became a rapid tactical battle.</p>
       <p>This was, in essence, a mod. The European players took an existing game, kept the grid and the turn structure, and rewrote the piece movement rules to suit their cultural preferences for speed and decisiveness.</p>
-      <h2>Historical variants.</h2>
+      <h2 id="historical-variants">Historical variants.</h2>
       <ul>
         <li><strong>Tamerlane Chess</strong> &mdash; A 112-square board with unique pieces including giraffes, war engines, and a piece that moves as a combination of knight and rook.</li>
         <li><strong>Xiangqi</strong> &mdash; River barriers and cannons make for a more direct, tactical game with faster resolution.</li>
         <li><strong>Shogi</strong> &mdash; Captured pieces can be re-deployed, ensuring games never simplify and drawless endgames.</li>
         <li><strong>Courier Chess</strong> &mdash; A 12x8 medieval variant popular for centuries before the modern queen was introduced.</li>
       </ul>
-      <h2>The modern modding era.</h2>
+      <h2 id="the-modern-modding-era">The modern modding era.</h2>
       <p>Today, chess modifications continue to proliferate. 3D Chess adds a vertical dimension. Hexagonal Chess (Glinski's variant) replaces the square grid entirely. Alice Chess uses two boards with pieces phasing between them. Bughouse Chess turns the game into a team sport with piece trading between boards.</p>
       <blockquote>"Chess has always been modified. The version we play today is simply the mod that won."</blockquote>
       <p>Notable figures throughout history understood this. Napoleon Bonaparte played chess obsessively during his campaigns. Benjamin Franklin wrote <em>The Morals of Chess</em>, promoting the game for teaching "foresight, caution and perseverance." Einstein was a devoted player who saw the game as a model for scientific thinking.</p>
-      <h2>Why this matters to us.</h2>
+      <h2 id="why-this-matters-to-us">Why this matters to us.</h2>
       <p>This history of continuous modification is what inspired Moddable.Games. If the greatest strategy game in human history is itself a mod &mdash; a Persian modification of an Indian game, further modified by Europeans &mdash; then modification is not a secondary activity. It is the primary creative act of game design.</p>
       <p><em>Our chess mods &mdash; Fog of War Chess, 4-Player Chess, and Hexagonal Chess &mdash; continue this tradition. Download them from the mods library and add your chapter to a 1,500-year story.</em></p>
     </article>
@@ -165,29 +169,80 @@ document.getElementById('footer-root').appendChild(footer());
 });
 
 // TOC
-const TOC = ['The Silk Road transmissions','Europe and the modern game','Historical variants','The modern modding era','Why this matters to us'];
+const TOC = [{label:'The Silk Road transmissions', id:'the-silk-road-transmissions'}, {label:'Europe and the modern game', id:'europe-and-the-modern-game'}, {label:'Historical variants', id:'historical-variants'}, {label:'The modern modding era', id:'the-modern-modding-era'}, {label:'Why this matters to us', id:'why-this-matters-to-us'}];
 const tul = document.getElementById('toc-list');
 TOC.forEach((t,i) => {
-  const li = el('li',{class: i===0 ? 'post-toc__item post-toc__item--active' : 'post-toc__item'});
-  li.appendChild(el('a',{href:'#',class: i===0 ? 'post-toc__link post-toc__link--active' : 'post-toc__link post-toc__link--inactive'},t));
+  const li = el('li',{class:'post-toc__item'});
+  const a = el('a',{href:'#'+t.id, class:'post-toc__link post-toc__link--inactive'},t.label);
+  a.addEventListener('click', function(e) { e.preventDefault(); document.getElementById(t.id).scrollIntoView({behavior:'smooth', block:'start'}); });
+  li.appendChild(a);
   tul.appendChild(li);
 });
+(function() {
+  const items = tul.querySelectorAll('.post-toc__item');
+  const links = tul.querySelectorAll('.post-toc__link');
+  const ids = TOC.map(t => t.id);
+  function setActive(idx) {
+    items.forEach((li, i) => {
+      li.classList.toggle('post-toc__item--active', i === idx);
+      links[i].classList.toggle('post-toc__link--active', i === idx);
+      links[i].classList.toggle('post-toc__link--inactive', i !== idx);
+    });
+  }
+  setActive(0);
+  const observer = new IntersectionObserver(entries => {
+    entries.forEach(entry => {
+      if (entry.isIntersecting) {
+        const idx = ids.indexOf(entry.target.id);
+        if (idx !== -1) setActive(idx);
+      }
+    });
+  }, {rootMargin: '-20% 0px -60% 0px'});
+  ids.forEach(id => { const el = document.getElementById(id); if (el) observer.observe(el); });
+})();
 
 const dlBtn = linkBtn('Browse mods','#','red');
 dlBtn.classList.add('post-mod-card__dl');
 document.getElementById('mod-dl-btn').appendChild(dlBtn);
 
+// Hero parallax — slow zoom + scroll fade
+(function() {
+  const header = document.querySelector('.post-header');
+  const img = document.querySelector('.post-header__img');
+  const inner = document.querySelector('.post-header__inner');
+  if (!header || !img || !inner) return;
+  let ticking = false;
+  window.addEventListener('scroll', function() {
+    if (ticking) return;
+    ticking = true;
+    requestAnimationFrame(function() {
+      const rect = header.getBoundingClientRect();
+      const h = header.offsetHeight;
+      const progress = Math.max(0, Math.min(1, -rect.top / h));
+      const scale = 1.08 + progress * 0.12;
+      img.style.transform = 'scale(' + scale + ')';
+      img.style.opacity = 0.5 - progress * 0.35;
+      inner.style.transform = 'translateY(' + (progress * -40) + 'px)';
+      inner.style.opacity = 1 - progress * 0.9;
+      ticking = false;
+    });
+  });
+})();
 // More posts
 const MORE = [
-  {cover:'#0c4f8d', cat:'TI4',        date:'Oct 14, 2025', title:"Twilight's Prophecies Thunder On!", href:url('/news/twilights-prophecies-thunder-on/')},
-  {cover:'#d11a1a', cat:'Deep dive',   date:'Sep 12, 2025', title:'Nuking Catan', href:url('/news/nuking-catan/')},
-  {cover:'#3a9928', cat:'Monopoly',    date:'Jul 22, 2025', title:'Monopolising Modified Variations', href:url('/news/monopolising-modified-variations/')},
+  {cover:'#0c4f8d', cat:'TI4', date:'Oct 2025', title:"Twilight's Prophecies Thunder On!", img:'twilights-prophecies-thunder-on.png', href:url('/news/twilights-prophecies-thunder-on/')},
+  {cover:'#3a9928', cat:'Monopoly', date:'Jul 2025', title:'Monopolising Modified Variations', img:'monopolising-modified-variations.jpg', href:url('/news/monopolising-modified-variations/')},
+  {cover:'#3a9928', cat:'Philosophy', date:'Mar 2026', title:'Making Mods Matter', img:'making-mods-matter.jpg', href:url('/news/making-mods-matter/')},
 ];
 const mp = document.getElementById('more-posts');
 MORE.forEach(p => {
   const a = el('a',{href:p.href,class:'post-more-card'});
   const cover = el('div',{class:'post-more-card__cover'});
   cover.style.background = `linear-gradient(135deg,#0a0d2a 0%,${p.cover} 100%)`;
+  if (p.img) {
+    const img = el('img',{src:url(`/img/news/${p.img}`), alt:'', class:'post-more-card__img'});
+    cover.appendChild(img);
+  }
   a.appendChild(cover);
   a.appendChild(el('div',{class:'post-more-card__meta'},`${p.cat.toUpperCase()} · ${p.date}`));
   a.appendChild(el('h3',{class:'post-more-card__title'},p.title));
