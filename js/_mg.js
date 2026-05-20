@@ -217,6 +217,13 @@ const MG = (() => {
     const right = el('div', { style:{ marginLeft:'auto', display:'flex', gap:'12px', alignItems:'center' }});
     const discordLink = el('a', { href:url('/community/'), style:{ fontFamily:F.pixel, fontSize:'8px', color:T.cosmicGlow, letterSpacing:'1.5px', textDecoration:'none' }}, 'DISCORD');
     right.appendChild(discordLink);
+
+    // Search trigger button
+    const searchBtn = el('button', { class:'mg-search-trigger', 'aria-label':'Search the site' });
+    searchBtn.innerHTML = '<svg viewBox="0 0 24 24"><circle cx="11" cy="11" r="8"/><line x1="21" y1="21" x2="16.65" y2="16.65"/></svg>';
+    searchBtn.addEventListener('click', () => { openSearch(); });
+    right.appendChild(searchBtn);
+
     right.appendChild(linkBtn('MOD A GAME', url('/submit/'), 'primary', { height:'38px', fontSize:'13px', padding:'0 16px' }));
     header.appendChild(right);
 
@@ -358,6 +365,7 @@ const MG = (() => {
     inner.appendChild(link);
 
     card.appendChild(inner);
+    card.addEventListener('click', (e) => { if (e.target.tagName !== 'A') window.location.href = href; });
     return card;
   }
 
@@ -426,6 +434,116 @@ const MG = (() => {
   }
 
   document.addEventListener('DOMContentLoaded', initReveal);
+
+  /* ── Global Search ──────────────────────────────────────────────────── */
+  const SEARCH_INDEX = [
+    {type:'mod', title:'Talisman: Hexed', desc:'Open-world hex system replacing the Talisman board with 61 tiles', href:url('/mods/talisman-hexed/')},
+    {type:'mod', title:'Hyper Imperium', desc:'Faster ruleset for TI4 + Prophecy of Kings', href:url('/mods/hyper-imperium/')},
+    {type:'mod', title:'Nuke Catan', desc:'Post-apocalyptic total conversion of Catan', href:url('/mods/nuke-catan/')},
+    {type:'mod', title:'Fog of War Chess', desc:'Players see only squares their pieces can legally move to', href:url('/mods/fog-of-war-chess/')},
+    {type:'mod', title:'4-Player Chess', desc:'Two teams or free-for-all on a cross-shaped board', href:url('/mods/4-player-chess/')},
+    {type:'mod', title:'Hexagonal Chess', desc:'Glinski variant — pieces move along hex edges', href:url('/mods/hexagonal-chess/')},
+    {type:'mod', title:'Econopoly', desc:'Monopoly with a working economy and dynamic pricing', href:url('/mods/econopoly/')},
+    {type:'mod', title:'Anti-Monopoly', desc:'Public domain competitive variant of Monopoly', href:url('/mods/anti-monopoly/')},
+    {type:'mod', title:'Flooded Catan', desc:'Rising sea levels slowly reduce the board', href:url('/mods/flooded-catan/')},
+    {type:'mod', title:'The Diamond Mine', desc:'Total conversion turning Catan into a mining game', href:url('/mods/the-diamond-mine/')},
+    {type:'mod', title:'Shattered Ascension', desc:'Community overhaul of TI4 with rebalanced factions', href:url('/mods/shattered-ascension/')},
+    {type:'mod', title:'CivRisk', desc:'Risk rewritten to play like Civilisation', href:url('/mods/civrisk/')},
+    {type:'game', title:'Nukes', desc:'Our original nuclear strategy game', href:url('/games/nukes/')},
+    {type:'game', title:'Mongo', desc:'Fast-paced card battler', href:url('/games/mongo/')},
+    {type:'game', title:'Endless Skies', desc:'Cooperative airship exploration', href:url('/games/endless-skies/')},
+    {type:'game', title:'Moddable Chess', desc:'2000+ variants, one moddable engine', href:url('/games/moddable-chess/')},
+    {type:'news', title:'Beyond The Box', desc:'The art of board game design begins and ends with the box', href:url('/news/beyond-the-box/')},
+    {type:'news', title:'The Ancients', desc:'Games older than history itself', href:url('/news/the-ancients/')},
+    {type:'news', title:'Making Mods Matter', desc:'Why modders deserve better tools', href:url('/news/making-mods-matter/')},
+    {type:'news', title:'Nuking Catan', desc:'A meditation on the gateway game', href:url('/news/nuking-catan/')},
+    {type:'news', title:'Open Sourcing Tabletop Games', desc:'Should board games be open source?', href:url('/news/open-sourcing-tabletop-games/')},
+    {type:'news', title:"Twilight's Prophecies Thunder On!", desc:'TI turns 25 — what Prophecy of Kings changed', href:url('/news/twilights-prophecies-thunder-on/')},
+    {type:'tool', title:'Dice Roller', desc:'Roll any combination of dice', href:url('/tools/')},
+    {type:'tool', title:'Turn Timer', desc:'Configurable player timer with presets', href:url('/tools/')},
+    {type:'tool', title:'TI4 Faction Picker', desc:'Random faction draft for Twilight Imperium', href:url('/tools/ti/')},
+    {type:'tool', title:'Talisman Character Lottery', desc:'Random character selection for Talisman', href:url('/tools/talisman/')},
+    {type:'page', title:'About', desc:'Our story and what we believe', href:url('/about/')},
+    {type:'page', title:'Community', desc:'Join the Discord — 2400+ members', href:url('/community/')},
+    {type:'page', title:'Submit a Mod', desc:'Share your homebrew with the community', href:url('/submit/')},
+  ];
+
+  let searchOverlay = null;
+
+  function openSearch() {
+    if (searchOverlay) { searchOverlay.remove(); searchOverlay = null; }
+
+    const overlay = el('div', {class:'mg-search-overlay'});
+    const panel = el('div', {class:'mg-search-panel'});
+    const header = el('div', {class:'mg-search-panel__header'});
+    const input = el('input', {type:'text', class:'mg-search-panel__input', placeholder:'Search mods, games, news, tools…', autofocus:'true'});
+    header.appendChild(input);
+    panel.appendChild(header);
+
+    const results = el('div', {class:'mg-search-panel__results'});
+    panel.appendChild(results);
+
+    const footer = el('div', {class:'mg-search-panel__footer'});
+    footer.innerHTML = '<div class="mg-search-panel__footer-hint"><span><kbd>↑↓</kbd> navigate</span><span><kbd>↵</kbd> open</span><span><kbd>esc</kbd> close</span></div>';
+    panel.appendChild(footer);
+
+    overlay.appendChild(panel);
+    document.body.appendChild(overlay);
+    searchOverlay = overlay;
+
+    requestAnimationFrame(() => { overlay.classList.add('mg-search-overlay--open'); input.focus(); });
+
+    function renderResults(query) {
+      results.innerHTML = '';
+      if (!query) {
+        results.innerHTML = '<div class="mg-search-panel__empty"><div class="mg-search-panel__empty-title">Start typing to search</div><div class="mg-search-panel__empty-hint">Mods, games, news articles, and tools</div></div>';
+        return;
+      }
+      const q = query.toLowerCase();
+      const matches = SEARCH_INDEX.filter(item => item.title.toLowerCase().includes(q) || item.desc.toLowerCase().includes(q));
+      if (matches.length === 0) {
+        results.innerHTML = '<div class="mg-search-panel__empty"><div class="mg-search-panel__empty-title">No results</div><div class="mg-search-panel__empty-hint">Try a different search term</div></div>';
+        return;
+      }
+      matches.slice(0, 8).forEach((item, i) => {
+        const a = el('a', {href:item.href, class:'mg-search-result' + (i===0?' mg-search-result--active':'')});
+        const badge = el('span', {class:'mg-search-result__type mg-search-result__type--'+item.type}, item.type);
+        const content = el('div', {class:'mg-search-result__content'});
+        content.appendChild(el('div', {class:'mg-search-result__title'}, item.title));
+        content.appendChild(el('div', {class:'mg-search-result__desc'}, item.desc));
+        a.appendChild(badge);
+        a.appendChild(content);
+        results.appendChild(a);
+      });
+    }
+
+    renderResults('');
+    input.addEventListener('input', () => renderResults(input.value.trim()));
+
+    let activeIdx = 0;
+    input.addEventListener('keydown', (e) => {
+      const items = results.querySelectorAll('.mg-search-result');
+      if (e.key === 'ArrowDown') { e.preventDefault(); activeIdx = Math.min(activeIdx+1, items.length-1); }
+      else if (e.key === 'ArrowUp') { e.preventDefault(); activeIdx = Math.max(activeIdx-1, 0); }
+      else if (e.key === 'Enter' && items[activeIdx]) { e.preventDefault(); items[activeIdx].click(); return; }
+      else if (e.key === 'Escape') { closeSearch(); return; }
+      else return;
+      items.forEach((it, i) => it.classList.toggle('mg-search-result--active', i===activeIdx));
+    });
+
+    overlay.addEventListener('click', (e) => { if (e.target === overlay) closeSearch(); });
+  }
+
+  function closeSearch() {
+    if (!searchOverlay) return;
+    searchOverlay.classList.remove('mg-search-overlay--open');
+    setTimeout(() => { if (searchOverlay) { searchOverlay.remove(); searchOverlay = null; } }, 200);
+  }
+
+  document.addEventListener('keydown', (e) => {
+    if ((e.metaKey || e.ctrlKey) && e.key === 'k') { e.preventDefault(); openSearch(); }
+    if (e.key === 'Escape') closeSearch();
+  });
 
   /* ── Expose ──────────────────────────────────────────────────────────── */
   return { T, F, HEX_BG, HEX_BG_RED, HEX_BG_GREEN, CATEGORY_COLORS, el, btn, linkBtn, navbar, footer, modCard, pageHero, cubeSVG, url, initReveal };
