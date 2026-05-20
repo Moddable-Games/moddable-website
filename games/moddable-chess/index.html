@@ -7,8 +7,8 @@
 <title>Moddable Chess — Moddable.Games</title>
 <link rel="stylesheet" href="../../css/_mg.css">
 <style>
-#hero-cube { width: clamp(180px, 22vw, 280px); height: clamp(180px, 22vw, 280px); }
-#hero-cube canvas { width: 100% !important; height: 100% !important; }
+#hero-cube { width: clamp(220px, 26vw, 320px); height: clamp(220px, 26vw, 320px); overflow: visible; }
+#hero-cube canvas { width: 100% !important; height: 100% !important; display: block; }
 </style>
 </head>
 <body class="mg-section--dark">
@@ -108,7 +108,7 @@ document.getElementById('footer-root').appendChild(footer());
   const w = container.clientWidth || 260, h = container.clientHeight || 260;
   const scene = new THREE.Scene();
   const camera = new THREE.PerspectiveCamera(40, w/h, 0.1, 100);
-  camera.position.set(0, 0.5, 4);
+  camera.position.set(0, 0.5, 5);
   const renderer = new THREE.WebGLRenderer({ alpha:true, antialias:true });
   renderer.setSize(w, h);
   renderer.setPixelRatio(Math.min(window.devicePixelRatio, 2));

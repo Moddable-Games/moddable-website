@@ -54,6 +54,45 @@ body { background: #f5f4ef; }
 .die-face.rolling { animation: dieRoll 0.4s cubic-bezier(.2,.8,.2,1); }
 @keyframes dieRoll { 0% { transform: rotate(-20deg) scale(0.8); } 60% { transform: rotate(10deg) scale(1.1); } 100% { transform: rotate(0) scale(1); } }
 input[type=range] { width: 100%; accent-color: #0c4f8d; }
+/* Voting Booth */
+.vote-setup__row { display: flex; gap: 10px; margin-bottom: 12px; }
+.vote-setup__input { flex: 1; height: 40px; padding: 0 14px; border-radius: 9999px; border: 1px solid var(--mg-hairline-light); font-family: var(--mg-font-body); font-size: 14px; background: #f5f4ef; color: var(--mg-ink); outline: none; }
+.vote-setup__input:focus { border-color: #3a9928; }
+.vote-setup__options { display: flex; flex-direction: column; gap: 8px; margin-bottom: 20px; }
+.vote-setup__option-row { display: flex; gap: 10px; align-items: center; }
+.vote-setup__remove { width: 28px; height: 28px; border-radius: 9999px; border: 1px solid var(--mg-hairline-light); background: transparent; color: var(--mg-mute); font-size: 16px; cursor: pointer; line-height: 1; }
+.vote-setup__remove:hover { border-color: #d11a1a; color: #d11a1a; }
+.vote-setup__btns { display: flex; gap: 10px; flex-wrap: wrap; }
+.vote-active__question { font-family: var(--mg-font-display); font-weight: 600; font-size: 24px; color: var(--mg-ink); margin-bottom: 8px; }
+.vote-active__info { font-family: var(--mg-font-mono); font-size: 13px; color: var(--mg-mute); margin-bottom: 20px; }
+.vote-active__options { display: flex; flex-direction: column; gap: 12px; margin-bottom: 20px; }
+.vote-option { display: block; width: 100%; padding: 16px 20px; border-radius: 14px; border: 2px solid #3a9928; background: transparent; font-family: var(--mg-font-display); font-weight: 600; font-size: 18px; color: var(--mg-ink); cursor: pointer; text-align: left; transition: all 150ms; }
+.vote-option:hover { background: #3a992810; transform: translateY(-1px); }
+.vote-option:active { background: #3a9928; color: #fff; }
+.vote-results__question { font-family: var(--mg-font-display); font-weight: 600; font-size: 24px; color: var(--mg-ink); margin-bottom: 20px; }
+.vote-results__bar-wrap { margin-bottom: 12px; }
+.vote-results__bar-label { display: flex; justify-content: space-between; font-family: var(--mg-font-body); font-size: 14px; font-weight: 600; color: var(--mg-ink); margin-bottom: 6px; }
+.vote-results__bar-track { height: 28px; border-radius: 9999px; background: #f5f4ef; overflow: hidden; }
+.vote-results__bar-fill { height: 100%; border-radius: 9999px; background: #3a9928; transition: width 400ms ease; }
+.vote-results__total { font-family: var(--mg-font-mono); font-size: 13px; color: var(--mg-mute); margin-top: 16px; margin-bottom: 20px; }
+.vote-results__btns { display: flex; gap: 10px; }
+/* Seating Randomizer */
+.seat-input__row { display: flex; gap: 10px; margin-bottom: 12px; }
+.seat-input__field { flex: 1; height: 40px; padding: 0 14px; border-radius: 9999px; border: 1px solid rgba(255,255,255,0.2); font-family: var(--mg-font-body); font-size: 14px; background: rgba(255,255,255,0.06); color: #fff; outline: none; }
+.seat-input__field:focus { border-color: #6fb5ff; }
+.seat-input__list { display: flex; gap: 8px; flex-wrap: wrap; margin-bottom: 20px; }
+.seat-input__tag { height: 32px; padding: 0 12px; border-radius: 9999px; background: rgba(255,255,255,0.1); border: 1px solid rgba(255,255,255,0.2); font-family: var(--mg-font-body); font-size: 13px; color: #fff; display: flex; align-items: center; gap: 8px; }
+.seat-input__tag-remove { background: none; border: none; color: rgba(255,255,255,0.5); cursor: pointer; font-size: 14px; padding: 0; line-height: 1; }
+.seat-input__tag-remove:hover { color: #fff; }
+.seat-input__btns { display: flex; gap: 10px; flex-wrap: wrap; }
+.seat-circle { position: relative; width: 280px; height: 280px; margin: 32px auto; }
+.seat-circle__table { position: absolute; top: 50%; left: 50%; width: 100px; height: 100px; margin: -50px 0 0 -50px; border-radius: 50%; background: rgba(255,255,255,0.06); border: 1px solid rgba(255,255,255,0.15); display: flex; align-items: center; justify-content: center; font-family: var(--mg-font-mono); font-size: 11px; color: rgba(255,255,255,0.4); }
+.seat-circle__player { position: absolute; width: 64px; height: 64px; margin: -32px 0 0 -32px; border-radius: 50%; background: #161721; border: 2px solid rgba(255,255,255,0.25); display: flex; flex-direction: column; align-items: center; justify-content: center; text-align: center; }
+.seat-circle__player--first { border-color: #e8a91a; }
+.seat-circle__player-name { font-family: var(--mg-font-body); font-weight: 600; font-size: 11px; color: #fff; line-height: 1.2; max-width: 56px; overflow: hidden; text-overflow: ellipsis; white-space: nowrap; }
+.seat-circle__player-num { font-family: var(--mg-font-mono); font-size: 9px; color: rgba(255,255,255,0.5); }
+.seat-circle__star { font-size: 10px; color: #e8a91a; line-height: 1; }
+.seat-controls__btns { display: flex; gap: 10px; flex-wrap: wrap; justify-content: center; margin-top: 24px; }
 </style>
 </head>
 <body>
@@ -124,6 +163,66 @@ input[type=range] { width: 100%; accent-color: #0c4f8d; }
       <p class="tools-widget__sub">Tracks up to 6 players. Good for Catan VP, TI4 objectives, anything with points.</p>
       <div id="score-board" class="score-board"></div>
       <div id="score-btns" class="score-board__btns"></div>
+    </div>
+
+    <!-- Turn Timer -->
+    <div class="tools-widget">
+      <div class="tools-widget__bloom"></div>
+      <div class="tools-widget__inner">
+        <div class="mg-eyebrow mg-eyebrow--red">&#9650; TURN TIMER</div>
+        <h2 class="tools-widget__heading">Time's up.</h2>
+        <div id="timer-players"></div>
+        <div id="timer-display"></div>
+        <div id="timer-controls"></div>
+      </div>
+    </div>
+
+    <!-- Initiative Tracker -->
+    <div class="tools-widget tools-widget--light">
+      <div class="mg-eyebrow mg-eyebrow--blue">&#9650; INITIATIVE TRACKER</div>
+      <h2 class="tools-widget__heading tools-widget__heading--dark">Who goes next.</h2>
+      <div id="init-list"></div>
+      <div id="init-controls"></div>
+    </div>
+
+    <!-- Map Grid Generator -->
+    <div class="tools-widget tools-widget--light">
+      <div class="mg-eyebrow mg-eyebrow--blue">&#9650; MAP GRID GENERATOR</div>
+      <h2 class="tools-widget__heading tools-widget__heading--dark">Print a battlefield.</h2>
+      <p class="tools-widget__sub">Instant printable grids — square, hex, or isometric. Export as SVG.</p>
+      <div id="grid-controls"></div>
+      <div id="grid-preview"></div>
+    </div>
+
+    <!-- Rules Referee -->
+    <div class="tools-widget tools-widget--light">
+      <div class="mg-eyebrow mg-eyebrow--red">&#9650; RULES REFEREE</div>
+      <h2 class="tools-widget__heading tools-widget__heading--dark">House rules, settled.</h2>
+      <p class="tools-widget__sub">Record your group's house rules. Search them mid-game. Never argue twice.</p>
+      <div id="rules-input"></div>
+      <div id="rules-list-container"></div>
+    </div>
+
+    <!-- Voting Booth -->
+    <div class="tools-widget tools-widget--light">
+      <div class="mg-eyebrow mg-eyebrow--green">&#9650; VOTING BOOTH</div>
+      <h2 class="tools-widget__heading tools-widget__heading--dark">Settle it fairly.</h2>
+      <p class="tools-widget__sub">Anonymous polling for group decisions. Create a question, add options, vote.</p>
+      <div id="vote-setup"></div>
+      <div id="vote-active"></div>
+      <div id="vote-results"></div>
+    </div>
+
+    <!-- Seating Randomizer -->
+    <div class="tools-widget">
+      <div class="tools-widget__bloom"></div>
+      <div class="tools-widget__inner">
+        <div class="mg-eyebrow mg-eyebrow--glow">&#9650; SEATING RANDOMIZER</div>
+        <h2 class="tools-widget__heading">Take your seats.</h2>
+        <div id="seat-input"></div>
+        <div id="seat-result"></div>
+        <div id="seat-controls"></div>
+      </div>
     </div>
 
   </div>
@@ -282,6 +381,244 @@ sb2.appendChild(btn('Add player', 'dark', () => {
 sb2.appendChild(btn('Reset scores', 'outline-light', () => {
   players.forEach(p => p.score = 0); renderScoreboard();
 }));
+
+/* ── VOTING BOOTH ── */
+(function() {
+  const setupEl = document.getElementById('vote-setup');
+  const activeEl = document.getElementById('vote-active');
+  const resultsEl = document.getElementById('vote-results');
+
+  let voteQuestion = '';
+  let voteOptions = ['', ''];
+  let votes = [];
+  let voterCount = 0;
+
+  function renderSetup() {
+    setupEl.innerHTML = '';
+    activeEl.innerHTML = '';
+    resultsEl.innerHTML = '';
+
+    const qRow = el('div', {class: 'vote-setup__row'});
+    const qInput = document.createElement('input');
+    qInput.className = 'vote-setup__input';
+    qInput.placeholder = 'Your question...';
+    qInput.value = voteQuestion;
+    qInput.addEventListener('input', () => { voteQuestion = qInput.value; });
+    qRow.appendChild(qInput);
+    setupEl.appendChild(qRow);
+
+    const optWrap = el('div', {class: 'vote-setup__options'});
+    voteOptions.forEach((opt, i) => {
+      const row = el('div', {class: 'vote-setup__option-row'});
+      const inp = document.createElement('input');
+      inp.className = 'vote-setup__input';
+      inp.placeholder = `Option ${i + 1}`;
+      inp.value = opt;
+      inp.addEventListener('input', () => { voteOptions[i] = inp.value; });
+      row.appendChild(inp);
+      if (voteOptions.length > 2) {
+        const rm = el('button', {class: 'vote-setup__remove'}, '×');
+        rm.addEventListener('click', () => { voteOptions.splice(i, 1); renderSetup(); });
+        row.appendChild(rm);
+      }
+      optWrap.appendChild(row);
+    });
+    setupEl.appendChild(optWrap);
+
+    const btnsWrap = el('div', {class: 'vote-setup__btns'});
+    if (voteOptions.length < 6) {
+      btnsWrap.appendChild(btn('Add option', 'outline-light', () => {
+        voteOptions.push('');
+        renderSetup();
+      }));
+    }
+    btnsWrap.appendChild(btn('Start Vote', 'green', () => {
+      if (!voteQuestion.trim()) return;
+      const filled = voteOptions.filter(o => o.trim());
+      if (filled.length < 2) return;
+      voteOptions = filled;
+      votes = new Array(voteOptions.length).fill(0);
+      voterCount = 0;
+      renderVoting();
+    }));
+    setupEl.appendChild(btnsWrap);
+  }
+
+  function renderVoting() {
+    setupEl.innerHTML = '';
+    resultsEl.innerHTML = '';
+    activeEl.innerHTML = '';
+
+    const q = el('div', {class: 'vote-active__question'}, voteQuestion);
+    activeEl.appendChild(q);
+
+    const info = el('div', {class: 'vote-active__info'}, `Voter ${voterCount + 1} — tap your choice, then pass the device.`);
+    activeEl.appendChild(info);
+
+    const optWrap = el('div', {class: 'vote-active__options'});
+    voteOptions.forEach((opt, i) => {
+      const b = el('button', {class: 'vote-option'}, opt);
+      b.addEventListener('click', () => {
+        votes[i]++;
+        voterCount++;
+        renderVoting();
+      });
+      optWrap.appendChild(b);
+    });
+    activeEl.appendChild(optWrap);
+
+    const endBtn = btn('End Voting & Show Results', 'green', () => {
+      renderResults();
+    });
+    activeEl.appendChild(endBtn);
+  }
+
+  function renderResults() {
+    setupEl.innerHTML = '';
+    activeEl.innerHTML = '';
+    resultsEl.innerHTML = '';
+
+    const q = el('div', {class: 'vote-results__question'}, voteQuestion);
+    resultsEl.appendChild(q);
+
+    const totalVotes = votes.reduce((a, b) => a + b, 0);
+    voteOptions.forEach((opt, i) => {
+      const pct = totalVotes > 0 ? Math.round((votes[i] / totalVotes) * 100) : 0;
+      const wrap = el('div', {class: 'vote-results__bar-wrap'});
+      const label = el('div', {class: 'vote-results__bar-label'});
+      label.appendChild(el('span', {}, opt));
+      label.appendChild(el('span', {}, `${votes[i]} (${pct}%)`));
+      wrap.appendChild(label);
+      const track = el('div', {class: 'vote-results__bar-track'});
+      const fill = el('div', {class: 'vote-results__bar-fill'});
+      fill.style.width = pct + '%';
+      track.appendChild(fill);
+      wrap.appendChild(track);
+      resultsEl.appendChild(wrap);
+    });
+
+    const total = el('div', {class: 'vote-results__total'}, `${totalVotes} vote${totalVotes !== 1 ? 's' : ''} cast`);
+    resultsEl.appendChild(total);
+
+    const btnsWrap = el('div', {class: 'vote-results__btns'});
+    btnsWrap.appendChild(btn('New Vote', 'green', () => {
+      voteQuestion = '';
+      voteOptions = ['', ''];
+      votes = [];
+      voterCount = 0;
+      renderSetup();
+    }));
+    resultsEl.appendChild(btnsWrap);
+  }
+
+  renderSetup();
+})();
+
+/* ── SEATING RANDOMIZER ── */
+(function() {
+  const inputEl = document.getElementById('seat-input');
+  const resultEl = document.getElementById('seat-result');
+  const controlsEl = document.getElementById('seat-controls');
+
+  let seatPlayers = [];
+  let shuffled = [];
+
+  function renderInput() {
+    inputEl.innerHTML = '';
+    resultEl.innerHTML = '';
+    controlsEl.innerHTML = '';
+
+    const row = el('div', {class: 'seat-input__row'});
+    const field = document.createElement('input');
+    field.className = 'seat-input__field';
+    field.placeholder = 'Enter player name...';
+    field.addEventListener('keydown', (e) => {
+      if (e.key === 'Enter' && field.value.trim() && seatPlayers.length < 8) {
+        seatPlayers.push(field.value.trim());
+        field.value = '';
+        renderInput();
+      }
+    });
+    row.appendChild(field);
+    const addBtn = btn('Add', 'primary', () => {
+      if (field.value.trim() && seatPlayers.length < 8) {
+        seatPlayers.push(field.value.trim());
+        field.value = '';
+        renderInput();
+      }
+    });
+    row.appendChild(addBtn);
+    inputEl.appendChild(row);
+
+    if (seatPlayers.length > 0) {
+      const list = el('div', {class: 'seat-input__list'});
+      seatPlayers.forEach((name, i) => {
+        const tag = el('div', {class: 'seat-input__tag'}, name);
+        const rm = el('button', {class: 'seat-input__tag-remove'}, '×');
+        rm.addEventListener('click', () => { seatPlayers.splice(i, 1); renderInput(); });
+        tag.appendChild(rm);
+        list.appendChild(tag);
+      });
+      inputEl.appendChild(list);
+    }
+
+    const btnsWrap = el('div', {class: 'seat-input__btns'});
+    if (seatPlayers.length >= 3) {
+      btnsWrap.appendChild(btn('Randomize', 'primary', () => {
+        shuffle();
+      }));
+    }
+    inputEl.appendChild(btnsWrap);
+  }
+
+  function shuffle() {
+    shuffled = [...seatPlayers];
+    for (let i = shuffled.length - 1; i > 0; i--) {
+      const j = Math.floor(Math.random() * (i + 1));
+      [shuffled[i], shuffled[j]] = [shuffled[j], shuffled[i]];
+    }
+    renderResult();
+  }
+
+  function renderResult() {
+    resultEl.innerHTML = '';
+    controlsEl.innerHTML = '';
+
+    const circle = el('div', {class: 'seat-circle'});
+    const table = el('div', {class: 'seat-circle__table'}, 'TABLE');
+    circle.appendChild(table);
+
+    const radius = 120;
+    const cx = 140;
+    const cy = 140;
+    shuffled.forEach((name, i) => {
+      const angle = (2 * Math.PI * i / shuffled.length) - Math.PI / 2;
+      const x = cx + radius * Math.cos(angle);
+      const y = cy + radius * Math.sin(angle);
+      const player = el('div', {class: 'seat-circle__player' + (i === 0 ? ' seat-circle__player--first' : '')});
+      player.style.left = x + 'px';
+      player.style.top = y + 'px';
+      if (i === 0) {
+        player.appendChild(el('div', {class: 'seat-circle__star'}, '★'));
+      }
+      player.appendChild(el('div', {class: 'seat-circle__player-name'}, name));
+      player.appendChild(el('div', {class: 'seat-circle__player-num'}, '#' + (i + 1)));
+      circle.appendChild(player);
+    });
+
+    resultEl.appendChild(circle);
+
+    const btnsWrap = el('div', {class: 'seat-controls__btns'});
+    btnsWrap.appendChild(btn('Shuffle Again', 'primary', shuffle));
+    btnsWrap.appendChild(btn('Reset', 'outline-light', () => {
+      shuffled = [];
+      renderInput();
+    }));
+    controlsEl.appendChild(btnsWrap);
+  }
+
+  renderInput();
+})();
 </script>
 </body>
 </html>
