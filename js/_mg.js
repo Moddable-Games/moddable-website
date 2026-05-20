@@ -1,6 +1,12 @@
 /* =========================================================================
-   Moddable.Games — Shared Component Library
+   Moddable.Games — Shared Component Library (monolith entry point)
    Vanilla JS, zero dependencies. All components write DOM directly.
+
+   This file is the single <script> pages load. It contains everything.
+   For development reference, the same code is split into:
+     - js/mg-core.js        (tokens, fonts, helpers, el(), url())
+     - js/mg-components.js  (navbar, footer, modCard, pageHero, buttons)
+     - js/mg-animations.js  (initReveal, IntersectionObserver)
    ========================================================================= */
 
 const MG = (() => {
