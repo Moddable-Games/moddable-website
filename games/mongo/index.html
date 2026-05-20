@@ -61,10 +61,20 @@
   </div>
 </section>
 
+<section class="mg-section mg-section--white mg-section--border-top">
+  <div class="mg-container">
+    <div class="community-header">
+      <h2 class="mg-heading-xl">Community mods for <em>Mongo</em>.</h2>
+      <a href="../../submit/" class="community-header__link">Submit yours &rarr;</a>
+    </div>
+    <div id="comm-grid" class="mg-grid-3" data-stagger></div>
+  </div>
+</section>
+
 <div id="footer-root"></div>
 <script src="../../js/_mg.js"></script>
 <script>
-const { T, el, linkBtn, navbar, footer } = MG;
+const { T, el, linkBtn, navbar, footer, modCard } = MG;
 document.getElementById('nav-root').appendChild(navbar('Games'));
 document.getElementById('footer-root').appendChild(footer());
 
@@ -127,6 +137,14 @@ HOOKS.forEach(h => {
   txt.appendChild(el('div',{class:'mg-card__desc'},h.desc));
   d.appendChild(txt); hg.appendChild(d);
 });
+
+const COMM = [
+  {category:'Rebalance',baseGame:'Mongo',title:'Mongo: Quick Draw',body:'5-card hands instead of 7. Faster rounds, more volatile rule changes. Lunch-break mode.',stats:'3–5 players · 15 min · 10+'},
+  {category:'Total conversion',baseGame:'Mongo',title:'Mongo: Spell Deck',body:'Fantasy theme. Rules become spells — "all cards played face-down" becomes "Fog of War", etc.',stats:'3–5 players · 45 min · 12+'},
+  {category:'Reskin',baseGame:'Mongo',title:'Mongo: Neon',body:'Cyberpunk card art. Same rules, UV-reactive card backs for night sessions.',stats:'3–5 players · 30 min · 12+'},
+];
+const cg = document.getElementById('comm-grid');
+COMM.forEach(m => cg.appendChild(MG.modCard(m)));
 </script>
 </body>
 </html>

@@ -16,15 +16,18 @@
   <div class="game-hero__hex" data-hex="blue"></div>
   <div class="game-hero__fade"></div>
   <div class="game-hero__inner">
-    <a href="../../games/" class="game-hero__back">&larr; All games</a>
-    <div class="game-hero__tags">
-      <span class="game-hero__tag" data-accent="blue">Platform</span>
-      <span class="game-hero__tag--outline">Open alpha</span>
-      <span class="game-hero__version" data-color="blue">v0.1.0</span>
+    <div class="game-hero__text hero-anim">
+      <a href="../../games/" class="game-hero__back">&larr; All games</a>
+      <div class="game-hero__tags">
+        <span class="game-hero__tag" data-accent="blue">Platform</span>
+        <span class="game-hero__tag--outline">Open alpha</span>
+        <span class="game-hero__version" data-color="blue">v0.1.0</span>
+      </div>
+      <h1 class="game-hero__title">Moddable Chess.</h1>
+      <p class="game-hero__lede">2000+ documented variants. Zero unified compendiums. One moddable engine — ours. The most modded game in history finally gets an open-source home.</p>
+      <div class="game-hero__btns" id="hero-btns"></div>
     </div>
-    <h1 class="game-hero__title">Moddable Chess.</h1>
-    <p class="game-hero__lede">2000+ documented variants. Zero unified compendiums. One moddable engine — ours.</p>
-    <div class="game-hero__btns" id="hero-btns"></div>
+    <img src="../../img/dungeon-chess/03_logo_all_white.png" alt="Moddable Chess" class="game-hero__logo">
   </div>
 </section>
 
@@ -34,29 +37,23 @@
 
 <section class="mg-section mg-section--light">
   <div class="mg-container">
-    <h2 class="mg-heading-xl">The most modded game in history.</h2>
-    <p class="mg-body-sub">Hundreds of variations exist. Most are buried in forum threads and PDFs. None have a playable, modular compendium online. We're building that compendium — starting with the four most-requested variants.</p>
-  </div>
-</section>
-
-<section class="mg-section mg-section--light mg-section--flush-top">
-  <div class="mg-container">
     <div class="mg-eyebrow mg-eyebrow--blue">&#9650; SUPPORTED VARIANTS</div>
-    <div id="variants-grid" class="mg-grid-4"></div>
+    <h2 class="mg-heading-xl">Four ways to play. More coming.</h2>
+    <div id="variants-grid" class="mg-grid-4" data-stagger></div>
   </div>
 </section>
 
-<section class="mg-section mg-section--white" id="dungeon-chess">
+<section class="mg-section mg-section--dark" id="dungeon-chess">
   <div class="mg-container">
-    <div class="mg-eyebrow mg-eyebrow--green">&#9650; FEATURED VARIANT · PRE-ALPHA</div>
     <div class="dc-header" data-reveal="up">
       <div>
-        <h2 class="mg-heading-lg">Dungeon Chess.</h2>
-        <p class="mg-body-sub">Chess as an asymmetric skirmish and dungeon crawler. Four races on a modular board with spells, objects, XP and environmental hazards — our catalyst for crowdfunding the catalogue.</p>
+        <div class="mg-eyebrow mg-eyebrow--green">&#9650; FEATURED VARIANT &middot; PRE-ALPHA &middot; Q4 2026</div>
+        <h2 class="mg-heading-xl mg-heading-xl--light">Dungeon Chess.</h2>
+        <p class="mg-body-sub mg-body-sub--light">Chess as an asymmetric skirmish and dungeon crawler. Four races on a modular board with spells, objects, XP and environmental hazards — our catalyst for crowdfunding the catalogue.</p>
       </div>
-      <div class="dc-logo"><img src="../../img/dungeon-chess/03_logo_all_white.png" alt="Dungeon Chess"></div>
+      <img src="../../img/dungeon-chess/03_logo_all_white.png" alt="Dungeon Chess" class="dc-logo-img">
     </div>
-    <h3 class="mg-heading-md" data-reveal="up">The four races.</h3>
+    <h3 class="mg-heading-md mg-heading-xl--light" data-reveal="up">The four races.</h3>
     <div id="dc-races" class="mg-grid-2" data-stagger></div>
     <h3 class="mg-heading-md" data-reveal="up">Mod hooks.</h3>
     <div id="dc-hooks" class="mg-grid-2" data-stagger></div>
@@ -80,6 +77,16 @@
     <h2 class="mg-heading-lg">Fork any variant. Build your own.</h2>
     <p class="mg-body-sub">Moddable Chess ships with four moddable files. All in version control.</p>
     <div id="hooks-grid" class="mg-grid-2"></div>
+  </div>
+</section>
+
+<section class="mg-section mg-section--white mg-section--border-top">
+  <div class="mg-container">
+    <div class="community-header">
+      <h2 class="mg-heading-xl">Community mods for <em>Moddable Chess</em>.</h2>
+      <a href="../../submit/" class="community-header__link">Submit yours &rarr;</a>
+    </div>
+    <div id="comm-grid" class="mg-grid-3" data-stagger></div>
   </div>
 </section>
 
@@ -114,7 +121,7 @@ const VARIANTS = [
   {n:'01', title:'Regular (8×8)',        body:'Standard chess as the baseline. The same rules you know — running on our engine so you can fork it.'},
   {n:'02', title:'4-Player',             body:'Two teams or free-for-all on a cross-shaped board. The diplomacy variant.'},
   {n:'03', title:'Hexagonal (Glinski)',   body:'Pieces move along hex edges. Six directions instead of eight. Deeper positional play.'},
-  {n:'04', title:'Dungeon Chess',         body:'Our first original mod. Asymmetric races, XP, spells, and a modular dungeon board.', href:url('/games/dungeon-chess/')},
+  {n:'04', title:'Dungeon Chess',         body:'Our first original mod. Asymmetric races, XP, spells, and a modular dungeon board.', href:'#dungeon-chess'},
 ];
 const vg = document.getElementById('variants-grid');
 VARIANTS.forEach(s => {
@@ -206,6 +213,15 @@ HOOKS.forEach(h => {
   txt.appendChild(el('div',{class:'mg-card__desc'},h.desc));
   d.appendChild(txt); hg.appendChild(d);
 });
+
+// Community mods
+const COMM = [
+  {category:'Total conversion',baseGame:'Chess',title:'Fog of War Chess',body:'See only squares your pieces can move to. No checks — capture the king to win.',stats:'2 players · 20–40 min · 10+',href:url('/mods/fog-of-war-chess/')},
+  {category:'Reskin',baseGame:'Chess',title:'4-Player Chess',body:'Four players, four armies, one board. Free-for-all or teams.',stats:'4 players · 30 min · 10+',href:url('/mods/4-player-chess/')},
+  {category:'Total conversion',baseGame:'Chess',title:'Hexagonal Chess (Glinski)',body:'Chess on 91 hexagonal cells. Three colours, six directions.',stats:'2 players · 30 min · 10+',href:url('/mods/hexagonal-chess/')},
+];
+const cg = document.getElementById('comm-grid');
+COMM.forEach(m => cg.appendChild(MG.modCard(m)));
 </script>
 </body>
 </html>

@@ -61,10 +61,20 @@
   </div>
 </section>
 
+<section class="mg-section mg-section--white mg-section--border-top">
+  <div class="mg-container">
+    <div class="community-header">
+      <h2 class="mg-heading-xl">Community mods for <em>Nukes</em>.</h2>
+      <a href="../../submit/" class="community-header__link">Submit yours &rarr;</a>
+    </div>
+    <div id="comm-grid" class="mg-grid-3" data-stagger></div>
+  </div>
+</section>
+
 <div id="footer-root"></div>
 <script src="../../js/_mg.js"></script>
 <script>
-const { T, el, linkBtn, navbar, footer, url } = MG;
+const { T, el, linkBtn, navbar, footer, url, modCard } = MG;
 document.getElementById('nav-root').appendChild(navbar('Games'));
 document.getElementById('footer-root').appendChild(footer());
 
@@ -127,6 +137,14 @@ HOOKS.forEach(h => {
   txt.appendChild(el('div',{class:'mg-card__desc'},h.desc));
   d.appendChild(txt); hg.appendChild(d);
 });
+
+const COMM = [
+  {category:'Rebalance',baseGame:'Nukes',title:'Nukes: Diplomacy Mode',body:'Extended negotiation phase. Three-turn pacts become binding contracts with penalties for breaking them.',stats:'3 players · 90 min · 14+'},
+  {category:'Total conversion',baseGame:'Nukes',title:'Nukes: Cold Space',body:'The same mechanics on a star map. Planets instead of hexes, fleets instead of armies, and the button launches a supernova.',stats:'2–4 players · 120 min · 14+'},
+  {category:'Reskin',baseGame:'Nukes',title:'Nukes: Retro',body:'1950s propaganda art style. Same rules, different aesthetic. Print-and-play with period-accurate typography.',stats:'3 players · 60 min · 14+'},
+];
+const cg = document.getElementById('comm-grid');
+COMM.forEach(m => cg.appendChild(MG.modCard(m)));
 </script>
 </body>
 </html>
