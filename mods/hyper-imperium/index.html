@@ -6,6 +6,10 @@
 <meta name="mg-base" content="/MODDABLE/moddable-website">
 <title>Hyper Imperium — Moddable.Games</title>
 <link rel="stylesheet" href="../../css/_mg.css">
+<style>
+.rules-sidebar { position: sticky; top: 96px; align-self: start; }
+.rules-layout { display: grid; grid-template-columns: 240px 1fr; gap: 64px; }
+</style>
 </head>
 <body class="mg-section--dark">
 <div id="nav-root"></div>
@@ -28,8 +32,19 @@
 </section>
 
 <section class="mg-section mg-section--light">
-  <div class="mg-container--narrow">
+  <div class="mg-container rules-layout">
+    <aside class="rules-sidebar">
+      <div class="mg-eyebrow mg-eyebrow--green">THE RULES</div>
+      <ol id="toc" class="toc-list"></ol>
+    </aside>
     <div id="rules-body"></div>
+  </div>
+</section>
+
+<section class="mg-section mg-section--light mg-section--flush-top">
+  <div class="mg-container">
+    <h2 class="mg-heading-xl">What you'll need.</h2>
+    <div id="components-grid" class="mg-grid-3"></div>
   </div>
 </section>
 
@@ -69,13 +84,39 @@ const SECTIONS = [
   { id:'5', title:'Hyper Agendas', body:"The agenda phase triggers every round, not just after Mecatol Rex is taken. Two agendas are voted on per agenda phase as normal. This keeps politics relevant from round one and gives the Speaker role consistent value throughout the game." },
 ];
 
+const toc = document.getElementById('toc');
 const body2 = document.getElementById('rules-body');
 SECTIONS.forEach(s => {
+  const li = el('li');
+  const a = el('a',{href:`#s${s.id}`,class:'toc-list__link'});
+  a.appendChild(el('span',{class:'toc-list__num'},s.id.padStart(2,'0')));
+  a.appendChild(document.createTextNode(s.title));
+  li.appendChild(a); toc.appendChild(li);
+
   const art = el('article',{class:'rules-section',id:`s${s.id}`});
   art.appendChild(el('div',{class:'rules-section__num'},`SECTION ${s.id.padStart(2,'0')}`));
   art.appendChild(el('h2',{class:'rules-section__title'},s.title));
   art.appendChild(el('p',{class:'rules-section__body'},s.body));
   body2.appendChild(art);
+});
+
+const COMPONENTS = [
+  { kind:'Required', list:['Twilight Imperium 4th Edition base game','Prophecy of Kings expansion (recommended)','All faction sheets and tokens'] },
+  { kind:'Printable', list:['Hyper Imperium rules reference (PDF, included)','Faction balance cheat sheet','Updated strategy card reference'] },
+  { kind:'House', list:['Large table (6ft minimum recommended)','VP tracker going to 12','Timer for strategy phases (optional)'] },
+];
+const cg = document.getElementById('components-grid');
+COMPONENTS.forEach(({kind,list}) => {
+  const c = el('div',{class:'mg-card'});
+  c.appendChild(el('div',{class:'mg-card__eyebrow mg-eyebrow--green'},kind.toUpperCase()));
+  const ul = el('ul',{class:'component-list'});
+  list.forEach(x => {
+    const li = el('li',{class:'component-list__item'});
+    li.appendChild(el('span',{class:'component-list__bullet'}));
+    li.appendChild(document.createTextNode(x));
+    ul.appendChild(li);
+  });
+  c.appendChild(ul); cg.appendChild(c);
 });
 
 const RELATED = [

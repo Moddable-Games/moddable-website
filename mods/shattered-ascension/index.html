@@ -6,18 +6,22 @@
 <meta name="mg-base" content="/MODDABLE/moddable-website">
 <title>Shattered Ascension — Moddable.Games</title>
 <link rel="stylesheet" href="../../css/_mg.css">
+<style>
+.rules-sidebar { position: sticky; top: 96px; align-self: start; }
+.rules-layout { display: grid; grid-template-columns: 240px 1fr; gap: 64px; }
+</style>
 </head>
 <body class="mg-section--dark">
 <div id="nav-root"></div>
 
 <section class="mod-hero">
-  <div class="mod-hero__hex-bg mod-hero__hex-bg--slow" data-bg="green"></div>
   <div class="mod-hero__glow mod-hero__glow--green"></div>
   <div class="mod-hero__inner hero-anim">
     <a href="../../mods/" class="mod-hero__back">&larr; All mods</a>
     <div class="mod-hero__tags">
       <span class="mod-hero__cat mod-hero__cat--green">Rebalance</span>
       <span class="mod-hero__base">base: Twilight Imperium 4e</span>
+      <span class="mod-hero__version">v3.1.0</span>
     </div>
     <h1 class="mod-hero__title mod-hero__title--green">Shattered <em>Ascension</em>.</h1>
     <p class="mod-hero__lede">PsiComa's decade-long TI3 remix — rebalanced factions, overhauled agenda phase, new card sets. The most thorough community TI variant in existence. Tabletop Simulator module available.</p>
@@ -27,41 +31,41 @@
 </section>
 
 <section class="mg-section mg-section--light">
-  <div class="mg-container--narrow">
-    <div class="mg-eyebrow mg-eyebrow--green">THE RULES</div>
+  <div class="mg-container rules-layout">
+    <aside class="rules-sidebar">
+      <div class="mg-eyebrow mg-eyebrow--green">THE RULES</div>
+      <ol id="toc" class="toc-list"></ol>
+    </aside>
     <div id="rules-body"></div>
   </div>
 </section>
 
-<section class="mg-section mg-section--light mg-section--flush-top mg-section--border-top">
-  <div class="mg-container--narrow">
-    <div class="mod-source">
-      <div class="mod-source__group">
-        <div class="mod-source__label">Source</div>
-        <div class="mod-source__value">boardgamegeek.com</div>
-      </div>
-      <div class="mod-source__group">
-        <div class="mod-source__label">License</div>
-        <div class="mod-source__value">Community / BoardGameGeek</div>
-      </div>
-    </div>
+<section class="mg-section mg-section--light mg-section--flush-top">
+  <div class="mg-container">
+    <h2 class="mg-heading-xl">What you'll need.</h2>
+    <div id="components-grid" class="mg-grid-3"></div>
+  </div>
+</section>
+
+<section class="mg-section mg-section--white mg-section--border-top">
+  <div class="mg-container">
+    <h2 class="related-heading">More from the library.</h2>
+    <div id="related-grid" class="mg-grid-3" data-stagger></div>
   </div>
 </section>
 
 <div id="footer-root"></div>
 <script src="../../js/_mg.js"></script>
 <script>
-const { T, el, linkBtn, navbar, footer } = MG;
+const { T, el, linkBtn, navbar, footer, modCard } = MG;
 document.getElementById('nav-root').appendChild(navbar('Mods'));
 document.getElementById('footer-root').appendChild(footer());
 
-document.querySelector('.mod-hero__hex-bg').style.backgroundImage = `url('../../img/hex-grid-green.svg')`;
-
 const hb = document.getElementById('header-btns');
-hb.appendChild(linkBtn('Download PDF', '#', 'green'));
+hb.appendChild(linkBtn('Download PDF', '#', 'primary'));
 hb.appendChild(linkBtn('View source', '#', 'outline-dark'));
 
-const STATS = [['Players','3–8'],['Time','6–12 hr'],['Age','16+'],['Source','boardgamegeek.com']];
+const STATS = [['Players','3–8'],['Time','6–12 hr'],['Age','16+'],['Source','boardgamegeek.com'],['License','Community / BoardGameGeek']];
 const sr = document.getElementById('stats-row');
 STATS.forEach(([k,v],i) => {
   if (i>0) sr.appendChild(el('span',{class:'stats-row__divider'}));
@@ -79,14 +83,48 @@ const SECTIONS = [
   { id:'5', title:'Combat revision', body:"Space combat uses a modified dice system with critical hits. Ground invasions are faster but riskier. Flagship abilities have been retuned to avoid snowball victories." },
 ];
 
+const toc = document.getElementById('toc');
 const body2 = document.getElementById('rules-body');
 SECTIONS.forEach(s => {
+  const li = el('li');
+  const a = el('a',{href:`#s${s.id}`,class:'toc-list__link'});
+  a.appendChild(el('span',{class:'toc-list__num'},s.id.padStart(2,'0')));
+  a.appendChild(document.createTextNode(s.title));
+  li.appendChild(a); toc.appendChild(li);
+
   const art = el('article',{class:'rules-section',id:`s${s.id}`});
   art.appendChild(el('div',{class:'rules-section__num'},`SECTION ${s.id.padStart(2,'0')}`));
   art.appendChild(el('h2',{class:'rules-section__title'},s.title));
   art.appendChild(el('p',{class:'rules-section__body'},s.body));
   body2.appendChild(art);
 });
+
+const COMPONENTS = [
+  { kind:'Required', list:['Twilight Imperium 3rd or 4th Edition base game','All expansion content (Shattered Empire recommended)','Faction sheets and plastic units for up to 8 players'] },
+  { kind:'Printable', list:['Shattered Ascension rulebook (PDF, 80+ pages)','Custom objective cards (print-and-cut)','Rebalanced strategy card overlays'] },
+  { kind:'House', list:['Tabletop Simulator (digital alternative available)','Large table for 8-player games','Full day blocked out (6–12 hours minimum)'] },
+];
+const cg = document.getElementById('components-grid');
+COMPONENTS.forEach(({kind,list}) => {
+  const c = el('div',{class:'mg-card'});
+  c.appendChild(el('div',{class:'mg-card__eyebrow mg-eyebrow--green'},kind.toUpperCase()));
+  const ul = el('ul',{class:'component-list'});
+  list.forEach(x => {
+    const li = el('li',{class:'component-list__item'});
+    li.appendChild(el('span',{class:'component-list__bullet'}));
+    li.appendChild(document.createTextNode(x));
+    ul.appendChild(li);
+  });
+  c.appendChild(ul); cg.appendChild(c);
+});
+
+const RELATED = [
+  { category:'Rebalance', baseGame:'Twilight Imperium 4e', title:'Hyper Imperium', body:"Hyper Movement, Hyper Trades, Hyper Agendas. A faster TI4 ruleset.", stats:'3–6 players · 4–6 hr · 14+', href:'../hyper-imperium/' },
+  { category:'Reskin', baseGame:'Talisman 4e', title:'Talisman: Hexed', body:"An open-world hex system that replaces the Talisman board with 61 hexagonal tiles.", stats:'2–6 players · 90 min · 13+', href:'../talisman-hexed/' },
+  { category:'Rebalance', baseGame:'Risk', title:'CivRisk', body:"Risk rewritten to play like Civilisation. Growth tiers, ruins, and technologies.", stats:'3–5 players · 180 min · 14+', href:'../civrisk/' },
+];
+const rg = document.getElementById('related-grid');
+RELATED.forEach(m => rg.appendChild(modCard(m)));
 </script>
 </body>
 </html>

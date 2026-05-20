@@ -6,6 +6,10 @@
 <meta name="mg-base" content="/MODDABLE/moddable-website">
 <title>Hexagonal Chess (Glinski) — Moddable.Games</title>
 <link rel="stylesheet" href="../../css/_mg.css">
+<style>
+.rules-sidebar { position: sticky; top: 96px; align-self: start; }
+.rules-layout { display: grid; grid-template-columns: 240px 1fr; gap: 64px; }
+</style>
 </head>
 <body class="mg-section--dark">
 <div id="nav-root"></div>
@@ -18,6 +22,7 @@
     <div class="mod-hero__tags">
       <span class="mod-hero__cat mod-hero__cat--red">Total conversion</span>
       <span class="mod-hero__base">base: Chess</span>
+      <span class="mod-hero__version">v1.0.0</span>
     </div>
     <h1 class="mod-hero__title mod-hero__title--red">Hexagonal <em>Chess</em>.</h1>
     <p class="mod-hero__lede">Glinski's hexagonal chess — 91 cells, three colours, six directions. The most popular hex-chess variant in history, played by millions since 1936.</p>
@@ -27,8 +32,19 @@
 </section>
 
 <section class="mg-section mg-section--light">
-  <div class="mg-container--narrow">
+  <div class="mg-container rules-layout">
+    <aside class="rules-sidebar">
+      <div class="mg-eyebrow mg-eyebrow--red">THE RULES</div>
+      <ol id="toc" class="toc-list"></ol>
+    </aside>
     <div id="rules-body"></div>
+  </div>
+</section>
+
+<section class="mg-section mg-section--light mg-section--flush-top">
+  <div class="mg-container">
+    <h2 class="mg-heading-xl">What you'll need.</h2>
+    <div id="components-grid" class="mg-grid-3"></div>
   </div>
 </section>
 
@@ -68,13 +84,39 @@ const SECTIONS = [
   { id:'5', title:'Check & checkmate', body:"Standard rules apply: a king in check must escape. Checkmate (no legal move to escape check) loses the game. Stalemate is a draw. The six directions of attack and three-colour bishop system create novel tactical patterns not found in square chess." },
 ];
 
+const toc = document.getElementById('toc');
 const body2 = document.getElementById('rules-body');
 SECTIONS.forEach(s => {
+  const li = el('li');
+  const a = el('a',{href:`#s${s.id}`,class:'toc-list__link'});
+  a.appendChild(el('span',{class:'toc-list__num'},s.id.padStart(2,'0')));
+  a.appendChild(document.createTextNode(s.title));
+  li.appendChild(a); toc.appendChild(li);
+
   const art = el('article',{class:'rules-section',id:`s${s.id}`});
   art.appendChild(el('div',{class:'rules-section__num'},`SECTION ${s.id.padStart(2,'0')}`));
   art.appendChild(el('h2',{class:'rules-section__title'},s.title));
   art.appendChild(el('p',{class:'rules-section__body'},s.body));
   body2.appendChild(art);
+});
+
+const COMPONENTS = [
+  { kind:'Required', list:['Hexagonal chess board (91 cells, 3 colours)','2 sets of chess pieces (standard or hex-specific)','Each side: 1 king, 1 queen, 3 bishops, 2 rooks, 2 knights, 9 pawns'] },
+  { kind:'Printable', list:['Board template (PDF, included)','Piece movement reference diagrams','Starting position setup guide'] },
+  { kind:'House', list:['Chess clock (optional, 15 min per side)','Flat surface large enough for hex board','Familiarity with standard chess helpful but not required'] },
+];
+const cg = document.getElementById('components-grid');
+COMPONENTS.forEach(({kind,list}) => {
+  const c = el('div',{class:'mg-card'});
+  c.appendChild(el('div',{class:'mg-card__eyebrow mg-eyebrow--red'},kind.toUpperCase()));
+  const ul = el('ul',{class:'component-list'});
+  list.forEach(x => {
+    const li = el('li',{class:'component-list__item'});
+    li.appendChild(el('span',{class:'component-list__bullet'}));
+    li.appendChild(document.createTextNode(x));
+    ul.appendChild(li);
+  });
+  c.appendChild(ul); cg.appendChild(c);
 });
 
 const RELATED = [

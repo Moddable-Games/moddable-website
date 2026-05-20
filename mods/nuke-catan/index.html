@@ -6,6 +6,10 @@
 <meta name="mg-base" content="/MODDABLE/moddable-website">
 <title>Nuke Catan — Moddable.Games</title>
 <link rel="stylesheet" href="../../css/_mg.css">
+<style>
+.rules-sidebar { position: sticky; top: 96px; align-self: start; }
+.rules-layout { display: grid; grid-template-columns: 240px 1fr; gap: 64px; }
+</style>
 </head>
 <body class="mg-section--dark">
 <div id="nav-root"></div>
@@ -18,6 +22,7 @@
     <div class="mod-hero__tags">
       <span class="mod-hero__cat mod-hero__cat--red">Total conversion</span>
       <span class="mod-hero__base">base: Catan</span>
+      <span class="mod-hero__version">v1.2.0</span>
     </div>
     <h1 class="mod-hero__title mod-hero__title--red">Nuke <em>Catan</em>.</h1>
     <p class="mod-hero__lede">Post-apocalyptic overhaul. Sheep are scarce, brick is currency. Once per game, a player may press The Button &mdash; one hex is permanently irradiated.</p>
@@ -27,8 +32,19 @@
 </section>
 
 <section class="mg-section mg-section--light">
-  <div class="mg-container--narrow">
+  <div class="mg-container rules-layout">
+    <aside class="rules-sidebar">
+      <div class="mg-eyebrow mg-eyebrow--red">THE RULES</div>
+      <ol id="toc" class="toc-list"></ol>
+    </aside>
     <div id="rules-body"></div>
+  </div>
+</section>
+
+<section class="mg-section mg-section--light mg-section--flush-top">
+  <div class="mg-container">
+    <h2 class="mg-heading-xl">What you'll need.</h2>
+    <div id="components-grid" class="mg-grid-3"></div>
   </div>
 </section>
 
@@ -68,13 +84,39 @@ const SECTIONS = [
   { id:'5', title:'The Button', body:"Once per game, each player may press The Button on their turn (before or after rolling). Choose any hex on the board — it and all adjacent hexes are irradiated. Pressing The Button immediately awards 2 VP but all other players refuse to trade with you for 2 full turns. You cannot use ports during this embargo period." },
 ];
 
+const toc = document.getElementById('toc');
 const body2 = document.getElementById('rules-body');
 SECTIONS.forEach(s => {
+  const li = el('li');
+  const a = el('a',{href:`#s${s.id}`,class:'toc-list__link'});
+  a.appendChild(el('span',{class:'toc-list__num'},s.id.padStart(2,'0')));
+  a.appendChild(document.createTextNode(s.title));
+  li.appendChild(a); toc.appendChild(li);
+
   const art = el('article',{class:'rules-section',id:`s${s.id}`});
   art.appendChild(el('div',{class:'rules-section__num'},`SECTION ${s.id.padStart(2,'0')}`));
   art.appendChild(el('h2',{class:'rules-section__title'},s.title));
   art.appendChild(el('p',{class:'rules-section__body'},s.body));
   body2.appendChild(art);
+});
+
+const COMPONENTS = [
+  { kind:'Required', list:['Catan base game (any edition)','Standard resource cards and tokens','Development card deck'] },
+  { kind:'Printable', list:['Radiation tokens (PDF, included)','Bunker tokens (PDF, included)','Updated resource reference card'] },
+  { kind:'House', list:['1 large red button (or any dramatic prop)','Radiation zone markers (coins work)','Embargo tracker (paper or tokens)'] },
+];
+const cg = document.getElementById('components-grid');
+COMPONENTS.forEach(({kind,list}) => {
+  const c = el('div',{class:'mg-card'});
+  c.appendChild(el('div',{class:'mg-card__eyebrow mg-eyebrow--red'},kind.toUpperCase()));
+  const ul = el('ul',{class:'component-list'});
+  list.forEach(x => {
+    const li = el('li',{class:'component-list__item'});
+    li.appendChild(el('span',{class:'component-list__bullet'}));
+    li.appendChild(document.createTextNode(x));
+    ul.appendChild(li);
+  });
+  c.appendChild(ul); cg.appendChild(c);
 });
 
 const RELATED = [

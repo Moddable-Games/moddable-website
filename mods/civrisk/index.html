@@ -6,18 +6,22 @@
 <meta name="mg-base" content="/MODDABLE/moddable-website">
 <title>CivRisk — Moddable.Games</title>
 <link rel="stylesheet" href="../../css/_mg.css">
+<style>
+.rules-sidebar { position: sticky; top: 96px; align-self: start; }
+.rules-layout { display: grid; grid-template-columns: 240px 1fr; gap: 64px; }
+</style>
 </head>
 <body class="mg-section--dark">
 <div id="nav-root"></div>
 
 <section class="mod-hero">
-  <div class="mod-hero__hex-bg mod-hero__hex-bg--slow" data-bg="green"></div>
   <div class="mod-hero__glow mod-hero__glow--green"></div>
   <div class="mod-hero__inner hero-anim">
     <a href="../../mods/" class="mod-hero__back">&larr; All mods</a>
     <div class="mod-hero__tags">
       <span class="mod-hero__cat mod-hero__cat--green">Rebalance</span>
       <span class="mod-hero__base">base: Risk</span>
+      <span class="mod-hero__version">v1.0.0</span>
     </div>
     <h1 class="mod-hero__title mod-hero__title--green">Civ<em>Risk</em>.</h1>
     <p class="mod-hero__lede">Risk rewritten to play like Civilisation: choose a civilisation and leader, build through growth tiers, discover ruins and barbarian camps. Chris Grey, 2023. ePub rules free to download.</p>
@@ -27,38 +31,38 @@
 </section>
 
 <section class="mg-section mg-section--light">
-  <div class="mg-container--narrow">
-    <div class="mg-eyebrow mg-eyebrow--green">THE RULES</div>
+  <div class="mg-container rules-layout">
+    <aside class="rules-sidebar">
+      <div class="mg-eyebrow mg-eyebrow--green">THE RULES</div>
+      <ol id="toc" class="toc-list"></ol>
+    </aside>
     <div id="rules-body"></div>
   </div>
 </section>
 
-<section class="mg-section mg-section--light mg-section--flush-top mg-section--border-top">
-  <div class="mg-container--narrow">
-    <div class="mod-source">
-      <div class="mod-source__group">
-        <div class="mod-source__label">Source</div>
-        <div class="mod-source__value">Chris Grey — self-published</div>
-      </div>
-      <div class="mod-source__group">
-        <div class="mod-source__label">License</div>
-        <div class="mod-source__value">Self-published / free ePub</div>
-      </div>
-    </div>
+<section class="mg-section mg-section--light mg-section--flush-top">
+  <div class="mg-container">
+    <h2 class="mg-heading-xl">What you'll need.</h2>
+    <div id="components-grid" class="mg-grid-3"></div>
+  </div>
+</section>
+
+<section class="mg-section mg-section--white mg-section--border-top">
+  <div class="mg-container">
+    <h2 class="related-heading">More from the library.</h2>
+    <div id="related-grid" class="mg-grid-3" data-stagger></div>
   </div>
 </section>
 
 <div id="footer-root"></div>
 <script src="../../js/_mg.js"></script>
 <script>
-const { T, el, linkBtn, navbar, footer } = MG;
+const { T, el, linkBtn, navbar, footer, modCard } = MG;
 document.getElementById('nav-root').appendChild(navbar('Mods'));
 document.getElementById('footer-root').appendChild(footer());
 
-document.querySelector('.mod-hero__hex-bg').style.backgroundImage = `url('../../img/hex-grid-green.svg')`;
-
 const hb = document.getElementById('header-btns');
-hb.appendChild(linkBtn('Download PDF', '#', 'green'));
+hb.appendChild(linkBtn('Download PDF', '#', 'primary'));
 hb.appendChild(linkBtn('View source', '#', 'outline-dark'));
 
 const STATS = [['Players','3–5'],['Time','180 min'],['Age','14+'],['Designer','Chris Grey'],['Year','2023']];
@@ -79,14 +83,48 @@ const SECTIONS = [
   { id:'5', title:'Victory', body:"Control 60% of territories OR complete 3 civilisation-specific objectives (unique per civ). Objectives range from controlling specific continents to reaching the Modern tier first to accumulating gold thresholds." },
 ];
 
+const toc = document.getElementById('toc');
 const body2 = document.getElementById('rules-body');
 SECTIONS.forEach(s => {
+  const li = el('li');
+  const a = el('a',{href:`#s${s.id}`,class:'toc-list__link'});
+  a.appendChild(el('span',{class:'toc-list__num'},s.id.padStart(2,'0')));
+  a.appendChild(document.createTextNode(s.title));
+  li.appendChild(a); toc.appendChild(li);
+
   const art = el('article',{class:'rules-section',id:`s${s.id}`});
   art.appendChild(el('div',{class:'rules-section__num'},`SECTION ${s.id.padStart(2,'0')}`));
   art.appendChild(el('h2',{class:'rules-section__title'},s.title));
   art.appendChild(el('p',{class:'rules-section__body'},s.body));
   body2.appendChild(art);
 });
+
+const COMPONENTS = [
+  { kind:'Required', list:['Risk base game (any edition with world map)','Army pieces for 3–5 players','Standard Risk cards and dice'] },
+  { kind:'Printable', list:['Civilisation cards (20 unique, PDF included)','Tech tree reference board','Discovery tokens (cut-out sheet)'] },
+  { kind:'House', list:['Gold tokens (coins, beads, or paper chits)','Hidden discovery tokens (face-down on map)','Growth tier tracker (one per player)'] },
+];
+const cg = document.getElementById('components-grid');
+COMPONENTS.forEach(({kind,list}) => {
+  const c = el('div',{class:'mg-card'});
+  c.appendChild(el('div',{class:'mg-card__eyebrow mg-eyebrow--green'},kind.toUpperCase()));
+  const ul = el('ul',{class:'component-list'});
+  list.forEach(x => {
+    const li = el('li',{class:'component-list__item'});
+    li.appendChild(el('span',{class:'component-list__bullet'}));
+    li.appendChild(document.createTextNode(x));
+    ul.appendChild(li);
+  });
+  c.appendChild(ul); cg.appendChild(c);
+});
+
+const RELATED = [
+  { category:'Reskin', baseGame:'Risk', title:'Custom World Risk', body:"Replace the standard board with your own map. The rules stay identical.", stats:'2–6 players · 120 min · 12+', href:'../custom-world-risk/' },
+  { category:'Rebalance', baseGame:'Twilight Imperium 4e', title:'Shattered Ascension', body:"Community overhaul of TI4 with new mechanics and rebalanced factions.", stats:'3–8 players · 6–12 hr · 16+', href:'../shattered-ascension/' },
+  { category:'Rebalance', baseGame:'Twilight Imperium 4e', title:'Hyper Imperium', body:"Hyper Movement, Hyper Trades, Hyper Agendas. A faster TI4 ruleset.", stats:'3–6 players · 4–6 hr · 14+', href:'../hyper-imperium/' },
+];
+const rg = document.getElementById('related-grid');
+RELATED.forEach(m => rg.appendChild(modCard(m)));
 </script>
 </body>
 </html>

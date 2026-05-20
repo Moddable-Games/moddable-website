@@ -6,59 +6,125 @@
 <meta name="mg-base" content="/MODDABLE/moddable-website">
 <title>Custom World Risk — Moddable.Games</title>
 <link rel="stylesheet" href="../../css/_mg.css">
+<style>
+.rules-sidebar { position: sticky; top: 96px; align-self: start; }
+.rules-layout { display: grid; grid-template-columns: 240px 1fr; gap: 64px; }
+</style>
 </head>
 <body class="mg-section--dark">
 <div id="nav-root"></div>
 
-<section class="compact-hero">
-  <div class="compact-hero__gradient"></div>
-  <div class="compact-hero__hex" data-bg="blue"></div>
-  <div class="compact-hero__fade"></div>
-  <div class="compact-hero__inner">
+<section class="mod-hero">
+  <div class="mod-hero__glow mod-hero__glow--blue"></div>
+  <div class="mod-hero__inner hero-anim">
     <a href="../../mods/" class="mod-hero__back">&larr; All mods</a>
     <div class="mod-hero__tags">
       <span class="mod-hero__cat mod-hero__cat--blue">Reskin</span>
-      <span class="mod-hero__base">Risk &middot; Community</span>
+      <span class="mod-hero__base">base: Risk</span>
+      <span class="mod-hero__version">v1.0.0</span>
     </div>
-    <h1 class="compact-hero__title">Custom World Risk</h1>
-    <p class="compact-hero__lede">Replace the standard board with your own map — Middle-earth, a fantasy continent, your neighbourhood. The rules stay identical, only the geography changes.</p>
-    <div class="compact-hero__stats">
-      <span>2–6 players</span><span>120 min</span><span>12+</span>
-    </div>
+    <h1 class="mod-hero__title">Custom World <em>Risk</em>.</h1>
+    <p class="mod-hero__lede">Replace the standard board with your own map — Middle-earth, a fantasy continent, your neighbourhood. The rules stay identical, only the geography changes.</p>
+    <div class="mod-hero__btns" id="header-btns"></div>
+    <div class="stats-row" id="stats-row"></div>
   </div>
 </section>
 
 <section class="mg-section mg-section--light">
-  <div class="mg-container--text">
-    <div id="rules" class="rules-list"></div>
+  <div class="mg-container rules-layout">
+    <aside class="rules-sidebar">
+      <div class="mg-eyebrow mg-eyebrow--blue">THE RULES</div>
+      <ol id="toc" class="toc-list"></ol>
+    </aside>
+    <div id="rules-body"></div>
+  </div>
+</section>
+
+<section class="mg-section mg-section--light mg-section--flush-top">
+  <div class="mg-container">
+    <h2 class="mg-heading-xl">What you'll need.</h2>
+    <div id="components-grid" class="mg-grid-3"></div>
+  </div>
+</section>
+
+<section class="mg-section mg-section--white mg-section--border-top">
+  <div class="mg-container">
+    <h2 class="related-heading">More from the library.</h2>
+    <div id="related-grid" class="mg-grid-3" data-stagger></div>
   </div>
 </section>
 
 <div id="footer-root"></div>
 <script src="../../js/_mg.js"></script>
 <script>
-const { el, navbar, footer } = MG;
+const { T, el, linkBtn, navbar, footer, modCard } = MG;
 document.getElementById('nav-root').appendChild(navbar('Mods'));
 document.getElementById('footer-root').appendChild(footer());
 
-document.querySelector('.compact-hero__hex').style.backgroundImage = `url('../../img/hex-grid-blue.svg')`;
+const hb = document.getElementById('header-btns');
+hb.appendChild(linkBtn('Download PDF', '#', 'primary'));
+hb.appendChild(linkBtn('View source', '#', 'outline-dark'));
 
-const RULES = [
-  { n:'01', title:'Choose your world', body:'Any map works — draw your own, print a fantasy continent, or use a historical map. Divide it into 30-50 territories with clear borders and connections.' },
-  { n:'02', title:'Define continents', body:'Group territories into 4-6 continents. Assign continent bonuses proportional to difficulty of holding them (fewer borders = higher bonus).' },
-  { n:'03', title:'Connection rules', body:'Adjacent territories can attack each other. For islands or separated regions, mark sea routes (dashed lines) that function as single-territory crossings.' },
-  { n:'04', title:'Setup & play', body:'Standard Risk rules apply from here: deal territories, place armies, take turns (reinforce → attack → fortify). All card mechanics unchanged.' },
-  { n:'05', title:'Sharing your map', body:'Upload your custom board to the community. Include: territory list, continent groupings, connection diagram, and recommended player count.' },
+const STATS = [['Players','2–6'],['Time','120 min'],['Age','12+'],['Source','Community'],['License','Public domain']];
+const sr = document.getElementById('stats-row');
+STATS.forEach(([k,v],i) => {
+  if (i>0) sr.appendChild(el('span',{class:'stats-row__divider'}));
+  const d = el('div',{class:'stats-row__item'});
+  d.appendChild(el('span',{class:'stats-row__label'},k));
+  d.appendChild(el('span',{class:'stats-row__value'},v));
+  sr.appendChild(d);
+});
+
+const SECTIONS = [
+  { id:'1', title:'Choose your world', body:"Any map works — draw your own, print a fantasy continent, or use a historical map. Divide it into 30–50 territories with clear borders and connections. The more territories, the longer the game." },
+  { id:'2', title:'Define continents', body:"Group territories into 4–6 continents. Assign continent bonuses proportional to difficulty of holding them (fewer borders = higher bonus). Balance is key — test with a few rounds before committing." },
+  { id:'3', title:'Connection rules', body:"Adjacent territories can attack each other. For islands or separated regions, mark sea routes (dashed lines) that function as single-territory crossings. Limit sea routes to prevent overpowered naval shortcuts." },
+  { id:'4', title:'Setup & play', body:"Standard Risk rules apply from here: deal territories, place armies, take turns (reinforce, attack, fortify). All card mechanics unchanged. Mission cards can be adapted to reference your custom continents." },
+  { id:'5', title:'Sharing your map', body:"Upload your custom board to the community. Include: territory list, continent groupings, connection diagram, and recommended player count. The best custom maps get featured in the Moddable library." },
 ];
 
-const rulesEl = document.getElementById('rules');
-RULES.forEach(r => {
-  const item = el('div', {class:'rules-list__item'});
-  item.appendChild(el('div', {class:'rules-list__num mg-eyebrow--blue'}, `${r.n}`));
-  item.appendChild(el('h2', {class:'rules-list__title'}, r.title));
-  item.appendChild(el('p', {class:'rules-list__body'}, r.body));
-  rulesEl.appendChild(item);
+const toc = document.getElementById('toc');
+const body2 = document.getElementById('rules-body');
+SECTIONS.forEach(s => {
+  const li = el('li');
+  const a = el('a',{href:`#s${s.id}`,class:'toc-list__link'});
+  a.appendChild(el('span',{class:'toc-list__num'},s.id.padStart(2,'0')));
+  a.appendChild(document.createTextNode(s.title));
+  li.appendChild(a); toc.appendChild(li);
+
+  const art = el('article',{class:'rules-section',id:`s${s.id}`});
+  art.appendChild(el('div',{class:'rules-section__num'},`SECTION ${s.id.padStart(2,'0')}`));
+  art.appendChild(el('h2',{class:'rules-section__title'},s.title));
+  art.appendChild(el('p',{class:'rules-section__body'},s.body));
+  body2.appendChild(art);
 });
+
+const COMPONENTS = [
+  { kind:'Required', list:['Risk base game (any edition, for pieces and cards)','Custom map (printed or hand-drawn)','Army pieces and dice from base game'] },
+  { kind:'Printable', list:['Blank map template (PDF, included)','Territory planning worksheet','Continent bonus calculator sheet'] },
+  { kind:'House', list:['Large paper or poster board for your map','Coloured markers for territory borders','Clear ruler for sea route markings'] },
+];
+const cg = document.getElementById('components-grid');
+COMPONENTS.forEach(({kind,list}) => {
+  const c = el('div',{class:'mg-card'});
+  c.appendChild(el('div',{class:'mg-card__eyebrow mg-eyebrow--blue'},kind.toUpperCase()));
+  const ul = el('ul',{class:'component-list'});
+  list.forEach(x => {
+    const li = el('li',{class:'component-list__item'});
+    li.appendChild(el('span',{class:'component-list__bullet'}));
+    li.appendChild(document.createTextNode(x));
+    ul.appendChild(li);
+  });
+  c.appendChild(ul); cg.appendChild(c);
+});
+
+const RELATED = [
+  { category:'Rebalance', baseGame:'Risk', title:'CivRisk', body:"Risk rewritten to play like Civilisation. Growth tiers, ruins, and technologies.", stats:'3–5 players · 180 min · 14+', href:'../civrisk/' },
+  { category:'Rebalance', baseGame:'Twilight Imperium 4e', title:'Hyper Imperium', body:"Hyper Movement, Hyper Trades, Hyper Agendas. A faster TI4 ruleset.", stats:'3–6 players · 4–6 hr · 14+', href:'../hyper-imperium/' },
+  { category:'Reskin', baseGame:'Talisman 4e', title:'Talisman: Hexed', body:"An open-world hex system that replaces the Talisman board with 61 hexagonal tiles.", stats:'2–6 players · 90 min · 13+', href:'../talisman-hexed/' },
+];
+const rg = document.getElementById('related-grid');
+RELATED.forEach(m => rg.appendChild(modCard(m)));
 </script>
 </body>
 </html>
