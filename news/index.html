@@ -22,6 +22,7 @@ body { background: #f5f4ef; }
 .news-cover { aspect-ratio: 1.65; }
 .news-cover--big { aspect-ratio: 1.7; }
 .news-cover__hex { position: absolute; inset: 0; }
+.news-cover__img { position: absolute; inset: 0; width: 100%; height: 100%; object-fit: cover; }
 
 /* Featured card */
 .news-featured-card { display: grid; grid-template-columns: 1.1fr 1fr; gap: 40px; align-items: center; background: #fff; border: 1px solid #e6e3d8; border-radius: 20px; padding: 32px; text-decoration: none; color: inherit; transition: border-color 180ms; }
@@ -107,31 +108,30 @@ document.getElementById('page-hero').appendChild(pageHero({
 }));
 
 const POSTS = [
-  { slug:'beyond-the-box',                       cat:'Essay',       date:'May 2026',  cover:'#0c4f8d', title:'Beyond The Box',                           excerpt:'The art of board game design begins and ends with the box — but what happens when we open it?' },
-  { slug:'the-ancients',                          cat:'Essay',       date:'Apr 2026',  cover:'#1a3680', title:'The Ancients',                              excerpt:'We rarely pause to consider what has already endured — games older than history itself.' },
-  { slug:'making-mods-matter',                    cat:'Philosophy',  date:'Mar 2026',  cover:'#3a9928', title:'Making Mods Matter',                        excerpt:'Those who tinker, tailor and say lore beyond casual play — and why they deserve better tools.' },
-  { slug:'the-house-always-wins',                 cat:'Philosophy',  date:'Mar 2026',  cover:'#3a9928', title:'The House Always Wins!',                    excerpt:'How house rules become canon, from en passant to free parking jackpots.' },
-  { slug:'open-sourcing-tabletop-games',          cat:'Philosophy',  date:'Mar 2026',  cover:'#0c4f8d', title:'Open Sourcing Tabletop Games',              excerpt:'Herein lies the paradox of protecting creative work in a medium built on sharing.' },
-  { slug:'tis-the-season-for-traditions',         cat:'Community',   date:'Mar 2026',  cover:'#d11a1a', title:"'Tis the Season for Traditions",            excerpt:'Reconnect through the ritual of games — why the holidays belong at the table.' },
-  { slug:'making-a-masterpiece-by-modification',  cat:'Chess',       date:'Oct 2025',  cover:'#d11a1a', title:'Making a Masterpiece by Modification',      excerpt:'Chess travelled the Silk Road and was rewritten at every stop. The greatest mod of all time.' },
-  { slug:'twilights-prophecies-thunder-on',       cat:'TI4',         date:'Oct 2025',  cover:'#0c4f8d', title:"Twilight's Prophecies Thunder On!",         excerpt:'Twilight Imperium turns 25. We look at what Prophecy of Kings changed — and what we changed next.' },
-  { slug:'nuking-catan',                          cat:'Catan',       date:'Jul 2025',  cover:'#d11a1a', title:'Nuking Catan',                              excerpt:'A meditation on the gateway game, 45 million boxes deep — and what we did to it.' },
-  { slug:'spiralling-paths-of-power-and-peril',   cat:'Talisman',    date:'Jul 2025',  cover:'#0c4f8d', title:'Spiralling Paths of Power and Peril',       excerpt:"Talisman's 40-year journey from Necromancer to our hex-tile reimagining." },
-  { slug:'monopolising-modified-variations',      cat:'Monopoly',    date:'Jul 2025',  cover:'#3a9928', title:'Monopolising Modified Variations',          excerpt:'Monopoly has more variants than any game alive. We asked: can we make it actually fun?' },
-  { slug:'conquering-the-constrains-of-chess',    cat:'Chess',       date:'Jun 2025',  cover:'#d11a1a', title:'Conquering the Constraints of Chess',       excerpt:'1500 years of constraints. 2000+ variants. Zero unified compendiums — until now.' },
+  { slug:'beyond-the-box',                       cat:'Essay',       date:'May 2026',  cover:'#0c4f8d', img:'beyond-the-box.jpg',                      title:'Beyond The Box',                           excerpt:'The art of board game design begins and ends with the box — but what happens when we open it?' },
+  { slug:'the-ancients',                          cat:'Essay',       date:'Apr 2026',  cover:'#1a3680', img:'the-ancients.jpg',                         title:'The Ancients',                              excerpt:'We rarely pause to consider what has already endured — games older than history itself.' },
+  { slug:'making-mods-matter',                    cat:'Philosophy',  date:'Mar 2026',  cover:'#3a9928', img:'making-mods-matter.jpg',                   title:'Making Mods Matter',                        excerpt:'Those who tinker, tailor and say lore beyond casual play — and why they deserve better tools.' },
+  { slug:'the-house-always-wins',                 cat:'Philosophy',  date:'Mar 2026',  cover:'#3a9928', img:'the-house-always-wins.jpg',                title:'The House Always Wins!',                    excerpt:'How house rules become canon, from en passant to free parking jackpots.' },
+  { slug:'open-sourcing-tabletop-games',          cat:'Philosophy',  date:'Mar 2026',  cover:'#0c4f8d', img:'open-sourcing-tabletop-games.jpg',         title:'Open Sourcing Tabletop Games',              excerpt:'Herein lies the paradox of protecting creative work in a medium built on sharing.' },
+  { slug:'tis-the-season-for-traditions',         cat:'Community',   date:'Mar 2026',  cover:'#d11a1a', img:'tis-the-season-for-traditions.jpg',        title:"'Tis the Season for Traditions",            excerpt:'Reconnect through the ritual of games — why the holidays belong at the table.' },
+  { slug:'making-a-masterpiece-by-modification',  cat:'Chess',       date:'Oct 2025',  cover:'#d11a1a', img:'making-a-masterpiece-by-modification.jpg', title:'Making a Masterpiece by Modification',      excerpt:'Chess travelled the Silk Road and was rewritten at every stop. The greatest mod of all time.' },
+  { slug:'twilights-prophecies-thunder-on',       cat:'TI4',         date:'Oct 2025',  cover:'#0c4f8d', img:'twilights-prophecies-thunder-on.png',      title:"Twilight's Prophecies Thunder On!",         excerpt:'Twilight Imperium turns 25. We look at what Prophecy of Kings changed — and what we changed next.' },
+  { slug:'nuking-catan',                          cat:'Catan',       date:'Jul 2025',  cover:'#d11a1a', img:'nuking-catan.jpg',                         title:'Nuking Catan',                              excerpt:'A meditation on the gateway game, 45 million boxes deep — and what we did to it.' },
+  { slug:'spiralling-paths-of-power-and-peril',   cat:'Talisman',    date:'Jul 2025',  cover:'#0c4f8d', img:'spiralling-paths-of-power-and-peril.jpg',  title:'Spiralling Paths of Power and Peril',       excerpt:"Talisman's 40-year journey from Necromancer to our hex-tile reimagining." },
+  { slug:'monopolising-modified-variations',      cat:'Monopoly',    date:'Jul 2025',  cover:'#3a9928', img:'monopolising-modified-variations.jpg',     title:'Monopolising Modified Variations',          excerpt:'Monopoly has more variants than any game alive. We asked: can we make it actually fun?' },
+  { slug:'conquering-the-constrains-of-chess',    cat:'Chess',       date:'Jun 2025',  cover:'#d11a1a', img:'conquering-the-constrains-of-chess.jpg',   title:'Conquering the Constraints of Chess',       excerpt:'1500 years of constraints. 2000+ variants. Zero unified compendiums — until now.' },
 ];
 
 const CATS = ['All',...new Set(POSTS.map(p=>p.cat))];
 let activeCat = 'All', searchVal = '';
 
-function postCover(color, big=false) {
-  const sz = big ? 56 : 28;
+function postCover(post, big=false) {
   const d = el('div',{class: big ? 'news-cover--big' : 'news-cover'});
-  d.style.background = `linear-gradient(135deg,#0a0d2a 0%,${color} 100%)`;
-  const overlay = el('div',{class:'news-cover__hex'});
-  overlay.style.backgroundImage = `url("${MG.url('/img/hex-grid-white.svg')}")`;
-  overlay.style.backgroundSize = `${sz}px ${sz*8/7}px`;
-  d.appendChild(overlay);
+  d.style.background = `linear-gradient(135deg,#0a0d2a 0%,${post.cover} 100%)`;
+  if (post.img) {
+    const img = el('img',{src:url(`/img/news/${post.img}`), alt:'', class:'news-cover__img'});
+    d.appendChild(img);
+  }
   return d;
 }
 
@@ -139,7 +139,7 @@ function postCover(color, big=false) {
 const fp = document.getElementById('featured-post');
 const feat = POSTS[0];
 const fa = el('a',{href:url(`/news/${feat.slug}/`),class:'news-featured-card'});
-fa.appendChild(postCover(feat.cover, true));
+fa.appendChild(postCover(feat, true));
 const fd = el('div');
 const fm = el('div',{class:'news-featured-card__meta'});
 fm.appendChild(el('span',{class:'news-featured-card__badge'}, 'FEATURED'));
@@ -174,7 +174,7 @@ function renderPosts() {
   grid.innerHTML = '';
   visible.forEach(p => {
     const a = el('a',{href:url(`/news/${p.slug}/`),class:'news-grid-card'});
-    a.appendChild(postCover(p.cover));
+    a.appendChild(postCover(p));
     const meta = el('div',{class:'news-grid-card__meta'});
     meta.appendChild(el('span',{class:'news-grid-card__cat'},p.cat.toUpperCase()));
     meta.appendChild(el('span',{class:'news-grid-card__dot'}));
