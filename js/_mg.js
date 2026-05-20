@@ -491,7 +491,7 @@ const MG = (() => {
     document.body.appendChild(overlay);
     searchOverlay = overlay;
 
-    requestAnimationFrame(() => { overlay.classList.add('mg-search-overlay--open'); input.focus(); });
+    requestAnimationFrame(() => { overlay.classList.add('mg-search-overlay--visible'); input.focus(); });
 
     function renderResults(query) {
       results.innerHTML = '';
@@ -536,7 +536,7 @@ const MG = (() => {
 
   function closeSearch() {
     if (!searchOverlay) return;
-    searchOverlay.classList.remove('mg-search-overlay--open');
+    searchOverlay.classList.remove('mg-search-overlay--visible');
     setTimeout(() => { if (searchOverlay) { searchOverlay.remove(); searchOverlay = null; } }, 200);
   }
 
