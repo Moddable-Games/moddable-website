@@ -1,0 +1,194 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<meta name="mg-base" content="/MODDABLE/moddable-website">
+<title>Making Mods Matter — Moddable.Games</title>
+<link rel="stylesheet" href="../../css/_mg.css">
+<style>
+body { background: #f5f4ef; }
+
+/* Post header */
+.post-header { position: relative; color: #fff; overflow: hidden; background: #000; }
+.post-header__bloom { position: absolute; left: 50%; bottom: -200px; transform: translateX(-50%); width: 1100px; height: 500px; background: radial-gradient(ellipse, rgba(58,153,40,0.4) 0%, transparent 65%); pointer-events: none; filter: blur(20px); }
+.post-header__inner { position: relative; padding: 48px 32px 88px; max-width: 800px; margin: 0 auto; text-align: center; box-sizing: border-box; }
+.post-header__back { font-family: var(--mg-font-mono); font-size: 12px; color: rgba(255,255,255,0.7); text-decoration: none; }
+.post-header__tags { display: flex; gap: 8px; justify-content: center; margin-top: 28px; flex-wrap: wrap; }
+.post-header__cat { font-family: var(--mg-font-body); font-weight: 600; font-size: 11px; background: #3a9928; color: #fff; padding: 4px 10px; border-radius: 9999px; }
+.post-header__meta { font-family: var(--mg-font-mono); font-size: 11px; color: rgba(255,255,255,0.7); padding: 4px 10px; border: 1px solid rgba(255,255,255,0.18); border-radius: 9999px; }
+.post-header__title { font-family: var(--mg-font-display); font-weight: 600; font-size: clamp(48px, 7vw, 96px); line-height: 0.95; letter-spacing: -0.025em; margin: 24px 0; text-shadow: 0 4px 30px rgba(0,0,0,0.6); }
+.post-header__title em { color: #6fb5ff; }
+.post-header__lede { font-family: var(--mg-font-body); font-style: italic; font-size: 18px; color: rgba(255,255,255,0.78); margin: 0; }
+
+/* Post body section */
+.post-body { background: #f5f4ef; padding: 72px 32px 96px; }
+.post-layout { max-width: 1200px; margin: 0 auto; display: grid; grid-template-columns: 200px 1fr 220px; gap: 56px; align-items: start; }
+.post-rail { position: sticky; top: 96px; }
+.post-rail__eyebrow { font-family: var(--mg-font-pixel); font-size: 9px; color: #0c4f8d; letter-spacing: 1.5px; margin-bottom: 14px; }
+.post-rail__eyebrow--green { color: #3a9928; margin-top: 32px; margin-bottom: 12px; }
+.post-author { display: flex; gap: 10px; align-items: center; margin-bottom: 20px; }
+.post-author__avatar { width: 40px; height: 40px; border-radius: 9999px; background: linear-gradient(135deg, #3a9928, #0c4f8d); flex: none; }
+.post-author__name { font-family: var(--mg-font-display); font-weight: 600; font-size: 15px; color: #14161c; letter-spacing: -0.2px; }
+.post-author__handle { font-family: var(--mg-font-mono); font-size: 11px; color: #7a8290; }
+.post-share-btns { display: flex; gap: 6px; flex-wrap: wrap; }
+.post-share-btn { font-family: var(--mg-font-mono); font-size: 11px; font-weight: 600; width: 38px; height: 38px; border-radius: 9999px; background: #fff; color: #14161c; border: 1px solid #e6e3d8; cursor: pointer; }
+
+/* TOC */
+.post-toc { list-style: none; padding: 0; margin: 0 0 32px; display: flex; flex-direction: column; gap: 8px; border-left: 1px solid #e6e3d8; }
+.post-toc__item { padding-left: 14px; margin-left: -1px; }
+.post-toc__item--active { border-left: 2px solid #3a9928; }
+.post-toc__link { font-family: var(--mg-font-body); font-size: 13px; text-decoration: none; }
+.post-toc__link--active { color: #14161c; font-weight: 600; }
+.post-toc__link--inactive { color: #4f5764; font-weight: 400; }
+
+/* Mod card in sidebar */
+.post-mod-card { background: #000; color: #fff; padding: 20px; border-radius: 16px; }
+.post-mod-card__eyebrow { font-family: var(--mg-font-pixel); font-size: 9px; color: #3a9928; letter-spacing: 1.5px; margin-bottom: 10px; }
+.post-mod-card__title { font-family: var(--mg-font-display); font-weight: 600; font-size: 18px; line-height: 1.2; margin-bottom: 6px; }
+.post-mod-card__version { font-family: var(--mg-font-mono); font-size: 11px; color: rgba(255,255,255,0.6); margin-bottom: 14px; }
+.post-mod-card__dl { height: 38px; font-size: 13px; width: 100%; }
+
+/* More posts section */
+.post-more { background: #fff; border-top: 1px solid #e6e3d8; padding: 80px 32px; }
+.post-more__inner { max-width: 1200px; margin: 0 auto; }
+.post-more__heading { font-family: var(--mg-font-display); font-weight: 600; font-size: 40px; line-height: 1.1; letter-spacing: -0.5px; color: #14161c; margin: 0 0 32px; }
+.post-more__grid { display: grid; grid-template-columns: repeat(3, 1fr); gap: 20px; }
+.post-more-card { display: flex; flex-direction: column; gap: 14px; padding: 20px; background: #f5f4ef; border-radius: 16px; text-decoration: none; color: inherit; }
+.post-more-card__cover { height: 120px; border-radius: 12px; }
+.post-more-card__meta { font-family: var(--mg-font-mono); font-size: 11px; color: #7a8290; letter-spacing: 0.3px; }
+.post-more-card__title { font-family: var(--mg-font-display); font-weight: 600; font-size: 20px; line-height: 1.2; letter-spacing: -0.2px; color: #14161c; margin: 0; }
+
+@media (max-width: 900px) {
+  .post-layout { grid-template-columns: 1fr !important; }
+  .post-rail { display: none !important; }
+  .post-more__grid { grid-template-columns: 1fr; }
+}
+</style>
+</head>
+<body>
+<div id="nav-root"></div>
+
+<!-- Post header -->
+<section class="post-header">
+  <div class="post-header__bloom"></div>
+  <div class="post-header__inner">
+    <a href="/news/" class="post-header__back">&#8592; All posts</a>
+    <div class="post-header__tags">
+      <span class="post-header__cat">COMMUNITY</span>
+      <span class="post-header__meta">Mar 2026 &middot; 5 min read</span>
+    </div>
+    <h1 class="post-header__title">Making Mods <em>Matter</em>.</h1>
+    <p class="post-header__lede">Why modders mod what matters &mdash; and how participatory design is reshaping tabletop gaming.</p>
+  </div>
+</section>
+
+<!-- Post body -->
+<section class="post-body">
+  <div class="post-layout">
+
+    <!-- Left rail -->
+    <aside class="post-rail">
+      <div class="post-rail__eyebrow">&#9650; AUTHOR</div>
+      <div class="post-author">
+        <div class="post-author__avatar"></div>
+        <div>
+          <div class="post-author__name">Kevin Chand</div>
+          <div class="post-author__handle">@kchand &middot; chief playtester</div>
+        </div>
+      </div>
+      <div class="post-rail__eyebrow post-rail__eyebrow--green">&#9650; SHARE</div>
+      <div class="post-share-btns" id="share-btns"></div>
+    </aside>
+
+    <!-- Article -->
+    <article class="prose">
+      <p class="lede">There's a distinct group of people, often found playtesting in board game cafes on a Sunday behind closed doors, who don't just play games. They tinker, remix, and rebuild them. Modders no longer represent slicksters on mopeds, but rather those that make meaningful modifications to existing games or actively contribute towards the creation of new ones in a group setting.</p>
+
+      <h2>A quiet revolution.</h2>
+      <p>In a world where video games have always embraced modding and in turn come to expect it, tabletop gamers have been doing it at a much smaller, disconnected scale quietly for decades. The internet didn't invent board game modding, but it dramatically reduced the barriers to entry and the isolation. People share, iterate, and refine ideas within their engaged communities.</p>
+
+      <h2>Systems thinking.</h2>
+      <p>Either way &mdash; it seems fitting that mods are both nouns and verbs. Board games are systems. Once players understand a system, they start seeing leverage points &mdash; dominant strategies that need addressing, underpowered factions, pacing issues that drag a three-hour game into five. Modding is often an act of refinement.</p>
+
+      <h2>Standing on centuries of play.</h2>
+      <p>The earliest recorded board game modifications often involved shifting rules to reflect religious beliefs, transforming entertainment into morality, or evolving pieces to mirror the politics of the time. Chess alone has seen hundreds of regional variants over the centuries &mdash; each a community mod in its own right.</p>
+      <p>More recently, games like Twilight Imperium, Catan, and Carcassonne have developed thriving modding ecosystems. Communities have created new resource systems, scenario-based maps, alternate trading, scoring, and campaign-style progression. Fan-made tiles and other expansive content has been uploaded to print-and-play sites and forums.</p>
+
+      <h2>Players as collaborators.</h2>
+      <p>Board gaming is not passive entertainment. It is participatory design. The moment someone says, "What if we change this rule?" &mdash; they've crossed the line from consumer to creator. That's a transformative moment. Why not treat players as collaborators instead of just consumers?</p>
+
+      <h2>What we're building.</h2>
+      <p>At Moddable Games, we're exploring a model where core engines and rulesets are transparent and extensible, physical components are designed to be replaceable and expandable, community-created variants sit alongside official content, and online versions of our games allow experimentation with bots, themes, and plugins.</p>
+      <p>We believe the future of tabletop gaming isn't just ownership. It's participation. The games that survive and thrive over the next decade won't be the ones locked behind proprietary rulebooks &mdash; they'll be the ones that adapt, that welcome modification, that grow with their players. Which game do you think deserves a mod next? Share your thoughts and ideas with our passionate community.</p>
+    </article>
+
+    <!-- Right rail -->
+    <aside class="post-rail">
+      <div class="post-rail__eyebrow">&#9650; IN THIS POST</div>
+      <ul id="toc-list" class="post-toc"></ul>
+      <div class="post-mod-card">
+        <div class="post-mod-card__eyebrow">&#9650; JOIN US</div>
+        <div class="post-mod-card__title">Moddable Community</div>
+        <div class="post-mod-card__version">Discord &middot; Open to all</div>
+        <div id="mod-dl-btn"></div>
+      </div>
+    </aside>
+  </div>
+</section>
+
+<!-- More posts -->
+<section class="post-more">
+  <div class="post-more__inner">
+    <h2 class="post-more__heading">More from the archive.</h2>
+    <div id="more-posts" class="post-more__grid"></div>
+  </div>
+</section>
+
+<div id="footer-root"></div>
+<script src="../../js/_mg.js"></script>
+<script>
+const { el, linkBtn, navbar, footer, url } = MG;
+document.getElementById('nav-root').appendChild(navbar('News'));
+document.getElementById('footer-root').appendChild(footer());
+
+// Share buttons
+['X','FB','LI','Copy'].forEach(s => {
+  const b = document.createElement('button');
+  b.textContent = s;
+  b.className = 'post-share-btn';
+  document.getElementById('share-btns').appendChild(b);
+});
+
+// TOC
+const TOC = ['A quiet revolution','Systems thinking','Standing on centuries of play','Players as collaborators',"What we're building"];
+const tul = document.getElementById('toc-list');
+TOC.forEach((t,i) => {
+  const li = el('li',{class: i===0 ? 'post-toc__item post-toc__item--active' : 'post-toc__item'});
+  li.appendChild(el('a',{href:'#',class: i===0 ? 'post-toc__link post-toc__link--active' : 'post-toc__link post-toc__link--inactive'},t));
+  tul.appendChild(li);
+});
+
+const dlBtn = linkBtn('Join Discord','#','green');
+dlBtn.classList.add('post-mod-card__dl');
+document.getElementById('mod-dl-btn').appendChild(dlBtn);
+
+// More posts
+const MORE = [
+  {cover:'#d11a1a', cat:'Catan',     date:'Sep 12, 2025', title:'Nuking Catan'},
+  {cover:'#0c4f8d', cat:'Mod update', date:'May 9, 2026',  title:'Econopoly v1.4: the audit patch'},
+  {cover:'#3a9928', cat:'Devlog',     date:'May 12, 2026', title:'Mongo enters open playtest'},
+];
+const mp = document.getElementById('more-posts');
+MORE.forEach(p => {
+  const a = el('a',{href:url('/news/nuking-catan/'),class:'post-more-card'});
+  const cover = el('div',{class:'post-more-card__cover'});
+  cover.style.background = `linear-gradient(135deg,#0a0d2a 0%,${p.cover} 100%)`;
+  a.appendChild(cover);
+  a.appendChild(el('div',{class:'post-more-card__meta'},`${p.cat.toUpperCase()} · ${p.date}`));
+  a.appendChild(el('h3',{class:'post-more-card__title'},p.title));
+  mp.appendChild(a);
+});
+</script>
+</body>
+</html>

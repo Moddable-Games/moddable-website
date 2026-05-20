@@ -13,7 +13,7 @@
 
 <section class="mg-section--tight mg-section--light">
   <div class="mg-container">
-    <div id="games-grid" class="mg-grid-auto"></div>
+    <div id="games-grid" class="mg-grid-auto" data-stagger></div>
   </div>
 </section>
 
@@ -40,7 +40,7 @@ const GAMES = [
 
 const grid = document.getElementById('games-grid');
 GAMES.forEach(g => {
-  const card = el('a', {href:g.href, class:'game-card'});
+  const card = el('a', {href:g.href, class:'game-card mg-lift', 'data-reveal':'up'});
   card.addEventListener('mouseenter', () => { card.style.borderColor = g.accent; });
   card.addEventListener('mouseleave', () => { card.style.borderColor = ''; });
 

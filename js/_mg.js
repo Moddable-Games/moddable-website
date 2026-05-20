@@ -115,13 +115,15 @@ const MG = (() => {
         fontFamily: F.body, fontWeight:600, fontSize:'15px',
         letterSpacing:'0.2px', cursor:'pointer',
         textDecoration:'none', whiteSpace:'nowrap',
-        transition:'background 180ms cubic-bezier(.2,.8,.2,1), transform 180ms',
+        transition:'background 200ms cubic-bezier(.2,.8,.2,1), transform 200ms cubic-bezier(.34,1.56,.64,1), box-shadow 200ms ease',
         ...extraStyle,
       }),
     });
     b.innerHTML = label;
-    b.addEventListener('mouseenter', () => b.style.background = BTN_HOVER[variant] || v.bg);
-    b.addEventListener('mouseleave', () => b.style.background = v.bg);
+    b.addEventListener('mouseenter', () => { b.style.background = BTN_HOVER[variant] || v.bg; b.style.transform = 'scale(1.05)'; b.style.boxShadow = '0 6px 20px rgba(0,0,0,0.2)'; });
+    b.addEventListener('mouseleave', () => { b.style.background = v.bg; b.style.transform = 'scale(1)'; b.style.boxShadow = 'none'; });
+    b.addEventListener('mousedown', () => { b.style.transform = 'scale(0.96)'; });
+    b.addEventListener('mouseup', () => { b.style.transform = 'scale(1.05)'; });
     if (onClick) b.addEventListener('click', onClick);
     return b;
   }
@@ -138,28 +140,30 @@ const MG = (() => {
         fontFamily: F.body, fontWeight:600, fontSize:'15px',
         letterSpacing:'0.2px', cursor:'pointer',
         textDecoration:'none', whiteSpace:'nowrap',
-        transition:'background 180ms cubic-bezier(.2,.8,.2,1)',
+        transition:'background 200ms cubic-bezier(.2,.8,.2,1), transform 200ms cubic-bezier(.34,1.56,.64,1), box-shadow 200ms ease',
         ...extraStyle,
       }),
     });
     a.innerHTML = label;
-    a.addEventListener('mouseenter', () => a.style.background = BTN_HOVER[variant] || v.bg);
-    a.addEventListener('mouseleave', () => a.style.background = v.bg);
+    a.addEventListener('mouseenter', () => { a.style.background = BTN_HOVER[variant] || v.bg; a.style.transform = 'scale(1.05)'; a.style.boxShadow = '0 6px 20px rgba(0,0,0,0.2)'; });
+    a.addEventListener('mouseleave', () => { a.style.background = v.bg; a.style.transform = 'scale(1)'; a.style.boxShadow = 'none'; });
+    a.addEventListener('mousedown', () => { a.style.transform = 'scale(0.96)'; });
+    a.addEventListener('mouseup', () => { a.style.transform = 'scale(1.05)'; });
     return a;
   }
 
   /* ── NavBar ──────────────────────────────────────────────────────────── */
   function navbar(activeId) {
     const NAV_ITEMS = [
-      { id:'Mods', href:url('/mods/'), children:[['All mods',url('/mods/')],['Submit a mod',url('/submit/')]] },
+      { id:'Mods', href:url('/mods/'), children:[['Total conversions',url('/mods/')],['Rebalances',url('/mods/')],['Reskins',url('/mods/')],['Submit a mod',url('/submit/')]] },
       { id:'Games', href:url('/games/'), children:[['Nukes',url('/games/nukes/')],['Mongo',url('/games/mongo/')],['Endless Skies',url('/games/endless-skies/')],['Moddable Chess',url('/games/moddable-chess/')],['Dungeon Chess',url('/games/dungeon-chess/')]] },
       { id:'Tools', href:url('/tools/'), children:[['Workbench',url('/tools/')],['TI tools',url('/tools/ti/')],['Talisman tools',url('/tools/talisman/')],['Nukes tools',url('/tools/nukes/')]] },
       { id:'News', href:url('/news/') },
-      { id:'About', href:url('/about/'), children:[['About',url('/about/')],['Team',url('/team/')],['Roadmap',url('/about/roadmap/')],['Community',url('/community/')]] },
+      { id:'About', href:url('/about/'), children:[['Team',url('/team/')],['Roadmap',url('/about/roadmap/')],['Community',url('/community/')]] },
     ];
 
     const header = el('header', { style: css({
-      height:'64px', background:'#000', position:'sticky', top:0, zIndex:50,
+      height:'64px', background:'#000', position:'fixed', top:0, left:0, right:0, zIndex:50,
       borderBottom:'1px solid rgba(255,255,255,0.08)',
       display:'flex', alignItems:'center', padding:'0 24px', gap:'24px',
       boxSizing:'border-box',
@@ -190,17 +194,20 @@ const MG = (() => {
       wrap.appendChild(a);
       if (item.children) {
         const dd = el('div', { style:{ position:'absolute', top:'100%', left:'50%', transform:'translateX(-50%)', paddingTop:'12px', display:'none', zIndex:100 }});
-        const menu = el('div', { style:{ background:'#14161c', border:'1px solid rgba(255,255,255,0.12)', borderRadius:'12px', padding:'8px 0', minWidth:'180px', boxShadow:'0 12px 32px rgba(0,0,0,0.5)' }});
+        const menu = el('div', { style:{ background:'#14161c', border:'1px solid rgba(255,255,255,0.12)', borderRadius:'14px', padding:'10px 0', minWidth:'200px', boxShadow:'0 16px 48px rgba(0,0,0,0.6), 0 0 0 1px rgba(111,181,255,0.06)', backdropFilter:'blur(12px)' }});
         item.children.forEach(([label, href]) => {
-          const link = el('a', { href, style:{ display:'block', padding:'8px 18px', fontFamily:F.body, fontSize:'13px', color:'rgba(255,255,255,0.8)', textDecoration:'none', transition:'background 100ms' }}, label);
-          link.addEventListener('mouseenter', () => link.style.background = 'rgba(255,255,255,0.06)');
-          link.addEventListener('mouseleave', () => link.style.background = 'transparent');
+          const link = el('a', { href, style:{ display:'flex', alignItems:'center', gap:'10px', padding:'10px 18px', fontFamily:F.body, fontSize:'13px', color:'rgba(255,255,255,0.8)', textDecoration:'none', transition:'all 150ms cubic-bezier(.2,.8,.2,1)', borderLeft:'2px solid transparent', margin:'0 6px', borderRadius:'6px' }}, label);
+          link.addEventListener('mouseenter', () => { link.style.background = 'rgba(111,181,255,0.08)'; link.style.borderLeftColor = T.cosmicGlow; link.style.color = '#fff'; link.style.paddingLeft = '20px'; });
+          link.addEventListener('mouseleave', () => { link.style.background = 'transparent'; link.style.borderLeftColor = 'transparent'; link.style.color = 'rgba(255,255,255,0.8)'; link.style.paddingLeft = '18px'; });
           menu.appendChild(link);
         });
         dd.appendChild(menu);
+        dd.style.opacity = '0';
+        dd.style.transform = 'translateX(-50%) translateY(-4px)';
+        dd.style.transition = 'opacity 180ms ease, transform 180ms cubic-bezier(.2,.8,.2,1)';
         wrap.appendChild(dd);
-        wrap.addEventListener('mouseenter', () => dd.style.display = 'block');
-        wrap.addEventListener('mouseleave', () => dd.style.display = 'none');
+        wrap.addEventListener('mouseenter', () => { dd.style.display = 'block'; requestAnimationFrame(() => { dd.style.opacity = '1'; dd.style.transform = 'translateX(-50%) translateY(0)'; }); });
+        wrap.addEventListener('mouseleave', () => { dd.style.opacity = '0'; dd.style.transform = 'translateX(-50%) translateY(-4px)'; setTimeout(() => { if (dd.style.opacity === '0') dd.style.display = 'none'; }, 180); });
       }
       nav.appendChild(wrap);
     }
@@ -259,14 +266,16 @@ const MG = (() => {
   /* ── Footer ──────────────────────────────────────────────────────────── */
   function footer() {
     const COLS = [
-      { title:'Mods',      links:[['All mods',url('/mods/')],['Submit a mod',url('/submit/')]] },
+      { title:'Mods',      links:[['Total conversions',url('/mods/')],['Rebalances',url('/mods/')],['Reskins',url('/mods/')],['Submit a mod',url('/submit/')]] },
       { title:'Games',     links:[['Endless Skies',url('/games/endless-skies/')],['Mongo',url('/games/mongo/')],['Nukes',url('/games/nukes/')],['Moddable Chess',url('/games/moddable-chess/')],['Dungeon Chess',url('/games/dungeon-chess/')]] },
-      { title:'Tools',     links:[['Workbench',url('/tools/')]] },
+      { title:'Tools',     links:[['Workbench',url('/tools/')],['TI4 tools',url('/tools/ti/')],['Talisman tools',url('/tools/talisman/')],['Nukes tools',url('/tools/nukes/')]] },
       { title:'Community', links:[['Discord',url('/community/')],['News',url('/news/')],['About',url('/about/')],['Team',url('/team/')],['Roadmap',url('/about/roadmap/')]] },
     ];
 
-    const f = el('footer', { style:{ background:'#000', color:'#fff', padding:'80px 24px 40px', boxSizing:'border-box' }});
-    const inner = el('div', { style:{ maxWidth:'1200px', margin:'0 auto' }});
+    const f = el('footer', { style:{ background:'#000', color:'#fff', padding:'80px 24px 40px', boxSizing:'border-box', position:'relative', overflow:'hidden' }});
+    const footerHex = el('div', { style:{ position:'absolute', inset:0, backgroundImage:`url("${url('/img/hex-grid-blue.svg')}")`, backgroundSize:'56px 64px', opacity:'0.04', pointerEvents:'none' }});
+    f.appendChild(footerHex);
+    const inner = el('div', { style:{ maxWidth:'1200px', margin:'0 auto', position:'relative' }});
 
     const grid = el('div', { style:{ display:'grid', gridTemplateColumns:'repeat(auto-fit,minmax(180px,1fr))', gap:'32px', paddingBottom:'56px', borderBottom:'1px solid rgba(255,255,255,0.12)' }});
 
@@ -301,16 +310,16 @@ const MG = (() => {
   /* ── ModCard ─────────────────────────────────────────────────────────── */
   function modCard({ category, title, baseGame, stats, body, href = '#', source = '' }) {
     const accent = CATEGORY_COLORS[category] || T.blue;
-    const card = el('article', { style: css({
+    const card = el('article', { 'data-reveal':'up', style: css({
       background:'#fff', borderRadius:'20px', overflow:'hidden',
       border:`1px solid ${T.hairlineLight}`,
       display:'flex', flexDirection:'column',
-      transition:'border-color 180ms cubic-bezier(.2,.8,.2,1), transform 180ms',
+      transition:'border-color 180ms cubic-bezier(.2,.8,.2,1), transform 250ms cubic-bezier(.2,.8,.2,1), box-shadow 250ms ease',
       cursor:'pointer',
     })});
 
-    card.addEventListener('mouseenter', () => { card.style.borderColor = accent; card.style.transform = 'translateY(-3px)'; });
-    card.addEventListener('mouseleave', () => { card.style.borderColor = T.hairlineLight; card.style.transform = 'translateY(0)'; });
+    card.addEventListener('mouseenter', () => { card.style.borderColor = accent; card.style.transform = 'translateY(-4px)'; card.style.boxShadow = '0 12px 32px rgba(0,0,0,0.08)'; });
+    card.addEventListener('mouseleave', () => { card.style.borderColor = T.hairlineLight; card.style.transform = 'translateY(0)'; card.style.boxShadow = 'none'; });
 
     // Top stripe
     card.appendChild(el('div', { style:{ height:'4px', background:accent }}));
@@ -368,7 +377,7 @@ const MG = (() => {
       sec.appendChild(glow);
     }
 
-    const content = el('div', { style:{ position:'relative', zIndex:2, padding:'72px 32px 96px', maxWidth:'1200px', margin:'0 auto', boxSizing:'border-box' }});
+    const content = el('div', { class:'hero-anim', style:{ position:'relative', zIndex:2, padding:'72px 32px 96px', maxWidth:'1200px', margin:'0 auto', boxSizing:'border-box' }});
     content.appendChild(el('div', { style:{ fontFamily:F.pixel, fontSize:'10px', color:accent, letterSpacing:'1.5px', marginBottom:'18px', textShadow:`0 0 12px ${accent}55` }}, eyebrow));
     const h = el('h1', { html:title, style:{ fontFamily:F.display, fontWeight:600, fontSize:'clamp(48px, 6.5vw, 88px)', lineHeight:'1.0', letterSpacing:'-0.025em', margin:'0 0 20px' }});
     content.appendChild(h);
@@ -390,7 +399,35 @@ const MG = (() => {
     });
   }
 
+  /* ── Scroll Reveal Observer ───────────────────────────────────────────── */
+  function initReveal() {
+    const els = document.querySelectorAll('[data-reveal]');
+    if (!els.length) return;
+
+    // Assign stagger indices to children of [data-stagger] parents
+    document.querySelectorAll('[data-stagger]').forEach(parent => {
+      Array.from(parent.children).forEach((child, i) => {
+        if (child.hasAttribute('data-reveal')) {
+          child.style.setProperty('--stagger-index', i);
+        }
+      });
+    });
+
+    const observer = new IntersectionObserver((entries) => {
+      entries.forEach(entry => {
+        if (entry.isIntersecting) {
+          entry.target.classList.add('revealed');
+          observer.unobserve(entry.target);
+        }
+      });
+    }, { threshold: 0.12, rootMargin: '0px 0px -40px 0px' });
+
+    els.forEach(el => observer.observe(el));
+  }
+
+  document.addEventListener('DOMContentLoaded', initReveal);
+
   /* ── Expose ──────────────────────────────────────────────────────────── */
-  return { T, F, HEX_BG, HEX_BG_RED, HEX_BG_GREEN, CATEGORY_COLORS, el, btn, linkBtn, navbar, footer, modCard, pageHero, cubeSVG, url };
+  return { T, F, HEX_BG, HEX_BG_RED, HEX_BG_GREEN, CATEGORY_COLORS, el, btn, linkBtn, navbar, footer, modCard, pageHero, cubeSVG, url, initReveal };
 
 })();

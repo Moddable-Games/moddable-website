@@ -1,0 +1,197 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<meta name="mg-base" content="/MODDABLE/moddable-website">
+<title>Spiralling Paths of Power and Peril — Moddable.Games</title>
+<link rel="stylesheet" href="../../css/_mg.css">
+<style>
+body { background: #f5f4ef; }
+
+/* Post header */
+.post-header { position: relative; color: #fff; overflow: hidden; background: #000; }
+.post-header__bloom { position: absolute; left: 50%; bottom: -200px; transform: translateX(-50%); width: 1100px; height: 500px; background: radial-gradient(ellipse, rgba(12,79,141,0.4) 0%, transparent 65%); pointer-events: none; filter: blur(20px); }
+.post-header__inner { position: relative; padding: 48px 32px 88px; max-width: 800px; margin: 0 auto; text-align: center; box-sizing: border-box; }
+.post-header__back { font-family: var(--mg-font-mono); font-size: 12px; color: rgba(255,255,255,0.7); text-decoration: none; }
+.post-header__tags { display: flex; gap: 8px; justify-content: center; margin-top: 28px; flex-wrap: wrap; }
+.post-header__cat { font-family: var(--mg-font-body); font-weight: 600; font-size: 11px; background: #0c4f8d; color: #fff; padding: 4px 10px; border-radius: 9999px; }
+.post-header__meta { font-family: var(--mg-font-mono); font-size: 11px; color: rgba(255,255,255,0.7); padding: 4px 10px; border: 1px solid rgba(255,255,255,0.18); border-radius: 9999px; }
+.post-header__title { font-family: var(--mg-font-display); font-weight: 600; font-size: clamp(48px, 7vw, 96px); line-height: 0.95; letter-spacing: -0.025em; margin: 24px 0; text-shadow: 0 4px 30px rgba(0,0,0,0.6); }
+.post-header__title em { color: #6fb5ff; }
+.post-header__lede { font-family: var(--mg-font-body); font-style: italic; font-size: 18px; color: rgba(255,255,255,0.78); margin: 0; }
+
+/* Post body section */
+.post-body { background: #f5f4ef; padding: 72px 32px 96px; }
+.post-layout { max-width: 1200px; margin: 0 auto; display: grid; grid-template-columns: 200px 1fr 220px; gap: 56px; align-items: start; }
+.post-rail { position: sticky; top: 96px; }
+.post-rail__eyebrow { font-family: var(--mg-font-pixel); font-size: 9px; color: #0c4f8d; letter-spacing: 1.5px; margin-bottom: 14px; }
+.post-rail__eyebrow--green { color: #3a9928; margin-top: 32px; margin-bottom: 12px; }
+.post-author { display: flex; gap: 10px; align-items: center; margin-bottom: 20px; }
+.post-author__avatar { width: 40px; height: 40px; border-radius: 9999px; background: linear-gradient(135deg, #0c4f8d, #3a9928); flex: none; }
+.post-author__name { font-family: var(--mg-font-display); font-weight: 600; font-size: 15px; color: #14161c; letter-spacing: -0.2px; }
+.post-author__handle { font-family: var(--mg-font-mono); font-size: 11px; color: #7a8290; }
+.post-share-btns { display: flex; gap: 6px; flex-wrap: wrap; }
+.post-share-btn { font-family: var(--mg-font-mono); font-size: 11px; font-weight: 600; width: 38px; height: 38px; border-radius: 9999px; background: #fff; color: #14161c; border: 1px solid #e6e3d8; cursor: pointer; }
+
+/* TOC */
+.post-toc { list-style: none; padding: 0; margin: 0 0 32px; display: flex; flex-direction: column; gap: 8px; border-left: 1px solid #e6e3d8; }
+.post-toc__item { padding-left: 14px; margin-left: -1px; }
+.post-toc__item--active { border-left: 2px solid #0c4f8d; }
+.post-toc__link { font-family: var(--mg-font-body); font-size: 13px; text-decoration: none; }
+.post-toc__link--active { color: #14161c; font-weight: 600; }
+.post-toc__link--inactive { color: #4f5764; font-weight: 400; }
+
+/* Mod card in sidebar */
+.post-mod-card { background: #000; color: #fff; padding: 20px; border-radius: 16px; }
+.post-mod-card__eyebrow { font-family: var(--mg-font-pixel); font-size: 9px; color: #6fb5ff; letter-spacing: 1.5px; margin-bottom: 10px; }
+.post-mod-card__title { font-family: var(--mg-font-display); font-weight: 600; font-size: 18px; line-height: 1.2; margin-bottom: 6px; }
+.post-mod-card__version { font-family: var(--mg-font-mono); font-size: 11px; color: rgba(255,255,255,0.6); margin-bottom: 14px; }
+.post-mod-card__dl { height: 38px; font-size: 13px; width: 100%; }
+
+/* More posts section */
+.post-more { background: #fff; border-top: 1px solid #e6e3d8; padding: 80px 32px; }
+.post-more__inner { max-width: 1200px; margin: 0 auto; }
+.post-more__heading { font-family: var(--mg-font-display); font-weight: 600; font-size: 40px; line-height: 1.1; letter-spacing: -0.5px; color: #14161c; margin: 0 0 32px; }
+.post-more__grid { display: grid; grid-template-columns: repeat(3, 1fr); gap: 20px; }
+.post-more-card { display: flex; flex-direction: column; gap: 14px; padding: 20px; background: #f5f4ef; border-radius: 16px; text-decoration: none; color: inherit; }
+.post-more-card__cover { height: 120px; border-radius: 12px; }
+.post-more-card__meta { font-family: var(--mg-font-mono); font-size: 11px; color: #7a8290; letter-spacing: 0.3px; }
+.post-more-card__title { font-family: var(--mg-font-display); font-weight: 600; font-size: 20px; line-height: 1.2; letter-spacing: -0.2px; color: #14161c; margin: 0; }
+
+@media (max-width: 900px) {
+  .post-layout { grid-template-columns: 1fr !important; }
+  .post-rail { display: none !important; }
+  .post-more__grid { grid-template-columns: 1fr; }
+}
+</style>
+</head>
+<body>
+<div id="nav-root"></div>
+
+<!-- Post header -->
+<section class="post-header">
+  <div class="post-header__bloom"></div>
+  <div class="post-header__inner">
+    <a href="/news/" class="post-header__back">&larr; All posts</a>
+    <div class="post-header__tags">
+      <span class="post-header__cat">TALISMAN</span>
+      <span class="post-header__meta">Jul 18, 2025 &middot; 7 min read</span>
+    </div>
+    <h1 class="post-header__title">Spiralling Paths of Power and <em>Peril</em>.</h1>
+    <p class="post-header__lede">40 years of Talisman &mdash; a game that looks harmless but delivers unpredictable, polarising gameplay.</p>
+  </div>
+</section>
+
+<!-- Post body -->
+<section class="post-body">
+  <div class="post-layout">
+
+    <!-- Left rail -->
+    <aside class="post-rail">
+      <div class="post-rail__eyebrow">&#9650; AUTHOR</div>
+      <div class="post-author">
+        <div class="post-author__avatar"></div>
+        <div>
+          <div class="post-author__name">Kevin Chand</div>
+          <div class="post-author__handle">Chief Playtester</div>
+        </div>
+      </div>
+      <div class="post-rail__eyebrow post-rail__eyebrow--green">&#9650; SHARE</div>
+      <div class="post-share-btns" id="share-btns"></div>
+    </aside>
+
+    <!-- Article -->
+    <article class="prose">
+      <p class="lede"><em>Talisman</em> looks harmless. A colourful fantasy board with wizards and warriors, a spinner of fate, a quest for the Crown of Command. But beneath the whimsy lies a game that is unpredictable, polarising, and &mdash; for a certain kind of player &mdash; utterly addictive.</p>
+      <p>It plays like Monopoly's dark fantasy cousin: the dice dictate your fate, the board punishes the unlucky, and the gap between first and last can widen with nauseating speed. And yet, after 40 years and over 800,000 copies sold, people keep coming back.</p>
+      <h2>From Necromancer to Games Workshop.</h2>
+      <p>In 1983, designer Robert Harris presented a prototype called <em>Necromancer</em> to Games Workshop. The company reimagined it as <em>Talisman</em>, and it became their first mass-market success &mdash; transforming Games Workshop from a distributor into a creative powerhouse, years before Warhammer would dominate their catalogue.</p>
+      <p>The game's premise was simple: traverse a spiral board through three concentric regions, grow your character's strength and craft, and reach the Crown of Command at the centre before anyone else. The execution was anything but predictable.</p>
+      <h2>Five editions, five eras.</h2>
+      <p>Talisman has been reinvented across five major editions spanning four decades:</p>
+      <ul>
+        <li><strong>1st Edition (1983)</strong> &mdash; Games Workshop. Black-and-white cards, hand-drawn board. Raw and unbalanced.</li>
+        <li><strong>2nd Edition (1985)</strong> &mdash; Games Workshop. Refined rules, colour cards, the expansion era begins.</li>
+        <li><strong>3rd Edition (1994)</strong> &mdash; Games Workshop. Circular board, divisive redesign.</li>
+        <li><strong>4th Edition (2008)</strong> &mdash; Fantasy Flight Games. Full-colour overhaul, 14 expansions over a decade.</li>
+        <li><strong>5th Edition (2024)</strong> &mdash; Avalon Hill / Hasbro. 3D models, streamlined rules, modern production.</li>
+      </ul>
+      <h2>Why it survives.</h2>
+      <p>Talisman's longevity comes from its mod-friendly nature. The spiral board, the character deck, the adventure cards &mdash; every component is a slot waiting to be filled with something new. The game appeals to tinkerers, artists, and creators who see the framework as a canvas rather than a finished product.</p>
+      <blockquote>"Talisman doesn't survive because it's balanced. It survives because it's moddable."</blockquote>
+      <h2>The static spiral problem.</h2>
+      <p>For all its charm, Talisman's board has a mechanical flaw: the spiral is predictable. Once you've mapped the outer, middle, and inner regions, the geography never changes. The adventure deck provides randomness, but the board itself is static.</p>
+      <p>This is precisely what <em>Talisman: Hexed</em> addresses. By replacing the fixed spiral with a modular hex grid, every game generates a unique geography. The regions still exist &mdash; outer, middle, inner &mdash; but their shape, their connections, and their dangers shift every session.</p>
+      <p><em>Talisman: Hexed v1.0.0 is available in the mods library. Download it, shuffle the tiles, and discover a Talisman you've never played before.</em></p>
+    </article>
+
+    <!-- Right rail -->
+    <aside class="post-rail">
+      <div class="post-rail__eyebrow">&#9650; IN THIS POST</div>
+      <ul id="toc-list" class="post-toc"></ul>
+      <div class="post-mod-card">
+        <div class="post-mod-card__eyebrow">&#9650; THE MOD</div>
+        <div class="post-mod-card__title">Talisman: Hexed</div>
+        <div class="post-mod-card__version">v1.0.0 &middot; Reskin</div>
+        <div id="mod-dl-btn"></div>
+      </div>
+    </aside>
+  </div>
+</section>
+
+<!-- More posts -->
+<section class="post-more">
+  <div class="post-more__inner">
+    <h2 class="post-more__heading">More from the archive.</h2>
+    <div id="more-posts" class="post-more__grid"></div>
+  </div>
+</section>
+
+<div id="footer-root"></div>
+<script src="../../js/_mg.js"></script>
+<script>
+const { el, linkBtn, navbar, footer, url } = MG;
+document.getElementById('nav-root').appendChild(navbar('News'));
+document.getElementById('footer-root').appendChild(footer());
+
+// Share buttons
+['X','FB','LI','Copy'].forEach(s => {
+  const b = document.createElement('button');
+  b.textContent = s;
+  b.className = 'post-share-btn';
+  document.getElementById('share-btns').appendChild(b);
+});
+
+// TOC
+const TOC = ['From Necromancer to Games Workshop','Five editions, five eras','Why it survives','The static spiral problem'];
+const tul = document.getElementById('toc-list');
+TOC.forEach((t,i) => {
+  const li = el('li',{class: i===0 ? 'post-toc__item post-toc__item--active' : 'post-toc__item'});
+  li.appendChild(el('a',{href:'#',class: i===0 ? 'post-toc__link post-toc__link--active' : 'post-toc__link post-toc__link--inactive'},t));
+  tul.appendChild(li);
+});
+
+const dlBtn = linkBtn('Download rules','#','blue');
+dlBtn.classList.add('post-mod-card__dl');
+document.getElementById('mod-dl-btn').appendChild(dlBtn);
+
+// More posts
+const MORE = [
+  {cover:'#d11a1a', cat:'Deep dive',  date:'Sep 12, 2025', title:'Nuking Catan', href:url('/news/nuking-catan/')},
+  {cover:'#1a3680', cat:'Monopoly',   date:'Jul 22, 2025', title:'Monopolising Modified Variations', href:url('/news/monopolising-modified-variations/')},
+  {cover:'#0c4f8d', cat:'Design',     date:'Jun 4, 2025',  title:'Conquering the Constrains of Chess', href:url('/news/conquering-the-constrains-of-chess/')},
+];
+const mp = document.getElementById('more-posts');
+MORE.forEach(p => {
+  const a = el('a',{href:p.href,class:'post-more-card'});
+  const cover = el('div',{class:'post-more-card__cover'});
+  cover.style.background = `linear-gradient(135deg,#0a0d2a 0%,${p.cover} 100%)`;
+  a.appendChild(cover);
+  a.appendChild(el('div',{class:'post-more-card__meta'},`${p.cat.toUpperCase()} · ${p.date}`));
+  a.appendChild(el('h3',{class:'post-more-card__title'},p.title));
+  mp.appendChild(a);
+});
+</script>
+</body>
+</html>

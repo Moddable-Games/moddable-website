@@ -10,11 +10,10 @@
   body { background: #000; color: #fff; }
   #hero { position:relative; min-height:780px; background:#000; overflow:hidden; isolation:isolate; }
   #hero-bg { position:absolute; top:0; left:0; right:0; height:130%; background:linear-gradient(180deg,#0a0d2a 0%,#1a3680 45%,#000 100%); will-change:transform; }
-  #hero-bg::before { content:''; position:absolute; inset:0; background:url('img/hex-land.jpg') center bottom / cover no-repeat; opacity:0.25; mix-blend-mode:screen; }
+  #hero-bg::before { content:''; position:absolute; inset:0; background:url('img/hex-land.jpg') center 70% / cover no-repeat; opacity:0.18; mix-blend-mode:screen; mask-image:linear-gradient(180deg, transparent 0%, black 30%, black 60%, transparent 90%); -webkit-mask-image:linear-gradient(180deg, transparent 0%, black 30%, black 60%, transparent 90%); }
   #hero-bg::after { content:''; position:absolute; inset:0; background:radial-gradient(ellipse 80% 40% at 50% 100%,rgba(58,123,232,0.55) 0%,transparent 70%); }
   #hero-hex { position:absolute; inset:0; background-image:url("img/hex-grid-blue.svg"); background-size:56px 64px; animation:hexFloat 30s linear infinite; z-index:1; pointer-events:none; }
-  #hero-glow { position:absolute; bottom:22%; left:0; right:0; height:60px; background:radial-gradient(ellipse 60% 100% at 50% 0%,rgba(58,123,232,0.3) 0%,transparent 100%); z-index:2; pointer-events:none; }
-  #hero-glow::before { content:''; position:absolute; bottom:100%; left:0; right:0; height:1px; background:linear-gradient(90deg,transparent,#3a7be8,rgba(111,181,255,0.8),#3a7be8,transparent); filter:blur(1px); }
+  #hero-glow { display:none; }
   #hero-top-fade { position:absolute; inset:0; background:linear-gradient(180deg,rgba(8,10,30,0.5) 0%,transparent 40%); z-index:3; pointer-events:none; }
   #hero-bot-fade { position:absolute; inset:0; background:linear-gradient(180deg,transparent 65%,rgba(0,0,0,0.5) 85%,#000 100%); z-index:3; pointer-events:none; }
   #hero-content { position:relative; z-index:4; padding:120px 24px 200px; max-width:1200px; margin:0 auto; text-align:center; animation:fadeRise 0.8s cubic-bezier(.2,.8,.2,1) both; }
@@ -29,7 +28,7 @@
   <div id="hero-glow"></div>
   <div id="hero-top-fade"></div>
   <div id="hero-bot-fade"></div>
-  <div id="hero-content">
+  <div id="hero-content" class="hero-anim">
     <div class="mg-eyebrow mg-eyebrow--glow">&#9650; MODDABLE.GAMES</div>
     <h1 class="home-hero__title">Creating games<br>you already own.</h1>
     <p class="home-hero__lede">Twelve community-built rulebook mods for the boards collecting dust on your shelf — plus three original games built to be modded from day one.</p>
@@ -41,33 +40,21 @@
 <section class="home-gallery">
   <div class="mg-container">
     <div class="home-gallery__header">
-      <div>
+      <div data-reveal="up">
         <div class="mg-eyebrow mg-eyebrow--blue">&#9650; THE LIBRARY</div>
         <h2 class="home-gallery__heading">Mods for games<br>you already own.</h2>
       </div>
       <div id="gallery-filters" class="home-gallery__filters"></div>
     </div>
-    <div id="gallery-grid" class="mg-grid-3 mg-grid-auto"></div>
+    <div id="gallery-grid" class="mg-grid-3 mg-grid-auto" data-stagger></div>
     <div class="home-gallery__cta"><a href="mods/">Browse all 12 mods &rarr;</a></div>
-  </div>
-</section>
-
-<!-- Nuke Catan -->
-<section class="home-nuke">
-  <div class="home-nuke__bloom"></div>
-  <div class="home-nuke__inner">
-    <div class="mg-eyebrow mg-eyebrow--red">&#9650; TOTAL CONVERSION &middot; CATAN</div>
-    <div id="nuke-cube" class="home-nuke__cube"></div>
-    <h2 class="home-nuke__heading">Are you ready<br>to <em>nuke</em> Catan?</h2>
-    <p class="home-nuke__body">A family-friendly post-apocalyptic rules overhaul. Same tiles, same dice, brand new economy — and yes, your kids are going to love arguing about who set fire to the road network.</p>
-    <div class="home-nuke__btns" id="nuke-btns"></div>
   </div>
 </section>
 
 <!-- Featured Mod -->
 <section class="home-featured">
   <div class="home-featured__glow"></div>
-  <div class="home-featured__inner" id="featured-inner">
+  <div class="home-featured__inner" id="featured-inner" data-reveal="up">
     <div>
       <div class="mg-eyebrow mg-eyebrow--glow">&#9650; MOD OF THE MONTH</div>
       <h2 class="home-featured__heading">Hyper Imperium</h2>
@@ -75,20 +62,34 @@
       <div class="home-featured__btns" id="featured-btns"></div>
       <div class="stats-row" id="featured-stats"></div>
     </div>
-    <div id="featured-cube" class="home-featured__cube"></div>
+    <img src="img/hyper-imperium-logo.png" alt="Hyper Imperium" class="home-featured__logo">
+  </div>
+</section>
+
+<div class="mg-divider-glow"></div>
+
+<!-- Nuke Catan -->
+<section class="home-nuke">
+  <div class="home-nuke__bloom"></div>
+  <div class="home-nuke__inner hero-anim">
+    <div class="mg-eyebrow mg-eyebrow--red">&#9650; TOTAL CONVERSION &middot; CATAN</div>
+    <img src="img/nuked-family.png" alt="Family playing a board game with a mushroom cloud" class="home-nuke__img" data-reveal="scale">
+    <h2 class="home-nuke__heading" data-reveal="up">Are you ready<br>to <em>nuke</em> Catan?</h2>
+    <p class="home-nuke__body" data-reveal="up">A family-friendly post-apocalyptic rules overhaul. Same tiles, same dice, brand new economy — and yes, your kids are going to love arguing about who set fire to the road network.</p>
+    <div class="home-nuke__btns" id="nuke-btns" data-reveal="up"></div>
   </div>
 </section>
 
 <!-- Why Hexagons -->
 <section class="home-hex">
   <div class="home-hex__inner" id="hex-section">
-    <div>
+    <div data-reveal="left">
       <div class="mg-eyebrow mg-eyebrow--red">&#9650; WHY HEXAGONS</div>
       <h2 class="home-hex__heading">Replacing squares with <em>hexagons.</em></h2>
       <p class="home-hex__body">Six neighbours instead of four. No diagonal exceptions. No edge-case rules. The math of strategy gets cleaner the moment the grid does.</p>
       <div class="home-hex__pills" id="hex-pills"></div>
     </div>
-    <div class="home-hex__diagram">
+    <div class="home-hex__diagram" data-reveal="right">
       <svg width="280" height="280" viewBox="0 0 280 280" fill="none" xmlns="http://www.w3.org/2000/svg" opacity="0.85">
         <path d="M140 20 240 60v80l-100 40L40 140V60z" stroke="#0c4f8d" stroke-width="1.5" fill="none" stroke-opacity="0.3"/>
         <path d="M140 60 200 85v50l-60 25-60-25V85z" stroke="#0c4f8d" stroke-width="2" fill="rgba(12,79,141,0.06)"/>
@@ -106,7 +107,7 @@
 <!-- The Online Engine -->
 <section class="home-engine">
   <div class="home-engine__bloom"></div>
-  <div class="home-engine__inner">
+  <div class="home-engine__inner" data-reveal="up">
     <div class="mg-eyebrow mg-eyebrow--glow">&#9650; THE ONLINE ENGINE</div>
     <h2 class="home-engine__heading">Play anywhere. Continue <em>everywhere.</em></h2>
     <p class="home-engine__body">Create private sessions. Hand off mid-game between phone, tablet, and laptop. Pause a session in May, finish it in October. The board waits.</p>
@@ -120,7 +121,7 @@
 
 <!-- Practice Partners -->
 <section class="home-bots">
-  <div class="home-bots__inner">
+  <div class="home-bots__inner" data-reveal="up">
     <div class="mg-eyebrow mg-eyebrow--blue">&#9650; PRACTICE PARTNERS</div>
     <h2 class="home-bots__heading">Play with friends — or <em>instructive bots.</em></h2>
     <p class="home-bots__body">Every game played online — human-vs-human or human-vs-bot — improves the next bot you'll face. The engine is a teaching engine first, an opponent second.</p>
@@ -135,7 +136,7 @@
       <h2 class="home-news__heading">From the table.</h2>
       <a href="news/" class="home-news__link">All posts &rarr;</a>
     </div>
-    <div id="news-grid" class="mg-grid-3 mg-grid-auto"></div>
+    <div id="news-grid" class="mg-grid-3 mg-grid-auto" data-stagger></div>
   </div>
 </section>
 
@@ -145,7 +146,7 @@
   <div class="home-community__glow"></div>
   <div class="home-community__hex" id="community-hex"></div>
   <div class="home-community__fade"></div>
-  <div class="home-community__inner">
+  <div class="home-community__inner hero-anim">
     <div class="mg-eyebrow mg-eyebrow--glow">&#9650; JOIN THE TABLE</div>
     <h2 class="home-community__heading">Mod a game with us.</h2>
     <p class="home-community__body">2,400+ rule-tinkerers, designers and PnP enthusiasts in the Discord. Pitch a mod, test someone else's, or just argue about <em>Catan</em>'s longest road rule.</p>
@@ -205,17 +206,11 @@ function renderGrid() {
 
 renderFilter(); renderGrid();
 
-// Nuke Catan cube
-const nc = document.getElementById('nuke-cube');
-const bigCube = cubeSVG(240);
-bigCube.style.filter = 'drop-shadow(0 20px 40px rgba(209,26,26,0.5))';
-nc.appendChild(bigCube);
 const nb2 = document.getElementById('nuke-btns');
 nb2.appendChild(linkBtn('Download the rules', '#', 'red'));
 nb2.appendChild(linkBtn('Read the brief', '#', 'outline-dark'));
 
-// Featured mod cube + buttons
-document.getElementById('featured-cube').appendChild(cubeSVG(220));
+// Featured mod buttons
 const fb = document.getElementById('featured-btns');
 fb.appendChild(linkBtn('Download the rules', '#', 'primary'));
 fb.appendChild(linkBtn('View the components', '#', 'outline-dark'));
@@ -239,7 +234,7 @@ const NEWS = [
 ];
 const ng = document.getElementById('news-grid');
 NEWS.forEach(n => {
-  const a = el('a', { href:url('/news/nuking-catan/'), class:'news-card' });
+  const a = el('a', { href:url('/news/nuking-catan/'), class:'news-card mg-lift', 'data-reveal':'up' });
   const row = el('div', { class:'news-card__header' });
   row.appendChild(el('span', { class:'news-card__tag' }, n.tag));
   row.appendChild(el('span', { class:'news-card__date' }, n.date));
@@ -268,13 +263,13 @@ const engFeatures = document.getElementById('engine-features');
 // Bot section buttons
 const botBtns = document.getElementById('bot-btns');
 botBtns.appendChild(linkBtn('Play Nukes online', '#', 'blue'));
-botBtns.appendChild(linkBtn('Try Moddable Chess', url('/games/moddable-chess/'), 'outline-dark'));
+botBtns.appendChild(linkBtn('Try Moddable Chess', '/games/moddable-chess/', 'outline-light'));
 
 // Community band
 document.getElementById('community-hex').style.backgroundImage = "url('img/hex-grid-blue.svg')";
 const cb = document.getElementById('community-btns');
-cb.appendChild(linkBtn('Open the Discord', url('/community/'), 'primary'));
-cb.appendChild(linkBtn('Submit a mod', url('/submit/'), 'outline-dark'));
+cb.appendChild(linkBtn('Open the Discord', '/community/', 'primary'));
+cb.appendChild(linkBtn('Submit a mod', '/submit/', 'outline-dark'));
 </script>
 </body>
 </html>

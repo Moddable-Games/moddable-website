@@ -21,15 +21,18 @@
   <div class="game-hero__hex" data-hex="blue"></div>
   <div class="game-hero__fade"></div>
   <div class="game-hero__inner">
-    <a href="../../games/" class="game-hero__back">&larr; All games</a>
-    <div class="game-hero__tags">
-      <span class="game-hero__tag" data-accent="green">Original</span>
-      <span class="game-hero__tag--outline">CC BY-NC-SA &middot; Print-and-play</span>
-      <span class="game-hero__version" data-color="glow">v1.3.0</span>
+    <div class="game-hero__text hero-anim">
+      <a href="../../games/" class="game-hero__back">&larr; All games</a>
+      <div class="game-hero__tags">
+        <span class="game-hero__tag" data-accent="green">Original</span>
+        <span class="game-hero__tag--outline">CC BY-NC-SA &middot; Print-and-play</span>
+        <span class="game-hero__version" data-color="glow">v1.3.0</span>
+      </div>
+      <h1 class="game-hero__title">Endless Skies.</h1>
+      <p class="game-hero__lede">A hex-tile exploration game built to be modded. Three biomes, twelve faction decks, one rulebook with version control — so the community can ship expansions without asking permission.</p>
+      <div class="game-hero__btns" id="hero-btns"></div>
     </div>
-    <h1 class="game-hero__title">Endless<br>Skies.</h1>
-    <p class="game-hero__lede">A hex-tile exploration game built to be modded. Three biomes, twelve faction decks, one rulebook with version control — so the community can ship expansions without asking permission.</p>
-    <div class="game-hero__btns" id="hero-btns"></div>
+    <img src="../../img/endless-skies-logo.png" alt="Endless Skies" class="game-hero__logo">
   </div>
 </section>
 
@@ -77,7 +80,7 @@ document.querySelector('[data-color]').style.color = '#6fb5ff';
 document.querySelector('[data-color]').style.textShadow = '0 0 8px rgba(111,181,255,0.5)';
 
 document.getElementById('hero-btns').appendChild(linkBtn('Download Print-and-Play','#','primary'));
-document.getElementById('hero-btns').appendChild(linkBtn('Browse community mods',url('/mods/'),'outline-dark'));
+document.getElementById('hero-btns').appendChild(linkBtn('Browse community mods','/mods/','outline-dark'));
 
 const STATS = [['Players','2–4'],['Time','60–90 min'],['Age','12+'],['Designer','Moddable team'],['Released','Mar 2025'],['Mods','8 community']];
 const sb = document.getElementById('stats-bar');

@@ -16,15 +16,18 @@
   <div class="game-hero__hex" data-hex="red"></div>
   <div class="game-hero__fade"></div>
   <div class="game-hero__inner">
-    <a href="../../games/" class="game-hero__back">&larr; All games</a>
-    <div class="game-hero__tags">
-      <span class="game-hero__tag" data-accent="red">Original</span>
-      <span class="game-hero__tag--outline">CC BY-NC-SA &middot; Print-and-play</span>
-      <span class="game-hero__version" data-color="red">v1.1.0</span>
+    <div class="game-hero__text hero-anim">
+      <a href="../../games/" class="game-hero__back">&larr; All games</a>
+      <div class="game-hero__tags">
+        <span class="game-hero__tag" data-accent="red">Original</span>
+        <span class="game-hero__tag--outline">CC BY-NC-SA &middot; Print-and-play</span>
+        <span class="game-hero__version" data-color="red">v1.1.0</span>
+      </div>
+      <h1 class="game-hero__title">Nukes.</h1>
+      <p class="game-hero__lede">Cold-war territory control on a hex map. Three superpowers, fifteen turns, one button that ends everything. Designed to be modded — swap the superpowers, change the fallout rules, rewrite the endgame.</p>
+      <div class="game-hero__btns" id="hero-btns"></div>
     </div>
-    <h1 class="game-hero__title">Nukes.</h1>
-    <p class="game-hero__lede">Cold-war territory control on a hex map. Three superpowers, fifteen turns, one button that ends everything. Designed to be modded — swap the superpowers, change the fallout rules, rewrite the endgame.</p>
-    <div class="game-hero__btns" id="hero-btns"></div>
+    <img src="../../img/nukes-logo.png" alt="Nukes" class="game-hero__logo">
   </div>
 </section>
 
@@ -101,7 +104,7 @@ STEPS.forEach(s => {
 });
 
 document.getElementById('button-cta').appendChild(linkBtn('Download the rules','#','red'));
-document.getElementById('button-cta').appendChild(linkBtn('See the tools',url('/tools/nukes/'),'outline-dark'));
+document.getElementById('button-cta').appendChild(linkBtn('See the tools','/tools/nukes/','outline-dark'));
 
 const HOOKS = [
   {name:'superpowers.yaml', desc:'Three factions with asymmetric abilities. Add a fourth, reshape all three, or make them symmetric for a purer strategy game.'},

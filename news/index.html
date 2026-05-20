@@ -107,14 +107,18 @@ document.getElementById('page-hero').appendChild(pageHero({
 }));
 
 const POSTS = [
-  { slug:'nuking-catan',    cat:'Catan',       date:'Sep 12, 2025', cover:'#d11a1a', title:'Nuking Catan',                      excerpt:'A meditation on the gateway game, 45 million boxes deep — and what we did to it.' },
-  { slug:'mongo-playtest',  cat:'Devlog',      date:'May 12, 2026', cover:'#3a9928', title:'Mongo enters open playtest',         excerpt:'Our second original game opens its playtest doors. 200 spots, first come first served.' },
-  { slug:'econopoly-v14',   cat:'Mod update',  date:'May 9, 2026',  cover:'#0c4f8d', title:'Econopoly v1.4: the audit patch',    excerpt:'Cash-pile tax cap raised. Bankruptcy chain reactions buffed. Longer games, better games.' },
-  { slug:'mod-jam-3',       cat:'Community',   date:'May 2, 2026',  cover:'#1a3680', title:'Mod jam #3 wraps up',                excerpt:'Twelve submissions. One won a literal trophy made of meeples. Results inside.' },
-  { slug:'hyper-v2',        cat:'Mod update',  date:'Apr 18, 2026', cover:'#5d2a8a', title:'Hyper Imperium v2.0.1 released',    excerpt:'Faction balance pass. Hyper Agenda timing fix. Updated print sheets included.' },
-  { slug:'endless-skies',   cat:'Devlog',      date:'Mar 5, 2026',  cover:'#3a7be8', title:'Endless Skies is out in the world', excerpt:'Fourteen months of playtesting. 61 hex tiles. One final answer to "how do we make a game that wants to be modded?"' },
-  { slug:'talisman-hexed',  cat:'Mod update',  date:'Apr 2024',     cover:'#0c4f8d', title:'Talisman: Hexed — river rules update', excerpt:'The river crossing rules got a full rewrite. Boats are now a proper sub-system.' },
-  { slug:'jam-2',           cat:'Community',   date:'Jan 2026',     cover:'#e89a1a', title:'Mod jam #2: Risk edition',           excerpt:'22 entries, five finalists, one very long night of voting. Risk will never be the same.' },
+  { slug:'beyond-the-box',                       cat:'Essay',       date:'May 2026',  cover:'#0c4f8d', title:'Beyond The Box',                           excerpt:'The art of board game design begins and ends with the box — but what happens when we open it?' },
+  { slug:'the-ancients',                          cat:'Essay',       date:'Apr 2026',  cover:'#1a3680', title:'The Ancients',                              excerpt:'We rarely pause to consider what has already endured — games older than history itself.' },
+  { slug:'making-mods-matter',                    cat:'Philosophy',  date:'Mar 2026',  cover:'#3a9928', title:'Making Mods Matter',                        excerpt:'Those who tinker, tailor and say lore beyond casual play — and why they deserve better tools.' },
+  { slug:'the-house-always-wins',                 cat:'Philosophy',  date:'Mar 2026',  cover:'#3a9928', title:'The House Always Wins!',                    excerpt:'How house rules become canon, from en passant to free parking jackpots.' },
+  { slug:'open-sourcing-tabletop-games',          cat:'Philosophy',  date:'Mar 2026',  cover:'#0c4f8d', title:'Open Sourcing Tabletop Games',              excerpt:'Herein lies the paradox of protecting creative work in a medium built on sharing.' },
+  { slug:'tis-the-season-for-traditions',         cat:'Community',   date:'Mar 2026',  cover:'#d11a1a', title:"'Tis the Season for Traditions",            excerpt:'Reconnect through the ritual of games — why the holidays belong at the table.' },
+  { slug:'making-a-masterpiece-by-modification',  cat:'Chess',       date:'Oct 2025',  cover:'#d11a1a', title:'Making a Masterpiece by Modification',      excerpt:'Chess travelled the Silk Road and was rewritten at every stop. The greatest mod of all time.' },
+  { slug:'twilights-prophecies-thunder-on',       cat:'TI4',         date:'Oct 2025',  cover:'#0c4f8d', title:"Twilight's Prophecies Thunder On!",         excerpt:'Twilight Imperium turns 25. We look at what Prophecy of Kings changed — and what we changed next.' },
+  { slug:'nuking-catan',                          cat:'Catan',       date:'Jul 2025',  cover:'#d11a1a', title:'Nuking Catan',                              excerpt:'A meditation on the gateway game, 45 million boxes deep — and what we did to it.' },
+  { slug:'spiralling-paths-of-power-and-peril',   cat:'Talisman',    date:'Jul 2025',  cover:'#0c4f8d', title:'Spiralling Paths of Power and Peril',       excerpt:"Talisman's 40-year journey from Necromancer to our hex-tile reimagining." },
+  { slug:'monopolising-modified-variations',      cat:'Monopoly',    date:'Jul 2025',  cover:'#3a9928', title:'Monopolising Modified Variations',          excerpt:'Monopoly has more variants than any game alive. We asked: can we make it actually fun?' },
+  { slug:'conquering-the-constrains-of-chess',    cat:'Chess',       date:'Jun 2025',  cover:'#d11a1a', title:'Conquering the Constraints of Chess',       excerpt:'1500 years of constraints. 2000+ variants. Zero unified compendiums — until now.' },
 ];
 
 const CATS = ['All',...new Set(POSTS.map(p=>p.cat))];
@@ -134,7 +138,7 @@ function postCover(color, big=false) {
 // Featured post
 const fp = document.getElementById('featured-post');
 const feat = POSTS[0];
-const fa = el('a',{href:url('/news/nuking-catan/'),class:'news-featured-card'});
+const fa = el('a',{href:url(`/news/${feat.slug}/`),class:'news-featured-card'});
 fa.appendChild(postCover(feat.cover, true));
 const fd = el('div');
 const fm = el('div',{class:'news-featured-card__meta'});
@@ -169,7 +173,7 @@ function renderPosts() {
   const grid = document.getElementById('posts-grid');
   grid.innerHTML = '';
   visible.forEach(p => {
-    const a = el('a',{href:url('/news/nuking-catan/'),class:'news-grid-card'});
+    const a = el('a',{href:url(`/news/${p.slug}/`),class:'news-grid-card'});
     a.appendChild(postCover(p.cover));
     const meta = el('div',{class:'news-grid-card__meta'});
     meta.appendChild(el('span',{class:'news-grid-card__cat'},p.cat.toUpperCase()));

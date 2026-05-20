@@ -1,0 +1,175 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<meta name="mg-base" content="/MODDABLE/moddable-website">
+<title>'Tis the Season for Traditions — Moddable.Games</title>
+<link rel="stylesheet" href="../../css/_mg.css">
+<style>
+body { background: #f5f4ef; }
+
+/* Post header */
+.post-header { position: relative; color: #fff; overflow: hidden; background: #000; }
+.post-header__bloom { position: absolute; left: 50%; bottom: -200px; transform: translateX(-50%); width: 1100px; height: 500px; background: radial-gradient(ellipse, rgba(58,153,40,0.4) 0%, transparent 65%); pointer-events: none; filter: blur(20px); }
+.post-header__inner { position: relative; padding: 48px 32px 88px; max-width: 800px; margin: 0 auto; text-align: center; box-sizing: border-box; }
+.post-header__back { font-family: var(--mg-font-mono); font-size: 12px; color: rgba(255,255,255,0.7); text-decoration: none; }
+.post-header__tags { display: flex; gap: 8px; justify-content: center; margin-top: 28px; flex-wrap: wrap; }
+.post-header__cat { font-family: var(--mg-font-body); font-weight: 600; font-size: 11px; background: #3a9928; color: #fff; padding: 4px 10px; border-radius: 9999px; }
+.post-header__meta { font-family: var(--mg-font-mono); font-size: 11px; color: rgba(255,255,255,0.7); padding: 4px 10px; border: 1px solid rgba(255,255,255,0.18); border-radius: 9999px; }
+.post-header__title { font-family: var(--mg-font-display); font-weight: 600; font-size: clamp(48px, 7vw, 96px); line-height: 0.95; letter-spacing: -0.025em; margin: 24px 0; text-shadow: 0 4px 30px rgba(0,0,0,0.6); }
+.post-header__title em { color: #5cbf4a; }
+.post-header__lede { font-family: var(--mg-font-body); font-style: italic; font-size: 18px; color: rgba(255,255,255,0.78); margin: 0; }
+
+/* Post body section */
+.post-body { background: #f5f4ef; padding: 72px 32px 96px; }
+.post-layout { max-width: 1200px; margin: 0 auto; display: grid; grid-template-columns: 200px 1fr 220px; gap: 56px; align-items: start; }
+.post-rail { position: sticky; top: 96px; }
+.post-rail__eyebrow { font-family: var(--mg-font-pixel); font-size: 9px; color: #0c4f8d; letter-spacing: 1.5px; margin-bottom: 14px; }
+.post-rail__eyebrow--green { color: #3a9928; margin-top: 32px; margin-bottom: 12px; }
+.post-author { display: flex; gap: 10px; align-items: center; margin-bottom: 20px; }
+.post-author__avatar { width: 40px; height: 40px; border-radius: 9999px; background: linear-gradient(135deg, #3a9928, #0c4f8d); flex: none; }
+.post-author__name { font-family: var(--mg-font-display); font-weight: 600; font-size: 15px; color: #14161c; letter-spacing: -0.2px; }
+.post-author__handle { font-family: var(--mg-font-mono); font-size: 11px; color: #7a8290; }
+.post-share-btns { display: flex; gap: 6px; flex-wrap: wrap; }
+.post-share-btn { font-family: var(--mg-font-mono); font-size: 11px; font-weight: 600; width: 38px; height: 38px; border-radius: 9999px; background: #fff; color: #14161c; border: 1px solid #e6e3d8; cursor: pointer; }
+
+/* TOC */
+.post-toc { list-style: none; padding: 0; margin: 0 0 32px; display: flex; flex-direction: column; gap: 8px; border-left: 1px solid #e6e3d8; }
+.post-toc__item { padding-left: 14px; margin-left: -1px; }
+.post-toc__item--active { border-left: 2px solid #3a9928; }
+.post-toc__link { font-family: var(--mg-font-body); font-size: 13px; text-decoration: none; }
+.post-toc__link--active { color: #14161c; font-weight: 600; }
+.post-toc__link--inactive { color: #4f5764; font-weight: 400; }
+
+/* More posts section */
+.post-more { background: #fff; border-top: 1px solid #e6e3d8; padding: 80px 32px; }
+.post-more__inner { max-width: 1200px; margin: 0 auto; }
+.post-more__heading { font-family: var(--mg-font-display); font-weight: 600; font-size: 40px; line-height: 1.1; letter-spacing: -0.5px; color: #14161c; margin: 0 0 32px; }
+.post-more__grid { display: grid; grid-template-columns: repeat(3, 1fr); gap: 20px; }
+.post-more-card { display: flex; flex-direction: column; gap: 14px; padding: 20px; background: #f5f4ef; border-radius: 16px; text-decoration: none; color: inherit; }
+.post-more-card__cover { height: 120px; border-radius: 12px; }
+.post-more-card__meta { font-family: var(--mg-font-mono); font-size: 11px; color: #7a8290; letter-spacing: 0.3px; }
+.post-more-card__title { font-family: var(--mg-font-display); font-weight: 600; font-size: 20px; line-height: 1.2; letter-spacing: -0.2px; color: #14161c; margin: 0; }
+
+@media (max-width: 900px) {
+  .post-layout { grid-template-columns: 1fr !important; }
+  .post-rail { display: none !important; }
+  .post-more__grid { grid-template-columns: 1fr; }
+}
+</style>
+</head>
+<body>
+<div id="nav-root"></div>
+
+<!-- Post header -->
+<section class="post-header">
+  <div class="post-header__bloom"></div>
+  <div class="post-header__inner">
+    <a href="/news/" class="post-header__back">← All posts</a>
+    <div class="post-header__tags">
+      <span class="post-header__cat">COMMUNITY</span>
+      <span class="post-header__meta">Mar 2026 · 5 min read</span>
+    </div>
+    <h1 class="post-header__title">'Tis the Season for <em>Traditions</em>.</h1>
+    <p class="post-header__lede">Or a game of Blood Bowl?</p>
+  </div>
+</section>
+
+<!-- Post body -->
+<section class="post-body">
+  <div class="post-layout">
+
+    <!-- Left rail -->
+    <aside class="post-rail">
+      <div class="post-rail__eyebrow">▲ AUTHOR</div>
+      <div class="post-author">
+        <div class="post-author__avatar"></div>
+        <div>
+          <div class="post-author__name">Mark Smalley</div>
+          <div class="post-author__handle">CEO &amp; Founder</div>
+        </div>
+      </div>
+      <div class="post-rail__eyebrow post-rail__eyebrow--green">▲ SHARE</div>
+      <div class="post-share-btns" id="share-btns"></div>
+    </aside>
+
+    <!-- Article -->
+    <article class="prose">
+      <p class="lede">As the year comes to an end, something in the air starts to shift — beyond the weather and the music. Homes become louder. Tables fuller and schedules slower. Whether around a Christmas roast or during the candle-lit evenings of Hanukkah, families gather not just to exchange gifts, but to reconnect through ritual.</p>
+      <p>Pagans connect at Yule time, Wiccans find solace in the Winter Solstice and the Hindu spend 5 days honouring Ganesh. Increasingly, December rituals also provide opportunities for playing games.</p>
+      <p>In the UK alone, 6 out of 10 adults expect to play board games during the festive season and 42% of those asked were also planning to buy new games as gifts in support of a growing market forecasted to reach $41.63 billion by 2033. Although classics such as Monopoly and Scrabble remain the dominant choices during the festivities there has also been a rise in demand for quick party card games such as Exploding Kittens and Taco Cat Goat Cheese Pizza as well as social deductions like Codenames, Mafia and the more recent and extremely expensive variant; Blood on the Clocktower, which all benefit from having larger groups or teams.</p>
+      <h2>Presence at the table.</h2>
+      <p>For much of the year, our lives are fragmented. Different schedules dotted across different devices fostering indifferent attention spans. Nonetheless, during the year-end festivities, something remarkable happens. People sit at the same table, sometimes for hours. As the meals settle and desserts are shared, someone will inevitably say, "Shall we play something?"</p>
+      <p>It may be a small sentence, but it signals something larger. It signals presence.</p>
+      <p>Games help to fill the gaps between conversations and silence. They give structure to togetherness, turning a table into a shared arena. A rulebook becomes a temporary social contract and for an hour or three; everyone's engaged in the same story. What makes holiday gameplay different from a regular Saturday night session?</p>
+      <p><strong>Tradition.</strong></p>
+      <h2>Games as seasonal identity.</h2>
+      <p>Some families replay the same game every year or pit the same teams against each other. They tweak and bend the rules. Inside jokes become embedded into everyone's strategies. Over time, the game stops being just a game. It becomes part of the family's seasonal identity.</p>
+      <blockquote>"Remember the year Mum won on the very last turn with that seven letter word?"</blockquote>
+      <blockquote>"Remember when the bank ran out of money and we started using real cash?"</blockquote>
+      <p>In some households Da Red Gobbo might even appear for a game!</p>
+      <h2>Touch matters.</h2>
+      <p>These stories resurface every year, and act as ancestral anchors in time. We spend most of our year on screens. But during the holidays, people instinctively reach for something tactile. Cards, dice, and boards sprawling with wooden tokens. There's something grounding about physical components in a season so saturated by digital noise. Touch matters, almost as much as shared eye contact and the sound of dice hitting the table.</p>
+      <p><em>Whether you celebrate Christmas, Hanukkah or simply the gift of being together, we hope you find moments around a table that feels unhurried. From all of us at Moddable, warm wishes for a restful season filled with meaningful play.</em></p>
+    </article>
+
+    <!-- Right rail -->
+    <aside class="post-rail">
+      <div class="post-rail__eyebrow">▲ IN THIS POST</div>
+      <ul id="toc-list" class="post-toc"></ul>
+    </aside>
+  </div>
+</section>
+
+<!-- More posts -->
+<section class="post-more">
+  <div class="post-more__inner">
+    <h2 class="post-more__heading">More from the archive.</h2>
+    <div id="more-posts" class="post-more__grid"></div>
+  </div>
+</section>
+
+<div id="footer-root"></div>
+<script src="../../js/_mg.js"></script>
+<script>
+const { el, linkBtn, navbar, footer, url } = MG;
+document.getElementById('nav-root').appendChild(navbar('News'));
+document.getElementById('footer-root').appendChild(footer());
+
+// Share buttons
+['X','FB','LI','Copy'].forEach(s => {
+  const b = document.createElement('button');
+  b.textContent = s;
+  b.className = 'post-share-btn';
+  document.getElementById('share-btns').appendChild(b);
+});
+
+// TOC
+const TOC = ['Presence at the table','Games as seasonal identity','Touch matters'];
+const tul = document.getElementById('toc-list');
+TOC.forEach((t,i) => {
+  const li = el('li',{class: i===0 ? 'post-toc__item post-toc__item--active' : 'post-toc__item'});
+  li.appendChild(el('a',{href:'#',class: i===0 ? 'post-toc__link post-toc__link--active' : 'post-toc__link post-toc__link--inactive'},t));
+  tul.appendChild(li);
+});
+
+// More posts
+const MORE = [
+  {cover:'#d11a1a', cat:'Devlog',     date:'Sep 12, 2025', title:'Nuking Catan'},
+  {cover:'#0c4f8d', cat:'Mod update', date:'May 9, 2026',  title:'Econopoly v1.4: the audit patch'},
+  {cover:'#1a3680', cat:'Community',  date:'May 2, 2026',  title:'Mod jam #3 wraps up'},
+];
+const mp = document.getElementById('more-posts');
+MORE.forEach(p => {
+  const a = el('a',{href:url('/news/nuking-catan/'),class:'post-more-card'});
+  const cover = el('div',{class:'post-more-card__cover'});
+  cover.style.background = `linear-gradient(135deg,#0a0d2a 0%,${p.cover} 100%)`;
+  a.appendChild(cover);
+  a.appendChild(el('div',{class:'post-more-card__meta'},`${p.cat.toUpperCase()} · ${p.date}`));
+  a.appendChild(el('h3',{class:'post-more-card__title'},p.title));
+  mp.appendChild(a);
+});
+</script>
+</body>
+</html>

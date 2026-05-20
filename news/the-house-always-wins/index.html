@@ -1,0 +1,168 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<meta name="mg-base" content="/MODDABLE/moddable-website">
+<title>The House Always Wins — Moddable.Games</title>
+<link rel="stylesheet" href="../../css/_mg.css">
+<style>
+body { background: #f5f4ef; }
+
+/* Post header */
+.post-header { position: relative; color: #fff; overflow: hidden; background: #000; }
+.post-header__bloom { position: absolute; left: 50%; bottom: -200px; transform: translateX(-50%); width: 1100px; height: 500px; background: radial-gradient(ellipse, rgba(58,153,40,0.4) 0%, transparent 65%); pointer-events: none; filter: blur(20px); }
+.post-header__inner { position: relative; padding: 48px 32px 88px; max-width: 800px; margin: 0 auto; text-align: center; box-sizing: border-box; }
+.post-header__back { font-family: var(--mg-font-mono); font-size: 12px; color: rgba(255,255,255,0.7); text-decoration: none; }
+.post-header__tags { display: flex; gap: 8px; justify-content: center; margin-top: 28px; flex-wrap: wrap; }
+.post-header__cat { font-family: var(--mg-font-body); font-weight: 600; font-size: 11px; background: #3a9928; color: #fff; padding: 4px 10px; border-radius: 9999px; }
+.post-header__meta { font-family: var(--mg-font-mono); font-size: 11px; color: rgba(255,255,255,0.7); padding: 4px 10px; border: 1px solid rgba(255,255,255,0.18); border-radius: 9999px; }
+.post-header__title { font-family: var(--mg-font-display); font-weight: 600; font-size: clamp(48px, 7vw, 96px); line-height: 0.95; letter-spacing: -0.025em; margin: 24px 0; text-shadow: 0 4px 30px rgba(0,0,0,0.6); }
+.post-header__lede { font-family: var(--mg-font-body); font-style: italic; font-size: 18px; color: rgba(255,255,255,0.78); margin: 0; }
+
+/* Post body section */
+.post-body { background: #f5f4ef; padding: 72px 32px 96px; }
+.post-layout { max-width: 1200px; margin: 0 auto; display: grid; grid-template-columns: 200px 1fr 220px; gap: 56px; align-items: start; }
+.post-rail { position: sticky; top: 96px; }
+.post-rail__eyebrow { font-family: var(--mg-font-pixel); font-size: 9px; color: #0c4f8d; letter-spacing: 1.5px; margin-bottom: 14px; }
+.post-rail__eyebrow--green { color: #3a9928; margin-top: 32px; margin-bottom: 12px; }
+.post-author { display: flex; gap: 10px; align-items: center; margin-bottom: 20px; }
+.post-author__avatar { width: 40px; height: 40px; border-radius: 9999px; background: linear-gradient(135deg, #3a9928, #0c4f8d); flex: none; }
+.post-author__name { font-family: var(--mg-font-display); font-weight: 600; font-size: 15px; color: #14161c; letter-spacing: -0.2px; }
+.post-author__handle { font-family: var(--mg-font-mono); font-size: 11px; color: #7a8290; }
+.post-share-btns { display: flex; gap: 6px; flex-wrap: wrap; }
+.post-share-btn { font-family: var(--mg-font-mono); font-size: 11px; font-weight: 600; width: 38px; height: 38px; border-radius: 9999px; background: #fff; color: #14161c; border: 1px solid #e6e3d8; cursor: pointer; }
+
+/* TOC */
+.post-toc { list-style: none; padding: 0; margin: 0 0 32px; display: flex; flex-direction: column; gap: 8px; border-left: 1px solid #e6e3d8; }
+.post-toc__item { padding-left: 14px; margin-left: -1px; }
+.post-toc__item--active { border-left: 2px solid #3a9928; }
+.post-toc__link { font-family: var(--mg-font-body); font-size: 13px; text-decoration: none; }
+.post-toc__link--active { color: #14161c; font-weight: 600; }
+.post-toc__link--inactive { color: #4f5764; font-weight: 400; }
+
+/* More posts section */
+.post-more { background: #fff; border-top: 1px solid #e6e3d8; padding: 80px 32px; }
+.post-more__inner { max-width: 1200px; margin: 0 auto; }
+.post-more__heading { font-family: var(--mg-font-display); font-weight: 600; font-size: 40px; line-height: 1.1; letter-spacing: -0.5px; color: #14161c; margin: 0 0 32px; }
+.post-more__grid { display: grid; grid-template-columns: repeat(3, 1fr); gap: 20px; }
+.post-more-card { display: flex; flex-direction: column; gap: 14px; padding: 20px; background: #f5f4ef; border-radius: 16px; text-decoration: none; color: inherit; }
+.post-more-card__cover { height: 120px; border-radius: 12px; }
+.post-more-card__meta { font-family: var(--mg-font-mono); font-size: 11px; color: #7a8290; letter-spacing: 0.3px; }
+.post-more-card__title { font-family: var(--mg-font-display); font-weight: 600; font-size: 20px; line-height: 1.2; letter-spacing: -0.2px; color: #14161c; margin: 0; }
+
+@media (max-width: 900px) {
+  .post-layout { grid-template-columns: 1fr !important; }
+  .post-rail { display: none !important; }
+  .post-more__grid { grid-template-columns: 1fr; }
+}
+</style>
+</head>
+<body>
+<div id="nav-root"></div>
+
+<!-- Post header -->
+<section class="post-header">
+  <div class="post-header__bloom"></div>
+  <div class="post-header__inner">
+    <a href="/news/" class="post-header__back">&larr; All posts</a>
+    <div class="post-header__tags">
+      <span class="post-header__cat">EDITORIAL</span>
+      <span class="post-header__meta">Mar 2026 &middot; 5 min read</span>
+    </div>
+    <h1 class="post-header__title">The House Always Wins!</h1>
+    <p class="post-header__lede">House rules that became canon &mdash; and what they tell us about the future of game design.</p>
+  </div>
+</section>
+
+<!-- Post body -->
+<section class="post-body">
+  <div class="post-layout">
+
+    <!-- Left rail -->
+    <aside class="post-rail">
+      <div class="post-rail__eyebrow">&#9650; AUTHOR</div>
+      <div class="post-author">
+        <div class="post-author__avatar"></div>
+        <div>
+          <div class="post-author__name">Kevin Chand</div>
+          <div class="post-author__handle">Chief Playtester</div>
+        </div>
+      </div>
+      <div class="post-rail__eyebrow post-rail__eyebrow--green">&#9650; SHARE</div>
+      <div class="post-share-btns" id="share-btns"></div>
+    </aside>
+
+    <!-- Article -->
+    <article class="prose">
+      <p class="lede">Anyone who has rolled dice on a board has said at least once: &ldquo;We don&rsquo;t play it that way.&rdquo; House rules are often dismissed as casual tweaks. Shortcuts for impatient players or patches for perceived flaws. Sometimes though, house rules do something much more interesting. Sometimes, they become canon.</p>
+      <p>No matter how hard some publishers might try, rulebooks are not sacred scripture. They are a snapshot of a designer&rsquo;s intent at a moment frozen in time. It is on the table where reality intervenes. Players discover strategies that stall momentum, or economic assumptions that unnecessarily inflate time. Some find eliminations discourage play or downtime that depletes a desire to replay. Yet in households in every nation all over the world, players adjust.</p>
+      <h2>Rules that rewrote themselves.</h2>
+      <p>What&rsquo;s fascinating is not that house rules exist; it&rsquo;s that some become widespread enough to redefine a game entirely. Consider <em>en passant</em> in Chess &mdash; first introduced as a house rule over 500 years ago and eventually standardised internationally 200 years later. Some people still believe it&rsquo;s merely a house rule and rage quit when used against them.</p>
+      <p>Or take <em>Monopoly</em>, a game with more unofficial variants than official editions. The free parking jackpot. Getting paid double for landing on Go. Auctioning houses not bought when landed on &mdash; which is, ironically, an actual official rule that most players mistakenly believe is a house rule.</p>
+      <h2>Why does this matter?</h2>
+      <p>House rules reveal three important truths. Players are active participants in design. Communities will optimise for fun over purity. And the final version of the game may not be the one printed.</p>
+      <p>If players are rewriting your rules, it implies they&rsquo;re deeply engaged with your system. In <em>Dungeons &amp; Dragons</em>, homebrew content isn&rsquo;t fringe behaviour; it&rsquo;s foundational culture. Entire campaign settings, character classes, mechanics and alternate systems were born at home tables before influencing official releases.</p>
+      <h2>Versioning the tabletop.</h2>
+      <p>What if publishers actively tracked and encouraged house rules? In a digital era, rules no longer need to be static. They can be versioned, tested, forked and merged. The open-source software world solved this decades ago. Tabletop games may be next &mdash; so join our community to discuss this and other topics.</p>
+    </article>
+
+    <!-- Right rail -->
+    <aside class="post-rail">
+      <div class="post-rail__eyebrow">&#9650; IN THIS POST</div>
+      <ul id="toc-list" class="post-toc"></ul>
+    </aside>
+  </div>
+</section>
+
+<!-- More posts -->
+<section class="post-more">
+  <div class="post-more__inner">
+    <h2 class="post-more__heading">More from the archive.</h2>
+    <div id="more-posts" class="post-more__grid"></div>
+  </div>
+</section>
+
+<div id="footer-root"></div>
+<script src="../../js/_mg.js"></script>
+<script>
+const { el, linkBtn, navbar, footer, url } = MG;
+document.getElementById('nav-root').appendChild(navbar('News'));
+document.getElementById('footer-root').appendChild(footer());
+
+// Share buttons
+['X','FB','LI','Copy'].forEach(s => {
+  const b = document.createElement('button');
+  b.textContent = s;
+  b.className = 'post-share-btn';
+  document.getElementById('share-btns').appendChild(b);
+});
+
+// TOC
+const TOC = ['Rules that rewrote themselves','Why does this matter','Versioning the tabletop'];
+const tul = document.getElementById('toc-list');
+TOC.forEach((t,i) => {
+  const li = el('li',{class: i===0 ? 'post-toc__item post-toc__item--active' : 'post-toc__item'});
+  li.appendChild(el('a',{href:'#',class: i===0 ? 'post-toc__link post-toc__link--active' : 'post-toc__link post-toc__link--inactive'},t));
+  tul.appendChild(li);
+});
+
+// More posts
+const MORE = [
+  {cover:'#d11a1a', cat:'Catan',      date:'Sep 12, 2025', title:'Nuking Catan'},
+  {cover:'#3a9928', cat:'Devlog',     date:'May 12, 2026', title:'Mongo enters open playtest'},
+  {cover:'#0c4f8d', cat:'Mod update', date:'May 9, 2026',  title:'Econopoly v1.4: the audit patch'},
+];
+const mp = document.getElementById('more-posts');
+MORE.forEach(p => {
+  const a = el('a',{href:url('/news/nuking-catan/'),class:'post-more-card'});
+  const cover = el('div',{class:'post-more-card__cover'});
+  cover.style.background = `linear-gradient(135deg,#0a0d2a 0%,${p.cover} 100%)`;
+  a.appendChild(cover);
+  a.appendChild(el('div',{class:'post-more-card__meta'},`${p.cat.toUpperCase()} · ${p.date}`));
+  a.appendChild(el('h3',{class:'post-more-card__title'},p.title));
+  mp.appendChild(a);
+});
+</script>
+</body>
+</html>
