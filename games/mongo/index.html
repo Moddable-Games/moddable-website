@@ -45,7 +45,7 @@
 <section class="mg-dark-center">
   <div class="mg-dark-center__bloom" data-bloom="green"></div>
   <div class="mg-dark-center__inner">
-    <div class="mg-eyebrow mg-eyebrow--green">&#9650; OPEN PLAYTEST</div>
+    <div class="mg-eyebrow mg-eyebrow--green">OPEN PLAYTEST</div>
     <h2 class="mg-dark-center__heading">200 spots. First come.</h2>
     <p class="mg-dark-center__body">We want real feedback from real tables. Fill out the form, get the cards PDF and a private Discord channel. Play it once, tell us what broke.</p>
     <div class="mg-dark-center__cta" id="playtest-btns"></div>
@@ -54,7 +54,7 @@
 
 <section class="mg-section mg-section--light">
   <div class="mg-container">
-    <div class="mg-eyebrow mg-eyebrow--green">&#9650; MOD HOOKS</div>
+    <div class="mg-eyebrow mg-eyebrow--green">MOD HOOKS</div>
     <h2 class="mg-heading-lg">Fork the deck.</h2>
     <p class="mg-body-sub">Mongo ships with three moddable layers. Change any one without touching the others.</p>
     <div id="hooks-grid" class="mg-grid-3"></div>
@@ -107,7 +107,7 @@ const STEPS = [
 const sg = document.getElementById('steps-grid');
 STEPS.forEach(s => {
   const a = el('article',{class:'mg-card'});
-  a.appendChild(el('div',{class:'mg-card__eyebrow mg-eyebrow--green'},`▲ ${s.n}`));
+  a.appendChild(el('div',{class:'mg-card__eyebrow mg-eyebrow--green'},`${s.n}`));
   a.appendChild(el('h3',{class:'mg-card__title'},s.title));
   a.appendChild(el('p',{class:'mg-card__body'},s.body));
   sg.appendChild(a);

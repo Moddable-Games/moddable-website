@@ -36,7 +36,7 @@ body { background: #f5f4ef; }
 <section class="mods-hero">
   <div class="mods-hero__bloom"></div>
   <div class="mods-hero__inner">
-    <div class="mg-eyebrow mg-eyebrow--glow">&#9650; THE LIBRARY</div>
+    <div class="mg-eyebrow mg-eyebrow--glow">THE LIBRARY</div>
     <h1 class="mods-hero__title">All mods. One library.</h1>
     <p class="mods-hero__lede" id="hero-sub"></p>
   </div>
@@ -58,7 +58,7 @@ body { background: #f5f4ef; }
     </div>
     <div id="mods-grid" class="mg-grid-auto" data-stagger></div>
     <div id="empty-state" class="mods-empty">
-      <div class="mg-eyebrow mg-eyebrow--red">&#9650; NO MATCH</div>
+      <div class="mg-eyebrow mg-eyebrow--red">NO MATCH</div>
       <h3 class="mods-empty__title">Nothing in the library matches.</h3>
       <p class="mods-empty__body">Want to write the mod yourself?</p>
       <a href="../submit/" class="mods-empty__link">Submit a mod</a>
@@ -169,7 +169,7 @@ function renderGrid() {
   const grid = document.getElementById('mods-grid');
   const empty = document.getElementById('empty-state');
   grid.innerHTML = '';
-  document.getElementById('count-label').textContent = `▲ ${visible.length} OF ${ALL_MODS.length} MODS`;
+  document.getElementById('count-label').textContent = `${visible.length} OF ${ALL_MODS.length} MODS`;
   if (visible.length === 0) { empty.style.display = 'block'; return; }
   empty.style.display = 'none';
   visible.forEach(m => grid.appendChild(MG.modCard(m)));

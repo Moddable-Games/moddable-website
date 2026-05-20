@@ -49,7 +49,7 @@
 
 <section class="mg-section--dark mg-section">
   <div class="mg-container">
-    <div class="mg-eyebrow mg-eyebrow--glow">&#9650; MOD HOOKS</div>
+    <div class="mg-eyebrow mg-eyebrow--glow">MOD HOOKS</div>
     <h2 class="mg-heading-xl mg-heading-xl--light">The whole rulebook is in a git repo.</h2>
     <p class="mg-body-sub mg-body-sub--light">Endless Skies ships with four hookable files. Fork the repo, change the file, send us a PR — or run your variant privately and never tell us.</p>
     <div id="hooks-grid" class="mg-grid-2"></div>
@@ -101,7 +101,7 @@ const STEPS = [
 const sg = document.getElementById('steps-grid');
 STEPS.forEach(s => {
   const a = el('article',{class:'mg-card'});
-  a.appendChild(el('div',{class:'mg-card__eyebrow mg-eyebrow--green'},`▲ ${s.n}`));
+  a.appendChild(el('div',{class:'mg-card__eyebrow mg-eyebrow--green'},`${s.n}`));
   a.appendChild(el('h3',{class:'mg-card__title'},s.title));
   a.appendChild(el('p',{class:'mg-card__body'},s.body));
   sg.appendChild(a);

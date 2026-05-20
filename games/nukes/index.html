@@ -45,7 +45,7 @@
 <section class="mg-dark-center">
   <div class="mg-dark-center__bloom" data-bloom="red"></div>
   <div class="mg-dark-center__inner">
-    <div class="mg-eyebrow mg-eyebrow--red">&#9650; THE BUTTON</div>
+    <div class="mg-eyebrow mg-eyebrow--red">THE BUTTON</div>
     <h2 class="mg-dark-center__heading">Once per game.<br>Never take it back.</h2>
     <p class="mg-dark-center__body">Any superpower can press The Button on any turn. Every hex within two rings of the target is permanently fallout — no resources, no movement, no rebuilding. The presser gains 5 points and the game ends two turns early.</p>
     <div class="mg-dark-center__cta" id="button-cta"></div>
@@ -54,7 +54,7 @@
 
 <section class="mg-section mg-section--light">
   <div class="mg-container">
-    <div class="mg-eyebrow mg-eyebrow--red">&#9650; MOD HOOKS</div>
+    <div class="mg-eyebrow mg-eyebrow--red">MOD HOOKS</div>
     <h2 class="mg-heading-lg">Change the superpower. Change the stakes.</h2>
     <p class="mg-body-sub">Nukes ships with four moddable files. All in version control.</p>
     <div id="hooks-grid" class="mg-grid-2"></div>
@@ -107,7 +107,7 @@ const STEPS = [
 const sg = document.getElementById('steps-grid');
 STEPS.forEach(s => {
   const a = el('article',{class:'mg-card'});
-  a.appendChild(el('div',{class:'mg-card__eyebrow mg-eyebrow--red'},`▲ ${s.n}`));
+  a.appendChild(el('div',{class:'mg-card__eyebrow mg-eyebrow--red'},`${s.n}`));
   a.appendChild(el('h3',{class:'mg-card__title'},s.title));
   a.appendChild(el('p',{class:'mg-card__body'},s.body));
   sg.appendChild(a);

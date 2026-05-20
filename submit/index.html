@@ -79,7 +79,7 @@ textarea.field-input { resize:vertical;min-height:120px; }
   <div class="submit-hero__glow"></div>
   <div class="submit-hero__inner">
     <a href="/mods/" class="submit-hero__back">← Back to mods</a>
-    <div class="submit-hero__eyebrow">▲ SUBMIT A MOD</div>
+    <div class="submit-hero__eyebrow">SUBMIT A MOD</div>
     <h1 class="submit-hero__title">Ship your rules.</h1>
     <p class="submit-hero__lede">Tell us about your mod. We'll review it, play it, and if it works at the table — publish it.</p>
   </div>
@@ -143,7 +143,7 @@ textarea.field-input { resize:vertical;min-height:120px; }
     <!-- Success -->
     <div id="step-success" hidden>
       <div class="submit-success">
-        <div class="submit-success__eyebrow">▲ SUBMITTED</div>
+        <div class="submit-success__eyebrow">SUBMITTED</div>
         <h2 class="submit-success__title">The dice are cast.</h2>
         <p class="submit-success__lede">We'll review your submission and get back to you within a fortnight. Keep an eye on Discord for updates.</p>
         <div id="success-btns" class="submit-success__btns"></div>
@@ -246,7 +246,7 @@ s2n.appendChild(btn('Next: submit →','primary',()=>goStep(3)));
 function buildPreview() {
   const p = document.getElementById('submit-preview');
   p.innerHTML = '';
-  p.appendChild(el('div',{class:'submit-preview__eyebrow'},'▲ YOUR SUBMISSION'));
+  p.appendChild(el('div',{class:'submit-preview__eyebrow'},'YOUR SUBMISSION'));
   const rows = [['Title',formData.title||'—'],['Base game',formData.baseGame||'—'],['Category',formData.category||'—'],['Stats',formData.stats||'—'],['Designer',formData.designer||'—'],['Version',formData.version||'—']];
   rows.forEach(([k,v])=>{
     const row = el('div',{class:'submit-preview__row'});

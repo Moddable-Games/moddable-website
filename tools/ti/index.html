@@ -91,7 +91,7 @@ body { background:#f5f4ef; }
   <div class="ti-hero__glow"></div>
   <div class="ti-hero__inner">
     <a href="/tools/" class="ti-hero__back">← All tools</a>
-    <div class="ti-hero__eyebrow">▲ HYPER IMPERIUM</div>
+    <div class="ti-hero__eyebrow">HYPER IMPERIUM</div>
     <h1 class="ti-hero__title">Twilight Imperium<br>tools.</h1>
     <p class="ti-hero__lede">Faction picker, objective tracker, and agenda voter. Tuned for Hyper Imperium — TI4 + PoK at speed.</p>
   </div>
@@ -105,7 +105,7 @@ body { background:#f5f4ef; }
       <div class="ti-card__header">
         <div class="ti-card__accent ti-card__accent--blue"></div>
         <div>
-          <div class="ti-card__eyebrow ti-card__eyebrow--blue">▲ FACTION DRAFT</div>
+          <div class="ti-card__eyebrow ti-card__eyebrow--blue">FACTION DRAFT</div>
           <h3 class="ti-card__title">Faction picker</h3>
           <p class="ti-card__desc">Deal each player a hand of factions. They pick one — banker's-draft style.</p>
         </div>
@@ -129,7 +129,7 @@ body { background:#f5f4ef; }
       <div class="ti-card__header">
         <div class="ti-card__accent ti-card__accent--green"></div>
         <div>
-          <div class="ti-card__eyebrow ti-card__eyebrow--green">▲ VICTORY POINTS</div>
+          <div class="ti-card__eyebrow ti-card__eyebrow--green">VICTORY POINTS</div>
           <h3 class="ti-card__title">Objective tracker</h3>
           <p class="ti-card__desc">Stage I and II public objectives. Tick them off as they're scored.</p>
         </div>
@@ -142,7 +142,7 @@ body { background:#f5f4ef; }
       <div class="ti-card__header">
         <div class="ti-card__accent ti-card__accent--red"></div>
         <div>
-          <div class="ti-card__eyebrow ti-card__eyebrow--red">▲ AGENDA PHASE</div>
+          <div class="ti-card__eyebrow ti-card__eyebrow--red">AGENDA PHASE</div>
           <h3 class="ti-card__title">Agenda voter</h3>
           <p class="ti-card__desc">Draw an agenda, cast votes, track the outcome.</p>
         </div>
@@ -204,7 +204,7 @@ function deal() {
   for (let p=0; p<playerCount; p++) {
     const row = shuffled.slice(p*handSize, p*handSize+handSize);
     const wrap = el('div',{class:'ti-hand'});
-    wrap.appendChild(el('div',{class:'ti-hand__label'},`▲ PLAYER ${p+1}`));
+    wrap.appendChild(el('div',{class:'ti-hand__label'},`PLAYER ${p+1}`));
     const row2 = el('div',{class:'ti-hand__row'});
     row.forEach(f => {
       const card = el('div',{class:'ti-faction'});
@@ -259,8 +259,8 @@ function objectiveSection(title, objs, accent) {
 }
 
 const og = document.getElementById('objectives-grid');
-og.appendChild(objectiveSection('▲ STAGE I', STAGE_I, '#3a9928'));
-og.appendChild(objectiveSection('▲ STAGE II', STAGE_II, '#0c4f8d'));
+og.appendChild(objectiveSection('STAGE I', STAGE_I, '#3a9928'));
+og.appendChild(objectiveSection('STAGE II', STAGE_II, '#0c4f8d'));
 
 /* ── AGENDA VOTER ── */
 const AGENDAS = [

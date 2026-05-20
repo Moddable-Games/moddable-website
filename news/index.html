@@ -102,7 +102,7 @@ const { T, el, linkBtn, navbar, footer, pageHero, url } = MG;
 document.getElementById('nav-root').appendChild(navbar('News'));
 document.getElementById('footer-root').appendChild(footer());
 document.getElementById('page-hero').appendChild(pageHero({
-  eyebrow: '▲ NEWS & UPDATES',
+  eyebrow: 'NEWS & UPDATES',
   title: 'News &amp; updates.',
   lede: 'Strictly written by humans.',
 }));
@@ -192,7 +192,7 @@ renderFilters(); renderPosts();
 const sidebar = document.getElementById('sidebar');
 // Search
 const searchWrap = el('div');
-searchWrap.appendChild(el('div',{class:'mg-eyebrow mg-eyebrow--blue'},'▲ SEARCH'));
+searchWrap.appendChild(el('div',{class:'mg-eyebrow mg-eyebrow--blue'},'SEARCH'));
 const si = el('div',{class:'news-search-wrap'});
 const inp = el('input',{type:'search',placeholder:'Search the archive…',class:'news-search-wrap__input'});
 inp.addEventListener('input',e=>{searchVal=e.target.value;renderPosts();});
@@ -202,7 +202,7 @@ si.appendChild(inp); searchWrap.appendChild(si); sidebar.appendChild(searchWrap)
 // Hot topics
 const TOPICS = [['Chess',2],['Philosophy',3],['Essay',2],['Catan',1],['TI4',1],['Talisman',1],['Monopoly',1],['Community',1]];
 const ht = el('div');
-ht.appendChild(el('div',{class:'mg-eyebrow mg-eyebrow--blue'},'▲ HOT TOPICS'));
+ht.appendChild(el('div',{class:'mg-eyebrow mg-eyebrow--blue'},'HOT TOPICS'));
 const tul = el('ul',{class:'news-topic-list'});
 TOPICS.forEach(([t,n]) => {
   const li = el('li');
@@ -217,7 +217,7 @@ ht.appendChild(tul); sidebar.appendChild(ht);
 // Archive
 const ARCHIVE = [['May 2026',1],['April 2026',1],['March 2026',4],['October 2025',2],['July 2025',3],['June 2025',1]];
 const arc = el('div');
-arc.appendChild(el('div',{class:'mg-eyebrow mg-eyebrow--blue'},'▲ ARCHIVE'));
+arc.appendChild(el('div',{class:'mg-eyebrow mg-eyebrow--blue'},'ARCHIVE'));
 const aul = el('ul',{class:'news-archive-list'});
 ARCHIVE.forEach(([m,n]) => {
   const li = el('li');

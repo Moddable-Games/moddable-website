@@ -45,7 +45,7 @@
 
 <section class="mg-section mg-section--white">
   <div class="mg-container">
-    <div class="mg-eyebrow mg-eyebrow--green">&#9650; THE RACES</div>
+    <div class="mg-eyebrow mg-eyebrow--green">THE RACES</div>
     <h2 class="mg-heading-lg">Four factions. Zero symmetry.</h2>
     <p class="mg-body-sub">Each race starts with the same piece count but plays completely differently. Names provisional pending playtest.</p>
     <div id="races-grid" class="mg-grid-2"></div>
@@ -54,7 +54,7 @@
 
 <section class="mg-section mg-section--light">
   <div class="mg-container">
-    <div class="mg-eyebrow mg-eyebrow--green">&#9650; MOD HOOKS</div>
+    <div class="mg-eyebrow mg-eyebrow--green">MOD HOOKS</div>
     <h2 class="mg-heading-lg">Fork the dungeon. Rewrite the rules.</h2>
     <p class="mg-body-sub">Dungeon Chess ships with four moddable files. All in version control.</p>
     <div id="hooks-grid" class="mg-grid-2"></div>
@@ -96,7 +96,7 @@ const STEPS = [
 const sg = document.getElementById('steps-grid');
 STEPS.forEach(s => {
   const a = el('article',{class:'mg-card'});
-  a.appendChild(el('div',{class:'mg-card__eyebrow mg-eyebrow--green'},`▲ ${s.n}`));
+  a.appendChild(el('div',{class:'mg-card__eyebrow mg-eyebrow--green'},`${s.n}`));
   a.appendChild(el('h3',{class:'mg-card__title'},s.title));
   a.appendChild(el('p',{class:'mg-card__body'},s.body));
   sg.appendChild(a);

@@ -54,7 +54,7 @@ const RULES = [
 const rulesEl = document.getElementById('rules');
 RULES.forEach(r => {
   const item = el('div', {class:'rules-list__item'});
-  item.appendChild(el('div', {class:'rules-list__num mg-eyebrow--blue'}, `▲ ${r.n}`));
+  item.appendChild(el('div', {class:'rules-list__num mg-eyebrow--blue'}, `${r.n}`));
   item.appendChild(el('h2', {class:'rules-list__title'}, r.title));
   item.appendChild(el('p', {class:'rules-list__body'}, r.body));
   rulesEl.appendChild(item);

@@ -42,7 +42,7 @@
 
 <section class="mg-section mg-section--light">
   <div class="mg-container">
-    <div class="mg-eyebrow mg-eyebrow--blue">&#9650; SUPPORTED VARIANTS</div>
+    <div class="mg-eyebrow mg-eyebrow--blue">SUPPORTED VARIANTS</div>
     <h2 class="mg-heading-xl">Four ways to play. More coming.</h2>
     <div id="variants-grid" class="mg-grid-4" data-stagger></div>
   </div>
@@ -52,7 +52,7 @@
   <div class="mg-container">
     <div class="dc-header" data-reveal="up">
       <div>
-        <div class="mg-eyebrow mg-eyebrow--green">&#9650; FEATURED VARIANT &middot; PRE-ALPHA &middot; Q4 2026</div>
+        <div class="mg-eyebrow mg-eyebrow--green">FEATURED VARIANT &middot; PRE-ALPHA &middot; Q4 2026</div>
         <h2 class="mg-heading-xl mg-heading-xl--light">Dungeon Chess.</h2>
         <p class="mg-body-sub mg-body-sub--light">Chess as an asymmetric skirmish and dungeon crawler. Four races on a modular board with spells, objects, XP and environmental hazards — our catalyst for crowdfunding the catalogue.</p>
       </div>
@@ -68,7 +68,7 @@
 <section class="mg-dark-center">
   <div class="mg-dark-center__bloom" data-bloom="blue"></div>
   <div class="mg-dark-center__inner">
-    <div class="mg-eyebrow mg-eyebrow--glow">&#9650; THE ONLINE ENGINE</div>
+    <div class="mg-eyebrow mg-eyebrow--glow">THE ONLINE ENGINE</div>
     <h2 class="mg-dark-center__heading">Play anywhere.<br>Continue everywhere.</h2>
     <p class="mg-dark-center__body">Create private sessions. Hand off mid-game between phone, tablet, and laptop. Pause a session in May, finish it in October. The board waits.</p>
     <div class="mg-dark-center__pills" id="engine-features"></div>
@@ -78,7 +78,7 @@
 
 <section class="mg-section mg-section--light">
   <div class="mg-container">
-    <div class="mg-eyebrow mg-eyebrow--blue">&#9650; MOD HOOKS</div>
+    <div class="mg-eyebrow mg-eyebrow--blue">MOD HOOKS</div>
     <h2 class="mg-heading-lg">Fork any variant. Build your own.</h2>
     <p class="mg-body-sub">Moddable Chess ships with four moddable files. All in version control.</p>
     <div id="hooks-grid" class="mg-grid-2"></div>
@@ -176,7 +176,7 @@ const VARIANTS = [
 const vg = document.getElementById('variants-grid');
 VARIANTS.forEach(s => {
   const a = el('article',{class:'mg-card'});
-  a.appendChild(el('div',{class:'mg-card__eyebrow mg-eyebrow--blue'},`▲ ${s.n}`));
+  a.appendChild(el('div',{class:'mg-card__eyebrow mg-eyebrow--blue'},`${s.n}`));
   a.appendChild(el('h3',{class:'mg-card__title'},s.title));
   a.appendChild(el('p',{class:'mg-card__body'},s.body));
   if(s.href) {
