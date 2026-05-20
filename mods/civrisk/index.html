@@ -1,0 +1,92 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<meta name="mg-base" content="/MODDABLE/moddable-website">
+<title>CivRisk — Moddable.Games</title>
+<link rel="stylesheet" href="../../css/_mg.css">
+</head>
+<body class="mg-section--dark">
+<div id="nav-root"></div>
+
+<section class="mod-hero">
+  <div class="mod-hero__hex-bg mod-hero__hex-bg--slow" data-bg="green"></div>
+  <div class="mod-hero__glow mod-hero__glow--green"></div>
+  <div class="mod-hero__inner">
+    <a href="../../mods/" class="mod-hero__back">&larr; All mods</a>
+    <div class="mod-hero__tags">
+      <span class="mod-hero__cat mod-hero__cat--green">Rebalance</span>
+      <span class="mod-hero__base">base: Risk</span>
+    </div>
+    <h1 class="mod-hero__title mod-hero__title--green">Civ<em>Risk</em>.</h1>
+    <p class="mod-hero__lede">Risk rewritten to play like Civilisation: choose a civilisation and leader, build through growth tiers, discover ruins and barbarian camps. Chris Grey, 2023. ePub rules free to download.</p>
+    <div class="mod-hero__btns" id="header-btns"></div>
+    <div class="stats-row" id="stats-row"></div>
+  </div>
+</section>
+
+<section class="mg-section mg-section--light">
+  <div class="mg-container--narrow">
+    <div class="mg-eyebrow mg-eyebrow--green">&#9650; THE RULES</div>
+    <div id="rules-body"></div>
+  </div>
+</section>
+
+<section class="mg-section mg-section--light mg-section--flush-top mg-section--border-top">
+  <div class="mg-container--narrow">
+    <div class="mod-source">
+      <div class="mod-source__group">
+        <div class="mod-source__label">Source</div>
+        <div class="mod-source__value">Chris Grey — self-published</div>
+      </div>
+      <div class="mod-source__group">
+        <div class="mod-source__label">License</div>
+        <div class="mod-source__value">Self-published / free ePub</div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<div id="footer-root"></div>
+<script src="../../js/_mg.js"></script>
+<script>
+const { T, el, linkBtn, navbar, footer } = MG;
+document.getElementById('nav-root').appendChild(navbar('Mods'));
+document.getElementById('footer-root').appendChild(footer());
+
+document.querySelector('.mod-hero__hex-bg').style.backgroundImage = `url('../../img/hex-grid-green.svg')`;
+
+const hb = document.getElementById('header-btns');
+hb.appendChild(linkBtn('Download PDF', '#', 'green'));
+hb.appendChild(linkBtn('View source', '#', 'outline-dark'));
+
+const STATS = [['Players','3–5'],['Time','180 min'],['Age','14+'],['Designer','Chris Grey'],['Year','2023']];
+const sr = document.getElementById('stats-row');
+STATS.forEach(([k,v],i) => {
+  if (i>0) sr.appendChild(el('span',{class:'stats-row__divider'}));
+  const d = el('div',{class:'stats-row__item'});
+  d.appendChild(el('span',{class:'stats-row__label'},k));
+  d.appendChild(el('span',{class:'stats-row__value'},v));
+  sr.appendChild(d);
+});
+
+const SECTIONS = [
+  { id:'1', title:'Civilisations', body:"20 unique civilisations with asymmetric abilities. Each starts with a capital territory and a unique leader power. Leaders grant a one-time ability that can swing early-game positioning." },
+  { id:'2', title:'Growth tiers', body:"Progress through Ancient → Classical → Medieval → Industrial → Modern. Each tier unlocks new unit types and abilities. Advancing requires controlling a minimum number of territories plus spending gold." },
+  { id:'3', title:'Ruins & barbarians', body:"The map starts with hidden discovery tokens. Reveal them by occupying a territory: gold, technologies, or barbarian ambushes. Barbarians spawn as neutral armies that must be defeated before claiming the territory." },
+  { id:'4', title:'Technologies', body:"Spend gold to research techs (one per turn). Techs give permanent bonuses: +1 defense, naval movement, siege weapons, etc. The tech tree has 15 nodes arranged in three branches: military, economic, and cultural." },
+  { id:'5', title:'Victory', body:"Control 60% of territories OR complete 3 civilisation-specific objectives (unique per civ). Objectives range from controlling specific continents to reaching the Modern tier first to accumulating gold thresholds." },
+];
+
+const body2 = document.getElementById('rules-body');
+SECTIONS.forEach(s => {
+  const art = el('article',{class:'rules-section',id:`s${s.id}`});
+  art.appendChild(el('div',{class:'rules-section__num'},`SECTION ${s.id.padStart(2,'0')}`));
+  art.appendChild(el('h2',{class:'rules-section__title'},s.title));
+  art.appendChild(el('p',{class:'rules-section__body'},s.body));
+  body2.appendChild(art);
+});
+</script>
+</body>
+</html>

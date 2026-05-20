@@ -1,0 +1,76 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<meta name="mg-base" content="/MODDABLE/moddable-website">
+<title>Econopoly — Moddable.Games</title>
+<link rel="stylesheet" href="../../css/_mg.css">
+</head>
+<body class="mg-section--dark">
+<div id="nav-root"></div>
+
+<section class="mod-hero">
+  <div class="mod-hero__hex-bg" data-bg="green"></div>
+  <div class="mod-hero__glow mod-hero__glow--green"></div>
+  <div class="mod-hero__inner">
+    <a href="../../mods/" class="mod-hero__back">&larr; All mods</a>
+    <div class="mod-hero__tags">
+      <span class="mod-hero__cat mod-hero__cat--green">Rebalance</span>
+      <span class="mod-hero__base">base: Monopoly</span>
+    </div>
+    <h1 class="mod-hero__title">Econopoly.</h1>
+    <p class="mod-hero__lede">Monopoly with a working economy. Anti-monopoly rules, dynamic property pricing, and a tax band that actually does something.</p>
+    <div class="mod-hero__btns" id="header-btns"></div>
+    <div class="stats-row" id="stats-row"></div>
+  </div>
+</section>
+
+<section class="mg-section mg-section--light">
+  <div class="mg-container--narrow">
+    <div id="rules-body"></div>
+  </div>
+</section>
+
+<div id="footer-root"></div>
+<script src="../../js/_mg.js"></script>
+<script>
+const { T, el, linkBtn, navbar, footer } = MG;
+document.getElementById('nav-root').appendChild(navbar('Mods'));
+document.getElementById('footer-root').appendChild(footer());
+
+document.querySelector('.mod-hero__hex-bg').style.backgroundImage = `url('../../img/hex-grid-green.svg')`;
+
+const hb = document.getElementById('header-btns');
+hb.appendChild(linkBtn('Download PDF', '#', 'primary'));
+hb.appendChild(linkBtn('View source', '#', 'outline-dark'));
+
+const STATS = [['Players','2–6'],['Time','60 min'],['Age','10+'],['Source','Moddable.Games'],['License','CC BY-NC-SA']];
+const sr = document.getElementById('stats-row');
+STATS.forEach(([k,v],i) => {
+  if (i>0) sr.appendChild(el('span',{class:'stats-row__divider'}));
+  const d = el('div',{class:'stats-row__item'});
+  d.appendChild(el('span',{class:'stats-row__label'},k));
+  d.appendChild(el('span',{class:'stats-row__value'},v));
+  sr.appendChild(d);
+});
+
+const SECTIONS = [
+  { id:'1', title:'Dynamic pricing', body:'Property prices fluctuate based on how many times they\'ve been landed on. Popular properties become expensive; neglected ones drop in value. Prices update at the start of each round.' },
+  { id:'2', title:'Tax bands', body:'Income tax scales with net worth. The richest player pays the highest rate each time they pass Go. Three bands: 10% (under $1000), 20% ($1000–$3000), 35% (over $3000). This keeps runaway leaders in check.' },
+  { id:'3', title:'Anti-monopoly clause', body:'Owning all properties of one colour triggers a government intervention — one property from that set is forcibly auctioned to the other players. Monopolies are powerful but temporary.' },
+  { id:'4', title:'Bankruptcy reform', body:'Bankrupt players enter "debt mode" for 3 turns before elimination. During debt mode, they can still trade, sell, and negotiate their way back to solvency. This prevents early-game knockouts from ruining the experience.' },
+  { id:'5', title:'Game timer', body:'The game ends after 90 minutes or when 2 players are eliminated, whichever comes first. The richest player wins. No more 4-hour Monopoly marathons that end in family arguments.' },
+];
+
+const body2 = document.getElementById('rules-body');
+SECTIONS.forEach(s => {
+  const art = el('article',{class:'rules-section',id:`s${s.id}`});
+  art.appendChild(el('div',{class:'rules-section__num rules-section__num--green'},`SECTION ${s.id.padStart(2,'0')}`));
+  art.appendChild(el('h2',{class:'rules-section__title'},s.title));
+  art.appendChild(el('p',{class:'rules-section__body'},s.body));
+  body2.appendChild(art);
+});
+</script>
+</body>
+</html>

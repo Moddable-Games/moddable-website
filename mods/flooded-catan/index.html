@@ -1,0 +1,76 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<meta name="mg-base" content="/MODDABLE/moddable-website">
+<title>Flooded Catan — Moddable.Games</title>
+<link rel="stylesheet" href="../../css/_mg.css">
+</head>
+<body class="mg-section--dark">
+<div id="nav-root"></div>
+
+<section class="mod-hero">
+  <div class="mod-hero__hex-bg" data-bg="green"></div>
+  <div class="mod-hero__glow mod-hero__glow--green"></div>
+  <div class="mod-hero__inner">
+    <a href="../../mods/" class="mod-hero__back">&larr; All mods</a>
+    <div class="mod-hero__tags">
+      <span class="mod-hero__cat mod-hero__cat--green">Rebalance</span>
+      <span class="mod-hero__base">base: Catan</span>
+    </div>
+    <h1 class="mod-hero__title">Flooded Catan.</h1>
+    <p class="mod-hero__lede">Community variant from the Catan Wiki: tiles flood every few rounds. Players can win by being the last settlement standing, not just by hitting 10 VP.</p>
+    <div class="mod-hero__btns" id="header-btns"></div>
+    <div class="stats-row" id="stats-row"></div>
+  </div>
+</section>
+
+<section class="mg-section mg-section--light">
+  <div class="mg-container--narrow">
+    <div id="rules-body"></div>
+  </div>
+</section>
+
+<div id="footer-root"></div>
+<script src="../../js/_mg.js"></script>
+<script>
+const { T, el, linkBtn, navbar, footer } = MG;
+document.getElementById('nav-root').appendChild(navbar('Mods'));
+document.getElementById('footer-root').appendChild(footer());
+
+document.querySelector('.mod-hero__hex-bg').style.backgroundImage = `url('../../img/hex-grid-green.svg')`;
+
+const hb = document.getElementById('header-btns');
+hb.appendChild(linkBtn('Download PDF', '#', 'primary'));
+hb.appendChild(linkBtn('View source', '#', 'outline-dark'));
+
+const STATS = [['Players','3–4'],['Time','75 min'],['Age','10+'],['Source','catan.fandom.com'],['License','Community / fan-made']];
+const sr = document.getElementById('stats-row');
+STATS.forEach(([k,v],i) => {
+  if (i>0) sr.appendChild(el('span',{class:'stats-row__divider'}));
+  const d = el('div',{class:'stats-row__item'});
+  d.appendChild(el('span',{class:'stats-row__label'},k));
+  d.appendChild(el('span',{class:'stats-row__value'},v));
+  sr.appendChild(d);
+});
+
+const SECTIONS = [
+  { id:'1', title:'Flood timer', body:'Every 4 turns, the lowest-numbered coastal hex floods — flip it face-down. Flooded hexes produce no resources, and no new buildings can be placed on their edges or vertices. The island is shrinking.' },
+  { id:'2', title:'Rising waters', body:'After turn 16, two hexes flood per cycle instead of one. The pace of destruction accelerates, forcing players toward the centre of the island and creating desperate last-stand scenarios.' },
+  { id:'3', title:'Survival victory', body:'If only one player has settlements or cities on non-flooded hexes, they win immediately — regardless of VP count. This alternate win condition rewards geographic strategy over pure economic play.' },
+  { id:'4', title:'Seawalls', body:'New structure: costs 2 brick + 1 wood. Placed on a hex edge, a seawall delays flooding of the adjacent hex by one full cycle. Limited to 3 per player. Placement timing is critical.' },
+  { id:'5', title:'Refugees', body:'When a settlement is flooded, the owning player may relocate it to any legal empty intersection for 1 grain + 1 wood. Cities cannot be relocated — they are lost permanently. Plan your city upgrades carefully.' },
+];
+
+const body2 = document.getElementById('rules-body');
+SECTIONS.forEach(s => {
+  const art = el('article',{class:'rules-section',id:`s${s.id}`});
+  art.appendChild(el('div',{class:'rules-section__num rules-section__num--green'},`SECTION ${s.id.padStart(2,'0')}`));
+  art.appendChild(el('h2',{class:'rules-section__title'},s.title));
+  art.appendChild(el('p',{class:'rules-section__body'},s.body));
+  body2.appendChild(art);
+});
+</script>
+</body>
+</html>

@@ -5,70 +5,72 @@
 <meta name="viewport" content="width=device-width, initial-scale=1">
 <meta name="mg-base" content="/MODDABLE/moddable-website">
 <title>Mongo — Moddable.Games</title>
-<link rel="stylesheet" href="../../_mg.css">
-<style>body{background:#000}</style>
+<link rel="stylesheet" href="../../css/_mg.css">
 </head>
-<body>
+<body class="mg-section--dark">
 <div id="nav-root"></div>
 
-<!-- Hero -->
-<section style="position:relative;color:#fff;overflow:hidden;isolation:isolate;background:#000;min-height:580px">
-  <div style="position:absolute;inset:0;background:linear-gradient(180deg,#0a2a10 0%,#0d3a15 40%,#000 100%)"></div>
-  <div style="position:absolute;inset:0;background-image:url('data:image/svg+xml;utf8,<svg xmlns=\'http://www.w3.org/2000/svg\' width=\'56\' height=\'64\' viewBox=\'0 0 56 64\'><path d=\'M28 1 54 16v32L28 63 2 48V16z\' fill=\'none\' stroke=\'%233a9928\' stroke-opacity=\'0.18\' stroke-width=\'1\'/></svg>');background-size:56px 64px;animation:hexFloat 30s linear infinite"></div>
-  <div style="position:absolute;inset:0;background:linear-gradient(180deg,rgba(0,0,0,0.4) 0%,transparent 50%,rgba(0,0,0,0.5) 100%);pointer-events:none"></div>
-  <div style="position:relative;padding:64px 32px 100px;max-width:1200px;margin:0 auto;box-sizing:border-box">
-    <a href="/" style="font-family:var(--mg-font-mono);font-size:12px;color:rgba(255,255,255,0.7);text-decoration:none">← All games</a>
-    <div style="display:flex;gap:10px;margin-top:28px;flex-wrap:wrap;align-items:center">
-      <span style="font-family:var(--mg-font-body);font-weight:600;font-size:11px;background:#3a9928;color:#fff;padding:4px 10px;border-radius:9999px">Original</span>
-      <span style="font-family:var(--mg-font-mono);font-size:11px;color:rgba(255,255,255,0.7);padding:4px 10px;border:1px solid rgba(255,255,255,0.2);border-radius:9999px">Open playtest · CC BY-NC-SA</span>
-      <span style="font-family:var(--mg-font-pixel);font-size:9px;color:#4eb735;padding:5px 10px;letter-spacing:1px;text-shadow:0 0 8px rgba(78,183,53,0.5)">v0.8.2 beta</span>
+<section class="game-hero">
+  <div class="game-hero__gradient" data-gradient="green"></div>
+  <div class="game-hero__bloom game-hero__bloom--green"></div>
+  <div class="game-hero__hex" data-hex="green"></div>
+  <div class="game-hero__fade"></div>
+  <div class="game-hero__inner">
+    <a href="../../games/" class="game-hero__back">&larr; All games</a>
+    <div class="game-hero__tags">
+      <span class="game-hero__tag" data-accent="green">Original</span>
+      <span class="game-hero__tag--outline">Open playtest &middot; CC BY-NC-SA</span>
+      <span class="game-hero__version" data-color="green">v0.8.2 beta</span>
     </div>
-    <h1 style="font-family:var(--mg-font-display);font-weight:600;font-size:clamp(56px,8vw,128px);line-height:0.92;letter-spacing:-0.03em;margin:24px 0;text-shadow:0 4px 30px rgba(0,0,0,0.6)">Mongo.</h1>
-    <p style="font-family:var(--mg-font-body);font-size:19px;line-height:1.55;color:rgba(255,255,255,0.86);max-width:640px;margin:0 0 36px;text-shadow:0 2px 16px rgba(0,0,0,0.7)">A trick-taking card game where every hand changes the rules for the next one. Built for modders — the full rulebook is on GitHub, the card art is CC-licensed, and we actively want your pull requests.</p>
-    <div style="display:flex;gap:12px;flex-wrap:wrap" id="hero-btns"></div>
+    <h1 class="game-hero__title">Mongo.</h1>
+    <p class="game-hero__lede">A trick-taking card game where every hand changes the rules for the next one. Built for modders — the full rulebook is on GitHub, the card art is CC-licensed, and we actively want your pull requests.</p>
+    <div class="game-hero__btns" id="hero-btns"></div>
   </div>
 </section>
 
-<!-- Stats bar -->
-<section style="background:#000;color:#fff;padding:0 32px 56px">
-  <div style="max-width:1200px;margin:0 auto;display:flex;gap:0;align-items:center;flex-wrap:wrap;padding-top:28px;border-top:1px solid rgba(255,255,255,0.10)" id="stats-bar"></div>
+<section class="stats-bar">
+  <div class="stats-bar__inner" id="stats-bar"></div>
 </section>
 
-<!-- How it plays -->
-<section style="background:#f5f4ef;padding:88px 32px">
-  <div style="max-width:1200px;margin:0 auto">
-    <h2 style="font-family:var(--mg-font-display);font-weight:600;font-size:clamp(36px,4.5vw,56px);line-height:1.05;letter-spacing:-0.025em;color:#14161c;margin:0 0 48px">How it plays.</h2>
-    <div id="steps-grid" class="mg-grid-4" style="display:grid;grid-template-columns:repeat(4,1fr);gap:16px"></div>
+<section class="mg-section mg-section--light">
+  <div class="mg-container">
+    <h2 class="mg-heading-xl">How it plays.</h2>
+    <div id="steps-grid" class="mg-grid-4"></div>
   </div>
 </section>
 
-<!-- Playtest CTA -->
-<section style="background:#000;color:#fff;padding:88px 32px;position:relative;overflow:hidden">
-  <div style="position:absolute;left:50%;top:50%;transform:translate(-50%,-50%);width:900px;height:400px;background:radial-gradient(ellipse,rgba(58,153,40,0.25) 0%,transparent 65%);pointer-events:none;filter:blur(20px)"></div>
-  <div style="max-width:760px;margin:0 auto;text-align:center;position:relative">
-    <div style="font-family:var(--mg-font-pixel);font-size:9px;color:#4eb735;letter-spacing:1.5px;margin-bottom:16px">▲ OPEN PLAYTEST</div>
-    <h2 style="font-family:var(--mg-font-display);font-weight:600;font-size:clamp(36px,5vw,64px);line-height:1.05;letter-spacing:-0.025em;margin:0 0 18px">200 spots. First come.</h2>
-    <p style="font-family:var(--mg-font-body);font-size:17px;line-height:1.6;color:rgba(255,255,255,0.78);margin:0 0 32px">We want real feedback from real tables. Fill out the form, get the cards PDF and a private Discord channel. Play it once, tell us what broke.</p>
-    <div style="display:flex;gap:12px;justify-content:center;flex-wrap:wrap" id="playtest-btns"></div>
+<section class="mg-dark-center">
+  <div class="mg-dark-center__bloom" data-bloom="green"></div>
+  <div class="mg-dark-center__inner">
+    <div class="mg-eyebrow mg-eyebrow--green">&#9650; OPEN PLAYTEST</div>
+    <h2 class="mg-dark-center__heading">200 spots. First come.</h2>
+    <p class="mg-dark-center__body">We want real feedback from real tables. Fill out the form, get the cards PDF and a private Discord channel. Play it once, tell us what broke.</p>
+    <div class="mg-dark-center__cta" id="playtest-btns"></div>
   </div>
 </section>
 
-<!-- Mod hooks -->
-<section style="background:#f5f4ef;padding:88px 32px">
-  <div style="max-width:1200px;margin:0 auto">
-    <div style="font-family:var(--mg-font-pixel);font-size:9px;color:#3a9928;letter-spacing:1.5px;margin-bottom:16px">▲ MOD HOOKS</div>
-    <h2 style="font-family:var(--mg-font-display);font-weight:600;font-size:clamp(32px,4vw,48px);line-height:1.05;letter-spacing:-0.025em;color:#14161c;margin:0 0 12px">Fork the deck.</h2>
-    <p style="font-family:var(--mg-font-body);font-size:16px;line-height:1.55;color:#4f5764;margin:0 0 32px;max-width:600px">Mongo ships with three moddable layers. Change any one without touching the others.</p>
-    <div id="hooks-grid" class="mg-grid-3" style="display:grid;grid-template-columns:repeat(3,1fr);gap:14px"></div>
+<section class="mg-section mg-section--light">
+  <div class="mg-container">
+    <div class="mg-eyebrow mg-eyebrow--green">&#9650; MOD HOOKS</div>
+    <h2 class="mg-heading-lg">Fork the deck.</h2>
+    <p class="mg-body-sub">Mongo ships with three moddable layers. Change any one without touching the others.</p>
+    <div id="hooks-grid" class="mg-grid-3"></div>
   </div>
 </section>
 
 <div id="footer-root"></div>
-<script src="../../_mg.js"></script>
+<script src="../../js/_mg.js"></script>
 <script>
 const { T, el, linkBtn, navbar, footer } = MG;
 document.getElementById('nav-root').appendChild(navbar('Games'));
 document.getElementById('footer-root').appendChild(footer());
+
+document.querySelector('[data-gradient]').style.background = 'linear-gradient(180deg,#0a2a10 0%,#0d3a15 40%,#000 100%)';
+document.querySelector('[data-hex]').style.backgroundImage = `url('../../img/hex-grid-green.svg')`;
+document.querySelector('[data-accent]').style.background = T.green;
+document.querySelector('[data-color]').style.color = '#4eb735';
+document.querySelector('[data-color]').style.textShadow = '0 0 8px rgba(78,183,53,0.5)';
+document.querySelector('[data-bloom]').style.background = 'radial-gradient(ellipse,rgba(58,153,40,0.25) 0%,transparent 65%)';
 
 document.getElementById('hero-btns').appendChild(linkBtn('Sign up for playtest','#','green'));
 document.getElementById('hero-btns').appendChild(linkBtn('Browse the GitHub','#','outline-dark'));
@@ -76,10 +78,10 @@ document.getElementById('hero-btns').appendChild(linkBtn('Browse the GitHub','#'
 const STATS = [['Players','3–5'],['Time','30–45 min'],['Age','12+'],['Mechanism','Trick-taking'],['Status','Open beta'],['Spots left','143 / 200']];
 const sb = document.getElementById('stats-bar');
 STATS.forEach(([k,v],i) => {
-  if(i>0) sb.appendChild(el('span',{style:{width:'1px',height:'24px',background:'rgba(255,255,255,0.12)',margin:'0 20px'}}));
-  const d = el('div',{style:{display:'flex',flexDirection:'column'}});
-  d.appendChild(el('span',{style:{fontFamily:'var(--mg-font-body)',fontSize:'10px',color:'rgba(255,255,255,0.5)',textTransform:'uppercase',letterSpacing:'1px'}},k));
-  d.appendChild(el('span',{style:{fontFamily:'var(--mg-font-mono)',fontWeight:600,fontSize:'16px',color:'#fff',marginTop:'4px'}},v));
+  if(i>0) sb.appendChild(el('span',{class:'stats-row__divider'}));
+  const d = el('div',{class:'stats-row__item'});
+  d.appendChild(el('span',{class:'stats-row__label'},k));
+  d.appendChild(el('span',{class:'stats-row__value'},v));
   sb.appendChild(d);
 });
 
@@ -91,10 +93,10 @@ const STEPS = [
 ];
 const sg = document.getElementById('steps-grid');
 STEPS.forEach(s => {
-  const a = el('article',{style:{background:'#fff',border:'1px solid #e6e3d8',borderRadius:'16px',padding:'24px'}});
-  a.appendChild(el('div',{style:{fontFamily:'var(--mg-font-pixel)',fontSize:'9px',color:'#3a9928',letterSpacing:'1.5px',marginBottom:'14px'}},`▲ ${s.n}`));
-  a.appendChild(el('h3',{style:{fontFamily:'var(--mg-font-display)',fontWeight:600,fontSize:'22px',lineHeight:'1.2',letterSpacing:'-0.25px',color:'#14161c',margin:'0 0 10px'}},s.title));
-  a.appendChild(el('p',{style:{fontFamily:'var(--mg-font-body)',fontSize:'14px',lineHeight:'1.55',color:'#3a3d44',margin:0}},s.body));
+  const a = el('article',{class:'mg-card'});
+  a.appendChild(el('div',{class:'mg-card__eyebrow mg-eyebrow--green'},`▲ ${s.n}`));
+  a.appendChild(el('h3',{class:'mg-card__title'},s.title));
+  a.appendChild(el('p',{class:'mg-card__body'},s.body));
   sg.appendChild(a);
 });
 
@@ -109,13 +111,17 @@ const HOOKS = [
 ];
 const hg = document.getElementById('hooks-grid');
 HOOKS.forEach(h => {
-  const d = el('div',{style:{background:'#fff',border:'1px solid #e6e3d8',borderRadius:'14px',padding:'24px',display:'flex',gap:'16px',alignItems:'flex-start'}});
-  const icon = el('div',{style:{width:'36px',height:'36px',background:'#3a9928',borderRadius:'8px',display:'flex',alignItems:'center',justifyContent:'center',color:'#fff',fontSize:'16px',flex:'none'}});
+  const d = el('div',{class:'mg-card mg-card--row'});
+  const icon = el('div',{class:'mg-card__icon'});
+  icon.style.background = T.green;
   icon.textContent = '◈';
   d.appendChild(icon);
   const txt = el('div');
-  txt.appendChild(el('div',{style:{fontFamily:'var(--mg-font-mono)',fontWeight:600,fontSize:'14px',color:'#3a9928'}},h.name));
-  txt.appendChild(el('div',{style:{fontFamily:'var(--mg-font-body)',fontSize:'13px',color:'#3a3d44',lineHeight:'1.5',marginTop:'6px'}},h.desc));
+  const title = el('div',{class:'mg-card__mono-title'});
+  title.style.color = T.green;
+  title.textContent = h.name;
+  txt.appendChild(title);
+  txt.appendChild(el('div',{class:'mg-card__desc'},h.desc));
   d.appendChild(txt); hg.appendChild(d);
 });
 </script>

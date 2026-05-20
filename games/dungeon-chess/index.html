@@ -1,0 +1,146 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<meta name="mg-base" content="/MODDABLE/moddable-website">
+<title>Dungeon Chess — Moddable.Games</title>
+<link rel="stylesheet" href="../../css/_mg.css">
+</head>
+<body class="mg-section--dark">
+<div id="nav-root"></div>
+
+<section class="game-hero">
+  <div class="game-hero__gradient" data-gradient="green-dark"></div>
+  <div class="game-hero__bloom game-hero__bloom--green"></div>
+  <div class="game-hero__hex" data-hex="green"></div>
+  <div class="game-hero__fade"></div>
+  <div class="game-hero__inner">
+    <a href="../../games/" class="game-hero__back">&larr; All games</a>
+    <div class="game-hero__tags">
+      <span class="game-hero__tag" data-accent="green">Original</span>
+      <span class="game-hero__tag--outline">CC BY-NC-SA</span>
+      <span class="game-hero__version" data-color="green">v0.3</span>
+    </div>
+    <h1 class="game-hero__title">Dungeon Chess.</h1>
+    <p class="game-hero__lede">Chess as an asymmetric skirmish and dungeon crawler. Four races on a modular board with spells, objects, XP and environmental hazards — our catalyst for crowdfunding the catalogue.</p>
+    <div class="game-hero__btns" id="hero-btns"></div>
+  </div>
+</section>
+
+<section class="stats-bar">
+  <div class="stats-bar__inner" id="stats-bar"></div>
+</section>
+
+<section class="mg-section mg-section--light">
+  <div class="mg-container">
+    <h2 class="mg-heading-xl">How it plays.</h2>
+    <div id="steps-grid" class="mg-grid-4"></div>
+  </div>
+</section>
+
+<section class="mg-section mg-section--white">
+  <div class="mg-container">
+    <div class="mg-eyebrow mg-eyebrow--green">&#9650; THE RACES</div>
+    <h2 class="mg-heading-lg">Four factions. Zero symmetry.</h2>
+    <p class="mg-body-sub">Each race starts with the same piece count but plays completely differently. Names provisional pending playtest.</p>
+    <div id="races-grid" class="mg-grid-2"></div>
+  </div>
+</section>
+
+<section class="mg-section mg-section--light">
+  <div class="mg-container">
+    <div class="mg-eyebrow mg-eyebrow--green">&#9650; MOD HOOKS</div>
+    <h2 class="mg-heading-lg">Fork the dungeon. Rewrite the rules.</h2>
+    <p class="mg-body-sub">Dungeon Chess ships with four moddable files. All in version control.</p>
+    <div id="hooks-grid" class="mg-grid-2"></div>
+  </div>
+</section>
+
+<div id="footer-root"></div>
+<script src="../../js/_mg.js"></script>
+<script>
+const { T, el, linkBtn, navbar, footer } = MG;
+document.getElementById('nav-root').appendChild(navbar('Games'));
+document.getElementById('footer-root').appendChild(footer());
+
+document.querySelector('[data-gradient]').style.background = 'linear-gradient(180deg,#0a1f0a 0%,#0d2a0d 40%,#000 100%)';
+document.querySelector('[data-hex]').style.backgroundImage = `url('../../img/hex-grid-green.svg')`;
+document.querySelector('[data-accent]').style.background = T.green;
+document.querySelector('[data-color]').style.color = '#4db83a';
+document.querySelector('[data-color]').style.textShadow = '0 0 8px rgba(58,153,40,0.5)';
+
+document.getElementById('hero-btns').appendChild(linkBtn('Join the playtest','#','green'));
+document.getElementById('hero-btns').appendChild(linkBtn('View on GitHub','#','outline-dark'));
+
+const STATS = [['Players','2–6'],['Modes','Skirmish + Legacy'],['Time','30–120 min'],['Age','12+'],['Status','Pre-alpha'],['Crowdfunding','Q4 2026']];
+const sb = document.getElementById('stats-bar');
+STATS.forEach(([k,v],i) => {
+  if(i>0) sb.appendChild(el('span',{class:'stats-row__divider'}));
+  const d = el('div',{class:'stats-row__item'});
+  d.appendChild(el('span',{class:'stats-row__label'},k));
+  d.appendChild(el('span',{class:'stats-row__value'},v));
+  sb.appendChild(d);
+});
+
+const STEPS = [
+  {n:'01', title:'Draft your warband',  body:'Pick a race — Demonics, Wraiths, Knights, or Verdants. Each starts with a King, two Champions, and four Pawns. No two races play the same.'},
+  {n:'02', title:'Explore the dungeon',  body:'Tiles are placed face-down. Moving onto a new tile reveals it — traps, treasures, environmental effects. The board grows as you play.'},
+  {n:'03', title:'Cast and level up',    body:'Capture enemy pieces to earn XP. Spend it to promote Pawns, unlock racial spells, or activate persistent dungeon effects.'},
+  {n:'04', title:'Win the campaign',     body:'Skirmish mode ends when a King falls. Legacy mode chains battles into a persistent campaign — your survivors carry wounds, XP, and grudges.'},
+];
+const sg = document.getElementById('steps-grid');
+STEPS.forEach(s => {
+  const a = el('article',{class:'mg-card'});
+  a.appendChild(el('div',{class:'mg-card__eyebrow mg-eyebrow--green'},`▲ ${s.n}`));
+  a.appendChild(el('h3',{class:'mg-card__title'},s.title));
+  a.appendChild(el('p',{class:'mg-card__body'},s.body));
+  sg.appendChild(a);
+});
+
+const RACES = [
+  {name:'Demonics',  accent:'#d11a1a', desc:'Burn everything. Demonics gain power from destruction — capturing pieces fuels area-of-effect hellfire.'},
+  {name:'Wraiths',   accent:'#6b4fa0', desc:'Phase through walls. Wraiths ignore terrain and can haunt tiles, making them dangerous for enemies.'},
+  {name:'Knights',   accent:'#c5a022', desc:'Hold the line. Knights gain defensive bonuses from formation — adjacent allies strengthen each other.'},
+  {name:'Verdants',  accent:'#3a9928', desc:'Grow the board. Verdants place new tiles, heal allies, and turn hazards into advantages.'},
+];
+const rg = document.getElementById('races-grid');
+RACES.forEach(r => {
+  const d = el('div',{class:'mg-card mg-card--light mg-card--row'});
+  const icon = el('div',{class:'mg-card__icon'});
+  icon.style.background = r.accent;
+  icon.textContent = '♟';
+  d.appendChild(icon);
+  const txt = el('div');
+  const title = el('div',{class:'mg-card__mono-title'});
+  title.style.color = r.accent;
+  title.textContent = r.name;
+  txt.appendChild(title);
+  txt.appendChild(el('div',{class:'mg-card__desc'},r.desc));
+  d.appendChild(txt); rg.appendChild(d);
+});
+
+const HOOKS = [
+  {name:'races.yaml',    desc:'Four playable races with distinct piece types, spells, and XP trees. Fork one, rewrite all four, or add a fifth.'},
+  {name:'board.lua',     desc:'Dungeon tile generation rules. Change the mix of traps vs treasures, board shape, or add entirely new tile types.'},
+  {name:'campaign.yaml', desc:'Legacy progression — how XP persists between sessions, what carries over, and when the campaign ends.'},
+  {name:'spells.yaml',   desc:'Every racial spell with costs, effects, and targeting rules. Balance them, remove them, or add cross-race combos.'},
+];
+const hg = document.getElementById('hooks-grid');
+HOOKS.forEach(h => {
+  const d = el('div',{class:'mg-card mg-card--row'});
+  const icon = el('div',{class:'mg-card__icon'});
+  icon.style.background = T.green;
+  icon.textContent = '◈';
+  d.appendChild(icon);
+  const txt = el('div');
+  const title = el('div',{class:'mg-card__mono-title'});
+  title.style.color = T.green;
+  title.textContent = h.name;
+  txt.appendChild(title);
+  txt.appendChild(el('div',{class:'mg-card__desc'},h.desc));
+  d.appendChild(txt); hg.appendChild(d);
+});
+</script>
+</body>
+</html>

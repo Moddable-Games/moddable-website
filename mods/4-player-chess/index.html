@@ -1,0 +1,89 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<meta name="mg-base" content="/MODDABLE/moddable-website">
+<title>4-Player Chess — Moddable.Games</title>
+<link rel="stylesheet" href="../../css/_mg.css">
+</head>
+<body class="mg-section--dark">
+<div id="nav-root"></div>
+
+<section class="mod-hero">
+  <img src="../../img/hex-grid-blue.svg" alt="" class="mod-hero__hex">
+  <div class="mod-hero__glow mod-hero__glow--blue"></div>
+  <div class="mod-hero__inner">
+    <a href="../../mods/" class="mod-hero__back">&larr; All mods</a>
+    <div class="mod-hero__tags">
+      <span class="mod-hero__cat mod-hero__cat--blue">Reskin</span>
+      <span class="mod-hero__base">base: Chess</span>
+    </div>
+    <h1 class="mod-hero__title">4-Player <em>Chess</em>.</h1>
+    <p class="mod-hero__lede">Four players, four armies, one board. Free-for-all or teams. The de facto standard for multi-player chess &mdash; widely available online and as print-and-play.</p>
+    <div class="mod-hero__btns" id="header-btns"></div>
+    <div class="stats-row" id="stats-row"></div>
+  </div>
+</section>
+
+<section class="mg-section mg-section--light">
+  <div class="mg-container--narrow">
+    <div id="rules-body"></div>
+  </div>
+</section>
+
+<section class="mg-section mg-section--white mg-section--border-top">
+  <div class="mg-container">
+    <h2 class="related-heading">More from the library.</h2>
+    <div id="related-grid" class="mg-grid-3"></div>
+  </div>
+</section>
+
+<div id="footer-root"></div>
+<script src="../../js/_mg.js"></script>
+<script>
+const { T, el, linkBtn, navbar, footer, modCard } = MG;
+document.getElementById('nav-root').appendChild(navbar('Mods'));
+document.getElementById('footer-root').appendChild(footer());
+
+const hb = document.getElementById('header-btns');
+hb.appendChild(linkBtn('Download PDF', '#', 'primary'));
+hb.appendChild(linkBtn('View on GitHub', '#', 'outline-dark'));
+
+const STATS = [['Players','4'],['Time','30 min'],['Age','10+'],['Source','chess.com/variants'],['License','Public domain']];
+const sr = document.getElementById('stats-row');
+STATS.forEach(([k,v],i) => {
+  if (i>0) sr.appendChild(el('span',{class:'stats-row__divider'}));
+  const d = el('div',{class:'stats-row__item'});
+  d.appendChild(el('span',{class:'stats-row__label'},k));
+  d.appendChild(el('span',{class:'stats-row__value'},v));
+  sr.appendChild(d);
+});
+
+const SECTIONS = [
+  { id:'1', title:'The board', body:"A 14×14 grid with the 3×3 corner squares removed, creating a cross shape. Four armies (Red, Blue, Yellow, Green) start from the four edges in standard chess formation. Each player has the full complement: 1 king, 1 queen, 2 rooks, 2 bishops, 2 knights, and 8 pawns." },
+  { id:'2', title:'Turn order', body:"Play proceeds clockwise: Red, Blue, Yellow, Green. If a player is eliminated (king captured), their remaining pieces stay on the board as neutral obstacles — they cannot move or be controlled, but they can be captured. Neutral pieces do not give check." },
+  { id:'3', title:'Teams mode', body:"Opposite players are partners (Red+Yellow vs Blue+Green). When a king is captured, that player's remaining pieces transfer to the capturer and become that player's colour. Partners may not capture each other's pieces. The team whose opponents are both eliminated wins." },
+  { id:'4', title:'Scoring (FFA)', body:"In free-for-all mode, points are awarded for each piece captured: pawn = 1 point, knight = 3, bishop = 3, rook = 5, queen = 9, king = 20. The game ends when one player remains or time runs out. Highest score wins. Checkmate is not required — only king capture ends a player's game." },
+  { id:'5', title:'Promotion', body:"Pawns promote only upon reaching the far edge — the edge directly opposite their starting position. Side edges do not count for promotion. A pawn that reaches a side edge simply stops and must continue moving forward on subsequent turns. Promotion choices are the same as standard chess: queen, rook, bishop, or knight." },
+];
+
+const body2 = document.getElementById('rules-body');
+SECTIONS.forEach(s => {
+  const art = el('article',{class:'rules-section',id:`s${s.id}`});
+  art.appendChild(el('div',{class:'rules-section__num'},`SECTION ${s.id.padStart(2,'0')}`));
+  art.appendChild(el('h2',{class:'rules-section__title'},s.title));
+  art.appendChild(el('p',{class:'rules-section__body'},s.body));
+  body2.appendChild(art);
+});
+
+const RELATED = [
+  { category:'Total conversion', baseGame:'Chess', title:'Fog of War Chess', body:"See only squares your pieces can move to. No checks — capture the king to win.", stats:'2 players · 20–40 min · 10+', href:'../fog-of-war-chess/' },
+  { category:'Total conversion', baseGame:'Chess', title:'Hexagonal Chess (Glinski)', body:"Chess played on a hexagonal board with 91 cells. Pieces gain new movement axes.", stats:'2 players · 30 min · 10+', href:'../hexagonal-chess/' },
+  { category:'Reskin', baseGame:'Talisman 4e', title:'Talisman: Hexed', body:"An open-world hex system that replaces the Talisman board with 61 hexagonal tiles.", stats:'2–6 players · 90 min · 13+', href:'../talisman-hexed/' },
+];
+const rg = document.getElementById('related-grid');
+RELATED.forEach(m => rg.appendChild(modCard(m)));
+</script>
+</body>
+</html>

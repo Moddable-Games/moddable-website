@@ -1,0 +1,92 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<meta name="mg-base" content="/MODDABLE/moddable-website">
+<title>The Diamond Mine — Moddable.Games</title>
+<link rel="stylesheet" href="../../css/_mg.css">
+</head>
+<body class="mg-section--dark">
+<div id="nav-root"></div>
+
+<section class="mod-hero">
+  <div class="mod-hero__hex-bg mod-hero__hex-bg--slow" data-bg="red"></div>
+  <div class="mod-hero__glow mod-hero__glow--red"></div>
+  <div class="mod-hero__inner">
+    <a href="../../mods/" class="mod-hero__back">&larr; All mods</a>
+    <div class="mod-hero__tags">
+      <span class="mod-hero__cat mod-hero__cat--red">Total conversion</span>
+      <span class="mod-hero__base">base: Catan</span>
+    </div>
+    <h1 class="mod-hero__title mod-hero__title--red">The Diamond <em>Mine</em>.</h1>
+    <p class="mod-hero__lede">A single-hex unofficial expansion: swap one pasture for the diamond mine. Diamonds substitute for ore in development card purchases. Self-contained rules, free to print.</p>
+    <div class="mod-hero__btns" id="header-btns"></div>
+    <div class="stats-row" id="stats-row"></div>
+  </div>
+</section>
+
+<section class="mg-section mg-section--light">
+  <div class="mg-container--narrow">
+    <div class="mg-eyebrow mg-eyebrow--red">&#9650; THE RULES</div>
+    <div id="rules-body"></div>
+  </div>
+</section>
+
+<section class="mg-section mg-section--light mg-section--flush-top mg-section--border-top">
+  <div class="mg-container--narrow">
+    <div class="mod-source">
+      <div class="mod-source__group">
+        <div class="mod-source__label">Source</div>
+        <div class="mod-source__value">scribd.com — meepleeater</div>
+      </div>
+      <div class="mod-source__group">
+        <div class="mod-source__label">License</div>
+        <div class="mod-source__value">Fan-made / free to print</div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<div id="footer-root"></div>
+<script src="../../js/_mg.js"></script>
+<script>
+const { T, el, linkBtn, navbar, footer } = MG;
+document.getElementById('nav-root').appendChild(navbar('Mods'));
+document.getElementById('footer-root').appendChild(footer());
+
+document.querySelector('.mod-hero__hex-bg').style.backgroundImage = `url('../../img/hex-grid-red.svg')`;
+
+const hb = document.getElementById('header-btns');
+hb.appendChild(linkBtn('Download PDF', '#', 'red'));
+hb.appendChild(linkBtn('View source', '#', 'outline-dark'));
+
+const STATS = [['Players','3–4'],['Time','60 min'],['Age','10+'],['Source','scribd / meepleeater']];
+const sr = document.getElementById('stats-row');
+STATS.forEach(([k,v],i) => {
+  if (i>0) sr.appendChild(el('span',{class:'stats-row__divider'}));
+  const d = el('div',{class:'stats-row__item'});
+  d.appendChild(el('span',{class:'stats-row__label'},k));
+  d.appendChild(el('span',{class:'stats-row__value'},v));
+  sr.appendChild(d);
+});
+
+const SECTIONS = [
+  { id:'1', title:'Setup', body:"Replace one pasture hex with the diamond mine hex (any number you choose). The diamond mine produces diamonds instead of wool when its number is rolled." },
+  { id:'2', title:'Diamond production', body:"When the diamond mine's number is rolled, adjacent settlements receive 1 diamond token. Cities receive 2 diamond tokens, as with any other resource." },
+  { id:'3', title:'Diamond usage', body:"Diamonds substitute for ore when buying development cards (1 diamond = 1 ore). They cannot be used for any other purchase — settlements, cities, or roads still require standard resources." },
+  { id:'4', title:'Trading', body:"Diamonds cannot be traded with other players or via port. They are personal resources only. This keeps the diamond mine from becoming an overpowered trade engine." },
+  { id:'5', title:'Robber interaction', body:"If the robber is placed on the diamond mine, no diamonds are produced AND the robber steals 1 diamond (if the target has any). If the target has no diamonds, the robber steals a random resource as normal." },
+];
+
+const body2 = document.getElementById('rules-body');
+SECTIONS.forEach(s => {
+  const art = el('article',{class:'rules-section',id:`s${s.id}`});
+  art.appendChild(el('div',{class:'rules-section__num'},`SECTION ${s.id.padStart(2,'0')}`));
+  art.appendChild(el('h2',{class:'rules-section__title'},s.title));
+  art.appendChild(el('p',{class:'rules-section__body'},s.body));
+  body2.appendChild(art);
+});
+</script>
+</body>
+</html>

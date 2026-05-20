@@ -5,55 +5,104 @@
 <meta name="viewport" content="width=device-width, initial-scale=1">
 <meta name="mg-base" content="/MODDABLE/moddable-website">
 <title>Nuking Catan — Moddable.Games</title>
-<link rel="stylesheet" href="../../_mg.css">
+<link rel="stylesheet" href="../../css/_mg.css">
 <style>
-body { background:#f5f4ef; }
-.prose p { margin:0 0 24px; }
-.prose p.lede { font-size:23px;line-height:1.5;color:#14161c;font-style:italic; }
-.prose h2 { font-family:"Inter Tight",system-ui,sans-serif;font-weight:600;font-size:32px;line-height:1.15;letter-spacing:-0.4px;margin:40px 0 16px;color:#14161c; }
-.prose blockquote { margin:32px 0;padding:20px 24px;border-left:4px solid #d11a1a;background:#fff;font-style:italic;color:#14161c;font-size:20px;line-height:1.5; }
-.prose ul { padding-left:22px;margin:0 0 24px; }
-.prose li { margin:0 0 8px; }
-@media(max-width:900px){.post-layout{grid-template-columns:1fr !important}.post-rail{display:none !important}}
+body { background: #f5f4ef; }
+
+/* Post header */
+.post-header { position: relative; color: #fff; overflow: hidden; background: #000; }
+.post-header__bloom { position: absolute; left: 50%; bottom: -200px; transform: translateX(-50%); width: 1100px; height: 500px; background: radial-gradient(ellipse, rgba(209,26,26,0.4) 0%, transparent 65%); pointer-events: none; filter: blur(20px); }
+.post-header__inner { position: relative; padding: 48px 32px 88px; max-width: 800px; margin: 0 auto; text-align: center; box-sizing: border-box; }
+.post-header__back { font-family: var(--mg-font-mono); font-size: 12px; color: rgba(255,255,255,0.7); text-decoration: none; }
+.post-header__tags { display: flex; gap: 8px; justify-content: center; margin-top: 28px; flex-wrap: wrap; }
+.post-header__cat { font-family: var(--mg-font-body); font-weight: 600; font-size: 11px; background: #d11a1a; color: #fff; padding: 4px 10px; border-radius: 9999px; }
+.post-header__meta { font-family: var(--mg-font-mono); font-size: 11px; color: rgba(255,255,255,0.7); padding: 4px 10px; border: 1px solid rgba(255,255,255,0.18); border-radius: 9999px; }
+.post-header__title { font-family: var(--mg-font-display); font-weight: 600; font-size: clamp(48px, 7vw, 96px); line-height: 0.95; letter-spacing: -0.025em; margin: 24px 0; text-shadow: 0 4px 30px rgba(0,0,0,0.6); }
+.post-header__title em { color: #e63232; }
+.post-header__lede { font-family: var(--mg-font-body); font-style: italic; font-size: 18px; color: rgba(255,255,255,0.78); margin: 0; }
+
+/* Post body section */
+.post-body { background: #f5f4ef; padding: 72px 32px 96px; }
+.post-layout { max-width: 1200px; margin: 0 auto; display: grid; grid-template-columns: 200px 1fr 220px; gap: 56px; align-items: start; }
+.post-rail { position: sticky; top: 96px; }
+.post-rail__eyebrow { font-family: var(--mg-font-pixel); font-size: 9px; color: #0c4f8d; letter-spacing: 1.5px; margin-bottom: 14px; }
+.post-rail__eyebrow--green { color: #3a9928; margin-top: 32px; margin-bottom: 12px; }
+.post-author { display: flex; gap: 10px; align-items: center; margin-bottom: 20px; }
+.post-author__avatar { width: 40px; height: 40px; border-radius: 9999px; background: linear-gradient(135deg, #d11a1a, #0c4f8d); flex: none; }
+.post-author__name { font-family: var(--mg-font-display); font-weight: 600; font-size: 15px; color: #14161c; letter-spacing: -0.2px; }
+.post-author__handle { font-family: var(--mg-font-mono); font-size: 11px; color: #7a8290; }
+.post-share-btns { display: flex; gap: 6px; flex-wrap: wrap; }
+.post-share-btn { font-family: var(--mg-font-mono); font-size: 11px; font-weight: 600; width: 38px; height: 38px; border-radius: 9999px; background: #fff; color: #14161c; border: 1px solid #e6e3d8; cursor: pointer; }
+
+/* TOC */
+.post-toc { list-style: none; padding: 0; margin: 0 0 32px; display: flex; flex-direction: column; gap: 8px; border-left: 1px solid #e6e3d8; }
+.post-toc__item { padding-left: 14px; margin-left: -1px; }
+.post-toc__item--active { border-left: 2px solid #d11a1a; }
+.post-toc__link { font-family: var(--mg-font-body); font-size: 13px; text-decoration: none; }
+.post-toc__link--active { color: #14161c; font-weight: 600; }
+.post-toc__link--inactive { color: #4f5764; font-weight: 400; }
+
+/* Mod card in sidebar */
+.post-mod-card { background: #000; color: #fff; padding: 20px; border-radius: 16px; }
+.post-mod-card__eyebrow { font-family: var(--mg-font-pixel); font-size: 9px; color: #e63232; letter-spacing: 1.5px; margin-bottom: 10px; }
+.post-mod-card__title { font-family: var(--mg-font-display); font-weight: 600; font-size: 18px; line-height: 1.2; margin-bottom: 6px; }
+.post-mod-card__version { font-family: var(--mg-font-mono); font-size: 11px; color: rgba(255,255,255,0.6); margin-bottom: 14px; }
+.post-mod-card__dl { height: 38px; font-size: 13px; width: 100%; }
+
+/* More posts section */
+.post-more { background: #fff; border-top: 1px solid #e6e3d8; padding: 80px 32px; }
+.post-more__inner { max-width: 1200px; margin: 0 auto; }
+.post-more__heading { font-family: var(--mg-font-display); font-weight: 600; font-size: 40px; line-height: 1.1; letter-spacing: -0.5px; color: #14161c; margin: 0 0 32px; }
+.post-more__grid { display: grid; grid-template-columns: repeat(3, 1fr); gap: 20px; }
+.post-more-card { display: flex; flex-direction: column; gap: 14px; padding: 20px; background: #f5f4ef; border-radius: 16px; text-decoration: none; color: inherit; }
+.post-more-card__cover { height: 120px; border-radius: 12px; }
+.post-more-card__meta { font-family: var(--mg-font-mono); font-size: 11px; color: #7a8290; letter-spacing: 0.3px; }
+.post-more-card__title { font-family: var(--mg-font-display); font-weight: 600; font-size: 20px; line-height: 1.2; letter-spacing: -0.2px; color: #14161c; margin: 0; }
+
+@media (max-width: 900px) {
+  .post-layout { grid-template-columns: 1fr !important; }
+  .post-rail { display: none !important; }
+  .post-more__grid { grid-template-columns: 1fr; }
+}
 </style>
 </head>
 <body>
 <div id="nav-root"></div>
 
 <!-- Post header -->
-<section style="position:relative;color:#fff;overflow:hidden;background:#000">
-  <div style="position:absolute;left:50%;bottom:-200px;transform:translateX(-50%);width:1100px;height:500px;background:radial-gradient(ellipse,rgba(209,26,26,0.4) 0%,transparent 65%);pointer-events:none;filter:blur(20px)"></div>
-  <div style="position:relative;padding:48px 32px 88px;max-width:800px;margin:0 auto;text-align:center;box-sizing:border-box">
-    <a href="/news/" style="font-family:var(--mg-font-mono);font-size:12px;color:rgba(255,255,255,0.7);text-decoration:none">← All posts</a>
-    <div style="display:flex;gap:8px;justify-content:center;margin-top:28px;flex-wrap:wrap">
-      <span style="font-family:var(--mg-font-body);font-weight:600;font-size:11px;background:#d11a1a;color:#fff;padding:4px 10px;border-radius:9999px">CATAN</span>
-      <span style="font-family:var(--mg-font-mono);font-size:11px;color:rgba(255,255,255,0.7);padding:4px 10px;border:1px solid rgba(255,255,255,0.18);border-radius:9999px">Sep 12, 2025 · 6 min read</span>
+<section class="post-header">
+  <div class="post-header__bloom"></div>
+  <div class="post-header__inner">
+    <a href="/news/" class="post-header__back">← All posts</a>
+    <div class="post-header__tags">
+      <span class="post-header__cat">CATAN</span>
+      <span class="post-header__meta">Sep 12, 2025 · 6 min read</span>
     </div>
-    <h1 style="font-family:var(--mg-font-display);font-weight:600;font-size:clamp(48px,7vw,96px);line-height:0.95;letter-spacing:-0.025em;margin:24px 0;text-shadow:0 4px 30px rgba(0,0,0,0.6)">Nuking <em style="color:#e63232">Catan</em>.</h1>
-    <p style="font-family:var(--mg-font-body);font-style:italic;font-size:18px;color:rgba(255,255,255,0.78);margin:0">A meditation on the gateway game, 45 million boxes deep — and what we did to it.</p>
+    <h1 class="post-header__title">Nuking <em>Catan</em>.</h1>
+    <p class="post-header__lede">A meditation on the gateway game, 45 million boxes deep — and what we did to it.</p>
   </div>
 </section>
 
 <!-- Post body -->
-<section style="background:#f5f4ef;padding:72px 32px 96px">
-  <div class="post-layout" style="max-width:1200px;margin:0 auto;display:grid;grid-template-columns:200px 1fr 220px;gap:56px;align-items:start">
+<section class="post-body">
+  <div class="post-layout">
 
     <!-- Left rail -->
-    <aside class="post-rail" style="position:sticky;top:96px">
-      <div style="font-family:var(--mg-font-pixel);font-size:9px;color:#0c4f8d;letter-spacing:1.5px;margin-bottom:14px">▲ AUTHOR</div>
-      <div style="display:flex;gap:10px;align-items:center;margin-bottom:20px">
-        <div style="width:40px;height:40px;border-radius:9999px;background:linear-gradient(135deg,#d11a1a,#0c4f8d);flex:none"></div>
+    <aside class="post-rail">
+      <div class="post-rail__eyebrow">▲ AUTHOR</div>
+      <div class="post-author">
+        <div class="post-author__avatar"></div>
         <div>
-          <div style="font-family:var(--mg-font-display);font-weight:600;font-size:15px;color:#14161c;letter-spacing:-0.2px">ascelot</div>
-          <div style="font-family:var(--mg-font-mono);font-size:11px;color:#7a8290">@ascelot · moddable team</div>
+          <div class="post-author__name">ascelot</div>
+          <div class="post-author__handle">@ascelot · moddable team</div>
         </div>
       </div>
-      <div style="font-family:var(--mg-font-pixel);font-size:9px;color:#3a9928;letter-spacing:1.5px;margin-top:32px;margin-bottom:12px">▲ SHARE</div>
-      <div style="display:flex;gap:6px;flex-wrap:wrap" id="share-btns"></div>
+      <div class="post-rail__eyebrow post-rail__eyebrow--green">▲ SHARE</div>
+      <div class="post-share-btns" id="share-btns"></div>
     </aside>
 
     <!-- Article -->
-    <article class="prose" style="font-family:var(--mg-font-body);font-size:19px;line-height:1.65;color:#1f2228">
+    <article class="prose">
       <p class="lede"><em>Catan</em> is popular. By some accounts, it's the most popular game of the modern era — a gateway game that's sold over 45 million copies and introduced countless families to a life of board-games beyond Monopoly.</p>
       <p>It's a game that enforces interaction between players. No silent solo turns. No retreating to a corner with a deck of cards. Every roll is a negotiation, every settlement a quiet provocation. You can't win <em>Catan</em> without talking to the people you're trying to beat — which is, when you think about it, both its genius and its source of all known dining-table arguments.</p>
       <h2>So we set it on fire.</h2>
@@ -74,13 +123,13 @@ body { background:#f5f4ef; }
     </article>
 
     <!-- Right rail -->
-    <aside class="post-rail" style="position:sticky;top:96px">
-      <div style="font-family:var(--mg-font-pixel);font-size:9px;color:#0c4f8d;letter-spacing:1.5px;margin-bottom:14px">▲ IN THIS POST</div>
-      <ul id="toc-list" style="list-style:none;padding:0;margin:0 0 32px;display:flex;flex-direction:column;gap:8px;border-left:1px solid #e6e3d8"></ul>
-      <div style="background:#000;color:#fff;padding:20px;border-radius:16px">
-        <div style="font-family:var(--mg-font-pixel);font-size:9px;color:#e63232;letter-spacing:1.5px;margin-bottom:10px">▲ THE MOD</div>
-        <div style="font-family:var(--mg-font-display);font-weight:600;font-size:18px;line-height:1.2;margin-bottom:6px">Nuke Catan</div>
-        <div style="font-family:var(--mg-font-mono);font-size:11px;color:rgba(255,255,255,0.6);margin-bottom:14px">v2.1.0 · Total Conversion</div>
+    <aside class="post-rail">
+      <div class="post-rail__eyebrow">▲ IN THIS POST</div>
+      <ul id="toc-list" class="post-toc"></ul>
+      <div class="post-mod-card">
+        <div class="post-mod-card__eyebrow">▲ THE MOD</div>
+        <div class="post-mod-card__title">Nuke Catan</div>
+        <div class="post-mod-card__version">v2.1.0 · Total Conversion</div>
         <div id="mod-dl-btn"></div>
       </div>
     </aside>
@@ -88,15 +137,15 @@ body { background:#f5f4ef; }
 </section>
 
 <!-- More posts -->
-<section style="background:#fff;border-top:1px solid #e6e3d8;padding:80px 32px">
-  <div style="max-width:1200px;margin:0 auto">
-    <h2 style="font-family:var(--mg-font-display);font-weight:600;font-size:40px;line-height:1.1;letter-spacing:-0.5px;color:#14161c;margin:0 0 32px">More from the archive.</h2>
-    <div id="more-posts" class="mg-grid-3" style="display:grid;grid-template-columns:repeat(3,1fr);gap:20px"></div>
+<section class="post-more">
+  <div class="post-more__inner">
+    <h2 class="post-more__heading">More from the archive.</h2>
+    <div id="more-posts" class="post-more__grid"></div>
   </div>
 </section>
 
 <div id="footer-root"></div>
-<script src="../../_mg.js"></script>
+<script src="../../js/_mg.js"></script>
 <script>
 const { el, linkBtn, navbar, footer, url } = MG;
 document.getElementById('nav-root').appendChild(navbar('News'));
@@ -106,7 +155,7 @@ document.getElementById('footer-root').appendChild(footer());
 ['X','FB','LI','Copy'].forEach(s => {
   const b = document.createElement('button');
   b.textContent = s;
-  Object.assign(b.style,{fontFamily:'var(--mg-font-mono)',fontSize:'11px',fontWeight:600,width:'38px',height:'38px',borderRadius:'9999px',background:'#fff',color:'#14161c',border:'1px solid #e6e3d8',cursor:'pointer'});
+  b.className = 'post-share-btn';
   document.getElementById('share-btns').appendChild(b);
 });
 
@@ -114,12 +163,14 @@ document.getElementById('footer-root').appendChild(footer());
 const TOC = ['So we set it on fire','What we left intact',"What you'll need"];
 const tul = document.getElementById('toc-list');
 TOC.forEach((t,i) => {
-  const li = el('li',{style:{paddingLeft:'14px',borderLeft: i===0?'2px solid #d11a1a':'none',marginLeft:'-1px'}});
-  li.appendChild(el('a',{href:'#',style:{fontFamily:'var(--mg-font-body)',fontSize:'13px',color: i===0?'#14161c':'#4f5764',textDecoration:'none',fontWeight: i===0?600:400}},t));
+  const li = el('li',{class: i===0 ? 'post-toc__item post-toc__item--active' : 'post-toc__item'});
+  li.appendChild(el('a',{href:'#',class: i===0 ? 'post-toc__link post-toc__link--active' : 'post-toc__link post-toc__link--inactive'},t));
   tul.appendChild(li);
 });
 
-document.getElementById('mod-dl-btn').appendChild(linkBtn('Download rules','#','red',{height:'38px',fontSize:'13px',width:'100%'}));
+const dlBtn = linkBtn('Download rules','#','red');
+dlBtn.classList.add('post-mod-card__dl');
+document.getElementById('mod-dl-btn').appendChild(dlBtn);
 
 // More posts
 const MORE = [
@@ -129,11 +180,12 @@ const MORE = [
 ];
 const mp = document.getElementById('more-posts');
 MORE.forEach(p => {
-  const a = el('a',{href:url('/news/nuking-catan/'),style:{display:'flex',flexDirection:'column',gap:'14px',padding:'20px',background:'#f5f4ef',borderRadius:'16px',textDecoration:'none',color:'inherit'}});
-  const cover = el('div',{style:{height:'120px',background:`linear-gradient(135deg,#0a0d2a 0%,${p.cover} 100%)`,borderRadius:'12px'}});
+  const a = el('a',{href:url('/news/nuking-catan/'),class:'post-more-card'});
+  const cover = el('div',{class:'post-more-card__cover'});
+  cover.style.background = `linear-gradient(135deg,#0a0d2a 0%,${p.cover} 100%)`;
   a.appendChild(cover);
-  a.appendChild(el('div',{style:{fontFamily:'var(--mg-font-mono)',fontSize:'11px',color:'#7a8290',letterSpacing:'0.3px'}},`${p.cat.toUpperCase()} · ${p.date}`));
-  a.appendChild(el('h3',{style:{fontFamily:'var(--mg-font-display)',fontWeight:600,fontSize:'20px',lineHeight:'1.2',letterSpacing:'-0.2px',color:'#14161c',margin:0}},p.title));
+  a.appendChild(el('div',{class:'post-more-card__meta'},`${p.cat.toUpperCase()} · ${p.date}`));
+  a.appendChild(el('h3',{class:'post-more-card__title'},p.title));
   mp.appendChild(a);
 });
 </script>

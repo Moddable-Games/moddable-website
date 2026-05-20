@@ -1,0 +1,90 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<meta name="mg-base" content="/MODDABLE/moddable-website">
+<title>Hyper Imperium — Moddable.Games</title>
+<link rel="stylesheet" href="../../css/_mg.css">
+</head>
+<body class="mg-section--dark">
+<div id="nav-root"></div>
+
+<section class="mod-hero">
+  <img src="../../img/hex-grid-blue.svg" alt="" class="mod-hero__hex">
+  <div class="mod-hero__glow mod-hero__glow--green"></div>
+  <div class="mod-hero__inner">
+    <a href="../../mods/" class="mod-hero__back">&larr; All mods</a>
+    <div class="mod-hero__tags">
+      <span class="mod-hero__cat mod-hero__cat--green">Rebalance</span>
+      <span class="mod-hero__base">base: Twilight Imperium 4e</span>
+      <span class="mod-hero__version">v2.0.1</span>
+    </div>
+    <h1 class="mod-hero__title">Hyper <em>Imperium</em>.</h1>
+    <p class="mod-hero__lede">Hyper Movement, Hyper Trades, Hyper Objectives, Hyper Factions, Hyper Agendas. A faster ruleset for TI4 + Prophecy of Kings that keeps the politics intact.</p>
+    <div class="mod-hero__btns" id="header-btns"></div>
+    <div class="stats-row" id="stats-row"></div>
+  </div>
+</section>
+
+<section class="mg-section mg-section--light">
+  <div class="mg-container--narrow">
+    <div id="rules-body"></div>
+  </div>
+</section>
+
+<section class="mg-section mg-section--white mg-section--border-top">
+  <div class="mg-container">
+    <h2 class="related-heading">More from the library.</h2>
+    <div id="related-grid" class="mg-grid-3"></div>
+  </div>
+</section>
+
+<div id="footer-root"></div>
+<script src="../../js/_mg.js"></script>
+<script>
+const { T, el, linkBtn, navbar, footer, modCard } = MG;
+document.getElementById('nav-root').appendChild(navbar('Mods'));
+document.getElementById('footer-root').appendChild(footer());
+
+const hb = document.getElementById('header-btns');
+hb.appendChild(linkBtn('Download PDF', '#', 'primary'));
+hb.appendChild(linkBtn('View on GitHub', '#', 'outline-dark'));
+
+const STATS = [['Players','3–6'],['Time','4–6 hr'],['Age','14+'],['Source','Moddable.Games'],['License','CC BY-NC-SA']];
+const sr = document.getElementById('stats-row');
+STATS.forEach(([k,v],i) => {
+  if (i>0) sr.appendChild(el('span',{class:'stats-row__divider'}));
+  const d = el('div',{class:'stats-row__item'});
+  d.appendChild(el('span',{class:'stats-row__label'},k));
+  d.appendChild(el('span',{class:'stats-row__value'},v));
+  sr.appendChild(d);
+});
+
+const SECTIONS = [
+  { id:'1', title:'Hyper Movement', body:"Ships move +1 hex per activation. This applies to all ship types, including fighters and war suns. The result is faster fleet positioning and more aggressive early-game posturing, making turtling less viable." },
+  { id:'2', title:'Hyper Trades', body:"The trade window opens every strategy phase, not just when the Trade strategy card is picked. Any player may negotiate trades freely during the strategy phase. Trade agreements still require mutual consent and can be broken at any time." },
+  { id:'3', title:'Hyper Objectives', body:"Two public objectives are revealed per round instead of one. The victory point target is raised to 12 VP (up from 10). This creates more paths to victory and rewards flexible strategy over single-minded rushing." },
+  { id:'4', title:'Hyper Factions', body:"Rebalanced faction abilities across all 25 factions. Weaker factions (Arborec, Winnu, Yin) receive meaningful buffs. Dominant factions (Saar, Jol-Nar, Nekro) are toned down without losing their identity. Full balance notes included in the PDF." },
+  { id:'5', title:'Hyper Agendas', body:"The agenda phase triggers every round, not just after Mecatol Rex is taken. Two agendas are voted on per agenda phase as normal. This keeps politics relevant from round one and gives the Speaker role consistent value throughout the game." },
+];
+
+const body2 = document.getElementById('rules-body');
+SECTIONS.forEach(s => {
+  const art = el('article',{class:'rules-section',id:`s${s.id}`});
+  art.appendChild(el('div',{class:'rules-section__num'},`SECTION ${s.id.padStart(2,'0')}`));
+  art.appendChild(el('h2',{class:'rules-section__title'},s.title));
+  art.appendChild(el('p',{class:'rules-section__body'},s.body));
+  body2.appendChild(art);
+});
+
+const RELATED = [
+  { category:'Reskin', baseGame:'Talisman 4e', title:'Talisman: Hexed', body:"An open-world hex system that replaces the Talisman board with 61 hexagonal tiles.", stats:'2–6 players · 90 min · 13+', href:'../talisman-hexed/' },
+  { category:'Total conversion', baseGame:'Catan', title:'Nuke Catan', body:"Post-apocalyptic overhaul. Sheep are scarce, brick is currency.", stats:'3–5 players · 60 min · 12+', href:'../nuke-catan/' },
+  { category:'Rebalance', baseGame:'Twilight Imperium 4e', title:'Shattered Ascension', body:"Community overhaul of TI4 with new mechanics and rebalanced factions.", stats:'3–6 players · 4–8 hr · 14+', href:'../shattered-ascension/' },
+];
+const rg = document.getElementById('related-grid');
+RELATED.forEach(m => rg.appendChild(modCard(m)));
+</script>
+</body>
+</html>

@@ -1,0 +1,148 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<meta name="mg-base" content="/MODDABLE/moddable-website">
+<title>Moddable Chess — Moddable.Games</title>
+<link rel="stylesheet" href="../../css/_mg.css">
+</head>
+<body class="mg-section--dark">
+<div id="nav-root"></div>
+
+<section class="game-hero">
+  <div class="game-hero__gradient" data-gradient="blue"></div>
+  <div class="game-hero__bloom game-hero__bloom--blue"></div>
+  <div class="game-hero__hex" data-hex="blue"></div>
+  <div class="game-hero__fade"></div>
+  <div class="game-hero__inner">
+    <a href="../../games/" class="game-hero__back">&larr; All games</a>
+    <div class="game-hero__tags">
+      <span class="game-hero__tag" data-accent="blue">Platform</span>
+      <span class="game-hero__tag--outline">Open alpha</span>
+      <span class="game-hero__version" data-color="blue">v0.1.0</span>
+    </div>
+    <h1 class="game-hero__title">Moddable Chess.</h1>
+    <p class="game-hero__lede">2000+ documented variants. Zero unified compendiums. One moddable engine — ours.</p>
+    <div class="game-hero__btns" id="hero-btns"></div>
+  </div>
+</section>
+
+<section class="stats-bar">
+  <div class="stats-bar__inner" id="stats-bar"></div>
+</section>
+
+<section class="mg-section mg-section--light">
+  <div class="mg-container">
+    <h2 class="mg-heading-xl">The most modded game in history.</h2>
+    <p class="mg-body-sub">Hundreds of variations exist. Most are buried in forum threads and PDFs. None have a playable, modular compendium online. We're building that compendium — starting with the four most-requested variants.</p>
+  </div>
+</section>
+
+<section class="mg-section mg-section--light mg-section--flush-top">
+  <div class="mg-container">
+    <div class="mg-eyebrow mg-eyebrow--blue">&#9650; SUPPORTED VARIANTS</div>
+    <div id="variants-grid" class="mg-grid-4"></div>
+  </div>
+</section>
+
+<section class="mg-dark-center">
+  <div class="mg-dark-center__bloom" data-bloom="blue"></div>
+  <div class="mg-dark-center__inner">
+    <div class="mg-eyebrow mg-eyebrow--glow">&#9650; THE ONLINE ENGINE</div>
+    <h2 class="mg-dark-center__heading">Play anywhere.<br>Continue everywhere.</h2>
+    <p class="mg-dark-center__body">Create private sessions. Hand off mid-game between phone, tablet, and laptop. Pause a session in May, finish it in October. The board waits.</p>
+    <div class="mg-dark-center__pills" id="engine-features"></div>
+    <div class="mg-dark-center__cta" id="engine-cta"></div>
+  </div>
+</section>
+
+<section class="mg-section mg-section--light">
+  <div class="mg-container">
+    <div class="mg-eyebrow mg-eyebrow--blue">&#9650; MOD HOOKS</div>
+    <h2 class="mg-heading-lg">Fork any variant. Build your own.</h2>
+    <p class="mg-body-sub">Moddable Chess ships with four moddable files. All in version control.</p>
+    <div id="hooks-grid" class="mg-grid-2"></div>
+  </div>
+</section>
+
+<div id="footer-root"></div>
+<script src="../../js/_mg.js"></script>
+<script>
+const { T, el, linkBtn, navbar, footer, url } = MG;
+document.getElementById('nav-root').appendChild(navbar('Games'));
+document.getElementById('footer-root').appendChild(footer());
+
+document.querySelector('[data-gradient]').style.background = 'linear-gradient(180deg,#0a0d2a 0%,#0c2e5a 40%,#000 100%)';
+document.querySelector('[data-hex]').style.backgroundImage = `url('../../img/hex-grid-blue.svg')`;
+document.querySelector('[data-accent]').style.background = T.blue;
+document.querySelector('[data-color]').style.color = '#6fb5ff';
+document.querySelector('[data-color]').style.textShadow = '0 0 8px rgba(111,181,255,0.5)';
+document.querySelector('[data-bloom]').style.background = 'radial-gradient(ellipse,rgba(12,79,141,0.35) 0%,transparent 65%)';
+
+document.getElementById('hero-btns').appendChild(linkBtn('Play now','#','blue'));
+document.getElementById('hero-btns').appendChild(linkBtn('Browse variants','#','outline-dark'));
+
+const STATS = [['Variants','4+'],['Players','2–4'],['Status','Open alpha'],['Engine','Live'],['Board types','Square + Hex']];
+const sb = document.getElementById('stats-bar');
+STATS.forEach(([k,v],i) => {
+  if(i>0) sb.appendChild(el('span',{class:'stats-row__divider'}));
+  const d = el('div',{class:'stats-row__item'});
+  d.appendChild(el('span',{class:'stats-row__label'},k));
+  d.appendChild(el('span',{class:'stats-row__value'},v));
+  sb.appendChild(d);
+});
+
+const VARIANTS = [
+  {n:'01', title:'Regular (8×8)',        body:'Standard chess as the baseline. The same rules you know — running on our engine so you can fork it.'},
+  {n:'02', title:'4-Player',             body:'Two teams or free-for-all on a cross-shaped board. The diplomacy variant.'},
+  {n:'03', title:'Hexagonal (Glinski)',   body:'Pieces move along hex edges. Six directions instead of eight. Deeper positional play.'},
+  {n:'04', title:'Dungeon Chess',         body:'Our first original mod. Asymmetric races, XP, spells, and a modular dungeon board.', href:url('/games/dungeon-chess/')},
+];
+const vg = document.getElementById('variants-grid');
+VARIANTS.forEach(s => {
+  const a = el('article',{class:'mg-card'});
+  a.appendChild(el('div',{class:'mg-card__eyebrow mg-eyebrow--blue'},`▲ ${s.n}`));
+  a.appendChild(el('h3',{class:'mg-card__title'},s.title));
+  a.appendChild(el('p',{class:'mg-card__body'},s.body));
+  if(s.href) {
+    const link = el('a',{href:s.href,class:'mg-card__link'});
+    link.textContent = 'Learn more →';
+    a.appendChild(link);
+  }
+  vg.appendChild(a);
+});
+
+const FEATURES = ['Private sessions','Cross-device','Async play'];
+const ef = document.getElementById('engine-features');
+FEATURES.forEach(f => {
+  ef.appendChild(el('span',{class:'mg-dark-center__pill'},f));
+});
+
+document.getElementById('engine-cta').appendChild(linkBtn('Try the engine','#','blue'));
+document.getElementById('engine-cta').appendChild(linkBtn('View on GitHub','#','outline-dark'));
+
+const HOOKS = [
+  {name:'board.lua',      desc:'Board geometry — square, hex, or anything. Define the grid, valid positions, and rendering rules.'},
+  {name:'pieces.yaml',    desc:'Every piece type with movement patterns, capture rules, and promotion conditions. Add new pieces or modify existing ones.'},
+  {name:'variants.yaml',  desc:'The variant registry. Combine a board, piece set, and win condition to define a new way to play.'},
+  {name:'ai.lua',         desc:'Bot behavior for each variant. The teaching engine learns from every game played — human or bot.'},
+];
+const hg = document.getElementById('hooks-grid');
+HOOKS.forEach(h => {
+  const d = el('div',{class:'mg-card mg-card--row'});
+  const icon = el('div',{class:'mg-card__icon'});
+  icon.style.background = T.blue;
+  icon.textContent = '◈';
+  d.appendChild(icon);
+  const txt = el('div');
+  const title = el('div',{class:'mg-card__mono-title'});
+  title.style.color = T.blue;
+  title.textContent = h.name;
+  txt.appendChild(title);
+  txt.appendChild(el('div',{class:'mg-card__desc'},h.desc));
+  d.appendChild(txt); hg.appendChild(d);
+});
+</script>
+</body>
+</html>

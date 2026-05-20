@@ -5,51 +5,71 @@
 <meta name="viewport" content="width=device-width, initial-scale=1">
 <meta name="mg-base" content="/MODDABLE/moddable-website">
 <title>Community — Moddable.Games</title>
-<link rel="stylesheet" href="../_mg.css">
-<style>body{background:#f5f4ef}</style>
+<link rel="stylesheet" href="../css/_mg.css">
+<style>
+body { background: #f5f4ef; }
+.community-section { padding: 72px 32px 96px; }
+.community-section__inner { max-width: 1200px; margin: 0 auto; display: flex; flex-direction: column; gap: 56px; }
+.stat-card { background: #fff; border: 1px solid var(--mg-hairline-light); border-radius: 16px; padding: 24px; text-align: center; }
+.stat-card__number { font-family: var(--mg-font-display); font-weight: 600; font-size: 56px; line-height: 1; color: var(--mg-ink); letter-spacing: -1px; }
+.stat-card__label { font-family: var(--mg-font-mono); font-size: 12px; color: var(--mg-stone); text-transform: uppercase; letter-spacing: 0.8px; margin-top: 8px; }
+.channel-link { display: grid; grid-template-columns: auto 1fr auto; gap: 16px; align-items: center; padding: 18px 20px; background: #fff; border: 1px solid var(--mg-hairline-light); border-radius: 12px; text-decoration: none; color: inherit; transition: border-color 150ms; }
+.channel-link:hover { border-color: var(--mg-ink); }
+.channel-link__bar { width: 8px; height: 32px; border-radius: 4px; }
+.channel-link__name { font-family: var(--mg-font-mono); font-weight: 600; font-size: 15px; color: var(--mg-ink); }
+.channel-link__desc { font-family: var(--mg-font-body); font-size: 13px; color: var(--mg-mute); margin-top: 2px; }
+.channel-link__count { font-family: var(--mg-font-mono); font-size: 12px; color: var(--mg-stone); text-align: right; }
+.jam-card { background: #fff; border: 1px solid var(--mg-hairline-light); border-radius: 16px; padding: 24px; display: flex; flex-direction: column; gap: 12px; }
+.jam-card__title { font-family: var(--mg-font-display); font-weight: 600; font-size: 24px; line-height: 1.2; letter-spacing: -0.25px; color: var(--mg-ink); margin: 0; }
+.jam-card__meta { font-family: var(--mg-font-mono); font-size: 12px; color: var(--mg-stone); }
+.jam-card__winner { background: var(--mg-canvas-light); border-radius: 10px; padding: 12px; font-family: var(--mg-font-body); font-size: 13px; color: var(--mg-body-color); line-height: 1.45; }
+.community-cta { background: #000; color: #fff; border-radius: 20px; padding: 48px 40px; text-align: center; position: relative; overflow: hidden; }
+.community-cta__hex { position: absolute; inset: 0; background-image: url('../img/hex-grid-blue.svg'); background-size: 56px 64px; animation: hexFloat 30s linear infinite; opacity: 0.5; }
+.jam-card__winner-label { font-weight: 600; }
+.community-cta__inner { position: relative; }
+.community-cta__heading { font-family: var(--mg-font-display); font-weight: 600; font-size: clamp(32px, 4vw, 48px); line-height: 1.05; letter-spacing: -0.025em; margin: 0 0 16px; }
+.community-cta__body { font-family: var(--mg-font-body); font-size: 17px; line-height: 1.6; color: rgba(255,255,255,0.78); max-width: 500px; margin: 0 auto 28px; }
+.community-cta__btns { display: flex; gap: 12px; justify-content: center; flex-wrap: wrap; }
+</style>
 </head>
 <body>
 <div id="nav-root"></div>
 <div id="page-hero"></div>
 
-<section style="background:#f5f4ef;padding:72px 32px 96px">
-  <div style="max-width:1200px;margin:0 auto;display:flex;flex-direction:column;gap:56px">
+<section class="community-section">
+  <div class="community-section__inner">
 
-    <!-- Stats -->
     <div>
-      <div style="font-family:var(--mg-font-pixel);font-size:9px;color:#0c4f8d;letter-spacing:1.5px;margin-bottom:20px">▲ BY THE NUMBERS</div>
-      <div id="stats-grid" style="display:grid;grid-template-columns:repeat(auto-fit,minmax(160px,1fr));gap:16px"></div>
+      <div class="mg-eyebrow mg-eyebrow--blue">&#9650; BY THE NUMBERS</div>
+      <div id="stats-grid" class="mg-grid-auto"></div>
     </div>
 
-    <!-- Discord channels -->
     <div>
-      <div style="font-family:var(--mg-font-pixel);font-size:9px;color:#0c4f8d;letter-spacing:1.5px;margin-bottom:20px">▲ DISCORD CHANNELS</div>
-      <h2 style="font-family:var(--mg-font-display);font-weight:600;font-size:clamp(32px,4vw,48px);line-height:1.05;letter-spacing:-0.025em;color:#14161c;margin:0 0 24px">Where the table talk happens.</h2>
-      <div id="channels-list" style="display:flex;flex-direction:column;gap:10px"></div>
+      <div class="mg-eyebrow mg-eyebrow--blue">&#9650; DISCORD CHANNELS</div>
+      <h2 class="mg-heading-lg">Where the table talk happens.</h2>
+      <div id="channels-list" class="rules-list"></div>
     </div>
 
-    <!-- Mod jams -->
     <div>
-      <div style="font-family:var(--mg-font-pixel);font-size:9px;color:#3a9928;letter-spacing:1.5px;margin-bottom:20px">▲ MOD JAMS</div>
-      <h2 style="font-family:var(--mg-font-display);font-weight:600;font-size:clamp(32px,4vw,48px);line-height:1.05;letter-spacing:-0.025em;color:#14161c;margin:0 0 24px">48 hours. One base game. Go.</h2>
-      <div id="jams-grid" style="display:grid;grid-template-columns:repeat(auto-fit,minmax(240px,1fr));gap:16px"></div>
+      <div class="mg-eyebrow mg-eyebrow--green">&#9650; MOD JAMS</div>
+      <h2 class="mg-heading-lg">48 hours. One base game. Go.</h2>
+      <div id="jams-grid" class="mg-grid-auto"></div>
     </div>
 
-    <!-- CTA -->
-    <div style="background:#000;color:#fff;border-radius:20px;padding:48px 40px;text-align:center;position:relative;overflow:hidden">
-      <div style="position:absolute;inset:0;background-image:url('data:image/svg+xml;utf8,<svg xmlns=\'http://www.w3.org/2000/svg\' width=\'56\' height=\'64\' viewBox=\'0 0 56 64\'><path d=\'M28 1 54 16v32L28 63 2 48V16z\' fill=\'none\' stroke=\'%233a7be8\' stroke-opacity=\'0.18\' stroke-width=\'1\'/></svg>');background-size:56px 64px;animation:hexFloat 30s linear infinite;opacity:0.5"></div>
-      <div style="position:relative">
-        <div style="font-family:var(--mg-font-pixel);font-size:9px;color:#6fb5ff;letter-spacing:1.5px;margin-bottom:16px">▲ JOIN UP</div>
-        <h3 style="font-family:var(--mg-font-display);font-weight:600;font-size:clamp(32px,4vw,48px);line-height:1.05;letter-spacing:-0.025em;margin:0 0 16px">Pull up a chair.</h3>
-        <p style="font-family:var(--mg-font-body);font-size:17px;line-height:1.6;color:rgba(255,255,255,0.78);max-width:500px;margin:0 auto 28px">2,400 moddable minds. Free to join. Bring your own dice.</p>
-        <div id="cta-btns" style="display:flex;gap:12px;justify-content:center;flex-wrap:wrap"></div>
+    <div class="community-cta">
+      <div class="community-cta__hex" id="cta-hex"></div>
+      <div class="community-cta__inner">
+        <div class="mg-eyebrow mg-eyebrow--glow">&#9650; JOIN UP</div>
+        <h3 class="community-cta__heading">Pull up a chair.</h3>
+        <p class="community-cta__body">2,400 moddable minds. Free to join. Bring your own dice.</p>
+        <div class="community-cta__btns" id="cta-btns"></div>
       </div>
     </div>
   </div>
 </section>
 
 <div id="footer-root"></div>
-<script src="../_mg.js"></script>
+<script src="../js/_mg.js"></script>
 <script>
 const { el, btn, linkBtn, navbar, footer, pageHero } = MG;
 document.getElementById('nav-root').appendChild(navbar('About'));
@@ -65,9 +85,9 @@ document.getElementById('page-hero').appendChild(pageHero({
 const STATS = [['2,400+','Discord members'],['12','published mods'],['3','mod jams run'],['6','team humans']];
 const sg = document.getElementById('stats-grid');
 STATS.forEach(([n,l]) => {
-  const c = el('div',{style:{background:'#fff',border:'1px solid #e6e3d8',borderRadius:'16px',padding:'24px',textAlign:'center'}});
-  c.appendChild(el('div',{style:{fontFamily:'var(--mg-font-display)',fontWeight:600,fontSize:'56px',lineHeight:'1',color:'#14161c',letterSpacing:'-1px'}},n));
-  c.appendChild(el('div',{style:{fontFamily:'var(--mg-font-mono)',fontSize:'12px',color:'#7a8290',textTransform:'uppercase',letterSpacing:'0.8px',marginTop:'8px'}},l));
+  const c = el('div',{class:'stat-card'});
+  c.appendChild(el('div',{class:'stat-card__number'},n));
+  c.appendChild(el('div',{class:'stat-card__label'},l));
   sg.appendChild(c);
 });
 
@@ -81,15 +101,15 @@ const CHANNELS = [
 ];
 const cl = document.getElementById('channels-list');
 CHANNELS.forEach(ch => {
-  const a = el('a',{href:'#',style:{display:'grid',gridTemplateColumns:'auto 1fr auto',gap:'16px',alignItems:'center',padding:'18px 20px',background:'#fff',border:'1px solid #e6e3d8',borderRadius:'12px',textDecoration:'none',color:'inherit',transition:'border-color 150ms'}});
-  a.addEventListener('mouseenter',()=>a.style.borderColor='#14161c');
-  a.addEventListener('mouseleave',()=>a.style.borderColor='#e6e3d8');
-  a.appendChild(el('div',{style:{width:'8px',height:'32px',background:ch.accent,borderRadius:'4px'}}));
+  const a = el('a',{href:'#',class:'channel-link'});
+  const bar = el('div',{class:'channel-link__bar'});
+  bar.style.background = ch.accent;
+  a.appendChild(bar);
   const txt = el('div');
-  txt.appendChild(el('div',{style:{fontFamily:'var(--mg-font-mono)',fontWeight:600,fontSize:'15px',color:'#14161c'}},`#${ch.name}`));
-  txt.appendChild(el('div',{style:{fontFamily:'var(--mg-font-body)',fontSize:'13px',color:'#4f5764',marginTop:'2px'}},ch.desc));
+  txt.appendChild(el('div',{class:'channel-link__name'},`#${ch.name}`));
+  txt.appendChild(el('div',{class:'channel-link__desc'},ch.desc));
   a.appendChild(txt);
-  a.appendChild(el('div',{style:{fontFamily:'var(--mg-font-mono)',fontSize:'12px',color:'#7a8290',textAlign:'right'}},`${ch.members} online`));
+  a.appendChild(el('div',{class:'channel-link__count'},`${ch.members} online`));
   cl.appendChild(a);
 });
 
@@ -101,19 +121,27 @@ const JAMS = [
 ];
 const jg = document.getElementById('jams-grid');
 JAMS.forEach(j => {
-  const c = el('div',{style:{background:'#fff',border:'1px solid #e6e3d8',borderRadius:'16px',padding:'24px',display:'flex',flexDirection:'column',gap:'12px'}});
-  c.appendChild(el('div',{style:{fontFamily:'var(--mg-font-pixel)',fontSize:'9px',color:j.color,letterSpacing:'1.5px'}},`▲ JAM ${j.n}`));
-  c.appendChild(el('h3',{style:{fontFamily:'var(--mg-font-display)',fontWeight:600,fontSize:'24px',lineHeight:'1.2',letterSpacing:'-0.25px',color:'#14161c',margin:0}},j.title));
-  const meta = el('div',{style:{fontFamily:'var(--mg-font-mono)',fontSize:'12px',color:'#7a8290'}});
+  const c = el('div',{class:'jam-card'});
+  const eye = el('div',{class:'mg-card__eyebrow'});
+  eye.style.color = j.color;
+  eye.textContent = `▲ JAM ${j.n}`;
+  c.appendChild(eye);
+  c.appendChild(el('h3',{class:'jam-card__title'},j.title));
+  const meta = el('div',{class:'jam-card__meta'});
   meta.textContent = `${j.date} · ${j.entries} entries`;
   c.appendChild(meta);
-  const winner = el('div',{style:{background:'#f5f4ef',borderRadius:'10px',padding:'12px',fontFamily:'var(--mg-font-body)',fontSize:'13px',color:'#1f2228',lineHeight:'1.45'}});
-  winner.innerHTML = `<span style="font-weight:600;color:${j.color}">Winner:</span> ${j.winner}`;
+  const winner = el('div',{class:'jam-card__winner'});
+  const winLabel = document.createElement('span');
+  winLabel.className = 'jam-card__winner-label';
+  winLabel.style.color = j.color;
+  winLabel.textContent = 'Winner:';
+  winner.appendChild(winLabel);
+  winner.appendChild(document.createTextNode(' ' + j.winner));
   c.appendChild(winner);
   jg.appendChild(c);
 });
 
-// CTA buttons
+// CTA
 const cb = document.getElementById('cta-btns');
 cb.appendChild(linkBtn('Open the Discord','#','primary'));
 cb.appendChild(linkBtn('Submit a mod','/submit/','outline-dark'));

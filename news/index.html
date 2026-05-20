@@ -5,8 +5,68 @@
 <meta name="viewport" content="width=device-width, initial-scale=1">
 <meta name="mg-base" content="/MODDABLE/moddable-website">
 <title>News — Moddable.Games</title>
-<link rel="stylesheet" href="../_mg.css">
-<style>body{background:#f5f4ef}</style>
+<link rel="stylesheet" href="../css/_mg.css">
+<style>
+body { background: #f5f4ef; }
+.news-main { background: #f5f4ef; padding: 56px 32px 96px; }
+.news-layout { max-width: 1200px; margin: 0 auto; display: grid; grid-template-columns: 1fr 280px; gap: 56px; align-items: start; }
+.news-featured { margin-bottom: 48px; }
+.news-mobile-search { position: relative; margin-bottom: 24px; display: none; }
+.news-mobile-search__input { width: 100%; height: 44px; padding: 0 16px 0 44px; border: 1px solid #e6e3d8; border-radius: 12px; font-family: var(--mg-font-body); font-size: 14px; background: #fff; outline: none; }
+.news-mobile-search__icon { position: absolute; left: 16px; top: 50%; transform: translateY(-50%); opacity: 0.4; font-size: 16px; pointer-events: none; }
+.news-cat-filters { display: flex; gap: 8px; flex-wrap: wrap; margin-bottom: 28px; }
+.news-posts-grid { display: grid; grid-template-columns: repeat(auto-fit, minmax(260px, 1fr)); gap: 20px; }
+.news-sidebar { position: sticky; top: 88px; display: flex; flex-direction: column; gap: 32px; }
+/* Cover images */
+.news-cover, .news-cover--big { width: 100%; border-radius: 12px; overflow: hidden; position: relative; }
+.news-cover { aspect-ratio: 1.65; }
+.news-cover--big { aspect-ratio: 1.7; }
+.news-cover__hex { position: absolute; inset: 0; }
+
+/* Featured card */
+.news-featured-card { display: grid; grid-template-columns: 1.1fr 1fr; gap: 40px; align-items: center; background: #fff; border: 1px solid #e6e3d8; border-radius: 20px; padding: 32px; text-decoration: none; color: inherit; transition: border-color 180ms; }
+.news-featured-card:hover { border-color: #14161c; }
+.news-featured-card__meta { display: flex; gap: 10px; align-items: center; margin-bottom: 14px; flex-wrap: wrap; }
+.news-featured-card__badge { font-family: var(--mg-font-body); font-weight: 600; font-size: 11px; background: #14161c; color: #fff; padding: 4px 10px; border-radius: 9999px; }
+.news-featured-card__date { font-family: var(--mg-font-mono); font-size: 12px; color: #7a8290; }
+.news-featured-card__title { font-family: var(--mg-font-display); font-weight: 600; font-size: 40px; line-height: 1.1; letter-spacing: -0.5px; color: #14161c; margin: 0 0 14px; }
+.news-featured-card__excerpt { font-family: var(--mg-font-body); font-size: 16px; line-height: 1.55; color: #3a3d44; margin: 0 0 18px; }
+.news-featured-card__link { font-family: var(--mg-font-body); font-weight: 600; font-size: 14px; color: #0c4f8d; }
+
+/* Grid cards */
+.news-grid-card { display: flex; flex-direction: column; gap: 16px; padding: 20px; background: #fff; border: 1px solid #e6e3d8; border-radius: 16px; text-decoration: none; color: inherit; transition: border-color 180ms; }
+.news-grid-card:hover { border-color: #14161c; }
+.news-grid-card__meta { display: flex; gap: 8px; align-items: center; flex-wrap: wrap; }
+.news-grid-card__cat { font-family: var(--mg-font-mono); font-size: 11px; color: #7a8290; letter-spacing: 0.3px; }
+.news-grid-card__dot { width: 3px; height: 3px; background: #c3c5cc; border-radius: 50%; }
+.news-grid-card__date { font-family: var(--mg-font-mono); font-size: 11px; color: #7a8290; }
+.news-grid-card__title { font-family: var(--mg-font-display); font-weight: 600; font-size: 22px; line-height: 1.2; letter-spacing: -0.25px; color: #14161c; margin: 0; }
+.news-grid-card__excerpt { font-family: var(--mg-font-body); font-size: 14px; line-height: 1.55; color: #4f5764; margin: 0; }
+
+/* Sidebar search */
+.news-search-wrap { position: relative; }
+.news-search-wrap__input { width: 100%; height: 48px; padding: 0 16px 0 44px; border: 1px solid #e6e3d8; border-radius: 12px; font-family: var(--mg-font-body); font-size: 14px; background: #fff; outline: none; }
+.news-search-wrap__icon { position: absolute; left: 16px; top: 50%; transform: translateY(-50%); opacity: 0.4; font-size: 16px; pointer-events: none; }
+
+/* Sidebar topic list */
+.news-topic-list { list-style: none; padding: 0; margin: 0; display: flex; flex-direction: column; gap: 6px; }
+.news-topic-list__link { display: flex; justify-content: space-between; align-items: center; padding: 8px 12px; background: #fff; border: 1px solid #e6e3d8; border-radius: 8px; text-decoration: none; color: inherit; transition: border-color 150ms; }
+.news-topic-list__link:hover { border-color: #14161c; }
+.news-topic-list__name { font-family: var(--mg-font-body); font-size: 14px; color: #14161c; }
+.news-topic-list__count { font-family: var(--mg-font-mono); font-size: 12px; color: #7a8290; }
+
+/* Sidebar archive list */
+.news-archive-list { list-style: none; padding: 0; margin: 0; display: flex; flex-direction: column; gap: 6px; }
+.news-archive-list__link { display: flex; justify-content: space-between; font-family: var(--mg-font-body); font-size: 14px; color: #14161c; text-decoration: none; padding: 6px 0; border-bottom: 1px solid #e6e3d8; }
+.news-archive-list__count { font-family: var(--mg-font-mono); font-size: 12px; color: #7a8290; }
+
+@media (max-width: 900px) {
+  .news-layout { grid-template-columns: 1fr; }
+  .news-sidebar { display: none; }
+  .news-mobile-search { display: block; }
+  .news-featured-card { grid-template-columns: 1fr; }
+}
+</style>
 </head>
 <body>
 <div id="nav-root"></div>
@@ -14,28 +74,28 @@
 <div id="page-hero"></div>
 
 <!-- Main content -->
-<section style="background:#f5f4ef;padding:56px 32px 96px">
-  <div style="max-width:1200px;margin:0 auto;display:grid;grid-template-columns:1fr 280px;gap:56px;align-items:start" id="news-layout">
+<section class="news-main">
+  <div class="news-layout" id="news-layout">
     <div>
       <!-- Featured post -->
-      <div id="featured-post" style="margin-bottom:48px"></div>
+      <div id="featured-post" class="news-featured"></div>
       <!-- Search input (mobile) -->
-      <div style="position:relative;margin-bottom:24px;display:none" id="mobile-search">
-        <input type="search" placeholder="Search the archive…" id="mobile-search-input" style="width:100%;height:44px;padding:0 16px 0 44px;border:1px solid #e6e3d8;border-radius:12px;font-family:var(--mg-font-body);font-size:14px;background:#fff;outline:none">
-        <span style="position:absolute;left:16px;top:50%;transform:translateY(-50%);opacity:0.4;font-size:16px;pointer-events:none">⌕</span>
+      <div class="news-mobile-search" id="mobile-search">
+        <input type="search" placeholder="Search the archive…" id="mobile-search-input" class="news-mobile-search__input">
+        <span class="news-mobile-search__icon">⌕</span>
       </div>
       <!-- Category filters -->
-      <div id="cat-filters" style="display:flex;gap:8px;flex-wrap:wrap;margin-bottom:28px"></div>
+      <div id="cat-filters" class="news-cat-filters"></div>
       <!-- Post grid -->
-      <div id="posts-grid" style="display:grid;grid-template-columns:repeat(auto-fit,minmax(260px,1fr));gap:20px"></div>
+      <div id="posts-grid" class="news-posts-grid"></div>
     </div>
     <!-- Sidebar -->
-    <aside style="position:sticky;top:88px;display:flex;flex-direction:column;gap:32px" id="sidebar"></aside>
+    <aside class="news-sidebar" id="sidebar"></aside>
   </div>
 </section>
 
 <div id="footer-root"></div>
-<script src="../_mg.js"></script>
+<script src="../js/_mg.js"></script>
 <script>
 const { T, el, linkBtn, navbar, footer, pageHero, url } = MG;
 document.getElementById('nav-root').appendChild(navbar('News'));
@@ -62,26 +122,28 @@ let activeCat = 'All', searchVal = '';
 
 function postCover(color, big=false) {
   const sz = big ? 56 : 28;
-  const d = el('div',{style:{width:'100%',aspectRatio: big?'1.7':'1.65',background:`linear-gradient(135deg,#0a0d2a 0%,${color} 100%)`,borderRadius:'12px',overflow:'hidden',position:'relative'}});
-  d.appendChild(el('div',{style:{position:'absolute',inset:0,backgroundImage:`url("data:image/svg+xml;utf8,<svg xmlns='http://www.w3.org/2000/svg' width='${sz}' height='${sz*8/7}' viewBox='0 0 56 64'><path d='M28 1 54 16v32L28 63 2 48V16z' fill='none' stroke='%23fff' stroke-opacity='0.2' stroke-width='1'/></svg>")`,backgroundSize:`${sz}px ${sz*8/7}px`}}));
+  const d = el('div',{class: big ? 'news-cover--big' : 'news-cover'});
+  d.style.background = `linear-gradient(135deg,#0a0d2a 0%,${color} 100%)`;
+  const overlay = el('div',{class:'news-cover__hex'});
+  overlay.style.backgroundImage = `url("${MG.url('/img/hex-grid-white.svg')}")`;
+  overlay.style.backgroundSize = `${sz}px ${sz*8/7}px`;
+  d.appendChild(overlay);
   return d;
 }
 
 // Featured post
 const fp = document.getElementById('featured-post');
 const feat = POSTS[0];
-const fa = el('a',{href:url('/news/nuking-catan/'),style:{display:'grid',gridTemplateColumns:'1.1fr 1fr',gap:'40px',alignItems:'center',background:'#fff',border:'1px solid #e6e3d8',borderRadius:'20px',padding:'32px',textDecoration:'none',color:'inherit',transition:'border-color 180ms'}});
-fa.addEventListener('mouseenter',()=>fa.style.borderColor='#14161c');
-fa.addEventListener('mouseleave',()=>fa.style.borderColor='#e6e3d8');
+const fa = el('a',{href:url('/news/nuking-catan/'),class:'news-featured-card'});
 fa.appendChild(postCover(feat.cover, true));
 const fd = el('div');
-const fm = el('div',{style:{display:'flex',gap:'10px',alignItems:'center',marginBottom:'14px',flexWrap:'wrap'}});
-fm.appendChild(el('span',{style:{fontFamily:'var(--mg-font-body)',fontWeight:600,fontSize:'11px',background:'#14161c',color:'#fff',padding:'4px 10px',borderRadius:'9999px'}}, 'FEATURED'));
-fm.appendChild(el('span',{style:{fontFamily:'var(--mg-font-mono)',fontSize:'12px',color:'#7a8290'}},`${feat.cat} · ${feat.date}`));
+const fm = el('div',{class:'news-featured-card__meta'});
+fm.appendChild(el('span',{class:'news-featured-card__badge'}, 'FEATURED'));
+fm.appendChild(el('span',{class:'news-featured-card__date'},`${feat.cat} · ${feat.date}`));
 fd.appendChild(fm);
-fd.appendChild(el('h2',{style:{fontFamily:'var(--mg-font-display)',fontWeight:600,fontSize:'40px',lineHeight:'1.1',letterSpacing:'-0.5px',color:'#14161c',margin:'0 0 14px'}},feat.title));
-fd.appendChild(el('p',{style:{fontFamily:'var(--mg-font-body)',fontSize:'16px',lineHeight:'1.55',color:'#3a3d44',margin:'0 0 18px'}},feat.excerpt));
-fd.appendChild(el('span',{style:{fontFamily:'var(--mg-font-body)',fontWeight:600,fontSize:'14px',color:'#0c4f8d'}},'Read the article →'));
+fd.appendChild(el('h2',{class:'news-featured-card__title'},feat.title));
+fd.appendChild(el('p',{class:'news-featured-card__excerpt'},feat.excerpt));
+fd.appendChild(el('span',{class:'news-featured-card__link'},'Read the article →'));
 fa.appendChild(fd); fp.appendChild(fa);
 
 // Category filters
@@ -92,7 +154,7 @@ function renderFilters() {
     const isA = c === activeCat;
     const b = document.createElement('button');
     b.textContent = c;
-    Object.assign(b.style,{fontFamily:'var(--mg-font-body)',fontWeight:600,fontSize:'13px',height:'34px',padding:'0 14px',borderRadius:'9999px',border:isA?'none':'1px solid #c3c5cc',background:isA?'#000':'transparent',color:isA?'#fff':'#14161c',cursor:'pointer',transition:'all 150ms'});
+    b.className = isA ? 'filter-btn filter-btn--active' : 'filter-btn';
     b.addEventListener('click',()=>{activeCat=c;renderFilters();renderPosts();});
     el2.appendChild(b);
   });
@@ -107,17 +169,15 @@ function renderPosts() {
   const grid = document.getElementById('posts-grid');
   grid.innerHTML = '';
   visible.forEach(p => {
-    const a = el('a',{href:url('/news/nuking-catan/'),style:{display:'flex',flexDirection:'column',gap:'16px',padding:'20px',background:'#fff',border:'1px solid #e6e3d8',borderRadius:'16px',textDecoration:'none',color:'inherit',transition:'border-color 180ms'}});
-    a.addEventListener('mouseenter',()=>a.style.borderColor='#14161c');
-    a.addEventListener('mouseleave',()=>a.style.borderColor='#e6e3d8');
+    const a = el('a',{href:url('/news/nuking-catan/'),class:'news-grid-card'});
     a.appendChild(postCover(p.cover));
-    const meta = el('div',{style:{display:'flex',gap:'8px',alignItems:'center',flexWrap:'wrap'}});
-    meta.appendChild(el('span',{style:{fontFamily:'var(--mg-font-mono)',fontSize:'11px',color:'#7a8290',letterSpacing:'0.3px'}},p.cat.toUpperCase()));
-    meta.appendChild(el('span',{style:{width:'3px',height:'3px',background:'#c3c5cc',borderRadius:'50%'}}));
-    meta.appendChild(el('span',{style:{fontFamily:'var(--mg-font-mono)',fontSize:'11px',color:'#7a8290'}},p.date));
+    const meta = el('div',{class:'news-grid-card__meta'});
+    meta.appendChild(el('span',{class:'news-grid-card__cat'},p.cat.toUpperCase()));
+    meta.appendChild(el('span',{class:'news-grid-card__dot'}));
+    meta.appendChild(el('span',{class:'news-grid-card__date'},p.date));
     a.appendChild(meta);
-    a.appendChild(el('h3',{style:{fontFamily:'var(--mg-font-display)',fontWeight:600,fontSize:'22px',lineHeight:'1.2',letterSpacing:'-0.25px',color:'#14161c',margin:0}},p.title));
-    a.appendChild(el('p',{style:{fontFamily:'var(--mg-font-body)',fontSize:'14px',lineHeight:'1.55',color:'#4f5764',margin:0}},p.excerpt));
+    a.appendChild(el('h3',{class:'news-grid-card__title'},p.title));
+    a.appendChild(el('p',{class:'news-grid-card__excerpt'},p.excerpt));
     grid.appendChild(a);
   });
 }
@@ -128,25 +188,23 @@ renderFilters(); renderPosts();
 const sidebar = document.getElementById('sidebar');
 // Search
 const searchWrap = el('div');
-searchWrap.appendChild(el('div',{style:{fontFamily:'var(--mg-font-pixel)',fontSize:'9px',color:'#0c4f8d',letterSpacing:'1.5px',marginBottom:'12px'}},'▲ SEARCH'));
-const si = el('div',{style:{position:'relative'}});
-const inp = el('input',{type:'search',placeholder:'Search the archive…',style:{width:'100%',height:'48px',padding:'0 16px 0 44px',border:'1px solid #e6e3d8',borderRadius:'12px',fontFamily:'var(--mg-font-body)',fontSize:'14px',background:'#fff',outline:'none'}});
+searchWrap.appendChild(el('div',{class:'mg-eyebrow mg-eyebrow--blue'},'▲ SEARCH'));
+const si = el('div',{class:'news-search-wrap'});
+const inp = el('input',{type:'search',placeholder:'Search the archive…',class:'news-search-wrap__input'});
 inp.addEventListener('input',e=>{searchVal=e.target.value;renderPosts();});
-si.appendChild(el('span',{style:{position:'absolute',left:'16px',top:'50%',transform:'translateY(-50%)',opacity:'0.4',fontSize:'16px',pointerEvents:'none'}},'⌕'));
+si.appendChild(el('span',{class:'news-search-wrap__icon'},'⌕'));
 si.appendChild(inp); searchWrap.appendChild(si); sidebar.appendChild(searchWrap);
 
 // Hot topics
 const TOPICS = [['Catan',23],['TI4',18],['Devlog',12],['Community',9],['Monopoly',7],['Chess',4]];
 const ht = el('div');
-ht.appendChild(el('div',{style:{fontFamily:'var(--mg-font-pixel)',fontSize:'9px',color:'#0c4f8d',letterSpacing:'1.5px',marginBottom:'14px'}},'▲ HOT TOPICS'));
-const tul = el('ul',{style:{listStyle:'none',padding:0,margin:0,display:'flex',flexDirection:'column',gap:'6px'}});
+ht.appendChild(el('div',{class:'mg-eyebrow mg-eyebrow--blue'},'▲ HOT TOPICS'));
+const tul = el('ul',{class:'news-topic-list'});
 TOPICS.forEach(([t,n]) => {
   const li = el('li');
-  const a = el('a',{href:'#',style:{display:'flex',justifyContent:'space-between',alignItems:'center',padding:'8px 12px',background:'#fff',border:'1px solid #e6e3d8',borderRadius:'8px',textDecoration:'none',color:'inherit',transition:'border-color 150ms'}});
-  a.addEventListener('mouseenter',()=>a.style.borderColor='#14161c');
-  a.addEventListener('mouseleave',()=>a.style.borderColor='#e6e3d8');
-  a.appendChild(el('span',{style:{fontFamily:'var(--mg-font-body)',fontSize:'14px',color:'#14161c'}},t));
-  a.appendChild(el('span',{style:{fontFamily:'var(--mg-font-mono)',fontSize:'12px',color:'#7a8290'}},String(n)));
+  const a = el('a',{href:'#',class:'news-topic-list__link'});
+  a.appendChild(el('span',{class:'news-topic-list__name'},t));
+  a.appendChild(el('span',{class:'news-topic-list__count'},String(n)));
   li.appendChild(a); tul.appendChild(li);
 });
 ht.appendChild(tul); sidebar.appendChild(ht);
@@ -154,13 +212,13 @@ ht.appendChild(tul); sidebar.appendChild(ht);
 // Archive
 const ARCHIVE = [['May 2026',3],['April 2026',2],['March 2026',2],['January 2026',1]];
 const arc = el('div');
-arc.appendChild(el('div',{style:{fontFamily:'var(--mg-font-pixel)',fontSize:'9px',color:'#0c4f8d',letterSpacing:'1.5px',marginBottom:'14px'}},'▲ ARCHIVE'));
-const aul = el('ul',{style:{listStyle:'none',padding:0,margin:0,display:'flex',flexDirection:'column',gap:'6px'}});
+arc.appendChild(el('div',{class:'mg-eyebrow mg-eyebrow--blue'},'▲ ARCHIVE'));
+const aul = el('ul',{class:'news-archive-list'});
 ARCHIVE.forEach(([m,n]) => {
   const li = el('li');
-  const a = el('a',{href:'#',style:{display:'flex',justifyContent:'space-between',fontFamily:'var(--mg-font-body)',fontSize:'14px',color:'#14161c',textDecoration:'none',padding:'6px 0',borderBottom:'1px solid #e6e3d8'}});
+  const a = el('a',{href:'#',class:'news-archive-list__link'});
   a.appendChild(document.createTextNode(m));
-  a.appendChild(el('span',{style:{fontFamily:'var(--mg-font-mono)',fontSize:'12px',color:'#7a8290'}},String(n)));
+  a.appendChild(el('span',{class:'news-archive-list__count'},String(n)));
   li.appendChild(a); aul.appendChild(li);
 });
 arc.appendChild(aul); sidebar.appendChild(arc);

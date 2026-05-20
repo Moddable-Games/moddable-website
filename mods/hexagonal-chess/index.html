@@ -1,0 +1,89 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<meta name="mg-base" content="/MODDABLE/moddable-website">
+<title>Hexagonal Chess (Glinski) — Moddable.Games</title>
+<link rel="stylesheet" href="../../css/_mg.css">
+</head>
+<body class="mg-section--dark">
+<div id="nav-root"></div>
+
+<section class="mod-hero">
+  <img src="../../img/hex-grid-blue.svg" alt="" class="mod-hero__hex">
+  <div class="mod-hero__glow mod-hero__glow--red"></div>
+  <div class="mod-hero__inner">
+    <a href="../../mods/" class="mod-hero__back">&larr; All mods</a>
+    <div class="mod-hero__tags">
+      <span class="mod-hero__cat mod-hero__cat--red">Total conversion</span>
+      <span class="mod-hero__base">base: Chess</span>
+    </div>
+    <h1 class="mod-hero__title mod-hero__title--red">Hexagonal <em>Chess</em>.</h1>
+    <p class="mod-hero__lede">Glinski's hexagonal chess — 91 cells, three colours, six directions. The most popular hex-chess variant in history, played by millions since 1936.</p>
+    <div class="mod-hero__btns" id="header-btns"></div>
+    <div class="stats-row" id="stats-row"></div>
+  </div>
+</section>
+
+<section class="mg-section mg-section--light">
+  <div class="mg-container--narrow">
+    <div id="rules-body"></div>
+  </div>
+</section>
+
+<section class="mg-section mg-section--white mg-section--border-top">
+  <div class="mg-container">
+    <h2 class="related-heading">More from the library.</h2>
+    <div id="related-grid" class="mg-grid-3"></div>
+  </div>
+</section>
+
+<div id="footer-root"></div>
+<script src="../../js/_mg.js"></script>
+<script>
+const { T, el, linkBtn, navbar, footer, modCard } = MG;
+document.getElementById('nav-root').appendChild(navbar('Mods'));
+document.getElementById('footer-root').appendChild(footer());
+
+const hb = document.getElementById('header-btns');
+hb.appendChild(linkBtn('Download PDF', '#', 'primary'));
+hb.appendChild(linkBtn('View on GitHub', '#', 'outline-dark'));
+
+const STATS = [['Players','2'],['Time','30 min'],['Age','10+'],['Source','chessvariants.com'],['License','Public domain']];
+const sr = document.getElementById('stats-row');
+STATS.forEach(([k,v],i) => {
+  if (i>0) sr.appendChild(el('span',{class:'stats-row__divider'}));
+  const d = el('div',{class:'stats-row__item'});
+  d.appendChild(el('span',{class:'stats-row__label'},k));
+  d.appendChild(el('span',{class:'stats-row__value'},v));
+  sr.appendChild(d);
+});
+
+const SECTIONS = [
+  { id:'1', title:'The board', body:"91 hexagonal cells arranged in a larger hexagon with side length 6. Cells are coloured in three alternating colours (light, medium, dark) so that no two adjacent cells share a colour. The board is oriented with a pointed edge facing each player." },
+  { id:'2', title:'Piece movement', body:"Rooks move along straight lines (any of the 6 hex directions). Bishops move diagonally — staying on one cell colour. Queens combine rook + bishop movement. Knights leap: one step straight then one step diagonally, jumping over intervening pieces. Kings move one step in any direction. Pawns advance straight forward and capture one step diagonally-forward." },
+  { id:'3', title:'Starting position', body:"Each player starts with: 1 king, 1 queen, 3 bishops (one per colour), 2 rooks, 2 knights, and 9 pawns. Pieces are arranged symmetrically on the board's first three ranks. The three bishops ensure every cell colour is covered." },
+  { id:'4', title:'Promotion & en passant', body:"Pawns promote on the far edge (the opponent's back rank of cells). Promotion options: queen, rook, bishop, or knight. En passant applies when a pawn uses its initial two-step move and passes a cell threatened by an enemy pawn — the capturing pawn takes as if the opponent moved one step." },
+  { id:'5', title:'Check & checkmate', body:"Standard rules apply: a king in check must escape. Checkmate (no legal move to escape check) loses the game. Stalemate is a draw. The six directions of attack and three-colour bishop system create novel tactical patterns not found in square chess." },
+];
+
+const body2 = document.getElementById('rules-body');
+SECTIONS.forEach(s => {
+  const art = el('article',{class:'rules-section',id:`s${s.id}`});
+  art.appendChild(el('div',{class:'rules-section__num'},`SECTION ${s.id.padStart(2,'0')}`));
+  art.appendChild(el('h2',{class:'rules-section__title'},s.title));
+  art.appendChild(el('p',{class:'rules-section__body'},s.body));
+  body2.appendChild(art);
+});
+
+const RELATED = [
+  { category:'Reskin', baseGame:'Chess', title:'4-Player Chess', body:"Four players, four armies, one board. Free-for-all or teams.", stats:'4 players · 30 min · 10+', href:'../4-player-chess/' },
+  { category:'Total conversion', baseGame:'Chess', title:'Fog of War Chess', body:"See only squares your pieces can move to. No checks — capture the king to win.", stats:'2 players · 20–40 min · 10+', href:'../fog-of-war-chess/' },
+  { category:'Rebalance', baseGame:'Twilight Imperium 4e', title:'Hyper Imperium', body:"Hyper Movement, Hyper Trades, Hyper Agendas. A faster TI4 ruleset.", stats:'3–6 players · 4–6 hr · 14+', href:'../hyper-imperium/' },
+];
+const rg = document.getElementById('related-grid');
+RELATED.forEach(m => rg.appendChild(modCard(m)));
+</script>
+</body>
+</html>

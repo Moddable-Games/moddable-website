@@ -21,39 +21,47 @@ One shared component library (`_mg.js` + `_mg.css`), one page per HTML file.
 ```
 /
 ├── CLAUDE.md               ← you are here
-├── _mg.js                  ← shared component library (tokens, navbar, footer, modCard, etc.)
-├── _mg.css                 ← shared CSS variables + resets + keyframes
-├── build-preview.py        ← regenerates moddable-preview.html from all source files
-├── moddable-preview.html   ← single-file preview (auto-generated, do not hand-edit)
-│
 ├── index.html              ← marketing home
-├── mods.html               ← mods library (filterable, searchable)
-├── mod-detail.html         ← Talisman: Hexed detail page
-├── game-detail.html        ← Endless Skies game page
-├── game-mongo.html         ← Mongo game page
-├── game-nukes.html         ← Nukes game page
-├── news.html               ← news index
-├── news-post.html          ← "Nuking Catan" article
-├── tools.html              ← tools hub (dice roller, name gen, score tracker)
-├── tools-ti.html           ← TI tools (faction picker, objectives, agenda voter)
-├── tools-talisman.html     ← Talisman tools (character lottery, hex board, encounter draw)
-├── tools-nukes.html        ← Nukes tools (target picker, fallout tracker, resource converter)
-├── submit.html             ← 3-step mod submission form
-├── about.html              ← about page
-├── team.html               ← team page
-└── community.html          ← community / Discord page
+├── 404.html                ← GitHub Pages 404
+├── css/
+│   └── _mg.css             ← shared CSS variables + resets + keyframes
+├── js/
+│   └── _mg.js              ← shared component library (tokens, navbar, footer, modCard, etc.)
+├── build/
+│   ├── build-preview.py    ← regenerates moddable-preview.html from all source files
+│   └── moddable-preview.html ← single-file preview (auto-generated, do not hand-edit)
+│
+├── mods/
+│   ├── index.html          ← mods library (filterable, searchable)
+│   └── talisman-hexed/index.html ← Talisman: Hexed detail page
+├── games/
+│   ├── endless-skies/index.html  ← Endless Skies game page
+│   ├── mongo/index.html          ← Mongo game page
+│   └── nukes/index.html          ← Nukes game page
+├── news/
+│   ├── index.html          ← news index
+│   └── nuking-catan/index.html   ← "Nuking Catan" article
+├── tools/
+│   ├── index.html          ← tools hub (dice roller, name gen, score tracker)
+│   ├── ti/index.html       ← TI tools (faction picker, objectives, agenda voter)
+│   ├── talisman/index.html ← Talisman tools (character lottery, hex board, encounter draw)
+│   └── nukes/index.html    ← Nukes tools (target picker, fallout tracker, resource converter)
+├── submit/index.html       ← 3-step mod submission form
+├── about/index.html        ← about page
+├── team/index.html         ← team page
+└── community/index.html    ← community / Discord page
 ```
 
 ---
 
 ## The preview workflow
 
-**Never hand-edit `moddable-preview.html`.**
+**Never hand-edit `build/moddable-preview.html`.**
 
 After any change to any source file, regenerate it:
 
 ```bash
-python3 build-preview.py
+python3 build/build-preview.py
 ```
 
 This bundles all pages into one self-contained HTML file with a client-side
@@ -64,8 +72,8 @@ The script:
 1. Reads every page's `<body>` content and inline `<script>`
 2. Strips the two lines that call `navbar()` and `footer()` into `#nav-root`
    / `#footer-root` (the preview shell owns those)
-3. Embeds `_mg.js` and `_mg.css` inline
-4. Writes `moddable-preview.html`
+3. Embeds `js/_mg.js` and `css/_mg.css` inline
+4. Writes `build/moddable-preview.html`
 
 ---
 
@@ -145,7 +153,7 @@ Every page follows this structure:
 <!-- page-specific HTML sections -->
 
 <div id="footer-root"></div>
-<script src="_mg.js"></script>
+<script src="../js/_mg.js"></script>  <!-- path depth varies by page -->
 <script>
 const { el, btn, linkBtn, navbar, footer, /* other needed exports */ } = MG;
 document.getElementById('nav-root').appendChild(navbar('ActiveSection'));

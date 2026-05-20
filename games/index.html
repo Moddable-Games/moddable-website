@@ -1,0 +1,74 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<meta name="mg-base" content="/MODDABLE/moddable-website">
+<title>Games — Moddable.Games</title>
+<link rel="stylesheet" href="../css/_mg.css">
+</head>
+<body class="mg-section--light">
+<div id="nav-root"></div>
+<div id="page-hero"></div>
+
+<section class="mg-section--tight mg-section--light">
+  <div class="mg-container">
+    <div id="games-grid" class="mg-grid-auto"></div>
+  </div>
+</section>
+
+<div id="footer-root"></div>
+<script src="../js/_mg.js"></script>
+<script>
+const { T, el, linkBtn, navbar, footer, pageHero, url } = MG;
+document.getElementById('nav-root').appendChild(navbar('Games'));
+document.getElementById('footer-root').appendChild(footer());
+document.getElementById('page-hero').appendChild(pageHero({
+  eyebrow:'▲ ORIGINAL GAMES',
+  title:'Five games. All moddable.',
+  lede:'Original tabletop games designed from day one to be forked, remixed, and rewritten. Every rulebook lives in a git repo.',
+  withHorizon:true,
+}));
+
+const GAMES = [
+  { title:'Nukes', accent:T.red, status:'Open alpha · Live', desc:'Cold-war territory control on a hex map. Three superpowers, fifteen turns, one button that ends everything.', players:'2–3', time:'45+ min', href:url('/games/nukes/') },
+  { title:'Mongo', accent:T.green, status:'Playtest · Q3 2026', desc:'Global conquest in the Flash Gordon universe — Risk × Catan in a public-domain setting.', players:'3–6', time:'90 min', href:url('/games/mongo/') },
+  { title:'Endless Skies', accent:T.green, status:'In development', desc:'Cooperative survival in procedurally generated skies. Tile-laying meets resource management.', players:'1–4', time:'60 min', href:url('/games/endless-skies/') },
+  { title:'Moddable Chess', accent:T.blue, status:'Open alpha · Live', desc:'2000+ chess variants, one engine. Regular, 4-Player, Hexagonal, and more — playable online.', players:'2–4', time:'10–60 min', href:url('/games/moddable-chess/') },
+  { title:'Dungeon Chess', accent:T.green, status:'Pre-alpha · Q4 2026', desc:'Chess as an asymmetric skirmish and dungeon crawler. Four races, XP, spells, modular boards.', players:'2–6', time:'30–120 min', href:url('/games/dungeon-chess/') },
+];
+
+const grid = document.getElementById('games-grid');
+GAMES.forEach(g => {
+  const card = el('a', {href:g.href, class:'game-card'});
+  card.addEventListener('mouseenter', () => { card.style.borderColor = g.accent; });
+  card.addEventListener('mouseleave', () => { card.style.borderColor = ''; });
+
+  const bar = el('div', {class:'game-card__bar'});
+  bar.style.background = g.accent;
+  card.appendChild(bar);
+
+  const thumb = el('div', {class:'game-card__thumb'});
+  thumb.style.background = `linear-gradient(135deg, #0a0d2a 0%, ${g.accent} 100%)`;
+  const hexOverlay = el('div', {class:'game-card__thumb-hex'});
+  hexOverlay.style.backgroundImage = `url("${url('/img/hex-grid-white.svg')}")`;
+  thumb.appendChild(hexOverlay);
+  card.appendChild(thumb);
+
+  const body = el('div', {class:'game-card__body'});
+  const status = el('div', {class:'game-card__status'});
+  status.style.color = g.accent;
+  status.textContent = g.status;
+  body.appendChild(status);
+  body.appendChild(el('h3', {class:'game-card__title'}, g.title));
+  body.appendChild(el('p', {class:'game-card__desc'}, g.desc));
+  const stats = el('div', {class:'game-card__stats'});
+  stats.textContent = `${g.players} · ${g.time}`;
+  body.appendChild(stats);
+
+  card.appendChild(body);
+  grid.appendChild(card);
+});
+</script>
+</body>
+</html>

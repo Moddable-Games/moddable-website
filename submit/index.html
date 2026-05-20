@@ -5,96 +5,156 @@
 <meta name="viewport" content="width=device-width, initial-scale=1">
 <meta name="mg-base" content="/MODDABLE/moddable-website">
 <title>Submit a mod — Moddable.Games</title>
-<link rel="stylesheet" href="../_mg.css">
+<link rel="stylesheet" href="../css/_mg.css">
 <style>
 body { background:#f5f4ef; }
 .field-input { width:100%;padding:14px 16px;border:1px solid #e6e3d8;border-radius:12px;font-family:var(--mg-font-body);font-size:16px;color:#14161c;background:#fff;outline:none;transition:border-color 150ms;box-sizing:border-box; }
 .field-input:focus { border-color:#0c4f8d; }
 textarea.field-input { resize:vertical;min-height:120px; }
+
+/* Submit hero */
+.submit-hero { background:#000;color:#fff;padding:64px 32px 72px;position:relative;overflow:hidden; }
+.submit-hero__glow { position:absolute;right:-100px;top:20%;width:500px;height:500px;background:radial-gradient(circle,rgba(58,123,232,0.2) 0%,transparent 65%);pointer-events:none; }
+.submit-hero__inner { max-width:760px;margin:0 auto;position:relative; }
+.submit-hero__back { font-family:var(--mg-font-mono);font-size:12px;color:rgba(255,255,255,0.7);text-decoration:none; }
+.submit-hero__eyebrow { font-family:var(--mg-font-pixel);font-size:10px;color:#6fb5ff;letter-spacing:1.5px;margin:24px 0 18px; }
+.submit-hero__title { font-family:var(--mg-font-display);font-weight:600;font-size:clamp(44px,6vw,80px);line-height:1.0;letter-spacing:-0.025em;margin:0 0 20px; }
+.submit-hero__lede { font-family:var(--mg-font-body);font-size:18px;line-height:1.6;color:rgba(255,255,255,0.78);margin:0; }
+
+/* Step indicator */
+.submit-steps { background:#fff;border-bottom:1px solid #e6e3d8;padding:0 32px; }
+.submit-steps__inner { max-width:760px;margin:0 auto;display:flex;align-items:center; }
+.step-tab { display:flex;align-items:center;gap:10px;padding:20px 0 18px;border-bottom:2px solid transparent;margin-right:24px;cursor:pointer; }
+.step-tab--active { border-bottom-color:#0c4f8d;opacity:1; }
+.step-tab--inactive { opacity:0.5; }
+.step-tab:last-child { margin-right:0; }
+.step-tab__num { width:26px;height:26px;border-radius:9999px;background:#c3c5cc;color:#fff;font-family:var(--mg-font-mono);font-size:12px;font-weight:600;display:flex;align-items:center;justify-content:center; }
+.step-tab__num--active { background:#0c4f8d; }
+.step-tab__label { font-family:var(--mg-font-body);font-weight:600;font-size:14px;color:#14161c; }
+
+/* Form section */
+.submit-form { background:#f5f4ef;padding:56px 32px 96px; }
+.submit-form__inner { max-width:760px;margin:0 auto; }
+.submit-form__fields { display:flex;flex-direction:column;gap:24px; }
+.submit-form__nav { display:flex;justify-content:flex-end; }
+.submit-form__nav--between { display:flex;justify-content:space-between; }
+
+/* Step 3 */
+.submit-preview { background:#fff;border:1px solid #e6e3d8;border-radius:16px;padding:28px;margin-bottom:32px; }
+.submit-preview__eyebrow { font-family:var(--mg-font-pixel);font-size:9px;color:#0c4f8d;letter-spacing:1.5px;margin-bottom:14px; }
+.submit-preview__row { display:flex;gap:16px;padding:8px 0;border-bottom:1px solid #e6e3d8;flex-wrap:wrap; }
+.submit-preview__key { font-family:var(--mg-font-mono);font-size:12px;color:#7a8290;min-width:100px; }
+.submit-preview__val { font-family:var(--mg-font-body);font-size:14px;color:#14161c;flex:1; }
+.submit-preview__desc { margin-top:14px;padding:14px;background:#f5f4ef;border-radius:10px;font-family:var(--mg-font-body);font-size:14px;line-height:1.55;color:#1f2228; }
+.submit-agree { display:flex;gap:12px;align-items:flex-start;background:#fff;border:1px solid #e6e3d8;border-radius:12px;padding:20px;margin-bottom:28px; }
+.submit-agree__checkbox { margin-top:3px;width:18px;height:18px;cursor:pointer; }
+.submit-agree__label { font-family:var(--mg-font-body);font-size:14px;color:#1f2228;line-height:1.5;cursor:pointer; }
+
+/* Success */
+.submit-success { text-align:center;padding:64px 0; }
+.submit-success__eyebrow { font-family:var(--mg-font-pixel);font-size:11px;color:#3a9928;letter-spacing:2px;margin-bottom:20px; }
+.submit-success__title { font-family:var(--mg-font-display);font-weight:600;font-size:48px;line-height:1.05;letter-spacing:-0.6px;color:#14161c;margin:0 0 16px; }
+.submit-success__lede { font-family:var(--mg-font-body);font-size:18px;line-height:1.6;color:#4f5764;max-width:520px;margin:0 auto 32px; }
+.submit-success__btns { display:flex;gap:12px;justify-content:center;flex-wrap:wrap; }
+
+/* Field builder */
+.field-wrap { display:flex;flex-direction:column;gap:6px; }
+.field-label { font-family:var(--mg-font-body);font-weight:600;font-size:14px;color:#14161c; }
+.field-label__required { color:#d11a1a;margin-left:4px; }
+.field-hint { font-family:var(--mg-font-body);font-size:13px;color:#4f5764; }
+.field-file { font-family:var(--mg-font-body);font-size:14px;color:#14161c;padding:10px 0;cursor:pointer; }
+
+/* Category picker */
+.cat-grid { display:grid;grid-template-columns:1fr 1fr 1fr;gap:10px; }
+.cat-btn { background:#fff;color:#14161c;border:2px solid #e6e3d8;border-radius:14px;padding:16px;text-align:left;cursor:pointer;transition:all 150ms;display:flex;flex-direction:column;gap:6px; }
+.cat-btn__title { font-family:var(--mg-font-display);font-weight:600;font-size:17px;letter-spacing:-0.2px; }
+.cat-btn__desc { font-family:var(--mg-font-body);font-size:12px;color:#4f5764;line-height:1.4; }
 </style>
 </head>
 <body>
 <div id="nav-root"></div>
 
 <!-- Header -->
-<section style="background:#000;color:#fff;padding:64px 32px 72px;position:relative;overflow:hidden">
-  <div style="position:absolute;right:-100px;top:20%;width:500px;height:500px;background:radial-gradient(circle,rgba(58,123,232,0.2) 0%,transparent 65%);pointer-events:none"></div>
-  <div style="max-width:760px;margin:0 auto;position:relative">
-    <a href="/mods/" style="font-family:var(--mg-font-mono);font-size:12px;color:rgba(255,255,255,0.7);text-decoration:none">← Back to mods</a>
-    <div style="font-family:var(--mg-font-pixel);font-size:10px;color:#6fb5ff;letter-spacing:1.5px;margin:24px 0 18px">▲ SUBMIT A MOD</div>
-    <h1 style="font-family:var(--mg-font-display);font-weight:600;font-size:clamp(44px,6vw,80px);line-height:1.0;letter-spacing:-0.025em;margin:0 0 20px">Ship your rules.</h1>
-    <p style="font-family:var(--mg-font-body);font-size:18px;line-height:1.6;color:rgba(255,255,255,0.78);margin:0">Tell us about your mod. We'll review it, play it, and if it works at the table — publish it.</p>
+<section class="submit-hero">
+  <div class="submit-hero__glow"></div>
+  <div class="submit-hero__inner">
+    <a href="/mods/" class="submit-hero__back">← Back to mods</a>
+    <div class="submit-hero__eyebrow">▲ SUBMIT A MOD</div>
+    <h1 class="submit-hero__title">Ship your rules.</h1>
+    <p class="submit-hero__lede">Tell us about your mod. We'll review it, play it, and if it works at the table — publish it.</p>
   </div>
 </section>
 
 <!-- Step indicator -->
-<div style="background:#fff;border-bottom:1px solid #e6e3d8;padding:0 32px">
-  <div style="max-width:760px;margin:0 auto;display:flex;align-items:center">
-    <div id="step-1-tab" class="step-tab" style="display:flex;align-items:center;gap:10px;padding:20px 0 18px;border-bottom:2px solid #0c4f8d;margin-right:24px;cursor:pointer">
-      <span id="s1-num" style="width:26px;height:26px;border-radius:9999px;background:#0c4f8d;color:#fff;font-family:var(--mg-font-mono);font-size:12px;font-weight:600;display:flex;align-items:center;justify-content:center">1</span>
-      <span style="font-family:var(--mg-font-body);font-weight:600;font-size:14px;color:#14161c">The basics</span>
+<div class="submit-steps">
+  <div class="submit-steps__inner">
+    <div id="step-1-tab" class="step-tab step-tab--active">
+      <span id="s1-num" class="step-tab__num step-tab__num--active">1</span>
+      <span class="step-tab__label">The basics</span>
     </div>
-    <div id="step-2-tab" class="step-tab" style="display:flex;align-items:center;gap:10px;padding:20px 0 18px;border-bottom:2px solid transparent;margin-right:24px;cursor:pointer;opacity:0.5">
-      <span id="s2-num" style="width:26px;height:26px;border-radius:9999px;background:#c3c5cc;color:#fff;font-family:var(--mg-font-mono);font-size:12px;font-weight:600;display:flex;align-items:center;justify-content:center">2</span>
-      <span style="font-family:var(--mg-font-body);font-weight:600;font-size:14px;color:#14161c">The rules</span>
+    <div id="step-2-tab" class="step-tab step-tab--inactive">
+      <span id="s2-num" class="step-tab__num">2</span>
+      <span class="step-tab__label">The rules</span>
     </div>
-    <div id="step-3-tab" class="step-tab" style="display:flex;align-items:center;gap:10px;padding:20px 0 18px;border-bottom:2px solid transparent;cursor:pointer;opacity:0.5">
-      <span id="s3-num" style="width:26px;height:26px;border-radius:9999px;background:#c3c5cc;color:#fff;font-family:var(--mg-font-mono);font-size:12px;font-weight:600;display:flex;align-items:center;justify-content:center">3</span>
-      <span style="font-family:var(--mg-font-body);font-weight:600;font-size:14px;color:#14161c">Submit</span>
+    <div id="step-3-tab" class="step-tab step-tab--inactive">
+      <span id="s3-num" class="step-tab__num">3</span>
+      <span class="step-tab__label">Submit</span>
     </div>
   </div>
 </div>
 
 <!-- Form -->
-<section style="background:#f5f4ef;padding:56px 32px 96px">
-  <div style="max-width:760px;margin:0 auto">
+<section class="submit-form">
+  <div class="submit-form__inner">
 
     <!-- Step 1 -->
     <div id="step-1">
-      <div style="display:flex;flex-direction:column;gap:24px">
+      <div class="submit-form__fields">
         <div id="field-title"></div>
         <div id="field-game"></div>
         <div id="field-cat"></div>
         <div id="field-stats"></div>
         <div id="field-desc"></div>
-        <div style="display:flex;justify-content:flex-end"><div id="next-1-btn"></div></div>
+        <div class="submit-form__nav"><div id="next-1-btn"></div></div>
       </div>
     </div>
 
     <!-- Step 2 -->
-    <div id="step-2" style="display:none">
-      <div style="display:flex;flex-direction:column;gap:24px">
+    <div id="step-2" hidden>
+      <div class="submit-form__fields">
         <div id="field-rulespdf"></div>
         <div id="field-pnp"></div>
         <div id="field-version"></div>
         <div id="field-designer"></div>
-        <div style="display:flex;justify-content:space-between" id="step2-nav"></div>
+        <div class="submit-form__nav--between" id="step2-nav"></div>
       </div>
     </div>
 
     <!-- Step 3 -->
-    <div id="step-3" style="display:none">
-      <div id="submit-preview" style="background:#fff;border:1px solid #e6e3d8;border-radius:16px;padding:28px;margin-bottom:32px"></div>
-      <div id="step3-agree" style="display:flex;gap:12px;align-items:flex-start;background:#fff;border:1px solid #e6e3d8;border-radius:12px;padding:20px;margin-bottom:28px">
-        <input type="checkbox" id="agree-check" style="margin-top:3px;width:18px;height:18px;cursor:pointer">
-        <label for="agree-check" style="font-family:var(--mg-font-body);font-size:14px;color:#1f2228;line-height:1.5;cursor:pointer">I confirm this mod is my own original work or that I have permission to share it. I understand it will be published openly under a Creative Commons licence unless otherwise agreed.</label>
+    <div id="step-3" hidden>
+      <div id="submit-preview" class="submit-preview"></div>
+      <div id="step3-agree" class="submit-agree">
+        <input type="checkbox" id="agree-check" class="submit-agree__checkbox">
+        <label for="agree-check" class="submit-agree__label">I confirm this mod is my own original work or that I have permission to share it. I understand it will be published openly under a Creative Commons licence unless otherwise agreed.</label>
       </div>
-      <div style="display:flex;justify-content:space-between" id="step3-nav"></div>
+      <div class="submit-form__nav--between" id="step3-nav"></div>
     </div>
 
     <!-- Success -->
-    <div id="step-success" style="display:none;text-align:center;padding:64px 0">
-      <div style="font-family:var(--mg-font-pixel);font-size:11px;color:#3a9928;letter-spacing:2px;margin-bottom:20px">▲ SUBMITTED</div>
-      <h2 style="font-family:var(--mg-font-display);font-weight:600;font-size:48px;line-height:1.05;letter-spacing:-0.6px;color:#14161c;margin:0 0 16px">The dice are cast.</h2>
-      <p style="font-family:var(--mg-font-body);font-size:18px;line-height:1.6;color:#4f5764;max-width:520px;margin:0 auto 32px">We'll review your submission and get back to you within a fortnight. Keep an eye on Discord for updates.</p>
-      <div id="success-btns" style="display:flex;gap:12px;justify-content:center;flex-wrap:wrap"></div>
+    <div id="step-success" hidden>
+      <div class="submit-success">
+        <div class="submit-success__eyebrow">▲ SUBMITTED</div>
+        <h2 class="submit-success__title">The dice are cast.</h2>
+        <p class="submit-success__lede">We'll review your submission and get back to you within a fortnight. Keep an eye on Discord for updates.</p>
+        <div id="success-btns" class="submit-success__btns"></div>
+      </div>
     </div>
 
   </div>
 </section>
 
 <div id="footer-root"></div>
-<script src="../_mg.js"></script>
+<script src="../js/_mg.js"></script>
 <script>
 const { T, el, btn, linkBtn, navbar, footer } = MG;
 document.getElementById('nav-root').appendChild(navbar('Mods'));
@@ -105,11 +165,11 @@ let currentStep = 1;
 
 // Field builder
 function field(id, label, hint, required, childFn) {
-  const wrap = el('div',{style:{display:'flex',flexDirection:'column',gap:'6px'}});
-  const lbl = el('label',{for:id,style:{fontFamily:'var(--mg-font-body)',fontWeight:600,fontSize:'14px',color:'#14161c'}});
-  lbl.innerHTML = label + (required ? '<span style="color:#d11a1a;margin-left:4px">*</span>' : '');
+  const wrap = el('div',{class:'field-wrap'});
+  const lbl = el('label',{for:id,class:'field-label'});
+  lbl.innerHTML = label + (required ? '<span class="field-label__required">*</span>' : '');
   wrap.appendChild(lbl);
-  if (hint) wrap.appendChild(el('span',{style:{fontFamily:'var(--mg-font-body)',fontSize:'13px',color:'#4f5764'}},hint));
+  if (hint) wrap.appendChild(el('span',{class:'field-hint'},hint));
   wrap.appendChild(childFn(id));
   return wrap;
 }
@@ -135,23 +195,25 @@ document.getElementById('field-title').appendChild(field('mod-title','Mod title'
 document.getElementById('field-game').appendChild(field('base-game','Base game','Which published game does your mod use?',true,textInput('base-game','e.g. Talisman 4e (revised)','baseGame')));
 
 // Category picker
-const catWrap = el('div',{style:{display:'flex',flexDirection:'column',gap:'6px'}});
-const catLbl = el('label',{style:{fontFamily:'var(--mg-font-body)',fontWeight:600,fontSize:'14px',color:'#14161c'}});
-catLbl.innerHTML = 'Mod category <span style="color:#d11a1a;margin-left:4px">*</span>';
+const catWrap = el('div',{class:'field-wrap'});
+const catLbl = el('label',{class:'field-label'});
+catLbl.innerHTML = 'Mod category <span class="field-label__required">*</span>';
 catWrap.appendChild(catLbl);
-catWrap.appendChild(el('span',{style:{fontFamily:'var(--mg-font-body)',fontSize:'13px',color:'#4f5764'}},'Pick the one that fits best.'));
-const catGrid = el('div',{style:{display:'grid',gridTemplateColumns:'1fr 1fr 1fr',gap:'10px'}});
+catWrap.appendChild(el('span',{class:'field-hint'},'Pick the one that fits best.'));
+const catGrid = el('div',{class:'cat-grid'});
 const CATS = [{v:'Reskin',c:T.blue,desc:'Same rules, new theme or board layout.'},{v:'Rebalance',c:T.green,desc:'Same theme, tuned rules — pacing, fairness, length.'},{v:'Total conversion',c:T.red,desc:'New rules, new theme, components only.'}];
 CATS.forEach(o => {
   const b = document.createElement('button');
   b.type = 'button';
-  Object.assign(b.style,{background:'#fff',color:'#14161c',border:`2px solid ${T.hairlineLight}`,borderRadius:'14px',padding:'16px',textAlign:'left',cursor:'pointer',transition:'all 150ms',display:'flex',flexDirection:'column',gap:'6px'});
-  b.innerHTML = `<span style="font-family:var(--mg-font-display);font-weight:600;font-size:17px;letter-spacing:-0.2px">${o.v}</span><span style="font-family:var(--mg-font-body);font-size:12px;color:#4f5764;line-height:1.4">${o.desc}</span>`;
+  b.className = 'cat-btn';
+  b.innerHTML = `<span class="cat-btn__title">${o.v}</span><span class="cat-btn__desc">${o.desc}</span>`;
   b.addEventListener('click',()=>{
     formData.category = o.v;
-    catGrid.querySelectorAll('button').forEach(x=>{Object.assign(x.style,{background:'#fff',color:'#14161c',border:`2px solid ${T.hairlineLight}`});x.querySelector('span:last-child').style.color='#4f5764';});
-    Object.assign(b.style,{background:o.c,color:'#fff',border:`2px solid ${o.c}`});
-    b.querySelector('span:last-child').style.color='rgba(255,255,255,0.82)';
+    catGrid.querySelectorAll('button').forEach(x=>{x.style.background='';x.style.color='';x.style.borderColor='';x.querySelector('.cat-btn__desc').style.color='';});
+    b.style.background = o.c;
+    b.style.color = '#fff';
+    b.style.borderColor = o.c;
+    b.querySelector('.cat-btn__desc').style.color = 'rgba(255,255,255,0.82)';
   });
   catGrid.appendChild(b);
 });
@@ -167,7 +229,7 @@ n1.appendChild(btn('Next: the rules →','primary',()=>goStep(2)));
 // Step 2
 function fileField(id, label, hint) {
   return field(id, label, hint, false, () => {
-    const inp = el('input',{type:'file',id,accept:'.pdf',style:{fontFamily:'var(--mg-font-body)',fontSize:'14px',color:'#14161c',padding:'10px 0',cursor:'pointer'}});
+    const inp = el('input',{type:'file',id,accept:'.pdf',class:'field-file'});
     return inp;
   });
 }
@@ -177,28 +239,28 @@ document.getElementById('field-version').appendChild(field('version','Version','
 document.getElementById('field-designer').appendChild(field('designer','Your handle','How should we credit you?',false,textInput('designer','@yourhandle','designer')));
 
 const s2n = document.getElementById('step2-nav');
-s2n.appendChild(btn('← Back','outline-light',()=>goStep(1),{color:'#14161c'}));
+s2n.appendChild(btn('← Back','outline-dark',()=>goStep(1)));
 s2n.appendChild(btn('Next: submit →','primary',()=>goStep(3)));
 
 // Step 3 preview
 function buildPreview() {
   const p = document.getElementById('submit-preview');
   p.innerHTML = '';
-  p.appendChild(el('div',{style:{fontFamily:'var(--mg-font-pixel)',fontSize:'9px',color:'#0c4f8d',letterSpacing:'1.5px',marginBottom:'14px'}},'▲ YOUR SUBMISSION'));
+  p.appendChild(el('div',{class:'submit-preview__eyebrow'},'▲ YOUR SUBMISSION'));
   const rows = [['Title',formData.title||'—'],['Base game',formData.baseGame||'—'],['Category',formData.category||'—'],['Stats',formData.stats||'—'],['Designer',formData.designer||'—'],['Version',formData.version||'—']];
   rows.forEach(([k,v])=>{
-    const row = el('div',{style:{display:'flex',gap:'16px',padding:'8px 0',borderBottom:'1px solid #e6e3d8',flexWrap:'wrap'}});
-    row.appendChild(el('span',{style:{fontFamily:'var(--mg-font-mono)',fontSize:'12px',color:'#7a8290',minWidth:'100px'}},k));
-    row.appendChild(el('span',{style:{fontFamily:'var(--mg-font-body)',fontSize:'14px',color:'#14161c',flex:1}},v));
+    const row = el('div',{class:'submit-preview__row'});
+    row.appendChild(el('span',{class:'submit-preview__key'},k));
+    row.appendChild(el('span',{class:'submit-preview__val'},v));
     p.appendChild(row);
   });
   if (formData.desc) {
-    p.appendChild(el('div',{style:{marginTop:'14px',padding:'14px',background:'#f5f4ef',borderRadius:'10px',fontFamily:'var(--mg-font-body)',fontSize:'14px',lineHeight:'1.55',color:'#1f2228'}},formData.desc));
+    p.appendChild(el('div',{class:'submit-preview__desc'},formData.desc));
   }
 }
 
 const s3n = document.getElementById('step3-nav');
-s3n.appendChild(btn('← Back','outline-light',()=>goStep(2),{color:'#14161c'}));
+s3n.appendChild(btn('← Back','outline-dark',()=>goStep(2)));
 const submitBtn = btn('Submit mod','green',()=>{
   if (!document.getElementById('agree-check').checked) { alert('Please confirm the agreement first.'); return; }
   goStep('success');
@@ -208,21 +270,22 @@ s3n.appendChild(submitBtn);
 // Success
 const sbw = document.getElementById('success-btns');
 sbw.appendChild(linkBtn('Back to the library','/mods/','dark'));
-sbw.appendChild(linkBtn('Join Discord','/community/','outline-light',{color:'#14161c',border:'1px solid #3a3d44'}));
+sbw.appendChild(linkBtn('Join Discord','/community/','outline-dark'));
 
 function goStep(n) {
   currentStep = n;
   ['step-1','step-2','step-3','step-success'].forEach(id => {
     const el2 = document.getElementById(id);
-    if (el2) el2.style.display = 'none';
+    if (el2) el2.hidden = true;
   });
   const tabs = document.querySelectorAll('.step-tab');
-  tabs.forEach((t,i)=>{t.style.borderBottomColor='transparent';t.style.opacity='0.5';});
+  tabs.forEach(t => { t.classList.remove('step-tab--active'); t.classList.add('step-tab--inactive'); });
+  document.querySelectorAll('.step-tab__num').forEach(s => s.classList.remove('step-tab__num--active'));
 
-  if (n === 1) { document.getElementById('step-1').style.display='block'; tabs[0].style.borderBottomColor='#0c4f8d';tabs[0].style.opacity='1'; }
-  if (n === 2) { document.getElementById('step-2').style.display='block'; tabs[1].style.borderBottomColor='#0c4f8d';tabs[1].style.opacity='1'; }
-  if (n === 3) { buildPreview(); document.getElementById('step-3').style.display='block'; tabs[2].style.borderBottomColor='#0c4f8d';tabs[2].style.opacity='1'; }
-  if (n === 'success') { document.getElementById('step-success').style.display='block'; }
+  if (n === 1) { document.getElementById('step-1').hidden=false; tabs[0].classList.add('step-tab--active');tabs[0].classList.remove('step-tab--inactive'); document.getElementById('s1-num').classList.add('step-tab__num--active'); }
+  if (n === 2) { document.getElementById('step-2').hidden=false; tabs[1].classList.add('step-tab--active');tabs[1].classList.remove('step-tab--inactive'); document.getElementById('s2-num').classList.add('step-tab__num--active'); }
+  if (n === 3) { buildPreview(); document.getElementById('step-3').hidden=false; tabs[2].classList.add('step-tab--active');tabs[2].classList.remove('step-tab--inactive'); document.getElementById('s3-num').classList.add('step-tab__num--active'); }
+  if (n === 'success') { document.getElementById('step-success').hidden=false; }
 }
 </script>
 </body>

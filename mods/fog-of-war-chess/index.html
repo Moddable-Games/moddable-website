@@ -1,0 +1,89 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<meta name="mg-base" content="/MODDABLE/moddable-website">
+<title>Fog of War Chess — Moddable.Games</title>
+<link rel="stylesheet" href="../../css/_mg.css">
+</head>
+<body class="mg-section--dark">
+<div id="nav-root"></div>
+
+<section class="mod-hero">
+  <img src="../../img/hex-grid-blue.svg" alt="" class="mod-hero__hex">
+  <div class="mod-hero__glow mod-hero__glow--red"></div>
+  <div class="mod-hero__inner">
+    <a href="../../mods/" class="mod-hero__back">&larr; All mods</a>
+    <div class="mod-hero__tags">
+      <span class="mod-hero__cat mod-hero__cat--red">Total conversion</span>
+      <span class="mod-hero__base">base: Chess</span>
+    </div>
+    <h1 class="mod-hero__title mod-hero__title--red">Fog of War <em>Chess</em>.</h1>
+    <p class="mod-hero__lede">Players see only the squares their own pieces can legally move to &mdash; no checks, no checkmates, only capture the king. Invented by Jens B&aelig;k Nielsen &amp; Torben Osted (1989).</p>
+    <div class="mod-hero__btns" id="header-btns"></div>
+    <div class="stats-row" id="stats-row"></div>
+  </div>
+</section>
+
+<section class="mg-section mg-section--light">
+  <div class="mg-container--narrow">
+    <div id="rules-body"></div>
+  </div>
+</section>
+
+<section class="mg-section mg-section--white mg-section--border-top">
+  <div class="mg-container">
+    <h2 class="related-heading">More from the library.</h2>
+    <div id="related-grid" class="mg-grid-3"></div>
+  </div>
+</section>
+
+<div id="footer-root"></div>
+<script src="../../js/_mg.js"></script>
+<script>
+const { T, el, linkBtn, navbar, footer, modCard } = MG;
+document.getElementById('nav-root').appendChild(navbar('Mods'));
+document.getElementById('footer-root').appendChild(footer());
+
+const hb = document.getElementById('header-btns');
+hb.appendChild(linkBtn('Download PDF', '#', 'primary'));
+hb.appendChild(linkBtn('View on GitHub', '#', 'outline-dark'));
+
+const STATS = [['Players','2'],['Time','20–40 min'],['Age','10+'],['Source','chessvariants.com'],['License','Public domain']];
+const sr = document.getElementById('stats-row');
+STATS.forEach(([k,v],i) => {
+  if (i>0) sr.appendChild(el('span',{class:'stats-row__divider'}));
+  const d = el('div',{class:'stats-row__item'});
+  d.appendChild(el('span',{class:'stats-row__label'},k));
+  d.appendChild(el('span',{class:'stats-row__value'},v));
+  sr.appendChild(d);
+});
+
+const SECTIONS = [
+  { id:'1', title:'Visibility', body:"You see only squares your pieces can move to or attack. Empty squares in your vision are shown normally. Enemy pieces only appear when they occupy a square threatened by one of your pieces. Your own pieces are always visible to you. Squares outside your vision appear as fog (grey/hidden)." },
+  { id:'2', title:'No check', body:"There is no check or checkmate in Fog of War Chess. The king can move into danger unknowingly — since you cannot see enemy attack lines that are outside your vision, the king receives no warning. This fundamentally changes the endgame: you must hunt the enemy king rather than corner it." },
+  { id:'3', title:'Win condition', body:"Capture the enemy king like any other piece. When you move a piece to the square occupied by the enemy king, the game ends immediately. There is no stalemate — if you cannot move, you lose. Draws are possible only by agreement or threefold repetition of visible board state." },
+  { id:'4', title:'Castling', body:"Castling is allowed only if both the king and the rook involved are within your field of vision (which they always are, since your own pieces' squares are visible). Standard castling rules otherwise apply: neither piece may have moved, no squares between them may be occupied, and the king may not pass through a square attacked by an enemy piece — but since you may not know if a square is attacked, castling through fog is at your own risk." },
+  { id:'5', title:'En passant', body:"En passant capture is allowed only if you can see the square the enemy pawn passed through. Since a pawn's two-square advance passes through an intermediate square, you must have vision of that intermediate square at the moment of capture. If the enemy pawn's advance was invisible to you, en passant is not available." },
+];
+
+const body2 = document.getElementById('rules-body');
+SECTIONS.forEach(s => {
+  const art = el('article',{class:'rules-section',id:`s${s.id}`});
+  art.appendChild(el('div',{class:'rules-section__num'},`SECTION ${s.id.padStart(2,'0')}`));
+  art.appendChild(el('h2',{class:'rules-section__title'},s.title));
+  art.appendChild(el('p',{class:'rules-section__body'},s.body));
+  body2.appendChild(art);
+});
+
+const RELATED = [
+  { category:'Reskin', baseGame:'Chess', title:'4-Player Chess', body:"Four players, four armies, one board. Free-for-all or teams.", stats:'4 players · 30 min · 10+', href:'../4-player-chess/' },
+  { category:'Total conversion', baseGame:'Chess', title:'Hexagonal Chess (Glinski)', body:"Chess played on a hexagonal board with 91 cells. Pieces gain new movement axes.", stats:'2 players · 30 min · 10+', href:'../hexagonal-chess/' },
+  { category:'Total conversion', baseGame:'Catan', title:'Nuke Catan', body:"Post-apocalyptic overhaul. Sheep are scarce, brick is currency.", stats:'3–5 players · 60 min · 12+', href:'../nuke-catan/' },
+];
+const rg = document.getElementById('related-grid');
+RELATED.forEach(m => rg.appendChild(modCard(m)));
+</script>
+</body>
+</html>

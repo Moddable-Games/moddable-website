@@ -28,7 +28,9 @@ const MG = (() => {
     "Reskin": T.blue,
   };
 
-  const HEX_BG = `url("data:image/svg+xml;utf8,<svg xmlns='http://www.w3.org/2000/svg' width='56' height='64' viewBox='0 0 56 64'><path d='M28 1 54 16v32L28 63 2 48V16z' fill='none' stroke='%233a7be8' stroke-opacity='0.18' stroke-width='1'/></svg>")`;
+  const HEX_BG = `url("${url('/img/hex-grid-blue.svg')}")`;
+  const HEX_BG_RED = `url("${url('/img/hex-grid-red.svg')}")`;
+  const HEX_BG_GREEN = `url("${url('/img/hex-grid-green.svg')}")`;
 
   const F = {
     display: `"Inter Tight", system-ui, sans-serif`,
@@ -149,11 +151,11 @@ const MG = (() => {
   /* ── NavBar ──────────────────────────────────────────────────────────── */
   function navbar(activeId) {
     const NAV_ITEMS = [
-      { id:'Mods', href:url('/mods/') },
-      { id:'Games', href:url('/games/endless-skies/') },
-      { id:'Tools', href:url('/tools/') },
+      { id:'Mods', href:url('/mods/'), children:[['All mods',url('/mods/')],['Submit a mod',url('/submit/')]] },
+      { id:'Games', href:url('/games/'), children:[['Nukes',url('/games/nukes/')],['Mongo',url('/games/mongo/')],['Endless Skies',url('/games/endless-skies/')],['Moddable Chess',url('/games/moddable-chess/')],['Dungeon Chess',url('/games/dungeon-chess/')]] },
+      { id:'Tools', href:url('/tools/'), children:[['Workbench',url('/tools/')],['TI tools',url('/tools/ti/')],['Talisman tools',url('/tools/talisman/')],['Nukes tools',url('/tools/nukes/')]] },
       { id:'News', href:url('/news/') },
-      { id:'About', href:url('/about/') },
+      { id:'About', href:url('/about/'), children:[['About',url('/about/')],['Team',url('/team/')],['Roadmap',url('/about/roadmap/')],['Community',url('/community/')]] },
     ];
 
     const header = el('header', { style: css({
@@ -164,28 +166,43 @@ const MG = (() => {
     })});
 
     // Logo
-    const logoWrap = el('a', { href:url('/'), style:{ display:'flex', alignItems:'center', gap:'10px', textDecoration:'none' }});
-    logoWrap.appendChild(cubeSVG(28));
-    logoWrap.appendChild(el('span', { style:{ fontFamily:F.display, fontWeight:700, fontSize:'17px', color:'#fff', letterSpacing:'-0.3px' }}, 'Moddable.Games'));
+    const logoWrap = el('a', { href:url('/'), style:{ display:'flex', alignItems:'center', textDecoration:'none' }});
+    logoWrap.appendChild(el('img', { src:url('/img/moddable-logo-white.png'), alt:'Moddable Games', style:{ height:'32px', width:'auto' }}));
     header.appendChild(logoWrap);
 
     // Desktop nav
     const nav = el('nav', { style:{ display:'flex', gap:'24px', marginLeft:'12px' }});
     for (const item of NAV_ITEMS) {
       const isActive = activeId === item.id;
+      const wrap = el('div', { style:{ position:'relative' }});
       const a = el('a', {
         href: item.href,
         style: css({
           fontFamily:F.body, fontWeight:500, fontSize:'14px',
           color: isActive ? '#fff' : 'rgba(255,255,255,0.6)',
-          textDecoration:'none', letterSpacing:'0.2px',
+          textDecoration:'none', letterSpacing:'0.8px', textTransform:'uppercase',
           position:'relative', paddingBottom:'4px',
         }),
       }, item.id);
       if (isActive) {
         a.appendChild(el('span', { style:{ position:'absolute', bottom:'-22px', left:0, right:0, height:'2px', background:T.cosmicGlow }}));
       }
-      nav.appendChild(a);
+      wrap.appendChild(a);
+      if (item.children) {
+        const dd = el('div', { style:{ position:'absolute', top:'100%', left:'50%', transform:'translateX(-50%)', paddingTop:'12px', display:'none', zIndex:100 }});
+        const menu = el('div', { style:{ background:'#14161c', border:'1px solid rgba(255,255,255,0.12)', borderRadius:'12px', padding:'8px 0', minWidth:'180px', boxShadow:'0 12px 32px rgba(0,0,0,0.5)' }});
+        item.children.forEach(([label, href]) => {
+          const link = el('a', { href, style:{ display:'block', padding:'8px 18px', fontFamily:F.body, fontSize:'13px', color:'rgba(255,255,255,0.8)', textDecoration:'none', transition:'background 100ms' }}, label);
+          link.addEventListener('mouseenter', () => link.style.background = 'rgba(255,255,255,0.06)');
+          link.addEventListener('mouseleave', () => link.style.background = 'transparent');
+          menu.appendChild(link);
+        });
+        dd.appendChild(menu);
+        wrap.appendChild(dd);
+        wrap.addEventListener('mouseenter', () => dd.style.display = 'block');
+        wrap.addEventListener('mouseleave', () => dd.style.display = 'none');
+      }
+      nav.appendChild(wrap);
     }
     header.appendChild(nav);
 
@@ -243,9 +260,9 @@ const MG = (() => {
   function footer() {
     const COLS = [
       { title:'Mods',      links:[['All mods',url('/mods/')],['Submit a mod',url('/submit/')]] },
-      { title:'Games',     links:[['Endless Skies',url('/games/endless-skies/')],['Mongo',url('/games/mongo/')],['Nukes',url('/games/nukes/')]] },
+      { title:'Games',     links:[['Endless Skies',url('/games/endless-skies/')],['Mongo',url('/games/mongo/')],['Nukes',url('/games/nukes/')],['Moddable Chess',url('/games/moddable-chess/')],['Dungeon Chess',url('/games/dungeon-chess/')]] },
       { title:'Tools',     links:[['Workbench',url('/tools/')]] },
-      { title:'Community', links:[['Discord',url('/community/')],['News',url('/news/')],['About',url('/about/')],['Team',url('/team/')]] },
+      { title:'Community', links:[['Discord',url('/community/')],['News',url('/news/')],['About',url('/about/')],['Team',url('/team/')],['Roadmap',url('/about/roadmap/')]] },
     ];
 
     const f = el('footer', { style:{ background:'#000', color:'#fff', padding:'80px 24px 40px', boxSizing:'border-box' }});
@@ -255,9 +272,8 @@ const MG = (() => {
 
     // Brand column
     const brand = el('div');
-    const logoWrap = el('div', { style:{ display:'flex', alignItems:'center', gap:'10px', marginBottom:'18px' }});
-    logoWrap.appendChild(cubeSVG(28));
-    logoWrap.appendChild(el('span', { style:{ fontFamily:F.display, fontWeight:700, fontSize:'16px', color:'#fff', letterSpacing:'-0.3px' }}, 'Moddable.Games'));
+    const logoWrap = el('div', { style:{ display:'flex', alignItems:'center', marginBottom:'18px' }});
+    logoWrap.appendChild(el('img', { src:url('/img/moddable-logo-white.png'), alt:'Moddable Games', style:{ height:'28px', width:'auto' }}));
     brand.appendChild(logoWrap);
     brand.appendChild(el('p', { style:{ fontFamily:F.body, fontSize:'14px', lineHeight:'1.6', color:'rgba(255,255,255,0.65)', maxWidth:'280px', margin:0 }}, 'Creating games you already own. Twelve mods. Three originals. One Discord.'));
     grid.appendChild(brand);
@@ -303,7 +319,7 @@ const MG = (() => {
 
     // Thumb
     const thumb = el('div', { style:{ width:'100%', aspectRatio:'1.6', borderRadius:'12px', overflow:'hidden', position:'relative', background:`linear-gradient(135deg, #0a0d2a 0%, ${accent} 100%)` }});
-    const hexPat = el('div', { style:{ position:'absolute', inset:0, backgroundImage:`url("data:image/svg+xml;utf8,<svg xmlns='http://www.w3.org/2000/svg' width='28' height='32' viewBox='0 0 56 64'><path d='M28 1 54 16v32L28 63 2 48V16z' fill='none' stroke='%23fff' stroke-opacity='0.25' stroke-width='1'/></svg>")`, backgroundSize:'28px 32px' }});
+    const hexPat = el('div', { style:{ position:'absolute', inset:0, backgroundImage:`url("${url('/img/hex-grid-white.svg')}")`, backgroundSize:'28px 32px' }});
     thumb.appendChild(hexPat);
     inner.appendChild(thumb);
 
@@ -328,7 +344,7 @@ const MG = (() => {
     inner.appendChild(statsRow);
 
     // Link
-    const link = el('a', { href: href.startsWith('/') ? url(href) : href, style:{ fontFamily:F.body, fontWeight:600, fontSize:'14px', color:accent, textDecoration:'none', display:'inline-flex', alignItems:'center', gap:'6px' }});
+    const link = el('a', { href, style:{ fontFamily:F.body, fontWeight:600, fontSize:'14px', color:accent, textDecoration:'none', display:'inline-flex', alignItems:'center', gap:'6px' }});
     link.innerHTML = 'View the rules <span aria-hidden="true">→</span>';
     inner.appendChild(link);
 
@@ -342,10 +358,11 @@ const MG = (() => {
 
     if (withHorizon) {
       const bg = el('div', { style:{ position:'absolute', inset:0, background:`linear-gradient(180deg, ${T.cosmicDeep} 0%, ${T.cosmicMid} 50%, #000 100%)` }});
+      const hexLand = el('div', { style:{ position:'absolute', inset:0, background:`url("${url('/img/hex-land.jpg')}") center bottom / cover no-repeat`, opacity:'0.2', mixBlendMode:'screen' }});
       const hexLayer = el('div', { style:{ position:'absolute', inset:0, backgroundImage:HEX_BG, backgroundSize:'56px 64px', opacity:'0.6' }});
       const fade = el('div', { style:{ position:'absolute', inset:0, background:'linear-gradient(180deg, rgba(8,10,30,0.5) 0%, transparent 60%)', pointerEvents:'none' }});
       const fadeBottom = el('div', { style:{ position:'absolute', inset:0, background:'linear-gradient(180deg, transparent 60%, #000 100%)', pointerEvents:'none' }});
-      sec.appendChild(bg); sec.appendChild(hexLayer); sec.appendChild(fade); sec.appendChild(fadeBottom);
+      sec.appendChild(bg); sec.appendChild(hexLand); sec.appendChild(hexLayer); sec.appendChild(fade); sec.appendChild(fadeBottom);
     } else {
       const glow = el('div', { style:{ position:'absolute', right:'-150px', top:'30%', width:'700px', height:'700px', background:`radial-gradient(circle, rgba(58,123,232,0.22) 0%, transparent 65%)`, pointerEvents:'none' }});
       sec.appendChild(glow);
@@ -374,6 +391,6 @@ const MG = (() => {
   }
 
   /* ── Expose ──────────────────────────────────────────────────────────── */
-  return { T, F, HEX_BG, CATEGORY_COLORS, el, btn, linkBtn, navbar, footer, modCard, pageHero, cubeSVG, url };
+  return { T, F, HEX_BG, HEX_BG_RED, HEX_BG_GREEN, CATEGORY_COLORS, el, btn, linkBtn, navbar, footer, modCard, pageHero, cubeSVG, url };
 
 })();

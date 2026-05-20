@@ -5,86 +5,148 @@
 <meta name="viewport" content="width=device-width, initial-scale=1">
 <meta name="mg-base" content="/MODDABLE/moddable-website">
 <title>Talisman tools — Moddable.Games</title>
-<link rel="stylesheet" href="../../_mg.css">
+<link rel="stylesheet" href="../../css/_mg.css">
 <style>
 body { background:#f5f4ef; }
-.tog-btn { width:36px;height:36px;border-radius:9999px;cursor:pointer;font-family:var(--mg-font-mono);font-weight:600;font-size:13px;border:1px solid #e6e3d8;transition:all 120ms; }
+.tog-btn { width:36px;height:36px;border-radius:9999px;cursor:pointer;font-family:var(--mg-font-mono);font-weight:600;font-size:13px;border:1px solid #e6e3d8;transition:all 120ms; background:#f5f4ef; color:#14161c; }
+.tog-btn--active { background:#14161c; color:#fff; }
+
+/* ── Hero ── */
+.talisman-hero { background:#000; color:#fff; padding:56px 32px 72px; position:relative; overflow:hidden; }
+.talisman-hero__glow { position:absolute; right:-80px; top:20%; width:500px; height:500px; background:radial-gradient(circle,rgba(93,42,138,0.3) 0%,transparent 65%); pointer-events:none; }
+.talisman-hero__inner { max-width:1200px; margin:0 auto; position:relative; }
+.talisman-hero__back { font-family:var(--mg-font-mono); font-size:12px; color:rgba(255,255,255,0.65); text-decoration:none; }
+.talisman-hero__eyebrow { font-family:var(--mg-font-pixel); font-size:10px; color:#c97afb; letter-spacing:1.5px; margin:20px 0 16px; }
+.talisman-hero__title { font-family:var(--mg-font-display); font-weight:600; font-size:clamp(44px,5.5vw,80px); line-height:1.0; letter-spacing:-0.025em; margin:0 0 18px; }
+.talisman-hero__lede { font-family:var(--mg-font-body); font-size:17px; line-height:1.55; color:rgba(255,255,255,0.75); max-width:560px; margin:0; }
+
+/* ── Tools section ── */
+.talisman-tools { background:#f5f4ef; padding:48px 32px 96px; }
+.talisman-tools__inner { max-width:900px; margin:0 auto; display:flex; flex-direction:column; gap:24px; }
+
+/* ── Tool cards ── */
+.tool-card { background:#fff; border:1px solid #e6e3d8; border-radius:20px; padding:32px; }
+.tool-card__header { display:flex; align-items:flex-start; gap:16px; margin-bottom:22px; padding-bottom:22px; border-bottom:1px solid #e6e3d8; }
+.tool-card__accent { width:6px; height:48px; border-radius:3px; flex:none; }
+.tool-card__accent--purple { background:#5d2a8a; }
+.tool-card__accent--blue { background:#0c4f8d; }
+.tool-card__accent--green { background:#3a9928; }
+.tool-card__eyebrow { font-family:var(--mg-font-pixel); font-size:9px; letter-spacing:1.5px; margin-bottom:6px; }
+.tool-card__eyebrow--purple { color:#5d2a8a; }
+.tool-card__eyebrow--blue { color:#0c4f8d; }
+.tool-card__eyebrow--green { color:#3a9928; }
+.tool-card__title { font-family:var(--mg-font-display); font-weight:600; font-size:24px; color:#14161c; margin:0; letter-spacing:-0.3px; }
+.tool-card__desc { font-family:var(--mg-font-body); font-size:14px; color:#4f5764; margin:4px 0 0; }
+
+/* ── Character lottery ── */
+.char-controls { display:flex; gap:10px; align-items:center; margin-bottom:20px; flex-wrap:wrap; }
+.char-controls__label { font-family:var(--mg-font-mono); font-size:12px; color:#7a8290; text-transform:uppercase; letter-spacing:0.5px; }
+.char-controls__btns { display:flex; gap:6px; }
+.char-controls__draw { margin-left:auto; }
+.char-grid { display:grid; grid-template-columns:repeat(2,1fr); gap:10px; }
+.char-card { background:#f5f4ef; border-radius:12px; padding:14px 18px; display:flex; align-items:center; gap:14px; }
+.char-card__avatar { width:40px; height:40px; border-radius:9999px; background:#5d2a8a; display:flex; align-items:center; justify-content:center; font-family:var(--mg-font-pixel); font-size:10px; color:#fff; letter-spacing:0.5px; flex:none; }
+.char-card__name { font-family:var(--mg-font-display); font-weight:600; font-size:17px; color:#14161c; }
+.char-card__stats { font-family:var(--mg-font-mono); font-size:11px; color:#4f5764; margin-top:2px; }
+.char-card__info { flex:1; }
+
+/* ── Hex board ── */
+.board-controls { display:flex; justify-content:space-between; align-items:center; margin-bottom:16px; }
+.board-seed { font-family:var(--mg-font-mono); font-size:12px; color:#7a8290; }
+.board-wrap { background:#0a0d2a; border-radius:14px; padding:20px; overflow:hidden; }
+.board-legend { display:flex; gap:12px; margin-top:14px; flex-wrap:wrap; }
+.board-legend__chip { display:flex; align-items:center; gap:6px; }
+.board-legend__swatch { width:12px; height:12px; border-radius:2px; }
+.board-legend__label { font-family:var(--mg-font-body); font-size:12px; color:#4f5764; }
+
+/* ── Encounter ── */
+.encounter-filters { display:flex; gap:8px; flex-wrap:wrap; margin-bottom:20px; }
+.encounter-card { min-height:160px; }
+.encounter-card__inner { background:#f5f4ef; border-radius:14px; padding:24px; }
+.encounter-card__eyebrow { font-family:var(--mg-font-pixel); font-size:9px; letter-spacing:1.5px; margin-bottom:10px; }
+.encounter-card__title { font-family:var(--mg-font-display); font-weight:600; font-size:22px; letter-spacing:-0.3px; color:#14161c; margin:0 0 12px; }
+.encounter-card__text { font-family:var(--mg-font-body); font-size:15px; line-height:1.65; color:#1f2228; margin:0; }
+.encounter-draw { margin-top:20px; }
+
+/* ── Ring filter buttons ── */
+.ring-btn { font-family:var(--mg-font-body); font-weight:600; font-size:13px; height:34px; padding:0 14px; border-radius:9999px; cursor:pointer; transition:all 150ms; }
+.ring-btn--inactive { border:1px solid #c3c5cc; background:transparent; color:#14161c; }
 </style>
 </head>
 <body>
 <div id="nav-root"></div>
 
-<section style="background:#000;color:#fff;padding:56px 32px 72px;position:relative;overflow:hidden">
-  <div style="position:absolute;right:-80px;top:20%;width:500px;height:500px;background:radial-gradient(circle,rgba(93,42,138,0.3) 0%,transparent 65%);pointer-events:none"></div>
-  <div style="max-width:1200px;margin:0 auto;position:relative">
-    <a href="/tools/" style="font-family:var(--mg-font-mono);font-size:12px;color:rgba(255,255,255,0.65);text-decoration:none">← All tools</a>
-    <div style="font-family:var(--mg-font-pixel);font-size:10px;color:#c97afb;letter-spacing:1.5px;margin:20px 0 16px">▲ TALISMAN: HEXED</div>
-    <h1 style="font-family:var(--mg-font-display);font-weight:600;font-size:clamp(44px,5.5vw,80px);line-height:1.0;letter-spacing:-0.025em;margin:0 0 18px">Talisman tools.</h1>
-    <p style="font-family:var(--mg-font-body);font-size:17px;line-height:1.55;color:rgba(255,255,255,0.75);max-width:560px;margin:0">Character lottery, hex board generator, and encounter quick-draw. Built for <em>Talisman: Hexed</em> — the 61-tile open-world variant.</p>
+<section class="talisman-hero">
+  <div class="talisman-hero__glow"></div>
+  <div class="talisman-hero__inner">
+    <a href="/tools/" class="talisman-hero__back">← All tools</a>
+    <div class="talisman-hero__eyebrow">▲ TALISMAN: HEXED</div>
+    <h1 class="talisman-hero__title">Talisman tools.</h1>
+    <p class="talisman-hero__lede">Character lottery, hex board generator, and encounter quick-draw. Built for <em>Talisman: Hexed</em> — the 61-tile open-world variant.</p>
   </div>
 </section>
 
-<section style="background:#f5f4ef;padding:48px 32px 96px">
-  <div style="max-width:900px;margin:0 auto;display:flex;flex-direction:column;gap:24px">
+<section class="talisman-tools">
+  <div class="talisman-tools__inner">
 
     <!-- Character Lottery -->
-    <div style="background:#fff;border:1px solid #e6e3d8;border-radius:20px;padding:32px">
-      <div style="display:flex;align-items:flex-start;gap:16px;margin-bottom:22px;padding-bottom:22px;border-bottom:1px solid #e6e3d8">
-        <div style="width:6px;height:48px;background:#5d2a8a;border-radius:3px;flex:none"></div>
+    <div class="tool-card">
+      <div class="tool-card__header">
+        <div class="tool-card__accent tool-card__accent--purple"></div>
         <div>
-          <div style="font-family:var(--mg-font-pixel);font-size:9px;color:#5d2a8a;letter-spacing:1.5px;margin-bottom:6px">▲ CHARACTER DRAFT</div>
-          <h3 style="font-family:var(--mg-font-display);font-weight:600;font-size:24px;color:#14161c;margin:0;letter-spacing:-0.3px">Character lottery</h3>
-          <p style="font-family:var(--mg-font-body);font-size:14px;color:#4f5764;margin:4px 0 0">Random character draw from the Talisman 4e (revised) base set.</p>
+          <div class="tool-card__eyebrow tool-card__eyebrow--purple">▲ CHARACTER DRAFT</div>
+          <h3 class="tool-card__title">Character lottery</h3>
+          <p class="tool-card__desc">Random character draw from the Talisman 4e (revised) base set.</p>
         </div>
       </div>
-      <div style="display:flex;gap:10px;align-items:center;margin-bottom:20px;flex-wrap:wrap">
-        <span style="font-family:var(--mg-font-mono);font-size:12px;color:#7a8290;text-transform:uppercase;letter-spacing:0.5px">Players:</span>
-        <div id="char-player-btns" style="display:flex;gap:6px"></div>
-        <div id="char-draw-btn" style="margin-left:auto"></div>
+      <div class="char-controls">
+        <span class="char-controls__label">Players:</span>
+        <div id="char-player-btns" class="char-controls__btns"></div>
+        <div id="char-draw-btn" class="char-controls__draw"></div>
       </div>
-      <div id="char-grid" style="display:grid;grid-template-columns:repeat(2,1fr);gap:10px"></div>
+      <div id="char-grid" class="char-grid"></div>
     </div>
 
     <!-- Hex Board Generator -->
-    <div style="background:#fff;border:1px solid #e6e3d8;border-radius:20px;padding:32px">
-      <div style="display:flex;align-items:flex-start;gap:16px;margin-bottom:22px;padding-bottom:22px;border-bottom:1px solid #e6e3d8">
-        <div style="width:6px;height:48px;background:#0c4f8d;border-radius:3px;flex:none"></div>
+    <div class="tool-card">
+      <div class="tool-card__header">
+        <div class="tool-card__accent tool-card__accent--blue"></div>
         <div>
-          <div style="font-family:var(--mg-font-pixel);font-size:9px;color:#0c4f8d;letter-spacing:1.5px;margin-bottom:6px">▲ BOARD SETUP</div>
-          <h3 style="font-family:var(--mg-font-display);font-weight:600;font-size:24px;color:#14161c;margin:0;letter-spacing:-0.3px">Hex board generator</h3>
-          <p style="font-family:var(--mg-font-body);font-size:14px;color:#4f5764;margin:4px 0 0">A fresh 4-ring layout on each shuffle. Visual reference for building the Hexed map.</p>
+          <div class="tool-card__eyebrow tool-card__eyebrow--blue">▲ BOARD SETUP</div>
+          <h3 class="tool-card__title">Hex board generator</h3>
+          <p class="tool-card__desc">A fresh 4-ring layout on each shuffle. Visual reference for building the Hexed map.</p>
         </div>
       </div>
-      <div style="display:flex;justify-content:space-between;align-items:center;margin-bottom:16px">
-        <div id="board-seed" style="font-family:var(--mg-font-mono);font-size:12px;color:#7a8290"></div>
+      <div class="board-controls">
+        <div id="board-seed" class="board-seed"></div>
         <div id="board-reshuffle-btn"></div>
       </div>
-      <div id="board-wrap" style="background:#0a0d2a;border-radius:14px;padding:20px;overflow:hidden">
+      <div id="board-wrap" class="board-wrap">
         <svg id="board-svg" width="100%" viewBox="-220 -220 440 440"></svg>
       </div>
-      <div style="display:flex;gap:12px;margin-top:14px;flex-wrap:wrap" id="board-legend"></div>
+      <div id="board-legend" class="board-legend"></div>
     </div>
 
     <!-- Encounter Quick-draw -->
-    <div style="background:#fff;border:1px solid #e6e3d8;border-radius:20px;padding:32px">
-      <div style="display:flex;align-items:flex-start;gap:16px;margin-bottom:22px;padding-bottom:22px;border-bottom:1px solid #e6e3d8">
-        <div style="width:6px;height:48px;background:#3a9928;border-radius:3px;flex:none"></div>
+    <div class="tool-card">
+      <div class="tool-card__header">
+        <div class="tool-card__accent tool-card__accent--green"></div>
         <div>
-          <div style="font-family:var(--mg-font-pixel);font-size:9px;color:#3a9928;letter-spacing:1.5px;margin-bottom:6px">▲ ENCOUNTER</div>
-          <h3 style="font-family:var(--mg-font-display);font-weight:600;font-size:24px;color:#14161c;margin:0;letter-spacing:-0.3px">Encounter quick-draw</h3>
-          <p style="font-family:var(--mg-font-body);font-size:14px;color:#4f5764;margin:4px 0 0">Draw a random encounter for any ring. Flavour text from the Hexed adventure deck.</p>
+          <div class="tool-card__eyebrow tool-card__eyebrow--green">▲ ENCOUNTER</div>
+          <h3 class="tool-card__title">Encounter quick-draw</h3>
+          <p class="tool-card__desc">Draw a random encounter for any ring. Flavour text from the Hexed adventure deck.</p>
         </div>
       </div>
-      <div style="display:flex;gap:8px;flex-wrap:wrap;margin-bottom:20px" id="ring-filters"></div>
-      <div id="encounter-card" style="min-height:160px"></div>
-      <div style="margin-top:20px" id="encounter-draw-btn"></div>
+      <div id="ring-filters" class="encounter-filters"></div>
+      <div id="encounter-card" class="encounter-card"></div>
+      <div id="encounter-draw-btn" class="encounter-draw"></div>
     </div>
 
   </div>
 </section>
 
 <div id="footer-root"></div>
-<script src="../../_mg.js"></script>
+<script src="../../js/_mg.js"></script>
 <script>
 const { T, el, btn, navbar, footer } = MG;
 document.getElementById('nav-root').appendChild(navbar('Tools'));
@@ -109,9 +171,8 @@ let charCount = 4;
 
 function mkTog(label, active, onClick) {
   const b = document.createElement('button');
-  b.className = 'tog-btn';
+  b.className = 'tog-btn' + (active ? ' tog-btn--active' : '');
   b.textContent = label;
-  Object.assign(b.style, { background: active?'#14161c':'#f5f4ef', color: active?'#fff':'#14161c' });
   b.addEventListener('click', onClick); return b;
 }
 
@@ -124,11 +185,11 @@ function drawChars() {
   const picks = [...CHARS].sort(()=>Math.random()-0.5).slice(0,charCount);
   const grid = document.getElementById('char-grid'); grid.innerHTML = '';
   picks.forEach((c,i) => {
-    const card = el('div',{style:{background:'#f5f4ef',borderRadius:'12px',padding:'14px 18px',display:'flex',alignItems:'center',gap:'14px'}});
-    const av = el('div',{style:{width:'40px',height:'40px',borderRadius:'9999px',background:'#5d2a8a',display:'flex',alignItems:'center',justifyContent:'center',fontFamily:'var(--mg-font-pixel)',fontSize:'10px',color:'#fff',letterSpacing:'0.5px',flex:'none'}},`P${i+1}`);
-    const info = el('div',{style:{flex:1}});
-    info.appendChild(el('div',{style:{fontFamily:'var(--mg-font-display)',fontWeight:600,fontSize:'17px',color:'#14161c'}},c.name));
-    info.appendChild(el('div',{style:{fontFamily:'var(--mg-font-mono)',fontSize:'11px',color:'#4f5764',marginTop:'2px'}},`STR ${c.str} · CRAFT ${c.cft} · LIVES ${c.lives}`));
+    const card = el('div',{class:'char-card'});
+    const av = el('div',{class:'char-card__avatar'},`P${i+1}`);
+    const info = el('div',{class:'char-card__info'});
+    info.appendChild(el('div',{class:'char-card__name'},c.name));
+    info.appendChild(el('div',{class:'char-card__stats'},`STR ${c.str} · CRAFT ${c.cft} · LIVES ${c.lives}`));
     card.appendChild(av); card.appendChild(info); grid.appendChild(card);
   });
 }
@@ -179,10 +240,13 @@ function drawBoard() {
   // Legend
   const legend = document.getElementById('board-legend'); legend.innerHTML = '';
   RING_META.forEach(r => {
-    const chip = el('div',{style:{display:'flex',alignItems:'center',gap:'6px'}});
-    chip.appendChild(el('div',{style:{width:'12px',height:'12px',background:r.color,borderRadius:'2px'}}));
-    chip.appendChild(el('span',{style:{fontFamily:'var(--mg-font-body)',fontSize:'12px',color:'#4f5764'}}),r.label);
-    chip.lastChild.textContent = r.label;
+    const chip = el('div',{class:'board-legend__chip'});
+    const swatch = el('div',{class:'board-legend__swatch'});
+    swatch.style.background = r.color;
+    chip.appendChild(swatch);
+    const lbl = el('span',{class:'board-legend__label'});
+    lbl.textContent = r.label;
+    chip.appendChild(lbl);
     legend.appendChild(chip);
   });
 }
@@ -223,8 +287,9 @@ function renderRingFilters() {
   Object.entries(RING_LABELS).forEach(([key,label]) => {
     const isA = key===activeRing;
     const b = document.createElement('button');
+    b.className = 'ring-btn' + (isA ? '' : ' ring-btn--inactive');
     b.textContent = label;
-    Object.assign(b.style,{fontFamily:'var(--mg-font-body)',fontWeight:600,fontSize:'13px',height:'34px',padding:'0 14px',borderRadius:'9999px',border:isA?'none':'1px solid #c3c5cc',background:isA?RING_COLORS[key]:'transparent',color:isA?'#fff':'#14161c',cursor:'pointer',transition:'all 150ms'});
+    if (isA) { b.style.background = RING_COLORS[key]; b.style.color = '#fff'; b.style.border = 'none'; }
     b.addEventListener('click',()=>{ activeRing=key; renderRingFilters(); drawEncounter(); });
     rf.appendChild(b);
   });
@@ -235,10 +300,13 @@ function drawEncounter() {
   const enc = pool[Math.floor(Math.random()*pool.length)];
   const card = document.getElementById('encounter-card');
   card.innerHTML = '';
-  const c = el('div',{style:{background:'#f5f4ef',borderRadius:'14px',padding:'24px',borderLeft:`4px solid ${RING_COLORS[activeRing]}`}});
-  c.appendChild(el('div',{style:{fontFamily:'var(--mg-font-pixel)',fontSize:'9px',color:RING_COLORS[activeRing],letterSpacing:'1.5px',marginBottom:'10px'}},`▲ ${RING_LABELS[activeRing].toUpperCase()} RING`));
-  c.appendChild(el('h4',{style:{fontFamily:'var(--mg-font-display)',fontWeight:600,fontSize:'22px',letterSpacing:'-0.3px',color:'#14161c',margin:'0 0 12px'}},enc.title));
-  c.appendChild(el('p',{style:{fontFamily:'var(--mg-font-body)',fontSize:'15px',lineHeight:'1.65',color:'#1f2228',margin:0}},enc.text));
+  const c = el('div',{class:'encounter-card__inner'});
+  c.style.borderLeft = `4px solid ${RING_COLORS[activeRing]}`;
+  const eyebrow = el('div',{class:'encounter-card__eyebrow'},`▲ ${RING_LABELS[activeRing].toUpperCase()} RING`);
+  eyebrow.style.color = RING_COLORS[activeRing];
+  c.appendChild(eyebrow);
+  c.appendChild(el('h4',{class:'encounter-card__title'},enc.title));
+  c.appendChild(el('p',{class:'encounter-card__text'},enc.text));
   card.appendChild(c);
 }
 

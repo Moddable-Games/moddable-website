@@ -1,0 +1,90 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<meta name="mg-base" content="/MODDABLE/moddable-website">
+<title>Roadmap — Moddable.Games</title>
+<link rel="stylesheet" href="../../css/_mg.css">
+<style>
+body { background: #f5f4ef; }
+.roadmap-timeline { position: relative; padding-left: 0; max-width: 840px; margin: 0 auto; }
+.roadmap-timeline::before { content: ''; position: absolute; left: 72px; top: 24px; bottom: 24px; width: 2px; background: var(--mg-hairline-light); }
+.milestone-row { display: flex; align-items: flex-start; gap: 24px; padding: 20px 0; position: relative; }
+.milestone-badge { flex: none; width: 120px; padding: 8px 14px; border-radius: 9999px; font-family: var(--mg-font-mono); font-size: 13px; font-weight: 600; color: #fff; text-align: center; position: relative; z-index: 1; }
+.milestone-text { font-family: var(--mg-font-body); font-size: 18px; line-height: 1.55; color: var(--mg-body-color); padding: 16px 24px; background: #fff; border: 1px solid var(--mg-hairline-light); border-radius: 14px; flex: 1; }
+.vision-card { background: #fff; border: 1px solid var(--mg-hairline-light); border-radius: 14px; padding: 28px 28px 24px; display: flex; flex-direction: column; gap: 8px; }
+.vision-number { font-family: var(--mg-font-mono); font-size: 12px; font-weight: 600; color: var(--mg-stone); letter-spacing: 0.5px; }
+.vision-title { font-family: var(--mg-font-display); font-weight: 600; font-size: 16px; color: var(--mg-ink); }
+.vision-body { font-family: var(--mg-font-body); font-size: 15px; line-height: 1.5; color: #4a5060; }
+.roadmap-vision { padding: 0 32px 96px; }
+.roadmap-vision__body { font-family: var(--mg-font-body); font-size: 19px; line-height: 1.65; color: var(--mg-body-color); margin: 0 0 36px; }
+</style>
+</head>
+<body>
+<div id="nav-root"></div>
+<div id="page-hero"></div>
+
+<section class="mg-section--tight">
+  <div class="roadmap-timeline" id="timeline"></div>
+</section>
+
+<section class="roadmap-vision">
+  <div class="mg-container--mid">
+    <h2 class="mg-heading-md">The bigger picture.</h2>
+    <p class="roadmap-vision__body">Become the ecosystem tabletop is still missing. A place where physical and online play converge under community ownership — and an online engine and marketplace where anyone can monetise their creations.</p>
+    <div id="vision-grid" class="mg-grid-3"></div>
+  </div>
+</section>
+
+<div id="footer-root"></div>
+<script src="../../js/_mg.js"></script>
+<script>
+const { el, navbar, footer, pageHero } = MG;
+document.getElementById('nav-root').appendChild(navbar('About'));
+document.getElementById('footer-root').appendChild(footer());
+document.getElementById('page-hero').appendChild(pageHero({
+  eyebrow:'▲ 18-MONTH ROADMAP',
+  title:'What ships and when.',
+  lede:'Our public roadmap — from print runs to platform launches. Updated as milestones hit.',
+  accent:'#0c4f8d',
+  withHorizon:true,
+}));
+
+const milestones = [
+  { quarter:'Q3 2026', text:'Nukes: first 500-unit print run ships', color:'#d11a1a' },
+  { quarter:'Q3 2026', text:'Moddable Chess: 4 variants playable online', color:'#3a9928' },
+  { quarter:'Q4 2026', text:'Dungeon Chess: crowdfunding campaign live', color:'#14161c' },
+  { quarter:'Q1 2027', text:'Marketplace beta: creators upload + sell mods', color:'#0c4f8d' },
+  { quarter:'Q2 2027', text:'Mongo: multiplayer playtest online', color:'#0c4f8d' },
+  { quarter:'Q3 2027', text:'Print-on-demand pipeline live', color:'#0c4f8d' },
+];
+
+const timeline = document.getElementById('timeline');
+milestones.forEach(m => {
+  const row = el('div',{class:'milestone-row'});
+  const badge = el('span',{class:'milestone-badge'},m.quarter);
+  badge.style.background = m.color;
+  const text = el('div',{class:'milestone-text'},m.text);
+  row.appendChild(badge);
+  row.appendChild(text);
+  timeline.appendChild(row);
+});
+
+const visionItems = [
+  { num:'01 · ENGINE', title:'Host any hex-based game online.', body:'A universal runtime for hex-grid games — drag pieces, resolve rules, spectate live.' },
+  { num:'02 · MARKETPLACE', title:'Designers sell mods, art and expansions.', body:'Upload your creation, set a price or go free, and reach thousands of players instantly.' },
+  { num:'03 · COMMUNITY', title:'Players find groups, share variants, run tournaments.', body:'Matchmaking, leaderboards, and event scheduling built into the platform.' },
+];
+
+const vGrid = document.getElementById('vision-grid');
+visionItems.forEach(v => {
+  const card = el('div',{class:'vision-card'});
+  card.appendChild(el('div',{class:'vision-number'},v.num));
+  card.appendChild(el('div',{class:'vision-title'},v.title));
+  card.appendChild(el('div',{class:'vision-body'},v.body));
+  vGrid.appendChild(card);
+});
+</script>
+</body>
+</html>

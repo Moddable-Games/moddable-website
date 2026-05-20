@@ -5,73 +5,146 @@
 <meta name="viewport" content="width=device-width, initial-scale=1">
 <meta name="mg-base" content="/MODDABLE/moddable-website">
 <title>Twilight Imperium tools — Moddable.Games</title>
-<link rel="stylesheet" href="../../_mg.css">
+<link rel="stylesheet" href="../../css/_mg.css">
 <style>
 body { background:#f5f4ef; }
 .tog-btn { width:36px;height:36px;border-radius:9999px;cursor:pointer;font-family:var(--mg-font-mono);font-weight:600;font-size:13px;transition:all 120ms; }
+
+/* ── TI Hero ── */
+.ti-hero { background:#000;color:#fff;padding:56px 32px 72px;position:relative;overflow:hidden; }
+.ti-hero__glow { position:absolute;left:-100px;top:20%;width:600px;height:600px;background:radial-gradient(circle,rgba(12,79,141,0.3) 0%,transparent 65%);pointer-events:none; }
+.ti-hero__inner { max-width:1200px;margin:0 auto;position:relative; }
+.ti-hero__back { font-family:var(--mg-font-mono);font-size:12px;color:rgba(255,255,255,0.65);text-decoration:none; }
+.ti-hero__eyebrow { font-family:var(--mg-font-pixel);font-size:10px;color:#6fb5ff;letter-spacing:1.5px;margin:20px 0 16px; }
+.ti-hero__title { font-family:var(--mg-font-display);font-weight:600;font-size:clamp(44px,5.5vw,80px);line-height:1.0;letter-spacing:-0.025em;margin:0 0 18px; }
+.ti-hero__lede { font-family:var(--mg-font-body);font-size:17px;line-height:1.55;color:rgba(255,255,255,0.75);max-width:560px;margin:0; }
+
+/* ── Tools body section ── */
+.ti-body { background:#f5f4ef;padding:48px 32px 96px; }
+.ti-body__inner { max-width:900px;margin:0 auto;display:flex;flex-direction:column;gap:24px; }
+
+/* ── Tool cards ── */
+.ti-card { background:#fff;border:1px solid #e6e3d8;border-radius:20px;padding:32px; }
+.ti-card__header { display:flex;align-items:flex-start;gap:16px;margin-bottom:22px;padding-bottom:22px;border-bottom:1px solid #e6e3d8; }
+.ti-card__accent { width:6px;height:48px;border-radius:3px;flex:none; }
+.ti-card__accent--blue { background:#0c4f8d; }
+.ti-card__accent--green { background:#3a9928; }
+.ti-card__accent--red { background:#d11a1a; }
+.ti-card__eyebrow { font-family:var(--mg-font-pixel);font-size:9px;letter-spacing:1.5px;margin-bottom:6px; }
+.ti-card__eyebrow--blue { color:#0c4f8d; }
+.ti-card__eyebrow--green { color:#3a9928; }
+.ti-card__eyebrow--red { color:#d11a1a; }
+.ti-card__title { font-family:var(--mg-font-display);font-weight:600;font-size:24px;color:#14161c;margin:0;letter-spacing:-0.3px; }
+.ti-card__desc { font-family:var(--mg-font-body);font-size:14px;color:#4f5764;margin:4px 0 0; }
+
+/* ── Faction picker controls ── */
+.ti-controls { display:flex;gap:14px;align-items:center;margin-bottom:20px;flex-wrap:wrap; }
+.ti-controls__group { display:flex;gap:8px;align-items:center; }
+.ti-controls__label { font-family:var(--mg-font-mono);font-size:12px;color:#7a8290;text-transform:uppercase;letter-spacing:0.5px; }
+.ti-controls__btns { display:flex;gap:6px; }
+#deal-btn { margin-left:auto; }
+
+/* ── Faction hands (JS-rendered) ── */
+.ti-hand { background:#f5f4ef;border-radius:12px;padding:14px;margin-bottom:10px; }
+.ti-hand__label { font-family:var(--mg-font-pixel);font-size:9px;color:#0c4f8d;letter-spacing:1.5px;margin-bottom:10px; }
+.ti-hand__row { display:flex;gap:8px;flex-wrap:wrap; }
+.ti-faction { flex:1 1 0;min-width:120px;padding:12px 14px;background:#fff;border-radius:10px;display:flex;align-items:center;gap:10px; }
+.ti-faction__badge { width:26px;height:26px;border-radius:6px;display:flex;align-items:center;justify-content:center;font-family:var(--mg-font-pixel);font-size:7px;flex:none; }
+.ti-faction__name { font-family:var(--mg-font-display);font-weight:600;font-size:13px;color:#14161c;line-height:1.2; }
+
+/* ── Objectives (JS-rendered) ── */
+.ti-objectives { display:grid;grid-template-columns:1fr 1fr;gap:20px; }
+.ti-obj-title { font-family:var(--mg-font-pixel);font-size:9px;letter-spacing:1.5px;margin-bottom:14px; }
+.ti-obj-list { display:flex;flex-direction:column;gap:6px; }
+.ti-obj-row { display:flex;align-items:center;gap:10px;padding:8px 12px;border-radius:8px;cursor:pointer;background:#f5f4ef;transition:background 150ms; }
+.ti-obj-check { width:18px;height:18px;border-radius:4px;flex:none;display:flex;align-items:center;justify-content:center;font-size:12px;transition:all 120ms; }
+.ti-obj-label { font-family:var(--mg-font-body);font-size:13px;color:#14161c;line-height:1.3; }
+
+/* ── Agenda (JS-rendered) ── */
+.ti-agenda-empty { text-align:center;padding:32px 0; }
+.ti-agenda-card { background:#f5f4ef;border-radius:14px;padding:24px;margin-bottom:20px; }
+.ti-agenda-type { font-family:var(--mg-font-mono);font-size:11px;font-weight:600;background:#d11a1a;color:#fff;padding:3px 10px;border-radius:9999px;margin-bottom:12px;display:inline-block; }
+.ti-agenda-title { font-family:var(--mg-font-display);font-weight:600;font-size:22px;letter-spacing:-0.3px;color:#14161c;margin:8px 0 16px; }
+.ti-agenda-opts { display:grid;grid-template-columns:1fr 1fr;gap:12px; }
+.ti-agenda-opt { background:#fff;border-radius:10px;padding:14px; }
+.ti-agenda-opt__label { font-family:var(--mg-font-mono);font-size:10px;font-weight:600;letter-spacing:1px;margin-bottom:6px; }
+.ti-agenda-opt__text { font-family:var(--mg-font-body);font-size:13px;color:#1f2228;line-height:1.5; }
+.ti-tally { display:flex;gap:16px;align-items:center;flex-wrap:wrap;margin-bottom:16px; }
+.ti-tally__group { display:flex;align-items:center;gap:10px;background:#fff;border:1px solid var(--mg-hairline-light);border-radius:12px;padding:12px 16px;flex:1 1 0; }
+.ti-tally__side { font-family:var(--mg-font-mono);font-size:12px;color:#7a8290;text-transform:uppercase; }
+.ti-tally__count { font-family:var(--mg-font-display);font-weight:600;font-size:28px;margin:0 8px;min-width:32px;text-align:center; }
+.ti-tally__btn { width:28px;height:28px;border-radius:9999px;cursor:pointer;font-size:16px;line-height:1; }
+.ti-tally__btn--minus { border:1px solid var(--mg-hairline-light);background:#f5f4ef; }
+.ti-tally__btn--plus { border:none;color:#fff; }
+.ti-agenda-btns { display:flex;gap:10px;flex-wrap:wrap; }
+
+@media (max-width: 768px) {
+  .ti-objectives { grid-template-columns:1fr; }
+  .ti-agenda-opts { grid-template-columns:1fr; }
+}
 </style>
 </head>
 <body>
 <div id="nav-root"></div>
 
-<section style="background:#000;color:#fff;padding:56px 32px 72px;position:relative;overflow:hidden">
-  <div style="position:absolute;left:-100px;top:20%;width:600px;height:600px;background:radial-gradient(circle,rgba(12,79,141,0.3) 0%,transparent 65%);pointer-events:none"></div>
-  <div style="max-width:1200px;margin:0 auto;position:relative">
-    <a href="/tools/" style="font-family:var(--mg-font-mono);font-size:12px;color:rgba(255,255,255,0.65);text-decoration:none">← All tools</a>
-    <div style="font-family:var(--mg-font-pixel);font-size:10px;color:#6fb5ff;letter-spacing:1.5px;margin:20px 0 16px">▲ HYPER IMPERIUM</div>
-    <h1 style="font-family:var(--mg-font-display);font-weight:600;font-size:clamp(44px,5.5vw,80px);line-height:1.0;letter-spacing:-0.025em;margin:0 0 18px">Twilight Imperium<br>tools.</h1>
-    <p style="font-family:var(--mg-font-body);font-size:17px;line-height:1.55;color:rgba(255,255,255,0.75);max-width:560px;margin:0">Faction picker, objective tracker, and agenda voter. Tuned for Hyper Imperium — TI4 + PoK at speed.</p>
+<section class="ti-hero">
+  <div class="ti-hero__glow"></div>
+  <div class="ti-hero__inner">
+    <a href="/tools/" class="ti-hero__back">← All tools</a>
+    <div class="ti-hero__eyebrow">▲ HYPER IMPERIUM</div>
+    <h1 class="ti-hero__title">Twilight Imperium<br>tools.</h1>
+    <p class="ti-hero__lede">Faction picker, objective tracker, and agenda voter. Tuned for Hyper Imperium — TI4 + PoK at speed.</p>
   </div>
 </section>
 
-<section style="background:#f5f4ef;padding:48px 32px 96px">
-  <div style="max-width:900px;margin:0 auto;display:flex;flex-direction:column;gap:24px">
+<section class="ti-body">
+  <div class="ti-body__inner">
 
     <!-- Faction Picker -->
-    <div class="tool-card" style="background:#fff;border:1px solid #e6e3d8;border-radius:20px;padding:32px">
-      <div style="display:flex;align-items:flex-start;gap:16px;margin-bottom:22px;padding-bottom:22px;border-bottom:1px solid #e6e3d8">
-        <div style="width:6px;height:48px;background:#0c4f8d;border-radius:3px;flex:none"></div>
+    <div class="ti-card">
+      <div class="ti-card__header">
+        <div class="ti-card__accent ti-card__accent--blue"></div>
         <div>
-          <div style="font-family:var(--mg-font-pixel);font-size:9px;color:#0c4f8d;letter-spacing:1.5px;margin-bottom:6px">▲ FACTION DRAFT</div>
-          <h3 style="font-family:var(--mg-font-display);font-weight:600;font-size:24px;color:#14161c;margin:0;letter-spacing:-0.3px">Faction picker</h3>
-          <p style="font-family:var(--mg-font-body);font-size:14px;color:#4f5764;margin:4px 0 0">Deal each player a hand of factions. They pick one — banker's-draft style.</p>
+          <div class="ti-card__eyebrow ti-card__eyebrow--blue">▲ FACTION DRAFT</div>
+          <h3 class="ti-card__title">Faction picker</h3>
+          <p class="ti-card__desc">Deal each player a hand of factions. They pick one — banker's-draft style.</p>
         </div>
       </div>
-      <div style="display:flex;gap:14px;align-items:center;margin-bottom:20px;flex-wrap:wrap">
-        <div style="display:flex;gap:8px;align-items:center">
-          <span style="font-family:var(--mg-font-mono);font-size:12px;color:#7a8290;text-transform:uppercase;letter-spacing:0.5px">Players:</span>
-          <div id="player-btns" style="display:flex;gap:6px"></div>
+      <div class="ti-controls">
+        <div class="ti-controls__group">
+          <span class="ti-controls__label">Players:</span>
+          <div id="player-btns" class="ti-controls__btns"></div>
         </div>
-        <div style="display:flex;gap:8px;align-items:center">
-          <span style="font-family:var(--mg-font-mono);font-size:12px;color:#7a8290;text-transform:uppercase;letter-spacing:0.5px">Per hand:</span>
-          <div id="hand-btns" style="display:flex;gap:6px"></div>
+        <div class="ti-controls__group">
+          <span class="ti-controls__label">Per hand:</span>
+          <div id="hand-btns" class="ti-controls__btns"></div>
         </div>
-        <div id="deal-btn" style="margin-left:auto"></div>
+        <div id="deal-btn"></div>
       </div>
       <div id="faction-hands"></div>
     </div>
 
     <!-- Objective Tracker -->
-    <div class="tool-card" style="background:#fff;border:1px solid #e6e3d8;border-radius:20px;padding:32px">
-      <div style="display:flex;align-items:flex-start;gap:16px;margin-bottom:22px;padding-bottom:22px;border-bottom:1px solid #e6e3d8">
-        <div style="width:6px;height:48px;background:#3a9928;border-radius:3px;flex:none"></div>
+    <div class="ti-card">
+      <div class="ti-card__header">
+        <div class="ti-card__accent ti-card__accent--green"></div>
         <div>
-          <div style="font-family:var(--mg-font-pixel);font-size:9px;color:#3a9928;letter-spacing:1.5px;margin-bottom:6px">▲ VICTORY POINTS</div>
-          <h3 style="font-family:var(--mg-font-display);font-weight:600;font-size:24px;color:#14161c;margin:0;letter-spacing:-0.3px">Objective tracker</h3>
-          <p style="font-family:var(--mg-font-body);font-size:14px;color:#4f5764;margin:4px 0 0">Stage I and II public objectives. Tick them off as they're scored.</p>
+          <div class="ti-card__eyebrow ti-card__eyebrow--green">▲ VICTORY POINTS</div>
+          <h3 class="ti-card__title">Objective tracker</h3>
+          <p class="ti-card__desc">Stage I and II public objectives. Tick them off as they're scored.</p>
         </div>
       </div>
-      <div style="display:grid;grid-template-columns:1fr 1fr;gap:20px" id="objectives-grid"></div>
+      <div class="ti-objectives" id="objectives-grid"></div>
     </div>
 
     <!-- Agenda Voter -->
-    <div class="tool-card" style="background:#fff;border:1px solid #e6e3d8;border-radius:20px;padding:32px">
-      <div style="display:flex;align-items:flex-start;gap:16px;margin-bottom:22px;padding-bottom:22px;border-bottom:1px solid #e6e3d8">
-        <div style="width:6px;height:48px;background:#d11a1a;border-radius:3px;flex:none"></div>
+    <div class="ti-card">
+      <div class="ti-card__header">
+        <div class="ti-card__accent ti-card__accent--red"></div>
         <div>
-          <div style="font-family:var(--mg-font-pixel);font-size:9px;color:#d11a1a;letter-spacing:1.5px;margin-bottom:6px">▲ AGENDA PHASE</div>
-          <h3 style="font-family:var(--mg-font-display);font-weight:600;font-size:24px;color:#14161c;margin:0;letter-spacing:-0.3px">Agenda voter</h3>
-          <p style="font-family:var(--mg-font-body);font-size:14px;color:#4f5764;margin:4px 0 0">Draw an agenda, cast votes, track the outcome.</p>
+          <div class="ti-card__eyebrow ti-card__eyebrow--red">▲ AGENDA PHASE</div>
+          <h3 class="ti-card__title">Agenda voter</h3>
+          <p class="ti-card__desc">Draw an agenda, cast votes, track the outcome.</p>
         </div>
       </div>
       <div id="agenda-section"></div>
@@ -81,7 +154,7 @@ body { background:#f5f4ef; }
 </section>
 
 <div id="footer-root"></div>
-<script src="../../_mg.js"></script>
+<script src="../../js/_mg.js"></script>
 <script>
 const { T, el, btn, navbar, footer } = MG;
 document.getElementById('nav-root').appendChild(navbar('Tools'));
@@ -130,14 +203,19 @@ function deal() {
   const hands = document.getElementById('faction-hands'); hands.innerHTML = '';
   for (let p=0; p<playerCount; p++) {
     const row = shuffled.slice(p*handSize, p*handSize+handSize);
-    const wrap = el('div',{style:{background:'#f5f4ef',borderRadius:'12px',padding:'14px',marginBottom:'10px'}});
-    wrap.appendChild(el('div',{style:{fontFamily:'var(--mg-font-pixel)',fontSize:'9px',color:'#0c4f8d',letterSpacing:'1.5px',marginBottom:'10px'}},`▲ PLAYER ${p+1}`));
-    const row2 = el('div',{style:{display:'flex',gap:'8px',flexWrap:'wrap'}});
+    const wrap = el('div',{class:'ti-hand'});
+    wrap.appendChild(el('div',{class:'ti-hand__label'},`▲ PLAYER ${p+1}`));
+    const row2 = el('div',{class:'ti-hand__row'});
     row.forEach(f => {
-      const card = el('div',{style:{flex:'1 1 0',minWidth:'120px',padding:'12px 14px',background:'#fff',border:`2px solid ${f.color}`,borderRadius:'10px',display:'flex',alignItems:'center',gap:'10px'}});
-      const badge = el('div',{style:{width:'26px',height:'26px',background:f.color,borderRadius:'6px',display:'flex',alignItems:'center',justifyContent:'center',fontFamily:'var(--mg-font-pixel)',fontSize:'7px',color: f.name==='L1Z1X Mindnet'?'#fff':'#000',flex:'none'}},f.flag);
+      const card = el('div',{class:'ti-faction'});
+      card.style.borderWidth = '2px';
+      card.style.borderStyle = 'solid';
+      card.style.borderColor = f.color;
+      const badge = el('div',{class:'ti-faction__badge'},f.flag);
+      badge.style.background = f.color;
+      badge.style.color = f.name==='L1Z1X Mindnet'?'#fff':'#000';
       card.appendChild(badge);
-      card.appendChild(el('div',{style:{fontFamily:'var(--mg-font-display)',fontWeight:600,fontSize:'13px',color:'#14161c',lineHeight:'1.2'}},f.name));
+      card.appendChild(el('div',{class:'ti-faction__name'},f.name));
       row2.appendChild(card);
     });
     wrap.appendChild(row2); hands.appendChild(wrap);
@@ -153,13 +231,16 @@ const STAGE_II = ['Centralize Galactic Trade','Conquer the Weak','Form Galactic 
 
 function objectiveSection(title, objs, accent) {
   const wrap = el('div');
-  wrap.appendChild(el('div',{style:{fontFamily:'var(--mg-font-pixel)',fontSize:'9px',color:accent,letterSpacing:'1.5px',marginBottom:'14px'}},title));
-  const list = el('div',{style:{display:'flex',flexDirection:'column',gap:'6px'}});
+  const heading = el('div',{class:'ti-obj-title'},title);
+  heading.style.color = accent;
+  wrap.appendChild(heading);
+  const list = el('div',{class:'ti-obj-list'});
   const state = objs.map(()=>false);
   objs.forEach((obj, i) => {
-    const row = el('div',{style:{display:'flex',alignItems:'center',gap:'10px',padding:'8px 12px',borderRadius:'8px',cursor:'pointer',background:'#f5f4ef',transition:'background 150ms'}});
-    const check = el('div',{style:{width:'18px',height:'18px',borderRadius:'4px',border:`2px solid ${accent}`,flex:'none',display:'flex',alignItems:'center',justifyContent:'center',fontSize:'12px',transition:'all 120ms'}});
-    const label = el('span',{style:{fontFamily:'var(--mg-font-body)',fontSize:'13px',color:'#14161c',lineHeight:'1.3'}},obj);
+    const row = el('div',{class:'ti-obj-row'});
+    const check = el('div',{class:'ti-obj-check'});
+    check.style.border = `2px solid ${accent}`;
+    const label = el('span',{class:'ti-obj-label'},obj);
     row.appendChild(check); row.appendChild(label);
     row.addEventListener('click',()=>{
       state[i] = !state[i];
@@ -203,42 +284,49 @@ function renderAgenda() {
   const sec = document.getElementById('agenda-section');
   sec.innerHTML = '';
   if (!currentAgenda) {
-    const b = el('div',{style:{textAlign:'center',padding:'32px 0'}});
+    const b = el('div',{class:'ti-agenda-empty'});
     b.appendChild(btn('Draw agenda','dark',drawAgenda));
     sec.appendChild(b); return;
   }
-  const card = el('div',{style:{background:'#f5f4ef',borderRadius:'14px',padding:'24px',marginBottom:'20px'}});
-  const typeTag = el('span',{style:{fontFamily:'var(--mg-font-mono)',fontSize:'11px',fontWeight:600,background:'#d11a1a',color:'#fff',padding:'3px 10px',borderRadius:'9999px',marginBottom:'12px',display:'inline-block'}},currentAgenda.type.toUpperCase());
+  const card = el('div',{class:'ti-agenda-card'});
+  const typeTag = el('span',{class:'ti-agenda-type'},currentAgenda.type.toUpperCase());
   card.appendChild(typeTag);
-  card.appendChild(el('h4',{style:{fontFamily:'var(--mg-font-display)',fontWeight:600,fontSize:'22px',letterSpacing:'-0.3px',color:'#14161c',margin:'8px 0 16px'}},currentAgenda.title));
-  const opts = el('div',{style:{display:'grid',gridTemplateColumns:'1fr 1fr',gap:'12px'}});
+  card.appendChild(el('h4',{class:'ti-agenda-title'},currentAgenda.title));
+  const opts = el('div',{class:'ti-agenda-opts'});
   [['FOR',currentAgenda.for,'#3a9928'],['AGAINST',currentAgenda.against,'#d11a1a']].forEach(([label,text,c]) => {
-    const o = el('div',{style:{background:'#fff',border:`1px solid ${c}44`,borderRadius:'10px',padding:'14px'}});
-    o.appendChild(el('div',{style:{fontFamily:'var(--mg-font-mono)',fontSize:'10px',color:c,fontWeight:600,letterSpacing:'1px',marginBottom:'6px'}},label));
-    o.appendChild(el('div',{style:{fontFamily:'var(--mg-font-body)',fontSize:'13px',color:'#1f2228',lineHeight:'1.5'}},text));
+    const o = el('div',{class:'ti-agenda-opt'});
+    o.style.border = `1px solid ${c}44`;
+    const lbl = el('div',{class:'ti-agenda-opt__label'},label);
+    lbl.style.color = c;
+    o.appendChild(lbl);
+    o.appendChild(el('div',{class:'ti-agenda-opt__text'},text));
     opts.appendChild(o);
   });
   card.appendChild(opts); sec.appendChild(card);
 
   // Vote tallies
-  const tally = el('div',{style:{display:'flex',gap:'16px',alignItems:'center',flexWrap:'wrap',marginBottom:'16px'}});
+  const tally = el('div',{class:'ti-tally'});
   ['for','against'].forEach(side => {
     const c = side==='for'?'#3a9928':'#d11a1a';
-    const group = el('div',{style:{display:'flex',alignItems:'center',gap:'10px',background:'#fff',border:`1px solid ${T.hairlineLight}`,borderRadius:'12px',padding:'12px 16px',flex:'1 1 0'}});
-    group.appendChild(el('span',{style:{fontFamily:'var(--mg-font-mono)',fontSize:'12px',color:'#7a8290',textTransform:'uppercase'}},side));
-    const count = el('span',{style:{fontFamily:'var(--mg-font-display)',fontWeight:600,fontSize:'28px',color:c,margin:'0 8px',minWidth:'32px',textAlign:'center'}},votes[side]);
+    const group = el('div',{class:'ti-tally__group'});
+    group.appendChild(el('span',{class:'ti-tally__side'},side));
+    const count = el('span',{class:'ti-tally__count'},votes[side]);
+    count.style.color = c;
     group.appendChild(count);
     const minus = document.createElement('button');
-    minus.textContent='−'; Object.assign(minus.style,{width:'28px',height:'28px',borderRadius:'9999px',border:`1px solid ${T.hairlineLight}`,background:'#f5f4ef',cursor:'pointer',fontSize:'16px',lineHeight:'1'});
+    minus.textContent='−';
+    minus.className = 'ti-tally__btn ti-tally__btn--minus';
     minus.addEventListener('click',()=>{ if(votes[side]>0){votes[side]--;count.textContent=votes[side];} });
     const plus = document.createElement('button');
-    plus.textContent='+'; Object.assign(plus.style,{width:'28px',height:'28px',borderRadius:'9999px',border:'none',background:c,color:'#fff',cursor:'pointer',fontSize:'16px',lineHeight:'1'});
+    plus.textContent='+';
+    plus.className = 'ti-tally__btn ti-tally__btn--plus';
+    plus.style.background = c;
     plus.addEventListener('click',()=>{ votes[side]++;count.textContent=votes[side]; });
     group.appendChild(minus); group.appendChild(plus); tally.appendChild(group);
   });
   sec.appendChild(tally);
 
-  const btns2 = el('div',{style:{display:'flex',gap:'10px',flexWrap:'wrap'}});
+  const btns2 = el('div',{class:'ti-agenda-btns'});
   btns2.appendChild(btn('Draw new agenda','dark',drawAgenda));
   btns2.appendChild(btn('Reset votes','outline-light',()=>{ votes={for:0,against:0};renderAgenda(); },{color:'#14161c'}));
   sec.appendChild(btns2);

@@ -5,39 +5,58 @@
 <meta name="viewport" content="width=device-width, initial-scale=1">
 <meta name="mg-base" content="/MODDABLE/moddable-website">
 <title>About — Moddable.Games</title>
-<link rel="stylesheet" href="../_mg.css">
-<style>body{background:#f5f4ef}</style>
+<link rel="stylesheet" href="../css/_mg.css">
+<style>
+body { background: #f5f4ef; }
+.about-section { padding: 72px 32px 96px; }
+.about-prose { font-family: var(--mg-font-body); font-size: 19px; line-height: 1.65; color: var(--mg-body-color); display: flex; flex-direction: column; gap: 32px; }
+.about-prose p { margin: 0 0 16px; }
+.about-prose p:last-child { margin: 0; }
+.about-lede { font-size: 23px; line-height: 1.5; color: var(--mg-ink); font-style: italic; }
+.about-links { display: grid; grid-template-columns: 1fr 1fr; gap: 12px; margin-top: 4px; }
+.about-link { display: flex; align-items: center; gap: 12px; padding: 18px; background: #fff; border: 1px solid var(--mg-hairline-light); border-radius: 14px; text-decoration: none; color: inherit; transition: border-color 150ms; }
+.about-link:hover { border-color: var(--mg-ink); }
+.about-link__icon { width: 32px; height: 32px; border-radius: 8px; flex: none; }
+.about-link__label { font-family: var(--mg-font-display); font-weight: 600; font-size: 15px; color: var(--mg-ink); }
+.about-link__sub { font-family: var(--mg-font-mono); font-size: 12px; color: var(--mg-stone); }
+</style>
 </head>
 <body>
 <div id="nav-root"></div>
 <div id="page-hero"></div>
 
-<section style="background:#f5f4ef;padding:72px 32px 96px">
-  <div style="max-width:720px;margin:0 auto">
-    <div style="font-family:var(--mg-font-body);font-size:19px;line-height:1.65;color:#1f2228;display:flex;flex-direction:column;gap:32px">
-      <p style="font-size:23px;line-height:1.5;color:#14161c;font-style:italic"><em>Moddable.Games</em> is a workshop publishing open-source rulebook mods for the board games already on your shelf — and three original games designed to be modded from day one.</p>
+<section class="about-section">
+  <div class="mg-container--text">
+    <div class="about-prose">
+      <p class="about-lede"><em>Moddable.Games</em> is a workshop publishing open-source rulebook mods for the board games already on your shelf — and three original games designed to be modded from day one.</p>
 
       <div>
-        <h2 style="font-family:var(--mg-font-display);font-weight:600;font-size:32px;line-height:1.15;letter-spacing:-0.4px;color:#14161c;margin:0 0 16px">The premise.</h2>
-        <p style="margin:0 0 16px">Tabletop publishing is conservative. Rules are copyrighted, artwork owned, trademarks defended — for understandable reasons. But that defensive crouch leaves a lot on the table. Half the fun of a game is the way your group plays it, not the way the publisher intended.</p>
-        <p style="margin:0">We do two things. We write rules patches you can run with the components in the box you already own — no expansions to buy, no replacement parts to print, just a PDF and a flat surface. And we design original games whose entire rulebook is in a git repo so anyone can fork it.</p>
+        <h2 class="mg-heading-md">The premise.</h2>
+        <p>Tabletop publishing is conservative. Rules are copyrighted, artwork owned, trademarks defended — for understandable reasons. But that defensive crouch leaves a lot on the table. Half the fun of a game is the way your group plays it, not the way the publisher intended.</p>
+        <p>We do two things. We write rules patches you can run with the components in the box you already own — no expansions to buy, no replacement parts to print, just a PDF and a flat surface. And we design original games whose entire rulebook is in a git repo so anyone can fork it.</p>
       </div>
 
       <div>
-        <h2 style="font-family:var(--mg-font-display);font-weight:600;font-size:32px;line-height:1.15;letter-spacing:-0.4px;color:#14161c;margin:0 0 16px">What we don't do.</h2>
-        <p style="margin:0">We don't sell boards. We don't run a Kickstarter. We don't manufacture meeples. The whole operation is digital — the only physical thing we make is the conversation around your kitchen table.</p>
+        <h2 class="mg-heading-md">The bigger picture.</h2>
+        <p>We're building the ecosystem tabletop is still missing. A place where physical and online play converge under community ownership — with an online engine that hosts any hex-based game, a marketplace where designers sell mods and expansions, and instructive bots that learn from every game played.</p>
+        <p>The engine is live in open alpha. Print-on-demand is next. The marketplace follows. Every piece compounds — more creators means more players means better bots means more creators.</p>
       </div>
 
       <div>
-        <h2 style="font-family:var(--mg-font-display);font-weight:600;font-size:32px;line-height:1.15;letter-spacing:-0.4px;color:#14161c;margin:0 0 16px">Where to find us.</h2>
-        <div style="display:grid;grid-template-columns:1fr 1fr;gap:12px;margin-top:4px" id="links-grid"></div>
+        <h2 class="mg-heading-md">Open-source, always.</h2>
+        <p>Every rulebook lives in a git repo. Every game ships with moddable files — swap factions, rewrite endgames, add new boards. We don't sell boards or manufacture meeples. We make the rules, the engine, and the community. The rest is yours.</p>
+      </div>
+
+      <div>
+        <h2 class="mg-heading-md">Where to find us.</h2>
+        <div class="about-links" id="links-grid"></div>
       </div>
     </div>
   </div>
 </section>
 
 <div id="footer-root"></div>
-<script src="../_mg.js"></script>
+<script src="../js/_mg.js"></script>
 <script>
 const { el, navbar, footer, pageHero, url } = MG;
 document.getElementById('nav-root').appendChild(navbar('About'));
@@ -52,18 +71,18 @@ document.getElementById('page-hero').appendChild(pageHero({
 const links = [
   { label:'Discord', sub:'2,400+ members', color:'#5865f2', href:url('/community/') },
   { label:'Team',    sub:'Six humans, no AI', color:'#0c4f8d', href:url('/team/') },
-  { label:'News',    sub:'Strictly written by humans', color:'#3a9928', href:url('/news/') },
+  { label:'Roadmap', sub:'18-month public plan', color:'#3a9928', href:url('/about/roadmap/') },
   { label:'Mods',    sub:'12 open-source mods', color:'#d11a1a', href:url('/mods/') },
 ];
 const lg = document.getElementById('links-grid');
 links.forEach(l => {
-  const a = el('a',{href:l.href,style:{display:'flex',alignItems:'center',gap:'12px',padding:'18px',background:'#fff',border:'1px solid #e6e3d8',borderRadius:'14px',textDecoration:'none',color:'inherit',transition:'border-color 150ms'}});
-  a.addEventListener('mouseenter',()=>a.style.borderColor='#14161c');
-  a.addEventListener('mouseleave',()=>a.style.borderColor='#e6e3d8');
-  a.appendChild(el('div',{style:{width:'32px',height:'32px',background:l.color,borderRadius:'8px',flex:'none'}}));
+  const a = el('a',{href:l.href,class:'about-link'});
+  const icon = el('div',{class:'about-link__icon'});
+  icon.style.background = l.color;
+  a.appendChild(icon);
   const t = el('div');
-  t.appendChild(el('div',{style:{fontFamily:'var(--mg-font-display)',fontWeight:600,fontSize:'15px',color:'#14161c'}},l.label));
-  t.appendChild(el('div',{style:{fontFamily:'var(--mg-font-mono)',fontSize:'12px',color:'#7a8290'}},l.sub));
+  t.appendChild(el('div',{class:'about-link__label'},l.label));
+  t.appendChild(el('div',{class:'about-link__sub'},l.sub));
   a.appendChild(t); lg.appendChild(a);
 });
 </script>
