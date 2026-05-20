@@ -93,6 +93,74 @@ input[type=range] { width: 100%; accent-color: #0c4f8d; }
 .seat-circle__player-num { font-family: var(--mg-font-mono); font-size: 9px; color: rgba(255,255,255,0.5); }
 .seat-circle__star { font-size: 10px; color: #e8a91a; line-height: 1; }
 .seat-controls__btns { display: flex; gap: 10px; flex-wrap: wrap; justify-content: center; margin-top: 24px; }
+/* Grid Generator */
+.grid-control { display: flex; flex-wrap: wrap; gap: 12px; align-items: center; margin-bottom: 16px; }
+.grid-control__group { display: flex; align-items: center; gap: 8px; }
+.grid-control__label { font-family: var(--mg-font-body); font-size: 13px; font-weight: 600; color: var(--mg-ink); }
+.grid-control__input { width: 60px; height: 34px; border-radius: 8px; border: 1px solid var(--mg-hairline-light); font-family: var(--mg-font-mono); font-size: 13px; text-align: center; padding: 0 8px; }
+.grid-control__range { width: 100px; accent-color: #0c4f8d; }
+.grid-control__value { font-family: var(--mg-font-mono); font-size: 13px; color: var(--mg-ink); min-width: 32px; }
+.grid-control__pill { height: 34px; padding: 0 14px; border-radius: 9999px; border: 1px solid var(--mg-hairline-light); background: transparent; font-family: var(--mg-font-body); font-weight: 600; font-size: 13px; color: var(--mg-ink); cursor: pointer; transition: all 150ms; }
+.grid-control__pill--active { background: var(--mg-ink); color: #fff; border-color: var(--mg-ink); }
+.grid-control__color { width: 28px; height: 28px; border-radius: 9999px; border: 2px solid transparent; cursor: pointer; transition: border-color 150ms; }
+.grid-control__color--active { border-color: var(--mg-ink); }
+.grid-control__btns { display: flex; gap: 10px; flex-wrap: wrap; margin-top: 16px; }
+.grid-preview { max-height: 400px; overflow: hidden; border: 1px solid var(--mg-hairline-light); border-radius: 12px; margin-top: 16px; display: flex; align-items: center; justify-content: center; background: #fff; }
+.grid-preview svg { display: block; max-width: 100%; max-height: 400px; }
+/* Rules Referee */
+.rules-form { display: flex; flex-direction: column; gap: 12px; margin-bottom: 24px; }
+.rules-form__row { display: flex; gap: 12px; flex-wrap: wrap; }
+.rules-form__input { height: 38px; border-radius: 8px; border: 1px solid var(--mg-hairline-light); font-family: var(--mg-font-body); font-size: 14px; padding: 0 12px; flex: 1; min-width: 140px; }
+.rules-form__textarea { border-radius: 8px; border: 1px solid var(--mg-hairline-light); font-family: var(--mg-font-body); font-size: 14px; padding: 10px 12px; resize: vertical; min-height: 60px; width: 100%; box-sizing: border-box; }
+.rules-form__select { height: 38px; border-radius: 8px; border: 1px solid var(--mg-hairline-light); font-family: var(--mg-font-body); font-size: 14px; padding: 0 12px; background: #fff; min-width: 120px; }
+.rules-form__btns { display: flex; gap: 10px; flex-wrap: wrap; }
+.rules-search { margin-bottom: 20px; }
+.rules-search__input { width: 100%; height: 38px; border-radius: 9999px; border: 1px solid var(--mg-hairline-light); font-family: var(--mg-font-body); font-size: 14px; padding: 0 16px; box-sizing: border-box; }
+.rules-list { display: flex; flex-direction: column; gap: 12px; }
+.rules-card { background: #f5f4ef; border-radius: 14px; padding: 16px 20px; border: 1px solid var(--mg-hairline-light); }
+.rules-card__header { display: flex; align-items: center; gap: 10px; margin-bottom: 6px; flex-wrap: wrap; }
+.rules-card__game { font-family: var(--mg-font-mono); font-size: 11px; color: var(--mg-mute); text-transform: uppercase; letter-spacing: 0.5px; }
+.rules-card__tag { font-family: var(--mg-font-body); font-size: 11px; font-weight: 600; padding: 2px 8px; border-radius: 9999px; background: var(--mg-ink); color: #fff; }
+.rules-card__title { font-family: var(--mg-font-display); font-weight: 600; font-size: 18px; color: var(--mg-ink); margin-bottom: 4px; }
+.rules-card__desc { font-family: var(--mg-font-body); font-size: 14px; color: var(--mg-mute); line-height: 1.5; margin-bottom: 8px; }
+.rules-card__footer { display: flex; align-items: center; justify-content: space-between; }
+.rules-card__time { font-family: var(--mg-font-mono); font-size: 11px; color: var(--mg-stone); }
+.rules-card__delete { font-family: var(--mg-font-body); font-size: 12px; font-weight: 600; color: #d11a1a; background: none; border: none; cursor: pointer; padding: 4px 8px; border-radius: 6px; transition: background 150ms; }
+.rules-card__delete:hover { background: rgba(209,26,26,0.08); }
+.rules-empty { font-family: var(--mg-font-body); font-size: 15px; color: var(--mg-mute); text-align: center; padding: 32px 0; }
+/* Turn Timer */
+.timer-players { display: flex; gap: 10px; flex-wrap: wrap; margin-bottom: 20px; align-items: center; }
+.timer-players__input { font-family: var(--mg-font-body); font-size: 14px; height: 36px; padding: 0 14px; border-radius: 9999px; border: 1px solid rgba(255,255,255,0.2); background: rgba(255,255,255,0.06); color: #fff; outline: none; width: 160px; }
+.timer-players__input::placeholder { color: rgba(255,255,255,0.4); }
+.timer-players__tag { height: 32px; padding: 0 12px; border-radius: 9999px; background: rgba(255,255,255,0.1); border: 1px solid rgba(255,255,255,0.2); font-family: var(--mg-font-body); font-size: 13px; color: #fff; display: flex; align-items: center; gap: 8px; }
+.timer-players__tag-remove { background: none; border: none; color: rgba(255,255,255,0.5); cursor: pointer; font-size: 14px; padding: 0; line-height: 1; }
+.timer-players__tag-remove:hover { color: #fff; }
+.timer-presets { display: flex; gap: 10px; flex-wrap: wrap; margin-bottom: 24px; }
+.timer-preset-btn { font-family: var(--mg-font-body); font-weight: 600; font-size: 13px; height: 34px; padding: 0 14px; border-radius: 9999px; border: 1px solid rgba(255,255,255,0.2); background: transparent; color: #fff; cursor: pointer; transition: all 150ms; }
+.timer-preset-btn--active { background: #d11a1a; border-color: #d11a1a; }
+.timer-display { font-family: var(--mg-font-mono); font-size: 64px; font-weight: 600; color: #fff; text-align: center; margin-bottom: 8px; min-height: 80px; line-height: 1.2; }
+.timer-display--expired { animation: timerPulse 0.6s ease-in-out 3; }
+@keyframes timerPulse { 0%, 100% { color: #fff; } 50% { color: #d11a1a; } }
+.timer-current { font-family: var(--mg-font-body); font-size: 16px; color: rgba(255,255,255,0.7); text-align: center; margin-bottom: 20px; min-height: 24px; }
+.timer-buttons { display: flex; gap: 10px; flex-wrap: wrap; margin-bottom: 24px; }
+.timer-stats { display: grid; grid-template-columns: repeat(auto-fit, minmax(120px, 1fr)); gap: 10px; }
+.timer-stats__entry { background: rgba(255,255,255,0.06); border-radius: 12px; padding: 12px; text-align: center; }
+.timer-stats__name { font-family: var(--mg-font-body); font-size: 12px; color: rgba(255,255,255,0.6); margin-bottom: 4px; }
+.timer-stats__time { font-family: var(--mg-font-mono); font-size: 18px; color: #fff; font-weight: 600; }
+/* Initiative Tracker */
+.init-add { display: flex; gap: 10px; flex-wrap: wrap; margin-bottom: 20px; align-items: center; }
+.init-add__input { font-family: var(--mg-font-body); font-size: 14px; height: 36px; padding: 0 14px; border-radius: 9999px; border: 1px solid var(--mg-hairline-light); background: #fff; color: var(--mg-ink); outline: none; }
+.init-add__input--name { width: 160px; }
+.init-add__input--number { width: 80px; text-align: center; }
+.init-round { font-family: var(--mg-font-display); font-weight: 600; font-size: 24px; color: var(--mg-ink); margin-bottom: 16px; }
+.init-list { display: flex; flex-direction: column; gap: 8px; margin-bottom: 20px; }
+.init-entry { display: flex; align-items: center; gap: 12px; padding: 12px 16px; border-radius: 12px; background: #f5f4ef; border: 2px solid transparent; transition: border-color 150ms, background 150ms; }
+.init-entry--active { border-color: #0c4f8d; background: #e8f0fa; }
+.init-entry__rank { font-family: var(--mg-font-mono); font-size: 24px; font-weight: 600; color: #0c4f8d; min-width: 40px; text-align: center; }
+.init-entry__name { font-family: var(--mg-font-body); font-size: 15px; font-weight: 600; color: var(--mg-ink); flex: 1; }
+.init-entry__remove { width: 28px; height: 28px; border-radius: 9999px; border: 1px solid var(--mg-hairline-light); background: #fff; color: var(--mg-mute); font-size: 14px; cursor: pointer; display: flex; align-items: center; justify-content: center; transition: all 150ms; }
+.init-entry__remove:hover { border-color: #d11a1a; color: #d11a1a; }
+.init-buttons { display: flex; gap: 10px; flex-wrap: wrap; }
 </style>
 </head>
 <body>
@@ -618,6 +686,657 @@ sb2.appendChild(btn('Reset scores', 'outline-light', () => {
   }
 
   renderInput();
+})();
+
+/* ── TURN TIMER ── */
+(function() {
+  const playersEl = document.getElementById('timer-players');
+  const displayEl = document.getElementById('timer-display');
+  const controlsEl = document.getElementById('timer-controls');
+
+  let timerPlayers = [];
+  let timePerTurn = 60;
+  let currentPlayerIdx = 0;
+  let timeRemaining = 60;
+  let interval = null;
+  let running = false;
+  let cumulativeTime = {};
+
+  function renderSetup() {
+    playersEl.innerHTML = '';
+    displayEl.innerHTML = '';
+    controlsEl.innerHTML = '';
+
+    // Player input row
+    const row = el('div', {class: 'timer-players'});
+    const input = document.createElement('input');
+    input.className = 'timer-players__input';
+    input.placeholder = 'Player name...';
+    input.addEventListener('keydown', (e) => {
+      if (e.key === 'Enter' && input.value.trim()) {
+        addPlayer(input.value.trim());
+        input.value = '';
+      }
+    });
+    row.appendChild(input);
+    row.appendChild(btn('Add', 'red', () => {
+      if (input.value.trim()) {
+        addPlayer(input.value.trim());
+        input.value = '';
+      }
+    }));
+    playersEl.appendChild(row);
+
+    // Player tags
+    if (timerPlayers.length > 0) {
+      const tags = el('div', {class: 'timer-players'});
+      timerPlayers.forEach((name, i) => {
+        const tag = el('div', {class: 'timer-players__tag'}, name);
+        const rm = el('button', {class: 'timer-players__tag-remove'}, '×');
+        rm.addEventListener('click', () => { timerPlayers.splice(i, 1); delete cumulativeTime[name]; renderSetup(); });
+        tag.appendChild(rm);
+        tags.appendChild(tag);
+      });
+      playersEl.appendChild(tags);
+    }
+
+    // Time presets
+    const presets = el('div', {class: 'timer-presets'});
+    [30, 60, 90, 120].forEach(sec => {
+      const b = document.createElement('button');
+      b.className = 'timer-preset-btn' + (sec === timePerTurn ? ' timer-preset-btn--active' : '');
+      b.textContent = sec + 's';
+      b.addEventListener('click', () => {
+        timePerTurn = sec;
+        timeRemaining = sec;
+        renderSetup();
+      });
+      presets.appendChild(b);
+    });
+    displayEl.appendChild(presets);
+
+    // Display
+    const display = el('div', {class: 'timer-display'}, formatTime(timePerTurn));
+    displayEl.appendChild(display);
+
+    // Current player label
+    if (timerPlayers.length > 0) {
+      const current = el('div', {class: 'timer-current'}, timerPlayers[currentPlayerIdx] + "'s turn");
+      displayEl.appendChild(current);
+    }
+
+    // Controls
+    if (timerPlayers.length >= 2) {
+      const btnsWrap = el('div', {class: 'timer-buttons'});
+      btnsWrap.appendChild(btn('Start', 'red', startTimer));
+      controlsEl.appendChild(btnsWrap);
+    }
+
+    renderStats();
+  }
+
+  function addPlayer(name) {
+    if (timerPlayers.length < 8) {
+      timerPlayers.push(name);
+      cumulativeTime[name] = 0;
+      renderSetup();
+    }
+  }
+
+  function formatTime(seconds) {
+    const m = Math.floor(seconds / 60);
+    const s = seconds % 60;
+    return (m > 0 ? m + ':' : '') + (m > 0 ? String(s).padStart(2, '0') : s + 's');
+  }
+
+  function startTimer() {
+    if (timerPlayers.length < 2) return;
+    running = true;
+    timeRemaining = timePerTurn;
+    renderRunning();
+    interval = setInterval(tick, 1000);
+  }
+
+  function tick() {
+    timeRemaining--;
+    cumulativeTime[timerPlayers[currentPlayerIdx]]++;
+    if (timeRemaining <= 0) {
+      clearInterval(interval);
+      running = false;
+      renderExpired();
+    } else {
+      updateDisplay();
+    }
+  }
+
+  function updateDisplay() {
+    const display = document.querySelector('.timer-display');
+    if (display) display.textContent = formatTime(timeRemaining);
+    renderStats();
+  }
+
+  function renderRunning() {
+    displayEl.innerHTML = '';
+    controlsEl.innerHTML = '';
+
+    const display = el('div', {class: 'timer-display'}, formatTime(timeRemaining));
+    displayEl.appendChild(display);
+
+    const current = el('div', {class: 'timer-current'}, timerPlayers[currentPlayerIdx] + "'s turn");
+    displayEl.appendChild(current);
+
+    const btnsWrap = el('div', {class: 'timer-buttons'});
+    btnsWrap.appendChild(btn('Pause', 'outline-light', () => {
+      clearInterval(interval);
+      running = false;
+      const resumeWrap = el('div', {class: 'timer-buttons'});
+      resumeWrap.appendChild(btn('Resume', 'red', () => {
+        running = true;
+        interval = setInterval(tick, 1000);
+        renderRunning();
+      }));
+      resumeWrap.appendChild(btn('Next Player', 'outline-light', nextPlayer));
+      controlsEl.innerHTML = '';
+      controlsEl.appendChild(resumeWrap);
+      renderStats();
+    }));
+    btnsWrap.appendChild(btn('Next Player', 'primary', nextPlayer));
+    controlsEl.innerHTML = '';
+    controlsEl.appendChild(btnsWrap);
+
+    renderStats();
+  }
+
+  function renderExpired() {
+    displayEl.innerHTML = '';
+    controlsEl.innerHTML = '';
+
+    const display = el('div', {class: 'timer-display timer-display--expired'}, '0s');
+    displayEl.appendChild(display);
+
+    const current = el('div', {class: 'timer-current'}, timerPlayers[currentPlayerIdx] + " — time expired!");
+    displayEl.appendChild(current);
+
+    const btnsWrap = el('div', {class: 'timer-buttons'});
+    btnsWrap.appendChild(btn('Next Player', 'red', nextPlayer));
+    btnsWrap.appendChild(btn('Reset', 'outline-light', () => {
+      clearInterval(interval);
+      running = false;
+      currentPlayerIdx = 0;
+      Object.keys(cumulativeTime).forEach(k => cumulativeTime[k] = 0);
+      renderSetup();
+    }));
+    controlsEl.innerHTML = '';
+    controlsEl.appendChild(btnsWrap);
+
+    renderStats();
+  }
+
+  function nextPlayer() {
+    clearInterval(interval);
+    currentPlayerIdx = (currentPlayerIdx + 1) % timerPlayers.length;
+    timeRemaining = timePerTurn;
+    running = true;
+    interval = setInterval(tick, 1000);
+    renderRunning();
+  }
+
+  function renderStats() {
+    let statsEl = document.querySelector('.timer-stats');
+    if (statsEl) statsEl.remove();
+    if (timerPlayers.length === 0) return;
+
+    statsEl = el('div', {class: 'timer-stats'});
+    timerPlayers.forEach(name => {
+      const entry = el('div', {class: 'timer-stats__entry'});
+      entry.appendChild(el('div', {class: 'timer-stats__name'}, name));
+      entry.appendChild(el('div', {class: 'timer-stats__time'}, formatTime(cumulativeTime[name] || 0)));
+      statsEl.appendChild(entry);
+    });
+    controlsEl.appendChild(statsEl);
+  }
+
+  renderSetup();
+})();
+
+/* ── INITIATIVE TRACKER ── */
+(function() {
+  const listEl = document.getElementById('init-list');
+  const controlsEl = document.getElementById('init-controls');
+
+  let combatants = [];
+  let currentTurn = 0;
+  let round = 1;
+
+  function render() {
+    listEl.innerHTML = '';
+    controlsEl.innerHTML = '';
+
+    // Add combatant form
+    const addRow = el('div', {class: 'init-add'});
+    const nameInput = document.createElement('input');
+    nameInput.className = 'init-add__input init-add__input--name';
+    nameInput.placeholder = 'Name...';
+    const initInput = document.createElement('input');
+    initInput.className = 'init-add__input init-add__input--number';
+    initInput.type = 'number';
+    initInput.placeholder = 'Init';
+    const addFn = () => {
+      const name = nameInput.value.trim();
+      const init = parseInt(initInput.value) || 0;
+      if (name) {
+        combatants.push({name, initiative: init});
+        combatants.sort((a, b) => b.initiative - a.initiative);
+        nameInput.value = '';
+        initInput.value = '';
+        render();
+      }
+    };
+    nameInput.addEventListener('keydown', (e) => { if (e.key === 'Enter') addFn(); });
+    initInput.addEventListener('keydown', (e) => { if (e.key === 'Enter') addFn(); });
+    addRow.appendChild(nameInput);
+    addRow.appendChild(initInput);
+    addRow.appendChild(btn('Add', 'blue', addFn));
+    listEl.appendChild(addRow);
+
+    // Round counter
+    if (combatants.length > 0) {
+      const roundEl = el('div', {class: 'init-round'}, 'Round ' + round);
+      listEl.appendChild(roundEl);
+    }
+
+    // Combatant list
+    const list = el('div', {class: 'init-list'});
+    combatants.forEach((c, i) => {
+      const entry = el('div', {class: 'init-entry' + (i === currentTurn ? ' init-entry--active' : '')});
+      entry.appendChild(el('div', {class: 'init-entry__rank'}, c.initiative.toString()));
+      entry.appendChild(el('div', {class: 'init-entry__name'}, c.name));
+      const rm = el('button', {class: 'init-entry__remove'}, '×');
+      rm.addEventListener('click', () => {
+        combatants.splice(i, 1);
+        if (currentTurn >= combatants.length) currentTurn = 0;
+        render();
+      });
+      entry.appendChild(rm);
+      list.appendChild(entry);
+    });
+    listEl.appendChild(list);
+
+    // Control buttons
+    if (combatants.length > 0) {
+      const btnsWrap = el('div', {class: 'init-buttons'});
+      btnsWrap.appendChild(btn('Next Turn', 'blue', () => {
+        currentTurn++;
+        if (currentTurn >= combatants.length) {
+          currentTurn = 0;
+          round++;
+        }
+        render();
+      }));
+      btnsWrap.appendChild(btn('New Round', 'outline-light', () => {
+        currentTurn = 0;
+        round++;
+        render();
+      }));
+      btnsWrap.appendChild(btn('Randomize All', 'outline-light', () => {
+        combatants.forEach(c => {
+          c.initiative = Math.floor(Math.random() * 20) + 1;
+        });
+        combatants.sort((a, b) => b.initiative - a.initiative);
+        currentTurn = 0;
+        render();
+      }));
+      btnsWrap.appendChild(btn('Clear All', 'outline-light', () => {
+        combatants = [];
+        currentTurn = 0;
+        round = 1;
+        render();
+      }));
+      controlsEl.appendChild(btnsWrap);
+    }
+  }
+
+  render();
+})();
+
+/* ── MAP GRID GENERATOR ── */
+(function() {
+  const controlsEl = document.getElementById('grid-controls');
+  const previewEl = document.getElementById('grid-preview');
+  previewEl.className = 'grid-preview';
+
+  let gridType = 'square';
+  let cellSize = 20;
+  let gridRows = 10;
+  let gridCols = 10;
+  let lineColor = '#999999';
+
+  const COLORS = [
+    { label: 'Grey', value: '#999999' },
+    { label: 'Blue', value: '#0c4f8d' },
+    { label: 'Black', value: '#000000' }
+  ];
+
+  function buildControls() {
+    controlsEl.innerHTML = '';
+
+    // Grid type pills
+    const typeRow = el('div', {class: 'grid-control'});
+    typeRow.appendChild(el('span', {class: 'grid-control__label'}, 'Type:'));
+    ['Square', 'Hex', 'Isometric'].forEach(function(t) {
+      const val = t.toLowerCase();
+      const pill = document.createElement('button');
+      pill.className = 'grid-control__pill' + (gridType === val ? ' grid-control__pill--active' : '');
+      pill.textContent = t;
+      pill.addEventListener('click', function() { gridType = val; buildControls(); renderGrid(); });
+      typeRow.appendChild(pill);
+    });
+    controlsEl.appendChild(typeRow);
+
+    // Cell size slider
+    const sizeRow = el('div', {class: 'grid-control'});
+    sizeRow.appendChild(el('span', {class: 'grid-control__label'}, 'Cell size:'));
+    const sizeRange = document.createElement('input');
+    sizeRange.type = 'range';
+    sizeRange.min = '10';
+    sizeRange.max = '40';
+    sizeRange.value = cellSize;
+    sizeRange.className = 'grid-control__range';
+    const sizeVal = el('span', {class: 'grid-control__value'}, cellSize + 'px');
+    sizeRange.addEventListener('input', function() { cellSize = parseInt(sizeRange.value); sizeVal.textContent = cellSize + 'px'; renderGrid(); });
+    sizeRow.appendChild(sizeRange);
+    sizeRow.appendChild(sizeVal);
+    controlsEl.appendChild(sizeRow);
+
+    // Grid dimensions
+    const dimRow = el('div', {class: 'grid-control'});
+    dimRow.appendChild(el('span', {class: 'grid-control__label'}, 'Grid:'));
+    const rowsInput = document.createElement('input');
+    rowsInput.type = 'number';
+    rowsInput.min = '2';
+    rowsInput.max = '30';
+    rowsInput.value = gridRows;
+    rowsInput.className = 'grid-control__input';
+    rowsInput.addEventListener('input', function() { gridRows = Math.max(2, Math.min(30, parseInt(rowsInput.value) || 2)); renderGrid(); });
+    dimRow.appendChild(rowsInput);
+    dimRow.appendChild(el('span', {class: 'grid-control__label'}, '×'));
+    const colsInput = document.createElement('input');
+    colsInput.type = 'number';
+    colsInput.min = '2';
+    colsInput.max = '30';
+    colsInput.value = gridCols;
+    colsInput.className = 'grid-control__input';
+    colsInput.addEventListener('input', function() { gridCols = Math.max(2, Math.min(30, parseInt(colsInput.value) || 2)); renderGrid(); });
+    dimRow.appendChild(colsInput);
+    controlsEl.appendChild(dimRow);
+
+    // Line color
+    const colorRow = el('div', {class: 'grid-control'});
+    colorRow.appendChild(el('span', {class: 'grid-control__label'}, 'Color:'));
+    COLORS.forEach(function(c) {
+      const swatch = document.createElement('button');
+      swatch.className = 'grid-control__color' + (lineColor === c.value ? ' grid-control__color--active' : '');
+      swatch.style.background = c.value;
+      swatch.title = c.label;
+      swatch.addEventListener('click', function() { lineColor = c.value; buildControls(); renderGrid(); });
+      colorRow.appendChild(swatch);
+    });
+    controlsEl.appendChild(colorRow);
+
+    // Action buttons
+    const btnsRow = el('div', {class: 'grid-control__btns'});
+    btnsRow.appendChild(btn('Download SVG', 'primary', downloadSVG));
+    btnsRow.appendChild(btn('Print', 'outline-light', printGrid));
+    controlsEl.appendChild(btnsRow);
+  }
+
+  function generateSquareSVG() {
+    const w = gridCols * cellSize;
+    const h = gridRows * cellSize;
+    var paths = '';
+    for (var r = 0; r <= gridRows; r++) {
+      paths += '<line x1="0" y1="' + (r * cellSize) + '" x2="' + w + '" y2="' + (r * cellSize) + '" stroke="' + lineColor + '" stroke-width="1"/>';
+    }
+    for (var c = 0; c <= gridCols; c++) {
+      paths += '<line x1="' + (c * cellSize) + '" y1="0" x2="' + (c * cellSize) + '" y2="' + h + '" stroke="' + lineColor + '" stroke-width="1"/>';
+    }
+    return '<svg xmlns="http://www.w3.org/2000/svg" width="' + w + '" height="' + h + '" viewBox="0 0 ' + w + ' ' + h + '">' + paths + '</svg>';
+  }
+
+  function generateHexSVG() {
+    const size = cellSize;
+    const hexW = size * Math.sqrt(3);
+    const hexH = size * 2;
+    const totalW = Math.ceil(hexW * gridCols + hexW / 2);
+    const totalH = Math.ceil(hexH * 0.75 * gridRows + hexH * 0.25);
+    var paths = '';
+    for (var row = 0; row < gridRows; row++) {
+      for (var col = 0; col < gridCols; col++) {
+        var offsetX = row % 2 === 1 ? hexW / 2 : 0;
+        var cx = col * hexW + hexW / 2 + offsetX;
+        var cy = row * (hexH * 0.75) + size;
+        var points = '';
+        for (var i = 0; i < 6; i++) {
+          var angle = (Math.PI / 180) * (60 * i - 30);
+          var px = cx + size * Math.cos(angle);
+          var py = cy + size * Math.sin(angle);
+          points += (i === 0 ? '' : ' ') + px.toFixed(2) + ',' + py.toFixed(2);
+        }
+        paths += '<polygon points="' + points + '" fill="none" stroke="' + lineColor + '" stroke-width="1"/>';
+      }
+    }
+    return '<svg xmlns="http://www.w3.org/2000/svg" width="' + totalW + '" height="' + totalH + '" viewBox="0 0 ' + totalW + ' ' + totalH + '">' + paths + '</svg>';
+  }
+
+  function generateIsoSVG() {
+    const w = gridCols * cellSize;
+    const h = gridRows * cellSize;
+    var paths = '';
+    // Faint orthogonal guides
+    for (var r = 0; r <= gridRows; r++) {
+      paths += '<line x1="0" y1="' + (r * cellSize) + '" x2="' + w + '" y2="' + (r * cellSize) + '" stroke="' + lineColor + '" stroke-width="0.5" stroke-opacity="0.3"/>';
+    }
+    for (var c = 0; c <= gridCols; c++) {
+      paths += '<line x1="' + (c * cellSize) + '" y1="0" x2="' + (c * cellSize) + '" y2="' + h + '" stroke="' + lineColor + '" stroke-width="0.5" stroke-opacity="0.3"/>';
+    }
+    // Diagonal lines (down-right)
+    for (var i = -(gridRows); i <= gridCols; i++) {
+      var x1 = i * cellSize, y1 = 0, x2 = i * cellSize + h, y2 = h;
+      paths += '<line x1="' + x1 + '" y1="' + y1 + '" x2="' + x2 + '" y2="' + y2 + '" stroke="' + lineColor + '" stroke-width="1"/>';
+    }
+    // Diagonal lines (down-left)
+    for (var j = 0; j <= gridCols + gridRows; j++) {
+      var lx1 = j * cellSize, ly1 = 0, lx2 = j * cellSize - h, ly2 = h;
+      paths += '<line x1="' + lx1 + '" y1="' + ly1 + '" x2="' + lx2 + '" y2="' + ly2 + '" stroke="' + lineColor + '" stroke-width="1"/>';
+    }
+    return '<svg xmlns="http://www.w3.org/2000/svg" width="' + w + '" height="' + h + '" viewBox="0 0 ' + w + ' ' + h + '">' + paths + '</svg>';
+  }
+
+  function renderGrid() {
+    var svg;
+    if (gridType === 'square') svg = generateSquareSVG();
+    else if (gridType === 'hex') svg = generateHexSVG();
+    else svg = generateIsoSVG();
+    previewEl.innerHTML = svg;
+  }
+
+  function getSVGString() {
+    if (gridType === 'square') return generateSquareSVG();
+    if (gridType === 'hex') return generateHexSVG();
+    return generateIsoSVG();
+  }
+
+  function downloadSVG() {
+    const svgStr = getSVGString();
+    const blob = new Blob([svgStr], { type: 'image/svg+xml' });
+    const u = URL.createObjectURL(blob);
+    const a = document.createElement('a');
+    a.href = u;
+    a.download = 'grid-' + gridType + '-' + gridCols + 'x' + gridRows + '.svg';
+    document.body.appendChild(a);
+    a.click();
+    document.body.removeChild(a);
+    URL.revokeObjectURL(u);
+  }
+
+  function printGrid() {
+    const svgStr = getSVGString();
+    const pw = window.open('', '_blank');
+    pw.document.write('<!doctype html><html><head><title>Grid Print</title><style>body{margin:0;display:flex;align-items:center;justify-content:center;min-height:100vh;}svg{max-width:100%;max-height:100vh;}</style></head><body>' + svgStr + '</body></html>');
+    pw.document.close();
+    pw.focus();
+    pw.print();
+  }
+
+  buildControls();
+  renderGrid();
+})();
+
+/* ── RULES REFEREE ── */
+(function() {
+  const inputEl = document.getElementById('rules-input');
+  const listEl = document.getElementById('rules-list-container');
+  const STORAGE_KEY = 'mg_house_rules';
+
+  function loadRules() {
+    try { return JSON.parse(localStorage.getItem(STORAGE_KEY)) || []; }
+    catch(e) { return []; }
+  }
+
+  function saveRules(data) {
+    localStorage.setItem(STORAGE_KEY, JSON.stringify(data));
+  }
+
+  var houseRules = loadRules();
+  var searchQuery = '';
+
+  function buildForm() {
+    inputEl.innerHTML = '';
+    const form = el('div', {class: 'rules-form'});
+
+    const row1 = el('div', {class: 'rules-form__row'});
+    const gameInput = document.createElement('input');
+    gameInput.className = 'rules-form__input';
+    gameInput.placeholder = 'Game name';
+    row1.appendChild(gameInput);
+
+    const titleInput = document.createElement('input');
+    titleInput.className = 'rules-form__input';
+    titleInput.placeholder = 'Rule title';
+    row1.appendChild(titleInput);
+    form.appendChild(row1);
+
+    const descArea = document.createElement('textarea');
+    descArea.className = 'rules-form__textarea';
+    descArea.placeholder = 'Describe the rule...';
+    form.appendChild(descArea);
+
+    const row2 = el('div', {class: 'rules-form__row'});
+    const catSelect = document.createElement('select');
+    catSelect.className = 'rules-form__select';
+    ['Gameplay', 'Setup', 'Scoring', 'Disputes'].forEach(function(c) {
+      const opt = document.createElement('option');
+      opt.value = c;
+      opt.textContent = c;
+      catSelect.appendChild(opt);
+    });
+    row2.appendChild(catSelect);
+    form.appendChild(row2);
+
+    const btnsRow = el('div', {class: 'rules-form__btns'});
+    btnsRow.appendChild(btn('Add Rule', 'primary', function() {
+      const game = gameInput.value.trim();
+      const title = titleInput.value.trim();
+      const desc = descArea.value.trim();
+      const cat = catSelect.value;
+      if (!game || !title || !desc) return;
+      houseRules.push({ id: Date.now(), game: game, title: title, desc: desc, category: cat, timestamp: new Date().toISOString() });
+      saveRules(houseRules);
+      gameInput.value = '';
+      titleInput.value = '';
+      descArea.value = '';
+      renderRulesList();
+    }));
+    btnsRow.appendChild(btn('Export JSON', 'outline-light', exportRules));
+    form.appendChild(btnsRow);
+
+    inputEl.appendChild(form);
+  }
+
+  function renderRulesList() {
+    listEl.innerHTML = '';
+
+    // Search bar
+    const searchWrap = el('div', {class: 'rules-search'});
+    const searchInput = document.createElement('input');
+    searchInput.className = 'rules-search__input';
+    searchInput.placeholder = 'Search rules...';
+    searchInput.value = searchQuery;
+    searchInput.addEventListener('input', function() { searchQuery = searchInput.value; renderRulesList(); });
+    searchWrap.appendChild(searchInput);
+    listEl.appendChild(searchWrap);
+
+    // Filter rules
+    const filtered = houseRules.filter(function(r) {
+      if (!searchQuery) return true;
+      const q = searchQuery.toLowerCase();
+      return r.game.toLowerCase().includes(q) || r.title.toLowerCase().includes(q) || r.desc.toLowerCase().includes(q) || r.category.toLowerCase().includes(q);
+    });
+
+    if (filtered.length === 0) {
+      const empty = el('div', {class: 'rules-empty'}, houseRules.length === 0 ? 'No house rules yet. Add your first one above.' : 'No rules match your search.');
+      listEl.appendChild(empty);
+      return;
+    }
+
+    const list = el('div', {class: 'rules-list'});
+    filtered.forEach(function(r) {
+      const card = el('div', {class: 'rules-card'});
+
+      const header = el('div', {class: 'rules-card__header'});
+      header.appendChild(el('span', {class: 'rules-card__game'}, r.game));
+      header.appendChild(el('span', {class: 'rules-card__tag'}, r.category));
+      card.appendChild(header);
+
+      card.appendChild(el('div', {class: 'rules-card__title'}, r.title));
+      card.appendChild(el('div', {class: 'rules-card__desc'}, r.desc));
+
+      const footer = el('div', {class: 'rules-card__footer'});
+      const date = new Date(r.timestamp);
+      footer.appendChild(el('span', {class: 'rules-card__time'}, date.toLocaleDateString() + ' ' + date.toLocaleTimeString([], {hour:'2-digit', minute:'2-digit'})));
+      const delBtn = document.createElement('button');
+      delBtn.className = 'rules-card__delete';
+      delBtn.textContent = 'Delete';
+      delBtn.addEventListener('click', function() {
+        if (confirm('Delete this rule?')) {
+          houseRules = houseRules.filter(function(x) { return x.id !== r.id; });
+          saveRules(houseRules);
+          renderRulesList();
+        }
+      });
+      footer.appendChild(delBtn);
+      card.appendChild(footer);
+
+      list.appendChild(card);
+    });
+    listEl.appendChild(list);
+  }
+
+  function exportRules() {
+    if (houseRules.length === 0) return;
+    const blob = new Blob([JSON.stringify(houseRules, null, 2)], { type: 'application/json' });
+    const u = URL.createObjectURL(blob);
+    const a = document.createElement('a');
+    a.href = u;
+    a.download = 'house-rules.json';
+    document.body.appendChild(a);
+    a.click();
+    document.body.removeChild(a);
+    URL.revokeObjectURL(u);
+  }
+
+  buildForm();
+  renderRulesList();
 })();
 </script>
 </body>
