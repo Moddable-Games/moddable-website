@@ -215,9 +215,9 @@ const MG = (() => {
 
     // Right side
     const right = el('div', { style:{ marginLeft:'auto', display:'flex', gap:'12px', alignItems:'center' }});
-    const discordLink = el('a', { href:url('/community/'), style:{ fontFamily:F.pixel, fontSize:'8px', color:T.cosmicGlow, letterSpacing:'1.5px', textDecoration:'none' }}, '▲ DISCORD');
+    const discordLink = el('a', { href:url('/community/'), style:{ fontFamily:F.pixel, fontSize:'8px', color:T.cosmicGlow, letterSpacing:'1.5px', textDecoration:'none' }}, 'DISCORD');
     right.appendChild(discordLink);
-    right.appendChild(linkBtn('Mod a game', url('/submit/'), 'primary', { height:'38px', fontSize:'13px', padding:'0 16px' }));
+    right.appendChild(linkBtn('MOD A GAME', url('/submit/'), 'primary', { height:'38px', fontSize:'13px', padding:'0 16px' }));
     header.appendChild(right);
 
     // Mobile hamburger (CSS media query shows/hides)
