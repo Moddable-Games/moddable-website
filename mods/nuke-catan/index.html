@@ -116,11 +116,11 @@ COMPONENTS.forEach(({kind,list}) => {
   c.appendChild(ul); cg.appendChild(c);
 });
 
-const RELATED = [
-  { category:'Rebalance', baseGame:'Catan', title:'Flooded Catan', body:"Rising sea levels slowly swallow the board. Coastal hexes sink one per round.", stats:'3–4 players · 75 min · 10+', href:'../flooded-catan/' },
-  { category:'Total conversion', baseGame:'Catan', title:'The Diamond Mine', body:"Replace hexes with mine shafts. Push-your-luck digging replaces dice rolls.", stats:'3–4 players · 45 min · 12+', href:'../the-diamond-mine/' },
-  { category:'Rebalance', baseGame:'Twilight Imperium 4e', title:'Hyper Imperium', body:"Hyper Movement, Hyper Trades, Hyper Agendas. A faster TI4 ruleset.", stats:'3–6 players · 4–6 hr · 14+', href:'../hyper-imperium/' },
-];
+const RELATED_TITLES = ['Flooded Catan', 'The Diamond Mine', 'Hyper Imperium'];
+const RELATED = RELATED_TITLES.map(t => {
+  const m = MG.ALL_MODS.find(x => x.title === t);
+  return Object.assign({}, m, { href: '../' + m.href.split('/mods/')[1] });
+});
 const rg = document.getElementById('related-grid');
 RELATED.forEach(m => rg.appendChild(modCard(m)));
 </script>

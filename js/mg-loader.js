@@ -9,6 +9,9 @@
   const base = src.replace('mg-loader.js', '');
   var modules = [
     'mg-core.js',
+    'mg-mods-data.js',
+    'mg-games-data.js',
+    'mg-news-data.js',
     'mg-buttons.js',
     'mg-cards.js',
     'mg-navbar.js',

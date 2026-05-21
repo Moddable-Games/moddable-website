@@ -116,11 +116,11 @@ COMPONENTS.forEach(({kind,list}) => {
   c.appendChild(ul); cg.appendChild(c);
 });
 
-const RELATED = [
-  { category:'Reskin', baseGame:'Chess', title:'4-Player Chess', body:"Four players, four armies, one board. Free-for-all or teams.", stats:'4 players · 30 min · 10+', href:'../4-player-chess/' },
-  { category:'Total conversion', baseGame:'Chess', title:'Hexagonal Chess (Glinski)', body:"Chess played on a hexagonal board with 91 cells. Pieces gain new movement axes.", stats:'2 players · 30 min · 10+', href:'../hexagonal-chess/' },
-  { category:'Total conversion', baseGame:'Catan', title:'Nuke Catan', body:"Post-apocalyptic overhaul. Sheep are scarce, brick is currency.", stats:'3–5 players · 60 min · 12+', href:'../nuke-catan/' },
-];
+const RELATED_TITLES = ['4-Player Chess', 'Hexagonal Chess (Glinski)', 'Nuke Catan'];
+const RELATED = RELATED_TITLES.map(t => {
+  const m = MG.ALL_MODS.find(x => x.title === t);
+  return Object.assign({}, m, { href: '../' + m.href.split('/mods/')[1] });
+});
 const rg = document.getElementById('related-grid');
 RELATED.forEach(m => rg.appendChild(modCard(m)));
 </script>

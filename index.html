@@ -115,7 +115,6 @@
 
 <script src="js/three.min.js"></script>
 <script src="js/mg-loader.js"></script>
-<script src="js/mg-news-data.js"></script>
 <script>
 const { T, el, btn, linkBtn, navbar, footer, modCard, cubeSVG, url } = MG;
 
@@ -231,15 +230,9 @@ const hb = document.getElementById('hero-btns');
 hb.appendChild(linkBtn('Browse the mods', '/mods/', 'primary'));
 hb.appendChild(linkBtn('Read the manifesto', '/about/', 'outline-dark'));
 
-// Mod gallery
-const MODS = [
-  { category:'Reskin',           baseGame:'Talisman 4e',         title:'Talisman: Hexed',                    body:"Replaces the Talisman boards with 61 hexagonal tiles arranged in concentric rings. Open-world hex system — every game lays out differently.", stats:'2–6 players · 90 min · 13+', href:url('/mods/talisman-hexed/'), source:'Moddable.Games' },
-  { category:'Rebalance',        baseGame:'Twilight Imperium 4e',title:'Hyper Imperium',                     body:"Hyper Movement · Hyper Trades · Hyper Objectives · Hyper Factions · Hyper Agendas. A faster ruleset for TI4 that keeps the politics intact.", stats:'3–6 players · 4–6 hr · 14+', source:'Moddable.Games' },
-  { category:'Total conversion', baseGame:'Catan',               title:'Nuke Catan',                         body:"Post-apocalyptic overhaul. Sheep are scarce, brick is currency. Once per game, someone presses The Button — one hex is permanently irradiated.", stats:'3–5 players · 60 min · 12+', source:'Moddable.Games' },
-  { category:'Rebalance',        baseGame:'Monopoly',            title:'Econopoly',                          body:"Monopoly with a working economy. Anti-monopoly rules, dynamic property pricing, and a tax band that actually does something.", stats:'2–6 players · 60 min · 10+', source:'Moddable.Games' },
-  { category:'Total conversion', baseGame:'Chess',               title:'Fog of War Chess',                   body:"Players see only squares their pieces can legally move to. No checks, no checkmates — only capture the king. Invented 1989, rules freely available.", stats:'2 players · 20–40 min · 10+', source:'chessvariants.com' },
-  { category:'Rebalance',        baseGame:'Risk',                title:'CivRisk',                            body:"Risk rewritten to play like Civilisation: 20 civilisations, leaders, growth tiers, ancient ruins. Chris Grey, 2023 — rules free to download.", stats:'3–5 players · 180 min · 14+', source:'Chris Grey' },
-];
+// Mod gallery — featured subset from shared data
+const HOME_MOD_TITLES = ['Talisman: Hexed','Hyper Imperium','Nuke Catan','Econopoly','Fog of War Chess','CivRisk'];
+const MODS = HOME_MOD_TITLES.map(t => MG.ALL_MODS.find(m => m.title === t));
 
 const filters = ['All','Total conversion','Rebalance','Reskin'];
 let activeFilter = 'All';

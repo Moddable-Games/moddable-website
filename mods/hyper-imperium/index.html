@@ -116,11 +116,11 @@ COMPONENTS.forEach(({kind,list}) => {
   c.appendChild(ul); cg.appendChild(c);
 });
 
-const RELATED = [
-  { category:'Reskin', baseGame:'Talisman 4e', title:'Talisman: Hexed', body:"An open-world hex system that replaces the Talisman board with 61 hexagonal tiles.", stats:'2–6 players · 90 min · 13+', href:'../talisman-hexed/' },
-  { category:'Total conversion', baseGame:'Catan', title:'Nuke Catan', body:"Post-apocalyptic overhaul. Sheep are scarce, brick is currency.", stats:'3–5 players · 60 min · 12+', href:'../nuke-catan/' },
-  { category:'Rebalance', baseGame:'Twilight Imperium 4e', title:'Shattered Ascension', body:"Community overhaul of TI4 with new mechanics and rebalanced factions.", stats:'3–6 players · 4–8 hr · 14+', href:'../shattered-ascension/' },
-];
+const RELATED_TITLES = ['Talisman: Hexed', 'Nuke Catan', 'Shattered Ascension'];
+const RELATED = RELATED_TITLES.map(t => {
+  const m = MG.ALL_MODS.find(x => x.title === t);
+  return Object.assign({}, m, { href: '../' + m.href.split('/mods/')[1] });
+});
 const rg = document.getElementById('related-grid');
 RELATED.forEach(m => rg.appendChild(modCard(m)));
 </script>

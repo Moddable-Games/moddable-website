@@ -116,11 +116,11 @@ COMPONENTS.forEach(({kind,list}) => {
   c.appendChild(ul); cg.appendChild(c);
 });
 
-const RELATED = [
-  { category:'Total conversion', baseGame:'Chess', title:'Fog of War Chess', body:"See only squares your pieces can move to. No checks — capture the king to win.", stats:'2 players · 20–40 min · 10+', href:'../fog-of-war-chess/' },
-  { category:'Total conversion', baseGame:'Chess', title:'Hexagonal Chess (Glinski)', body:"Chess played on a hexagonal board with 91 cells. Pieces gain new movement axes.", stats:'2 players · 30 min · 10+', href:'../hexagonal-chess/' },
-  { category:'Reskin', baseGame:'Talisman 4e', title:'Talisman: Hexed', body:"An open-world hex system that replaces the Talisman board with 61 hexagonal tiles.", stats:'2–6 players · 90 min · 13+', href:'../talisman-hexed/' },
-];
+const RELATED_TITLES = ['Fog of War Chess', 'Hexagonal Chess (Glinski)', 'Talisman: Hexed'];
+const RELATED = RELATED_TITLES.map(t => {
+  const m = MG.ALL_MODS.find(x => x.title === t);
+  return Object.assign({}, m, { href: '../' + m.href.split('/mods/')[1] });
+});
 const rg = document.getElementById('related-grid');
 RELATED.forEach(m => rg.appendChild(modCard(m)));
 </script>

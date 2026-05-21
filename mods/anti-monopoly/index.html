@@ -115,11 +115,11 @@ COMPONENTS.forEach(({kind,list}) => {
   c.appendChild(ul); cg.appendChild(c);
 });
 
-const RELATED = [
-  { category:'Rebalance', baseGame:'Monopoly', title:'Econopoly', body:"Monopoly with a working economy. Dynamic pricing and tax bands.", stats:'2–6 players · 60 min · 10+', href:'../econopoly/' },
-  { category:'Total conversion', baseGame:'Catan', title:'Nuke Catan', body:"Post-apocalyptic overhaul. Sheep are scarce, brick is currency.", stats:'3–5 players · 60 min · 12+', href:'../nuke-catan/' },
-  { category:'Rebalance', baseGame:'Risk', title:'CivRisk', body:"Risk rewritten to play like Civilisation. Growth tiers, ruins, and technologies.", stats:'3–5 players · 180 min · 14+', href:'../civrisk/' },
-];
+const RELATED_TITLES = ['Econopoly', 'Nuke Catan', 'CivRisk'];
+const RELATED = RELATED_TITLES.map(t => {
+  const m = MG.ALL_MODS.find(x => x.title === t);
+  return Object.assign({}, m, { href: '../' + m.href.split('/mods/')[1] });
+});
 const rg = document.getElementById('related-grid');
 RELATED.forEach(m => rg.appendChild(modCard(m)));
 </script>

@@ -115,11 +115,11 @@ COMPONENTS.forEach(({kind,list}) => {
   c.appendChild(ul); cg.appendChild(c);
 });
 
-const RELATED = [
-  { category:'Rebalance', baseGame:'Twilight Imperium 4e', title:'Hyper Imperium', body:"Hyper Movement, Hyper Trades, Hyper Agendas. A faster TI4 ruleset.", stats:'3–6 players · 4–6 hr · 14+', href:'../hyper-imperium/' },
-  { category:'Reskin', baseGame:'Talisman 4e', title:'Talisman: Hexed', body:"An open-world hex system that replaces the Talisman board with 61 hexagonal tiles.", stats:'2–6 players · 90 min · 13+', href:'../talisman-hexed/' },
-  { category:'Rebalance', baseGame:'Risk', title:'CivRisk', body:"Risk rewritten to play like Civilisation. Growth tiers, ruins, and technologies.", stats:'3–5 players · 180 min · 14+', href:'../civrisk/' },
-];
+const RELATED_TITLES = ['Hyper Imperium', 'Talisman: Hexed', 'CivRisk'];
+const RELATED = RELATED_TITLES.map(t => {
+  const m = MG.ALL_MODS.find(x => x.title === t);
+  return Object.assign({}, m, { href: '../' + m.href.split('/mods/')[1] });
+});
 const rg = document.getElementById('related-grid');
 RELATED.forEach(m => rg.appendChild(modCard(m)));
 </script>
