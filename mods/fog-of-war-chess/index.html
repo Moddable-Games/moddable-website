@@ -8,7 +8,7 @@
 <link rel="stylesheet" href="../../css/_mg.css">
 <link rel="stylesheet" href="../../css/mod-detail.css">
 </head>
-<body class="mg-section--dark">
+<body class="mg-section--dark" data-accent="red" data-mod="fog-of-war-chess">
 <div id="nav-root"></div>
 
 <section class="mod-hero">
@@ -54,75 +54,5 @@
 
 <div id="footer-root"></div>
 <script src="../../js/mg-loader.js"></script>
-<script>
-const { T, el, linkBtn, navbar, footer, modCard } = MG;
-document.getElementById('nav-root').appendChild(navbar('Mods'));
-document.getElementById('footer-root').appendChild(footer());
-
-const hb = document.getElementById('header-btns');
-hb.appendChild(linkBtn('Download PDF', '#', 'primary'));
-hb.appendChild(linkBtn('View on GitHub', '#', 'outline-dark'));
-
-const STATS = [['Players','2'],['Time','20–40 min'],['Age','10+'],['Source','chessvariants.com'],['License','Public domain']];
-const sr = document.getElementById('stats-row');
-STATS.forEach(([k,v],i) => {
-  if (i>0) sr.appendChild(el('span',{class:'stats-row__divider'}));
-  const d = el('div',{class:'stats-row__item'});
-  d.appendChild(el('span',{class:'stats-row__label'},k));
-  d.appendChild(el('span',{class:'stats-row__value'},v));
-  sr.appendChild(d);
-});
-
-const SECTIONS = [
-  { id:'1', title:'Visibility', body:"You see only squares your pieces can move to or attack. Empty squares in your vision are shown normally. Enemy pieces only appear when they occupy a square threatened by one of your pieces. Your own pieces are always visible to you. Squares outside your vision appear as fog (grey/hidden)." },
-  { id:'2', title:'No check', body:"There is no check or checkmate in Fog of War Chess. The king can move into danger unknowingly — since you cannot see enemy attack lines that are outside your vision, the king receives no warning. This fundamentally changes the endgame: you must hunt the enemy king rather than corner it." },
-  { id:'3', title:'Win condition', body:"Capture the enemy king like any other piece. When you move a piece to the square occupied by the enemy king, the game ends immediately. There is no stalemate — if you cannot move, you lose. Draws are possible only by agreement or threefold repetition of visible board state." },
-  { id:'4', title:'Castling', body:"Castling is allowed only if both the king and the rook involved are within your field of vision (which they always are, since your own pieces' squares are visible). Standard castling rules otherwise apply: neither piece may have moved, no squares between them may be occupied, and the king may not pass through a square attacked by an enemy piece — but since you may not know if a square is attacked, castling through fog is at your own risk." },
-  { id:'5', title:'En passant', body:"En passant capture is allowed only if you can see the square the enemy pawn passed through. Since a pawn's two-square advance passes through an intermediate square, you must have vision of that intermediate square at the moment of capture. If the enemy pawn's advance was invisible to you, en passant is not available." },
-];
-
-const toc = document.getElementById('toc');
-const body2 = document.getElementById('rules-body');
-SECTIONS.forEach(s => {
-  const li = el('li');
-  const a = el('a',{href:`#s${s.id}`,class:'toc-list__link'});
-  a.appendChild(el('span',{class:'toc-list__num'},s.id.padStart(2,'0')));
-  a.appendChild(document.createTextNode(s.title));
-  li.appendChild(a); toc.appendChild(li);
-
-  const art = el('article',{class:'rules-section',id:`s${s.id}`});
-  art.appendChild(el('div',{class:'rules-section__num'},`SECTION ${s.id.padStart(2,'0')}`));
-  art.appendChild(el('h2',{class:'rules-section__title'},s.title));
-  art.appendChild(el('p',{class:'rules-section__body'},s.body));
-  body2.appendChild(art);
-});
-
-const COMPONENTS = [
-  { kind:'Required', list:['Standard chess set (any size)','Two identical chess boards (one per player)','Opaque screen or divider between players'] },
-  { kind:'Printable', list:['Fog overlay tokens (PDF, included)','Quick-reference visibility rules card','Setup diagram for screen placement'] },
-  { kind:'House', list:['A referee (or digital app) to manage hidden information','Notepad for tracking opponent captures','Timer (optional, recommended 15 min per side)'] },
-];
-const cg = document.getElementById('components-grid');
-COMPONENTS.forEach(({kind,list}) => {
-  const c = el('div',{class:'mg-card'});
-  c.appendChild(el('div',{class:'mg-card__eyebrow mg-eyebrow--red'},kind.toUpperCase()));
-  const ul = el('ul',{class:'component-list'});
-  list.forEach(x => {
-    const li = el('li',{class:'component-list__item'});
-    li.appendChild(el('span',{class:'component-list__bullet'}));
-    li.appendChild(document.createTextNode(x));
-    ul.appendChild(li);
-  });
-  c.appendChild(ul); cg.appendChild(c);
-});
-
-const RELATED_TITLES = ['4-Player Chess', 'Hexagonal Chess (Glinski)', 'Nuke Catan'];
-const RELATED = RELATED_TITLES.map(t => {
-  const m = MG.ALL_MODS.find(x => x.title === t);
-  return Object.assign({}, m, { href: '../' + m.href.split('/mods/')[1] });
-});
-const rg = document.getElementById('related-grid');
-RELATED.forEach(m => rg.appendChild(modCard(m)));
-</script>
 </body>
 </html>

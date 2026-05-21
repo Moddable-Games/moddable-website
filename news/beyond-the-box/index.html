@@ -8,7 +8,7 @@
 <link rel="stylesheet" href="../../css/_mg.css">
 <link rel="stylesheet" href="../../css/news-post.css">
 </head>
-<body>
+<body data-toc="[{&quot;label&quot;: &quot;The illustrator&quot;, &quot;id&quot;: &quot;the-illustrator&quot;}, {&quot;label&quot;: &quot;The graphic designer&quot;, &quot;id&quot;: &quot;the-graphic-designer&quot;}, {&quot;label&quot;: &quot;The rulebook editor&quot;, &quot;id&quot;: &quot;the-rulebook-editor&quot;}, {&quot;label&quot;: &quot;The worldbuilder&quot;, &quot;id&quot;: &quot;the-worldbuilder&quot;}, {&quot;label&quot;: &quot;The community&quot;, &quot;id&quot;: &quot;the-community&quot;}]">
 <div id="nav-root"></div>
 
 <!-- Post header -->
@@ -93,117 +93,6 @@
 
 <div id="footer-root"></div>
 <script src="../../js/mg-loader.js"></script>
-<script>
-const { el, linkBtn, navbar, footer, url } = MG;
-document.getElementById('nav-root').appendChild(navbar('News'));
-document.getElementById('footer-root').appendChild(footer());
-
-// Share buttons
-['X','FB','LI','Copy'].forEach(s => {
-  const b = document.createElement('button');
-  b.textContent = s;
-  b.className = 'post-share-btn';
-  document.getElementById('share-btns').appendChild(b);
-});
-
-// TOC
-const TOC = [{label:'The illustrator', id:'the-illustrator'}, {label:'The graphic designer', id:'the-graphic-designer'}, {label:'The rulebook editor', id:'the-rulebook-editor'}, {label:'The worldbuilder', id:'the-worldbuilder'}, {label:'The community', id:'the-community'}];
-const tul = document.getElementById('toc-list');
-TOC.forEach((t,i) => {
-  const li = el('li',{class:'post-toc__item'});
-  const a = el('a',{href:'#'+t.id, class:'post-toc__link post-toc__link--inactive'},t.label);
-  a.addEventListener('click', function(e) { e.preventDefault(); document.getElementById(t.id).scrollIntoView({behavior:'smooth', block:'start'}); });
-  li.appendChild(a);
-  tul.appendChild(li);
-});
-(function() {
-  const items = tul.querySelectorAll('.post-toc__item');
-  const links = tul.querySelectorAll('.post-toc__link');
-  const ids = TOC.map(t => t.id);
-  function setActive(idx) {
-    items.forEach((li, i) => {
-      li.classList.toggle('post-toc__item--active', i === idx);
-      links[i].classList.toggle('post-toc__link--active', i === idx);
-      links[i].classList.toggle('post-toc__link--inactive', i !== idx);
-    });
-  }
-  setActive(0);
-  const observer = new IntersectionObserver(entries => {
-    entries.forEach(entry => {
-      if (entry.isIntersecting) {
-        const idx = ids.indexOf(entry.target.id);
-        if (idx !== -1) setActive(idx);
-      }
-    });
-  }, {rootMargin: '-20% 0px -60% 0px'});
-  ids.forEach(id => { const el = document.getElementById(id); if (el) observer.observe(el); });
-})();
-
-// Hero parallax — slow zoom + scroll fade
-(function() {
-  const header = document.querySelector('.post-header');
-  const img = document.querySelector('.post-header__img');
-  const inner = document.querySelector('.post-header__inner');
-  if (!header || !img || !inner) return;
-  let ticking = false;
-  window.addEventListener('scroll', function() {
-    if (ticking) return;
-    ticking = true;
-    requestAnimationFrame(function() {
-      const rect = header.getBoundingClientRect();
-      const h = header.offsetHeight;
-      const progress = Math.max(0, Math.min(1, -rect.top / h));
-      const scale = 1.08 + progress * 0.12;
-      img.style.transform = 'scale(' + scale + ')';
-      img.style.opacity = 0.5 - progress * 0.35;
-      inner.style.transform = 'translateY(' + (progress * -40) + 'px)';
-      inner.style.opacity = 1 - progress * 0.9;
-      ticking = false;
-    });
-  });
-})();
-
-// Topic tags in sidebar (links back to filtered index)
-const currentSlugForTags = window.location.pathname.split('/news/')[1]?.replace(/\//g,'') || '';
-const currentPostData = MG.NEWS_POSTS.find(p => p.slug === currentSlugForTags);
-if (currentPostData) {
-  const rightRail = document.querySelectorAll('.post-rail')[1];
-  if (rightRail) {
-    const tagSection = el('div',{style:{marginTop:'32px'}});
-    tagSection.appendChild(el('div',{class:'post-rail__eyebrow'},'TOPICS'));
-    const tagList = el('ul',{class:'post-rail__tags'});
-    currentPostData.tags.forEach(t => {
-      const li = el('li');
-      li.appendChild(el('a',{href:url('/news/#topic='+encodeURIComponent(t)),class:'post-rail__tag'},t));
-      tagList.appendChild(li);
-    });
-    tagSection.appendChild(tagList);
-    rightRail.appendChild(tagSection);
-  }
-}
-
-// More posts (from shared data, related by tags)
-const currentSlug = window.location.pathname.split('/news/')[1]?.replace(/\//g,'') || '';
-const currentPost = MG.NEWS_POSTS.find(p => p.slug === currentSlug);
-const related = MG.NEWS_POSTS
-  .filter(p => p.slug !== currentSlug)
-  .map(p => ({ ...p, score: currentPost ? p.tags.filter(t => currentPost.tags.includes(t)).length : 0 }))
-  .sort((a,b) => b.score - a.score)
-  .slice(0, 3);
-const mp = document.getElementById('more-posts');
-related.forEach(p => {
-  const a = el('a',{href:url('/news/' + p.slug + '/'),class:'post-more-card'});
-  const cover = el('div',{class:'post-more-card__cover'});
-  cover.style.background = 'linear-gradient(135deg,#0a0d2a 0%,' + p.cover + ' 100%)';
-  if (p.img) {
-    const img = el('img',{src:url('/img/news/' + p.img), alt:'', class:'post-more-card__img'});
-    cover.appendChild(img);
-  }
-  a.appendChild(cover);
-  a.appendChild(el('div',{class:'post-more-card__meta'}, p.tags.slice(0,2).join(' · ').toUpperCase() + ' · ' + p.date));
-  a.appendChild(el('h3',{class:'post-more-card__title'},p.title));
-  mp.appendChild(a);
-});
-</script>
+<script src="../../js/mg-news-article-page.js"></script>
 </body>
 </html>

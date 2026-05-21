@@ -1,0 +1,175 @@
+(function() {
+const { T, el, linkBtn, navbar, footer, url } = MG;
+document.getElementById('nav-root').appendChild(navbar('Games'));
+document.getElementById('footer-root').appendChild(footer());
+
+// 3D Hero cube (Three.js)
+(function(){
+  const container = document.getElementById('hero-cube');
+  const w = container.clientWidth || 260, h = container.clientHeight || 260;
+  const scene = new THREE.Scene();
+  const camera = new THREE.PerspectiveCamera(40, w/h, 0.1, 100);
+  camera.position.set(0, 0, 5.2);
+  const renderer = new THREE.WebGLRenderer({ alpha:true, antialias:true });
+  renderer.setSize(w, h);
+  renderer.setPixelRatio(Math.min(window.devicePixelRatio, 2));
+  container.appendChild(renderer.domElement);
+
+  const geo = new THREE.BoxGeometry(1.6, 1.6, 1.6);
+  const mats = [
+    new THREE.MeshStandardMaterial({color:0x0c4f8d, metalness:0.3, roughness:0.4}),
+    new THREE.MeshStandardMaterial({color:0x0c4f8d, metalness:0.3, roughness:0.4}),
+    new THREE.MeshStandardMaterial({color:0xd11a1a, metalness:0.3, roughness:0.4}),
+    new THREE.MeshStandardMaterial({color:0xd11a1a, metalness:0.3, roughness:0.4}),
+    new THREE.MeshStandardMaterial({color:0x3a9928, metalness:0.3, roughness:0.4}),
+    new THREE.MeshStandardMaterial({color:0x3a9928, metalness:0.3, roughness:0.4}),
+  ];
+  const cube = new THREE.Mesh(geo, mats);
+  scene.add(cube);
+
+  const edges = new THREE.LineSegments(
+    new THREE.EdgesGeometry(geo),
+    new THREE.LineBasicMaterial({color:0xffffff, transparent:true, opacity:0.3})
+  );
+  cube.add(edges);
+
+  scene.add(new THREE.AmbientLight(0xffffff, 0.6));
+  const dir = new THREE.DirectionalLight(0x6fb5ff, 1.2);
+  dir.position.set(2, 3, 4);
+  scene.add(dir);
+
+  function animate(){
+    requestAnimationFrame(animate);
+    cube.rotation.y += 0.008;
+    cube.rotation.x += 0.003;
+    renderer.render(scene, camera);
+  }
+  animate();
+})();
+
+document.querySelector('[data-gradient]').style.background = 'linear-gradient(180deg,#0a0d2a 0%,#0c2e5a 40%,#000 100%)';
+document.querySelector('[data-hex]').style.backgroundImage = `url('../../img/hex-grid-blue.svg')`;
+document.querySelector('[data-accent]').style.background = T.blue;
+document.querySelector('[data-color]').style.color = '#6fb5ff';
+document.querySelector('[data-color]').style.textShadow = '0 0 8px rgba(111,181,255,0.5)';
+document.querySelector('[data-bloom]').style.background = 'radial-gradient(ellipse,rgba(12,79,141,0.35) 0%,transparent 65%)';
+
+document.getElementById('hero-btns').appendChild(linkBtn('Play now','#','blue'));
+document.getElementById('hero-btns').appendChild(linkBtn('Browse variants','#','outline-dark'));
+
+const STATS = [['Variants','4+'],['Players','2–4'],['Status','Open alpha'],['Engine','Live'],['Board types','Square + Hex']];
+const sb = document.getElementById('stats-bar');
+STATS.forEach(([k,v],i) => {
+  if(i>0) sb.appendChild(el('span',{class:'stats-row__divider'}));
+  const d = el('div',{class:'stats-row__item'});
+  d.appendChild(el('span',{class:'stats-row__label'},k));
+  d.appendChild(el('span',{class:'stats-row__value'},v));
+  sb.appendChild(d);
+});
+
+const VARIANTS = [
+  {n:'01', title:'Regular (8×8)',        body:'Standard chess as the baseline. The same rules you know — running on our engine so you can fork it.'},
+  {n:'02', title:'4-Player',             body:'Two teams or free-for-all on a cross-shaped board. The diplomacy variant.'},
+  {n:'03', title:'Hexagonal (Glinski)',   body:'Pieces move along hex edges. Six directions instead of eight. Deeper positional play.'},
+  {n:'04', title:'Dungeon Chess',         body:'Our first original mod. Asymmetric races, XP, spells, and a modular dungeon board.', href:'#dungeon-chess'},
+];
+const vg = document.getElementById('variants-grid');
+VARIANTS.forEach(s => {
+  const a = el('article',{class:'mg-card'});
+  a.appendChild(el('div',{class:'mg-card__eyebrow mg-eyebrow--blue'},`${s.n}`));
+  a.appendChild(el('h3',{class:'mg-card__title'},s.title));
+  a.appendChild(el('p',{class:'mg-card__body'},s.body));
+  if(s.href) {
+    const link = el('a',{href:s.href,class:'mg-card__link'});
+    link.textContent = 'Learn more →';
+    a.appendChild(link);
+  }
+  vg.appendChild(a);
+});
+
+// Dungeon Chess races
+const DC_RACES = [
+  {name:'Demonics',  accent:'#d11a1a', desc:'Burn everything. Capturing pieces fuels area-of-effect hellfire.'},
+  {name:'Wraiths',   accent:'#6b4fa0', desc:'Phase through walls. Haunt tiles, making them dangerous for enemies.'},
+  {name:'Knights',   accent:'#c5a022', desc:'Hold the line. Adjacent allies strengthen each other defensively.'},
+  {name:'Verdants',  accent:'#3a9928', desc:'Grow the board. Place new tiles, heal allies, turn hazards into advantages.'},
+];
+const dcr = document.getElementById('dc-races');
+DC_RACES.forEach(r => {
+  const d = el('div',{class:'mg-card mg-card--light mg-card--row'});
+  const icon = el('div',{class:'mg-card__icon'});
+  icon.style.background = r.accent;
+  icon.textContent = '♟';
+  d.appendChild(icon);
+  const txt = el('div');
+  const title = el('div',{class:'mg-card__mono-title'});
+  title.style.color = r.accent;
+  title.textContent = r.name;
+  txt.appendChild(title);
+  txt.appendChild(el('div',{class:'mg-card__desc'},r.desc));
+  d.appendChild(txt); dcr.appendChild(d);
+});
+
+// Dungeon Chess hooks
+const DC_HOOKS = [
+  {name:'races.yaml',    desc:'Four playable races with distinct piece types, spells, and XP trees.'},
+  {name:'board.lua',     desc:'Dungeon tile generation — traps vs treasures, board shape, new tile types.'},
+  {name:'campaign.yaml', desc:'Legacy progression — XP persistence, carry-over, campaign end conditions.'},
+  {name:'spells.yaml',   desc:'Every racial spell with costs, effects, and targeting rules.'},
+];
+const dch = document.getElementById('dc-hooks');
+DC_HOOKS.forEach(h => {
+  const d = el('div',{class:'mg-card mg-card--row'});
+  const icon = el('div',{class:'mg-card__icon'});
+  icon.style.background = T.green;
+  icon.textContent = '◈';
+  d.appendChild(icon);
+  const txt = el('div');
+  const title = el('div',{class:'mg-card__mono-title'});
+  title.style.color = T.green;
+  title.textContent = h.name;
+  txt.appendChild(title);
+  txt.appendChild(el('div',{class:'mg-card__desc'},h.desc));
+  d.appendChild(txt); dch.appendChild(d);
+});
+
+const FEATURES = ['Private sessions','Cross-device','Async play'];
+const ef = document.getElementById('engine-features');
+FEATURES.forEach(f => {
+  ef.appendChild(el('span',{class:'mg-dark-center__pill'},f));
+});
+
+document.getElementById('engine-cta').appendChild(linkBtn('Try the engine','#','blue'));
+document.getElementById('engine-cta').appendChild(linkBtn('View on GitHub','#','outline-dark'));
+
+const HOOKS = [
+  {name:'board.lua',      desc:'Board geometry — square, hex, or anything. Define the grid, valid positions, and rendering rules.'},
+  {name:'pieces.yaml',    desc:'Every piece type with movement patterns, capture rules, and promotion conditions. Add new pieces or modify existing ones.'},
+  {name:'variants.yaml',  desc:'The variant registry. Combine a board, piece set, and win condition to define a new way to play.'},
+  {name:'ai.lua',         desc:'Bot behavior for each variant. The teaching engine learns from every game played — human or bot.'},
+];
+const hg = document.getElementById('hooks-grid');
+HOOKS.forEach(h => {
+  const d = el('div',{class:'mg-card mg-card--row'});
+  const icon = el('div',{class:'mg-card__icon'});
+  icon.style.background = T.blue;
+  icon.textContent = '◈';
+  d.appendChild(icon);
+  const txt = el('div');
+  const title = el('div',{class:'mg-card__mono-title'});
+  title.style.color = T.blue;
+  title.textContent = h.name;
+  txt.appendChild(title);
+  txt.appendChild(el('div',{class:'mg-card__desc'},h.desc));
+  d.appendChild(txt); hg.appendChild(d);
+});
+
+// Community mods
+const COMM = [
+  {category:'Total conversion',baseGame:'Chess',title:'Fog of War Chess',body:'See only squares your pieces can move to. No checks — capture the king to win.',stats:'2 players · 20–40 min · 10+',href:url('/mods/fog-of-war-chess/')},
+  {category:'Reskin',baseGame:'Chess',title:'4-Player Chess',body:'Four players, four armies, one board. Free-for-all or teams.',stats:'4 players · 30 min · 10+',href:url('/mods/4-player-chess/')},
+  {category:'Total conversion',baseGame:'Chess',title:'Hexagonal Chess (Glinski)',body:'Chess on 91 hexagonal cells. Three colours, six directions.',stats:'2 players · 30 min · 10+',href:url('/mods/hexagonal-chess/')},
+];
+const cg = document.getElementById('comm-grid');
+COMM.forEach(m => cg.appendChild(MG.modCard(m)));
+})();

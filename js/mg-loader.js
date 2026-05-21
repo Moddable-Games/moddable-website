@@ -10,6 +10,7 @@
   var modules = [
     'mg-core.js',
     'mg-mods-data.js',
+    'mg-mods-content.js',
     'mg-games-data.js',
     'mg-news-data.js',
     'mg-buttons.js',
@@ -17,7 +18,8 @@
     'mg-navbar.js',
     'mg-footer.js',
     'mg-search.js',
-    'mg-animations.js'
+    'mg-animations.js',
+    'mg-mod-page.js'
   ];
   for (var i = 0; i < modules.length; i++) {
     document.write('<script src="' + base + modules[i] + '"><\/script>');

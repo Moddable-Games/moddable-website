@@ -1,2 +1,10 @@
 .rules-sidebar { position: sticky; top: 96px; align-self: start; }
 .rules-layout { display: grid; grid-template-columns: 240px 1fr; gap: 64px; }
+
+:root { --mod-accent: var(--mg-blue); }
+body[data-accent="green"] { --mod-accent: var(--mg-green); }
+body[data-accent="red"] { --mod-accent: var(--mg-red); }
+
+.toc-list__link { transition: color 150ms, font-weight 150ms; }
+.toc-list__link.toc-list__link--active { font-weight: 600; color: var(--mod-accent); }
+.toc-list__link.toc-list__link--active .toc-list__num { color: var(--mod-accent); }

@@ -8,7 +8,7 @@
 <link rel="stylesheet" href="../../css/_mg.css">
 <link rel="stylesheet" href="../../css/mod-detail.css">
 </head>
-<body class="mg-section--dark">
+<body class="mg-section--dark" data-accent="green" data-mod="hyper-imperium">
 <div id="nav-root"></div>
 
 <section class="mod-hero">
@@ -54,75 +54,5 @@
 
 <div id="footer-root"></div>
 <script src="../../js/mg-loader.js"></script>
-<script>
-const { T, el, linkBtn, navbar, footer, modCard } = MG;
-document.getElementById('nav-root').appendChild(navbar('Mods'));
-document.getElementById('footer-root').appendChild(footer());
-
-const hb = document.getElementById('header-btns');
-hb.appendChild(linkBtn('Download PDF', '#', 'primary'));
-hb.appendChild(linkBtn('View on GitHub', '#', 'outline-dark'));
-
-const STATS = [['Players','3–6'],['Time','4–6 hr'],['Age','14+'],['Source','Moddable.Games'],['License','CC BY-NC-SA']];
-const sr = document.getElementById('stats-row');
-STATS.forEach(([k,v],i) => {
-  if (i>0) sr.appendChild(el('span',{class:'stats-row__divider'}));
-  const d = el('div',{class:'stats-row__item'});
-  d.appendChild(el('span',{class:'stats-row__label'},k));
-  d.appendChild(el('span',{class:'stats-row__value'},v));
-  sr.appendChild(d);
-});
-
-const SECTIONS = [
-  { id:'1', title:'Hyper Movement', body:"Ships move +1 hex per activation. This applies to all ship types, including fighters and war suns. The result is faster fleet positioning and more aggressive early-game posturing, making turtling less viable." },
-  { id:'2', title:'Hyper Trades', body:"The trade window opens every strategy phase, not just when the Trade strategy card is picked. Any player may negotiate trades freely during the strategy phase. Trade agreements still require mutual consent and can be broken at any time." },
-  { id:'3', title:'Hyper Objectives', body:"Two public objectives are revealed per round instead of one. The victory point target is raised to 12 VP (up from 10). This creates more paths to victory and rewards flexible strategy over single-minded rushing." },
-  { id:'4', title:'Hyper Factions', body:"Rebalanced faction abilities across all 25 factions. Weaker factions (Arborec, Winnu, Yin) receive meaningful buffs. Dominant factions (Saar, Jol-Nar, Nekro) are toned down without losing their identity. Full balance notes included in the PDF." },
-  { id:'5', title:'Hyper Agendas', body:"The agenda phase triggers every round, not just after Mecatol Rex is taken. Two agendas are voted on per agenda phase as normal. This keeps politics relevant from round one and gives the Speaker role consistent value throughout the game." },
-];
-
-const toc = document.getElementById('toc');
-const body2 = document.getElementById('rules-body');
-SECTIONS.forEach(s => {
-  const li = el('li');
-  const a = el('a',{href:`#s${s.id}`,class:'toc-list__link'});
-  a.appendChild(el('span',{class:'toc-list__num'},s.id.padStart(2,'0')));
-  a.appendChild(document.createTextNode(s.title));
-  li.appendChild(a); toc.appendChild(li);
-
-  const art = el('article',{class:'rules-section',id:`s${s.id}`});
-  art.appendChild(el('div',{class:'rules-section__num'},`SECTION ${s.id.padStart(2,'0')}`));
-  art.appendChild(el('h2',{class:'rules-section__title'},s.title));
-  art.appendChild(el('p',{class:'rules-section__body'},s.body));
-  body2.appendChild(art);
-});
-
-const COMPONENTS = [
-  { kind:'Required', list:['Twilight Imperium 4th Edition base game','Prophecy of Kings expansion (recommended)','All faction sheets and tokens'] },
-  { kind:'Printable', list:['Hyper Imperium rules reference (PDF, included)','Faction balance cheat sheet','Updated strategy card reference'] },
-  { kind:'House', list:['Large table (6ft minimum recommended)','VP tracker going to 12','Timer for strategy phases (optional)'] },
-];
-const cg = document.getElementById('components-grid');
-COMPONENTS.forEach(({kind,list}) => {
-  const c = el('div',{class:'mg-card'});
-  c.appendChild(el('div',{class:'mg-card__eyebrow mg-eyebrow--green'},kind.toUpperCase()));
-  const ul = el('ul',{class:'component-list'});
-  list.forEach(x => {
-    const li = el('li',{class:'component-list__item'});
-    li.appendChild(el('span',{class:'component-list__bullet'}));
-    li.appendChild(document.createTextNode(x));
-    ul.appendChild(li);
-  });
-  c.appendChild(ul); cg.appendChild(c);
-});
-
-const RELATED_TITLES = ['Talisman: Hexed', 'Nuke Catan', 'Shattered Ascension'];
-const RELATED = RELATED_TITLES.map(t => {
-  const m = MG.ALL_MODS.find(x => x.title === t);
-  return Object.assign({}, m, { href: '../' + m.href.split('/mods/')[1] });
-});
-const rg = document.getElementById('related-grid');
-RELATED.forEach(m => rg.appendChild(modCard(m)));
-</script>
 </body>
 </html>

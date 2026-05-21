@@ -8,7 +8,7 @@
 <link rel="stylesheet" href="../../css/_mg.css">
 <link rel="stylesheet" href="../../css/mod-detail.css">
 </head>
-<body class="mg-section--dark">
+<body class="mg-section--dark" data-accent="green" data-mod="econopoly">
 <div id="nav-root"></div>
 
 <section class="mod-hero">
@@ -53,75 +53,5 @@
 
 <div id="footer-root"></div>
 <script src="../../js/mg-loader.js"></script>
-<script>
-const { T, el, linkBtn, navbar, footer, modCard } = MG;
-document.getElementById('nav-root').appendChild(navbar('Mods'));
-document.getElementById('footer-root').appendChild(footer());
-
-const hb = document.getElementById('header-btns');
-hb.appendChild(linkBtn('Download PDF', '#', 'primary'));
-hb.appendChild(linkBtn('View source', '#', 'outline-dark'));
-
-const STATS = [['Players','2–6'],['Time','60 min'],['Age','10+'],['Source','Moddable.Games'],['License','CC BY-NC-SA']];
-const sr = document.getElementById('stats-row');
-STATS.forEach(([k,v],i) => {
-  if (i>0) sr.appendChild(el('span',{class:'stats-row__divider'}));
-  const d = el('div',{class:'stats-row__item'});
-  d.appendChild(el('span',{class:'stats-row__label'},k));
-  d.appendChild(el('span',{class:'stats-row__value'},v));
-  sr.appendChild(d);
-});
-
-const SECTIONS = [
-  { id:'1', title:'Dynamic pricing', body:'Property prices fluctuate based on how many times they\'ve been landed on. Popular properties become expensive; neglected ones drop in value. Prices update at the start of each round.' },
-  { id:'2', title:'Tax bands', body:'Income tax scales with net worth. The richest player pays the highest rate each time they pass Go. Three bands: 10% (under $1000), 20% ($1000–$3000), 35% (over $3000). This keeps runaway leaders in check.' },
-  { id:'3', title:'Anti-monopoly clause', body:'Owning all properties of one colour triggers a government intervention — one property from that set is forcibly auctioned to the other players. Monopolies are powerful but temporary.' },
-  { id:'4', title:'Bankruptcy reform', body:'Bankrupt players enter "debt mode" for 3 turns before elimination. During debt mode, they can still trade, sell, and negotiate their way back to solvency. This prevents early-game knockouts from ruining the experience.' },
-  { id:'5', title:'Game timer', body:'The game ends after 90 minutes or when 2 players are eliminated, whichever comes first. The richest player wins. No more 4-hour Monopoly marathons that end in family arguments.' },
-];
-
-const toc = document.getElementById('toc');
-const body2 = document.getElementById('rules-body');
-SECTIONS.forEach(s => {
-  const li = el('li');
-  const a = el('a',{href:`#s${s.id}`,class:'toc-list__link'});
-  a.appendChild(el('span',{class:'toc-list__num'},s.id.padStart(2,'0')));
-  a.appendChild(document.createTextNode(s.title));
-  li.appendChild(a); toc.appendChild(li);
-
-  const art = el('article',{class:'rules-section',id:`s${s.id}`});
-  art.appendChild(el('div',{class:'rules-section__num'},`SECTION ${s.id.padStart(2,'0')}`));
-  art.appendChild(el('h2',{class:'rules-section__title'},s.title));
-  art.appendChild(el('p',{class:'rules-section__body'},s.body));
-  body2.appendChild(art);
-});
-
-const COMPONENTS = [
-  { kind:'Required', list:['Monopoly base game (any edition)','Standard property cards and money','All player tokens and dice'] },
-  { kind:'Printable', list:['Dynamic pricing tracker sheet (PDF, included)','Tax band reference card','Debt mode reminder tokens'] },
-  { kind:'House', list:['90-minute timer (phone or kitchen timer)','Pencil for price tracking each round','Calculator for tax band percentages'] },
-];
-const cg = document.getElementById('components-grid');
-COMPONENTS.forEach(({kind,list}) => {
-  const c = el('div',{class:'mg-card'});
-  c.appendChild(el('div',{class:'mg-card__eyebrow mg-eyebrow--green'},kind.toUpperCase()));
-  const ul = el('ul',{class:'component-list'});
-  list.forEach(x => {
-    const li = el('li',{class:'component-list__item'});
-    li.appendChild(el('span',{class:'component-list__bullet'}));
-    li.appendChild(document.createTextNode(x));
-    ul.appendChild(li);
-  });
-  c.appendChild(ul); cg.appendChild(c);
-});
-
-const RELATED_TITLES = ['Anti-Monopoly', 'Nuke Catan', 'Talisman: Hexed'];
-const RELATED = RELATED_TITLES.map(t => {
-  const m = MG.ALL_MODS.find(x => x.title === t);
-  return Object.assign({}, m, { href: '../' + m.href.split('/mods/')[1] });
-});
-const rg = document.getElementById('related-grid');
-RELATED.forEach(m => rg.appendChild(modCard(m)));
-</script>
 </body>
 </html>

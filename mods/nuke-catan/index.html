@@ -8,7 +8,7 @@
 <link rel="stylesheet" href="../../css/_mg.css">
 <link rel="stylesheet" href="../../css/mod-detail.css">
 </head>
-<body class="mg-section--dark">
+<body class="mg-section--dark" data-accent="red" data-mod="nuke-catan">
 <div id="nav-root"></div>
 
 <section class="mod-hero">
@@ -54,75 +54,5 @@
 
 <div id="footer-root"></div>
 <script src="../../js/mg-loader.js"></script>
-<script>
-const { T, el, linkBtn, navbar, footer, modCard } = MG;
-document.getElementById('nav-root').appendChild(navbar('Mods'));
-document.getElementById('footer-root').appendChild(footer());
-
-const hb = document.getElementById('header-btns');
-hb.appendChild(linkBtn('Download PDF', '#', 'primary'));
-hb.appendChild(linkBtn('View on GitHub', '#', 'outline-dark'));
-
-const STATS = [['Players','3–5'],['Time','60 min'],['Age','12+'],['Source','Moddable.Games'],['License','CC BY-NC-SA']];
-const sr = document.getElementById('stats-row');
-STATS.forEach(([k,v],i) => {
-  if (i>0) sr.appendChild(el('span',{class:'stats-row__divider'}));
-  const d = el('div',{class:'stats-row__item'});
-  d.appendChild(el('span',{class:'stats-row__label'},k));
-  d.appendChild(el('span',{class:'stats-row__value'},v));
-  sr.appendChild(d);
-});
-
-const SECTIONS = [
-  { id:'1', title:'The new economy', body:"Brick replaces wheat as the core currency. All development cards cost brick. Roads cost 1 brick + 1 wood (unchanged). Settlements cost 2 brick + 1 wood + 1 sheep. Sheep produce at half rate — only on even dice rolls. Ore remains unchanged but gains value as a Bunker component." },
-  { id:'2', title:'Radiation tokens', body:"When The Button is pressed, the target hex and all adjacent hexes become irradiated. Place radiation tokens on each affected hex. Irradiated hexes produce nothing regardless of dice rolls. No new roads or settlements may be built on irradiated edges or intersections. Existing structures on irradiated hexes still count for VP but produce nothing." },
-  { id:'3', title:'Bunkers', body:"A new structure type. Costs 3 brick + 1 ore to build. May be placed on any settlement or city you own. A Bunker protects the settlement from radiation — the settlement continues producing from adjacent non-irradiated hexes, and the intersection remains buildable. Bunkers do not protect roads." },
-  { id:'4', title:'Victory conditions', body:"The game ends when a player reaches 8 VP (reduced from 10) OR when only one player has at least one non-irradiated settlement remaining. In the latter case, that player wins regardless of VP count. Longest Road and Largest Army still award 2 VP each." },
-  { id:'5', title:'The Button', body:"Once per game, each player may press The Button on their turn (before or after rolling). Choose any hex on the board — it and all adjacent hexes are irradiated. Pressing The Button immediately awards 2 VP but all other players refuse to trade with you for 2 full turns. You cannot use ports during this embargo period." },
-];
-
-const toc = document.getElementById('toc');
-const body2 = document.getElementById('rules-body');
-SECTIONS.forEach(s => {
-  const li = el('li');
-  const a = el('a',{href:`#s${s.id}`,class:'toc-list__link'});
-  a.appendChild(el('span',{class:'toc-list__num'},s.id.padStart(2,'0')));
-  a.appendChild(document.createTextNode(s.title));
-  li.appendChild(a); toc.appendChild(li);
-
-  const art = el('article',{class:'rules-section',id:`s${s.id}`});
-  art.appendChild(el('div',{class:'rules-section__num'},`SECTION ${s.id.padStart(2,'0')}`));
-  art.appendChild(el('h2',{class:'rules-section__title'},s.title));
-  art.appendChild(el('p',{class:'rules-section__body'},s.body));
-  body2.appendChild(art);
-});
-
-const COMPONENTS = [
-  { kind:'Required', list:['Catan base game (any edition)','Standard resource cards and tokens','Development card deck'] },
-  { kind:'Printable', list:['Radiation tokens (PDF, included)','Bunker tokens (PDF, included)','Updated resource reference card'] },
-  { kind:'House', list:['1 large red button (or any dramatic prop)','Radiation zone markers (coins work)','Embargo tracker (paper or tokens)'] },
-];
-const cg = document.getElementById('components-grid');
-COMPONENTS.forEach(({kind,list}) => {
-  const c = el('div',{class:'mg-card'});
-  c.appendChild(el('div',{class:'mg-card__eyebrow mg-eyebrow--red'},kind.toUpperCase()));
-  const ul = el('ul',{class:'component-list'});
-  list.forEach(x => {
-    const li = el('li',{class:'component-list__item'});
-    li.appendChild(el('span',{class:'component-list__bullet'}));
-    li.appendChild(document.createTextNode(x));
-    ul.appendChild(li);
-  });
-  c.appendChild(ul); cg.appendChild(c);
-});
-
-const RELATED_TITLES = ['Flooded Catan', 'The Diamond Mine', 'Hyper Imperium'];
-const RELATED = RELATED_TITLES.map(t => {
-  const m = MG.ALL_MODS.find(x => x.title === t);
-  return Object.assign({}, m, { href: '../' + m.href.split('/mods/')[1] });
-});
-const rg = document.getElementById('related-grid');
-RELATED.forEach(m => rg.appendChild(modCard(m)));
-</script>
 </body>
 </html>

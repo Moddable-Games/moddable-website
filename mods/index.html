@@ -47,53 +47,6 @@
 
 <div id="footer-root"></div>
 <script src="../js/mg-loader.js"></script>
-<script>
-const { navbar, footer, modCard, url } = MG;
-document.getElementById('nav-root').appendChild(navbar('Mods'));
-document.getElementById('footer-root').appendChild(footer());
-
-const ALL_MODS = MG.ALL_MODS;
-
-const filters = ['All','Total conversion','Rebalance','Reskin'];
-let activeCat = 'All', searchVal = '';
-
-document.getElementById('hero-sub').textContent = `${ALL_MODS.length} rulebook mods across ${new Set(ALL_MODS.map(m=>m.baseGame)).size} base games. Filter by mod-type, or search for the one you already own.`;
-
-function renderFilters() {
-  const el2 = document.getElementById('cat-filters');
-  el2.innerHTML = '';
-  filters.forEach(f => {
-    const a = f === activeCat;
-    const b = document.createElement('button');
-    b.textContent = f;
-    Object.assign(b.style, { fontFamily:'var(--mg-font-body)', fontWeight:600, fontSize:'13px', height:'36px', padding:'0 14px', borderRadius:'9999px', border: a?'none':'1px solid #c3c5cc', background: a?'#000':'transparent', color: a?'#fff':'#14161c', cursor:'pointer', transition:'all 150ms' });
-    b.addEventListener('click', () => { activeCat = f; renderFilters(); renderGrid(); });
-    el2.appendChild(b);
-  });
-}
-
-function renderGrid() {
-  const q = searchVal.toLowerCase();
-  const visible = ALL_MODS.filter(m =>
-    (activeCat === 'All' || m.category === activeCat) &&
-    (!q || m.title.toLowerCase().includes(q) || m.baseGame.toLowerCase().includes(q))
-  );
-  const grid = document.getElementById('mods-grid');
-  const empty = document.getElementById('empty-state');
-  grid.innerHTML = '';
-  document.getElementById('count-label').textContent = `${visible.length} OF ${ALL_MODS.length} MODS`;
-  if (visible.length === 0) { empty.style.display = 'block'; return; }
-  empty.style.display = 'none';
-  visible.forEach(m => grid.appendChild(MG.modCard(m)));
-  MG.initReveal();
-}
-
-document.getElementById('search-input').addEventListener('input', e => { searchVal = e.target.value; renderGrid(); });
-
-// Pre-filter from URL hash (e.g. /mods/#Total%20conversion)
-const hashCat = decodeURIComponent(location.hash.slice(1));
-if (hashCat && filters.includes(hashCat)) activeCat = hashCat;
-renderFilters(); renderGrid();
-</script>
+<script src="../js/mg-mods-index-page.js"></script>
 </body>
 </html>

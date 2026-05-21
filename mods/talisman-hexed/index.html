@@ -8,7 +8,7 @@
 <link rel="stylesheet" href="../../css/_mg.css">
 <link rel="stylesheet" href="../../css/mod-detail.css">
 </head>
-<body class="mg-section--dark">
+<body class="mg-section--dark" data-accent="blue" data-mod="talisman-hexed">
 <div id="nav-root"></div>
 
 <section class="mod-hero">
@@ -53,75 +53,5 @@
 
 <div id="footer-root"></div>
 <script src="../../js/mg-loader.js"></script>
-<script>
-const { T, el, linkBtn, navbar, footer, modCard } = MG;
-document.getElementById('nav-root').appendChild(navbar('Mods'));
-document.getElementById('footer-root').appendChild(footer());
-
-const hb = document.getElementById('header-btns');
-hb.appendChild(linkBtn('Download rules', '#', 'primary'));
-hb.appendChild(linkBtn('Print-and-play pack', '#', 'outline-dark'));
-
-const STATS = [['Players','2–6'],['Time','90 min'],['Age','13+'],['Tiles','61 hex'],['Designer','Moddable team'],['Updated','Apr 2024']];
-const sr = document.getElementById('stats-row');
-STATS.forEach(([k,v],i) => {
-  if (i>0) sr.appendChild(el('span',{class:'stats-row__divider'}));
-  const d = el('div',{class:'stats-row__item'});
-  d.appendChild(el('span',{class:'stats-row__label'},k));
-  d.appendChild(el('span',{class:'stats-row__value'},v));
-  sr.appendChild(d);
-});
-
-const SECTIONS = [
-  { id:'1', title:'Why hex?', body:"The square Talisman board gets boring fast — same path, same encounters, same finale every game. Hexagonal tiles let us deal a new map each session and keep the journey unpredictable." },
-  { id:'2', title:'The four rings', body:"61 tiles arranged in concentric rings: 24 outer (the world), 18 river, 12 middle (the highlands), 6 inner (the dungeon approach), plus one central tile (the Crown of Command)." },
-  { id:'3', title:'Special tiles', body:"10 water tiles connect across rings via the river. 4 desert tiles act as Talisman's traditional 'Desert' region. The rest map onto the original board's encounter spaces, redistributed each game." },
-  { id:'4', title:'Movement', body:"Roll 1d6 and move that many tiles in any direction along legal edges. You may cross river tiles only with a boat token, raft, or relevant character ability." },
-  { id:'5', title:"What hasn't changed", body:"All Talisman 4e (revised) cards, characters, spell decks, and adventure cards work as-is. Hexed only replaces the board — your encounter library is untouched." },
-];
-
-const toc = document.getElementById('toc');
-const body2 = document.getElementById('rules-body');
-SECTIONS.forEach(s => {
-  const li = el('li');
-  const a = el('a',{href:`#s${s.id}`,class:'toc-list__link'});
-  a.appendChild(el('span',{class:'toc-list__num'},s.id.padStart(2,'0')));
-  a.appendChild(document.createTextNode(s.title));
-  li.appendChild(a); toc.appendChild(li);
-
-  const art = el('article',{class:'rules-section',id:`s${s.id}`});
-  art.appendChild(el('div',{class:'rules-section__num'},`SECTION ${s.id.padStart(2,'0')}`));
-  art.appendChild(el('h2',{class:'rules-section__title'},s.title));
-  art.appendChild(el('p',{class:'rules-section__body'},s.body));
-  body2.appendChild(art);
-});
-
-const COMPONENTS = [
-  { kind:'Required', list:['Talisman 4e (revised) base game','Card decks (Adventure, Spell, Purchase, Stranger, Warlock Quest)','Character cards + miniatures'] },
-  { kind:'Printable', list:['61 × hexagonal tiles (PDF, included)','Tile inventory + assembly diagram','River movement tokens'] },
-  { kind:'House', list:['1d6 standard die','A large flat surface — 4ft × 3ft minimum','Patience for tile shuffling'] },
-];
-const cg = document.getElementById('components-grid');
-COMPONENTS.forEach(({kind,list}) => {
-  const c = el('div',{class:'mg-card'});
-  c.appendChild(el('div',{class:'mg-card__eyebrow mg-eyebrow--blue'},kind.toUpperCase()));
-  const ul = el('ul',{class:'component-list'});
-  list.forEach(x => {
-    const li = el('li',{class:'component-list__item'});
-    li.appendChild(el('span',{class:'component-list__bullet'}));
-    li.appendChild(document.createTextNode(x));
-    ul.appendChild(li);
-  });
-  c.appendChild(ul); cg.appendChild(c);
-});
-
-const RELATED_TITLES = ['Hyper Imperium', 'Econopoly', 'Nuke Catan'];
-const RELATED = RELATED_TITLES.map(t => {
-  const m = MG.ALL_MODS.find(x => x.title === t);
-  return Object.assign({}, m, { href: '../' + m.href.split('/mods/')[1] });
-});
-const rg = document.getElementById('related-grid');
-RELATED.forEach(m => rg.appendChild(modCard(m)));
-</script>
 </body>
 </html>

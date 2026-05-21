@@ -8,7 +8,7 @@
 <link rel="stylesheet" href="../../css/_mg.css">
 <link rel="stylesheet" href="../../css/mod-detail.css">
 </head>
-<body class="mg-section--dark">
+<body class="mg-section--dark" data-accent="green" data-mod="shattered-ascension">
 <div id="nav-root"></div>
 
 <section class="mod-hero">
@@ -53,75 +53,5 @@
 
 <div id="footer-root"></div>
 <script src="../../js/mg-loader.js"></script>
-<script>
-const { T, el, linkBtn, navbar, footer, modCard } = MG;
-document.getElementById('nav-root').appendChild(navbar('Mods'));
-document.getElementById('footer-root').appendChild(footer());
-
-const hb = document.getElementById('header-btns');
-hb.appendChild(linkBtn('Download PDF', '#', 'primary'));
-hb.appendChild(linkBtn('View source', '#', 'outline-dark'));
-
-const STATS = [['Players','3–8'],['Time','6–12 hr'],['Age','16+'],['Source','boardgamegeek.com'],['License','Community / BoardGameGeek']];
-const sr = document.getElementById('stats-row');
-STATS.forEach(([k,v],i) => {
-  if (i>0) sr.appendChild(el('span',{class:'stats-row__divider'}));
-  const d = el('div',{class:'stats-row__item'});
-  d.appendChild(el('span',{class:'stats-row__label'},k));
-  d.appendChild(el('span',{class:'stats-row__value'},v));
-  sr.appendChild(d);
-});
-
-const SECTIONS = [
-  { id:'1', title:'Faction rebalance', body:"Every faction receives point-cost balancing. Weaker factions get starting bonuses; dominant factions face constraints. No faction is auto-pick or auto-ban in competitive play." },
-  { id:'2', title:'Strategy card overhaul', body:"All 8 strategy cards reworked. Secondary abilities are more impactful, reducing the \"must-pick\" problem. Every strategy card is now viable depending on game state." },
-  { id:'3', title:'Agenda phase 2.0', body:"Agendas now have permanent, game-changing effects. Political maneuvering becomes a genuine win condition path. The speaker role carries real weight every round." },
-  { id:'4', title:'New objectives', body:"40+ custom objectives replacing the base set. More diverse paths to victory, fewer VP-denial strategies. Both public and secret objectives have been redesigned for variety." },
-  { id:'5', title:'Combat revision', body:"Space combat uses a modified dice system with critical hits. Ground invasions are faster but riskier. Flagship abilities have been retuned to avoid snowball victories." },
-];
-
-const toc = document.getElementById('toc');
-const body2 = document.getElementById('rules-body');
-SECTIONS.forEach(s => {
-  const li = el('li');
-  const a = el('a',{href:`#s${s.id}`,class:'toc-list__link'});
-  a.appendChild(el('span',{class:'toc-list__num'},s.id.padStart(2,'0')));
-  a.appendChild(document.createTextNode(s.title));
-  li.appendChild(a); toc.appendChild(li);
-
-  const art = el('article',{class:'rules-section',id:`s${s.id}`});
-  art.appendChild(el('div',{class:'rules-section__num'},`SECTION ${s.id.padStart(2,'0')}`));
-  art.appendChild(el('h2',{class:'rules-section__title'},s.title));
-  art.appendChild(el('p',{class:'rules-section__body'},s.body));
-  body2.appendChild(art);
-});
-
-const COMPONENTS = [
-  { kind:'Required', list:['Twilight Imperium 3rd or 4th Edition base game','All expansion content (Shattered Empire recommended)','Faction sheets and plastic units for up to 8 players'] },
-  { kind:'Printable', list:['Shattered Ascension rulebook (PDF, 80+ pages)','Custom objective cards (print-and-cut)','Rebalanced strategy card overlays'] },
-  { kind:'House', list:['Tabletop Simulator (digital alternative available)','Large table for 8-player games','Full day blocked out (6–12 hours minimum)'] },
-];
-const cg = document.getElementById('components-grid');
-COMPONENTS.forEach(({kind,list}) => {
-  const c = el('div',{class:'mg-card'});
-  c.appendChild(el('div',{class:'mg-card__eyebrow mg-eyebrow--green'},kind.toUpperCase()));
-  const ul = el('ul',{class:'component-list'});
-  list.forEach(x => {
-    const li = el('li',{class:'component-list__item'});
-    li.appendChild(el('span',{class:'component-list__bullet'}));
-    li.appendChild(document.createTextNode(x));
-    ul.appendChild(li);
-  });
-  c.appendChild(ul); cg.appendChild(c);
-});
-
-const RELATED_TITLES = ['Hyper Imperium', 'Talisman: Hexed', 'CivRisk'];
-const RELATED = RELATED_TITLES.map(t => {
-  const m = MG.ALL_MODS.find(x => x.title === t);
-  return Object.assign({}, m, { href: '../' + m.href.split('/mods/')[1] });
-});
-const rg = document.getElementById('related-grid');
-RELATED.forEach(m => rg.appendChild(modCard(m)));
-</script>
 </body>
 </html>
