@@ -12,7 +12,7 @@ A multi-page marketing site and tools platform for an open-source board game mod
 HTML + Vanilla JS + Zero dependencies + Zero build step
 ```
 
-One shared component library (`js/_mg.js` + `css/_mg.css`), one `index.html` per route.
+Modular JS architecture: one loader (`js/mg-loader.js`) loads 12 shared modules + page-specific scripts. Zero inline scripts or styles.
 
 ---
 
@@ -89,24 +89,48 @@ Open `http://localhost:8000/`. Clean URLs, no `.html` extensions.
 
 ---
 
-### Component library (`_mg.js`)
+### JS Architecture
 
-```js
-MG.navbar(activeId)        // Sticky 64px navbar
-MG.footer()                // Full site footer
-MG.modCard(props)          // Mod card component
-MG.pageHero(props)         // Interior page hero
-MG.linkBtn(label, href, variant)  // Pill link button
-MG.btn(label, variant, onClick)   // Pill button
-MG.cubeSVG(size)           // Tri-colour cube logo
-MG.url(path)               // Base-path-aware URL helper
 ```
+js/
+├── mg-loader.js          ← entry point, loads all modules
+├── mg-core.js            ← tokens, el(), url()
+├── mg-buttons.js         ← btn(), linkBtn()
+├── mg-cards.js           ← modCard()
+├── mg-navbar.js          ← navbar()
+├── mg-footer.js          ← footer()
+├── mg-search.js          ← global Cmd+K search
+├── mg-animations.js      ← scroll reveal + TOC spy
+├── mg-mods-data.js       ← mod library data
+├── mg-mods-content.js    ← mod page content (rules, components, etc.)
+├── mg-news-data.js       ← news post metadata
+├── mg-games-data.js      ← games data
+├── mg-team-data.js       ← team member data
+├── mg-mod-page.js        ← data-driven mod detail renderer
+├── mg-news-article-page.js ← shared news article renderer
+└── mg-*-page.js          ← page-specific scripts (home, tools, etc.)
+```
+
+Pages load `mg-loader.js` (which handles shared modules) + their own page script.
 
 ---
 
 ### Changelog
 
+#### 2026-05-21
+- Extracted ALL inline scripts to external JS files (zero remain across 45 pages)
+- Created data-driven mod page renderer (`mg-mod-page.js` + `mg-mods-content.js`)
+- Created shared news article renderer (`mg-news-article-page.js` with `data-toc`)
+- Extracted team data to `mg-team-data.js`
+- Added TOC scroll-spy with accent colour highlighting
+- Added global rule: no inline `<script>` blocks (matches no inline styles)
+- Net: -5220 lines of inline JS removed, +3537 lines in proper external modules
+
 #### 2026-05-20
+- Extracted mods and games data into shared JS modules (`mg-mods-data.js`, `mg-games-data.js`)
+- Extracted all inline styles to external CSS files; complete JS module split
+- Split `_mg.js` into semantic modules (core, components, animations)
+- Added global search (Cmd+K) and made mod cards fully clickable
 - Scroll-reveal animation system, hero entrance choreography, button micro-interactions
 - Game page heroes: two-column layout with floating logos
 - Homepage: nuked-family illustration, Hyper Imperium logo, glowing section dividers
