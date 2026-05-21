@@ -6,11 +6,7 @@
 <meta name="mg-base" content="/MODDABLE/moddable-website">
 <title>Moddable Chess — Moddable.Games</title>
 <link rel="stylesheet" href="../../css/_mg.css">
-<style>
-#hero-cube { width: clamp(280px, 32vw, 420px); height: clamp(280px, 32vw, 420px); overflow: visible; }
-#hero-cube canvas { display: block; }
-.game-hero__inner { align-items: center; }
-</style>
+<link rel="stylesheet" href="../../css/game-moddable-chess.css">
 </head>
 <body class="mg-section--dark">
 <div id="nav-root"></div>
@@ -97,7 +93,7 @@
 
 <div id="footer-root"></div>
 <script src="../../js/three.min.js"></script>
-<script src="../../js/_mg.js"></script>
+<script src="../../js/mg-loader.js"></script>
 <script>
 const { T, el, linkBtn, navbar, footer, url } = MG;
 document.getElementById('nav-root').appendChild(navbar('Games'));

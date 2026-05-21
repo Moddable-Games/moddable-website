@@ -6,20 +6,7 @@
 <meta name="mg-base" content="/MODDABLE/moddable-website">
 <title>Roadmap — Moddable.Games</title>
 <link rel="stylesheet" href="../../css/_mg.css">
-<style>
-body { background: #f5f4ef; }
-.roadmap-timeline { position: relative; padding-left: 0; max-width: 840px; margin: 0 auto; }
-.roadmap-timeline::before { content: ''; position: absolute; left: 72px; top: 24px; bottom: 24px; width: 2px; background: var(--mg-hairline-light); }
-.milestone-row { display: flex; align-items: flex-start; gap: 24px; padding: 20px 0; position: relative; }
-.milestone-badge { flex: none; width: 120px; padding: 8px 14px; border-radius: 9999px; font-family: var(--mg-font-mono); font-size: 13px; font-weight: 600; color: #fff; text-align: center; position: relative; z-index: 1; }
-.milestone-text { font-family: var(--mg-font-body); font-size: 18px; line-height: 1.55; color: var(--mg-body-color); padding: 16px 24px; background: #fff; border: 1px solid var(--mg-hairline-light); border-radius: 14px; flex: 1; }
-.vision-card { background: #fff; border: 1px solid var(--mg-hairline-light); border-radius: 14px; padding: 28px 28px 24px; display: flex; flex-direction: column; gap: 8px; }
-.vision-number { font-family: var(--mg-font-mono); font-size: 12px; font-weight: 600; color: var(--mg-stone); letter-spacing: 0.5px; }
-.vision-title { font-family: var(--mg-font-display); font-weight: 600; font-size: 16px; color: var(--mg-ink); }
-.vision-body { font-family: var(--mg-font-body); font-size: 15px; line-height: 1.5; color: #4a5060; }
-.roadmap-vision { padding: 0 32px 96px; }
-.roadmap-vision__body { font-family: var(--mg-font-body); font-size: 19px; line-height: 1.65; color: var(--mg-body-color); margin: 0 0 36px; }
-</style>
+<link rel="stylesheet" href="../../css/roadmap.css">
 </head>
 <body>
 <div id="nav-root"></div>
@@ -38,7 +25,7 @@ body { background: #f5f4ef; }
 </section>
 
 <div id="footer-root"></div>
-<script src="../../js/_mg.js"></script>
+<script src="../../js/mg-loader.js"></script>
 <script>
 const { el, navbar, footer, pageHero } = MG;
 document.getElementById('nav-root').appendChild(navbar('About'));

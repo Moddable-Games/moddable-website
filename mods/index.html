@@ -6,28 +6,7 @@
 <meta name="mg-base" content="/MODDABLE/moddable-website">
 <title>All mods — Moddable.Games</title>
 <link rel="stylesheet" href="../css/_mg.css">
-<style>
-body { background: #f5f4ef; }
-.mods-hero { background: #000; color: #fff; padding: 64px 32px 88px; position: relative; overflow: hidden; }
-.mods-hero__bloom { position: absolute; right: -150px; top: 10%; width: 700px; height: 700px; background: radial-gradient(circle, rgba(58,123,232,0.28) 0%, transparent 65%); pointer-events: none; }
-.mods-hero__inner { max-width: 1200px; margin: 0 auto; position: relative; }
-.mods-hero__title { font-family: var(--mg-font-display); font-weight: 600; font-size: clamp(48px, 7vw, 96px); line-height: 0.95; letter-spacing: -0.025em; margin: 0 0 20px; }
-.mods-hero__lede { font-family: var(--mg-font-body); font-size: 18px; line-height: 1.55; color: rgba(255,255,255,0.82); max-width: 600px; margin: 0; }
-.mods-filter { background: var(--mg-canvas-light); padding: 40px 32px 96px; }
-.mods-filter__inner { max-width: 1200px; margin: 0 auto; }
-.mods-filter__bar { display: flex; gap: 16px; margin-bottom: 32px; flex-wrap: wrap; align-items: center; }
-.mods-filter__search-wrap { position: relative; flex: 1 1 280px; max-width: 360px; }
-.mods-filter__search { width: 100%; height: 44px; padding: 0 16px 0 44px; border: 1px solid var(--mg-hairline-light); border-radius: 9999px; font-family: var(--mg-font-body); font-size: 14px; background: #fff; outline: none; }
-.mods-filter__search-icon { position: absolute; left: 16px; top: 50%; transform: translateY(-50%); opacity: 0.4; font-size: 16px; pointer-events: none; }
-.mods-filter__cats { display: flex; gap: 8px; flex-wrap: wrap; margin-left: auto; }
-.mods-filter__meta { display: flex; justify-content: space-between; align-items: center; margin-bottom: 16px; flex-wrap: wrap; gap: 8px; }
-.mods-filter__count { font-family: var(--mg-font-pixel); font-size: 9px; color: var(--mg-ink); letter-spacing: 1.5px; }
-.mods-filter__sort { font-family: var(--mg-font-mono); font-size: 12px; color: var(--mg-stone); }
-.mods-empty { display: none; background: #fff; border: 1px solid var(--mg-hairline-light); border-radius: 16px; padding: 48px; text-align: center; margin-top: 16px; }
-.mods-empty__title { font-family: var(--mg-font-display); font-weight: 600; font-size: 24px; color: var(--mg-ink); margin: 0 0 8px; }
-.mods-empty__body { font-family: var(--mg-font-body); font-size: 15px; color: var(--mg-mute); margin: 0 0 20px; }
-.mods-empty__link { display: inline-flex; align-items: center; height: 48px; padding: 0 22px; background: var(--mg-ink); color: #fff; border-radius: 9999px; font-family: var(--mg-font-body); font-weight: 600; font-size: 15px; text-decoration: none; }
-</style>
+<link rel="stylesheet" href="../css/mods.css">
 </head>
 <body>
 <div id="nav-root"></div>
@@ -67,7 +46,7 @@ body { background: #f5f4ef; }
 </section>
 
 <div id="footer-root"></div>
-<script src="../js/_mg.js"></script>
+<script src="../js/mg-loader.js"></script>
 <script>
 const { navbar, footer, modCard, url } = MG;
 document.getElementById('nav-root').appendChild(navbar('Mods'));

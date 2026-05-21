@@ -1,0 +1,75 @@
+body { background:#f5f4ef; }
+.tog-btn { width:36px;height:36px;border-radius:9999px;cursor:pointer;font-family:var(--mg-font-mono);font-weight:600;font-size:13px;transition:all 120ms; }
+
+/* ── TI Hero ── */
+.ti-hero { background:#000;color:#fff;padding:56px 32px 72px;position:relative;overflow:hidden; }
+.ti-hero__glow { position:absolute;left:-100px;top:20%;width:600px;height:600px;background:radial-gradient(circle,rgba(12,79,141,0.3) 0%,transparent 65%);pointer-events:none; }
+.ti-hero__inner { max-width:1200px;margin:0 auto;position:relative; }
+.ti-hero__back { font-family:var(--mg-font-mono);font-size:12px;color:rgba(255,255,255,0.65);text-decoration:none; }
+.ti-hero__eyebrow { font-family:var(--mg-font-pixel);font-size:10px;color:#6fb5ff;letter-spacing:1.5px;margin:20px 0 16px; }
+.ti-hero__title { font-family:var(--mg-font-display);font-weight:600;font-size:clamp(44px,5.5vw,80px);line-height:1.0;letter-spacing:-0.025em;margin:0 0 18px; }
+.ti-hero__lede { font-family:var(--mg-font-body);font-size:17px;line-height:1.55;color:rgba(255,255,255,0.75);max-width:560px;margin:0; }
+
+/* ── Tools body section ── */
+.ti-body { background:#f5f4ef;padding:48px 32px 96px; }
+.ti-body__inner { max-width:900px;margin:0 auto;display:flex;flex-direction:column;gap:24px; }
+
+/* ── Tool cards ── */
+.ti-card { background:#fff;border:1px solid #e6e3d8;border-radius:20px;padding:32px; }
+.ti-card__header { display:flex;align-items:flex-start;gap:16px;margin-bottom:22px;padding-bottom:22px;border-bottom:1px solid #e6e3d8; }
+.ti-card__accent { width:6px;height:48px;border-radius:3px;flex:none; }
+.ti-card__accent--blue { background:#0c4f8d; }
+.ti-card__accent--green { background:#3a9928; }
+.ti-card__accent--red { background:#d11a1a; }
+.ti-card__eyebrow { font-family:var(--mg-font-pixel);font-size:9px;letter-spacing:1.5px;margin-bottom:6px; }
+.ti-card__eyebrow--blue { color:#0c4f8d; }
+.ti-card__eyebrow--green { color:#3a9928; }
+.ti-card__eyebrow--red { color:#d11a1a; }
+.ti-card__title { font-family:var(--mg-font-display);font-weight:600;font-size:24px;color:#14161c;margin:0;letter-spacing:-0.3px; }
+.ti-card__desc { font-family:var(--mg-font-body);font-size:14px;color:#4f5764;margin:4px 0 0; }
+
+/* ── Faction picker controls ── */
+.ti-controls { display:flex;gap:14px;align-items:center;margin-bottom:20px;flex-wrap:wrap; }
+.ti-controls__group { display:flex;gap:8px;align-items:center; }
+.ti-controls__label { font-family:var(--mg-font-mono);font-size:12px;color:#7a8290;text-transform:uppercase;letter-spacing:0.5px; }
+.ti-controls__btns { display:flex;gap:6px; }
+#deal-btn { margin-left:auto; }
+
+/* ── Faction hands (JS-rendered) ── */
+.ti-hand { background:#f5f4ef;border-radius:12px;padding:14px;margin-bottom:10px; }
+.ti-hand__label { font-family:var(--mg-font-pixel);font-size:9px;color:#0c4f8d;letter-spacing:1.5px;margin-bottom:10px; }
+.ti-hand__row { display:flex;gap:8px;flex-wrap:wrap; }
+.ti-faction { flex:1 1 0;min-width:120px;padding:12px 14px;background:#fff;border-radius:10px;display:flex;align-items:center;gap:10px; }
+.ti-faction__badge { width:26px;height:26px;border-radius:6px;display:flex;align-items:center;justify-content:center;font-family:var(--mg-font-pixel);font-size:7px;flex:none; }
+.ti-faction__name { font-family:var(--mg-font-display);font-weight:600;font-size:13px;color:#14161c;line-height:1.2; }
+
+/* ── Objectives (JS-rendered) ── */
+.ti-objectives { display:grid;grid-template-columns:1fr 1fr;gap:20px; }
+.ti-obj-title { font-family:var(--mg-font-pixel);font-size:9px;letter-spacing:1.5px;margin-bottom:14px; }
+.ti-obj-list { display:flex;flex-direction:column;gap:6px; }
+.ti-obj-row { display:flex;align-items:center;gap:10px;padding:8px 12px;border-radius:8px;cursor:pointer;background:#f5f4ef;transition:background 150ms; }
+.ti-obj-check { width:18px;height:18px;border-radius:4px;flex:none;display:flex;align-items:center;justify-content:center;font-size:12px;transition:all 120ms; }
+.ti-obj-label { font-family:var(--mg-font-body);font-size:13px;color:#14161c;line-height:1.3; }
+
+/* ── Agenda (JS-rendered) ── */
+.ti-agenda-empty { text-align:center;padding:32px 0; }
+.ti-agenda-card { background:#f5f4ef;border-radius:14px;padding:24px;margin-bottom:20px; }
+.ti-agenda-type { font-family:var(--mg-font-mono);font-size:11px;font-weight:600;background:#d11a1a;color:#fff;padding:3px 10px;border-radius:9999px;margin-bottom:12px;display:inline-block; }
+.ti-agenda-title { font-family:var(--mg-font-display);font-weight:600;font-size:22px;letter-spacing:-0.3px;color:#14161c;margin:8px 0 16px; }
+.ti-agenda-opts { display:grid;grid-template-columns:1fr 1fr;gap:12px; }
+.ti-agenda-opt { background:#fff;border-radius:10px;padding:14px; }
+.ti-agenda-opt__label { font-family:var(--mg-font-mono);font-size:10px;font-weight:600;letter-spacing:1px;margin-bottom:6px; }
+.ti-agenda-opt__text { font-family:var(--mg-font-body);font-size:13px;color:#1f2228;line-height:1.5; }
+.ti-tally { display:flex;gap:16px;align-items:center;flex-wrap:wrap;margin-bottom:16px; }
+.ti-tally__group { display:flex;align-items:center;gap:10px;background:#fff;border:1px solid var(--mg-hairline-light);border-radius:12px;padding:12px 16px;flex:1 1 0; }
+.ti-tally__side { font-family:var(--mg-font-mono);font-size:12px;color:#7a8290;text-transform:uppercase; }
+.ti-tally__count { font-family:var(--mg-font-display);font-weight:600;font-size:28px;margin:0 8px;min-width:32px;text-align:center; }
+.ti-tally__btn { width:28px;height:28px;border-radius:9999px;cursor:pointer;font-size:16px;line-height:1; }
+.ti-tally__btn--minus { border:1px solid var(--mg-hairline-light);background:#f5f4ef; }
+.ti-tally__btn--plus { border:none;color:#fff; }
+.ti-agenda-btns { display:flex;gap:10px;flex-wrap:wrap; }
+
+@media (max-width: 768px) {
+  .ti-objectives { grid-template-columns:1fr; }
+  .ti-agenda-opts { grid-template-columns:1fr; }
+}

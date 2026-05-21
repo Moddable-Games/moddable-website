@@ -6,12 +6,7 @@
 <meta name="mg-base" content="/MODDABLE/moddable-website">
 <title>Endless Skies — Moddable.Games</title>
 <link rel="stylesheet" href="../../css/_mg.css">
-<style>
-.hooks-card { background: var(--mg-surface-elevated); border: 1px solid rgba(255,255,255,0.08); border-radius: 16px; padding: 24px; display: flex; gap: 18px; align-items: flex-start; }
-.hooks-card__icon { width: 40px; height: 40px; background: var(--mg-blue); border-radius: 10px; display: flex; align-items: center; justify-content: center; flex: none; font-size: 18px; color: #fff; }
-.hooks-card__name { font-family: var(--mg-font-mono); font-weight: 600; font-size: 15px; color: var(--mg-cosmic-glow); }
-.hooks-card__desc { font-family: var(--mg-font-body); font-size: 14px; color: rgba(255,255,255,0.78); line-height: 1.5; margin-top: 6px; }
-</style>
+<link rel="stylesheet" href="../../css/game-endless-skies.css">
 </head>
 <body class="mg-section--dark">
 <div id="nav-root"></div>
@@ -67,7 +62,7 @@
 </section>
 
 <div id="footer-root"></div>
-<script src="../../js/_mg.js"></script>
+<script src="../../js/mg-loader.js"></script>
 <script>
 const { T, el, linkBtn, navbar, footer, modCard, url } = MG;
 document.getElementById('nav-root').appendChild(navbar('Games'));

@@ -1,0 +1,129 @@
+/* =========================================================================
+   Moddable.Games — News Post Data (single source of truth)
+   Extends window.MG (created by mg-core.js)
+   ========================================================================= */
+
+(function() {
+  window.MG.NEWS_POSTS = [
+    {
+      slug: 'beyond-the-box',
+      tags: ['Carcassonne','Catan','Gloomhaven','Twilight Imperium'],
+      date: 'May 2026',
+      cover: '#0c4f8d',
+      img: 'beyond-the-box.jpg',
+      title: 'Beyond The Box',
+      excerpt: 'The art of board game design begins and ends with the box — but what happens when we open it?',
+      theme: 'blue'
+    },
+    {
+      slug: 'the-ancients',
+      tags: ['Ashtapada','Backgammon','Chess','Go','Mancala','Mehen','Senet','The Royal Game of Ur'],
+      date: 'Apr 2026',
+      cover: '#1a3680',
+      img: 'the-ancients.jpg',
+      title: 'The Ancients',
+      excerpt: 'We rarely pause to consider what has already endured — games older than history itself.',
+      theme: 'blue'
+    },
+    {
+      slug: 'making-mods-matter',
+      tags: ['Carcassonne','Chess','Twilight Imperium'],
+      date: 'Mar 2026',
+      cover: '#3a9928',
+      img: 'making-mods-matter.jpg',
+      title: 'Making Mods Matter',
+      excerpt: 'Those who tinker, tailor and say lore beyond casual play — and why they deserve better tools.',
+      theme: 'green'
+    },
+    {
+      slug: 'the-house-always-wins',
+      tags: ['Chess','Dungeons & Dragons','Go','Monopoly'],
+      date: 'Feb 2026',
+      cover: '#3a9928',
+      img: 'the-house-always-wins.jpg',
+      title: 'The House Always Wins!',
+      excerpt: 'How house rules become canon, from en passant to free parking jackpots.',
+      theme: 'green'
+    },
+    {
+      slug: 'open-sourcing-tabletop-games',
+      tags: ['Catan','Moddable Games','Nukes'],
+      date: 'Jan 2026',
+      cover: '#0c4f8d',
+      img: 'open-sourcing-tabletop-games.jpg',
+      title: 'Open Sourcing Tabletop Games',
+      excerpt: 'Herein lies the paradox of protecting creative work in a medium built on sharing.',
+      theme: 'green'
+    },
+    {
+      slug: 'tis-the-season-for-traditions',
+      tags: ['Blood Bowl','Blood on The Clocktower','Codenames','Exploding Kittens','Mafia','Monopoly','Scrabble','Taco Cat Goat Cheese Pizza'],
+      date: 'Dec 2025',
+      cover: '#d11a1a',
+      img: 'tis-the-season-for-traditions.jpg',
+      title: "'Tis the Season for Traditions",
+      excerpt: 'Reconnect through the ritual of games — why the holidays belong at the table.',
+      theme: 'green'
+    },
+    {
+      slug: 'making-a-masterpiece-by-modification',
+      tags: ['Ashtapada','Chess','XiangQi'],
+      date: 'Nov 2025',
+      cover: '#d11a1a',
+      img: 'making-a-masterpiece-by-modification.jpg',
+      title: 'Making a Masterpiece by Modification',
+      excerpt: 'Chess travelled the Silk Road and was rewritten at every stop. The greatest mod of all time.',
+      theme: 'red'
+    },
+    {
+      slug: 'twilights-prophecies-thunder-on',
+      tags: ['Gloomhaven','Nukes','Twilight Imperium'],
+      date: 'Oct 2025',
+      cover: '#0c4f8d',
+      img: 'twilights-prophecies-thunder-on.png',
+      title: "Twilight's Prophecies Thunder On!",
+      excerpt: 'Twilight Imperium turns 25. We look at what Prophecy of Kings changed — and what we changed next.',
+      theme: 'blue'
+    },
+    {
+      slug: 'nuking-catan',
+      tags: ['Catan','Talisman'],
+      date: 'Sep 2025',
+      cover: '#d11a1a',
+      img: 'nuking-catan.jpg',
+      title: 'Nuking Catan',
+      excerpt: 'A meditation on the gateway game, 45 million boxes deep — and what we did to it.',
+      theme: 'red'
+    },
+    {
+      slug: 'spiralling-paths-of-power-and-peril',
+      tags: ['Monopoly','Talisman'],
+      date: 'Aug 2025',
+      cover: '#0c4f8d',
+      img: 'spiralling-paths-of-power-and-peril.jpg',
+      title: 'Spiralling Paths of Power and Peril',
+      excerpt: "Talisman's 40-year journey from Necromancer to our hex-tile reimagining.",
+      theme: 'blue'
+    },
+    {
+      slug: 'monopolising-modified-variations',
+      tags: ['Monopoly'],
+      date: 'Jul 2025',
+      cover: '#3a9928',
+      img: 'monopolising-modified-variations.jpg',
+      title: 'Monopolising Modified Variations',
+      excerpt: 'Monopoly has more variants than any game alive. We asked: can we make it actually fun?',
+      theme: 'green'
+    },
+    {
+      slug: 'conquering-the-constrains-of-chess',
+      tags: ['Checkers','Chess','Go'],
+      date: 'Jun 2025',
+      cover: '#d11a1a',
+      img: 'conquering-the-constrains-of-chess.jpg',
+      title: 'Conquering the Constraints of Chess',
+      excerpt: '1500 years of constraints. 2000+ variants. Zero unified compendiums — until now.',
+      theme: 'red'
+    },
+  ];
+})();

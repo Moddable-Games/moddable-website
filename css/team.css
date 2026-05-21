@@ -1,0 +1,9 @@
+body { background: #f5f4ef; }
+.team-section { padding: 72px 32px 96px; }
+.team-card { background: #fff; border: 1px solid var(--mg-hairline-light); border-radius: 20px; padding: 24px; display: flex; flex-direction: column; gap: 14px; }
+.team-card__header { display: flex; align-items: center; gap: 14px; }
+.team-card__avatar { width: 56px; height: 56px; border-radius: 9999px; display: flex; align-items: center; justify-content: center; font-family: var(--mg-font-pixel); font-size: 16px; color: #fff; flex: none; }
+.team-card__name { font-family: var(--mg-font-display); font-weight: 600; font-size: 20px; letter-spacing: -0.25px; color: var(--mg-ink); }
+.team-card__role { font-family: var(--mg-font-mono); font-size: 12px; color: var(--mg-stone); margin-top: 2px; }
+.team-card__bio { font-family: var(--mg-font-body); font-size: 14px; line-height: 1.6; color: #3a3d44; margin: 0; }
+.team-card__handle { font-family: var(--mg-font-mono); font-size: 12px; margin-top: auto; }

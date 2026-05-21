@@ -6,60 +6,7 @@
 <meta name="mg-base" content="/MODDABLE/moddable-website">
 <title>Nukes tools — Moddable.Games</title>
 <link rel="stylesheet" href="../../css/_mg.css">
-<style>
-body { background:#f5f4ef; }
-#hex-map { background:#0a0d2a; border-radius:14px; padding:24px; position:relative; overflow:hidden; margin-bottom:14px; cursor:pointer; }
-#hex-map-inner { position:absolute; inset:0; background:radial-gradient(circle at 50% 50%,rgba(209,26,26,0.18) 0%,transparent 70%); pointer-events:none; }
-
-/* ── Nukes hero ────────────────────────────────────────────────────── */
-.nukes-hero { background:#000; color:#fff; padding:56px 32px 72px; position:relative; overflow:hidden; }
-.nukes-hero__bloom { position:absolute; left:50%; top:60%; transform:translateX(-50%); width:800px; height:300px; background:radial-gradient(ellipse,rgba(209,26,26,0.25) 0%,transparent 65%); pointer-events:none; filter:blur(20px); }
-.nukes-hero__inner { max-width:1200px; margin:0 auto; position:relative; }
-.nukes-hero__back { font-family:var(--mg-font-mono); font-size:12px; color:rgba(255,255,255,0.65); text-decoration:none; }
-.nukes-hero__eyebrow { font-family:var(--mg-font-pixel); font-size:10px; color:#e63232; letter-spacing:1.5px; margin:20px 0 16px; }
-.nukes-hero__title { font-family:var(--mg-font-display); font-weight:600; font-size:clamp(44px,5.5vw,80px); line-height:1.0; letter-spacing:-0.025em; margin:0 0 18px; }
-.nukes-hero__lede { font-family:var(--mg-font-body); font-size:17px; line-height:1.55; color:rgba(255,255,255,0.75); max-width:560px; margin:0; }
-
-/* ── Tools content section ─────────────────────────────────────────── */
-.nukes-content { background:#f5f4ef; padding:48px 32px 96px; }
-.nukes-content__inner { max-width:900px; margin:0 auto; display:flex; flex-direction:column; gap:24px; }
-
-/* ── Tool card ─────────────────────────────────────────────────────── */
-.nukes-card { background:#fff; border:1px solid #e6e3d8; border-radius:20px; padding:32px; }
-.nukes-card__header { display:flex; align-items:flex-start; gap:16px; margin-bottom:22px; padding-bottom:22px; border-bottom:1px solid #e6e3d8; }
-.nukes-card__accent { width:6px; height:48px; border-radius:3px; flex:none; }
-.nukes-card__accent--red { background:#d11a1a; }
-.nukes-card__accent--orange { background:#e89a1a; }
-.nukes-card__accent--blue { background:#0c4f8d; }
-.nukes-card__eyebrow { font-family:var(--mg-font-pixel); font-size:9px; letter-spacing:1.5px; margin-bottom:6px; }
-.nukes-card__eyebrow--red { color:#d11a1a; }
-.nukes-card__eyebrow--orange { color:#e89a1a; }
-.nukes-card__eyebrow--blue { color:#0c4f8d; }
-.nukes-card__title { font-family:var(--mg-font-display); font-weight:600; font-size:24px; color:#14161c; margin:0; letter-spacing:-0.3px; }
-.nukes-card__desc { font-family:var(--mg-font-body); font-size:14px; color:#4f5764; margin:4px 0 0; }
-
-/* ── Target picker footer ──────────────────────────────────────────── */
-.target-picker__footer { display:flex; justify-content:space-between; align-items:center; flex-wrap:wrap; gap:8px; }
-#strike-count { font-family:var(--mg-font-mono); font-size:13px; color:#4f5764; }
-
-/* ── Fallout tracker ───────────────────────────────────────────────── */
-#fallout-list { display:flex; flex-direction:column; gap:10px; margin-bottom:16px; }
-#fallout-btns { display:flex; gap:10px; flex-wrap:wrap; }
-
-.fallout-row { display:grid; grid-template-columns:1fr auto auto; gap:12px; align-items:center; padding:14px 16px; background:#f5f4ef; border-radius:10px; }
-.fallout-row__name { font-family:var(--mg-font-body); font-weight:600; font-size:15px; color:#14161c; }
-.fallout-row__meta { font-family:var(--mg-font-mono); font-size:11px; color:#7a8290; margin-top:2px; }
-.fallout-row__advance { font-family:var(--mg-font-body); font-weight:600; font-size:13px; padding:6px 14px; border-radius:9999px; border:none; background:#14161c; color:#fff; cursor:pointer; }
-.fallout-row__remove { width:30px; height:30px; border-radius:9999px; border:1px solid #e6e3d8; background:#fff; cursor:pointer; font-size:14px; color:#7a8290; }
-.fallout-empty { padding:24px; text-align:center; font-family:var(--mg-font-mono); font-size:13px; color:#7a8290; }
-
-/* ── Resource table ────────────────────────────────────────────────── */
-#resource-table { display:grid; grid-template-columns:1fr 1fr 1fr; gap:1px; background:#e6e3d8; border-radius:10px; overflow:hidden; }
-.resource-cell { padding:10px 14px; background:#fff; }
-.resource-cell--header { font-family:var(--mg-font-mono); font-weight:600; font-size:11px; color:#7a8290; text-transform:uppercase; letter-spacing:0.5px; }
-.resource-cell--body { font-family:var(--mg-font-body); font-size:14px; color:#14161c; }
-.resource-cell--nuke-name { font-family:var(--mg-font-body); font-weight:600; font-size:14px; color:#d11a1a; }
-</style>
+<link rel="stylesheet" href="../../css/tools-nukes.css">
 </head>
 <body>
 <div id="nav-root"></div>
@@ -125,7 +72,7 @@ body { background:#f5f4ef; }
 </section>
 
 <div id="footer-root"></div>
-<script src="../../js/_mg.js"></script>
+<script src="../../js/mg-loader.js"></script>
 <script>
 const { T, el, btn, navbar, footer } = MG;
 document.getElementById('nav-root').appendChild(navbar('Tools'));

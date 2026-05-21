@@ -1,0 +1,23 @@
+body { background: #f5f4ef; }
+.community-section { padding: 72px 32px 96px; }
+.community-section__inner { max-width: 1200px; margin: 0 auto; display: flex; flex-direction: column; gap: 56px; }
+.stat-card { background: #fff; border: 1px solid var(--mg-hairline-light); border-radius: 16px; padding: 24px; text-align: center; }
+.stat-card__number { font-family: var(--mg-font-display); font-weight: 600; font-size: 56px; line-height: 1; color: var(--mg-ink); letter-spacing: -1px; }
+.stat-card__label { font-family: var(--mg-font-mono); font-size: 12px; color: var(--mg-stone); text-transform: uppercase; letter-spacing: 0.8px; margin-top: 8px; }
+.channel-link { display: grid; grid-template-columns: auto 1fr auto; gap: 16px; align-items: center; padding: 18px 20px; background: #fff; border: 1px solid var(--mg-hairline-light); border-radius: 12px; text-decoration: none; color: inherit; transition: border-color 150ms; }
+.channel-link:hover { border-color: var(--mg-ink); }
+.channel-link__bar { width: 8px; height: 32px; border-radius: 4px; }
+.channel-link__name { font-family: var(--mg-font-mono); font-weight: 600; font-size: 15px; color: var(--mg-ink); }
+.channel-link__desc { font-family: var(--mg-font-body); font-size: 13px; color: var(--mg-mute); margin-top: 2px; }
+.channel-link__count { font-family: var(--mg-font-mono); font-size: 12px; color: var(--mg-stone); text-align: right; }
+.jam-card { background: #fff; border: 1px solid var(--mg-hairline-light); border-radius: 16px; padding: 24px; display: flex; flex-direction: column; gap: 12px; }
+.jam-card__title { font-family: var(--mg-font-display); font-weight: 600; font-size: 24px; line-height: 1.2; letter-spacing: -0.25px; color: var(--mg-ink); margin: 0; }
+.jam-card__meta { font-family: var(--mg-font-mono); font-size: 12px; color: var(--mg-stone); }
+.jam-card__winner { background: var(--mg-canvas-light); border-radius: 10px; padding: 12px; font-family: var(--mg-font-body); font-size: 13px; color: var(--mg-body-color); line-height: 1.45; }
+.community-cta { background: #000; color: #fff; border-radius: 20px; padding: 48px 40px; text-align: center; position: relative; overflow: hidden; }
+.community-cta__hex { position: absolute; inset: 0; background-image: url('../img/hex-grid-blue.svg'); background-size: 56px 64px; animation: hexFloat 30s linear infinite; opacity: 0.5; }
+.jam-card__winner-label { font-weight: 600; }
+.community-cta__inner { position: relative; }
+.community-cta__heading { font-family: var(--mg-font-display); font-weight: 600; font-size: clamp(32px, 4vw, 48px); line-height: 1.05; letter-spacing: -0.025em; margin: 0 0 16px; }
+.community-cta__body { font-family: var(--mg-font-body); font-size: 17px; line-height: 1.6; color: rgba(255,255,255,0.78); max-width: 500px; margin: 0 auto 28px; }
+.community-cta__btns { display: flex; gap: 12px; justify-content: center; flex-wrap: wrap; }

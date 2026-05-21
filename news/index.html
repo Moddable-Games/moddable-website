@@ -6,68 +6,7 @@
 <meta name="mg-base" content="/MODDABLE/moddable-website">
 <title>News — Moddable.Games</title>
 <link rel="stylesheet" href="../css/_mg.css">
-<style>
-body { background: #f5f4ef; }
-.news-main { background: #f5f4ef; padding: 56px 32px 96px; }
-.news-layout { max-width: 1200px; margin: 0 auto; display: grid; grid-template-columns: 1fr 280px; gap: 56px; align-items: start; }
-.news-featured { margin-bottom: 48px; }
-.news-mobile-search { position: relative; margin-bottom: 24px; display: none; }
-.news-mobile-search__input { width: 100%; height: 44px; padding: 0 16px 0 44px; border: 1px solid #e6e3d8; border-radius: 12px; font-family: var(--mg-font-body); font-size: 14px; background: #fff; outline: none; }
-.news-mobile-search__icon { position: absolute; left: 16px; top: 50%; transform: translateY(-50%); opacity: 0.4; font-size: 16px; pointer-events: none; }
-.news-cat-filters { display: flex; gap: 8px; flex-wrap: wrap; margin-bottom: 28px; }
-.news-posts-grid { display: grid; grid-template-columns: repeat(auto-fit, minmax(260px, 1fr)); gap: 20px; }
-.news-sidebar { position: sticky; top: 88px; display: flex; flex-direction: column; gap: 32px; }
-/* Cover images */
-.news-cover, .news-cover--big { width: 100%; border-radius: 12px; overflow: hidden; position: relative; }
-.news-cover { aspect-ratio: 1.65; }
-.news-cover--big { aspect-ratio: 1.7; }
-.news-cover__hex { position: absolute; inset: 0; }
-.news-cover__img { position: absolute; inset: 0; width: 100%; height: 100%; object-fit: cover; }
-
-/* Featured card */
-.news-featured-card { display: grid; grid-template-columns: 1.1fr 1fr; gap: 40px; align-items: center; background: #fff; border: 1px solid #e6e3d8; border-radius: 20px; padding: 32px; text-decoration: none; color: inherit; transition: border-color 180ms; }
-.news-featured-card:hover { border-color: #14161c; }
-.news-featured-card__meta { display: flex; gap: 10px; align-items: center; margin-bottom: 14px; flex-wrap: wrap; }
-.news-featured-card__badge { font-family: var(--mg-font-body); font-weight: 600; font-size: 11px; background: #14161c; color: #fff; padding: 4px 10px; border-radius: 9999px; }
-.news-featured-card__date { font-family: var(--mg-font-mono); font-size: 12px; color: #7a8290; }
-.news-featured-card__title { font-family: var(--mg-font-display); font-weight: 600; font-size: 40px; line-height: 1.1; letter-spacing: -0.5px; color: #14161c; margin: 0 0 14px; }
-.news-featured-card__excerpt { font-family: var(--mg-font-body); font-size: 16px; line-height: 1.55; color: #3a3d44; margin: 0 0 18px; }
-.news-featured-card__link { font-family: var(--mg-font-body); font-weight: 600; font-size: 14px; color: #0c4f8d; }
-
-/* Grid cards */
-.news-grid-card { display: flex; flex-direction: column; gap: 16px; padding: 20px; background: #fff; border: 1px solid #e6e3d8; border-radius: 16px; text-decoration: none; color: inherit; transition: border-color 180ms; }
-.news-grid-card:hover { border-color: #14161c; }
-.news-grid-card__meta { display: flex; gap: 8px; align-items: center; flex-wrap: wrap; }
-.news-grid-card__cat { font-family: var(--mg-font-mono); font-size: 11px; color: #7a8290; letter-spacing: 0.3px; }
-.news-grid-card__dot { width: 3px; height: 3px; background: #c3c5cc; border-radius: 50%; }
-.news-grid-card__date { font-family: var(--mg-font-mono); font-size: 11px; color: #7a8290; }
-.news-grid-card__title { font-family: var(--mg-font-display); font-weight: 600; font-size: 22px; line-height: 1.2; letter-spacing: -0.25px; color: #14161c; margin: 0; }
-.news-grid-card__excerpt { font-family: var(--mg-font-body); font-size: 14px; line-height: 1.55; color: #4f5764; margin: 0; }
-
-/* Sidebar search */
-.news-search-wrap { position: relative; }
-.news-search-wrap__input { width: 100%; height: 48px; padding: 0 16px 0 44px; border: 1px solid #e6e3d8; border-radius: 12px; font-family: var(--mg-font-body); font-size: 14px; background: #fff; outline: none; }
-.news-search-wrap__icon { position: absolute; left: 16px; top: 50%; transform: translateY(-50%); opacity: 0.4; font-size: 16px; pointer-events: none; }
-
-/* Sidebar topic list */
-.news-topic-list { list-style: none; padding: 0; margin: 0; display: flex; flex-direction: column; gap: 6px; }
-.news-topic-list__link { display: flex; justify-content: space-between; align-items: center; padding: 8px 12px; background: #fff; border: 1px solid #e6e3d8; border-radius: 8px; text-decoration: none; color: inherit; transition: border-color 150ms; }
-.news-topic-list__link:hover { border-color: #14161c; }
-.news-topic-list__name { font-family: var(--mg-font-body); font-size: 14px; color: #14161c; }
-.news-topic-list__count { font-family: var(--mg-font-mono); font-size: 12px; color: #7a8290; }
-
-/* Sidebar archive list */
-.news-archive-list { list-style: none; padding: 0; margin: 0; display: flex; flex-direction: column; gap: 6px; }
-.news-archive-list__link { display: flex; justify-content: space-between; font-family: var(--mg-font-body); font-size: 14px; color: #14161c; text-decoration: none; padding: 6px 0; border-bottom: 1px solid #e6e3d8; }
-.news-archive-list__count { font-family: var(--mg-font-mono); font-size: 12px; color: #7a8290; }
-
-@media (max-width: 900px) {
-  .news-layout { grid-template-columns: 1fr; }
-  .news-sidebar { display: none; }
-  .news-mobile-search { display: block; }
-  .news-featured-card { grid-template-columns: 1fr; }
-}
-</style>
+<link rel="stylesheet" href="../css/news-index.css">
 </head>
 <body>
 <div id="nav-root"></div>
@@ -85,8 +24,6 @@ body { background: #f5f4ef; }
         <input type="search" placeholder="Search the archive…" id="mobile-search-input" class="news-mobile-search__input">
         <span class="news-mobile-search__icon">⌕</span>
       </div>
-      <!-- Category filters -->
-      <div id="cat-filters" class="news-cat-filters"></div>
       <!-- Post grid -->
       <div id="posts-grid" class="news-posts-grid"></div>
     </div>
@@ -96,7 +33,8 @@ body { background: #f5f4ef; }
 </section>
 
 <div id="footer-root"></div>
-<script src="../js/_mg.js"></script>
+<script src="../js/mg-loader.js"></script>
+<script src="../js/mg-news-data.js"></script>
 <script>
 const { T, el, linkBtn, navbar, footer, pageHero, url } = MG;
 document.getElementById('nav-root').appendChild(navbar('News'));
@@ -107,23 +45,19 @@ document.getElementById('page-hero').appendChild(pageHero({
   lede: 'Strictly written by humans.',
 }));
 
-const POSTS = [
-  { slug:'beyond-the-box',                       cat:'Essay',       date:'May 2026',  cover:'#0c4f8d', img:'beyond-the-box.jpg',                      title:'Beyond The Box',                           excerpt:'The art of board game design begins and ends with the box — but what happens when we open it?' },
-  { slug:'the-ancients',                          cat:'Essay',       date:'Apr 2026',  cover:'#1a3680', img:'the-ancients.jpg',                         title:'The Ancients',                              excerpt:'We rarely pause to consider what has already endured — games older than history itself.' },
-  { slug:'making-mods-matter',                    cat:'Philosophy',  date:'Mar 2026',  cover:'#3a9928', img:'making-mods-matter.jpg',                   title:'Making Mods Matter',                        excerpt:'Those who tinker, tailor and say lore beyond casual play — and why they deserve better tools.' },
-  { slug:'the-house-always-wins',                 cat:'Philosophy',  date:'Mar 2026',  cover:'#3a9928', img:'the-house-always-wins.jpg',                title:'The House Always Wins!',                    excerpt:'How house rules become canon, from en passant to free parking jackpots.' },
-  { slug:'open-sourcing-tabletop-games',          cat:'Philosophy',  date:'Mar 2026',  cover:'#0c4f8d', img:'open-sourcing-tabletop-games.jpg',         title:'Open Sourcing Tabletop Games',              excerpt:'Herein lies the paradox of protecting creative work in a medium built on sharing.' },
-  { slug:'tis-the-season-for-traditions',         cat:'Community',   date:'Mar 2026',  cover:'#d11a1a', img:'tis-the-season-for-traditions.jpg',        title:"'Tis the Season for Traditions",            excerpt:'Reconnect through the ritual of games — why the holidays belong at the table.' },
-  { slug:'making-a-masterpiece-by-modification',  cat:'Chess',       date:'Oct 2025',  cover:'#d11a1a', img:'making-a-masterpiece-by-modification.jpg', title:'Making a Masterpiece by Modification',      excerpt:'Chess travelled the Silk Road and was rewritten at every stop. The greatest mod of all time.' },
-  { slug:'twilights-prophecies-thunder-on',       cat:'TI4',         date:'Oct 2025',  cover:'#0c4f8d', img:'twilights-prophecies-thunder-on.png',      title:"Twilight's Prophecies Thunder On!",         excerpt:'Twilight Imperium turns 25. We look at what Prophecy of Kings changed — and what we changed next.' },
-  { slug:'nuking-catan',                          cat:'Catan',       date:'Jul 2025',  cover:'#d11a1a', img:'nuking-catan.jpg',                         title:'Nuking Catan',                              excerpt:'A meditation on the gateway game, 45 million boxes deep — and what we did to it.' },
-  { slug:'spiralling-paths-of-power-and-peril',   cat:'Talisman',    date:'Jul 2025',  cover:'#0c4f8d', img:'spiralling-paths-of-power-and-peril.jpg',  title:'Spiralling Paths of Power and Peril',       excerpt:"Talisman's 40-year journey from Necromancer to our hex-tile reimagining." },
-  { slug:'monopolising-modified-variations',      cat:'Monopoly',    date:'Jul 2025',  cover:'#3a9928', img:'monopolising-modified-variations.jpg',     title:'Monopolising Modified Variations',          excerpt:'Monopoly has more variants than any game alive. We asked: can we make it actually fun?' },
-  { slug:'conquering-the-constrains-of-chess',    cat:'Chess',       date:'Jun 2025',  cover:'#d11a1a', img:'conquering-the-constrains-of-chess.jpg',   title:'Conquering the Constraints of Chess',       excerpt:'1500 years of constraints. 2000+ variants. Zero unified compendiums — until now.' },
-];
+const POSTS = MG.NEWS_POSTS;
 
-const CATS = ['All',...new Set(POSTS.map(p=>p.cat))];
-let activeCat = 'All', searchVal = '';
+let activeCat = 'All', activeMonth = null, searchVal = '';
+
+function setFilter(cat, month) {
+  activeCat = cat;
+  activeMonth = month;
+  const hash = cat !== 'All' ? 'topic=' + encodeURIComponent(cat) : month ? 'month=' + encodeURIComponent(month) : '';
+  history.replaceState(null, '', hash ? '#' + hash : window.location.pathname);
+  renderPosts(true);
+  renderTopics();
+  renderArchive();
+}
 
 function postCover(post, big=false) {
   const d = el('div',{class: big ? 'news-cover--big' : 'news-cover'});
@@ -136,60 +70,105 @@ function postCover(post, big=false) {
 }
 
 // Featured post
-const fp = document.getElementById('featured-post');
+const fpEl = document.getElementById('featured-post');
 const feat = POSTS[0];
 const fa = el('a',{href:url(`/news/${feat.slug}/`),class:'news-featured-card'});
 fa.appendChild(postCover(feat, true));
 const fd = el('div');
 const fm = el('div',{class:'news-featured-card__meta'});
 fm.appendChild(el('span',{class:'news-featured-card__badge'}, 'FEATURED'));
-fm.appendChild(el('span',{class:'news-featured-card__date'},`${feat.cat} · ${feat.date}`));
+fm.appendChild(el('span',{class:'news-featured-card__date'},`${feat.tags.slice(0,2).join(' · ')} · ${feat.date}`));
 fd.appendChild(fm);
 fd.appendChild(el('h2',{class:'news-featured-card__title'},feat.title));
 fd.appendChild(el('p',{class:'news-featured-card__excerpt'},feat.excerpt));
 fd.appendChild(el('span',{class:'news-featured-card__link'},'Read the article →'));
-fa.appendChild(fd); fp.appendChild(fa);
+fa.appendChild(fd); fpEl.appendChild(fa);
 
-// Category filters
-function renderFilters() {
-  const el2 = document.getElementById('cat-filters');
-  el2.innerHTML = '';
-  CATS.forEach(c => {
-    const isA = c === activeCat;
-    const b = document.createElement('button');
-    b.textContent = c;
-    b.className = isA ? 'filter-btn filter-btn--active' : 'filter-btn';
-    b.addEventListener('click',()=>{activeCat=c;renderFilters();renderPosts();});
-    el2.appendChild(b);
-  });
-}
-
-function renderPosts() {
+function renderPosts(scroll) {
   const q = searchVal.toLowerCase();
-  const visible = POSTS.slice(1).filter(p =>
-    (activeCat === 'All' || p.cat === activeCat) &&
-    (!q || p.title.toLowerCase().includes(q))
+  const isFiltered = activeCat !== 'All' || activeMonth || q;
+  const pool = isFiltered ? POSTS : POSTS.slice(1);
+  const visible = pool.filter(p =>
+    (activeCat === 'All' || p.tags.includes(activeCat)) &&
+    (!activeMonth || p.date === activeMonth) &&
+    (!q || p.title.toLowerCase().includes(q) || p.excerpt.toLowerCase().includes(q))
   );
+  fpEl.style.display = isFiltered ? 'none' : '';
   const grid = document.getElementById('posts-grid');
   grid.innerHTML = '';
-  visible.forEach(p => {
-    const a = el('a',{href:url(`/news/${p.slug}/`),class:'news-grid-card'});
-    a.appendChild(postCover(p));
-    const meta = el('div',{class:'news-grid-card__meta'});
-    meta.appendChild(el('span',{class:'news-grid-card__cat'},p.cat.toUpperCase()));
-    meta.appendChild(el('span',{class:'news-grid-card__dot'}));
-    meta.appendChild(el('span',{class:'news-grid-card__date'},p.date));
-    a.appendChild(meta);
-    a.appendChild(el('h3',{class:'news-grid-card__title'},p.title));
-    a.appendChild(el('p',{class:'news-grid-card__excerpt'},p.excerpt));
-    grid.appendChild(a);
-  });
-}
 
-renderFilters(); renderPosts();
+  if (isFiltered) {
+    const bar = el('div',{class:'news-results-bar'});
+    const label = activeCat !== 'All' ? activeCat : activeMonth ? activeMonth : '"' + searchVal + '"';
+    bar.appendChild(el('span',{class:'news-results-bar__text'},
+      visible.length === 0 ? 'No posts found for ' + label
+        : 'Showing ' + visible.length + ' of ' + POSTS.length + ' posts for ' + label
+    ));
+    const clear = el('a',{href:'#',class:'news-results-bar__clear'}, '← Show all posts');
+    clear.addEventListener('click',(e)=>{e.preventDefault();activeCat='All';activeMonth=null;searchVal='';inp.value='';renderPosts(true);renderTopics();renderArchive();});
+    bar.appendChild(clear);
+    grid.appendChild(bar);
+  }
+
+  if (visible.length === 0) {
+    grid.style.gridTemplateColumns = '1fr';
+  } else if (!isFiltered || visible.length <= 2) {
+    grid.style.gridTemplateColumns = visible.length === 1 ? '1fr'
+      : visible.length === 2 ? 'repeat(2, 1fr)'
+      : 'repeat(auto-fit, minmax(260px, 1fr))';
+    visible.forEach(p => {
+      const a = el('a',{href:url(`/news/${p.slug}/`),class:'news-grid-card'});
+      a.appendChild(postCover(p));
+      const meta = el('div',{class:'news-grid-card__meta'});
+      meta.appendChild(el('span',{class:'news-grid-card__cat'},p.tags.slice(0,2).join(' · ').toUpperCase()));
+      meta.appendChild(el('span',{class:'news-grid-card__dot'}));
+      meta.appendChild(el('span',{class:'news-grid-card__date'},p.date));
+      a.appendChild(meta);
+      a.appendChild(el('h3',{class:'news-grid-card__title'},p.title));
+      a.appendChild(el('p',{class:'news-grid-card__excerpt'},p.excerpt));
+      grid.appendChild(a);
+    });
+  } else {
+    grid.style.gridTemplateColumns = '1fr';
+    const feat = visible[0];
+    const fa = el('a',{href:url(`/news/${feat.slug}/`),class:'news-featured-card'});
+    fa.appendChild(postCover(feat, true));
+    const fd = el('div');
+    const fm = el('div',{class:'news-featured-card__meta'});
+    fm.appendChild(el('span',{class:'news-featured-card__badge'}, feat.tags[0].toUpperCase()));
+    fm.appendChild(el('span',{class:'news-featured-card__date'}, feat.tags.slice(0,2).join(' · ') + ' · ' + feat.date));
+    fd.appendChild(fm);
+    fd.appendChild(el('h2',{class:'news-featured-card__title'},feat.title));
+    fd.appendChild(el('p',{class:'news-featured-card__excerpt'},feat.excerpt));
+    fd.appendChild(el('span',{class:'news-featured-card__link'},'Read the article →'));
+    fa.appendChild(fd);
+    grid.appendChild(fa);
+
+    const rest = visible.slice(1);
+    const subgrid = el('div',{class:'news-posts-grid'});
+    subgrid.style.gridTemplateColumns = rest.length === 1 ? '1fr'
+      : rest.length === 2 ? 'repeat(2, 1fr)'
+      : 'repeat(auto-fit, minmax(260px, 1fr))';
+    rest.forEach(p => {
+      const a = el('a',{href:url(`/news/${p.slug}/`),class:'news-grid-card'});
+      a.appendChild(postCover(p));
+      const meta = el('div',{class:'news-grid-card__meta'});
+      meta.appendChild(el('span',{class:'news-grid-card__cat'},p.tags.slice(0,2).join(' · ').toUpperCase()));
+      meta.appendChild(el('span',{class:'news-grid-card__dot'}));
+      meta.appendChild(el('span',{class:'news-grid-card__date'},p.date));
+      a.appendChild(meta);
+      a.appendChild(el('h3',{class:'news-grid-card__title'},p.title));
+      a.appendChild(el('p',{class:'news-grid-card__excerpt'},p.excerpt));
+      subgrid.appendChild(a);
+    });
+    grid.appendChild(subgrid);
+  }
+  if (scroll) document.querySelector('.news-main').scrollIntoView({behavior:'smooth',block:'start'});
+}
 
 // Sidebar
 const sidebar = document.getElementById('sidebar');
+
 // Search
 const searchWrap = el('div');
 searchWrap.appendChild(el('div',{class:'mg-eyebrow mg-eyebrow--blue'},'SEARCH'));
@@ -199,34 +178,78 @@ inp.addEventListener('input',e=>{searchVal=e.target.value;renderPosts();});
 si.appendChild(el('span',{class:'news-search-wrap__icon'},'⌕'));
 si.appendChild(inp); searchWrap.appendChild(si); sidebar.appendChild(searchWrap);
 
-// Hot topics
-const TOPICS = [['Chess',2],['Philosophy',3],['Essay',2],['Catan',1],['TI4',1],['Talisman',1],['Monopoly',1],['Community',1]];
+// Hot topics (derived from post tags)
+const tagCounts = {};
+POSTS.forEach(p => p.tags.forEach(t => { tagCounts[t] = (tagCounts[t] || 0) + 1; }));
+const TOPICS = Object.entries(tagCounts).sort((a,b) => b[1] - a[1]);
 const ht = el('div');
 ht.appendChild(el('div',{class:'mg-eyebrow mg-eyebrow--blue'},'HOT TOPICS'));
 const tul = el('ul',{class:'news-topic-list'});
-TOPICS.forEach(([t,n]) => {
-  const li = el('li');
-  const a = el('a',{href:'#',class:'news-topic-list__link'});
-  a.appendChild(el('span',{class:'news-topic-list__name'},t));
-  a.appendChild(el('span',{class:'news-topic-list__count'},String(n)));
-  a.addEventListener('click',(e)=>{e.preventDefault();activeCat=t;renderFilters();renderPosts();});
-  li.appendChild(a); tul.appendChild(li);
-});
+
+function renderTopics() {
+  tul.innerHTML = '';
+  const allLi = el('li');
+  const allA = el('a',{href:'#',class:'news-topic-list__link'});
+  if (activeCat === 'All' && !activeMonth) allA.style.fontWeight = '700';
+  allA.appendChild(el('span',{class:'news-topic-list__name'},'All'));
+  allA.appendChild(el('span',{class:'news-topic-list__count'},String(POSTS.length)));
+  allA.addEventListener('click',(e)=>{e.preventDefault();setFilter('All',null);});
+  allLi.appendChild(allA); tul.appendChild(allLi);
+  TOPICS.forEach(([t,n]) => {
+    const li = el('li');
+    const a = el('a',{href:'#topic='+encodeURIComponent(t),class:'news-topic-list__link'});
+    if (t === activeCat) a.style.fontWeight = '700';
+    a.appendChild(el('span',{class:'news-topic-list__name'},t));
+    a.appendChild(el('span',{class:'news-topic-list__count'},String(n)));
+    a.addEventListener('click',(e)=>{e.preventDefault();setFilter(activeCat===t?'All':t,null);});
+    li.appendChild(a); tul.appendChild(li);
+  });
+}
+
 ht.appendChild(tul); sidebar.appendChild(ht);
 
-// Archive
-const ARCHIVE = [['May 2026',1],['April 2026',1],['March 2026',4],['October 2025',2],['July 2025',3],['June 2025',1]];
+// Archive (derived from post dates, clickable to filter)
+const monthCounts = {};
+POSTS.forEach(p => { monthCounts[p.date] = (monthCounts[p.date] || 0) + 1; });
+const ARCHIVE = Object.entries(monthCounts);
+
 const arc = el('div');
 arc.appendChild(el('div',{class:'mg-eyebrow mg-eyebrow--blue'},'ARCHIVE'));
-const aul = el('ul',{class:'news-archive-list'});
-ARCHIVE.forEach(([m,n]) => {
-  const li = el('li');
-  const a = el('a',{href:'#',class:'news-archive-list__link'});
-  a.appendChild(document.createTextNode(m));
-  a.appendChild(el('span',{class:'news-archive-list__count'},String(n)));
-  li.appendChild(a); aul.appendChild(li);
-});
-arc.appendChild(aul); sidebar.appendChild(arc);
+
+function renderArchive() {
+  const aul = arc.querySelector('.news-archive-list');
+  if (aul) aul.remove();
+  const ul = el('ul',{class:'news-archive-list'});
+  ARCHIVE.forEach(([m,n]) => {
+    const li = el('li');
+    const a = el('a',{href:'#month='+encodeURIComponent(m),class:'news-archive-list__link'});
+    if (m === activeMonth) a.style.fontWeight = '700';
+    a.appendChild(document.createTextNode(m));
+    a.appendChild(el('span',{class:'news-archive-list__count'},String(n)));
+    a.addEventListener('click',(e)=>{
+      e.preventDefault();
+      setFilter('All', activeMonth === m ? null : m);
+    });
+    li.appendChild(a); ul.appendChild(li);
+  });
+  arc.appendChild(ul);
+}
+
+sidebar.appendChild(arc);
+
+// Read hash on load
+(function() {
+  const hash = window.location.hash.slice(1);
+  if (hash.startsWith('topic=')) {
+    activeCat = decodeURIComponent(hash.slice(6));
+  } else if (hash.startsWith('month=')) {
+    activeMonth = decodeURIComponent(hash.slice(6));
+  }
+})();
+
+renderPosts();
+renderTopics();
+renderArchive();
 </script>
 </body>
 </html>

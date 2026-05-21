@@ -1,0 +1,2 @@
+.rules-sidebar { position: sticky; top: 96px; align-self: start; }
+.rules-layout { display: grid; grid-template-columns: 240px 1fr; gap: 64px; }

@@ -6,70 +6,9 @@
 <meta name="mg-base" content="/MODDABLE/moddable-website">
 <title>Monopolising Modified Variations — Moddable.Games</title>
 <link rel="stylesheet" href="../../css/_mg.css">
-<style>
-body { background: #f5f4ef; }
-
-/* Post header */
-.post-header { position: relative; color: #fff; overflow: hidden; background: #000; min-height: 520px; display: flex; align-items: center; justify-content: center; }
-.post-header__img { position: absolute; inset: 0; width: 100%; height: 100%; object-fit: cover; object-position: center top; opacity: 0.5; pointer-events: none; transform: scale(1.08); transform-origin: center center; will-change: transform, opacity; }
-.post-header__inner { transition: transform 0.1s linear, opacity 0.1s linear; will-change: transform, opacity; }
-.post-header__bloom { position: absolute; left: 50%; bottom: -200px; transform: translateX(-50%); width: 1100px; height: 500px; background: radial-gradient(ellipse, rgba(58,153,40,0.4) 0%, transparent 65%); pointer-events: none; filter: blur(20px); }
-.post-header__inner { position: relative; padding: 96px 32px 96px; max-width: 800px; width: 100%; text-align: center; box-sizing: border-box; }
-.post-header__back { font-family: var(--mg-font-mono); font-size: 12px; color: rgba(255,255,255,0.7); text-decoration: none; }
-.post-header__tags { display: flex; gap: 8px; justify-content: center; margin-top: 28px; flex-wrap: wrap; }
-.post-header__cat { font-family: var(--mg-font-body); font-weight: 600; font-size: 11px; background: #3a9928; color: #fff; padding: 4px 10px; border-radius: 9999px; }
-.post-header__meta { font-family: var(--mg-font-mono); font-size: 11px; color: rgba(255,255,255,0.7); padding: 4px 10px; border: 1px solid rgba(255,255,255,0.18); border-radius: 9999px; }
-.post-header__title { font-family: var(--mg-font-display); font-weight: 600; font-size: clamp(48px, 7vw, 96px); line-height: 0.95; letter-spacing: -0.025em; margin: 24px 0; text-shadow: 0 4px 30px rgba(0,0,0,0.6); }
-.post-header__title em { color: #5abf47; }
-.post-header__lede { font-family: var(--mg-font-body); font-style: italic; font-size: 18px; color: rgba(255,255,255,0.78); margin: 0; }
-
-/* Post body section */
-.post-body { background: #f5f4ef; padding: 72px 32px 96px; }
-.post-layout { max-width: 1200px; margin: 0 auto; display: grid; grid-template-columns: 200px 1fr 220px; gap: 56px; align-items: start; }
-.post-rail { position: sticky; top: 96px; }
-.post-rail__eyebrow { font-family: var(--mg-font-pixel); font-size: 9px; color: #0c4f8d; letter-spacing: 1.5px; margin-bottom: 14px; }
-.post-rail__eyebrow--green { color: #3a9928; margin-top: 32px; margin-bottom: 12px; }
-.post-author { display: flex; gap: 10px; align-items: center; margin-bottom: 20px; }
-.post-author__avatar { width: 40px; height: 40px; border-radius: 9999px; background: linear-gradient(135deg, #3a9928, #0c4f8d); flex: none; }
-.post-author__name { font-family: var(--mg-font-display); font-weight: 600; font-size: 15px; color: #14161c; letter-spacing: -0.2px; }
-.post-author__handle { font-family: var(--mg-font-mono); font-size: 11px; color: #7a8290; }
-.post-share-btns { display: flex; gap: 6px; flex-wrap: wrap; }
-.post-share-btn { font-family: var(--mg-font-mono); font-size: 11px; font-weight: 600; width: 38px; height: 38px; border-radius: 9999px; background: #fff; color: #14161c; border: 1px solid #e6e3d8; cursor: pointer; }
-
-/* TOC */
-.post-toc { list-style: none; padding: 0; margin: 0 0 32px; display: flex; flex-direction: column; gap: 8px; border-left: 1px solid #e6e3d8; }
-.post-toc__item { padding-left: 14px; margin-left: -1px; }
-.post-toc__item--active { border-left: 2px solid #3a9928; }
-.post-toc__link { font-family: var(--mg-font-body); font-size: 13px; text-decoration: none; }
-.post-toc__link--active { color: #14161c; font-weight: 600; }
-.post-toc__link--inactive { color: #4f5764; font-weight: 400; }
-
-/* Mod card in sidebar */
-.post-mod-card { background: #000; color: #fff; padding: 20px; border-radius: 16px; }
-.post-mod-card__eyebrow { font-family: var(--mg-font-pixel); font-size: 9px; color: #5abf47; letter-spacing: 1.5px; margin-bottom: 10px; }
-.post-mod-card__title { font-family: var(--mg-font-display); font-weight: 600; font-size: 18px; line-height: 1.2; margin-bottom: 6px; }
-.post-mod-card__version { font-family: var(--mg-font-mono); font-size: 11px; color: rgba(255,255,255,0.6); margin-bottom: 14px; }
-.post-mod-card__dl { height: 38px; font-size: 13px; width: 100%; }
-
-/* More posts section */
-.post-more { background: #fff; border-top: 1px solid #e6e3d8; padding: 80px 32px; }
-.post-more__inner { max-width: 1200px; margin: 0 auto; }
-.post-more__heading { font-family: var(--mg-font-display); font-weight: 600; font-size: 40px; line-height: 1.1; letter-spacing: -0.5px; color: #14161c; margin: 0 0 32px; }
-.post-more__grid { display: grid; grid-template-columns: repeat(3, 1fr); gap: 20px; }
-.post-more-card { display: flex; flex-direction: column; gap: 14px; padding: 20px; background: #f5f4ef; border-radius: 16px; text-decoration: none; color: inherit; }
-.post-more-card__cover { height: 120px; border-radius: 12px; overflow: hidden; position: relative; }
-.post-more-card__img { position: absolute; inset: 0; width: 100%; height: 100%; object-fit: cover; }
-.post-more-card__meta { font-family: var(--mg-font-mono); font-size: 11px; color: #7a8290; letter-spacing: 0.3px; }
-.post-more-card__title { font-family: var(--mg-font-display); font-weight: 600; font-size: 20px; line-height: 1.2; letter-spacing: -0.2px; color: #14161c; margin: 0; }
-
-@media (max-width: 900px) {
-  .post-layout { grid-template-columns: 1fr !important; }
-  .post-rail { display: none !important; }
-  .post-more__grid { grid-template-columns: 1fr; }
-}
-</style>
+<link rel="stylesheet" href="../../css/news-post.css">
 </head>
-<body>
+<body data-theme="green">
 <div id="nav-root"></div>
 
 <!-- Post header -->
@@ -80,7 +19,7 @@ body { background: #f5f4ef; }
     <a href="/news/" class="post-header__back">&larr; All posts</a>
     <div class="post-header__tags">
       <span class="post-header__cat">MONOPOLY</span>
-      <span class="post-header__meta">Jul 22, 2025 &middot; 6 min read</span>
+      <span class="post-header__meta">Jul 2025 &middot; 6 min read</span>
     </div>
     <h1 class="post-header__title">Monopolising Modified <em>Variations</em>.</h1>
     <p class="post-header__lede">275 million copies, 200+ editions &mdash; and the community is still finding new ways to break the rules.</p>
@@ -151,7 +90,8 @@ body { background: #f5f4ef; }
 </section>
 
 <div id="footer-root"></div>
-<script src="../../js/_mg.js"></script>
+<script src="../../js/mg-loader.js"></script>
+<script src="../../js/mg-news-data.js"></script>
 <script>
 const { el, linkBtn, navbar, footer, url } = MG;
 document.getElementById('nav-root').appendChild(navbar('News'));
@@ -225,23 +165,44 @@ document.getElementById('mod-dl-btn').appendChild(dlBtn);
     });
   });
 })();
-// More posts
-const MORE = [
-  {cover:'#d11a1a', cat:'Chess', date:'Jun 2025', title:'Conquering the Constraints of Chess', img:'conquering-the-constrains-of-chess.jpg', href:url('/news/conquering-the-constrains-of-chess/')},
-  {cover:'#3a9928', cat:'Philosophy', date:'Mar 2026', title:'Making Mods Matter', img:'making-mods-matter.jpg', href:url('/news/making-mods-matter/')},
-  {cover:'#d11a1a', cat:'Chess', date:'Oct 2025', title:'Making a Masterpiece by Modification', img:'making-a-masterpiece-by-modification.jpg', href:url('/news/making-a-masterpiece-by-modification/')},
-];
+// Topic tags in sidebar (links back to filtered index)
+const currentSlugForTags = window.location.pathname.split('/news/')[1]?.replace(/\//g,'') || '';
+const currentPostData = MG.NEWS_POSTS.find(p => p.slug === currentSlugForTags);
+if (currentPostData) {
+  const rightRail = document.querySelectorAll('.post-rail')[1];
+  if (rightRail) {
+    const tagSection = el('div',{style:{marginTop:'32px'}});
+    tagSection.appendChild(el('div',{class:'post-rail__eyebrow'},'TOPICS'));
+    const tagList = el('ul',{class:'post-rail__tags'});
+    currentPostData.tags.forEach(t => {
+      const li = el('li');
+      li.appendChild(el('a',{href:url('/news/#topic='+encodeURIComponent(t)),class:'post-rail__tag'},t));
+      tagList.appendChild(li);
+    });
+    tagSection.appendChild(tagList);
+    rightRail.appendChild(tagSection);
+  }
+}
+
+// More posts (from shared data, related by tags)
+const currentSlug = window.location.pathname.split('/news/')[1]?.replace(/\//g,'') || '';
+const currentPost = MG.NEWS_POSTS.find(p => p.slug === currentSlug);
+const related = MG.NEWS_POSTS
+  .filter(p => p.slug !== currentSlug)
+  .map(p => ({ ...p, score: currentPost ? p.tags.filter(t => currentPost.tags.includes(t)).length : 0 }))
+  .sort((a,b) => b.score - a.score)
+  .slice(0, 3);
 const mp = document.getElementById('more-posts');
-MORE.forEach(p => {
-  const a = el('a',{href:p.href,class:'post-more-card'});
+related.forEach(p => {
+  const a = el('a',{href:url('/news/' + p.slug + '/'),class:'post-more-card'});
   const cover = el('div',{class:'post-more-card__cover'});
-  cover.style.background = `linear-gradient(135deg,#0a0d2a 0%,${p.cover} 100%)`;
+  cover.style.background = 'linear-gradient(135deg,#0a0d2a 0%,' + p.cover + ' 100%)';
   if (p.img) {
-    const img = el('img',{src:url(`/img/news/${p.img}`), alt:'', class:'post-more-card__img'});
+    const img = el('img',{src:url('/img/news/' + p.img), alt:'', class:'post-more-card__img'});
     cover.appendChild(img);
   }
   a.appendChild(cover);
-  a.appendChild(el('div',{class:'post-more-card__meta'},`${p.cat.toUpperCase()} · ${p.date}`));
+  a.appendChild(el('div',{class:'post-more-card__meta'}, p.tags.slice(0,2).join(' · ').toUpperCase() + ' · ' + p.date));
   a.appendChild(el('h3',{class:'post-more-card__title'},p.title));
   mp.appendChild(a);
 });

@@ -1,10 +1,9 @@
 /* =========================================================================
    Moddable.Games — Animations: Scroll reveal, IntersectionObserver
-   Depends on: mg-core.js (window._MG_CORE)
+   Extends window.MG (created by mg-core.js)
    ========================================================================= */
 
-window._MG_ANIMATIONS = (() => {
-
+(function() {
   function initReveal() {
     const els = document.querySelectorAll('[data-reveal]');
     if (!els.length) return;
@@ -31,5 +30,5 @@ window._MG_ANIMATIONS = (() => {
 
   document.addEventListener('DOMContentLoaded', initReveal);
 
-  return { initReveal };
+  window.MG.initReveal = initReveal;
 })();

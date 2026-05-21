@@ -1,9 +1,9 @@
 /* =========================================================================
    Moddable.Games — Core: Tokens, Fonts, Helpers
+   Must load first. Creates window.MG namespace.
    ========================================================================= */
 
-window._MG_CORE = (() => {
-
+window.MG = (() => {
   const BASE = (document.querySelector('meta[name="mg-base"]') || {}).content || '';
   function url(path) { return BASE + path; }
 
@@ -84,5 +84,18 @@ window._MG_CORE = (() => {
     return svg;
   }
 
-  return { BASE, url, T, F, CATEGORY_COLORS, HEX_BG, HEX_BG_RED, HEX_BG_GREEN, el, css, cubeSVG };
+  if (BASE) {
+    document.addEventListener('DOMContentLoaded', () => {
+      document.querySelectorAll('a[href^="/"]').forEach(a => {
+        const h = a.getAttribute('href');
+        if (!h.startsWith(BASE + '/')) a.setAttribute('href', BASE + h);
+      });
+      document.querySelectorAll('link[href^="/"]').forEach(l => {
+        const h = l.getAttribute('href');
+        if (!h.startsWith(BASE + '/')) l.setAttribute('href', BASE + h);
+      });
+    });
+  }
+
+  return { T, F, HEX_BG, HEX_BG_RED, HEX_BG_GREEN, CATEGORY_COLORS, el, css, cubeSVG, url };
 })();
