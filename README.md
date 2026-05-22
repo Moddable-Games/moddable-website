@@ -117,6 +117,13 @@ Pages load `mg-loader.js` (which handles shared modules) + their own page script
 
 ### Changelog
 
+#### 2026-05-22
+- Redesigned tools page: filterable card grid with category bar (Game Night, Planning, Creative, Mod-Specific)
+- Converted 3 dark-themed tool widgets (Dice, Timer, Seating) to unified light card style
+- Added 3D spinning CSS dice to tools hero section
+- Redesigned team page with photo avatars breaking out of cards (4-column grid)
+- Removed font-test.html
+
 #### 2026-05-21
 - Extracted ALL inline scripts to external JS files (zero remain across 45 pages)
 - Created data-driven mod page renderer (`mg-mod-page.js` + `mg-mods-content.js`)

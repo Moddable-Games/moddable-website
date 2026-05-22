@@ -11,133 +11,41 @@
 <body>
 <div id="nav-root"></div>
 
-<!-- Header -->
 <section class="tools-hero">
   <div class="tools-hero__bloom"></div>
   <div class="tools-hero__inner">
-    <div class="mg-eyebrow mg-eyebrow--glow">THE WORKBENCH</div>
-    <h1 class="tools-hero__title">The toys we built<br>for the table.</h1>
-    <p class="tools-hero__lede">A dice roller for when you've lost yours under the couch. A name generator for hex-tile heroes. A scoreboard for everything else.</p>
+    <div class="tools-hero__text">
+      <div class="mg-eyebrow mg-eyebrow--glow">THE WORKBENCH</div>
+      <h1 class="tools-hero__title">The toys we built<br>for the table.</h1>
+      <p class="tools-hero__lede">A dice roller for when you've lost yours under the couch. A name generator for hex-tile heroes. A scoreboard for everything else.</p>
+    </div>
+    <div class="tools-hero__dice" id="hero-dice">
+      <div class="dice3d">
+        <div class="dice3d__face dice3d__face--front"><span class="pip"></span></div>
+        <div class="dice3d__face dice3d__face--back"><span class="pip"></span><span class="pip"></span><span class="pip"></span><span class="pip"></span><span class="pip"></span><span class="pip"></span></div>
+        <div class="dice3d__face dice3d__face--top"><span class="pip"></span><span class="pip"></span><span class="pip"></span></div>
+        <div class="dice3d__face dice3d__face--bottom"><span class="pip"></span><span class="pip"></span><span class="pip"></span><span class="pip"></span></div>
+        <div class="dice3d__face dice3d__face--right"><span class="pip"></span><span class="pip"></span><span class="pip"></span><span class="pip"></span><span class="pip"></span></div>
+        <div class="dice3d__face dice3d__face--left"><span class="pip"></span><span class="pip"></span></div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<section class="tools-filter">
+  <div class="tools-filter__inner">
+    <div id="tools-category-bar" class="tools-filter__bar"></div>
   </div>
 </section>
 
 <section class="tools-body">
   <div class="tools-body__inner">
-
-    <!-- Specialist tool links -->
-    <div class="tools-mod-links">
-      <h2 class="tools-mod-links__heading">Mod-specific tools.</h2>
-      <p class="tools-mod-links__sub">Built for individual mods. Pick yours.</p>
+    <div id="mod-tools-section" class="tools-section">
+      <h2 class="tools-section__heading">Mod-specific tools</h2>
+      <p class="tools-section__sub">Built for individual mods. Pick yours.</p>
       <div class="mg-grid-3" id="mod-tools-grid"></div>
     </div>
-    <div class="tools-widget">
-      <div class="tools-widget__bloom"></div>
-      <div class="tools-widget__inner">
-        <div class="mg-eyebrow mg-eyebrow--glow">DICE ROLLER</div>
-        <h2 class="tools-widget__heading">Roll anything.</h2>
-
-        <div class="dice-row" id="dice-row"></div>
-
-        <div class="dice-controls">
-          <label class="dice-controls__label">Count:</label>
-          <input type="range" min="1" max="10" value="1" id="dice-count" class="dice-controls__range">
-          <span id="dice-count-label" class="dice-controls__value">1</span>
-          <div class="dice-controls__modifier">
-            <label class="dice-controls__label">Modifier:</label>
-            <button id="mod-minus" class="dice-controls__btn">&minus;</button>
-            <span id="modifier-val" class="dice-controls__value dice-controls__value--wide">0</span>
-            <button id="mod-plus" class="dice-controls__btn">+</button>
-          </div>
-        </div>
-
-        <div id="roll-result" class="dice-result">—</div>
-        <div id="roll-breakdown" class="dice-breakdown"></div>
-        <div id="roll-btn-wrap"></div>
-      </div>
-    </div>
-
-    <!-- Name Generator -->
-    <div class="tools-widget tools-widget--light">
-      <div class="mg-eyebrow mg-eyebrow--blue">NAME GENERATOR</div>
-      <h2 class="tools-widget__heading tools-widget__heading--dark">Name your character.</h2>
-      <p class="tools-widget__sub">Works for any hex-tile explorer, faction leader, or rule-bending rogue.</p>
-
-      <div class="name-gen__filters" id="style-filters"></div>
-
-      <div id="generated-name" class="name-gen__result">—</div>
-      <div id="name-sub" class="name-gen__sub"></div>
-      <div id="name-btn-wrap" class="name-gen__btns"></div>
-    </div>
-
-    <!-- Score Tracker -->
-    <div class="tools-widget tools-widget--light">
-      <div class="mg-eyebrow mg-eyebrow--green">SCORE TRACKER</div>
-      <h2 class="tools-widget__heading tools-widget__heading--dark">Keep the count.</h2>
-      <p class="tools-widget__sub">Tracks up to 6 players. Good for Catan VP, TI4 objectives, anything with points.</p>
-      <div id="score-board" class="score-board"></div>
-      <div id="score-btns" class="score-board__btns"></div>
-    </div>
-
-    <!-- Turn Timer -->
-    <div class="tools-widget">
-      <div class="tools-widget__bloom"></div>
-      <div class="tools-widget__inner">
-        <div class="mg-eyebrow mg-eyebrow--red">TURN TIMER</div>
-        <h2 class="tools-widget__heading">Time's up.</h2>
-        <div id="timer-players"></div>
-        <div id="timer-display"></div>
-        <div id="timer-controls"></div>
-      </div>
-    </div>
-
-    <!-- Initiative Tracker -->
-    <div class="tools-widget tools-widget--light">
-      <div class="mg-eyebrow mg-eyebrow--blue">INITIATIVE TRACKER</div>
-      <h2 class="tools-widget__heading tools-widget__heading--dark">Who goes next.</h2>
-      <div id="init-list"></div>
-      <div id="init-controls"></div>
-    </div>
-
-    <!-- Map Grid Generator -->
-    <div class="tools-widget tools-widget--light">
-      <div class="mg-eyebrow mg-eyebrow--blue">MAP GRID GENERATOR</div>
-      <h2 class="tools-widget__heading tools-widget__heading--dark">Print a battlefield.</h2>
-      <p class="tools-widget__sub">Instant printable grids — square, hex, or isometric. Export as SVG.</p>
-      <div id="grid-controls"></div>
-      <div id="grid-preview"></div>
-    </div>
-
-    <!-- Rules Referee -->
-    <div class="tools-widget tools-widget--light">
-      <div class="mg-eyebrow mg-eyebrow--red">RULES REFEREE</div>
-      <h2 class="tools-widget__heading tools-widget__heading--dark">House rules, settled.</h2>
-      <p class="tools-widget__sub">Record your group's house rules. Search them mid-game. Never argue twice.</p>
-      <div id="rules-input"></div>
-      <div id="rules-list-container"></div>
-    </div>
-
-    <!-- Voting Booth -->
-    <div class="tools-widget tools-widget--light">
-      <div class="mg-eyebrow mg-eyebrow--green">VOTING BOOTH</div>
-      <h2 class="tools-widget__heading tools-widget__heading--dark">Settle it fairly.</h2>
-      <p class="tools-widget__sub">Anonymous polling for group decisions. Create a question, add options, vote.</p>
-      <div id="vote-setup"></div>
-      <div id="vote-active"></div>
-      <div id="vote-results"></div>
-    </div>
-
-    <!-- Seating Randomizer -->
-    <div class="tools-widget">
-      <div class="tools-widget__bloom"></div>
-      <div class="tools-widget__inner">
-        <div class="mg-eyebrow mg-eyebrow--glow">SEATING RANDOMIZER</div>
-        <h2 class="tools-widget__heading">Take your seats.</h2>
-        <div id="seat-input"></div>
-        <div id="seat-result"></div>
-        <div id="seat-controls"></div>
-      </div>
-    </div>
-
+    <div id="tools-grid" class="tools-grid"></div>
   </div>
 </section>
 

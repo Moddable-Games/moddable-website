@@ -1,10 +1,8 @@
 (function() {
   window.MG.TEAM = [
-    { handle:'@ascelot',    name:'Riley', role:'Founder · rules',   bio:"Designs the mods, runs the playtests, refuses to use Comic Sans on the PDFs.", color:'#d11a1a' },
-    { handle:'@cobalt',     name:'Sam',   role:'Original games',    bio:"Lead on Endless Skies + Mongo. Holds the only spreadsheet that explains TI4 in one row.", color:'#0c4f8d' },
-    { handle:'@hexbear',    name:'Joel',  role:'Art + components',  bio:"Hexagonal everything. Drew 61 tiles for Talisman: Hexed in three weeks.", color:'#3a9928' },
-    { handle:'@tessellate', name:'Tess',  role:'Community',         bio:"Runs the Discord. Runs the mod jams. Has read every house-rule thread on BoardGameGeek.", color:'#e89a1a' },
-    { handle:'@nukular',    name:'Kit',   role:'Tools + dev',       bio:"Built the dice roller. Maintains the modding hooks repo. Loses every game of Nuke Catan.", color:'#5d2a8a' },
-    { handle:'@longest',    name:'Ben',   role:'Words',             bio:"Writes the news posts you actually read. Strictly written by humans, including this bio.", color:'#936d62' }
+    { handle:'mark',  name:'Mark Smalley',    role:'Founder · DM · Builder',       bio:"Modder since forever. Built the world's first NoSQL CMS and a 500 Startups-backed Bitcoin wallet.", color:'#d11a1a', img:'../assets/team/mark.png' },
+    { handle:'kevin', name:'Kevin Chand',     role:'Playtest · Growth · Ops',      bio:"Systems thinker. Chief playtester and social engineer leading online growth, marketing and manufacturing.", color:'#3a9928', img:'../assets/team/kevin.png' },
+    { handle:'akmal', name:'Akmal Fikri',     role:'Engine · Community',            bio:"Web developer and board-game evangelist. Builds the online engine — grey hair earned the hard way.", color:'#0c4f8d', img:'../assets/team/akmal.png' },
+    { handle:'iqbal', name:'Iqbal Ridzuan',   role:'Lead Artist · Creative',       bio:"Head of creative. BioHack and Mechamato — featured on BoardGameGeek and IMDB.", color:'#e89a1a', img:'../assets/team/iqbal.png' }
   ];
 })();

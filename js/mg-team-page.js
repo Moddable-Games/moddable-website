@@ -11,26 +11,19 @@
   document.getElementById('footer-root').appendChild(footer());
   document.getElementById('page-hero').appendChild(pageHero({
     eyebrow: 'THE TEAM',
-    title: 'Six humans. Zero AI.',
-    lede: 'The people who write the rules, draw the tiles, and lose every game of Nuke Catan.'
+    title: "Who's making this happen.",
+    lede: 'A modder-founder, a systems-thinker playtester, a board-game evangelist who builds the engine, and a game artist with TV credits.'
   }));
 
   MG.TEAM.forEach(function(m) {
-    var card = el('article', {class:'team-card'});
-    var hrow = el('div', {class:'team-card__header'});
-    var avatar = el('div', {class:'team-card__avatar'});
-    avatar.style.background = 'linear-gradient(135deg,' + m.color + ',' + m.color + '88)';
-    avatar.textContent = m.name[0];
-    hrow.appendChild(avatar);
-    var info = el('div');
-    info.appendChild(el('div', {class:'team-card__name'}, m.name));
-    info.appendChild(el('div', {class:'team-card__role'}, m.role));
-    hrow.appendChild(info);
-    card.appendChild(hrow);
+    var card = el('div', {class:'team-card'});
+    var avatar = el('div', {class:'card-avatar'});
+    var img = el('img', {class:'img-breakout', src: m.img, alt: m.name});
+    avatar.appendChild(img);
+    card.appendChild(avatar);
+    card.appendChild(el('h3', {class:'team-card__name'}, m.name));
+    card.appendChild(el('div', {class:'team-card__role'}, m.role));
     card.appendChild(el('p', {class:'team-card__bio'}, m.bio));
-    var handle = el('div', {class:'team-card__handle'}, m.handle);
-    handle.style.color = m.color;
-    card.appendChild(handle);
     grid.appendChild(card);
   });
 })();

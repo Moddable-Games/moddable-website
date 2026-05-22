@@ -1,9 +1,32 @@
 (function() {
-const { el, btn, linkBtn, navbar, footer, url } = MG;
+const { el, btn, linkBtn, navbar, footer, url, T } = MG;
 document.getElementById('nav-root').appendChild(navbar('Tools'));
 document.getElementById('footer-root').appendChild(footer());
 
-// Mod-specific tool links
+/* ── TOOL DEFINITIONS ── */
+const TOOLS = [
+  { id:'dice',       title:'Roll anything.',        eyebrow:'DICE ROLLER',         category:'game-night', accent:'glow',  desc:'Standard RPG dice from d4 to d100, with modifiers.' },
+  { id:'name-gen',   title:'Name your character.',  eyebrow:'NAME GENERATOR',      category:'creative',   accent:'blue',  desc:'Works for any hex-tile explorer, faction leader, or rule-bending rogue.' },
+  { id:'score',      title:'Keep the count.',       eyebrow:'SCORE TRACKER',       category:'planning',   accent:'green', desc:'Tracks up to 6 players. Good for Catan VP, TI4 objectives, anything with points.' },
+  { id:'timer',      title:"Time's up.",            eyebrow:'TURN TIMER',          category:'game-night', accent:'red',   desc:'Per-player countdown timer with cumulative stats.' },
+  { id:'initiative', title:'Who goes next.',        eyebrow:'INITIATIVE TRACKER',  category:'game-night', accent:'blue',  desc:'Turn order tracker with initiative rolls.' },
+  { id:'map-grid',   title:'Print a battlefield.',  eyebrow:'MAP GRID GENERATOR',  category:'creative',   accent:'blue',  desc:'Instant printable grids — square, hex, or isometric. Export as SVG.' },
+  { id:'rules',      title:'House rules, settled.', eyebrow:'RULES REFEREE',       category:'planning',   accent:'red',   desc:"Record your group's house rules. Search them mid-game. Never argue twice." },
+  { id:'vote',       title:'Settle it fairly.',     eyebrow:'VOTING BOOTH',        category:'planning',   accent:'green', desc:'Anonymous polling for group decisions. Create a question, add options, vote.' },
+  { id:'seating',    title:'Take your seats.',      eyebrow:'SEATING RANDOMIZER',  category:'game-night', accent:'glow',  desc:'Random player seating around the table.' },
+];
+
+const CATEGORIES = [
+  { key:'all',          label:'All Tools' },
+  { key:'game-night',   label:'Game Night' },
+  { key:'planning',     label:'Planning' },
+  { key:'creative',     label:'Creative' },
+  { key:'mod-specific', label:'Mod-Specific' },
+];
+
+let activeCategory = 'all';
+
+/* ── MOD-SPECIFIC LINKS ── */
 const MOD_TOOLS = [
   { title:'Twilight Imperium', sub:'Faction picker · Objective tracker · Agenda voter', color:'#0c4f8d', href:url('/tools/ti/') },
   { title:'Talisman: Hexed',   sub:'Character lottery · Hex board · Encounter draw', color:'#5d2a8a', href:url('/tools/talisman/') },
@@ -25,1017 +48,606 @@ MOD_TOOLS.forEach(t => {
   mtg.appendChild(a);
 });
 
+/* ── FILTER BAR ── */
+function renderFilterBar() {
+  const bar = document.getElementById('tools-category-bar');
+  bar.innerHTML = '';
+  CATEGORIES.forEach(cat => {
+    const b = document.createElement('button');
+    b.className = 'tools-filter__btn' + (cat.key === activeCategory ? ' tools-filter__btn--active' : '');
+    b.textContent = cat.label;
+    b.addEventListener('click', () => { activeCategory = cat.key; renderFilterBar(); filterTools(); });
+    bar.appendChild(b);
+  });
+}
+
+function filterTools() {
+  document.querySelectorAll('.tool-card[data-category]').forEach(card => {
+    const cat = card.getAttribute('data-category');
+    const show = activeCategory === 'all' || cat === activeCategory;
+    card.classList.toggle('tool-card--hidden', !show);
+  });
+  const modSection = document.getElementById('mod-tools-section');
+  const showMod = activeCategory === 'all' || activeCategory === 'mod-specific';
+  modSection.classList.toggle('tools-section--hidden', !showMod);
+}
+
+/* ── RENDER CARD SHELLS ── */
+function renderToolCards() {
+  const grid = document.getElementById('tools-grid');
+  TOOLS.forEach(tool => {
+    const card = el('div', {class:'tool-card', 'data-category':tool.category});
+    card.id = 'tool-' + tool.id;
+
+    const header = el('div', {class:'tool-card__header'});
+    header.appendChild(el('div', {class:'tool-card__accent tool-card__accent--' + tool.accent}));
+    const headerText = el('div');
+    headerText.appendChild(el('div', {class:'tool-card__eyebrow tool-card__eyebrow--' + tool.accent}, tool.eyebrow));
+    headerText.appendChild(el('h3', {class:'tool-card__title'}, tool.title));
+    headerText.appendChild(el('p', {class:'tool-card__desc'}, tool.desc));
+    header.appendChild(headerText);
+    card.appendChild(header);
+
+    const body = el('div', {class: 'tool-card__body'});
+    body.id = tool.id + '-body';
+    card.appendChild(body);
+
+    grid.appendChild(card);
+  });
+}
+
+renderFilterBar();
+renderToolCards();
+
 /* ── DICE ROLLER ── */
-const DICE = [4,6,8,10,12,20,100];
-let selectedDie = 6, diceCount = 1, modifier = 0;
-
-const diceRow = document.getElementById('dice-row');
-DICE.forEach(d => {
-  const b = document.createElement('button');
-  b.className = 'die-face';
-  b.setAttribute('data-d', d);
-  b.innerHTML = `<span class="die-face__label${d===100?' die-face__label--sm':''}">d${d}</span>`;
-  b.addEventListener('click', () => { selectedDie = d; updateDiceButtons(); });
-  diceRow.appendChild(b);
-});
-
-function updateDiceButtons() {
-  document.querySelectorAll('.die-face').forEach(b => {
-    const d = parseInt(b.getAttribute('data-d'));
-    b.style.borderColor = d === selectedDie ? '#6fb5ff' : 'rgba(255,255,255,0.15)';
-    b.style.background = d === selectedDie ? '#161721' : '#0a0a0a';
-  });
-}
-updateDiceButtons();
-
-const countSlider = document.getElementById('dice-count');
-const countLabel = document.getElementById('dice-count-label');
-countSlider.addEventListener('input', e => { diceCount = parseInt(e.target.value); countLabel.textContent = diceCount; });
-document.getElementById('mod-minus').addEventListener('click', () => { modifier--; document.getElementById('modifier-val').textContent = modifier >= 0 ? '+'+modifier : modifier; });
-document.getElementById('mod-plus').addEventListener('click', () => { modifier++; document.getElementById('modifier-val').textContent = modifier >= 0 ? '+'+modifier : modifier; });
-
-const rollResult = document.getElementById('roll-result');
-const rollBreak = document.getElementById('roll-breakdown');
-
-function rollDice() {
-  const rolls = Array.from({length: diceCount}, () => Math.floor(Math.random() * selectedDie) + 1);
-  const total = rolls.reduce((a,b)=>a+b,0) + modifier;
-  rollResult.textContent = total;
-  rollBreak.textContent = `[${rolls.join(', ')}]${modifier !== 0 ? (modifier>0?'+':'')+modifier : ''} = ${total}`;
-  // Animate dice buttons
-  document.querySelectorAll('.die-face').forEach(b => {
-    if (parseInt(b.getAttribute('data-d')) === selectedDie) {
-      b.classList.add('rolling');
-      setTimeout(() => b.classList.remove('rolling'), 400);
-    }
-  });
-}
-
-document.getElementById('roll-btn-wrap').appendChild(btn('Roll the dice', 'primary', rollDice));
-
-/* ── NAME GENERATOR ── */
-const NAME_PARTS = {
-  fantasy:  { first:['Aerin','Brax','Calder','Dusk','Evren','Fenn','Gara','Hex','Ivar','Jora'], last:['of the Outer Ring','the Unmapped','Voidwalker','Stormcaller','Ironquill','the Hexed','Far-Shore'] },
-  sci_fi:   { first:['Vega','Krix','Oryn','Zael','Pyx','Cade','Thorn','Sola','Nx-7','Clio'],    last:['of Sector Nine','Drifter','Null-Class','the Salvager','Protocol-Break','Station-Born'] },
-  tabletop: { first:['The Merchant','The Cartographer','The Bandit','The Diplomat','The Engineer','The Warlord'], last:['of Catan','of the Void','of House Salvager','of the Outer Colonies','the Undefeated'] },
-};
-let nameStyle = 'fantasy';
-
-const styleFilters = document.getElementById('style-filters');
-Object.keys(NAME_PARTS).forEach(s => {
-  const label = s.replace('_',' ').replace(/\b\w/g,c=>c.toUpperCase());
-  const isA = s === nameStyle;
-  const b = document.createElement('button');
-  b.textContent = label; b.setAttribute('data-style', s);
-  Object.assign(b.style, {fontFamily:'var(--mg-font-body)',fontWeight:600,fontSize:'13px',height:'34px',padding:'0 14px',borderRadius:'9999px',border:isA?'none':'1px solid #c3c5cc',background:isA?'#000':'transparent',color:isA?'#fff':'#14161c',cursor:'pointer',transition:'all 150ms'});
-  b.addEventListener('click', () => { nameStyle=s; refreshStyleBtns(); generateName(); });
-  styleFilters.appendChild(b);
-});
-function refreshStyleBtns(){document.querySelectorAll('[data-style]').forEach(b=>{const a=b.getAttribute('data-style')===nameStyle;b.style.background=a?'#000':'transparent';b.style.color=a?'#fff':'#14161c';b.style.border=a?'none':'1px solid #c3c5cc';});}
-
-function generateName() {
-  const parts = NAME_PARTS[nameStyle];
-  const first = parts.first[Math.floor(Math.random()*parts.first.length)];
-  const last = parts.last[Math.floor(Math.random()*parts.last.length)];
-  document.getElementById('generated-name').textContent = first;
-  document.getElementById('name-sub').textContent = last;
-}
-generateName();
-const nbw = document.getElementById('name-btn-wrap');
-nbw.appendChild(btn('Generate', 'primary', generateName));
-nbw.appendChild(btn('Regenerate first', 'outline-light', () => {
-  const parts = NAME_PARTS[nameStyle];
-  document.getElementById('generated-name').textContent = parts.first[Math.floor(Math.random()*parts.first.length)];
-}));
-
-/* ── SCORE TRACKER ── */
-const MAX_PLAYERS = 6;
-const PLAYER_COLORS = ['#d11a1a','#0c4f8d','#3a9928','#e89a1a','#5d2a8a','#936d62'];
-let players = [
-  {name:'Player 1',score:0,color:PLAYER_COLORS[0]},
-  {name:'Player 2',score:0,color:PLAYER_COLORS[1]},
-];
-
-function renderScoreboard() {
-  const board = document.getElementById('score-board');
-  board.innerHTML = '';
-  players.forEach((p,i) => {
-    const c = el('div',{style:{background:'#f5f4ef',borderRadius:'16px',padding:'16px',display:'flex',flexDirection:'column',gap:'8px',position:'relative',border:`2px solid ${p.color}22`}});
-    const nameEl = el('div',{contenteditable:'true',style:{fontFamily:'var(--mg-font-body)',fontWeight:600,fontSize:'14px',color:'#14161c',outline:'none',borderBottom:'1px dashed #c3c5cc',paddingBottom:'4px'}},p.name);
-    nameEl.addEventListener('blur',()=>{players[i].name=nameEl.textContent.trim()||`Player ${i+1}`;});
-    c.appendChild(nameEl);
-    const score = el('div',{style:{fontFamily:'var(--mg-font-display)',fontWeight:600,fontSize:'48px',lineHeight:'1',letterSpacing:'-1px',color:p.color,textAlign:'center'}},p.score.toString());
-    c.appendChild(score);
-    const btns = el('div',{style:{display:'flex',gap:'8px'}});
-    const minus = el('button',{style:{flex:1,height:'36px',borderRadius:'9999px',background:'#fff',border:`1px solid ${T.hairlineLight}`,fontFamily:'var(--mg-font-body)',fontWeight:600,fontSize:'18px',cursor:'pointer',color:'#14161c'}},'-');
-    minus.addEventListener('click',()=>{players[i].score=Math.max(0,players[i].score-1);renderScoreboard();});
-    const plus = el('button',{style:{flex:1,height:'36px',borderRadius:'9999px',background:p.color,border:'none',color:'#fff',fontFamily:'var(--mg-font-body)',fontWeight:600,fontSize:'18px',cursor:'pointer'}},'+');
-    plus.addEventListener('click',()=>{players[i].score++;renderScoreboard();});
-    btns.appendChild(minus); btns.appendChild(plus);
-    c.appendChild(btns);
-    board.appendChild(c);
-  });
-}
-const {T} = MG;
-renderScoreboard();
-
-const sb2 = document.getElementById('score-btns');
-sb2.appendChild(btn('Add player', 'dark', () => {
-  if (players.length < MAX_PLAYERS) {
-    players.push({name:`Player ${players.length+1}`,score:0,color:PLAYER_COLORS[players.length]});
-    renderScoreboard();
-  }
-}));
-sb2.appendChild(btn('Reset scores', 'outline-light', () => {
-  players.forEach(p => p.score = 0); renderScoreboard();
-}));
-
-/* ── VOTING BOOTH ── */
 (function() {
-  const setupEl = document.getElementById('vote-setup');
-  const activeEl = document.getElementById('vote-active');
-  const resultsEl = document.getElementById('vote-results');
+  const body = document.getElementById('dice-body');
+  const DICE = [4,6,8,10,12,20,100];
+  let selectedDie = 6, diceCount = 1, modifier = 0;
 
-  let voteQuestion = '';
-  let voteOptions = ['', ''];
-  let votes = [];
-  let voterCount = 0;
+  const diceRow = el('div',{class:'dice-row'});
+  body.appendChild(diceRow);
+  DICE.forEach(d => {
+    const b = document.createElement('button');
+    b.className = 'die-face'; b.setAttribute('data-d', d);
+    b.innerHTML = '<span class="die-face__label' + (d===100?' die-face__label--sm':'') + '">d' + d + '</span>';
+    b.addEventListener('click', () => { selectedDie = d; updateDiceButtons(); });
+    diceRow.appendChild(b);
+  });
 
-  function renderSetup() {
-    setupEl.innerHTML = '';
-    activeEl.innerHTML = '';
-    resultsEl.innerHTML = '';
+  function updateDiceButtons() {
+    diceRow.querySelectorAll('.die-face').forEach(b => {
+      const d = parseInt(b.getAttribute('data-d'));
+      b.style.borderColor = d === selectedDie ? '#6fb5ff' : '';
+      b.style.background = d === selectedDie ? '#e8f4ff' : '';
+    });
+  }
+  updateDiceButtons();
 
-    const qRow = el('div', {class: 'vote-setup__row'});
-    const qInput = document.createElement('input');
-    qInput.className = 'vote-setup__input';
-    qInput.placeholder = 'Your question...';
-    qInput.value = voteQuestion;
-    qInput.addEventListener('input', () => { voteQuestion = qInput.value; });
-    qRow.appendChild(qInput);
-    setupEl.appendChild(qRow);
+  const controls = el('div',{class:'dice-controls'});
+  controls.innerHTML = '<label class="dice-controls__label">Count:</label>';
+  const countSlider = document.createElement('input');
+  countSlider.type='range'; countSlider.min='1'; countSlider.max='10'; countSlider.value='1'; countSlider.className='dice-controls__range';
+  const countLabel = el('span',{class:'dice-controls__value'},'1');
+  countSlider.addEventListener('input', e => { diceCount = parseInt(e.target.value); countLabel.textContent = diceCount; });
+  controls.appendChild(countSlider);
+  controls.appendChild(countLabel);
 
-    const optWrap = el('div', {class: 'vote-setup__options'});
-    voteOptions.forEach((opt, i) => {
-      const row = el('div', {class: 'vote-setup__option-row'});
-      const inp = document.createElement('input');
-      inp.className = 'vote-setup__input';
-      inp.placeholder = `Option ${i + 1}`;
-      inp.value = opt;
-      inp.addEventListener('input', () => { voteOptions[i] = inp.value; });
-      row.appendChild(inp);
-      if (voteOptions.length > 2) {
-        const rm = el('button', {class: 'vote-setup__remove'}, '×');
-        rm.addEventListener('click', () => { voteOptions.splice(i, 1); renderSetup(); });
-        row.appendChild(rm);
+  const modDiv = el('div',{class:'dice-controls__modifier'});
+  modDiv.innerHTML = '<label class="dice-controls__label">Modifier:</label>';
+  const modMinus = el('button',{class:'dice-controls__btn'},'−');
+  const modVal = el('span',{class:'dice-controls__value dice-controls__value--wide'},'0');
+  const modPlus = el('button',{class:'dice-controls__btn'},'+');
+  modMinus.addEventListener('click', () => { modifier--; modVal.textContent = modifier >= 0 ? '+'+modifier : modifier; });
+  modPlus.addEventListener('click', () => { modifier++; modVal.textContent = modifier >= 0 ? '+'+modifier : modifier; });
+  modDiv.appendChild(modMinus); modDiv.appendChild(modVal); modDiv.appendChild(modPlus);
+  controls.appendChild(modDiv);
+  body.appendChild(controls);
+
+  const rollResult = el('div',{class:'dice-result'},'—');
+  const rollBreak = el('div',{class:'dice-breakdown'});
+  body.appendChild(rollResult);
+  body.appendChild(rollBreak);
+
+  function rollDice() {
+    const rolls = Array.from({length: diceCount}, () => Math.floor(Math.random() * selectedDie) + 1);
+    const total = rolls.reduce((a,b)=>a+b,0) + modifier;
+    rollResult.textContent = total;
+    rollBreak.textContent = '[' + rolls.join(', ') + ']' + (modifier !== 0 ? (modifier>0?'+':'')+modifier : '') + ' = ' + total;
+    diceRow.querySelectorAll('.die-face').forEach(b => {
+      if (parseInt(b.getAttribute('data-d')) === selectedDie) {
+        b.classList.add('rolling'); setTimeout(() => b.classList.remove('rolling'), 400);
       }
-      optWrap.appendChild(row);
     });
-    setupEl.appendChild(optWrap);
-
-    const btnsWrap = el('div', {class: 'vote-setup__btns'});
-    if (voteOptions.length < 6) {
-      btnsWrap.appendChild(btn('Add option', 'outline-light', () => {
-        voteOptions.push('');
-        renderSetup();
-      }));
-    }
-    btnsWrap.appendChild(btn('Start Vote', 'green', () => {
-      if (!voteQuestion.trim()) return;
-      const filled = voteOptions.filter(o => o.trim());
-      if (filled.length < 2) return;
-      voteOptions = filled;
-      votes = new Array(voteOptions.length).fill(0);
-      voterCount = 0;
-      renderVoting();
-    }));
-    setupEl.appendChild(btnsWrap);
   }
-
-  function renderVoting() {
-    setupEl.innerHTML = '';
-    resultsEl.innerHTML = '';
-    activeEl.innerHTML = '';
-
-    const q = el('div', {class: 'vote-active__question'}, voteQuestion);
-    activeEl.appendChild(q);
-
-    const info = el('div', {class: 'vote-active__info'}, `Voter ${voterCount + 1} — tap your choice, then pass the device.`);
-    activeEl.appendChild(info);
-
-    const optWrap = el('div', {class: 'vote-active__options'});
-    voteOptions.forEach((opt, i) => {
-      const b = el('button', {class: 'vote-option'}, opt);
-      b.addEventListener('click', () => {
-        votes[i]++;
-        voterCount++;
-        renderVoting();
-      });
-      optWrap.appendChild(b);
-    });
-    activeEl.appendChild(optWrap);
-
-    const endBtn = btn('End Voting & Show Results', 'green', () => {
-      renderResults();
-    });
-    activeEl.appendChild(endBtn);
-  }
-
-  function renderResults() {
-    setupEl.innerHTML = '';
-    activeEl.innerHTML = '';
-    resultsEl.innerHTML = '';
-
-    const q = el('div', {class: 'vote-results__question'}, voteQuestion);
-    resultsEl.appendChild(q);
-
-    const totalVotes = votes.reduce((a, b) => a + b, 0);
-    voteOptions.forEach((opt, i) => {
-      const pct = totalVotes > 0 ? Math.round((votes[i] / totalVotes) * 100) : 0;
-      const wrap = el('div', {class: 'vote-results__bar-wrap'});
-      const label = el('div', {class: 'vote-results__bar-label'});
-      label.appendChild(el('span', {}, opt));
-      label.appendChild(el('span', {}, `${votes[i]} (${pct}%)`));
-      wrap.appendChild(label);
-      const track = el('div', {class: 'vote-results__bar-track'});
-      const fill = el('div', {class: 'vote-results__bar-fill'});
-      fill.style.width = pct + '%';
-      track.appendChild(fill);
-      wrap.appendChild(track);
-      resultsEl.appendChild(wrap);
-    });
-
-    const total = el('div', {class: 'vote-results__total'}, `${totalVotes} vote${totalVotes !== 1 ? 's' : ''} cast`);
-    resultsEl.appendChild(total);
-
-    const btnsWrap = el('div', {class: 'vote-results__btns'});
-    btnsWrap.appendChild(btn('New Vote', 'green', () => {
-      voteQuestion = '';
-      voteOptions = ['', ''];
-      votes = [];
-      voterCount = 0;
-      renderSetup();
-    }));
-    resultsEl.appendChild(btnsWrap);
-  }
-
-  renderSetup();
+  body.appendChild(btn('Roll the dice', 'primary', rollDice));
 })();
 
-/* ── SEATING RANDOMIZER ── */
+/* ── NAME GENERATOR ── */
 (function() {
-  const inputEl = document.getElementById('seat-input');
-  const resultEl = document.getElementById('seat-result');
-  const controlsEl = document.getElementById('seat-controls');
+  const body = document.getElementById('name-gen-body');
+  const NAME_PARTS = {
+    fantasy:  { first:['Aerin','Brax','Calder','Dusk','Evren','Fenn','Gara','Hex','Ivar','Jora'], last:['of the Outer Ring','the Unmapped','Voidwalker','Stormcaller','Ironquill','the Hexed','Far-Shore'] },
+    sci_fi:   { first:['Vega','Krix','Oryn','Zael','Pyx','Cade','Thorn','Sola','Nx-7','Clio'],    last:['of Sector Nine','Drifter','Null-Class','the Salvager','Protocol-Break','Station-Born'] },
+    tabletop: { first:['The Merchant','The Cartographer','The Bandit','The Diplomat','The Engineer','The Warlord'], last:['of Catan','of the Void','of House Salvager','of the Outer Colonies','the Undefeated'] },
+  };
+  let nameStyle = 'fantasy';
 
-  let seatPlayers = [];
-  let shuffled = [];
+  const filters = el('div',{class:'name-gen__filters'});
+  Object.keys(NAME_PARTS).forEach(s => {
+    const label = s.replace('_',' ').replace(/\b\w/g,c=>c.toUpperCase());
+    const b = document.createElement('button');
+    b.textContent = label; b.setAttribute('data-style', s);
+    b.className = 'tools-filter__btn' + (s === nameStyle ? ' tools-filter__btn--active' : '');
+    b.addEventListener('click', () => { nameStyle=s; refreshBtns(); generateName(); });
+    filters.appendChild(b);
+  });
+  body.appendChild(filters);
 
-  function renderInput() {
-    inputEl.innerHTML = '';
-    resultEl.innerHTML = '';
-    controlsEl.innerHTML = '';
-
-    const row = el('div', {class: 'seat-input__row'});
-    const field = document.createElement('input');
-    field.className = 'seat-input__field';
-    field.placeholder = 'Enter player name...';
-    field.addEventListener('keydown', (e) => {
-      if (e.key === 'Enter' && field.value.trim() && seatPlayers.length < 8) {
-        seatPlayers.push(field.value.trim());
-        field.value = '';
-        renderInput();
-      }
+  function refreshBtns() {
+    filters.querySelectorAll('[data-style]').forEach(b => {
+      b.className = 'tools-filter__btn' + (b.getAttribute('data-style') === nameStyle ? ' tools-filter__btn--active' : '');
     });
-    row.appendChild(field);
-    const addBtn = btn('Add', 'primary', () => {
-      if (field.value.trim() && seatPlayers.length < 8) {
-        seatPlayers.push(field.value.trim());
-        field.value = '';
-        renderInput();
-      }
-    });
-    row.appendChild(addBtn);
-    inputEl.appendChild(row);
-
-    if (seatPlayers.length > 0) {
-      const list = el('div', {class: 'seat-input__list'});
-      seatPlayers.forEach((name, i) => {
-        const tag = el('div', {class: 'seat-input__tag'}, name);
-        const rm = el('button', {class: 'seat-input__tag-remove'}, '×');
-        rm.addEventListener('click', () => { seatPlayers.splice(i, 1); renderInput(); });
-        tag.appendChild(rm);
-        list.appendChild(tag);
-      });
-      inputEl.appendChild(list);
-    }
-
-    const btnsWrap = el('div', {class: 'seat-input__btns'});
-    if (seatPlayers.length >= 3) {
-      btnsWrap.appendChild(btn('Randomize', 'primary', () => {
-        shuffle();
-      }));
-    }
-    inputEl.appendChild(btnsWrap);
   }
 
-  function shuffle() {
-    shuffled = [...seatPlayers];
-    for (let i = shuffled.length - 1; i > 0; i--) {
-      const j = Math.floor(Math.random() * (i + 1));
-      [shuffled[i], shuffled[j]] = [shuffled[j], shuffled[i]];
-    }
-    renderResult();
+  const nameResult = el('div',{class:'name-gen__result'},'—');
+  const nameSub = el('div',{class:'name-gen__sub'});
+  body.appendChild(nameResult);
+  body.appendChild(nameSub);
+
+  function generateName() {
+    const parts = NAME_PARTS[nameStyle];
+    nameResult.textContent = parts.first[Math.floor(Math.random()*parts.first.length)];
+    nameSub.textContent = parts.last[Math.floor(Math.random()*parts.last.length)];
   }
+  generateName();
 
-  function renderResult() {
-    resultEl.innerHTML = '';
-    controlsEl.innerHTML = '';
+  const btnsWrap = el('div',{class:'name-gen__btns'});
+  btnsWrap.appendChild(btn('Generate', 'primary', generateName));
+  btnsWrap.appendChild(btn('Regenerate first', 'outline-dark', () => {
+    const parts = NAME_PARTS[nameStyle];
+    nameResult.textContent = parts.first[Math.floor(Math.random()*parts.first.length)];
+  }));
+  body.appendChild(btnsWrap);
+})();
 
-    const circle = el('div', {class: 'seat-circle'});
-    const table = el('div', {class: 'seat-circle__table'}, 'TABLE');
-    circle.appendChild(table);
+/* ── SCORE TRACKER ── */
+(function() {
+  const body = document.getElementById('score-body');
+  const MAX_PLAYERS = 6;
+  const PLAYER_COLORS = ['#d11a1a','#0c4f8d','#3a9928','#e89a1a','#5d2a8a','#936d62'];
+  let players = [
+    {name:'Player 1',score:0,color:PLAYER_COLORS[0]},
+    {name:'Player 2',score:0,color:PLAYER_COLORS[1]},
+  ];
 
-    const radius = 120;
-    const cx = 140;
-    const cy = 140;
-    shuffled.forEach((name, i) => {
-      const angle = (2 * Math.PI * i / shuffled.length) - Math.PI / 2;
-      const x = cx + radius * Math.cos(angle);
-      const y = cy + radius * Math.sin(angle);
-      const player = el('div', {class: 'seat-circle__player' + (i === 0 ? ' seat-circle__player--first' : '')});
-      player.style.left = x + 'px';
-      player.style.top = y + 'px';
-      if (i === 0) {
-        player.appendChild(el('div', {class: 'seat-circle__star'}, '★'));
-      }
-      player.appendChild(el('div', {class: 'seat-circle__player-name'}, name));
-      player.appendChild(el('div', {class: 'seat-circle__player-num'}, '#' + (i + 1)));
-      circle.appendChild(player);
+  const board = el('div',{class:'score-board'});
+  const btnsEl = el('div',{class:'score-board__btns'});
+  body.appendChild(board);
+  body.appendChild(btnsEl);
+
+  function renderScoreboard() {
+    board.innerHTML = '';
+    players.forEach((p,i) => {
+      const c = el('div',{class:'score-player'});
+      c.style.cssText = 'background:#f5f4ef;border-radius:16px;padding:16px;display:flex;flex-direction:column;gap:8px;border:2px solid ' + p.color + '22';
+      const nameEl = document.createElement('div');
+      nameEl.contentEditable = 'true';
+      nameEl.style.cssText = 'font-family:var(--mg-font-body);font-weight:600;font-size:14px;color:#14161c;outline:none;border-bottom:1px dashed #c3c5cc;padding-bottom:4px';
+      nameEl.textContent = p.name;
+      nameEl.addEventListener('blur',()=>{players[i].name=nameEl.textContent.trim()||'Player '+(i+1);});
+      c.appendChild(nameEl);
+      const score = el('div');
+      score.style.cssText = 'font-family:var(--mg-font-display);font-weight:600;font-size:48px;line-height:1;letter-spacing:-1px;color:'+p.color+';text-align:center';
+      score.textContent = p.score;
+      c.appendChild(score);
+      const bRow = el('div');
+      bRow.style.cssText = 'display:flex;gap:8px';
+      const minus = document.createElement('button');
+      minus.style.cssText = 'flex:1;height:36px;border-radius:9999px;background:#fff;border:1px solid #e6e3d8;font-family:var(--mg-font-body);font-weight:600;font-size:18px;cursor:pointer;color:#14161c';
+      minus.textContent = '−';
+      minus.addEventListener('click',()=>{players[i].score=Math.max(0,players[i].score-1);renderScoreboard();});
+      const plus = document.createElement('button');
+      plus.style.cssText = 'flex:1;height:36px;border-radius:9999px;background:'+p.color+';border:none;color:#fff;font-family:var(--mg-font-body);font-weight:600;font-size:18px;cursor:pointer';
+      plus.textContent = '+';
+      plus.addEventListener('click',()=>{players[i].score++;renderScoreboard();});
+      bRow.appendChild(minus); bRow.appendChild(plus);
+      c.appendChild(bRow);
+      board.appendChild(c);
     });
-
-    resultEl.appendChild(circle);
-
-    const btnsWrap = el('div', {class: 'seat-controls__btns'});
-    btnsWrap.appendChild(btn('Shuffle Again', 'primary', shuffle));
-    btnsWrap.appendChild(btn('Reset', 'outline-light', () => {
-      shuffled = [];
-      renderInput();
-    }));
-    controlsEl.appendChild(btnsWrap);
   }
+  renderScoreboard();
 
-  renderInput();
+  btnsEl.appendChild(btn('Add player', 'dark', () => {
+    if (players.length < MAX_PLAYERS) { players.push({name:'Player '+(players.length+1),score:0,color:PLAYER_COLORS[players.length]}); renderScoreboard(); }
+  }));
+  btnsEl.appendChild(btn('Reset scores', 'outline-dark', () => { players.forEach(p => p.score = 0); renderScoreboard(); }));
 })();
 
 /* ── TURN TIMER ── */
 (function() {
-  const playersEl = document.getElementById('timer-players');
-  const displayEl = document.getElementById('timer-display');
-  const controlsEl = document.getElementById('timer-controls');
+  const body = document.getElementById('timer-body');
+  let timerPlayers = [], timePerTurn = 60, currentPlayerIdx = 0, timeRemaining = 60, interval = null, running = false, cumulativeTime = {};
 
-  let timerPlayers = [];
-  let timePerTurn = 60;
-  let currentPlayerIdx = 0;
-  let timeRemaining = 60;
-  let interval = null;
-  let running = false;
-  let cumulativeTime = {};
+  const playersEl = el('div'); const displayEl = el('div'); const controlsEl = el('div');
+  body.appendChild(playersEl); body.appendChild(displayEl); body.appendChild(controlsEl);
+
+  function formatTime(seconds) { const m = Math.floor(seconds/60); const s = seconds%60; return (m>0?m+':':'')+(m>0?String(s).padStart(2,'0'):s+'s'); }
 
   function renderSetup() {
-    playersEl.innerHTML = '';
-    displayEl.innerHTML = '';
-    controlsEl.innerHTML = '';
-
-    // Player input row
-    const row = el('div', {class: 'timer-players'});
-    const input = document.createElement('input');
-    input.className = 'timer-players__input';
-    input.placeholder = 'Player name...';
-    input.addEventListener('keydown', (e) => {
-      if (e.key === 'Enter' && input.value.trim()) {
-        addPlayer(input.value.trim());
-        input.value = '';
-      }
-    });
+    playersEl.innerHTML = ''; displayEl.innerHTML = ''; controlsEl.innerHTML = '';
+    const row = el('div',{class:'timer-players'});
+    const input = document.createElement('input'); input.className='timer-players__input'; input.placeholder='Player name...';
+    input.addEventListener('keydown',(e)=>{ if(e.key==='Enter'&&input.value.trim()){addPlayer(input.value.trim());input.value='';} });
     row.appendChild(input);
-    row.appendChild(btn('Add', 'red', () => {
-      if (input.value.trim()) {
-        addPlayer(input.value.trim());
-        input.value = '';
-      }
-    }));
+    row.appendChild(btn('Add','red',()=>{ if(input.value.trim()){addPlayer(input.value.trim());input.value='';} }));
     playersEl.appendChild(row);
-
-    // Player tags
-    if (timerPlayers.length > 0) {
-      const tags = el('div', {class: 'timer-players'});
-      timerPlayers.forEach((name, i) => {
-        const tag = el('div', {class: 'timer-players__tag'}, name);
-        const rm = el('button', {class: 'timer-players__tag-remove'}, '×');
-        rm.addEventListener('click', () => { timerPlayers.splice(i, 1); delete cumulativeTime[name]; renderSetup(); });
-        tag.appendChild(rm);
-        tags.appendChild(tag);
+    if(timerPlayers.length>0){
+      const tags=el('div',{class:'timer-players'});
+      timerPlayers.forEach((name,i)=>{
+        const tag=el('div',{class:'timer-players__tag'},name);
+        const rm=el('button',{class:'timer-players__tag-remove'},'×');
+        rm.addEventListener('click',()=>{timerPlayers.splice(i,1);delete cumulativeTime[name];renderSetup();});
+        tag.appendChild(rm); tags.appendChild(tag);
       });
       playersEl.appendChild(tags);
     }
-
-    // Time presets
-    const presets = el('div', {class: 'timer-presets'});
-    [30, 60, 90, 120].forEach(sec => {
-      const b = document.createElement('button');
-      b.className = 'timer-preset-btn' + (sec === timePerTurn ? ' timer-preset-btn--active' : '');
-      b.textContent = sec + 's';
-      b.addEventListener('click', () => {
-        timePerTurn = sec;
-        timeRemaining = sec;
-        renderSetup();
-      });
-      presets.appendChild(b);
+    const presets=el('div',{class:'timer-presets'});
+    [30,60,90,120].forEach(sec=>{
+      const b=document.createElement('button'); b.className='timer-preset-btn'+(sec===timePerTurn?' timer-preset-btn--active':''); b.textContent=sec+'s';
+      b.addEventListener('click',()=>{timePerTurn=sec;timeRemaining=sec;renderSetup();}); presets.appendChild(b);
     });
     displayEl.appendChild(presets);
-
-    // Display
-    const display = el('div', {class: 'timer-display'}, formatTime(timePerTurn));
-    displayEl.appendChild(display);
-
-    // Current player label
-    if (timerPlayers.length > 0) {
-      const current = el('div', {class: 'timer-current'}, timerPlayers[currentPlayerIdx] + "'s turn");
-      displayEl.appendChild(current);
-    }
-
-    // Controls
-    if (timerPlayers.length >= 2) {
-      const btnsWrap = el('div', {class: 'timer-buttons'});
-      btnsWrap.appendChild(btn('Start', 'red', startTimer));
-      controlsEl.appendChild(btnsWrap);
-    }
-
+    displayEl.appendChild(el('div',{class:'timer-display'},formatTime(timePerTurn)));
+    if(timerPlayers.length>0) displayEl.appendChild(el('div',{class:'timer-current'},timerPlayers[currentPlayerIdx]+"'s turn"));
+    if(timerPlayers.length>=2){ const bw=el('div',{class:'timer-buttons'}); bw.appendChild(btn('Start','red',startTimer)); controlsEl.appendChild(bw); }
     renderStats();
   }
 
-  function addPlayer(name) {
-    if (timerPlayers.length < 8) {
-      timerPlayers.push(name);
-      cumulativeTime[name] = 0;
-      renderSetup();
-    }
-  }
+  function addPlayer(name){if(timerPlayers.length<8){timerPlayers.push(name);cumulativeTime[name]=0;renderSetup();}}
+  function startTimer(){if(timerPlayers.length<2)return;running=true;timeRemaining=timePerTurn;renderRunning();interval=setInterval(tick,1000);}
+  function tick(){timeRemaining--;cumulativeTime[timerPlayers[currentPlayerIdx]]++;if(timeRemaining<=0){clearInterval(interval);running=false;renderExpired();}else{updateDisplay();}}
+  function updateDisplay(){const d=body.querySelector('.timer-display');if(d)d.textContent=formatTime(timeRemaining);renderStats();}
 
-  function formatTime(seconds) {
-    const m = Math.floor(seconds / 60);
-    const s = seconds % 60;
-    return (m > 0 ? m + ':' : '') + (m > 0 ? String(s).padStart(2, '0') : s + 's');
-  }
-
-  function startTimer() {
-    if (timerPlayers.length < 2) return;
-    running = true;
-    timeRemaining = timePerTurn;
-    renderRunning();
-    interval = setInterval(tick, 1000);
-  }
-
-  function tick() {
-    timeRemaining--;
-    cumulativeTime[timerPlayers[currentPlayerIdx]]++;
-    if (timeRemaining <= 0) {
-      clearInterval(interval);
-      running = false;
-      renderExpired();
-    } else {
-      updateDisplay();
-    }
-  }
-
-  function updateDisplay() {
-    const display = document.querySelector('.timer-display');
-    if (display) display.textContent = formatTime(timeRemaining);
-    renderStats();
-  }
-
-  function renderRunning() {
-    displayEl.innerHTML = '';
-    controlsEl.innerHTML = '';
-
-    const display = el('div', {class: 'timer-display'}, formatTime(timeRemaining));
-    displayEl.appendChild(display);
-
-    const current = el('div', {class: 'timer-current'}, timerPlayers[currentPlayerIdx] + "'s turn");
-    displayEl.appendChild(current);
-
-    const btnsWrap = el('div', {class: 'timer-buttons'});
-    btnsWrap.appendChild(btn('Pause', 'outline-light', () => {
-      clearInterval(interval);
-      running = false;
-      const resumeWrap = el('div', {class: 'timer-buttons'});
-      resumeWrap.appendChild(btn('Resume', 'red', () => {
-        running = true;
-        interval = setInterval(tick, 1000);
-        renderRunning();
-      }));
-      resumeWrap.appendChild(btn('Next Player', 'outline-light', nextPlayer));
-      controlsEl.innerHTML = '';
-      controlsEl.appendChild(resumeWrap);
-      renderStats();
+  function renderRunning(){
+    displayEl.innerHTML='';controlsEl.innerHTML='';
+    displayEl.appendChild(el('div',{class:'timer-display'},formatTime(timeRemaining)));
+    displayEl.appendChild(el('div',{class:'timer-current'},timerPlayers[currentPlayerIdx]+"'s turn"));
+    const bw=el('div',{class:'timer-buttons'});
+    bw.appendChild(btn('Pause','outline-dark',()=>{clearInterval(interval);running=false;
+      const rw=el('div',{class:'timer-buttons'});rw.appendChild(btn('Resume','red',()=>{running=true;interval=setInterval(tick,1000);renderRunning();}));rw.appendChild(btn('Next Player','outline-dark',nextPlayer));controlsEl.innerHTML='';controlsEl.appendChild(rw);renderStats();
     }));
-    btnsWrap.appendChild(btn('Next Player', 'primary', nextPlayer));
-    controlsEl.innerHTML = '';
-    controlsEl.appendChild(btnsWrap);
-
-    renderStats();
+    bw.appendChild(btn('Next Player','primary',nextPlayer));controlsEl.innerHTML='';controlsEl.appendChild(bw);renderStats();
   }
 
-  function renderExpired() {
-    displayEl.innerHTML = '';
-    controlsEl.innerHTML = '';
-
-    const display = el('div', {class: 'timer-display timer-display--expired'}, '0s');
-    displayEl.appendChild(display);
-
-    const current = el('div', {class: 'timer-current'}, timerPlayers[currentPlayerIdx] + " — time expired!");
-    displayEl.appendChild(current);
-
-    const btnsWrap = el('div', {class: 'timer-buttons'});
-    btnsWrap.appendChild(btn('Next Player', 'red', nextPlayer));
-    btnsWrap.appendChild(btn('Reset', 'outline-light', () => {
-      clearInterval(interval);
-      running = false;
-      currentPlayerIdx = 0;
-      Object.keys(cumulativeTime).forEach(k => cumulativeTime[k] = 0);
-      renderSetup();
-    }));
-    controlsEl.innerHTML = '';
-    controlsEl.appendChild(btnsWrap);
-
-    renderStats();
+  function renderExpired(){
+    displayEl.innerHTML='';controlsEl.innerHTML='';
+    displayEl.appendChild(el('div',{class:'timer-display timer-display--expired'},'0s'));
+    displayEl.appendChild(el('div',{class:'timer-current'},timerPlayers[currentPlayerIdx]+' — time expired!'));
+    const bw=el('div',{class:'timer-buttons'});
+    bw.appendChild(btn('Next Player','red',nextPlayer));
+    bw.appendChild(btn('Reset','outline-dark',()=>{clearInterval(interval);running=false;currentPlayerIdx=0;Object.keys(cumulativeTime).forEach(k=>cumulativeTime[k]=0);renderSetup();}));
+    controlsEl.innerHTML='';controlsEl.appendChild(bw);renderStats();
   }
 
-  function nextPlayer() {
-    clearInterval(interval);
-    currentPlayerIdx = (currentPlayerIdx + 1) % timerPlayers.length;
-    timeRemaining = timePerTurn;
-    running = true;
-    interval = setInterval(tick, 1000);
-    renderRunning();
+  function nextPlayer(){clearInterval(interval);currentPlayerIdx=(currentPlayerIdx+1)%timerPlayers.length;timeRemaining=timePerTurn;running=true;interval=setInterval(tick,1000);renderRunning();}
+
+  function renderStats(){
+    let se=controlsEl.querySelector('.timer-stats');if(se)se.remove();if(timerPlayers.length===0)return;
+    se=el('div',{class:'timer-stats'});
+    timerPlayers.forEach(name=>{const e=el('div',{class:'timer-stats__entry'});e.appendChild(el('div',{class:'timer-stats__name'},name));e.appendChild(el('div',{class:'timer-stats__time'},formatTime(cumulativeTime[name]||0)));se.appendChild(e);});
+    controlsEl.appendChild(se);
   }
-
-  function renderStats() {
-    let statsEl = document.querySelector('.timer-stats');
-    if (statsEl) statsEl.remove();
-    if (timerPlayers.length === 0) return;
-
-    statsEl = el('div', {class: 'timer-stats'});
-    timerPlayers.forEach(name => {
-      const entry = el('div', {class: 'timer-stats__entry'});
-      entry.appendChild(el('div', {class: 'timer-stats__name'}, name));
-      entry.appendChild(el('div', {class: 'timer-stats__time'}, formatTime(cumulativeTime[name] || 0)));
-      statsEl.appendChild(entry);
-    });
-    controlsEl.appendChild(statsEl);
-  }
-
   renderSetup();
 })();
 
 /* ── INITIATIVE TRACKER ── */
 (function() {
-  const listEl = document.getElementById('init-list');
-  const controlsEl = document.getElementById('init-controls');
-
-  let combatants = [];
-  let currentTurn = 0;
-  let round = 1;
+  const body = document.getElementById('initiative-body');
+  let combatants = [], currentTurn = 0, round = 1;
 
   function render() {
-    listEl.innerHTML = '';
-    controlsEl.innerHTML = '';
+    body.innerHTML = '';
+    const addRow = el('div',{class:'init-add'});
+    const nameInput = document.createElement('input'); nameInput.className='init-add__input init-add__input--name'; nameInput.placeholder='Name...';
+    const initInput = document.createElement('input'); initInput.className='init-add__input init-add__input--number'; initInput.type='number'; initInput.placeholder='Init';
+    const addFn = () => { const name=nameInput.value.trim(); const init=parseInt(initInput.value)||0; if(name){combatants.push({name,initiative:init});combatants.sort((a,b)=>b.initiative-a.initiative);nameInput.value='';initInput.value='';render();}};
+    nameInput.addEventListener('keydown',(e)=>{if(e.key==='Enter')addFn();});
+    initInput.addEventListener('keydown',(e)=>{if(e.key==='Enter')addFn();});
+    addRow.appendChild(nameInput); addRow.appendChild(initInput); addRow.appendChild(btn('Add','blue',addFn));
+    body.appendChild(addRow);
 
-    // Add combatant form
-    const addRow = el('div', {class: 'init-add'});
-    const nameInput = document.createElement('input');
-    nameInput.className = 'init-add__input init-add__input--name';
-    nameInput.placeholder = 'Name...';
-    const initInput = document.createElement('input');
-    initInput.className = 'init-add__input init-add__input--number';
-    initInput.type = 'number';
-    initInput.placeholder = 'Init';
-    const addFn = () => {
-      const name = nameInput.value.trim();
-      const init = parseInt(initInput.value) || 0;
-      if (name) {
-        combatants.push({name, initiative: init});
-        combatants.sort((a, b) => b.initiative - a.initiative);
-        nameInput.value = '';
-        initInput.value = '';
-        render();
-      }
-    };
-    nameInput.addEventListener('keydown', (e) => { if (e.key === 'Enter') addFn(); });
-    initInput.addEventListener('keydown', (e) => { if (e.key === 'Enter') addFn(); });
-    addRow.appendChild(nameInput);
-    addRow.appendChild(initInput);
-    addRow.appendChild(btn('Add', 'blue', addFn));
-    listEl.appendChild(addRow);
-
-    // Round counter
-    if (combatants.length > 0) {
-      const roundEl = el('div', {class: 'init-round'}, 'Round ' + round);
-      listEl.appendChild(roundEl);
-    }
-
-    // Combatant list
-    const list = el('div', {class: 'init-list'});
-    combatants.forEach((c, i) => {
-      const entry = el('div', {class: 'init-entry' + (i === currentTurn ? ' init-entry--active' : '')});
-      entry.appendChild(el('div', {class: 'init-entry__rank'}, c.initiative.toString()));
-      entry.appendChild(el('div', {class: 'init-entry__name'}, c.name));
-      const rm = el('button', {class: 'init-entry__remove'}, '×');
-      rm.addEventListener('click', () => {
-        combatants.splice(i, 1);
-        if (currentTurn >= combatants.length) currentTurn = 0;
-        render();
-      });
-      entry.appendChild(rm);
-      list.appendChild(entry);
+    if(combatants.length>0) body.appendChild(el('div',{class:'init-round'},'Round '+round));
+    const list=el('div',{class:'init-list'});
+    combatants.forEach((c,i)=>{
+      const entry=el('div',{class:'init-entry'+(i===currentTurn?' init-entry--active':'')});
+      entry.appendChild(el('div',{class:'init-entry__rank'},c.initiative.toString()));
+      entry.appendChild(el('div',{class:'init-entry__name'},c.name));
+      const rm=el('button',{class:'init-entry__remove'},'×');
+      rm.addEventListener('click',()=>{combatants.splice(i,1);if(currentTurn>=combatants.length)currentTurn=0;render();});
+      entry.appendChild(rm); list.appendChild(entry);
     });
-    listEl.appendChild(list);
+    body.appendChild(list);
 
-    // Control buttons
-    if (combatants.length > 0) {
-      const btnsWrap = el('div', {class: 'init-buttons'});
-      btnsWrap.appendChild(btn('Next Turn', 'blue', () => {
-        currentTurn++;
-        if (currentTurn >= combatants.length) {
-          currentTurn = 0;
-          round++;
-        }
-        render();
-      }));
-      btnsWrap.appendChild(btn('New Round', 'outline-light', () => {
-        currentTurn = 0;
-        round++;
-        render();
-      }));
-      btnsWrap.appendChild(btn('Randomize All', 'outline-light', () => {
-        combatants.forEach(c => {
-          c.initiative = Math.floor(Math.random() * 20) + 1;
-        });
-        combatants.sort((a, b) => b.initiative - a.initiative);
-        currentTurn = 0;
-        render();
-      }));
-      btnsWrap.appendChild(btn('Clear All', 'outline-light', () => {
-        combatants = [];
-        currentTurn = 0;
-        round = 1;
-        render();
-      }));
-      controlsEl.appendChild(btnsWrap);
+    if(combatants.length>0){
+      const bw=el('div',{class:'init-buttons'});
+      bw.appendChild(btn('Next Turn','blue',()=>{currentTurn++;if(currentTurn>=combatants.length){currentTurn=0;round++;}render();}));
+      bw.appendChild(btn('New Round','outline-dark',()=>{currentTurn=0;round++;render();}));
+      bw.appendChild(btn('Randomize All','outline-dark',()=>{combatants.forEach(c=>{c.initiative=Math.floor(Math.random()*20)+1;});combatants.sort((a,b)=>b.initiative-a.initiative);currentTurn=0;render();}));
+      bw.appendChild(btn('Clear All','outline-dark',()=>{combatants=[];currentTurn=0;round=1;render();}));
+      body.appendChild(bw);
     }
   }
-
   render();
 })();
 
 /* ── MAP GRID GENERATOR ── */
 (function() {
-  const controlsEl = document.getElementById('grid-controls');
-  const previewEl = document.getElementById('grid-preview');
-  previewEl.className = 'grid-preview';
+  const body = document.getElementById('map-grid-body');
+  let gridType = 'square', cols = 12, rows = 8, cellSize = 40;
 
-  let gridType = 'square';
-  let cellSize = 20;
-  let gridRows = 10;
-  let gridCols = 10;
-  let lineColor = '#999999';
+  const controls = el('div',{class:'map-grid__controls'});
+  const typeRow = el('div',{class:'map-grid__types'});
+  ['square','hex','iso'].forEach(t => {
+    const b = document.createElement('button');
+    b.className = 'tools-filter__btn' + (t === gridType ? ' tools-filter__btn--active' : '');
+    b.textContent = t.charAt(0).toUpperCase() + t.slice(1);
+    b.setAttribute('data-type', t);
+    b.addEventListener('click', () => { gridType = t; refreshTypeBtns(); renderGrid(); });
+    typeRow.appendChild(b);
+  });
+  controls.appendChild(typeRow);
 
-  const COLORS = [
-    { label: 'Grey', value: '#999999' },
-    { label: 'Blue', value: '#0c4f8d' },
-    { label: 'Black', value: '#000000' }
-  ];
-
-  function buildControls() {
-    controlsEl.innerHTML = '';
-
-    // Grid type pills
-    const typeRow = el('div', {class: 'grid-control'});
-    typeRow.appendChild(el('span', {class: 'grid-control__label'}, 'Type:'));
-    ['Square', 'Hex', 'Isometric'].forEach(function(t) {
-      const val = t.toLowerCase();
-      const pill = document.createElement('button');
-      pill.className = 'grid-control__pill' + (gridType === val ? ' grid-control__pill--active' : '');
-      pill.textContent = t;
-      pill.addEventListener('click', function() { gridType = val; buildControls(); renderGrid(); });
-      typeRow.appendChild(pill);
+  function refreshTypeBtns() {
+    typeRow.querySelectorAll('[data-type]').forEach(b => {
+      b.className = 'tools-filter__btn' + (b.getAttribute('data-type') === gridType ? ' tools-filter__btn--active' : '');
     });
-    controlsEl.appendChild(typeRow);
-
-    // Cell size slider
-    const sizeRow = el('div', {class: 'grid-control'});
-    sizeRow.appendChild(el('span', {class: 'grid-control__label'}, 'Cell size:'));
-    const sizeRange = document.createElement('input');
-    sizeRange.type = 'range';
-    sizeRange.min = '10';
-    sizeRange.max = '40';
-    sizeRange.value = cellSize;
-    sizeRange.className = 'grid-control__range';
-    const sizeVal = el('span', {class: 'grid-control__value'}, cellSize + 'px');
-    sizeRange.addEventListener('input', function() { cellSize = parseInt(sizeRange.value); sizeVal.textContent = cellSize + 'px'; renderGrid(); });
-    sizeRow.appendChild(sizeRange);
-    sizeRow.appendChild(sizeVal);
-    controlsEl.appendChild(sizeRow);
-
-    // Grid dimensions
-    const dimRow = el('div', {class: 'grid-control'});
-    dimRow.appendChild(el('span', {class: 'grid-control__label'}, 'Grid:'));
-    const rowsInput = document.createElement('input');
-    rowsInput.type = 'number';
-    rowsInput.min = '2';
-    rowsInput.max = '30';
-    rowsInput.value = gridRows;
-    rowsInput.className = 'grid-control__input';
-    rowsInput.addEventListener('input', function() { gridRows = Math.max(2, Math.min(30, parseInt(rowsInput.value) || 2)); renderGrid(); });
-    dimRow.appendChild(rowsInput);
-    dimRow.appendChild(el('span', {class: 'grid-control__label'}, '×'));
-    const colsInput = document.createElement('input');
-    colsInput.type = 'number';
-    colsInput.min = '2';
-    colsInput.max = '30';
-    colsInput.value = gridCols;
-    colsInput.className = 'grid-control__input';
-    colsInput.addEventListener('input', function() { gridCols = Math.max(2, Math.min(30, parseInt(colsInput.value) || 2)); renderGrid(); });
-    dimRow.appendChild(colsInput);
-    controlsEl.appendChild(dimRow);
-
-    // Line color
-    const colorRow = el('div', {class: 'grid-control'});
-    colorRow.appendChild(el('span', {class: 'grid-control__label'}, 'Color:'));
-    COLORS.forEach(function(c) {
-      const swatch = document.createElement('button');
-      swatch.className = 'grid-control__color' + (lineColor === c.value ? ' grid-control__color--active' : '');
-      swatch.style.background = c.value;
-      swatch.title = c.label;
-      swatch.addEventListener('click', function() { lineColor = c.value; buildControls(); renderGrid(); });
-      colorRow.appendChild(swatch);
-    });
-    controlsEl.appendChild(colorRow);
-
-    // Action buttons
-    const btnsRow = el('div', {class: 'grid-control__btns'});
-    btnsRow.appendChild(btn('Download SVG', 'primary', downloadSVG));
-    btnsRow.appendChild(btn('Print', 'outline-light', printGrid));
-    controlsEl.appendChild(btnsRow);
   }
 
-  function generateSquareSVG() {
-    const w = gridCols * cellSize;
-    const h = gridRows * cellSize;
-    var paths = '';
-    for (var r = 0; r <= gridRows; r++) {
-      paths += '<line x1="0" y1="' + (r * cellSize) + '" x2="' + w + '" y2="' + (r * cellSize) + '" stroke="' + lineColor + '" stroke-width="1"/>';
-    }
-    for (var c = 0; c <= gridCols; c++) {
-      paths += '<line x1="' + (c * cellSize) + '" y1="0" x2="' + (c * cellSize) + '" y2="' + h + '" stroke="' + lineColor + '" stroke-width="1"/>';
-    }
-    return '<svg xmlns="http://www.w3.org/2000/svg" width="' + w + '" height="' + h + '" viewBox="0 0 ' + w + ' ' + h + '">' + paths + '</svg>';
-  }
+  const sizeRow = el('div',{class:'map-grid__size-row'});
+  sizeRow.innerHTML = '<label class="map-grid__label">Cols:</label>';
+  const colInput = document.createElement('input'); colInput.type='number'; colInput.value=cols; colInput.min='2'; colInput.max='30'; colInput.className='map-grid__input';
+  colInput.addEventListener('change', () => { cols = parseInt(colInput.value)||12; renderGrid(); });
+  sizeRow.appendChild(colInput);
+  const rowLabel = document.createElement('label'); rowLabel.className='map-grid__label'; rowLabel.textContent='Rows:';
+  sizeRow.appendChild(rowLabel);
+  const rowInput = document.createElement('input'); rowInput.type='number'; rowInput.value=rows; rowInput.min='2'; rowInput.max='30'; rowInput.className='map-grid__input';
+  rowInput.addEventListener('change', () => { rows = parseInt(rowInput.value)||8; renderGrid(); });
+  sizeRow.appendChild(rowInput);
+  controls.appendChild(sizeRow);
+  body.appendChild(controls);
 
-  function generateHexSVG() {
-    const size = cellSize;
-    const hexW = size * Math.sqrt(3);
-    const hexH = size * 2;
-    const totalW = Math.ceil(hexW * gridCols + hexW / 2);
-    const totalH = Math.ceil(hexH * 0.75 * gridRows + hexH * 0.25);
-    var paths = '';
-    for (var row = 0; row < gridRows; row++) {
-      for (var col = 0; col < gridCols; col++) {
-        var offsetX = row % 2 === 1 ? hexW / 2 : 0;
-        var cx = col * hexW + hexW / 2 + offsetX;
-        var cy = row * (hexH * 0.75) + size;
-        var points = '';
-        for (var i = 0; i < 6; i++) {
-          var angle = (Math.PI / 180) * (60 * i - 30);
-          var px = cx + size * Math.cos(angle);
-          var py = cy + size * Math.sin(angle);
-          points += (i === 0 ? '' : ' ') + px.toFixed(2) + ',' + py.toFixed(2);
-        }
-        paths += '<polygon points="' + points + '" fill="none" stroke="' + lineColor + '" stroke-width="1"/>';
-      }
-    }
-    return '<svg xmlns="http://www.w3.org/2000/svg" width="' + totalW + '" height="' + totalH + '" viewBox="0 0 ' + totalW + ' ' + totalH + '">' + paths + '</svg>';
-  }
-
-  function generateIsoSVG() {
-    const w = gridCols * cellSize;
-    const h = gridRows * cellSize;
-    var paths = '';
-    // Faint orthogonal guides
-    for (var r = 0; r <= gridRows; r++) {
-      paths += '<line x1="0" y1="' + (r * cellSize) + '" x2="' + w + '" y2="' + (r * cellSize) + '" stroke="' + lineColor + '" stroke-width="0.5" stroke-opacity="0.3"/>';
-    }
-    for (var c = 0; c <= gridCols; c++) {
-      paths += '<line x1="' + (c * cellSize) + '" y1="0" x2="' + (c * cellSize) + '" y2="' + h + '" stroke="' + lineColor + '" stroke-width="0.5" stroke-opacity="0.3"/>';
-    }
-    // Diagonal lines (down-right)
-    for (var i = -(gridRows); i <= gridCols; i++) {
-      var x1 = i * cellSize, y1 = 0, x2 = i * cellSize + h, y2 = h;
-      paths += '<line x1="' + x1 + '" y1="' + y1 + '" x2="' + x2 + '" y2="' + y2 + '" stroke="' + lineColor + '" stroke-width="1"/>';
-    }
-    // Diagonal lines (down-left)
-    for (var j = 0; j <= gridCols + gridRows; j++) {
-      var lx1 = j * cellSize, ly1 = 0, lx2 = j * cellSize - h, ly2 = h;
-      paths += '<line x1="' + lx1 + '" y1="' + ly1 + '" x2="' + lx2 + '" y2="' + ly2 + '" stroke="' + lineColor + '" stroke-width="1"/>';
-    }
-    return '<svg xmlns="http://www.w3.org/2000/svg" width="' + w + '" height="' + h + '" viewBox="0 0 ' + w + ' ' + h + '">' + paths + '</svg>';
-  }
+  const canvas = el('div',{class:'map-grid__canvas'});
+  body.appendChild(canvas);
 
   function renderGrid() {
-    var svg;
-    if (gridType === 'square') svg = generateSquareSVG();
-    else if (gridType === 'hex') svg = generateHexSVG();
-    else svg = generateIsoSVG();
-    previewEl.innerHTML = svg;
-  }
+    const w = cols * cellSize + (gridType === 'hex' ? cellSize * 0.5 : 0);
+    const h = rows * cellSize * (gridType === 'hex' ? 0.87 : 1) + (gridType === 'iso' ? cols * cellSize * 0.5 : 0);
+    let paths = '';
 
-  function getSVGString() {
-    if (gridType === 'square') return generateSquareSVG();
-    if (gridType === 'hex') return generateHexSVG();
-    return generateIsoSVG();
+    if (gridType === 'square') {
+      for (let x = 0; x <= cols; x++) paths += '<line x1="'+(x*cellSize)+'" y1="0" x2="'+(x*cellSize)+'" y2="'+(rows*cellSize)+'" stroke="#999" stroke-width="0.5"/>';
+      for (let y = 0; y <= rows; y++) paths += '<line x1="0" y1="'+(y*cellSize)+'" x2="'+(cols*cellSize)+'" y2="'+(y*cellSize)+'" stroke="#999" stroke-width="0.5"/>';
+      canvas.innerHTML = '<svg viewBox="0 0 '+(cols*cellSize)+' '+(rows*cellSize)+'" class="map-grid__svg">'+paths+'</svg>';
+    } else if (gridType === 'hex') {
+      const r = cellSize * 0.5;
+      const h60 = r * Math.sqrt(3);
+      for (let row = 0; row < rows; row++) {
+        for (let col = 0; col < cols; col++) {
+          const cx = r + col * r * 1.5;
+          const cy = h60 * 0.5 + row * h60 + (col % 2 === 1 ? h60 * 0.5 : 0);
+          let hex = '';
+          for (let i = 0; i < 6; i++) {
+            const angle = Math.PI / 180 * (60 * i - 30);
+            hex += (i===0?'M':'L') + (cx + r * Math.cos(angle)).toFixed(1) + ',' + (cy + r * Math.sin(angle)).toFixed(1);
+          }
+          paths += '<path d="'+hex+'Z" fill="none" stroke="#999" stroke-width="0.5"/>';
+        }
+      }
+      const svgW = cols * r * 1.5 + r * 0.5;
+      const svgH = rows * h60 + h60 * 0.5;
+      canvas.innerHTML = '<svg viewBox="0 0 '+svgW.toFixed(0)+' '+svgH.toFixed(0)+'" class="map-grid__svg">'+paths+'</svg>';
+    } else {
+      for (let row = 0; row <= rows; row++) {
+        const y = row * cellSize * 0.5;
+        const x1 = row * cellSize * 0.5;
+        paths += '<line x1="'+x1+'" y1="'+y+'" x2="'+(x1 + cols * cellSize)+'" y2="'+y+'" stroke="#999" stroke-width="0.5"/>';
+      }
+      for (let col = 0; col <= cols; col++) {
+        const x = col * cellSize;
+        paths += '<line x1="'+(x + rows * cellSize * 0.5)+'" y1="0" x2="'+x+'" y2="'+(rows * cellSize * 0.5)+'" stroke="#999" stroke-width="0.5"/>';
+      }
+      const svgW = cols * cellSize + rows * cellSize * 0.5;
+      const svgH = rows * cellSize * 0.5;
+      canvas.innerHTML = '<svg viewBox="0 0 '+svgW+' '+svgH+'" class="map-grid__svg">'+paths+'</svg>';
+    }
   }
-
-  function downloadSVG() {
-    const svgStr = getSVGString();
-    const blob = new Blob([svgStr], { type: 'image/svg+xml' });
-    const u = URL.createObjectURL(blob);
-    const a = document.createElement('a');
-    a.href = u;
-    a.download = 'grid-' + gridType + '-' + gridCols + 'x' + gridRows + '.svg';
-    document.body.appendChild(a);
-    a.click();
-    document.body.removeChild(a);
-    URL.revokeObjectURL(u);
-  }
-
-  function printGrid() {
-    const svgStr = getSVGString();
-    const pw = window.open('', '_blank');
-    pw.document.write('<!doctype html><html><head><title>Grid Print</title><style>body{margin:0;display:flex;align-items:center;justify-content:center;min-height:100vh;}svg{max-width:100%;max-height:100vh;}</style></head><body>' + svgStr + '</body></html>');
-    pw.document.close();
-    pw.focus();
-    pw.print();
-  }
-
-  buildControls();
   renderGrid();
+
+  const btnsWrap = el('div',{class:'map-grid__btns'});
+  btnsWrap.appendChild(btn('Export SVG', 'primary', () => {
+    const svg = canvas.querySelector('svg');
+    if (!svg) return;
+    const blob = new Blob([svg.outerHTML], {type:'image/svg+xml'});
+    const a = document.createElement('a');
+    a.href = URL.createObjectURL(blob); a.download = 'grid-'+gridType+'.svg'; a.click();
+    URL.revokeObjectURL(a.href);
+  }));
+  body.appendChild(btnsWrap);
 })();
 
 /* ── RULES REFEREE ── */
 (function() {
-  const inputEl = document.getElementById('rules-input');
-  const listEl = document.getElementById('rules-list-container');
-  const STORAGE_KEY = 'mg_house_rules';
+  const body = document.getElementById('rules-body');
+  let rules = JSON.parse(localStorage.getItem('mg-house-rules') || '[]');
 
-  function loadRules() {
-    try { return JSON.parse(localStorage.getItem(STORAGE_KEY)) || []; }
-    catch(e) { return []; }
-  }
+  const addRow = el('div',{class:'rules-add'});
+  const ruleInput = document.createElement('input'); ruleInput.className='rules-add__input'; ruleInput.placeholder='Type a house rule...';
+  const addFn = () => { const text = ruleInput.value.trim(); if(text){rules.push(text);save();ruleInput.value='';renderRules();} };
+  ruleInput.addEventListener('keydown', e => { if(e.key==='Enter') addFn(); });
+  addRow.appendChild(ruleInput);
+  addRow.appendChild(btn('Add Rule','red',addFn));
+  body.appendChild(addRow);
 
-  function saveRules(data) {
-    localStorage.setItem(STORAGE_KEY, JSON.stringify(data));
-  }
+  const searchRow = el('div',{class:'rules-search'});
+  const searchInput = document.createElement('input'); searchInput.className='rules-search__input'; searchInput.placeholder='Search rules...';
+  searchInput.addEventListener('input', () => renderRules(searchInput.value.toLowerCase()));
+  searchRow.appendChild(searchInput);
+  body.appendChild(searchRow);
 
-  var houseRules = loadRules();
-  var searchQuery = '';
+  const list = el('div',{class:'rules-list'});
+  body.appendChild(list);
 
-  function buildForm() {
-    inputEl.innerHTML = '';
-    const form = el('div', {class: 'rules-form'});
+  function save() { localStorage.setItem('mg-house-rules', JSON.stringify(rules)); }
 
-    const row1 = el('div', {class: 'rules-form__row'});
-    const gameInput = document.createElement('input');
-    gameInput.className = 'rules-form__input';
-    gameInput.placeholder = 'Game name';
-    row1.appendChild(gameInput);
-
-    const titleInput = document.createElement('input');
-    titleInput.className = 'rules-form__input';
-    titleInput.placeholder = 'Rule title';
-    row1.appendChild(titleInput);
-    form.appendChild(row1);
-
-    const descArea = document.createElement('textarea');
-    descArea.className = 'rules-form__textarea';
-    descArea.placeholder = 'Describe the rule...';
-    form.appendChild(descArea);
-
-    const row2 = el('div', {class: 'rules-form__row'});
-    const catSelect = document.createElement('select');
-    catSelect.className = 'rules-form__select';
-    ['Gameplay', 'Setup', 'Scoring', 'Disputes'].forEach(function(c) {
-      const opt = document.createElement('option');
-      opt.value = c;
-      opt.textContent = c;
-      catSelect.appendChild(opt);
-    });
-    row2.appendChild(catSelect);
-    form.appendChild(row2);
-
-    const btnsRow = el('div', {class: 'rules-form__btns'});
-    btnsRow.appendChild(btn('Add Rule', 'primary', function() {
-      const game = gameInput.value.trim();
-      const title = titleInput.value.trim();
-      const desc = descArea.value.trim();
-      const cat = catSelect.value;
-      if (!game || !title || !desc) return;
-      houseRules.push({ id: Date.now(), game: game, title: title, desc: desc, category: cat, timestamp: new Date().toISOString() });
-      saveRules(houseRules);
-      gameInput.value = '';
-      titleInput.value = '';
-      descArea.value = '';
-      renderRulesList();
-    }));
-    btnsRow.appendChild(btn('Export JSON', 'outline-light', exportRules));
-    form.appendChild(btnsRow);
-
-    inputEl.appendChild(form);
-  }
-
-  function renderRulesList() {
-    listEl.innerHTML = '';
-
-    // Search bar
-    const searchWrap = el('div', {class: 'rules-search'});
-    const searchInput = document.createElement('input');
-    searchInput.className = 'rules-search__input';
-    searchInput.placeholder = 'Search rules...';
-    searchInput.value = searchQuery;
-    searchInput.addEventListener('input', function() { searchQuery = searchInput.value; renderRulesList(); });
-    searchWrap.appendChild(searchInput);
-    listEl.appendChild(searchWrap);
-
-    // Filter rules
-    const filtered = houseRules.filter(function(r) {
-      if (!searchQuery) return true;
-      const q = searchQuery.toLowerCase();
-      return r.game.toLowerCase().includes(q) || r.title.toLowerCase().includes(q) || r.desc.toLowerCase().includes(q) || r.category.toLowerCase().includes(q);
-    });
-
+  function renderRules(filter) {
+    list.innerHTML = '';
+    const filtered = filter ? rules.filter(r => r.toLowerCase().includes(filter)) : rules;
     if (filtered.length === 0) {
-      const empty = el('div', {class: 'rules-empty'}, houseRules.length === 0 ? 'No house rules yet. Add your first one above.' : 'No rules match your search.');
-      listEl.appendChild(empty);
+      list.appendChild(el('div',{class:'rules-empty'}, rules.length === 0 ? 'No rules yet. Add your first house rule above.' : 'No rules match your search.'));
       return;
     }
-
-    const list = el('div', {class: 'rules-list'});
-    filtered.forEach(function(r) {
-      const card = el('div', {class: 'rules-card'});
-
-      const header = el('div', {class: 'rules-card__header'});
-      header.appendChild(el('span', {class: 'rules-card__game'}, r.game));
-      header.appendChild(el('span', {class: 'rules-card__tag'}, r.category));
-      card.appendChild(header);
-
-      card.appendChild(el('div', {class: 'rules-card__title'}, r.title));
-      card.appendChild(el('div', {class: 'rules-card__desc'}, r.desc));
-
-      const footer = el('div', {class: 'rules-card__footer'});
-      const date = new Date(r.timestamp);
-      footer.appendChild(el('span', {class: 'rules-card__time'}, date.toLocaleDateString() + ' ' + date.toLocaleTimeString([], {hour:'2-digit', minute:'2-digit'})));
-      const delBtn = document.createElement('button');
-      delBtn.className = 'rules-card__delete';
-      delBtn.textContent = 'Delete';
-      delBtn.addEventListener('click', function() {
-        if (confirm('Delete this rule?')) {
-          houseRules = houseRules.filter(function(x) { return x.id !== r.id; });
-          saveRules(houseRules);
-          renderRulesList();
-        }
-      });
-      footer.appendChild(delBtn);
-      card.appendChild(footer);
-
-      list.appendChild(card);
+    filtered.forEach((r) => {
+      const idx = rules.indexOf(r);
+      const entry = el('div',{class:'rules-entry'});
+      entry.appendChild(el('span',{class:'rules-entry__num'},'#'+(idx+1)));
+      entry.appendChild(el('span',{class:'rules-entry__text'},r));
+      const rm = el('button',{class:'rules-entry__remove'},'×');
+      rm.addEventListener('click', () => { rules.splice(idx,1); save(); renderRules(filter); });
+      entry.appendChild(rm);
+      list.appendChild(entry);
     });
-    listEl.appendChild(list);
   }
-
-  function exportRules() {
-    if (houseRules.length === 0) return;
-    const blob = new Blob([JSON.stringify(houseRules, null, 2)], { type: 'application/json' });
-    const u = URL.createObjectURL(blob);
-    const a = document.createElement('a');
-    a.href = u;
-    a.download = 'house-rules.json';
-    document.body.appendChild(a);
-    a.click();
-    document.body.removeChild(a);
-    URL.revokeObjectURL(u);
-  }
-
-  buildForm();
-  renderRulesList();
+  renderRules();
 })();
+
+/* ── VOTING BOOTH ── */
+(function() {
+  const body = document.getElementById('vote-body');
+  let question = '', options = [], votes = {}, voted = false;
+
+  function renderSetup() {
+    body.innerHTML = '';
+    const qInput = document.createElement('input'); qInput.className='vote-input vote-input--question'; qInput.placeholder='What are we voting on?'; qInput.value=question;
+    qInput.addEventListener('input', () => { question = qInput.value; });
+    body.appendChild(qInput);
+
+    const optList = el('div',{class:'vote-options'});
+    options.forEach((opt, i) => {
+      const row = el('div',{class:'vote-option-row'});
+      row.appendChild(el('span',{class:'vote-option-row__text'},opt));
+      const rm = el('button',{class:'vote-option-row__remove'},'×');
+      rm.addEventListener('click', () => { options.splice(i,1); delete votes[opt]; renderSetup(); });
+      row.appendChild(rm);
+      optList.appendChild(row);
+    });
+    body.appendChild(optList);
+
+    const addRow = el('div',{class:'vote-add'});
+    const optInput = document.createElement('input'); optInput.className='vote-input'; optInput.placeholder='Add an option...';
+    const addOpt = () => { const t=optInput.value.trim(); if(t&&!options.includes(t)){options.push(t);votes[t]=0;optInput.value='';renderSetup();} };
+    optInput.addEventListener('keydown', e => { if(e.key==='Enter') addOpt(); });
+    addRow.appendChild(optInput);
+    addRow.appendChild(btn('Add','green',addOpt));
+    body.appendChild(addRow);
+
+    if (options.length >= 2) {
+      body.appendChild(btn('Start Vote','primary', () => { voted=false; renderVoting(); }));
+    }
+  }
+
+  function renderVoting() {
+    body.innerHTML = '';
+    body.appendChild(el('h4',{class:'vote-question'},question || 'Vote'));
+    const optList = el('div',{class:'vote-ballot'});
+    options.forEach(opt => {
+      const b = document.createElement('button'); b.className='vote-ballot__option';
+      b.textContent = opt;
+      b.addEventListener('click', () => { if(!voted){votes[opt]++;voted=true;renderResults();} });
+      optList.appendChild(b);
+    });
+    body.appendChild(optList);
+    if (!voted) body.appendChild(el('div',{class:'vote-hint'},'Select one option to cast your vote.'));
+  }
+
+  function renderResults() {
+    body.innerHTML = '';
+    body.appendChild(el('h4',{class:'vote-question'},question || 'Results'));
+    const total = Object.values(votes).reduce((a,b)=>a+b,0) || 1;
+    const sorted = options.slice().sort((a,b)=>votes[b]-votes[a]);
+    const results = el('div',{class:'vote-results'});
+    sorted.forEach(opt => {
+      const pct = Math.round(votes[opt] / total * 100);
+      const row = el('div',{class:'vote-result-row'});
+      row.appendChild(el('span',{class:'vote-result-row__label'},opt));
+      row.appendChild(el('span',{class:'vote-result-row__count'},votes[opt]+' vote'+(votes[opt]!==1?'s':'')));
+      const bar = el('div',{class:'vote-result-row__bar'});
+      const fill = el('div',{class:'vote-result-row__fill'}); fill.style.width = pct+'%';
+      bar.appendChild(fill); row.appendChild(bar);
+      results.appendChild(row);
+    });
+    body.appendChild(results);
+
+    const bw = el('div',{class:'vote-buttons'});
+    bw.appendChild(btn('Vote Again','green', () => { voted=false; renderVoting(); }));
+    bw.appendChild(btn('Reset Poll','outline-dark', () => { options.forEach(o=>votes[o]=0); voted=false; renderVoting(); }));
+    bw.appendChild(btn('New Question','outline-dark', () => { question=''; options=[]; votes={}; voted=false; renderSetup(); }));
+    body.appendChild(bw);
+  }
+  renderSetup();
+})();
+
+/* ── SEATING RANDOMIZER ── */
+(function() {
+  const body = document.getElementById('seating-body');
+  let players = [];
+
+  const addRow = el('div',{class:'seating-add'});
+  const nameInput = document.createElement('input'); nameInput.className='seating-add__input'; nameInput.placeholder='Player name...';
+  const addFn = () => { const name=nameInput.value.trim(); if(name&&!players.includes(name)){players.push(name);nameInput.value='';renderPlayers();} };
+  nameInput.addEventListener('keydown', e => { if(e.key==='Enter') addFn(); });
+  addRow.appendChild(nameInput);
+  addRow.appendChild(btn('Add','primary',addFn));
+  body.appendChild(addRow);
+
+  const tags = el('div',{class:'seating-tags'});
+  body.appendChild(tags);
+
+  const resultEl = el('div',{class:'seating-result'});
+  body.appendChild(resultEl);
+
+  const btnsWrap = el('div',{class:'seating-buttons'});
+  btnsWrap.appendChild(btn('Randomize Seats','primary', randomize));
+  btnsWrap.appendChild(btn('Clear All','outline-dark', () => { players=[]; renderPlayers(); resultEl.innerHTML=''; }));
+  body.appendChild(btnsWrap);
+
+  function renderPlayers() {
+    tags.innerHTML = '';
+    players.forEach((name, i) => {
+      const tag = el('div',{class:'seating-tag'},name);
+      const rm = el('button',{class:'seating-tag__remove'},'×');
+      rm.addEventListener('click', () => { players.splice(i,1); renderPlayers(); resultEl.innerHTML=''; });
+      tag.appendChild(rm); tags.appendChild(tag);
+    });
+  }
+
+  function randomize() {
+    if (players.length < 2) return;
+    const shuffled = players.slice();
+    for (let i = shuffled.length - 1; i > 0; i--) {
+      const j = Math.floor(Math.random() * (i + 1));
+      [shuffled[i], shuffled[j]] = [shuffled[j], shuffled[i]];
+    }
+    resultEl.innerHTML = '';
+    const table = el('div',{class:'seating-table'});
+    shuffled.forEach((name, i) => {
+      const seat = el('div',{class:'seating-seat'});
+      seat.appendChild(el('div',{class:'seating-seat__num'},'Seat '+(i+1)));
+      seat.appendChild(el('div',{class:'seating-seat__name'},name));
+      table.appendChild(seat);
+    });
+    resultEl.appendChild(table);
+  }
+})();
+
 })();
