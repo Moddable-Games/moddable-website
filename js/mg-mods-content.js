@@ -8,6 +8,8 @@
 
     'talisman-hexed': {
       accent: 'blue',
+      heroTitle: 'Talisman: <em>Hexed</em>.',
+      lede: 'An open-world hex system that replaces the Talisman game boards with 61 individual hexagonal tiles — arranged in concentric rings so every game lays out differently. Built for <em>Talisman 4th Edition (revised)</em> by Fantasy Flight Games.',
       buttons: [['Download rules', '#', 'primary'], ['Print-and-play pack', '#', 'outline-dark']],
       stats: [['Players','2–6'],['Time','90 min'],['Age','13+'],['Tiles','61 hex'],['Designer','Moddable team'],['Updated','Apr 2024']],
       sections: [
@@ -27,6 +29,8 @@
 
     'hyper-imperium': {
       accent: 'green',
+      heroTitle: 'Hyper <em>Imperium</em>.',
+      lede: 'Hyper Movement, Hyper Trades, Hyper Objectives, Hyper Factions, Hyper Agendas. A faster ruleset for TI4 + Prophecy of Kings that keeps the politics intact.',
       stats: [['Players','3–6'],['Time','4–6 hr'],['Age','14+'],['Source','Moddable.Games'],['License','CC BY-NC-SA']],
       sections: [
         { id:'1', title:'Hyper Movement', body:"Ships move +1 hex per activation. This applies to all ship types, including fighters and war suns. The result is faster fleet positioning and more aggressive early-game posturing, making turtling less viable." },
@@ -45,6 +49,8 @@
 
     'nuke-catan': {
       accent: 'red',
+      heroTitle: 'Nuke <em>Catan</em>.',
+      lede: 'Post-apocalyptic overhaul. Sheep are scarce, brick is currency. Once per game, a player may press The Button — one hex is permanently irradiated.',
       stats: [['Players','3–5'],['Time','60 min'],['Age','12+'],['Source','Moddable.Games'],['License','CC BY-NC-SA']],
       sections: [
         { id:'1', title:'The new economy', body:"Brick replaces wheat as the core currency. All development cards cost brick. Roads cost 1 brick + 1 wood (unchanged). Settlements cost 2 brick + 1 wood + 1 sheep. Sheep produce at half rate — only on even dice rolls. Ore remains unchanged but gains value as a Bunker component." },
@@ -63,6 +69,8 @@
 
     'fog-of-war-chess': {
       accent: 'red',
+      heroTitle: 'Fog of War <em>Chess</em>.',
+      lede: 'Players see only the squares their own pieces can legally move to — no checks, no checkmates, only capture the king. Invented by Jens Bæk Nielsen & Torben Osted (1989).',
       stats: [['Players','2'],['Time','20–40 min'],['Age','10+'],['Source','chessvariants.com'],['License','Public domain']],
       sections: [
         { id:'1', title:'Visibility', body:"You see only squares your pieces can move to or attack. Empty squares in your vision are shown normally. Enemy pieces only appear when they occupy a square threatened by one of your pieces. Your own pieces are always visible to you. Squares outside your vision appear as fog (grey/hidden)." },
@@ -81,6 +89,8 @@
 
     '4-player-chess': {
       accent: 'blue',
+      heroTitle: '4-Player <em>Chess</em>.',
+      lede: 'Four players, four armies, one board. Free-for-all or teams. The de facto standard for multi-player chess — widely available online and as print-and-play.',
       stats: [['Players','4'],['Time','30 min'],['Age','10+'],['Source','chess.com/variants'],['License','Public domain']],
       sections: [
         { id:'1', title:'The board', body:"A 14×14 grid with the 3×3 corner squares removed, creating a cross shape. Four armies (Red, Blue, Yellow, Green) start from the four edges in standard chess formation. Each player has the full complement: 1 king, 1 queen, 2 rooks, 2 bishops, 2 knights, and 8 pawns." },
@@ -99,6 +109,8 @@
 
     'hexagonal-chess': {
       accent: 'red',
+      heroTitle: 'Hexagonal <em>Chess</em>.',
+      lede: "Gliński's hexagonal chess — 91 cells, three colours, six directions. The most popular hex-chess variant in history, played by millions since 1936.",
       stats: [['Players','2'],['Time','30 min'],['Age','10+'],['Source','chessvariants.com'],['License','Public domain']],
       sections: [
         { id:'1', title:'The board', body:"91 hexagonal cells arranged in a larger hexagon with side length 6. Cells are coloured in three alternating colours (light, medium, dark) so that no two adjacent cells share a colour. The board is oriented with a pointed edge facing each player." },
@@ -117,6 +129,8 @@
 
     'anti-monopoly': {
       accent: 'red',
+      heroTitle: 'Anti-Monopoly.',
+      lede: 'Two teams play by different rules on the same board: Monopolists charge high rent on monopolies; Competitors charge cost-price only. Published by Ralph Anspach in 1973.',
       buttons: [['Download PDF', '#', 'primary'], ['View source', '#', 'outline-dark']],
       stats: [['Players','2–6'],['Time','60 min'],['Age','10+'],['Source','Public domain variant'],['License','Public domain']],
       sections: [
@@ -136,6 +150,8 @@
 
     'econopoly': {
       accent: 'green',
+      heroTitle: 'Econopoly.',
+      lede: 'Monopoly with a working economy. Anti-monopoly rules, dynamic property pricing, and a tax band that actually does something.',
       buttons: [['Download PDF', '#', 'primary'], ['View source', '#', 'outline-dark']],
       stats: [['Players','2–6'],['Time','60 min'],['Age','10+'],['Source','Moddable.Games'],['License','CC BY-NC-SA']],
       sections: [
@@ -155,6 +171,8 @@
 
     'flooded-catan': {
       accent: 'green',
+      heroTitle: 'Flooded Catan.',
+      lede: 'Community variant from the Catan Wiki: tiles flood every few rounds. Players can win by being the last settlement standing, not just by hitting 10 VP.',
       buttons: [['Download PDF', '#', 'primary'], ['View source', '#', 'outline-dark']],
       stats: [['Players','3–4'],['Time','75 min'],['Age','10+'],['Source','catan.fandom.com'],['License','Community / fan-made']],
       sections: [
@@ -174,6 +192,8 @@
 
     'the-diamond-mine': {
       accent: 'red',
+      heroTitle: 'The Diamond <em>Mine</em>.',
+      lede: 'A single-hex unofficial expansion: swap one pasture for the diamond mine. Diamonds substitute for ore in development card purchases. Self-contained rules, free to print.',
       buttons: [['Download PDF', '#', 'primary'], ['View source', '#', 'outline-dark']],
       stats: [['Players','3–4'],['Time','60 min'],['Age','10+'],['Source','scribd / meepleeater'],['License','Fan-made / free to print']],
       sections: [
@@ -193,6 +213,8 @@
 
     'shattered-ascension': {
       accent: 'green',
+      heroTitle: 'Shattered <em>Ascension</em>.',
+      lede: "PsiComa's decade-long TI3 remix — rebalanced factions, overhauled agenda phase, new card sets. The most thorough community TI variant in existence. Tabletop Simulator module available.",
       buttons: [['Download PDF', '#', 'primary'], ['View source', '#', 'outline-dark']],
       stats: [['Players','3–8'],['Time','6–12 hr'],['Age','16+'],['Source','boardgamegeek.com'],['License','Community / BoardGameGeek']],
       sections: [
@@ -212,6 +234,8 @@
 
     'civrisk': {
       accent: 'green',
+      heroTitle: 'Civ<em>Risk</em>.',
+      lede: 'Risk rewritten to play like Civilisation: choose a civilisation and leader, build through growth tiers, discover ruins and barbarian camps. Chris Grey, 2023. ePub rules free to download.',
       buttons: [['Download PDF', '#', 'primary'], ['View source', '#', 'outline-dark']],
       stats: [['Players','3–5'],['Time','180 min'],['Age','14+'],['Designer','Chris Grey'],['Year','2023']],
       sections: [
@@ -231,6 +255,8 @@
 
     'custom-world-risk': {
       accent: 'blue',
+      heroTitle: 'Custom World <em>Risk</em>.',
+      lede: 'Replace the standard board with your own map — Middle-earth, a fantasy continent, your neighbourhood. The rules stay identical, only the geography changes.',
       buttons: [['Download PDF', '#', 'primary'], ['View source', '#', 'outline-dark']],
       stats: [['Players','2–6'],['Time','120 min'],['Age','12+'],['Source','Community'],['License','Public domain']],
       sections: [
