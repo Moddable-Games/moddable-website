@@ -125,6 +125,11 @@ Pages load `mg-loader.js` (shared modules) + their own page script. Data is fetc
 - Removed `ready()` method (unused); `load()` kept for backward compat
 - Fixed responsive team page: breakout images scale down on mobile (≤600px)
 - Search index loads news asynchronously on first open (no longer relies on sync cache)
+- Templated all 13 mod pages — identical HTML shells, hero rendered from data
+- Extracted all 12 news article bodies to `data/articles/{slug}.html` partials
+- Article metadata (author, lede, TOC, modCard) moved into `data/news.json`
+- News page shells are now identical templates — full page rendered by JS
+- Created issue #35 for per-page Open Graph / Twitter meta tags
 
 #### 2026-05-22
 - Extracted all data from JS modules to JSON files (`data/mods.json`, `games.json`, `news.json`, `team.json`)
