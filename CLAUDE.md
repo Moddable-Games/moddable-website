@@ -139,8 +139,9 @@ MG.footer()            // full site footer
 MG.modCard(props)      // mod card; props: { category, title, baseGame, stats, body, href, source }
 MG.pageHero(props)     // interior page hero; props: { eyebrow, title, lede, accent, withHorizon, minHeight }
 MG.cubeSVG(size)       // the tri-colour cube SVG logo mark
-MG.data.load(names)    // fetch JSON data files; returns Promise<store>
-MG.data.get(name)      // get cached data synchronously (null if not loaded)
+MG.data.get(name)      // → Promise<Array> — fetches & caches automatically
+MG.data.get(type, slug) // → Promise<Object|null> — single item by slug (e.g. get('mod','nuke-catan'))
+MG.data.load(names)    // → Promise<store> — batch-fetch (backward compat)
 ```
 
 ### Button variants

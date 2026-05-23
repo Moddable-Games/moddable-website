@@ -91,4 +91,9 @@ body { background: #f5f4ef; }
 
 @media (max-width: 600px) {
   .team-grid { grid-template-columns: 1fr; max-width: 360px; margin-top: 180px; }
+  .card-avatar { height: 160px; }
+  .card-avatar .img-breakout {
+    width: 300px;
+    bottom: calc(-380px * 0.35 + 6px);
+  }
 }

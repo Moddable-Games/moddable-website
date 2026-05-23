@@ -101,8 +101,7 @@ window.MG = (() => {
 
   const data = (() => {
     const cache = {};
-    let pending = null;
-    const waiters = [];
+    const inflight = {};
 
     function transform(name, items) {
       if (name === 'mods') {
@@ -111,51 +110,41 @@ window.MG = (() => {
       if (name === 'games') {
         return items.map(g => Object.assign({}, g, { accent: ACCENT_MAP[g.accent] || g.accent, href: url(g.path) }));
       }
-      if (name === 'news') {
-        return items;
-      }
-      if (name === 'team') {
-        return items;
-      }
       return items;
     }
 
-    function load(names) {
-      pending = Promise.all(names.map(name => {
-        if (cache[name]) return Promise.resolve();
-        return fetch(url('/data/' + name + '.json'))
-          .then(r => r.json())
-          .then(items => { cache[name] = transform(name, items); });
-      })).then(() => {
-        const store = {
-          mods: cache.mods || null,
-          games: cache.games || null,
-          news: cache.news || null,
-          team: cache.team || null,
-        };
-        waiters.forEach(fn => fn(store));
-        waiters.length = 0;
-        return store;
-      });
-      return pending;
+    function fetchOne(name) {
+      if (cache[name]) return Promise.resolve(cache[name]);
+      if (inflight[name]) return inflight[name];
+      inflight[name] = fetch(url('/data/' + name + '.json'))
+        .then(r => r.json())
+        .then(items => {
+          cache[name] = transform(name, items);
+          delete inflight[name];
+          return cache[name];
+        });
+      return inflight[name];
     }
 
-    function ready(fn) {
-      if (pending) {
-        pending.then(() => fn({
-          mods: cache.mods || null,
-          games: cache.games || null,
-          news: cache.news || null,
-          team: cache.team || null,
-        }));
-      } else {
-        waiters.push(fn);
+    function get(name, slug) {
+      if (slug !== undefined) {
+        return fetchOne(name === 'mod' ? 'mods' : name + 's').then(items =>
+          items.find(item => item.slug === slug) || null
+        );
       }
+      return fetchOne(name);
     }
 
-    function get(name) { return cache[name] || null; }
+    function load(names) {
+      return Promise.all(names.map(fetchOne)).then(() => ({
+        mods: cache.mods || null,
+        games: cache.games || null,
+        news: cache.news || null,
+        team: cache.team || null,
+      }));
+    }
 
-    return { load, ready, get };
+    return { get, load };
   })();
 
   const isLocal = Boolean(BASE);

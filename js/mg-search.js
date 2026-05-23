@@ -32,18 +32,23 @@
     {type:'page', title:'Submit a Mod', desc:'Share your homebrew with the community', href:url('/submit/')},
   ];
 
+  let newsIndex = null;
+
+  function loadNewsIndex() {
+    if (newsIndex) return;
+    window.MG.data.get('news').then(items => {
+      newsIndex = items.map(p => ({type:'news', title:p.title, desc:p.excerpt, href:url('/news/' + p.slug + '/')}));
+    });
+  }
+
   function getSearchIndex() {
-    var news = window.MG.data.get('news');
-    if (news) {
-      const newsItems = news.map(p => ({type:'news', title:p.title, desc:p.excerpt, href:url('/news/' + p.slug + '/')}));
-      return SEARCH_INDEX.concat(newsItems);
-    }
-    return SEARCH_INDEX;
+    return newsIndex ? SEARCH_INDEX.concat(newsIndex) : SEARCH_INDEX;
   }
 
   let searchOverlay = null;
 
   function openSearch() {
+    loadNewsIndex();
     if (searchOverlay) { searchOverlay.remove(); searchOverlay = null; }
 
     const overlay = el('div', {class:'mg-search-overlay'});

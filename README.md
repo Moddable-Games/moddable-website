@@ -113,15 +113,22 @@ data/
 └── team.json               ← team members (4 entries)
 ```
 
-Pages load `mg-loader.js` (shared modules) + their own page script. Data is fetched asynchronously via `MG.data.load(['mods','news']).then(store => { ... })`.
+Pages load `mg-loader.js` (shared modules) + their own page script. Data is fetched via `MG.data.get('mods')` → Promise, or `MG.data.get('mod', 'slug')` for single items. Legacy `MG.data.load(['mods','news']).then(store => {...})` still works.
 
 ---
 
 ### Changelog
 
+#### 2026-05-23
+- Refactored `MG.data` to Promise-based API: `get(name)` → Promise, `get(type, slug)` → single item lookup
+- Deduplicates in-flight fetches (no double-requests for same resource)
+- Removed `ready()` method (unused); `load()` kept for backward compat
+- Fixed responsive team page: breakout images scale down on mobile (≤600px)
+- Search index loads news asynchronously on first open (no longer relies on sync cache)
+
 #### 2026-05-22
 - Extracted all data from JS modules to JSON files (`data/mods.json`, `games.json`, `news.json`, `team.json`)
-- Added `MG.data` fetch layer in `mg-core.js` — async `load()/ready()/get()` pattern
+- Added `MG.data` fetch layer in `mg-core.js` — async `load()/get()` pattern
 - Removed 4 data JS modules (`mg-mods-data.js`, `mg-games-data.js`, `mg-news-data.js`, `mg-team-data.js`)
 - Updated all consumer scripts to use `MG.data.load().then()` pattern
 - Added `text-wrap: pretty` to global CSS resets for orphan prevention
