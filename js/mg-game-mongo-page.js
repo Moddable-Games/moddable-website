@@ -1,5 +1,5 @@
 (function() {
-const { T, el, linkBtn, navbar, footer, modCard } = MG;
+const { T, el, linkBtn, navbar, footer, rulesUrl, modCard } = MG;
 document.getElementById('nav-root').appendChild(navbar('Games'));
 document.getElementById('footer-root').appendChild(footer());
 
@@ -11,9 +11,9 @@ document.querySelector('[data-color]').style.textShadow = '0 0 8px rgba(78,183,5
 document.querySelector('[data-bloom]').style.background = 'radial-gradient(ellipse,rgba(58,153,40,0.25) 0%,transparent 65%)';
 
 document.getElementById('hero-btns').appendChild(linkBtn('Sign up for playtest','#','green'));
-document.getElementById('hero-btns').appendChild(linkBtn('Browse the GitHub','#','outline-dark'));
+document.getElementById('hero-btns').appendChild(linkBtn('Read the Rules', rulesUrl('mongo'),'outline-dark'));
 
-const STATS = [['Players','3–5'],['Time','30–45 min'],['Age','12+'],['Mechanism','Trick-taking'],['Status','Open beta'],['Spots left','143 / 200']];
+const STATS = [['Players','3–6'],['Time','90 min'],['Age','14+'],['Mechanism','Trick-taking'],['Status','Open beta'],['Spots left','143 / 200'],['Updated','May 2026']];
 const sb = document.getElementById('stats-bar');
 STATS.forEach(([k,v],i) => {
   if(i>0) sb.appendChild(el('span',{class:'stats-row__divider'}));

@@ -97,5 +97,75 @@ window.MG = (() => {
     });
   }
 
-  return { T, F, HEX_BG, HEX_BG_RED, HEX_BG_GREEN, CATEGORY_COLORS, el, css, cubeSVG, url };
+  const ACCENT_MAP = { red: T.red, green: T.green, blue: T.blue };
+
+  const data = (() => {
+    const cache = {};
+    let pending = null;
+    const waiters = [];
+
+    function transform(name, items) {
+      if (name === 'mods') {
+        return items.map(m => Object.assign({}, m, { href: url(m.path) }));
+      }
+      if (name === 'games') {
+        return items.map(g => Object.assign({}, g, { accent: ACCENT_MAP[g.accent] || g.accent, href: url(g.path) }));
+      }
+      if (name === 'news') {
+        return items;
+      }
+      if (name === 'team') {
+        return items;
+      }
+      return items;
+    }
+
+    function load(names) {
+      pending = Promise.all(names.map(name => {
+        if (cache[name]) return Promise.resolve();
+        return fetch(url('/data/' + name + '.json'))
+          .then(r => r.json())
+          .then(items => { cache[name] = transform(name, items); });
+      })).then(() => {
+        const store = {
+          mods: cache.mods || null,
+          games: cache.games || null,
+          news: cache.news || null,
+          team: cache.team || null,
+        };
+        waiters.forEach(fn => fn(store));
+        waiters.length = 0;
+        return store;
+      });
+      return pending;
+    }
+
+    function ready(fn) {
+      if (pending) {
+        pending.then(() => fn({
+          mods: cache.mods || null,
+          games: cache.games || null,
+          news: cache.news || null,
+          team: cache.team || null,
+        }));
+      } else {
+        waiters.push(fn);
+      }
+    }
+
+    function get(name) { return cache[name] || null; }
+
+    return { load, ready, get };
+  })();
+
+  const isLocal = Boolean(BASE);
+  const RULES_BASE = isLocal
+    ? 'http://localhost/MODDABLE/nukes-rulebook/dist'
+    : 'https://rules.moddable.games/dist';
+
+  function rulesUrl(slug) {
+    return `${RULES_BASE}/${slug}/`;
+  }
+
+  return { T, F, HEX_BG, HEX_BG_RED, HEX_BG_GREEN, CATEGORY_COLORS, el, css, cubeSVG, url, rulesUrl, data };
 })();

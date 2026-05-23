@@ -1,5 +1,5 @@
 (function() {
-const { T, el, linkBtn, navbar, footer, modCard, url } = MG;
+const { T, el, linkBtn, navbar, footer, modCard, url, rulesUrl } = MG;
 document.getElementById('nav-root').appendChild(navbar('Games'));
 document.getElementById('footer-root').appendChild(footer());
 
@@ -9,10 +9,10 @@ document.querySelector('[data-accent]').style.background = T.green;
 document.querySelector('[data-color]').style.color = '#6fb5ff';
 document.querySelector('[data-color]').style.textShadow = '0 0 8px rgba(111,181,255,0.5)';
 
-document.getElementById('hero-btns').appendChild(linkBtn('Download Print-and-Play','#','primary'));
+document.getElementById('hero-btns').appendChild(linkBtn('Read the Rules', rulesUrl('endless-skies'),'primary'));
 document.getElementById('hero-btns').appendChild(linkBtn('Browse community mods','/mods/','outline-dark'));
 
-const STATS = [['Players','2–4'],['Time','60–90 min'],['Age','12+'],['Designer','Moddable team'],['Released','Mar 2025'],['Mods','8 community']];
+const STATS = [['Players','1–4'],['Time','60 min'],['Age','10+'],['Designer','Moddable team'],['Released','Mar 2025'],['Updated','May 2026']];
 const sb = document.getElementById('stats-bar');
 STATS.forEach(([k,v],i) => {
   if(i>0) sb.appendChild(el('span',{class:'stats-row__divider'}));

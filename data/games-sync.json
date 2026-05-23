@@ -1,0 +1,93 @@
+{
+  "dungeon-chess": {
+    "title": "Dungeon Chess",
+    "version": "0.1.0",
+    "players": "2–4",
+    "duration": "30–120 min",
+    "age": "12+",
+    "tagline": "Asymmetric fantasy strategy on modular dungeon boards",
+    "type": "mod",
+    "base_game": "Chess",
+    "status": "alpha",
+    "updated": "2026-05-22",
+    "published": true
+  },
+  "econopoly": {
+    "title": "Econopoly",
+    "version": "0.9.0",
+    "players": "2–6",
+    "duration": "60 min",
+    "age": "10+",
+    "tagline": "Monopoly with a working economy",
+    "type": "mod",
+    "base_game": "Monopoly",
+    "status": "live",
+    "updated": "2026-05-10",
+    "published": false
+  },
+  "endless-skies": {
+    "title": "Endless Skies",
+    "version": "1.3.0",
+    "players": "1–4",
+    "duration": "60 min",
+    "age": "10+",
+    "tagline": "Cooperative survival in procedurally generated skies",
+    "type": "game",
+    "base_game": null,
+    "status": "dev",
+    "updated": "2026-05-18",
+    "published": false
+  },
+  "hyper-imperium": {
+    "title": "Hyper Imperium",
+    "version": "2.0.1",
+    "players": "3–6",
+    "duration": "4–6 hr",
+    "age": "14+",
+    "tagline": "A faster, more political Twilight Imperium",
+    "type": "mod",
+    "base_game": "Twilight Imperium 4e",
+    "status": "live",
+    "updated": "2026-05-15",
+    "published": false
+  },
+  "mongo": {
+    "title": "Mongo",
+    "version": "0.8.2",
+    "players": "3–6",
+    "duration": "90 min",
+    "age": "14+",
+    "tagline": "Global conquest in the Flash Gordon universe",
+    "type": "game",
+    "base_game": null,
+    "status": "playtest",
+    "updated": "2026-05-20",
+    "published": false
+  },
+  "nukes": {
+    "title": "Nukes",
+    "version": "0.9.3",
+    "players": "2–3",
+    "duration": "45+ min",
+    "age": "12+",
+    "tagline": "Cold-war territory control on a hex map with nuclear brinkmanship",
+    "type": "game",
+    "base_game": null,
+    "status": "live",
+    "updated": "2026-05-22",
+    "published": true
+  },
+  "talisman-hexed": {
+    "title": "Talisman: Hexed",
+    "version": "1.0.0",
+    "players": "2–6",
+    "duration": "90 min",
+    "age": "13+",
+    "tagline": "Open-world hex tiles for Talisman — a new map every session",
+    "type": "mod",
+    "base_game": "Talisman 4e",
+    "status": "live",
+    "updated": "2026-04-15",
+    "published": false
+  }
+}

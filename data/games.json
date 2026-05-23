@@ -1,0 +1,42 @@
+[
+  {
+    "title": "Nukes",
+    "accent": "red",
+    "status": "Open alpha · Live",
+    "desc": "Cold-war territory control on a hex map. Three superpowers, fifteen turns, one button that ends everything.",
+    "players": "2–3",
+    "time": "45+ min",
+    "path": "/games/nukes/",
+    "rulebook": "nukes"
+  },
+  {
+    "title": "Mongo",
+    "accent": "green",
+    "status": "Playtest · Q3 2026",
+    "desc": "Global conquest in the Flash Gordon universe — Risk × Catan in a public-domain setting.",
+    "players": "3–6",
+    "time": "90 min",
+    "path": "/games/mongo/",
+    "rulebook": "mongo"
+  },
+  {
+    "title": "Endless Skies",
+    "accent": "green",
+    "status": "In development",
+    "desc": "Cooperative survival in procedurally generated skies. Tile-laying meets resource management.",
+    "players": "1–4",
+    "time": "60 min",
+    "path": "/games/endless-skies/",
+    "rulebook": "endless-skies"
+  },
+  {
+    "title": "Moddable Chess",
+    "accent": "blue",
+    "status": "Open alpha · Live",
+    "desc": "2000+ chess variants, one engine. Regular, 4-Player, Hexagonal, Dungeon Chess, and more — playable online.",
+    "players": "2–6",
+    "time": "10–120 min",
+    "path": "/games/moddable-chess/",
+    "rulebook": "dungeon-chess"
+  }
+]

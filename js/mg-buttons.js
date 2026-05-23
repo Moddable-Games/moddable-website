@@ -47,8 +47,10 @@
 
   function linkBtn(label, href, variant = 'primary', extraStyle = {}) {
     const v = BTN_VARIANTS[variant] || BTN_VARIANTS.primary;
+    const isExternal = href.startsWith('http');
     const a = el('a', {
       href: href.startsWith('/') ? url(href) : href,
+      ...(isExternal ? { target: '_blank', rel: 'noopener' } : {}),
       style: css({
         display:'inline-flex', alignItems:'center', justifyContent:'center',
         height:'48px', padding:'0 22px', borderRadius:'9999px',

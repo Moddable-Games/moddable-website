@@ -1,5 +1,5 @@
 (function() {
-const { T, el, linkBtn, navbar, footer } = MG;
+const { T, el, linkBtn, navbar, footer, rulesUrl } = MG;
 document.getElementById('nav-root').appendChild(navbar('Games'));
 document.getElementById('footer-root').appendChild(footer());
 
@@ -10,9 +10,9 @@ document.querySelector('[data-color]').style.color = '#4db83a';
 document.querySelector('[data-color]').style.textShadow = '0 0 8px rgba(58,153,40,0.5)';
 
 document.getElementById('hero-btns').appendChild(linkBtn('Join the playtest','#','green'));
-document.getElementById('hero-btns').appendChild(linkBtn('View on GitHub','#','outline-dark'));
+document.getElementById('hero-btns').appendChild(linkBtn('Read the Rules', rulesUrl('dungeon-chess'),'outline-dark'));
 
-const STATS = [['Players','2–6'],['Modes','Skirmish + Legacy'],['Time','30–120 min'],['Age','12+'],['Status','Pre-alpha'],['Crowdfunding','Q4 2026']];
+const STATS = [['Players','2–6'],['Modes','Skirmish + Legacy'],['Time','30–120 min'],['Age','12+'],['Status','Pre-alpha'],['Crowdfunding','Q4 2026'],['Updated','May 2026']];
 const sb = document.getElementById('stats-bar');
 STATS.forEach(([k,v],i) => {
   if(i>0) sb.appendChild(el('span',{class:'stats-row__divider'}));

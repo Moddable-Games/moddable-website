@@ -1,5 +1,5 @@
 (function() {
-const { T, el, linkBtn, navbar, footer, url, modCard } = MG;
+const { T, el, linkBtn, navbar, footer, url, rulesUrl, modCard } = MG;
 document.getElementById('nav-root').appendChild(navbar('Games'));
 document.getElementById('footer-root').appendChild(footer());
 
@@ -10,10 +10,10 @@ document.querySelector('[data-color]').style.color = '#e63232';
 document.querySelector('[data-color]').style.textShadow = '0 0 8px rgba(230,50,50,0.5)';
 document.querySelector('[data-bloom]').style.background = 'radial-gradient(ellipse,rgba(209,26,26,0.35) 0%,transparent 65%)';
 
-document.getElementById('hero-btns').appendChild(linkBtn('Download Print-and-Play','#','red'));
-document.getElementById('hero-btns').appendChild(linkBtn('Browse on GitHub','#','outline-dark'));
+document.getElementById('hero-btns').appendChild(linkBtn('Read the Rules', rulesUrl('nukes'),'red'));
+document.getElementById('hero-btns').appendChild(linkBtn('Browse on GitHub','https://github.com/Moddable-Games/Nukes-Rulebook/blob/main/games/nukes/content/rulebook.md','outline-dark'));
 
-const STATS = [['Players','3'],['Turns','15'],['Time','60–90 min'],['Age','14+'],['Designer','Moddable team'],['Released','Jan 2026']];
+const STATS = [['Players','3'],['Turns','15'],['Time','60–90 min'],['Age','14+'],['Designer','Moddable team'],['Released','Jan 2012'],['Updated','May 2026']];
 const sb = document.getElementById('stats-bar');
 STATS.forEach(([k,v],i) => {
   if(i>0) sb.appendChild(el('span',{class:'stats-row__divider'}));
@@ -38,7 +38,7 @@ STEPS.forEach(s => {
   sg.appendChild(a);
 });
 
-document.getElementById('button-cta').appendChild(linkBtn('Download the rules','#','red'));
+document.getElementById('button-cta').appendChild(linkBtn('Read the Rules', rulesUrl('nukes'),'red'));
 document.getElementById('button-cta').appendChild(linkBtn('See the tools','/tools/nukes/','outline-dark'));
 
 const HOOKS = [
