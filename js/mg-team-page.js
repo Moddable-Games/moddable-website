@@ -1,6 +1,6 @@
 (function() {
   var grid = document.getElementById('team-grid');
-  if (!grid || !window.MG.TEAM) return;
+  if (!grid) return;
 
   var el = MG.el;
   var navbar = MG.navbar;
@@ -15,15 +15,17 @@
     lede: 'A modder-founder, a systems-thinker playtester, a board-game evangelist who builds the engine, and a game artist with TV credits.'
   }));
 
-  MG.TEAM.forEach(function(m) {
-    var card = el('div', {class:'team-card'});
-    var avatar = el('div', {class:'card-avatar'});
-    var img = el('img', {class:'img-breakout', src: m.img, alt: m.name});
-    avatar.appendChild(img);
-    card.appendChild(avatar);
-    card.appendChild(el('h3', {class:'team-card__name'}, m.name));
-    card.appendChild(el('div', {class:'team-card__role'}, m.role));
-    card.appendChild(el('p', {class:'team-card__bio'}, m.bio));
-    grid.appendChild(card);
+  MG.data.load(['team']).then(function(store) {
+    store.team.forEach(function(m) {
+      var card = el('div', {class:'team-card'});
+      var avatar = el('div', {class:'card-avatar'});
+      var img = el('img', {class:'img-breakout', src: '../assets/team/' + m.img, alt: m.name});
+      avatar.appendChild(img);
+      card.appendChild(avatar);
+      card.appendChild(el('h3', {class:'team-card__name'}, m.name));
+      card.appendChild(el('div', {class:'team-card__role'}, m.role));
+      card.appendChild(el('p', {class:'team-card__bio'}, m.bio));
+      grid.appendChild(card);
+    });
   });
 })();

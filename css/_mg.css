@@ -4,6 +4,7 @@
 html { scroll-behavior: smooth; }
 body { font-family: "Barlow", system-ui, sans-serif; -webkit-font-smoothing: antialiased; padding-top: 64px; }
 em { font-style: italic; }
+h1, h2, h3, h4, h5, h6, p, li { text-wrap: pretty; }
 img { display: block; max-width: 100%; }
 
 button:focus-visible, a:focus-visible, input:focus-visible, textarea:focus-visible, select:focus-visible {

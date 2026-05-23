@@ -2,7 +2,7 @@
    Moddable.Games — Mod Detail Page Renderer
    Reads data-mod="slug" from <body>, looks up MG.MOD_PAGES[slug],
    and renders the entire page (hero, stats, TOC, rules, components, related).
-   Depends on: mg-core.js, mg-mods-data.js, mg-mods-content.js, mg-buttons.js, mg-cards.js
+   Depends on: mg-core.js, mg-mods-content.js, mg-buttons.js, mg-cards.js
    ========================================================================= */
 
 (function() {
@@ -83,13 +83,16 @@
 
   // Related mods
   var rg = document.getElementById('related-grid');
-  if (rg && page.related && MG.ALL_MODS) {
-    page.related.forEach(function(title) {
-      var m = MG.ALL_MODS.find(function(x) { return x.title === title; });
-      if (m) {
-        var card = Object.assign({}, m, { href: '../' + m.href.split('/mods/')[1] });
-        rg.appendChild(modCard(card));
-      }
+  if (rg && page.related) {
+    MG.data.load(['mods']).then(function(store) {
+      page.related.forEach(function(title) {
+        var m = store.mods.find(function(x) { return x.title === title; });
+        if (m) {
+          var card = Object.assign({}, m, { href: '../' + m.href.split('/mods/')[1] });
+          rg.appendChild(modCard(card));
+        }
+      });
+      MG.initReveal();
     });
   }
 })();

@@ -12,37 +12,40 @@
   hb.appendChild(linkBtn('Join the Discord', url('/community/'), 'primary'));
   hb.appendChild(linkBtn('See the roadmap', url('/about/roadmap/'), 'outline-dark'));
 
-  var GAMES = MG.GAMES;
   var grid = document.getElementById('games-grid');
 
-  GAMES.forEach(function(g) {
-    var card = el('a', {href:g.href, class:'game-card mg-lift', 'data-reveal':'up'});
-    card.addEventListener('mouseenter', function() { card.style.borderColor = g.accent; });
-    card.addEventListener('mouseleave', function() { card.style.borderColor = ''; });
+  MG.data.load(['games']).then(function(store) {
+    store.games.forEach(function(g) {
+      var card = el('a', {href:g.href, class:'game-card mg-lift', 'data-reveal':'up'});
+      card.addEventListener('mouseenter', function() { card.style.borderColor = g.accent; });
+      card.addEventListener('mouseleave', function() { card.style.borderColor = ''; });
 
-    var bar = el('div', {class:'game-card__bar'});
-    bar.style.background = g.accent;
-    card.appendChild(bar);
+      var bar = el('div', {class:'game-card__bar'});
+      bar.style.background = g.accent;
+      card.appendChild(bar);
 
-    var thumb = el('div', {class:'game-card__thumb'});
-    thumb.style.background = 'linear-gradient(135deg, #0a0d2a 0%, ' + g.accent + ' 100%)';
-    var hexOverlay = el('div', {class:'game-card__thumb-hex'});
-    hexOverlay.style.backgroundImage = 'url("' + url('/img/hex-grid-white.svg') + '")';
-    thumb.appendChild(hexOverlay);
-    card.appendChild(thumb);
+      var thumb = el('div', {class:'game-card__thumb'});
+      thumb.style.background = 'linear-gradient(135deg, #0a0d2a 0%, ' + g.accent + ' 100%)';
+      var hexOverlay = el('div', {class:'game-card__thumb-hex'});
+      hexOverlay.style.backgroundImage = 'url("' + url('/img/hex-grid-white.svg') + '")';
+      thumb.appendChild(hexOverlay);
+      card.appendChild(thumb);
 
-    var body = el('div', {class:'game-card__body'});
-    var status = el('div', {class:'game-card__status'});
-    status.style.color = g.accent;
-    status.textContent = g.status;
-    body.appendChild(status);
-    body.appendChild(el('h3', {class:'game-card__title'}, g.title));
-    body.appendChild(el('p', {class:'game-card__desc'}, g.desc));
-    var stats = el('div', {class:'game-card__stats'});
-    stats.textContent = g.players + ' · ' + g.time;
-    body.appendChild(stats);
+      var body = el('div', {class:'game-card__body'});
+      var status = el('div', {class:'game-card__status'});
+      status.style.color = g.accent;
+      status.textContent = g.status;
+      body.appendChild(status);
+      body.appendChild(el('h3', {class:'game-card__title'}, g.title));
+      body.appendChild(el('p', {class:'game-card__desc'}, g.desc));
+      var stats = el('div', {class:'game-card__stats'});
+      stats.textContent = g.players + ' · ' + g.time;
+      body.appendChild(stats);
 
-    card.appendChild(body);
-    grid.appendChild(card);
+      card.appendChild(body);
+      grid.appendChild(card);
+    });
+
+    MG.initReveal();
   });
 })();

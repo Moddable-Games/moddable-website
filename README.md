@@ -93,31 +93,38 @@ Open `http://localhost:8000/`. Clean URLs, no `.html` extensions.
 
 ```
 js/
-├── mg-loader.js          ← entry point, loads all modules
-├── mg-core.js            ← tokens, el(), url()
-├── mg-buttons.js         ← btn(), linkBtn()
-├── mg-cards.js           ← modCard()
-├── mg-navbar.js          ← navbar()
-├── mg-footer.js          ← footer()
-├── mg-search.js          ← global Cmd+K search
-├── mg-animations.js      ← scroll reveal + TOC spy
-├── mg-mods-data.js       ← mod library data
-├── mg-mods-content.js    ← mod page content (rules, components, etc.)
-├── mg-news-data.js       ← news post metadata
-├── mg-games-data.js      ← games data
-├── mg-team-data.js       ← team member data
-├── mg-mod-page.js        ← data-driven mod detail renderer
+├── mg-loader.js            ← entry point, loads all modules
+├── mg-core.js              ← tokens, el(), url(), MG.data (fetch layer)
+├── mg-buttons.js           ← btn(), linkBtn()
+├── mg-cards.js             ← modCard(), pageHero()
+├── mg-navbar.js            ← navbar()
+├── mg-footer.js            ← footer()
+├── mg-search.js            ← global Cmd+K search
+├── mg-animations.js        ← scroll reveal + TOC spy
+├── mg-mods-content.js      ← mod page content (rules, components, etc.)
+├── mg-mod-page.js          ← data-driven mod detail renderer
 ├── mg-news-article-page.js ← shared news article renderer
-└── mg-*-page.js          ← page-specific scripts (home, tools, etc.)
+└── mg-*-page.js            ← page-specific scripts (home, tools, etc.)
+
+data/
+├── mods.json               ← mod library (13 entries)
+├── games.json              ← games (5 entries)
+├── news.json               ← news posts (12 entries)
+└── team.json               ← team members (4 entries)
 ```
 
-Pages load `mg-loader.js` (which handles shared modules) + their own page script.
+Pages load `mg-loader.js` (shared modules) + their own page script. Data is fetched asynchronously via `MG.data.load(['mods','news']).then(store => { ... })`.
 
 ---
 
 ### Changelog
 
 #### 2026-05-22
+- Extracted all data from JS modules to JSON files (`data/mods.json`, `games.json`, `news.json`, `team.json`)
+- Added `MG.data` fetch layer in `mg-core.js` — async `load()/ready()/get()` pattern
+- Removed 4 data JS modules (`mg-mods-data.js`, `mg-games-data.js`, `mg-news-data.js`, `mg-team-data.js`)
+- Updated all consumer scripts to use `MG.data.load().then()` pattern
+- Added `text-wrap: pretty` to global CSS resets for orphan prevention
 - Redesigned tools page: filterable card grid with category bar (Game Night, Planning, Creative, Mod-Specific)
 - Converted 3 dark-themed tool widgets (Dice, Timer, Seating) to unified light card style
 - Added 3D spinning CSS dice to tools hero section

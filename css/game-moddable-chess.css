@@ -1,3 +1,13 @@
 #hero-cube { width: clamp(280px, 32vw, 420px); height: clamp(280px, 32vw, 420px); overflow: visible; }
 #hero-cube canvas { display: block; }
 .game-hero__inner { align-items: center; }
+
+.dc-race-card { background: #161721; border-radius: 16px; overflow: hidden; border: 1px solid rgba(255,255,255,0.08); }
+.dc-race-card__img { width: 100%; height: 180px; object-fit: cover; object-position: center; }
+.dc-race-card__body { padding: 20px; }
+.dc-race-card__name { font-family: var(--mg-font-display); font-weight: 700; font-size: 20px; letter-spacing: -0.3px; margin-bottom: 8px; }
+.dc-race-card__desc { font-family: var(--mg-font-body); font-size: 14px; line-height: 1.6; color: rgba(255,255,255,0.7); margin: 0; }
+
+.dc-system-card { background: rgba(255,255,255,0.04); border: 1px solid rgba(255,255,255,0.1); border-radius: 12px; padding: 20px; }
+.dc-system-card__name { font-family: var(--mg-font-mono); font-size: 13px; font-weight: 600; color: #4eb735; letter-spacing: 0.5px; margin-bottom: 8px; }
+.dc-system-card__desc { font-family: var(--mg-font-body); font-size: 14px; line-height: 1.6; color: rgba(255,255,255,0.65); margin: 0; }

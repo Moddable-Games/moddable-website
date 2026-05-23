@@ -115,31 +115,48 @@ hb.appendChild(linkBtn('Read the manifesto', '/about/', 'outline-dark'));
 
 // Mod gallery — featured subset from shared data
 const HOME_MOD_TITLES = ['Talisman: Hexed','Hyper Imperium','Nuke Catan','Econopoly','Fog of War Chess','CivRisk'];
-const MODS = HOME_MOD_TITLES.map(t => MG.ALL_MODS.find(m => m.title === t));
-
 const filters = ['All','Total conversion','Rebalance','Reskin'];
 let activeFilter = 'All';
 const filtersEl = document.getElementById('gallery-filters');
 const gridEl = document.getElementById('gallery-grid');
 
-function renderFilter() {
-  filtersEl.innerHTML = '';
-  filters.forEach(f => {
-    const isActive = f === activeFilter;
-    const b = el('button', { class: isActive ? 'filter-btn filter-btn--active' : 'filter-btn' }, f);
-    b.addEventListener('click', () => { activeFilter = f; renderFilter(); renderGrid(); });
-    filtersEl.appendChild(b);
+MG.data.load(['mods','news']).then(store => {
+  const MODS = HOME_MOD_TITLES.map(t => store.mods.find(m => m.title === t));
+
+  function renderFilter() {
+    filtersEl.innerHTML = '';
+    filters.forEach(f => {
+      const isActive = f === activeFilter;
+      const b = el('button', { class: isActive ? 'filter-btn filter-btn--active' : 'filter-btn' }, f);
+      b.addEventListener('click', () => { activeFilter = f; renderFilter(); renderGrid(); });
+      filtersEl.appendChild(b);
+    });
+  }
+
+  function renderGrid() {
+    gridEl.innerHTML = '';
+    const visible = activeFilter === 'All' ? MODS : MODS.filter(m => m.category === activeFilter);
+    visible.forEach(m => gridEl.appendChild(modCard(m)));
+    MG.initReveal();
+  }
+
+  renderFilter(); renderGrid();
+
+  // News grid (latest 3 from shared data)
+  const ng = document.getElementById('news-grid');
+  store.news.slice(0, 3).forEach(n => {
+    const a = el('a', { href:url(`/news/${n.slug}/`), class:'news-card mg-lift', 'data-reveal':'up' });
+    const row = el('div', { class:'news-card__header' });
+    row.appendChild(el('span', { class:'news-card__tag' }, n.tags[0]));
+    row.appendChild(el('span', { class:'news-card__date' }, n.date));
+    a.appendChild(row);
+    a.appendChild(el('h3', { class:'news-card__title' }, n.title));
+    a.appendChild(el('p', { class:'news-card__body' }, n.excerpt));
+    a.appendChild(el('span', { class:'news-card__more' }, 'Read more →'));
+    ng.appendChild(a);
   });
-}
-
-function renderGrid() {
-  gridEl.innerHTML = '';
-  const visible = activeFilter === 'All' ? MODS : MODS.filter(m => m.category === activeFilter);
-  visible.forEach(m => gridEl.appendChild(modCard(m)));
   MG.initReveal();
-}
-
-renderFilter(); renderGrid();
+});
 
 const nb2 = document.getElementById('nuke-btns');
 nb2.appendChild(linkBtn('Download the rules', '#', 'red'));
@@ -182,19 +199,6 @@ stats.forEach(([k,v], i) => {
   sEl.appendChild(d);
 });
 
-// News grid (latest 3 from shared data)
-const ng = document.getElementById('news-grid');
-MG.NEWS_POSTS.slice(0, 3).forEach(n => {
-  const a = el('a', { href:url(`/news/${n.slug}/`), class:'news-card mg-lift', 'data-reveal':'up' });
-  const row = el('div', { class:'news-card__header' });
-  row.appendChild(el('span', { class:'news-card__tag' }, n.tags[0]));
-  row.appendChild(el('span', { class:'news-card__date' }, n.date));
-  a.appendChild(row);
-  a.appendChild(el('h3', { class:'news-card__title' }, n.title));
-  a.appendChild(el('p', { class:'news-card__body' }, n.excerpt));
-  a.appendChild(el('span', { class:'news-card__more' }, 'Read more →'));
-  ng.appendChild(a);
-});
 
 // Platform tabs
 (function() {

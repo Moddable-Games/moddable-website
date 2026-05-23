@@ -26,10 +26,12 @@ One shared component library (`_mg.js` + `_mg.css`), one page per HTML file.
 ├── css/
 │   └── _mg.css             ← shared CSS variables + resets + keyframes
 ├── js/
-│   └── _mg.js              ← shared component library (tokens, navbar, footer, modCard, etc.)
-├── build/
-│   ├── build-preview.py    ← regenerates moddable-preview.html from all source files
-│   └── moddable-preview.html ← single-file preview (auto-generated, do not hand-edit)
+│   └── mg-loader.js        ← entry point; loads shared modules
+├── data/
+│   ├── mods.json           ← mod library (13 entries)
+│   ├── games.json          ← games (5 entries)
+│   ├── news.json           ← news posts (12 entries)
+│   └── team.json           ← team members (4 entries)
 │
 ├── mods/
 │   ├── index.html          ← mods library (filterable, searchable)
@@ -118,9 +120,10 @@ The script:
 
 ---
 
-## Component library (`_mg.js`)
+## Component library (modular JS in `js/`)
 
-All components live inside the `MG` IIFE and are exported via `return { ... }`.
+All components live inside the `MG` namespace (built by `mg-core.js` + extension
+modules loaded via `mg-loader.js`).
 
 ### Available exports
 ```js
@@ -136,6 +139,8 @@ MG.footer()            // full site footer
 MG.modCard(props)      // mod card; props: { category, title, baseGame, stats, body, href, source }
 MG.pageHero(props)     // interior page hero; props: { eyebrow, title, lede, accent, withHorizon, minHeight }
 MG.cubeSVG(size)       // the tri-colour cube SVG logo mark
+MG.data.load(names)    // fetch JSON data files; returns Promise<store>
+MG.data.get(name)      // get cached data synchronously (null if not loaded)
 ```
 
 ### Button variants
@@ -196,9 +201,9 @@ hand-rolled sections — so they stay visually consistent.
 
 ---
 
-## Mods library data (source of truth: `mods.html` `ALL_MODS` array)
+## Mods library data (source of truth: `data/mods.json`)
 
-12 entries across 5 base games. Three are Moddable originals; nine are real
+13 entries across 5 base games. Four are Moddable originals; nine are real
 publicly available community variants with attributions.
 
 | Title | Base game | Category | Source |

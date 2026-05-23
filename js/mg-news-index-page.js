@@ -8,7 +8,8 @@ document.getElementById('page-hero').appendChild(pageHero({
   lede: 'Strictly written by humans.',
 }));
 
-const POSTS = MG.NEWS_POSTS;
+MG.data.load(['news']).then(function(store) {
+const POSTS = store.news;
 
 let activeCat = 'All', activeMonth = null, searchVal = '';
 
@@ -32,7 +33,6 @@ function postCover(post, big=false) {
   return d;
 }
 
-// Featured post
 const fpEl = document.getElementById('featured-post');
 const feat = POSTS[0];
 const fa = el('a',{href:url(`/news/${feat.slug}/`),class:'news-featured-card'});
@@ -129,10 +129,8 @@ function renderPosts(scroll) {
   if (scroll) document.querySelector('.news-main').scrollIntoView({behavior:'smooth',block:'start'});
 }
 
-// Sidebar
 const sidebar = document.getElementById('sidebar');
 
-// Search
 const searchWrap = el('div');
 searchWrap.appendChild(el('div',{class:'mg-eyebrow mg-eyebrow--blue'},'SEARCH'));
 const si = el('div',{class:'news-search-wrap'});
@@ -141,7 +139,6 @@ inp.addEventListener('input',e=>{searchVal=e.target.value;renderPosts();});
 si.appendChild(el('span',{class:'news-search-wrap__icon'},'⌕'));
 si.appendChild(inp); searchWrap.appendChild(si); sidebar.appendChild(searchWrap);
 
-// Hot topics (derived from post tags)
 const tagCounts = {};
 POSTS.forEach(p => p.tags.forEach(t => { tagCounts[t] = (tagCounts[t] || 0) + 1; }));
 const TOPICS = Object.entries(tagCounts).sort((a,b) => b[1] - a[1]);
@@ -171,7 +168,6 @@ function renderTopics() {
 
 ht.appendChild(tul); sidebar.appendChild(ht);
 
-// Archive (derived from post dates, clickable to filter)
 const monthCounts = {};
 POSTS.forEach(p => { monthCounts[p.date] = (monthCounts[p.date] || 0) + 1; });
 const ARCHIVE = Object.entries(monthCounts);
@@ -200,7 +196,6 @@ function renderArchive() {
 
 sidebar.appendChild(arc);
 
-// Read hash on load
 (function() {
   const hash = window.location.hash.slice(1);
   if (hash.startsWith('topic=')) {
@@ -213,4 +208,5 @@ sidebar.appendChild(arc);
 renderPosts();
 renderTopics();
 renderArchive();
+});
 })();

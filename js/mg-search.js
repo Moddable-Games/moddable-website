@@ -33,8 +33,9 @@
   ];
 
   function getSearchIndex() {
-    if (window.MG.NEWS_POSTS) {
-      const newsItems = window.MG.NEWS_POSTS.map(p => ({type:'news', title:p.title, desc:p.excerpt, href:url('/news/' + p.slug + '/')}));
+    var news = window.MG.data.get('news');
+    if (news) {
+      const newsItems = news.map(p => ({type:'news', title:p.title, desc:p.excerpt, href:url('/news/' + p.slug + '/')}));
       return SEARCH_INDEX.concat(newsItems);
     }
     return SEARCH_INDEX;
