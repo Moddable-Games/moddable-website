@@ -8,7 +8,7 @@
 <link rel="stylesheet" href="../../css/_mg.css">
 <link rel="stylesheet" href="../../css/game-moddable-chess.css">
 </head>
-<body class="mg-section--dark">
+<body class="mg-section--dark" data-game="moddable-chess">
 <div id="nav-root"></div>
 
 <section class="game-hero">
@@ -28,7 +28,7 @@
       <p class="game-hero__lede">2000+ documented variants. Zero unified compendiums. One moddable engine — ours. The most modded game in history finally gets an open-source home.</p>
       <div class="game-hero__btns" id="hero-btns"></div>
     </div>
-    <div id="hero-cube" class="game-hero__logo"></div>
+    <img src="" alt="" class="game-hero__logo">
   </div>
 </section>
 
@@ -40,24 +40,7 @@
   <div class="mg-container">
     <div class="mg-eyebrow mg-eyebrow--blue">SUPPORTED VARIANTS</div>
     <h2 class="mg-heading-xl">Four ways to play. More coming.</h2>
-    <div id="variants-grid" class="mg-grid-4" data-stagger></div>
-  </div>
-</section>
-
-<section class="mg-section mg-section--dark" id="dungeon-chess">
-  <div class="mg-container">
-    <div class="dc-header" data-reveal="up">
-      <div>
-        <div class="mg-eyebrow mg-eyebrow--green">FEATURED VARIANT &middot; PRE-ALPHA &middot; Q4 2026</div>
-        <h2 class="mg-heading-xl mg-heading-xl--light">Dungeon Chess.</h2>
-        <p class="mg-body-sub mg-body-sub--light">Chess as an asymmetric skirmish and dungeon crawler. Four races on a modular board with spells, objects, XP and environmental hazards — our catalyst for crowdfunding the catalogue.</p>
-      </div>
-      <img src="../../img/dungeon-chess/03_logo_all_white.png" alt="Dungeon Chess" class="dc-logo-img">
-    </div>
-    <h3 class="mg-heading-md mg-heading-xl--light" data-reveal="up">The four races.</h3>
-    <div id="dc-races" class="mg-grid-2" data-stagger></div>
-    <h3 class="mg-heading-md" data-reveal="up">Mod hooks.</h3>
-    <div id="dc-hooks" class="mg-grid-2" data-stagger></div>
+    <div id="variants-grid" class="mg-grid-4"></div>
   </div>
 </section>
 
@@ -84,16 +67,15 @@
 <section class="mg-section mg-section--white mg-section--border-top">
   <div class="mg-container">
     <div class="community-header">
-      <h2 class="mg-heading-xl">Community mods for <em>Moddable Chess</em>.</h2>
+      <h2 class="mg-heading-xl" id="comm-heading"></h2>
       <a href="../../submit/" class="community-header__link">Submit yours &rarr;</a>
     </div>
-    <div id="comm-grid" class="mg-grid-3" data-stagger></div>
+    <div id="comm-grid" class="mg-grid-3"></div>
   </div>
 </section>
 
 <div id="footer-root"></div>
-<script src="../../js/three.min.js"></script>
 <script src="../../js/mg-loader.js"></script>
-<script src="../../js/mg-game-moddable-chess-page.js"></script>
+<script src="../../js/mg-game-page.js"></script>
 </body>
 </html>

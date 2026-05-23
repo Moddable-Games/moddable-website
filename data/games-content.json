@@ -1,7 +1,9 @@
 {
   "nukes": {
     "slug": "nukes",
+    "title": "Nukes",
     "accent": "red",
+    "heroImage": "/img/nukes-logo.png",
     "colors": {
       "gradient": "linear-gradient(180deg,#2a0a0a 0%,#3a0d0d 40%,#000 100%)",
       "hexGrid": "hex-grid-red.svg",
@@ -48,7 +50,9 @@
   },
   "mongo": {
     "slug": "mongo",
+    "title": "Mongo",
     "accent": "green",
+    "heroImage": "/img/mongo-logo.png",
     "colors": {
       "gradient": "linear-gradient(180deg,#0a2a10 0%,#0d3a15 40%,#000 100%)",
       "hexGrid": "hex-grid-green.svg",
@@ -97,7 +101,9 @@
   },
   "endless-skies": {
     "slug": "endless-skies",
+    "title": "Endless Skies",
     "accent": "green",
+    "heroImage": "/img/endless-skies-logo.png",
     "colors": {
       "gradient": "linear-gradient(180deg,#0a0d2a 0%,#1a3680 45%,#000 100%)",
       "hexGrid": "hex-grid-blue.svg",
@@ -140,7 +146,9 @@
   },
   "dungeon-chess": {
     "slug": "dungeon-chess",
+    "title": "Dungeon Chess",
     "accent": "green",
+    "heroImage": "/img/dungeon-chess/03_logo_all_white.png",
     "colors": {
       "gradient": "linear-gradient(180deg,#0a1f0a 0%,#0d2a0d 40%,#000 100%)",
       "hexGrid": "hex-grid-green.svg",
@@ -149,38 +157,99 @@
       "bloom": null
     },
     "stats": [
-      ["Players", "2–6"],
-      ["Modes", "Skirmish + Legacy"],
+      ["Players", "2–4"],
       ["Time", "30–120 min"],
       ["Age", "12+"],
-      ["Status", "Pre-alpha"],
-      ["Crowdfunding", "Q4 2026"],
+      ["Species", "4"],
+      ["Units", "24"],
+      ["Status", "Alpha"],
       ["Updated", "May 2026"]
     ],
     "buttons": {
       "hero": [
-        ["Join the playtest", "#", "green"],
-        ["Read the Rules", "rules:dungeon-chess", "outline-dark"]
+        ["Read the Rules", "rules:dungeon-chess", "green"],
+        ["Play Online", "#", "outline-dark"]
       ],
       "cta": []
     },
     "steps": [
-      {"n": "01", "title": "Draft your warband", "body": "Pick a race — Demonics, Wraiths, Knights, or Verdants. Each starts with a King, two Champions, and four Pawns. No two races play the same."},
-      {"n": "02", "title": "Explore the dungeon", "body": "Tiles are placed face-down. Moving onto a new tile reveals it — traps, treasures, environmental effects. The board grows as you play."},
-      {"n": "03", "title": "Cast and level up", "body": "Capture enemy pieces to earn XP. Spend it to promote Pawns, unlock racial spells, or activate persistent dungeon effects."},
-      {"n": "04", "title": "Win the campaign", "body": "Skirmish mode ends when a King falls. Legacy mode chains battles into a persistent campaign — your survivors carry wounds, XP, and grudges."}
+      {"n": "01", "title": "Choose your species", "body": "Humans, Undead, Redskins, or Greenskins. Each has 6 unique unit types with different costs, movements, and special abilities."},
+      {"n": "02", "title": "Draft your warband", "body": "Spend 75 XP to build your team. Must include a King and at least one Pawn. Every point is a tactical commitment — no two warbands are alike."},
+      {"n": "03", "title": "Deploy and battle", "body": "Place your units in your spawn zone, then take turns moving one piece. Capture enemies by moving onto their square. Terrain matters — water blocks, gaps divide, corridors create chokepoints."},
+      {"n": "04", "title": "Capture the King", "body": "The game ends the moment a King is captured. Protect yours, hunt theirs. Check forces a response — but there's no stalemate here."}
     ],
     "races": [
-      {"name": "Demonics", "accent": "#d11a1a", "icon": "♟", "desc": "Burn everything. Demonics gain power from destruction — capturing pieces fuels area-of-effect hellfire."},
-      {"name": "Wraiths", "accent": "#6b4fa0", "icon": "♟", "desc": "Phase through walls. Wraiths ignore terrain and can haunt tiles, making them dangerous for enemies."},
-      {"name": "Knights", "accent": "#c5a022", "icon": "♟", "desc": "Hold the line. Knights gain defensive bonuses from formation — adjacent allies strengthen each other."},
-      {"name": "Verdants", "accent": "#3a9928", "icon": "♟", "desc": "Grow the board. Verdants place new tiles, heal allies, and turn hazards into advantages."}
+      {"name": "Humans", "accent": "#c0c8d0", "icon": "⚔", "desc": "Balanced generalists. Archers attack across gaps, the Wizard splits movement and attack, and the Princess slides like a bishop."},
+      {"name": "Undead", "accent": "#6b4fa0", "icon": "💀", "desc": "Movement trickery. Wraiths phase through gaps, the Vampire reverses move/attack axes, and the Warlock attacks diagonally at range."},
+      {"name": "Redskins", "accent": "#d11a1a", "icon": "🔥", "desc": "Devastating firepower. Kobolds and Iron Golems use cannon attacks — sliding through a screen piece to strike at range. The Red Dragon attacks as a knight."},
+      {"name": "Greenskins", "accent": "#3a9928", "icon": "👺", "desc": "Brute force. Goblins and Ogres bring cannon attacks like the Redskins, while the Shaman commands full queen movement. The Warlord strikes as a knight."}
     ],
     "hooks": [
       {"name": "races.yaml", "desc": "Four playable races with distinct piece types, spells, and XP trees. Fork one, rewrite all four, or add a fifth."},
       {"name": "board.lua", "desc": "Dungeon tile generation rules. Change the mix of traps vs treasures, board shape, or add entirely new tile types."},
       {"name": "campaign.yaml", "desc": "Legacy progression — how XP persists between sessions, what carries over, and when the campaign ends."},
       {"name": "spells.yaml", "desc": "Every racial spell with costs, effects, and targeting rules. Balance them, remove them, or add cross-race combos."}
+    ]
+  },
+  "moddable-chess": {
+    "slug": "moddable-chess",
+    "title": "Moddable Chess",
+    "accent": "blue",
+    "heroImage": "/img/moddable-chess-cube.svg",
+    "colors": {
+      "gradient": "linear-gradient(180deg,#0a0d2a 0%,#0c2e5a 40%,#000 100%)",
+      "hexGrid": "hex-grid-blue.svg",
+      "textColor": "#6fb5ff",
+      "textShadow": "0 0 8px rgba(111,181,255,0.5)",
+      "bloom": "radial-gradient(ellipse,rgba(12,79,141,0.35) 0%,transparent 65%)"
+    },
+    "stats": [
+      ["Variants", "12+"],
+      ["Players", "2–4"],
+      ["Status", "Open alpha"],
+      ["Engine", "Live"],
+      ["Board types", "Square + Hex"],
+      ["Updated", "May 2026"]
+    ],
+    "buttons": {
+      "hero": [
+        ["Play now", "#", "blue"],
+        ["Browse variants", "#variants-grid", "outline-dark"]
+      ],
+      "cta": [],
+      "extra": {
+        "engine-cta": [
+          ["Try the engine", "#", "blue"],
+          ["View on GitHub", "#", "outline-dark"]
+        ]
+      }
+    },
+    "variants": [
+      {"n": "01", "title": "Regular (8×8)", "body": "Standard chess as the baseline. The same rules you know — running on our engine so you can fork it."},
+      {"n": "02", "title": "4-Player", "body": "Two teams or free-for-all on a cross-shaped board. The diplomacy variant."},
+      {"n": "03", "title": "Hexagonal (Glinski)", "body": "Pieces move along hex edges. Six directions instead of eight. Deeper positional play."},
+      {"n": "04", "title": "Dungeon Chess", "body": "Our original variant — four asymmetric species, 75 XP drafting, cannon mechanics, and modular dungeon boards. Now its own standalone game.", "href": "/games/dungeon-chess/"}
+    ],
+    "features": ["Private sessions", "Cross-device", "Async play"],
+    "hooks": [
+      {"name": "board.lua", "desc": "Board geometry — square, hex, or anything. Define the grid, valid positions, and rendering rules."},
+      {"name": "pieces.yaml", "desc": "Every piece type with movement patterns, capture rules, and promotion conditions. Add new pieces or modify existing ones."},
+      {"name": "variants.yaml", "desc": "The variant registry. Combine a board, piece set, and win condition to define a new way to play."},
+      {"name": "ai.lua", "desc": "Bot behavior for each variant. The teaching engine learns from every game played — human or bot."}
+    ],
+    "communityLabel": "Supported variants.",
+    "community": [
+      {"category": "Total conversion", "baseGame": "Chess", "title": "Fog of War Chess", "body": "Players see only squares their pieces can move to. No checks, no checkmates — capture the king to win. Invented 1989.", "stats": "2 players · 20–40 min · 10+"},
+      {"category": "Reskin", "baseGame": "Chess", "title": "4-Player Chess", "body": "Four armies on a cross-shaped board. Free-for-all or 2v2 teams. The de facto standard for multiplayer chess.", "stats": "4 players · 30 min · 10+"},
+      {"category": "Total conversion", "baseGame": "Chess", "title": "Hexagonal Chess (Glinski)", "body": "91 hexagonal cells, 9 pawns per side, bishops on three cell colours. Władysław Gliński, 1936.", "stats": "2 players · 30–60 min · 12+"},
+      {"category": "Total conversion", "baseGame": "Chess", "title": "Alice Chess", "body": "Two boards, one army. Pieces transfer to the other board after each move. Conceived by V.R. Parton, 1953.", "stats": "2 players · 30–45 min · 12+"},
+      {"category": "Total conversion", "baseGame": "Chess", "title": "Capablanca Chess", "body": "10×8 board with two new pieces: Archbishop (bishop+knight) and Chancellor (rook+knight). José Capablanca, 1920s.", "stats": "2 players · 45–90 min · 12+"},
+      {"category": "Total conversion", "baseGame": "Chess", "title": "Courier Chess", "body": "Medieval 12×8 variant with 24 pieces per side including couriers and sages. Documented since 1202.", "stats": "2 players · 60–90 min · 14+"},
+      {"category": "Total conversion", "baseGame": "Chess", "title": "Omega Chess", "body": "10×10 board plus corner squares. Adds Champion (knight+king area) and Wizard (camel+ferz). Daniel MacDonald, 1992.", "stats": "2 players · 45–90 min · 12+"},
+      {"category": "Total conversion", "baseGame": "Chess", "title": "Grand Chess", "body": "10×10 board with Archbishop and Chancellor. No castling, pawns promote on rank 8 or 9. Christian Freeling, 1984.", "stats": "2 players · 45–75 min · 12+"},
+      {"category": "Total conversion", "baseGame": "Chess", "title": "XiangQi (Chinese Chess)", "body": "9×10 board with river and palace. Cannons capture by jumping, generals face off across the board. Over 1000 years old.", "stats": "2 players · 30–60 min · 10+"},
+      {"category": "Reskin", "baseGame": "Chess", "title": "3-Board Chess", "body": "Three standard boards side by side. Pieces can move between boards along shared edges. Multiplayer spatial chaos.", "stats": "3 players · 45–60 min · 12+"},
+      {"category": "Reskin", "baseGame": "Chess", "title": "4-Board Chess", "body": "Four boards in a 2×2 grid. Pieces transfer between boards at shared edges. Team or free-for-all.", "stats": "4 players · 60–90 min · 12+"}
     ]
   }
 }

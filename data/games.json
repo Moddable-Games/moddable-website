@@ -30,13 +30,24 @@
     "rulebook": "endless-skies"
   },
   {
+    "title": "Dungeon Chess",
+    "accent": "green",
+    "status": "Alpha",
+    "desc": "Asymmetric fantasy strategy on modular dungeon boards. Four species, 24 units, XP drafting.",
+    "players": "2–4",
+    "time": "30–120 min",
+    "path": "/games/dungeon-chess/",
+    "rulebook": "dungeon-chess",
+    "type": "game"
+  },
+  {
     "title": "Moddable Chess",
     "accent": "blue",
     "status": "Open alpha · Live",
-    "desc": "2000+ chess variants, one engine. Regular, 4-Player, Hexagonal, Dungeon Chess, and more — playable online.",
+    "desc": "2000+ chess variants, one modular engine. Regular, 4-Player, Hexagonal, and more — playable online.",
     "players": "2–6",
     "time": "10–120 min",
     "path": "/games/moddable-chess/",
-    "rulebook": "dungeon-chess"
+    "type": "platform"
   }
 ]

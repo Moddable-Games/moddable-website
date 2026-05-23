@@ -55,7 +55,7 @@ document.querySelector('[data-color]').style.textShadow = '0 0 8px rgba(111,181,
 document.querySelector('[data-bloom]').style.background = 'radial-gradient(ellipse,rgba(12,79,141,0.35) 0%,transparent 65%)';
 
 document.getElementById('hero-btns').appendChild(linkBtn('Play now','#','blue'));
-document.getElementById('hero-btns').appendChild(linkBtn('Read the Rules', rulesUrl('dungeon-chess'),'outline-dark'));
+document.getElementById('hero-btns').appendChild(linkBtn('Browse variants','#','outline-dark'));
 
 const STATS = [['Variants','4+'],['Players','2–4'],['Status','Open alpha'],['Engine','Live'],['Board types','Square + Hex'],['Updated','May 2026']];
 const sb = document.getElementById('stats-bar');
@@ -71,7 +71,7 @@ const VARIANTS = [
   {n:'01', title:'Regular (8×8)',        body:'Standard chess as the baseline. The same rules you know — running on our engine so you can fork it.'},
   {n:'02', title:'4-Player',             body:'Two teams or free-for-all on a cross-shaped board. The diplomacy variant.'},
   {n:'03', title:'Hexagonal (Glinski)',   body:'Pieces move along hex edges. Six directions instead of eight. Deeper positional play.'},
-  {n:'04', title:'Dungeon Chess',         body:'Our first original variant. Four asymmetric species, 75 XP team drafting, cannon mechanics, and modular dungeon boards. Solo vs AI live now.', href:'#dungeon-chess'},
+  {n:'04', title:'Dungeon Chess',         body:'Our original variant — four asymmetric species, 75 XP drafting, cannon mechanics, and modular dungeon boards. Now its own standalone game.', href:'/games/dungeon-chess/'},
 ];
 const vg = document.getElementById('variants-grid');
 VARIANTS.forEach(s => {
@@ -85,44 +85,6 @@ VARIANTS.forEach(s => {
     a.appendChild(link);
   }
   vg.appendChild(a);
-});
-
-// Dungeon Chess races
-const DC_RACES = [
-  {name:'Humans',     accent:'#c5a022', img:'humans.png',     desc:'Balanced — heroes on the front line, archers that shoot across gaps, a wizard queen that moves as rook but attacks diagonally.'},
-  {name:'Undead',     accent:'#6b4fa0', img:'undead.png',     desc:'Movement trickery — wraiths phase through gaps, vampires glide diagonally, a warlock king that attacks at bishop range.'},
-  {name:'Redskins',   accent:'#d11a1a', img:'redskins.png',   desc:'Firepower — kobold cannons on pawns, iron golems with rook-line artillery, a dragon king with knight-range attacks.'},
-  {name:'Greenskins', accent:'#3a9928', img:'greenskins.png', desc:'Brute force — goblin swarms with cannon attacks, ogre artillery, trolls that dominate open lanes without water.'},
-];
-const dcr = document.getElementById('dc-races');
-DC_RACES.forEach(r => {
-  const d = el('div',{class:'dc-race-card', 'data-reveal':'up'});
-  const img = el('img',{src:'../../img/dungeon-chess/species/' + r.img, alt:r.name + ' species', class:'dc-race-card__img'});
-  d.appendChild(img);
-  const txt = el('div',{class:'dc-race-card__body'});
-  const title = el('div',{class:'dc-race-card__name'});
-  title.style.color = r.accent;
-  title.textContent = r.name;
-  txt.appendChild(title);
-  txt.appendChild(el('p',{class:'dc-race-card__desc'},r.desc));
-  d.appendChild(txt); dcr.appendChild(d);
-});
-
-// Dungeon Chess hooks
-const DC_HOOKS = [
-  {name:'Species & units',  desc:'Four species × 6 unit types each. Every unit has a chess-piece base movement plus species-specific abilities — cannon attacks, gap-crossing, water restrictions.'},
-  {name:'XP drafting',      desc:'75 XP budget per team. Units cost 2–20 XP. Constraints: exactly 1 king, at least 1 pawn, no max team size. Duplicate units allowed.'},
-  {name:'Modular maps',     desc:'Three battle maps — compact 10×10 skirmish, 20×8 two-player dungeon cross, and 20×20 four-player symmetric cross. Water, void, and spawn zones define each.'},
-  {name:'Terrain system',   desc:'Water blocks most pieces but not all. Gaps interrupt diagonals selectively. Void squares are impassable. Each species interacts differently with terrain.'},
-];
-const dch = document.getElementById('dc-hooks');
-DC_HOOKS.forEach(h => {
-  const d = el('div',{class:'dc-system-card', 'data-reveal':'up'});
-  const title = el('div',{class:'dc-system-card__name'});
-  title.textContent = h.name;
-  d.appendChild(title);
-  d.appendChild(el('p',{class:'dc-system-card__desc'},h.desc));
-  dch.appendChild(d);
 });
 
 const FEATURES = ['Private sessions','Cross-device','Async play'];
