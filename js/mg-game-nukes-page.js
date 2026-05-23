@@ -13,7 +13,7 @@ document.querySelector('[data-bloom]').style.background = 'radial-gradient(ellip
 document.getElementById('hero-btns').appendChild(linkBtn('Read the Rules', rulesUrl('nukes'),'red'));
 document.getElementById('hero-btns').appendChild(linkBtn('Browse on GitHub','https://github.com/Moddable-Games/Nukes-Rulebook/blob/main/games/nukes/content/rulebook.md','outline-dark'));
 
-const STATS = [['Players','3'],['Turns','15'],['Time','60–90 min'],['Age','14+'],['Designer','Moddable team'],['Released','Jan 2012'],['Updated','May 2026']];
+const STATS = [['Players','2–3'],['Turns','15'],['Time','45+ min'],['Age','12+'],['Designer','Moddable team'],['Released','Jan 2012'],['Updated','May 2026']];
 const sb = document.getElementById('stats-bar');
 STATS.forEach(([k,v],i) => {
   if(i>0) sb.appendChild(el('span',{class:'stats-row__divider'}));

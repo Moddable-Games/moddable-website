@@ -23,7 +23,7 @@ STATS.forEach(([k,v],i) => {
 });
 
 const STEPS = [
-  {n:'01', title:'Draft your warband',  body:'Pick a race — Demonics, Wraiths, Knights, or Verdants. Each starts with a King, two Champions, and four Pawns. No two races play the same.'},
+  {n:'01', title:'Draft your warband',  body:'Pick a race — Humans, Undead, Redskins, or Greenskins. Each starts with a King, two Champions, and four Pawns. No two races play the same.'},
   {n:'02', title:'Explore the dungeon',  body:'Tiles are placed face-down. Moving onto a new tile reveals it — traps, treasures, environmental effects. The board grows as you play.'},
   {n:'03', title:'Cast and level up',    body:'Capture enemy pieces to earn XP. Spend it to promote Pawns, unlock racial spells, or activate persistent dungeon effects.'},
   {n:'04', title:'Win the campaign',     body:'Skirmish mode ends when a King falls. Legacy mode chains battles into a persistent campaign — your survivors carry wounds, XP, and grudges.'},
