@@ -149,7 +149,7 @@ window.MG = (() => {
 
   const isLocal = Boolean(BASE);
   const RULES_BASE = isLocal
-    ? 'http://localhost/MODDABLE/nukes-rulebook/dist'
+    ? 'http://localhost/MODDABLE/moddable-rules/dist'
     : 'https://rules.moddable.games/dist';
 
   function rulesUrl(slug) {
