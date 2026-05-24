@@ -15,9 +15,11 @@
 
     // Hero
     const hero = el('section', {class: 'td-hero'});
+    const glowClip = el('div', {class: 'td-hero__glow-clip'});
     const glow = el('div', {class: 'td-hero__glow'});
     glow.style.background = member.color;
-    hero.appendChild(glow);
+    glowClip.appendChild(glow);
+    hero.appendChild(glowClip);
 
     const inner = el('div', {class: 'td-hero__inner'});
     inner.appendChild(el('a', {href: url('/team/'), class: 'td-hero__back'}, '← Back to team'));
