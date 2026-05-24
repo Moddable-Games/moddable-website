@@ -62,3 +62,10 @@ body { background:#f5f4ef; }
 /* ── Ring filter buttons ── */
 .ring-btn { font-family:var(--mg-font-body); font-weight:600; font-size:13px; height:34px; padding:0 14px; border-radius:9999px; cursor:pointer; transition:all 150ms; }
 .ring-btn--inactive { border:1px solid #c3c5cc; background:transparent; color:#14161c; }
+
+@media (max-width: 640px) {
+  .talisman-tools { padding: 36px 20px 64px; }
+  .tool-card { padding: 20px; }
+  .char-grid { grid-template-columns: 1fr; }
+  .char-controls__draw { margin-left: 0; }
+}

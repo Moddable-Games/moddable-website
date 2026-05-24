@@ -746,10 +746,21 @@ button:focus-visible, a:focus-visible, input:focus-visible, textarea:focus-visib
   .mg-grid-3 { grid-template-columns: 1fr !important; }
   .mg-grid-2 { grid-template-columns: 1fr !important; }
   .mg-grid-4 { grid-template-columns: 1fr 1fr !important; }
-  .rules-layout { grid-template-columns: 1fr !important; }
+  .rules-layout { grid-template-columns: 1fr !important; gap: 32px !important; }
   .rules-sidebar { position: static !important; }
+  .home-featured__inner { grid-template-columns: 1fr !important; text-align: center; }
+  .home-featured__body { margin-left: auto; margin-right: auto; }
+  .home-featured__btns { justify-content: center; }
+  .home-featured__cube, .home-featured__logo { display: none; }
+  .home-hex__inner { grid-template-columns: 1fr !important; gap: 40px !important; }
+  .home-hex__diagram { order: -1; }
+  .home-featured { padding: 80px 20px; }
+  .home-hex { padding: 64px 20px; }
+  .home-engine { padding: 64px 20px; }
+  .mg-section { padding: 80px 20px; }
+  .stats-row__divider { margin: 0 10px; }
 }
 @media (max-width: 540px) {
   .mg-grid-4 { grid-template-columns: 1fr !important; }
-  section, .section-pad { padding-left: 20px !important; padding-right: 20px !important; }
+  section, .section-pad { padding-left: 16px !important; padding-right: 16px !important; }
 }

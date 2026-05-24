@@ -21,3 +21,10 @@ body { background: #f5f4ef; }
 .community-cta__heading { font-family: var(--mg-font-display); font-weight: 600; font-size: clamp(32px, 4vw, 48px); line-height: 1.05; letter-spacing: -0.025em; margin: 0 0 16px; }
 .community-cta__body { font-family: var(--mg-font-body); font-size: 17px; line-height: 1.6; color: rgba(255,255,255,0.78); max-width: 500px; margin: 0 auto 28px; }
 .community-cta__btns { display: flex; gap: 12px; justify-content: center; flex-wrap: wrap; }
+
+@media (max-width: 640px) {
+  .community-section { padding: 48px 20px 64px; }
+  .channel-link { grid-template-columns: auto 1fr; gap: 12px; }
+  .channel-link__count { grid-column: 2; }
+  .community-cta { padding: 36px 24px; }
+}

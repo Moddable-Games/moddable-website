@@ -290,3 +290,8 @@
   flex-wrap: wrap;
   gap: 8px;
 }
+
+@media (max-width: 640px) {
+  .deck-card { padding: 20px; }
+  .deal-hands { grid-template-columns: 1fr; }
+}

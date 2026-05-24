@@ -183,3 +183,9 @@
   text-align: center;
   line-height: 1.5;
 }
+
+@media (max-width: 480px) {
+  .sub-form { padding: 20px; }
+  .sub-form__email-row { flex-direction: column; }
+  .sub-cards { grid-template-columns: 1fr; }
+}

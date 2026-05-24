@@ -260,3 +260,11 @@
   font-weight: 600;
   color: var(--mg-ink);
 }
+
+@media (max-width: 640px) {
+  .chess-card { padding: 20px; }
+  .rules-ref__grid { grid-template-columns: 1fr; gap: 4px 0; }
+  .rules-ref__label { margin-top: 8px; }
+  .match-form__row { flex-direction: column; align-items: stretch; gap: 6px; }
+  .match-form__label { min-width: unset; }
+}

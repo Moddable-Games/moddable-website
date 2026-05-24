@@ -50,3 +50,12 @@ body { background:#f5f4ef; }
 .resource-cell--header { font-family:var(--mg-font-mono); font-weight:600; font-size:11px; color:#7a8290; text-transform:uppercase; letter-spacing:0.5px; }
 .resource-cell--body { font-family:var(--mg-font-body); font-size:14px; color:#14161c; }
 .resource-cell--nuke-name { font-family:var(--mg-font-body); font-weight:600; font-size:14px; color:#d11a1a; }
+
+@media (max-width: 640px) {
+  .nukes-content { padding: 36px 20px 64px; }
+  .nukes-card { padding: 20px; }
+  #resource-table { grid-template-columns: 1fr; }
+  .resource-cell--header { border-bottom: 1px solid #e6e3d8; }
+  .fallout-row { grid-template-columns: 1fr; gap: 8px; }
+  .fallout-row__advance, .fallout-row__remove { justify-self: start; }
+}

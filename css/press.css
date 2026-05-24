@@ -185,3 +185,11 @@
 .press-copied--show {
   opacity: 1;
 }
+
+@media (max-width: 640px) {
+  .press-card { padding: 20px; }
+  .press-stats { grid-template-columns: 1fr 1fr; }
+  .press-assets { grid-template-columns: 1fr 1fr; }
+  .press-swatch { width: 56px; }
+  .press-swatch__color { width: 56px; height: 40px; }
+}
