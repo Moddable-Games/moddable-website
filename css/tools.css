@@ -267,3 +267,15 @@ input[type=range] { width: 100%; accent-color: #0c4f8d; }
 .seating-seat { background: #f5f4ef; border: 1px solid var(--mg-hairline-light); border-radius: 12px; padding: 14px; text-align: center; }
 .seating-seat__num { font-family: var(--mg-font-mono); font-size: 11px; color: var(--mg-stone); margin-bottom: 4px; }
 .seating-seat__name { font-family: var(--mg-font-body); font-weight: 600; font-size: 14px; color: var(--mg-ink); }
+
+@media (max-width: 768px) {
+  .tools-hero__inner { flex-direction: column; text-align: center; }
+  .tools-hero__dice { display: none; }
+  .tools-hero { padding: 48px 20px 64px; }
+  .tools-body { padding: 32px 20px 64px; }
+  .tools-filter { padding: 12px 20px; }
+  .tool-card { padding: 24px 20px; }
+  .dice-result { font-size: 56px; }
+  .name-gen__result { font-size: 36px; }
+  .timer-display { font-size: 48px; }
+}

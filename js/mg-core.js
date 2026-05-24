@@ -4,7 +4,10 @@
    ========================================================================= */
 
 window.MG = (() => {
-  const BASE = (document.querySelector('meta[name="mg-base"]') || {}).content || '';
+  const META_BASE = (document.querySelector('meta[name="mg-base"]') || {}).content;
+  const BASE = META_BASE != null ? META_BASE
+    : location.pathname.includes('/MODDABLE/moddable-website')
+      ? '/MODDABLE/moddable-website' : '';
   function url(path) { return BASE + path; }
 
   const T = {

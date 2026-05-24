@@ -20,3 +20,11 @@ body { background: #f5f4ef; }
 .mods-empty__title { font-family: var(--mg-font-display); font-weight: 600; font-size: 24px; color: var(--mg-ink); margin: 0 0 8px; }
 .mods-empty__body { font-family: var(--mg-font-body); font-size: 15px; color: var(--mg-mute); margin: 0 0 20px; }
 .mods-empty__link { display: inline-flex; align-items: center; height: 48px; padding: 0 22px; background: var(--mg-ink); color: #fff; border-radius: 9999px; font-family: var(--mg-font-body); font-weight: 600; font-size: 15px; text-decoration: none; }
+
+@media (max-width: 768px) {
+  .mods-hero { padding: 48px 20px 64px; }
+  .mods-filter { padding: 32px 20px 72px; }
+  .mods-filter__bar { flex-direction: column; }
+  .mods-filter__search-wrap { max-width: none; }
+  .mods-filter__cats { margin-left: 0; }
+}
