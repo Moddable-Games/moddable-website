@@ -119,6 +119,13 @@ Pages load `mg-loader.js` (shared modules) + their own page script. Data is fetc
 
 ### Changelog
 
+#### 2026-05-24
+- Added per-page OG/Twitter meta tags via `build/stamp-meta.py` (closes #35)
+- Fleshed out 4 stub pages: /press (stat cards, swatches, assets), /subscribe (form + success state), /tools/decks (deck builder), /tools/chess (variant picker)
+- Added all new pages to navbar dropdowns, footer links, and tools index
+- Created new `Moddable-Games/moddable-chess` repo — shared chess engine with 14 variants
+- Renamed existing chess repo to `Moddable-Games/dungeon-chess`
+
 #### 2026-05-23
 - Refactored `MG.data` to Promise-based API: `get(name)` → Promise, `get(type, slug)` → single item lookup
 - Deduplicates in-flight fetches (no double-requests for same resource)
