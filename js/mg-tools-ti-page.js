@@ -17,7 +17,7 @@ const FACTIONS = [
   { name:'Xxcha Kingdom',       color:'#0c4f8d', flag:'XX'  },
   { name:'Empyrean',            color:'#e63232', flag:'EP'  },
   { name:'Argent Flight',       color:'#6fb5ff', flag:'AF'  },
-  { name:"Vuil'raith Cabal",    color:'#7a8290', flag:'VR'  },
+  { name:"Vuil'raith Cabal",    color:'#636b78', flag:'VR'  },
   { name:'Naaz-Rokha Alliance', color:'#428619', flag:'NR'  },
   { name:'Titans of Ul',        color:'#936d62', flag:'TU'  },
 ];
@@ -93,7 +93,7 @@ function objectiveSection(title, objs, accent) {
       check.style.color = '#fff';
       row.style.background = state[i] ? accent+'18' : '#f5f4ef';
       label.style.textDecoration = state[i] ? 'line-through' : 'none';
-      label.style.color = state[i] ? '#7a8290' : '#14161c';
+      label.style.color = state[i] ? '#636b78' : '#14161c';
     });
     list.appendChild(row);
   });
@@ -107,12 +107,52 @@ og.appendChild(objectiveSection('STAGE II', STAGE_II, '#0c4f8d'));
 
 /* ── AGENDA VOTER ── */
 const AGENDAS = [
-  { title:'Classified Document Leaks', type:'Law', for:'Attach a politics rider to any planet in Mecatol Rex system', against:'Player with most planets loses 1 VP' },
-  { title:'Conventions of War', type:'Law', for:'No player may use their faction abilities during combat', against:'For the rest of the round, players may use war sun fighters' },
-  { title:'Core Mining', type:'Directive', for:'Each player destroys one of their space docks; gains 2 trade goods', against:'Each player draws 1 action card' },
-  { title:'Demilitarized Zone', type:'Law', for:'Mecatol Rex becomes demilitarized — no units may land', against:'Current speaker gains 3 command tokens' },
-  { title:'Galactic Crisis Pact', type:'Law', for:'All players vote simultaneously and publicly', against:'Votes this round count double' },
-  { title:'Holy Planet of Ixth', type:'Law', for:'Attach Holy Planet of Ixth card to one cultural planet', against:'Each player exhausts one of their planets' },
+  { title:'Anti-Intellectual Revolution', type:'Law', for:'After a player researches a technology, they must destroy one of their non-fighter ships', against:'At the start of each round, each player discards 1 action card' },
+  { title:'Archived Secret', type:'Directive', for:'Elected player draws 2 secret objectives', against:'Elected player draws 3 action cards' },
+  { title:'Arms Reduction', type:'Directive', for:'Each player destroys all but 2 of their dreadnoughts and all but 4 of their cruisers', against:'Each player returns 1 command token from their fleet pool to reinforcements' },
+  { title:'Classified Document Leaks', type:'Law', for:'When a player scores a secret objective, they must reveal all secret objectives in hand', against:'Each player that has scored a secret objective gains 1 trade good' },
+  { title:'Colonial Redistribution', type:'Directive', for:'Each player returns all planets outside their home system to the game board', against:'Each player places 1 infantry from reinforcements on a planet they control' },
+  { title:'Committee Formation', type:'Law', for:'The speaker cannot vote on agendas', against:'Each player who voted for this outcome draws 1 action card' },
+  { title:'Compensated Disarmament', type:'Directive', for:'Each player destroys all of their ground forces on Mecatol Rex; each player who destroys at least 1 ground force gains 3 trade goods', against:'Each player places up to 2 infantry from reinforcements on Mecatol Rex' },
+  { title:'Conventions of War', type:'Law', for:'Players cannot use BOMBARDMENT against planets that contain structures', against:'Each player that voted for this outcome draws 1 action card' },
+  { title:'Core Mining', type:'Directive', for:'Attach this card to a hazardous planet; its resource value is increased by 2', against:'Attach this card to a cultural planet; its influence value is increased by 2' },
+  { title:'Demilitarized Zone', type:'Law', for:'All units in the Mecatol Rex system are returned to reinforcements; players cannot move units into the Mecatol Rex system', against:'The Mecatol Rex system gains no effect' },
+  { title:'Economic Equality', type:'Directive', for:'Each player returns all trade goods to the supply and gains 5 trade goods', against:'Each player returns all trade goods to the supply and draws 1 action card for every 3 trade goods returned (rounded down)' },
+  { title:'Enforced Travel Ban', type:'Law', for:'Alpha and beta wormholes have no effect during movement', against:'Players may not spend trade goods to increase the number of votes they cast' },
+  { title:'Executive Sanctions', type:'Law', for:'Each player can have a maximum of 3 action cards in hand', against:'Each player can have a maximum of 5 action cards in hand' },
+  { title:'Fleet Regulations', type:'Law', for:'Each player places a maximum of 4 tokens in their fleet pool', against:'Each player places a maximum of 5 tokens in their fleet pool' },
+  { title:'Galactic Crisis Pact', type:'Directive', for:'The speaker gains 1 victory point', against:'The speaker loses 1 victory point' },
+  { title:'Holy Planet of Ixth', type:'Law', for:'Attach this card to a cultural planet; its resource value and influence value are each increased by 2', against:'Exhaust all cultural planets' },
+  { title:'Homeland Defense Act', type:'Law', for:'Each player cannot have more than 2 PDS units on any planet', against:'Each player places 1 PDS from reinforcements on a planet they control' },
+  { title:'Imperial Arbiter', type:'Law', for:'The speaker gains this card; at any time they may discard this card to swap 2 systems on the game board', against:'Exhaust all planets in one system chosen by the speaker' },
+  { title:'Incentive Program', type:'Directive', for:'Draw 1 stage I public objective and place it faceup in the common play area', against:'Draw 1 stage II public objective and place it faceup in the common play area' },
+  { title:'Ixthian Artifact', type:'Directive', for:'The speaker rolls 1 die; on 6-10 each player may research 1 technology; on 1-5 destroy all units on 3 planets you control', against:'No effect' },
+  { title:'Judicial Abolishment', type:'Directive', for:'Discard all laws in play', against:'Each player draws 1 action card for each law in play' },
+  { title:'Minister of Commerce', type:'Law', for:'The speaker gains this card; at the start of the strategy phase they gain 1 trade good for each neighbour they have', against:'Each player who voted for this outcome gains 1 trade good' },
+  { title:'Minister of Exploration', type:'Law', for:'The speaker gains this card; when they take control of a planet, they gain 1 trade good', against:'Each player who voted for this outcome gains 1 trade good' },
+  { title:'Minister of Industry', type:'Law', for:'The speaker gains this card; they may place 1 space dock from reinforcements on a planet they control', against:'Each player who voted for this outcome places 1 PDS from reinforcements on a planet they control' },
+  { title:'Minister of Peace', type:'Law', for:'The speaker gains this card; after a player activates a system that contains one of their units, that player loses 1 trade good', against:'Each player who voted for this outcome gains 1 trade good' },
+  { title:'Minister of Policy', type:'Law', for:'The speaker gains this card; at the end of the status phase they draw 1 action card', against:'Each player who voted for this outcome draws 1 action card' },
+  { title:'Minister of Sciences', type:'Law', for:'The speaker gains this card; when they research a technology, they may spend 3 trade goods to ignore 1 prerequisite', against:'Each player who voted for this outcome gains 2 trade goods' },
+  { title:'Minister of War', type:'Law', for:'The speaker gains this card; they may convert 1 of their command tokens from their strategy pool to their fleet pool at the start of each round', against:'Each player who voted for this outcome places 1 cruiser from reinforcements in their home system' },
+  { title:'Miscount Disclosed', type:'Directive', for:'Revote on the previous agenda', against:'The previous agenda has no further effect' },
+  { title:'Mutiny', type:'Directive', for:'Each player who voted for this outcome gains 1 victory point', against:'Each player who voted for this outcome loses 1 victory point' },
+  { title:'New Constitution', type:'Directive', for:'Discard all laws in play. At the end of this agenda phase draw 2 agendas from the top of the deck and resolve each', against:'No effect' },
+  { title:'Prophecy of Ixth', type:'Law', for:'The speaker gains this card; they apply +1 to the result of each of their unit\'s combat rolls', against:'Each player who voted for this outcome applies +1 to their SPACE COMBAT rolls until end of round' },
+  { title:'Public Execution', type:'Directive', for:'Elected player discards all action cards from hand and loses 3 trade goods', against:'Elected player gains 1 trade good for each action card in hand' },
+  { title:'Publicize Weapon Schematics', type:'Directive', for:'If any player has a war sun on the board, all players may research the War Sun tech (ignoring prerequisites); destroy all war suns', against:'No effect' },
+  { title:'Regulated Conscription', type:'Law', for:'No more than 2 ground forces may participate in combat on a given planet', against:'No effect; each player that voted for this outcome places 2 infantry from reinforcements on a planet they control' },
+  { title:'Representative Government', type:'Law', for:'Each player with a cultural planet gains 1 additional vote during agenda phase', against:'Each player can cast a total of only 1 vote on each agenda' },
+  { title:'Research Team: Biotic', type:'Directive', for:'Attach this card to a planet with a green technology specialty; its resource value is increased by 1', against:'Attach this card to a planet without a technology specialty; that planet gains a green technology specialty' },
+  { title:'Research Team: Cybernetic', type:'Directive', for:'Attach this card to a planet with a yellow technology specialty; its resource value is increased by 1', against:'Attach this card to a planet without a technology specialty; that planet gains a yellow technology specialty' },
+  { title:'Research Team: Propulsion', type:'Directive', for:'Attach this card to a planet with a blue technology specialty; its resource value is increased by 1', against:'Attach this card to a planet without a technology specialty; that planet gains a blue technology specialty' },
+  { title:'Research Team: Warfare', type:'Directive', for:'Attach this card to a planet with a red technology specialty; its resource value is increased by 1', against:'Attach this card to a planet without a technology specialty; that planet gains a red technology specialty' },
+  { title:'Seed of an Empire', type:'Directive', for:'The player with the most victory points gains 1 victory point', against:'The player with the fewest victory points gains 1 victory point' },
+  { title:'Senate Sanctuary', type:'Law', for:'Mecatol Rex is immune to the BOMBARDMENT ability', against:'No effect' },
+  { title:'Shard of the Throne', type:'Law', for:'The speaker gains this card and 1 VP; if they ever lose this card they lose 1 VP', against:'The speaker draws 1 secret objective' },
+  { title:'Shared Research', type:'Law', for:'Each player\'s technology prerequisites are reduced by 1 for all technologies', against:'No effect' },
+  { title:'Wormhole Reconstruction', type:'Directive', for:'All systems containing alpha or beta wormholes are adjacent to each other', against:'Each player that has a ship in or adjacent to a wormhole system may move that ship to any other wormhole system' },
+  { title:'Wormhole Research', type:'Law', for:'Players that have ships in systems containing wormholes gain 1 trade good at the start of the status phase', against:'Each player who voted for this outcome gains 2 trade goods' },
 ];
 
 let currentAgenda = null, votes = {for:0, against:0};

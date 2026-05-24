@@ -185,7 +185,7 @@
       var cover = el('div', {class: 'post-more-card__cover'});
       cover.style.background = 'linear-gradient(135deg,#0a0d2a 0%,' + p.cover + ' 100%)';
       if (p.img) {
-        cover.appendChild(el('img', {src: url('/img/news/' + p.img), alt: '', class: 'post-more-card__img'}));
+        cover.appendChild(el('img', {src: url('/img/news/' + p.img), alt: '', class: 'post-more-card__img', loading:'lazy'}));
       }
       a.appendChild(cover);
       a.appendChild(el('div', {class: 'post-more-card__meta'}, p.tags.slice(0,2).join(' · ').toUpperCase() + ' · ' + p.date));

@@ -20,7 +20,7 @@ window.MG = (() => {
     surfaceElevated:"#161721",
     hairlineLight:"#e6e3d8",
     ink:"#14161c", body:"#1f2228", charcoal:"#3a3d44",
-    mute:"#4f5764", stone:"#7a8290", faint:"#c3c5cc",
+    mute:"#4f5764", stone:"#636b78", faint:"#c3c5cc",
   };
 
   const CATEGORY_COLORS = {

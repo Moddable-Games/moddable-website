@@ -31,7 +31,7 @@ body { background:#f5f4ef; }
 
 /* ── Character lottery ── */
 .char-controls { display:flex; gap:10px; align-items:center; margin-bottom:20px; flex-wrap:wrap; }
-.char-controls__label { font-family:var(--mg-font-mono); font-size:12px; color:#7a8290; text-transform:uppercase; letter-spacing:0.5px; }
+.char-controls__label { font-family:var(--mg-font-mono); font-size:12px; color:#636b78; text-transform:uppercase; letter-spacing:0.5px; }
 .char-controls__btns { display:flex; gap:6px; }
 .char-controls__draw { margin-left:auto; }
 .char-grid { display:grid; grid-template-columns:repeat(2,1fr); gap:10px; }
@@ -43,7 +43,7 @@ body { background:#f5f4ef; }
 
 /* ── Hex board ── */
 .board-controls { display:flex; justify-content:space-between; align-items:center; margin-bottom:16px; }
-.board-seed { font-family:var(--mg-font-mono); font-size:12px; color:#7a8290; }
+.board-seed { font-family:var(--mg-font-mono); font-size:12px; color:#636b78; }
 .board-wrap { background:#0a0d2a; border-radius:14px; padding:20px; overflow:hidden; }
 .board-legend { display:flex; gap:12px; margin-top:14px; flex-wrap:wrap; }
 .board-legend__chip { display:flex; align-items:center; gap:6px; }

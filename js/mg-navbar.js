@@ -33,7 +33,7 @@
     for (const item of NAV_ITEMS) {
       const isActive = activeId === item.id;
       const wrap = el('div', { style:{ position:'relative' }});
-      const a = el('a', {
+      const aAttrs = {
         href: item.href,
         style: css({
           fontFamily:F.body, fontWeight:500, fontSize:'14px',
@@ -41,7 +41,9 @@
           textDecoration:'none', letterSpacing:'0.8px', textTransform:'uppercase',
           position:'relative', paddingBottom:'4px',
         }),
-      }, item.id);
+      };
+      if (isActive) aAttrs['aria-current'] = 'page';
+      const a = el('a', aAttrs, item.id);
       if (isActive) {
         a.appendChild(el('span', { style:{ position:'absolute', bottom:'-22px', left:0, right:0, height:'2px', background:T.cosmicGlow }}));
       }

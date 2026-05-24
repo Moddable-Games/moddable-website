@@ -27,7 +27,7 @@ function postCover(post, big=false) {
   const d = el('div',{class: big ? 'news-cover--big' : 'news-cover'});
   d.style.background = `linear-gradient(135deg,#0a0d2a 0%,${post.cover} 100%)`;
   if (post.img) {
-    const img = el('img',{src:url(`/img/news/${post.img}`), alt:'', class:'news-cover__img'});
+    const img = el('img',{src:url(`/img/news/${post.img}`), alt:'', class:'news-cover__img', loading:'lazy'});
     d.appendChild(img);
   }
   return d;

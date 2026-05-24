@@ -39,15 +39,15 @@ body { background:#f5f4ef; }
 
 .fallout-row { display:grid; grid-template-columns:1fr auto auto; gap:12px; align-items:center; padding:14px 16px; background:#f5f4ef; border-radius:10px; }
 .fallout-row__name { font-family:var(--mg-font-body); font-weight:600; font-size:15px; color:#14161c; }
-.fallout-row__meta { font-family:var(--mg-font-mono); font-size:11px; color:#7a8290; margin-top:2px; }
+.fallout-row__meta { font-family:var(--mg-font-mono); font-size:11px; color:#636b78; margin-top:2px; }
 .fallout-row__advance { font-family:var(--mg-font-body); font-weight:600; font-size:13px; padding:6px 14px; border-radius:9999px; border:none; background:#14161c; color:#fff; cursor:pointer; }
-.fallout-row__remove { width:30px; height:30px; border-radius:9999px; border:1px solid #e6e3d8; background:#fff; cursor:pointer; font-size:14px; color:#7a8290; }
-.fallout-empty { padding:24px; text-align:center; font-family:var(--mg-font-mono); font-size:13px; color:#7a8290; }
+.fallout-row__remove { width:30px; height:30px; border-radius:9999px; border:1px solid #e6e3d8; background:#fff; cursor:pointer; font-size:14px; color:#636b78; }
+.fallout-empty { padding:24px; text-align:center; font-family:var(--mg-font-mono); font-size:13px; color:#636b78; }
 
 /* ── Resource table ────────────────────────────────────────────────── */
 #resource-table { display:grid; grid-template-columns:1fr 1fr 1fr; gap:1px; background:#e6e3d8; border-radius:10px; overflow:hidden; }
 .resource-cell { padding:10px 14px; background:#fff; }
-.resource-cell--header { font-family:var(--mg-font-mono); font-weight:600; font-size:11px; color:#7a8290; text-transform:uppercase; letter-spacing:0.5px; }
+.resource-cell--header { font-family:var(--mg-font-mono); font-weight:600; font-size:11px; color:#636b78; text-transform:uppercase; letter-spacing:0.5px; }
 .resource-cell--body { font-family:var(--mg-font-body); font-size:14px; color:#14161c; }
 .resource-cell--nuke-name { font-family:var(--mg-font-body); font-weight:600; font-size:14px; color:#d11a1a; }
 
