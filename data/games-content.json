@@ -12,40 +12,123 @@
       "bloom": "radial-gradient(ellipse,rgba(209,26,26,0.35) 0%,transparent 65%)"
     },
     "stats": [
-      ["Players", "2–3"],
-      ["Turns", "15"],
-      ["Time", "45+ min"],
-      ["Age", "12+"],
-      ["Designer", "Moddable team"],
-      ["Released", "Jan 2012"],
-      ["Updated", "May 2026"]
+      [
+        "Players",
+        "2–3"
+      ],
+      [
+        "Turns",
+        "15"
+      ],
+      [
+        "Time",
+        "45+ min"
+      ],
+      [
+        "Age",
+        "12+"
+      ],
+      [
+        "Designer",
+        "Moddable team"
+      ],
+      [
+        "Released",
+        "Jan 2012"
+      ],
+      [
+        "Updated",
+        "May 2026"
+      ]
     ],
     "buttons": {
       "hero": [
-        ["Read the Rules", "rules:nukes", "red"],
-        ["Browse on GitHub", "https://github.com/Moddable-Games/Nukes-Rulebook/blob/main/games/nukes/content/rulebook.md", "outline-dark"]
+        [
+          "Read the Rules",
+          "rules:nukes",
+          "red"
+        ],
+        [
+          "Browse on GitHub",
+          "https://github.com/Moddable-Games/Nukes-Rulebook/blob/main/games/nukes/content/rulebook.md",
+          "outline-dark"
+        ]
       ],
       "cta": [
-        ["Read the Rules", "rules:nukes", "red"],
-        ["See the tools", "/tools/nukes/", "outline-dark"]
+        [
+          "Read the Rules",
+          "rules:nukes",
+          "red"
+        ],
+        [
+          "See the tools",
+          "/tools/nukes/",
+          "outline-dark"
+        ]
       ]
     },
     "steps": [
-      {"n": "01", "title": "Divide the map", "body": "61 hexes dealt face-down. Each superpower places its capital on a starting hex. Claim three adjacent hexes as your heartland."},
-      {"n": "02", "title": "Build and expand", "body": "Spend resources to build units, fortify hexes, or research the one upgrade your superpower gets. Expand by conquest or diplomacy."},
-      {"n": "03", "title": "Negotiate", "body": "Every turn has a diplomacy phase before combat. Superpowers can form two-turn non-aggression pacts. They can break them. That's the game."},
-      {"n": "04", "title": "Press or survive", "body": "After turn 15, or when The Button is pressed, the game ends. Points for hexes held, capitals standing, and alliances honoured."}
+      {
+        "n": "01",
+        "title": "Divide the map",
+        "body": "61 hexes dealt face-down. Each superpower places its capital on a starting hex. Claim three adjacent hexes as your heartland."
+      },
+      {
+        "n": "02",
+        "title": "Build and expand",
+        "body": "Spend resources to build units, fortify hexes, or research the one upgrade your superpower gets. Expand by conquest or diplomacy."
+      },
+      {
+        "n": "03",
+        "title": "Negotiate",
+        "body": "Every turn has a diplomacy phase before combat. Superpowers can form two-turn non-aggression pacts. They can break them. That's the game."
+      },
+      {
+        "n": "04",
+        "title": "Press or survive",
+        "body": "After turn 15, or when The Button is pressed, the game ends. Points for hexes held, capitals standing, and alliances honoured."
+      }
     ],
     "hooks": [
-      {"name": "superpowers.yaml", "desc": "Three factions with asymmetric abilities. Add a fourth, reshape all three, or make them symmetric for a purer strategy game."},
-      {"name": "map.yaml", "desc": "The starting hex layout and heartland rules. Change it to a linear strip, concentric rings, or a randomised deal."},
-      {"name": "button.lua", "desc": "The Button rules — when it can be pressed, how large the fallout radius is, what the point penalty for losing your capital is."},
-      {"name": "endgame.md", "desc": "Victory conditions and scoring formula. Default scores hexes + capitals. Override to make alliances worth more, or war worth less."}
+      {
+        "name": "superpowers.yaml",
+        "desc": "Three factions with asymmetric abilities. Add a fourth, reshape all three, or make them symmetric for a purer strategy game."
+      },
+      {
+        "name": "map.yaml",
+        "desc": "The starting hex layout and heartland rules. Change it to a linear strip, concentric rings, or a randomised deal."
+      },
+      {
+        "name": "button.lua",
+        "desc": "The Button rules — when it can be pressed, how large the fallout radius is, what the point penalty for losing your capital is."
+      },
+      {
+        "name": "endgame.md",
+        "desc": "Victory conditions and scoring formula. Default scores hexes + capitals. Override to make alliances worth more, or war worth less."
+      }
     ],
     "community": [
-      {"category": "Rebalance", "baseGame": "Nukes", "title": "Nukes: Diplomacy Mode", "body": "Extended negotiation phase. Three-turn pacts become binding contracts with penalties for breaking them.", "stats": "3 players · 90 min · 14+"},
-      {"category": "Total conversion", "baseGame": "Nukes", "title": "Nukes: Cold Space", "body": "The same mechanics on a star map. Planets instead of hexes, fleets instead of armies, and the button launches a supernova.", "stats": "2–4 players · 120 min · 14+"},
-      {"category": "Reskin", "baseGame": "Nukes", "title": "Nukes: Retro", "body": "1950s propaganda art style. Same rules, different aesthetic. Print-and-play with period-accurate typography.", "stats": "3 players · 60 min · 14+"}
+      {
+        "category": "Rebalance",
+        "baseGame": "Nukes",
+        "title": "Nukes: Diplomacy Mode",
+        "body": "Extended negotiation phase. Three-turn pacts become binding contracts with penalties for breaking them.",
+        "stats": "3 players · 90 min · 14+"
+      },
+      {
+        "category": "Total conversion",
+        "baseGame": "Nukes",
+        "title": "Nukes: Cold Space",
+        "body": "The same mechanics on a star map. Planets instead of hexes, fleets instead of armies, and the button launches a supernova.",
+        "stats": "2–4 players · 120 min · 14+"
+      },
+      {
+        "category": "Reskin",
+        "baseGame": "Nukes",
+        "title": "Nukes: Retro",
+        "body": "1950s propaganda art style. Same rules, different aesthetic. Print-and-play with period-accurate typography.",
+        "stats": "3 players · 60 min · 14+"
+      }
     ]
   },
   "mongo": {
@@ -61,42 +144,122 @@
       "bloom": "radial-gradient(ellipse,rgba(58,153,40,0.25) 0%,transparent 65%)"
     },
     "stats": [
-      ["Players", "3–6"],
-      ["Time", "90 min"],
-      ["Age", "14+"],
-      ["Mechanism", "Trick-taking"],
-      ["Status", "Open beta"],
-      ["Spots left", "143 / 200"],
-      ["Updated", "May 2026"]
+      [
+        "Players",
+        "3–6"
+      ],
+      [
+        "Time",
+        "90 min"
+      ],
+      [
+        "Age",
+        "14+"
+      ],
+      [
+        "Mechanism",
+        "Trick-taking"
+      ],
+      [
+        "Status",
+        "Open beta"
+      ],
+      [
+        "Spots left",
+        "143 / 200"
+      ],
+      [
+        "Updated",
+        "May 2026"
+      ]
     ],
     "buttons": {
       "hero": [
-        ["Sign up for playtest", "#", "green"],
-        ["Read the Rules", "rules:mongo", "outline-dark"]
+        [
+          "Sign up for playtest",
+          "#",
+          "green"
+        ],
+        [
+          "Read the Rules",
+          "rules:mongo",
+          "outline-dark"
+        ]
       ],
       "cta": [],
       "extra": {
         "playtest-btns": [
-          ["Sign up for playtest", "#", "green"],
-          ["Download the beta rules", "#", "outline-dark"]
+          [
+            "Sign up for playtest",
+            "#",
+            "green"
+          ],
+          [
+            "Download the beta rules",
+            "#",
+            "outline-dark"
+          ]
         ]
       }
     },
     "steps": [
-      {"n": "01", "title": "Deal the deck", "body": "54 cards, shuffled. Each player gets 7. The remaining stack is the Mongo pile — it changes shape every round."},
-      {"n": "02", "title": "Name the rule", "body": "The winner of the previous trick names one new rule for the next trick only. Anything within the Rule Book bounds."},
-      {"n": "03", "title": "Play a trick", "body": "Standard trick-taking: lead a card, follow suit if you can, highest card wins. Except the rule from step 2 overrides."},
-      {"n": "04", "title": "Stack the Mongo", "body": "Tricks are worth points based on cards played, not cards won. After 7 tricks, score. First to 50 wins."}
+      {
+        "n": "01",
+        "title": "Deal the deck",
+        "body": "54 cards, shuffled. Each player gets 7. The remaining stack is the Mongo pile — it changes shape every round."
+      },
+      {
+        "n": "02",
+        "title": "Name the rule",
+        "body": "The winner of the previous trick names one new rule for the next trick only. Anything within the Rule Book bounds."
+      },
+      {
+        "n": "03",
+        "title": "Play a trick",
+        "body": "Standard trick-taking: lead a card, follow suit if you can, highest card wins. Except the rule from step 2 overrides."
+      },
+      {
+        "n": "04",
+        "title": "Stack the Mongo",
+        "body": "Tricks are worth points based on cards played, not cards won. After 7 tricks, score. First to 50 wins."
+      }
     ],
     "hooks": [
-      {"name": "rules.md", "desc": "The Rule Book: the constraints a rule-namer must stay within. Fork it to expand or restrict what rules are legal."},
-      {"name": "deck.yaml", "desc": "Card definitions — suits, values, special behaviours. Add a fifth suit, remove the Jokers, invent wildcards."},
-      {"name": "scoring.lua", "desc": "The points formula. Default is pip-based. Override it to make tricks matter more, or turns, or anything else."}
+      {
+        "name": "rules.md",
+        "desc": "The Rule Book: the constraints a rule-namer must stay within. Fork it to expand or restrict what rules are legal."
+      },
+      {
+        "name": "deck.yaml",
+        "desc": "Card definitions — suits, values, special behaviours. Add a fifth suit, remove the Jokers, invent wildcards."
+      },
+      {
+        "name": "scoring.lua",
+        "desc": "The points formula. Default is pip-based. Override it to make tricks matter more, or turns, or anything else."
+      }
     ],
     "community": [
-      {"category": "Rebalance", "baseGame": "Mongo", "title": "Mongo: Quick Draw", "body": "5-card hands instead of 7. Faster rounds, more volatile rule changes. Lunch-break mode.", "stats": "3–5 players · 15 min · 10+"},
-      {"category": "Total conversion", "baseGame": "Mongo", "title": "Mongo: Spell Deck", "body": "Fantasy theme. Rules become spells — \"all cards played face-down\" becomes \"Fog of War\", etc.", "stats": "3–5 players · 45 min · 12+"},
-      {"category": "Reskin", "baseGame": "Mongo", "title": "Mongo: Neon", "body": "Cyberpunk card art. Same rules, UV-reactive card backs for night sessions.", "stats": "3–5 players · 30 min · 12+"}
+      {
+        "category": "Rebalance",
+        "baseGame": "Mongo",
+        "title": "Mongo: Quick Draw",
+        "body": "5-card hands instead of 7. Faster rounds, more volatile rule changes. Lunch-break mode.",
+        "stats": "3–5 players · 15 min · 10+"
+      },
+      {
+        "category": "Total conversion",
+        "baseGame": "Mongo",
+        "title": "Mongo: Spell Deck",
+        "body": "Fantasy theme. Rules become spells — \"all cards played face-down\" becomes \"Fog of War\", etc.",
+        "stats": "3–5 players · 45 min · 12+"
+      },
+      {
+        "category": "Reskin",
+        "baseGame": "Mongo",
+        "title": "Mongo: Neon",
+        "body": "Cyberpunk card art. Same rules, UV-reactive card backs for night sessions.",
+        "stats": "3–5 players · 30 min · 12+"
+      }
     ]
   },
   "endless-skies": {
@@ -112,36 +275,108 @@
       "bloom": null
     },
     "stats": [
-      ["Players", "1–4"],
-      ["Time", "60 min"],
-      ["Age", "10+"],
-      ["Designer", "Moddable team"],
-      ["Released", "Mar 2025"],
-      ["Updated", "May 2026"]
+      [
+        "Players",
+        "1–4"
+      ],
+      [
+        "Time",
+        "60 min"
+      ],
+      [
+        "Age",
+        "10+"
+      ],
+      [
+        "Designer",
+        "Moddable team"
+      ],
+      [
+        "Released",
+        "Mar 2025"
+      ],
+      [
+        "Updated",
+        "May 2026"
+      ]
     ],
     "buttons": {
       "hero": [
-        ["Read the Rules", "rules:endless-skies", "primary"],
-        ["Browse community mods", "/mods/", "outline-dark"]
+        [
+          "Read the Rules",
+          "rules:endless-skies",
+          "primary"
+        ],
+        [
+          "Browse community mods",
+          "/mods/",
+          "outline-dark"
+        ]
       ],
       "cta": []
     },
     "steps": [
-      {"n": "01", "title": "Lay the world", "body": "19 hex tiles dealt face-down into a 3-ring spiral. No two games start the same."},
-      {"n": "02", "title": "Pick a faction", "body": "Twelve faction decks: Cartographers, Storm-callers, Salvagers, Iron Banks… each breaks one rule."},
-      {"n": "03", "title": "Trade and tile", "body": "Flip a tile to reveal a biome (sky, sea, surface). Trade resources — the speaker can veto one deal per round."},
-      {"n": "04", "title": "End in the void", "body": "Whoever reaches the Void first triggers endgame. Two more full rounds, then count points."}
+      {
+        "n": "01",
+        "title": "Lay the world",
+        "body": "19 hex tiles dealt face-down into a 3-ring spiral. No two games start the same."
+      },
+      {
+        "n": "02",
+        "title": "Pick a faction",
+        "body": "Twelve faction decks: Cartographers, Storm-callers, Salvagers, Iron Banks… each breaks one rule."
+      },
+      {
+        "n": "03",
+        "title": "Trade and tile",
+        "body": "Flip a tile to reveal a biome (sky, sea, surface). Trade resources — the speaker can veto one deal per round."
+      },
+      {
+        "n": "04",
+        "title": "End in the void",
+        "body": "Whoever reaches the Void first triggers endgame. Two more full rounds, then count points."
+      }
     ],
     "hooks": [
-      {"name": "factions.yaml", "desc": "Add a faction deck with one rule-breaker line. Validates against the base ruleset."},
-      {"name": "biomes.yaml", "desc": "Define new tile biomes — terrain, resources, victory contribution."},
-      {"name": "endgame.lua", "desc": "Override how the endgame is triggered. Useful for short-game variants."},
-      {"name": "rules.md", "desc": "Your version of the rulebook. Diffs are reviewed by the maintainers."}
+      {
+        "name": "factions.yaml",
+        "desc": "Add a faction deck with one rule-breaker line. Validates against the base ruleset."
+      },
+      {
+        "name": "biomes.yaml",
+        "desc": "Define new tile biomes — terrain, resources, victory contribution."
+      },
+      {
+        "name": "endgame.lua",
+        "desc": "Override how the endgame is triggered. Useful for short-game variants."
+      },
+      {
+        "name": "rules.md",
+        "desc": "Your version of the rulebook. Diffs are reviewed by the maintainers."
+      }
     ],
     "community": [
-      {"category": "Reskin", "baseGame": "Endless Skies", "title": "Endless Skies: Inkwell", "body": "All-monochrome tile set. Every faction recoloured into Edo-period woodblock palette.", "stats": "2–4 players · 90 min · 12+"},
-      {"category": "Rebalance", "baseGame": "Endless Skies", "title": "Solo Skies", "body": "A solo-mode bot using a 32-card AI deck. Three difficulty tiers.", "stats": "1 player · 60 min · 14+"},
-      {"category": "Total conversion", "baseGame": "Endless Skies", "title": "Subterranean", "body": "Same engine, underground theme. The Void becomes the Magma Heart. Hex tiles flipped sides.", "stats": "2–4 players · 90 min · 12+"}
+      {
+        "category": "Reskin",
+        "baseGame": "Endless Skies",
+        "title": "Endless Skies: Inkwell",
+        "body": "All-monochrome tile set. Every faction recoloured into Edo-period woodblock palette.",
+        "stats": "2–4 players · 90 min · 12+"
+      },
+      {
+        "category": "Rebalance",
+        "baseGame": "Endless Skies",
+        "title": "Solo Skies",
+        "body": "A solo-mode bot using a 32-card AI deck. Three difficulty tiers.",
+        "stats": "1 player · 60 min · 14+"
+      },
+      {
+        "category": "Total conversion",
+        "baseGame": "Endless Skies",
+        "title": "Subterranean",
+        "body": "Same engine, underground theme. The Void becomes the Magma Heart. Hex tiles flipped sides.",
+        "stats": "2–4 players · 90 min · 12+"
+      }
     ]
   },
   "dungeon-chess": {
@@ -157,38 +392,115 @@
       "bloom": null
     },
     "stats": [
-      ["Players", "2–4"],
-      ["Time", "30–120 min"],
-      ["Age", "12+"],
-      ["Species", "4"],
-      ["Units", "24"],
-      ["Status", "Alpha"],
-      ["Updated", "May 2026"]
+      [
+        "Players",
+        "2–4"
+      ],
+      [
+        "Time",
+        "30–120 min"
+      ],
+      [
+        "Age",
+        "12+"
+      ],
+      [
+        "Species",
+        "4"
+      ],
+      [
+        "Units",
+        "24"
+      ],
+      [
+        "Status",
+        "Alpha"
+      ],
+      [
+        "Updated",
+        "May 2026"
+      ]
     ],
     "buttons": {
       "hero": [
-        ["Read the Rules", "rules:dungeon-chess", "green"],
-        ["Play Online", "#", "outline-dark"]
+        [
+          "Read the Rules",
+          "rules:dungeon-chess",
+          "green"
+        ],
+        [
+          "Play Online",
+          "https://chess.moddable.games/play/",
+          "outline-dark"
+        ]
       ],
       "cta": []
     },
     "steps": [
-      {"n": "01", "title": "Choose your species", "body": "Humans, Undead, Redskins, or Greenskins. Each has 6 unique unit types with different costs, movements, and special abilities."},
-      {"n": "02", "title": "Draft your warband", "body": "Spend 75 XP to build your team. Must include a King and at least one Pawn. Every point is a tactical commitment — no two warbands are alike."},
-      {"n": "03", "title": "Deploy and battle", "body": "Place your units in your spawn zone, then take turns moving one piece. Capture enemies by moving onto their square. Terrain matters — water blocks, gaps divide, corridors create chokepoints."},
-      {"n": "04", "title": "Capture the King", "body": "The game ends the moment a King is captured. Protect yours, hunt theirs. Check forces a response — but there's no stalemate here."}
+      {
+        "n": "01",
+        "title": "Choose your species",
+        "body": "Humans, Undead, Redskins, or Greenskins. Each has 6 unique unit types with different costs, movements, and special abilities."
+      },
+      {
+        "n": "02",
+        "title": "Draft your warband",
+        "body": "Spend 75 XP to build your team. Must include a King and at least one Pawn. Every point is a tactical commitment — no two warbands are alike."
+      },
+      {
+        "n": "03",
+        "title": "Deploy and battle",
+        "body": "Place your units in your spawn zone, then take turns moving one piece. Capture enemies by moving onto their square. Terrain matters — water blocks, gaps divide, corridors create chokepoints."
+      },
+      {
+        "n": "04",
+        "title": "Capture the King",
+        "body": "The game ends the moment a King is captured. Protect yours, hunt theirs. Check forces a response — but there's no stalemate here."
+      }
     ],
     "races": [
-      {"name": "Humans", "accent": "#c0c8d0", "icon": "⚔", "desc": "Balanced generalists. Archers attack across gaps, the Wizard splits movement and attack, and the Princess slides like a bishop."},
-      {"name": "Undead", "accent": "#6b4fa0", "icon": "💀", "desc": "Movement trickery. Wraiths phase through gaps, the Vampire reverses move/attack axes, and the Warlock attacks diagonally at range."},
-      {"name": "Redskins", "accent": "#d11a1a", "icon": "🔥", "desc": "Devastating firepower. Kobolds and Iron Golems use cannon attacks — sliding through a screen piece to strike at range. The Red Dragon attacks as a knight."},
-      {"name": "Greenskins", "accent": "#3a9928", "icon": "👺", "desc": "Brute force. Goblins and Ogres bring cannon attacks like the Redskins, while the Shaman commands full queen movement. The Warlord strikes as a knight."}
+      {
+        "name": "Humans",
+        "accent": "#c0c8d0",
+        "icon": "⚔",
+        "desc": "Balanced generalists. Archers attack across gaps, the Wizard splits movement and attack, and the Princess slides like a bishop."
+      },
+      {
+        "name": "Undead",
+        "accent": "#6b4fa0",
+        "icon": "💀",
+        "desc": "Movement trickery. Wraiths phase through gaps, the Vampire reverses move/attack axes, and the Warlock attacks diagonally at range."
+      },
+      {
+        "name": "Redskins",
+        "accent": "#d11a1a",
+        "icon": "🔥",
+        "desc": "Devastating firepower. Kobolds and Iron Golems use cannon attacks — sliding through a screen piece to strike at range. The Red Dragon attacks as a knight."
+      },
+      {
+        "name": "Greenskins",
+        "accent": "#3a9928",
+        "icon": "👺",
+        "desc": "Brute force. Goblins and Ogres bring cannon attacks like the Redskins, while the Shaman commands full queen movement. The Warlord strikes as a knight."
+      }
     ],
     "hooks": [
-      {"name": "races.yaml", "desc": "Four playable races with distinct piece types, spells, and XP trees. Fork one, rewrite all four, or add a fifth."},
-      {"name": "board.lua", "desc": "Dungeon tile generation rules. Change the mix of traps vs treasures, board shape, or add entirely new tile types."},
-      {"name": "campaign.yaml", "desc": "Legacy progression — how XP persists between sessions, what carries over, and when the campaign ends."},
-      {"name": "spells.yaml", "desc": "Every racial spell with costs, effects, and targeting rules. Balance them, remove them, or add cross-race combos."}
+      {
+        "name": "races.yaml",
+        "desc": "Four playable races with distinct piece types, spells, and XP trees. Fork one, rewrite all four, or add a fifth."
+      },
+      {
+        "name": "board.lua",
+        "desc": "Dungeon tile generation rules. Change the mix of traps vs treasures, board shape, or add entirely new tile types."
+      },
+      {
+        "name": "campaign.yaml",
+        "desc": "Legacy progression — how XP persists between sessions, what carries over, and when the campaign ends."
+      },
+      {
+        "name": "spells.yaml",
+        "desc": "Every racial spell with costs, effects, and targeting rules. Balance them, remove them, or add cross-race combos."
+      }
     ]
   },
   "moddable-chess": {
@@ -204,52 +516,185 @@
       "bloom": "radial-gradient(ellipse,rgba(12,79,141,0.35) 0%,transparent 65%)"
     },
     "stats": [
-      ["Variants", "12+"],
-      ["Players", "2–4"],
-      ["Status", "Open alpha"],
-      ["Engine", "Live"],
-      ["Board types", "Square + Hex"],
-      ["Updated", "May 2026"]
+      [
+        "Variants",
+        "14"
+      ],
+      [
+        "Players",
+        "2-4"
+      ],
+      [
+        "Status",
+        "Live"
+      ],
+      [
+        "Engine",
+        "Open source"
+      ],
+      [
+        "Board types",
+        "8×8 to 12×8"
+      ],
+      [
+        "Updated",
+        "May 2026"
+      ]
     ],
     "buttons": {
       "hero": [
-        ["Play now", "#", "blue"],
-        ["Browse variants", "#variants-grid", "outline-dark"]
+        [
+          "Play now",
+          "https://chess.moddable.games/play/",
+          "blue"
+        ],
+        [
+          "Browse variants",
+          "#variants-grid",
+          "outline-dark"
+        ]
       ],
       "cta": [],
       "extra": {
         "engine-cta": [
-          ["Try the engine", "#", "blue"],
-          ["View on GitHub", "#", "outline-dark"]
+          [
+            "Try the engine",
+            "https://chess.moddable.games/play/",
+            "blue"
+          ],
+          [
+            "View on GitHub",
+            "https://github.com/Moddable-Games/moddable-chess",
+            "outline-dark"
+          ]
         ]
       }
     },
     "variants": [
-      {"n": "01", "title": "Regular (8×8)", "body": "Standard chess as the baseline. The same rules you know — running on our engine so you can fork it."},
-      {"n": "02", "title": "4-Player", "body": "Two teams or free-for-all on a cross-shaped board. The diplomacy variant."},
-      {"n": "03", "title": "Hexagonal (Glinski)", "body": "Pieces move along hex edges. Six directions instead of eight. Deeper positional play."},
-      {"n": "04", "title": "Dungeon Chess", "body": "Our original variant — four asymmetric species, 75 XP drafting, cannon mechanics, and modular dungeon boards. Now its own standalone game.", "href": "/games/dungeon-chess/"}
+      {
+        "n": "01",
+        "title": "Regular (8×8)",
+        "body": "Standard chess as the baseline. The same rules you know — running on our engine so you can fork it."
+      },
+      {
+        "n": "02",
+        "title": "4-Player",
+        "body": "Two teams or free-for-all on a cross-shaped board. The diplomacy variant."
+      },
+      {
+        "n": "03",
+        "title": "Hexagonal (Glinski)",
+        "body": "Pieces move along hex edges. Six directions instead of eight. Deeper positional play."
+      },
+      {
+        "n": "04",
+        "title": "Dungeon Chess",
+        "body": "Our original variant — four asymmetric species, 75 XP drafting, cannon mechanics, and modular dungeon boards. Now its own standalone game.",
+        "href": "/games/dungeon-chess/"
+      }
     ],
-    "features": ["Private sessions", "Cross-device", "Async play"],
+    "features": [
+      "Private sessions",
+      "Cross-device",
+      "Async play"
+    ],
     "hooks": [
-      {"name": "board.lua", "desc": "Board geometry — square, hex, or anything. Define the grid, valid positions, and rendering rules."},
-      {"name": "pieces.yaml", "desc": "Every piece type with movement patterns, capture rules, and promotion conditions. Add new pieces or modify existing ones."},
-      {"name": "variants.yaml", "desc": "The variant registry. Combine a board, piece set, and win condition to define a new way to play."},
-      {"name": "ai.lua", "desc": "Bot behavior for each variant. The teaching engine learns from every game played — human or bot."}
+      {
+        "name": "board.lua",
+        "desc": "Board geometry — square, hex, or anything. Define the grid, valid positions, and rendering rules."
+      },
+      {
+        "name": "pieces.yaml",
+        "desc": "Every piece type with movement patterns, capture rules, and promotion conditions. Add new pieces or modify existing ones."
+      },
+      {
+        "name": "variants.yaml",
+        "desc": "The variant registry. Combine a board, piece set, and win condition to define a new way to play."
+      },
+      {
+        "name": "ai.lua",
+        "desc": "Bot behavior for each variant. The teaching engine learns from every game played — human or bot."
+      }
     ],
     "communityLabel": "Supported variants.",
     "community": [
-      {"category": "Total conversion", "baseGame": "Chess", "title": "Fog of War Chess", "body": "Players see only squares their pieces can move to. No checks, no checkmates — capture the king to win. Invented 1989.", "stats": "2 players · 20–40 min · 10+"},
-      {"category": "Reskin", "baseGame": "Chess", "title": "4-Player Chess", "body": "Four armies on a cross-shaped board. Free-for-all or 2v2 teams. The de facto standard for multiplayer chess.", "stats": "4 players · 30 min · 10+"},
-      {"category": "Total conversion", "baseGame": "Chess", "title": "Hexagonal Chess (Glinski)", "body": "91 hexagonal cells, 9 pawns per side, bishops on three cell colours. Władysław Gliński, 1936.", "stats": "2 players · 30–60 min · 12+"},
-      {"category": "Total conversion", "baseGame": "Chess", "title": "Alice Chess", "body": "Two boards, one army. Pieces transfer to the other board after each move. Conceived by V.R. Parton, 1953.", "stats": "2 players · 30–45 min · 12+"},
-      {"category": "Total conversion", "baseGame": "Chess", "title": "Capablanca Chess", "body": "10×8 board with two new pieces: Archbishop (bishop+knight) and Chancellor (rook+knight). José Capablanca, 1920s.", "stats": "2 players · 45–90 min · 12+"},
-      {"category": "Total conversion", "baseGame": "Chess", "title": "Courier Chess", "body": "Medieval 12×8 variant with 24 pieces per side including couriers and sages. Documented since 1202.", "stats": "2 players · 60–90 min · 14+"},
-      {"category": "Total conversion", "baseGame": "Chess", "title": "Omega Chess", "body": "10×10 board plus corner squares. Adds Champion (knight+king area) and Wizard (camel+ferz). Daniel MacDonald, 1992.", "stats": "2 players · 45–90 min · 12+"},
-      {"category": "Total conversion", "baseGame": "Chess", "title": "Grand Chess", "body": "10×10 board with Archbishop and Chancellor. No castling, pawns promote on rank 8 or 9. Christian Freeling, 1984.", "stats": "2 players · 45–75 min · 12+"},
-      {"category": "Total conversion", "baseGame": "Chess", "title": "XiangQi (Chinese Chess)", "body": "9×10 board with river and palace. Cannons capture by jumping, generals face off across the board. Over 1000 years old.", "stats": "2 players · 30–60 min · 10+"},
-      {"category": "Reskin", "baseGame": "Chess", "title": "3-Board Chess", "body": "Three standard boards side by side. Pieces can move between boards along shared edges. Multiplayer spatial chaos.", "stats": "3 players · 45–60 min · 12+"},
-      {"category": "Reskin", "baseGame": "Chess", "title": "4-Board Chess", "body": "Four boards in a 2×2 grid. Pieces transfer between boards at shared edges. Team or free-for-all.", "stats": "4 players · 60–90 min · 12+"}
+      {
+        "category": "Total conversion",
+        "baseGame": "Chess",
+        "title": "Fog of War Chess",
+        "body": "Players see only squares their pieces can move to. No checks, no checkmates — capture the king to win. Invented 1989.",
+        "stats": "2 players · 20–40 min · 10+"
+      },
+      {
+        "category": "Reskin",
+        "baseGame": "Chess",
+        "title": "4-Player Chess",
+        "body": "Four armies on a cross-shaped board. Free-for-all or 2v2 teams. The de facto standard for multiplayer chess.",
+        "stats": "4 players · 30 min · 10+"
+      },
+      {
+        "category": "Total conversion",
+        "baseGame": "Chess",
+        "title": "Hexagonal Chess (Glinski)",
+        "body": "91 hexagonal cells, 9 pawns per side, bishops on three cell colours. Władysław Gliński, 1936.",
+        "stats": "2 players · 30–60 min · 12+"
+      },
+      {
+        "category": "Total conversion",
+        "baseGame": "Chess",
+        "title": "Alice Chess",
+        "body": "Two boards, one army. Pieces transfer to the other board after each move. Conceived by V.R. Parton, 1953.",
+        "stats": "2 players · 30–45 min · 12+"
+      },
+      {
+        "category": "Total conversion",
+        "baseGame": "Chess",
+        "title": "Capablanca Chess",
+        "body": "10×8 board with two new pieces: Archbishop (bishop+knight) and Chancellor (rook+knight). José Capablanca, 1920s.",
+        "stats": "2 players · 45–90 min · 12+"
+      },
+      {
+        "category": "Total conversion",
+        "baseGame": "Chess",
+        "title": "Courier Chess",
+        "body": "Medieval 12×8 variant with 24 pieces per side including couriers and sages. Documented since 1202.",
+        "stats": "2 players · 60–90 min · 14+"
+      },
+      {
+        "category": "Total conversion",
+        "baseGame": "Chess",
+        "title": "Omega Chess",
+        "body": "10×10 board plus corner squares. Adds Champion (knight+king area) and Wizard (camel+ferz). Daniel MacDonald, 1992.",
+        "stats": "2 players · 45–90 min · 12+"
+      },
+      {
+        "category": "Total conversion",
+        "baseGame": "Chess",
+        "title": "Grand Chess",
+        "body": "10×10 board with Archbishop and Chancellor. No castling, pawns promote on rank 8 or 9. Christian Freeling, 1984.",
+        "stats": "2 players · 45–75 min · 12+"
+      },
+      {
+        "category": "Total conversion",
+        "baseGame": "Chess",
+        "title": "XiangQi (Chinese Chess)",
+        "body": "9×10 board with river and palace. Cannons capture by jumping, generals face off across the board. Over 1000 years old.",
+        "stats": "2 players · 30–60 min · 10+"
+      },
+      {
+        "category": "Reskin",
+        "baseGame": "Chess",
+        "title": "3-Board Chess",
+        "body": "Three standard boards side by side. Pieces can move between boards along shared edges. Multiplayer spatial chaos.",
+        "stats": "3 players · 45–60 min · 12+"
+      },
+      {
+        "category": "Reskin",
+        "baseGame": "Chess",
+        "title": "4-Board Chess",
+        "body": "Four boards in a 2×2 grid. Pieces transfer between boards at shared edges. Team or free-for-all.",
+        "stats": "4 players · 60–90 min · 12+"
+      }
     ]
   }
 }
