@@ -22,18 +22,18 @@
     const inner = el('div', {class: 'td-hero__inner'});
     inner.appendChild(el('a', {href: url('/team/'), class: 'td-hero__back'}, '← Back to team'));
 
-    const avatar = el('div', {class: 'td-hero__avatar'});
-    avatar.appendChild(el('img', {
-      src: url('/assets/team/' + member.img),
-      alt: member.name,
-      loading: 'lazy'
-    }));
-    inner.appendChild(avatar);
-
-    const text = el('div');
+    const text = el('div', {class: 'td-hero__text'});
     text.appendChild(el('h1', {class: 'td-hero__name'}, member.name));
     text.appendChild(el('div', {class: 'td-hero__role'}, member.role));
     inner.appendChild(text);
+
+    const avatar = el('div', {class: 'td-hero__avatar'});
+    avatar.appendChild(el('img', {
+      src: url('/assets/team/' + member.img),
+      alt: member.name
+    }));
+    inner.appendChild(avatar);
+
     hero.appendChild(inner);
     container.appendChild(hero);
 
