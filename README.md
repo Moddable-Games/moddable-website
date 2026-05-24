@@ -129,6 +129,14 @@ Pages load `mg-loader.js` (shared modules) + their own page script. Data is fetc
 - Added CNAME for web.moddable.games, production OG URLs, GitHub Pages ready (closes #9)
 - 47 branded OG social images generated for all pages
 - Auto-detect local dev path from URL — no manual `mg-base` meta tag needed
+- Responsive design audit: mobile breakpoints across 11 CSS files (closes #6)
+- ARIA landmarks, skip-to-content link, aria-current=page on nav (closes #24)
+- Fixed placeholder # links — community channels now non-link divs (closes #26)
+- TI4 agenda voter expanded: 6 → 46 cards, full base game deck (closes #3)
+- Accessibility: stone colour darkened for WCAG AA contrast (closes #11)
+- Performance: lazy-load below-fold images (closes #14)
+- Tools interactivity audit: all widgets verified functional (closes #27)
+- Repo made public, GitHub Pages live at web.moddable.games
 
 #### 2026-05-23
 - Refactored `MG.data` to Promise-based API: `get(name)` → Promise, `get(type, slug)` → single item lookup
