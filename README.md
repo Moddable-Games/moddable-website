@@ -137,6 +137,7 @@ Pages load `mg-loader.js` (shared modules) + their own page script. Data is fetc
 - Performance: lazy-load below-fold images (closes #14)
 - Tools interactivity audit: all widgets verified functional (closes #27)
 - Repo made public, GitHub Pages live at web.moddable.games
+- Team member detail pages with authored posts, long bios, teammate links (closes #32)
 
 #### 2026-05-23
 - Refactored `MG.data` to Promise-based API: `get(name)` → Promise, `get(type, slug)` → single item lookup
