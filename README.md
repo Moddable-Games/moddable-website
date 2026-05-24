@@ -125,6 +125,10 @@ Pages load `mg-loader.js` (shared modules) + their own page script. Data is fetc
 - Added all new pages to navbar dropdowns, footer links, and tools index
 - Created new `Moddable-Games/moddable-chess` repo — shared chess engine with 14 variants
 - Renamed existing chess repo to `Moddable-Games/dungeon-chess`
+- Added favicon set (SVG + PNG), apple-touch-icon, PWA manifest, theme-color (closes #8)
+- Added CNAME for web.moddable.games, production OG URLs, GitHub Pages ready (closes #9)
+- 47 branded OG social images generated for all pages
+- Auto-detect local dev path from URL — no manual `mg-base` meta tag needed
 
 #### 2026-05-23
 - Refactored `MG.data` to Promise-based API: `get(name)` → Promise, `get(type, slug)` → single item lookup
