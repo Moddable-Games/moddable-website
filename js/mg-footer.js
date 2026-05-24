@@ -14,7 +14,7 @@
       { title:'Community', links:[['Discord',url('/community/')],['News',url('/news/')],['About',url('/about/')],['Team',url('/team/')],['Press',url('/press/')],['Subscribe',url('/subscribe/')]] },
     ];
 
-    const f = el('footer', { style:{ background:'#000', color:'#fff', padding:'80px 24px 40px', boxSizing:'border-box', position:'relative', overflow:'hidden' }});
+    const f = el('footer', { role:'contentinfo', 'aria-label':'Site footer', style:{ background:'#000', color:'#fff', padding:'80px 24px 40px', boxSizing:'border-box', position:'relative', overflow:'hidden' }});
     const footerHex = el('div', { style:{ position:'absolute', inset:0, backgroundImage:`url("${url('/img/hex-grid-blue.svg')}")`, backgroundSize:'56px 64px', opacity:'0.04', pointerEvents:'none' }});
     f.appendChild(footerHex);
     const inner = el('div', { style:{ maxWidth:'1200px', margin:'0 auto', position:'relative' }});

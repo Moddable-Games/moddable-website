@@ -29,7 +29,7 @@
   ];
   var cl = document.getElementById('channels-list');
   CHANNELS.forEach(function(ch) {
-    var a = el('a', {href:'#', class:'channel-link'});
+    var a = el('div', {class:'channel-link'});
     var bar = el('div', {class:'channel-link__bar'});
     bar.style.background = ch.accent;
     a.appendChild(bar);

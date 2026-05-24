@@ -15,18 +15,21 @@
       { id:'About', href:url('/about/'), children:[['Team',url('/team/')],['Roadmap',url('/about/roadmap/')],['Community',url('/community/')],['Press',url('/press/')]] },
     ];
 
-    const header = el('header', { style: css({
+    const header = el('header', { role:'banner', 'aria-label':'Site header', style: css({
       height:'64px', background:'#000', position:'fixed', top:0, left:0, right:0, zIndex:50,
       borderBottom:'1px solid rgba(255,255,255,0.08)',
       display:'flex', alignItems:'center', padding:'0 24px', gap:'24px',
       boxSizing:'border-box',
     })});
 
+    const skip = el('a', { href:'#main-content', class:'mg-skip-link' }, 'Skip to content');
+    header.appendChild(skip);
+
     const logoWrap = el('a', { href:url('/'), style:{ display:'flex', alignItems:'center', textDecoration:'none' }});
     logoWrap.appendChild(el('img', { src:url('/img/moddable-logo-white.png'), alt:'Moddable Games', style:{ height:'32px', width:'auto' }}));
     header.appendChild(logoWrap);
 
-    const nav = el('nav', { style:{ display:'flex', gap:'24px', marginLeft:'12px' }});
+    const nav = el('nav', { 'aria-label':'Main navigation', style:{ display:'flex', gap:'24px', marginLeft:'12px' }});
     for (const item of NAV_ITEMS) {
       const isActive = activeId === item.id;
       const wrap = el('div', { style:{ position:'relative' }});
@@ -102,17 +105,28 @@
       id:'mg-mobile-drawer',
       style: css({ position:'fixed', top:'64px', left:0, right:0, bottom:0, background:'#000', zIndex:49, padding:'32px 24px', overflowY:'auto' }),
     });
-    const drawerNav = el('nav', { style:{ display:'flex', flexDirection:'column', gap:'4px' }});
+    const drawerNav = el('nav', { 'aria-label':'Main navigation', style:{ display:'flex', flexDirection:'column', gap:'4px' }});
     for (const item of NAV_ITEMS) {
       drawerNav.appendChild(el('a', { href:item.href, style:{ fontFamily:F.body, fontWeight:600, fontSize:'20px', color: activeId===item.id?'#fff':'rgba(255,255,255,0.65)', textDecoration:'none', padding:'12px 0', display:'block' }}, item.id));
     }
     drawer.appendChild(drawerNav);
 
     let drawerOpen = false;
+    hamburger.setAttribute('aria-expanded', 'false');
     hamburger.addEventListener('click', () => {
       drawerOpen = !drawerOpen;
       drawer.style.display = drawerOpen ? 'block' : 'none';
       hamburger.textContent = drawerOpen ? '✕' : '☰';
+      hamburger.setAttribute('aria-expanded', String(drawerOpen));
+    });
+
+    document.addEventListener('DOMContentLoaded', () => {
+      const navRoot = document.getElementById('nav-root');
+      const main = navRoot && navRoot.nextElementSibling;
+      if (main && !document.getElementById('main-content')) {
+        main.id = 'main-content';
+        main.setAttribute('role', 'main');
+      }
     });
 
     return el('div', { style:{ position:'sticky', top:0, zIndex:50 }}, header, drawer);

@@ -16,6 +16,8 @@ html { scroll-behavior: smooth; }
 body { font-family: "Barlow", system-ui, sans-serif; -webkit-font-smoothing: antialiased; padding-top: 64px; }
 em { font-style: italic; }
 h1, h2, h3, h4, h5, h6, p, li { text-wrap: pretty; }
+.mg-skip-link { position: absolute; top: -100%; left: 16px; z-index: 100; padding: 8px 16px; background: #fff; color: #14161c; font-family: var(--mg-font-body); font-size: 14px; font-weight: 600; border-radius: 9999px; text-decoration: none; opacity: 0; transition: opacity 150ms; }
+.mg-skip-link:focus { top: 12px; opacity: 1; outline: 2px solid var(--mg-cosmic-glow); outline-offset: 2px; }
 img { display: block; max-width: 100%; }
 
 button:focus-visible, a:focus-visible, input:focus-visible, textarea:focus-visible, select:focus-visible {
