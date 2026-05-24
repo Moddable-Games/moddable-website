@@ -10,9 +10,9 @@
     const NAV_ITEMS = [
       { id:'Mods', href:url('/mods/'), children:[['Total conversions',url('/mods/#Total conversion')],['Rebalances',url('/mods/#Rebalance')],['Reskins',url('/mods/#Reskin')],['Submit a mod',url('/submit/')]] },
       { id:'Games', href:url('/games/'), children:[['Nukes',url('/games/nukes/')],['Mongo',url('/games/mongo/')],['Endless Skies',url('/games/endless-skies/')],['Moddable Chess',url('/games/moddable-chess/')]] },
-      { id:'Tools', href:url('/tools/'), children:[['TI tools',url('/tools/ti/')],['Talisman tools',url('/tools/talisman/')],['Nukes tools',url('/tools/nukes/')]] },
+      { id:'Tools', href:url('/tools/'), children:[['TI tools',url('/tools/ti/')],['Talisman tools',url('/tools/talisman/')],['Nukes tools',url('/tools/nukes/')],['Deck builder',url('/tools/decks/')],['Chess variants',url('/tools/chess/')]] },
       { id:'News', href:url('/news/') },
-      { id:'About', href:url('/about/'), children:[['Team',url('/team/')],['Roadmap',url('/about/roadmap/')],['Community',url('/community/')]] },
+      { id:'About', href:url('/about/'), children:[['Team',url('/team/')],['Roadmap',url('/about/roadmap/')],['Community',url('/community/')],['Press',url('/press/')]] },
     ];
 
     const header = el('header', { style: css({

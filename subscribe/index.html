@@ -5,26 +5,69 @@
 <meta name="viewport" content="width=device-width, initial-scale=1">
 <meta name="mg-base" content="/MODDABLE/moddable-website">
 <title>Subscribe — Moddable.Games</title>
+<meta name="description" content="Subscribe to the Moddable.Games newsletter for crowdfunding updates and playtest invites.">
+<meta property="og:title" content="Subscribe">
+<meta property="og:description" content="Subscribe to the Moddable.Games newsletter for crowdfunding updates and playtest invites.">
+<meta property="og:url" content="https://moddable.games/subscribe/">
+<meta property="og:type" content="website">
+<meta property="og:site_name" content="Moddable.Games">
+<meta property="og:image" content="https://moddable.games/img/og/subscribe.png">
+<meta name="twitter:card" content="summary_large_image">
+<meta name="twitter:title" content="Subscribe">
+<meta name="twitter:description" content="Subscribe to the Moddable.Games newsletter for crowdfunding updates and playtest invites.">
+<meta name="twitter:image" content="https://moddable.games/img/og/subscribe.png">
 <link rel="stylesheet" href="../css/_mg.css">
+<link rel="stylesheet" href="../css/subscribe.css">
 </head>
 <body>
 <div id="nav-root"></div>
 
-<section class="mg-hero mg-hero--dark">
-  <div class="mg-hero__inner">
-    <div class="mg-eyebrow">Newsletter</div>
-    <h1 class="mg-hero__title">Stay in the loop.</h1>
-    <p class="mg-hero__lede">Crowdfunding updates, playtest invites, and new game announcements. No spam — one email per milestone.</p>
+<section class="sub-hero">
+  <div class="sub-hero__glow"></div>
+  <div class="sub-hero__inner">
+    <div class="sub-hero__eyebrow">NEWSLETTER</div>
+    <h1 class="sub-hero__title">Stay in the loop.</h1>
+    <p class="sub-hero__lede">Crowdfunding updates, playtest invites, and new game announcements. No spam — one email per milestone.</p>
   </div>
 </section>
 
-<section class="mg-section">
-  <div class="mg-section__inner">
-    <p>Newsletter signup form coming soon. In the meantime, join the <a href="https://discord.com/invite/WXENAywsQb" target="_blank" rel="noopener">Discord</a> for real-time updates.</p>
+<section class="sub-body">
+  <div class="sub-body__inner">
+
+    <div class="sub-form" id="sub-form"></div>
+
+    <div id="sub-success" class="sub-success">
+      <div class="sub-success__icon">✓</div>
+      <div class="sub-success__title">You're in.</div>
+      <p class="sub-success__text">We'll email you when something ships. No spam, no filler.</p>
+    </div>
+
+    <div class="sub-cards">
+      <div class="sub-card">
+        <div class="sub-card__title">One per milestone</div>
+        <div class="sub-card__text">We only send when something actually ships — a game, a playtest, a crowdfund launch.</div>
+      </div>
+      <div class="sub-card">
+        <div class="sub-card__title">Playtest priority</div>
+        <div class="sub-card__text">Subscribers get early access to closed playtests before Discord announcements.</div>
+      </div>
+      <div class="sub-card">
+        <div class="sub-card__title">Crowdfund alerts</div>
+        <div class="sub-card__text">First to know when a Kickstarter or Gamefound goes live. Early-bird pricing links.</div>
+      </div>
+      <div class="sub-card">
+        <div class="sub-card__title">Unsubscribe any time</div>
+        <div class="sub-card__text">One click, no questions. We don't sell data or share lists.</div>
+      </div>
+    </div>
+
+    <p class="sub-privacy">We send one email per milestone. Unsubscribe any time. No spam, ever.</p>
+
   </div>
 </section>
 
 <div id="footer-root"></div>
 <script src="../js/mg-loader.js"></script>
+<script src="../js/mg-subscribe-page.js"></script>
 </body>
 </html>

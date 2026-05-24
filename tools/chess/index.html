@@ -5,27 +5,77 @@
 <meta name="viewport" content="width=device-width, initial-scale=1">
 <meta name="mg-base" content="/MODDABLE/moddable-website">
 <title>Chess Variant Loader — Moddable.Games</title>
+<meta name="description" content="Chess variant loader — load and play from 2000+ documented chess variants.">
+<meta property="og:title" content="Chess Variant Loader">
+<meta property="og:description" content="Chess variant loader — load and play from 2000+ documented chess variants.">
+<meta property="og:url" content="https://moddable.games/tools/chess/">
+<meta property="og:type" content="website">
+<meta property="og:site_name" content="Moddable.Games">
+<meta property="og:image" content="https://moddable.games/img/og/tools-chess.png">
+<meta name="twitter:card" content="summary_large_image">
+<meta name="twitter:title" content="Chess Variant Loader">
+<meta name="twitter:description" content="Chess variant loader — load and play from 2000+ documented chess variants.">
+<meta name="twitter:image" content="https://moddable.games/img/og/tools-chess.png">
 <link rel="stylesheet" href="../../css/_mg.css">
+<link rel="stylesheet" href="../../css/tools-chess.css">
 </head>
 <body>
 <div id="nav-root"></div>
 
-<section class="mg-hero mg-hero--dark">
-  <div class="mg-hero__inner">
-    <a href="/tools/" class="mg-hero__back">← All tools</a>
-    <div class="mg-eyebrow">Tools</div>
-    <h1 class="mg-hero__title">Chess Variant Loader</h1>
-    <p class="mg-hero__lede">Load, play, and share from 2000+ documented chess variants. One engine, infinite rulesets.</p>
+<section class="chess-hero">
+  <div class="chess-hero__glow"></div>
+  <div class="chess-hero__inner">
+    <a href="/tools/" class="chess-hero__back">← All tools</a>
+    <div class="chess-hero__eyebrow">CHESS VARIANTS</div>
+    <h1 class="chess-hero__title">Chess Variant Loader</h1>
+    <p class="chess-hero__lede">Load, play, and share from 2000+ documented chess variants. One engine, infinite rulesets.</p>
   </div>
 </section>
 
-<section class="mg-section">
-  <div class="mg-section__inner">
-    <p>Chess variant loader in development. Check back soon.</p>
+<section class="chess-body">
+  <div class="chess-body__inner">
+
+    <div class="chess-card">
+      <div class="chess-card__header">
+        <div class="chess-card__accent chess-card__accent--blue"></div>
+        <div>
+          <div class="chess-card__eyebrow chess-card__eyebrow--blue">DISCOVER</div>
+          <h3 class="chess-card__title">Variant picker</h3>
+          <p class="chess-card__desc">Cycle through chess variants to find your next game.</p>
+        </div>
+      </div>
+      <div id="chess-picker"></div>
+    </div>
+
+    <div class="chess-card">
+      <div class="chess-card__header">
+        <div class="chess-card__accent chess-card__accent--green"></div>
+        <div>
+          <div class="chess-card__eyebrow chess-card__eyebrow--green">REFERENCE</div>
+          <h3 class="chess-card__title">Rules quick-reference</h3>
+          <p class="chess-card__desc">Board, win condition, and key rule changes for the selected variant.</p>
+        </div>
+      </div>
+      <div id="chess-rules" class="rules-ref"></div>
+    </div>
+
+    <div class="chess-card">
+      <div class="chess-card__header">
+        <div class="chess-card__accent chess-card__accent--red"></div>
+        <div>
+          <div class="chess-card__eyebrow chess-card__eyebrow--red">PLAY</div>
+          <h3 class="chess-card__title">Match setup</h3>
+          <p class="chess-card__desc">Configure variant, time control, and players for your next game.</p>
+        </div>
+      </div>
+      <div id="chess-match"></div>
+    </div>
+
   </div>
 </section>
 
 <div id="footer-root"></div>
 <script src="../../js/mg-loader.js"></script>
+<script src="../../js/mg-tools-chess-page.js"></script>
 </body>
 </html>

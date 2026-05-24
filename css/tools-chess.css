@@ -1,0 +1,239 @@
+.chess-hero {
+  position: relative;
+  padding: 100px 24px 60px;
+  background: var(--mg-cosmic-deep);
+  overflow: hidden;
+}
+
+.chess-hero__glow {
+  position: absolute;
+  top: 50%;
+  left: 50%;
+  width: 600px;
+  height: 600px;
+  transform: translate(-50%, -50%);
+  background: radial-gradient(circle, rgba(12, 79, 141, 0.18) 0%, transparent 70%);
+  pointer-events: none;
+}
+
+.chess-hero__inner {
+  max-width: 680px;
+  margin: 0 auto;
+  text-align: center;
+  position: relative;
+  z-index: 1;
+}
+
+.chess-hero__back {
+  display: inline-block;
+  margin-bottom: 16px;
+  font-size: 13px;
+  color: rgba(255, 255, 255, 0.6);
+  text-decoration: none;
+}
+
+.chess-hero__back:hover {
+  color: #fff;
+}
+
+.chess-hero__eyebrow {
+  font-family: 'Press Start 2P', monospace;
+  font-size: 10px;
+  letter-spacing: 0.08em;
+  color: var(--mg-blue);
+  margin-bottom: 16px;
+}
+
+.chess-hero__title {
+  font-family: 'Inter Tight', sans-serif;
+  font-size: clamp(2rem, 5vw, 3rem);
+  font-weight: 700;
+  color: #fff;
+  margin: 0 0 12px;
+}
+
+.chess-hero__lede {
+  font-size: 1.05rem;
+  color: rgba(255, 255, 255, 0.7);
+  max-width: 520px;
+  margin: 0 auto;
+  line-height: 1.6;
+}
+
+.chess-body {
+  background: var(--mg-canvas-light);
+  padding: 48px 24px 80px;
+}
+
+.chess-body__inner {
+  max-width: 780px;
+  margin: 0 auto;
+  display: flex;
+  flex-direction: column;
+  gap: 32px;
+}
+
+.chess-card {
+  background: #fff;
+  border: 1px solid var(--mg-hairline-light);
+  border-radius: 16px;
+  padding: 28px;
+}
+
+.chess-card__header {
+  display: flex;
+  align-items: flex-start;
+  gap: 16px;
+  margin-bottom: 20px;
+}
+
+.chess-card__accent {
+  width: 4px;
+  height: 40px;
+  border-radius: 2px;
+  flex-shrink: 0;
+  margin-top: 2px;
+}
+
+.chess-card__accent--blue { background: var(--mg-blue); }
+.chess-card__accent--green { background: var(--mg-green); }
+.chess-card__accent--red { background: var(--mg-red); }
+
+.chess-card__eyebrow {
+  font-family: 'Press Start 2P', monospace;
+  font-size: 9px;
+  letter-spacing: 0.06em;
+  margin-bottom: 4px;
+}
+
+.chess-card__eyebrow--blue { color: var(--mg-blue); }
+.chess-card__eyebrow--green { color: var(--mg-green); }
+.chess-card__eyebrow--red { color: var(--mg-red); }
+
+.chess-card__title {
+  font-family: 'Inter Tight', sans-serif;
+  font-size: 1.25rem;
+  font-weight: 600;
+  color: var(--mg-ink);
+  margin: 0 0 4px;
+}
+
+.chess-card__desc {
+  font-size: 0.9rem;
+  color: #555;
+  margin: 0;
+}
+
+.variant-display {
+  border: 1px solid var(--mg-hairline-light);
+  border-radius: 12px;
+  padding: 20px;
+  background: var(--mg-canvas-light);
+  margin-bottom: 12px;
+}
+
+.variant-display__name {
+  font-family: 'Inter Tight', sans-serif;
+  font-size: 1.3rem;
+  font-weight: 700;
+  color: var(--mg-ink);
+  margin-bottom: 8px;
+}
+
+.variant-display__meta {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 12px;
+  font-size: 0.85rem;
+  color: #666;
+}
+
+.variant-display__meta span {
+  font-family: 'JetBrains Mono', monospace;
+}
+
+.rules-ref {
+  margin-top: 16px;
+}
+
+.rules-ref__grid {
+  display: grid;
+  grid-template-columns: 100px 1fr;
+  gap: 8px 16px;
+  font-size: 0.9rem;
+}
+
+.rules-ref__label {
+  font-weight: 600;
+  color: var(--mg-ink);
+}
+
+.rules-ref__value {
+  color: #555;
+}
+
+.match-form {
+  display: flex;
+  flex-direction: column;
+  gap: 12px;
+}
+
+.match-form__row {
+  display: flex;
+  align-items: center;
+  gap: 12px;
+}
+
+.match-form__label {
+  font-size: 0.85rem;
+  color: #666;
+  min-width: 80px;
+}
+
+.match-form__select {
+  padding: 8px 16px;
+  border: 1px solid var(--mg-hairline-light);
+  border-radius: 9999px;
+  font-size: 0.9rem;
+  background: #fff;
+  outline: none;
+}
+
+.match-form__select:focus {
+  border-color: var(--mg-blue);
+}
+
+.match-form__input {
+  padding: 8px 16px;
+  border: 1px solid var(--mg-hairline-light);
+  border-radius: 9999px;
+  font-size: 0.9rem;
+  background: #fff;
+  outline: none;
+  flex: 1;
+}
+
+.match-form__input:focus {
+  border-color: var(--mg-blue);
+}
+
+.match-ready {
+  border: 1px solid var(--mg-green);
+  border-radius: 12px;
+  padding: 16px 20px;
+  background: rgba(58, 153, 40, 0.05);
+  margin-top: 12px;
+}
+
+.match-ready__title {
+  font-family: 'Inter Tight', sans-serif;
+  font-weight: 600;
+  color: var(--mg-green);
+  margin-bottom: 8px;
+}
+
+.match-ready__detail {
+  font-size: 0.9rem;
+  color: #555;
+  margin: 4px 0;
+}

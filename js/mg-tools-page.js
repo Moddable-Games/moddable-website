@@ -31,6 +31,8 @@ const MOD_TOOLS = [
   { title:'Twilight Imperium', sub:'Faction picker · Objective tracker · Agenda voter', color:'#0c4f8d', href:url('/tools/ti/') },
   { title:'Talisman: Hexed',   sub:'Character lottery · Hex board · Encounter draw', color:'#5d2a8a', href:url('/tools/talisman/') },
   { title:'Nuke Catan',        sub:'Target picker · Fallout tracker · Resource converter', color:'#d11a1a', href:url('/tools/nukes/') },
+  { title:'Card Deck Builder', sub:'Design · Shuffle · Deal — custom decks for any game', color:'#3a9928', href:url('/tools/decks/') },
+  { title:'Chess Variants',    sub:'20 variants · Rules reference · Match setup', color:'#0c4f8d', href:url('/tools/chess/') },
 ];
 const mtg = document.getElementById('mod-tools-grid');
 MOD_TOOLS.forEach(t => {

@@ -5,27 +5,77 @@
 <meta name="viewport" content="width=device-width, initial-scale=1">
 <meta name="mg-base" content="/MODDABLE/moddable-website">
 <title>Card Deck Builder — Moddable.Games</title>
+<meta name="description" content="Card deck builder — design, shuffle, and deal custom card decks for any tabletop game.">
+<meta property="og:title" content="Card Deck Builder">
+<meta property="og:description" content="Card deck builder — design, shuffle, and deal custom card decks for any tabletop game.">
+<meta property="og:url" content="https://moddable.games/tools/decks/">
+<meta property="og:type" content="website">
+<meta property="og:site_name" content="Moddable.Games">
+<meta property="og:image" content="https://moddable.games/img/og/tools-decks.png">
+<meta name="twitter:card" content="summary_large_image">
+<meta name="twitter:title" content="Card Deck Builder">
+<meta name="twitter:description" content="Card deck builder — design, shuffle, and deal custom card decks for any tabletop game.">
+<meta name="twitter:image" content="https://moddable.games/img/og/tools-decks.png">
 <link rel="stylesheet" href="../../css/_mg.css">
+<link rel="stylesheet" href="../../css/tools-decks.css">
 </head>
 <body>
 <div id="nav-root"></div>
 
-<section class="mg-hero mg-hero--dark">
-  <div class="mg-hero__inner">
-    <a href="/tools/" class="mg-hero__back">← All tools</a>
-    <div class="mg-eyebrow">Tools</div>
-    <h1 class="mg-hero__title">Card Deck Builder</h1>
-    <p class="mg-hero__lede">Design, shuffle, and deal custom card decks for any tabletop game. Tarot, poker, or fully custom — your rules.</p>
+<section class="decks-hero">
+  <div class="decks-hero__glow"></div>
+  <div class="decks-hero__inner">
+    <a href="/tools/" class="decks-hero__back">← All tools</a>
+    <div class="decks-hero__eyebrow">DECK BUILDER</div>
+    <h1 class="decks-hero__title">Card Deck Builder</h1>
+    <p class="decks-hero__lede">Design, shuffle, and deal custom card decks for any tabletop game. Tarot, poker, or fully custom — your rules.</p>
   </div>
 </section>
 
-<section class="mg-section">
-  <div class="mg-section__inner">
-    <p>Card deck builder tool in development. Check back soon.</p>
+<section class="decks-body">
+  <div class="decks-body__inner">
+
+    <div class="deck-card">
+      <div class="deck-card__header">
+        <div class="deck-card__accent deck-card__accent--green"></div>
+        <div>
+          <div class="deck-card__eyebrow deck-card__eyebrow--green">DESIGN</div>
+          <h3 class="deck-card__title">Deck designer</h3>
+          <p class="deck-card__desc">Add card types with names and quantities to build your custom deck.</p>
+        </div>
+      </div>
+      <div id="deck-designer"></div>
+    </div>
+
+    <div class="deck-card">
+      <div class="deck-card__header">
+        <div class="deck-card__accent deck-card__accent--blue"></div>
+        <div>
+          <div class="deck-card__eyebrow deck-card__eyebrow--blue">PLAY</div>
+          <h3 class="deck-card__title">Shuffle &amp; Deal</h3>
+          <p class="deck-card__desc">Shuffle the deck and deal hands to players. Reshuffle any time.</p>
+        </div>
+      </div>
+      <div id="deck-dealer"></div>
+    </div>
+
+    <div class="deck-card">
+      <div class="deck-card__header">
+        <div class="deck-card__accent deck-card__accent--red"></div>
+        <div>
+          <div class="deck-card__eyebrow deck-card__eyebrow--red">PRESETS</div>
+          <h3 class="deck-card__title">Preset decks</h3>
+          <p class="deck-card__desc">Load a standard deck to get started quickly.</p>
+        </div>
+      </div>
+      <div id="deck-presets"></div>
+    </div>
+
   </div>
 </section>
 
 <div id="footer-root"></div>
 <script src="../../js/mg-loader.js"></script>
+<script src="../../js/mg-tools-decks-page.js"></script>
 </body>
 </html>

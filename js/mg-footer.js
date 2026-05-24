@@ -10,8 +10,8 @@
     const COLS = [
       { title:'Mods',      links:[['Total conversions',url('/mods/#Total conversion')],['Rebalances',url('/mods/#Rebalance')],['Reskins',url('/mods/#Reskin')],['Submit a mod',url('/submit/')]] },
       { title:'Games',     links:[['Endless Skies',url('/games/endless-skies/')],['Mongo',url('/games/mongo/')],['Nukes',url('/games/nukes/')],['Moddable Chess',url('/games/moddable-chess/')]] },
-      { title:'Tools',     links:[['Workbench',url('/tools/')],['TI4 tools',url('/tools/ti/')],['Talisman tools',url('/tools/talisman/')],['Nukes tools',url('/tools/nukes/')]] },
-      { title:'Community', links:[['Discord',url('/community/')],['News',url('/news/')],['About',url('/about/')],['Team',url('/team/')],['Roadmap',url('/about/roadmap/')]] },
+      { title:'Tools',     links:[['Workbench',url('/tools/')],['TI4 tools',url('/tools/ti/')],['Talisman tools',url('/tools/talisman/')],['Nukes tools',url('/tools/nukes/')],['Deck builder',url('/tools/decks/')],['Chess variants',url('/tools/chess/')]] },
+      { title:'Community', links:[['Discord',url('/community/')],['News',url('/news/')],['About',url('/about/')],['Team',url('/team/')],['Press',url('/press/')],['Subscribe',url('/subscribe/')]] },
     ];
 
     const f = el('footer', { style:{ background:'#000', color:'#fff', padding:'80px 24px 40px', boxSizing:'border-box', position:'relative', overflow:'hidden' }});

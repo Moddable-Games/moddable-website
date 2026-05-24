@@ -5,63 +5,84 @@
 <meta name="viewport" content="width=device-width, initial-scale=1">
 <meta name="mg-base" content="/MODDABLE/moddable-website">
 <title>Press Kit — Moddable.Games</title>
+<meta name="description" content="Press kit and media assets for Moddable.Games.">
+<meta property="og:title" content="Press Kit">
+<meta property="og:description" content="Press kit and media assets for Moddable.Games.">
+<meta property="og:url" content="https://moddable.games/press/">
+<meta property="og:type" content="website">
+<meta property="og:site_name" content="Moddable.Games">
+<meta property="og:image" content="https://moddable.games/img/og/press.png">
+<meta name="twitter:card" content="summary_large_image">
+<meta name="twitter:title" content="Press Kit">
+<meta name="twitter:description" content="Press kit and media assets for Moddable.Games.">
+<meta name="twitter:image" content="https://moddable.games/img/og/press.png">
 <link rel="stylesheet" href="../css/_mg.css">
+<link rel="stylesheet" href="../css/press.css">
 </head>
 <body>
 <div id="nav-root"></div>
 
-<section class="mg-hero mg-hero--dark">
-  <div class="mg-hero__inner">
-    <div class="mg-eyebrow">Press &amp; Media</div>
-    <h1 class="mg-hero__title">Press Kit</h1>
-    <p class="mg-hero__lede">Pre-cleared for editorial use. No permission needed — just credit Moddable.Games.</p>
+<section class="press-hero">
+  <div class="press-hero__glow"></div>
+  <div class="press-hero__inner">
+    <div class="press-hero__eyebrow">PRESS &amp; MEDIA</div>
+    <h1 class="press-hero__title">Press Kit</h1>
+    <p class="press-hero__lede">Pre-cleared for editorial use. No permission needed — just credit Moddable.Games.</p>
   </div>
 </section>
 
-<section class="mg-section">
-  <div class="mg-section__inner">
+<section class="press-body">
+  <div class="press-body__inner">
 
-    <h2>Download</h2>
-    <p>Full press kit ZIP coming soon. In the meantime, contact <a href="mailto:press@moddable.games">press@moddable.games</a> for assets.</p>
+    <div class="press-card">
+      <h3 class="press-card__title">Quick Facts</h3>
+      <div id="press-stats"></div>
+    </div>
 
-    <h2>Brand Assets</h2>
-    <ul>
-      <li>Logo (SVG, PNG — dark + light variants)</li>
-      <li>Brand colours + type specs</li>
-      <li>Nukes logo + icon set</li>
-      <li>Dungeon Chess logo suite</li>
-      <li>Founder headshots (hi-res)</li>
-    </ul>
+    <div class="press-card">
+      <h3 class="press-card__title">Contact</h3>
+      <div class="press-contact">
+        <span class="press-contact__email">press@moddable.games</span>
+        <span id="press-copy-btn"></span>
+        <span id="press-copied" class="press-copied">Copied</span>
+      </div>
+    </div>
 
-    <h2>Gameplay</h2>
-    <ul>
-      <li>Online engine screenshots (4K)</li>
-      <li>Gameplay b-roll (30s + 60s clips)</li>
-      <li>Physical prototype photos</li>
-      <li>Board close-ups + component shots</li>
-    </ul>
+    <div class="press-card">
+      <h3 class="press-card__title">Brand Colours</h3>
+      <div id="press-swatches"></div>
+    </div>
 
-    <h2>Documents</h2>
-    <ul>
-      <li>One-page press release (PDF)</li>
-      <li>Founder bio + company backgrounder</li>
-      <li>Fact sheet</li>
-      <li>Rulebook excerpt (free to publish)</li>
-    </ul>
+    <div class="press-card">
+      <h3 class="press-card__title">Brand Assets</h3>
+      <div id="press-assets"></div>
+    </div>
 
-    <h2>Quick Facts</h2>
-    <ul>
-      <li><strong>Founded:</strong> 2024, Kuala Lumpur</li>
-      <li><strong>Team:</strong> 4 (design, engineering, art, ops)</li>
-      <li><strong>Stage:</strong> Pre-seed / bootstrapped</li>
-      <li><strong>First game:</strong> Nukes (open alpha live at nukes.moddable.games)</li>
-      <li><strong>Contact:</strong> press@moddable.games</li>
-    </ul>
+    <div class="press-card">
+      <h3 class="press-card__title">Gameplay Media</h3>
+      <ul>
+        <li>Online engine screenshots (4K)</li>
+        <li>Gameplay b-roll (30s + 60s clips)</li>
+        <li>Physical prototype photos</li>
+        <li>Board close-ups + component shots</li>
+      </ul>
+    </div>
+
+    <div class="press-card">
+      <h3 class="press-card__title">Documents</h3>
+      <ul>
+        <li>One-page press release (PDF)</li>
+        <li>Founder bio + company backgrounder</li>
+        <li>Fact sheet</li>
+        <li>Rulebook excerpt (free to publish)</li>
+      </ul>
+    </div>
 
   </div>
 </section>
 
 <div id="footer-root"></div>
 <script src="../js/mg-loader.js"></script>
+<script src="../js/mg-press-page.js"></script>
 </body>
 </html>
