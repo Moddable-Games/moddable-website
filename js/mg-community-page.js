@@ -11,7 +11,7 @@
     withHorizon: true
   }));
 
-  var STATS = [['2,400+','Discord members'],['12','published mods'],['3','mod jams run'],['6','team humans']];
+  var STATS = [['2,400+','Discord members'],['12','published mods'],['3','mod jams run'],['4','team humans']];
   var sg = document.getElementById('stats-grid');
   STATS.forEach(function(pair) {
     var c = el('div', {class:'stat-card'});
