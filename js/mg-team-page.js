@@ -17,7 +17,7 @@
 
   MG.data.load(['team']).then(function(store) {
     store.team.forEach(function(m) {
-      var card = el('div', {class:'team-card'});
+      var card = el('a', {class:'team-card', href: MG.url('/team/' + m.handle + '/')});
       var avatar = el('div', {class:'card-avatar'});
       var img = el('img', {class:'img-breakout', src: '../assets/team/' + m.img, alt: m.name, loading:'lazy'});
       avatar.appendChild(img);

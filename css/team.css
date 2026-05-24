@@ -27,7 +27,11 @@ body { background: #f5f4ef; }
   padding-top: 28px;
   text-align: center;
   align-items: center;
+  text-decoration: none;
+  color: inherit;
+  transition: border-color 150ms;
 }
+.team-card:hover { border-color: var(--mg-ink); }
 
 .card-avatar {
   position: relative;
