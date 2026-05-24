@@ -4,26 +4,20 @@ document.getElementById('nav-root').appendChild(navbar('Tools'));
 document.getElementById('footer-root').appendChild(footer());
 
 const VARIANTS = [
-  { name: 'Regular Chess', players: '2', board: '8×8', win: 'Checkmate', special: 'Standard FIDE rules' },
-  { name: 'Fischer Random (Chess960)', players: '2', board: '8×8', win: 'Checkmate', special: 'Back rank pieces randomised (960 positions). Castling rules adapted.' },
-  { name: 'Crazyhouse', players: '2', board: '8×8', win: 'Checkmate', special: 'Captured pieces can be dropped onto the board as your own.' },
-  { name: 'Bughouse', players: '4 (2v2)', board: '2× 8×8', win: 'Checkmate either opponent', special: 'Team pairs share captured pieces across two boards.' },
-  { name: 'King of the Hill', players: '2', board: '8×8', win: 'Checkmate or king reaches centre 4 squares', special: 'Moving your king to d4/d5/e4/e5 is an instant win.' },
-  { name: 'Three-Check', players: '2', board: '8×8', win: 'Checkmate or deliver 3 checks', special: 'First to check the opponent three times wins.' },
-  { name: 'Atomic Chess', players: '2', board: '8×8', win: 'Explode opponent king', special: 'Captures cause explosions destroying all pieces on adjacent squares.' },
-  { name: 'Antichess (Losing Chess)', players: '2', board: '8×8', win: 'Lose all pieces or get stalemated', special: 'Captures are mandatory. First to lose all pieces wins.' },
-  { name: 'Racing Kings', players: '2', board: '8×8', win: 'King reaches 8th rank first', special: 'No checks allowed. Both kings start on 1st rank. Race to the top.' },
-  { name: 'Horde', players: '2', board: '8×8', win: 'Black: checkmate White king. White: capture all black pawns.', special: 'White has 36 pawns and no king. Black has a standard army.' },
-  { name: '4-Player Chess', players: '4', board: '14×14 (cross-shaped)', win: 'Most points from checkmates', special: 'Four armies, four colours. Free-for-all or 2v2 teams.' },
-  { name: 'Hexagonal Chess (Glinski)', players: '2', board: '91 hexagons', win: 'Checkmate', special: 'Pieces move along hex axes. Bishops get 3 colours, not 2.' },
-  { name: 'Circular Chess', players: '2', board: '4×16 ring', win: 'Checkmate', special: 'Board wraps into a cylinder. No edge — pieces can circle around.' },
-  { name: 'Cylinder Chess', players: '2', board: '8×8 (wrapped)', win: 'Checkmate', special: 'Left and right edges are connected. Rooks and queens wrap around.' },
-  { name: 'Fog of War', players: '2', board: '8×8', win: 'Capture opponent king', special: 'You only see squares your pieces can move to. No check warnings.' },
-  { name: 'Duck Chess', players: '2', board: '8×8', win: 'Capture opponent king', special: 'After each move, place the duck (blocker) on any empty square.' },
-  { name: 'Monster Chess', players: '2', board: '8×8', win: 'Checkmate', special: 'White has king + 4 pawns but moves TWICE per turn. Black has full army.' },
-  { name: 'Rifle Chess', players: '2', board: '8×8', win: 'Checkmate', special: 'Capturing pieces stay on their square — they "shoot" the target.' },
-  { name: 'Marseillais Chess', players: '2', board: '8×8', win: 'Checkmate', special: 'Each player makes TWO moves per turn (except White\'s first turn).' },
-  { name: 'Capablanca Chess', players: '2', board: '10×8', win: 'Checkmate', special: 'Two extra pieces: Archbishop (B+N) and Chancellor (R+N). Wider board.' },
+  { name: 'Regular Chess', players: '2', board: '8×8', win: 'Checkmate', special: 'Standard FIDE rules', key: 'standard' },
+  { name: 'Fischer Random (Chess960)', players: '2', board: '8×8', win: 'Checkmate', special: 'Back rank pieces randomised (960 positions). Castling rules adapted.', key: 'chess960' },
+  { name: 'King of the Hill', players: '2', board: '8×8', win: 'Checkmate or king reaches centre 4 squares', special: 'Moving your king to d4/d5/e4/e5 is an instant win.', key: 'kingOfTheHill' },
+  { name: 'Three-Check', players: '2', board: '8×8', win: 'Checkmate or deliver 3 checks', special: 'First to check the opponent three times wins.', key: 'threeCheck' },
+  { name: 'Atomic Chess', players: '2', board: '8×8', win: 'Explode opponent king', special: 'Captures cause explosions destroying all pieces on adjacent squares.', key: 'atomic' },
+  { name: 'Antichess', players: '2', board: '8×8', win: 'Lose all pieces or get stalemated', special: 'Captures are mandatory. First to lose all pieces wins.', key: 'antichess' },
+  { name: 'Racing Kings', players: '2', board: '8×8', win: 'King reaches 8th rank first', special: 'No checks allowed. Both kings start on 1st rank. Race to the top.', key: 'racingKings' },
+  { name: 'Fog of War', players: '2', board: '8×8', win: 'Capture opponent king', special: 'You only see squares your pieces can move to. No check warnings.', key: 'fogOfWar' },
+  { name: 'Duck Chess', players: '2', board: '8×8', win: 'Capture opponent king', special: 'After each move, place the duck (blocker) on any empty square.', key: 'duckChess' },
+  { name: 'Rifle Chess', players: '2', board: '8×8', win: 'Checkmate', special: 'Capturing pieces stay on their square — they "shoot" the target.', key: 'rifle' },
+  { name: 'Marseillais Chess', players: '2', board: '8×8', win: 'Checkmate', special: 'Each player makes TWO moves per turn (except White\'s first turn).', key: 'marseillais' },
+  { name: 'Capablanca Chess', players: '2', board: '10×8', win: 'Checkmate', special: 'Two extra pieces: Archbishop (B+N) and Chancellor (R+N). Wider board.', key: 'capablanca' },
+  { name: 'Grand Chess', players: '2', board: '10×10', win: 'Checkmate', special: 'Same new pieces as Capablanca, bigger board, pawns start on rank 3.', key: 'grand' },
+  { name: 'Courier Chess', players: '2', board: '12×8', win: 'Checkmate', special: 'Medieval German variant from the 1200s. Extra bishops and sage pieces.', key: 'courier' },
 ];
 
 let currentIdx = Math.floor(Math.random() * VARIANTS.length);
@@ -124,21 +118,94 @@ function renderMatch() {
 
   form.appendChild(btn('Start Match', 'blue', () => {
     const v = VARIANTS[currentIdx];
-    const time = document.getElementById('time-select').value;
-    const name1 = document.getElementById('p1-name').value || 'Player 1';
-    const name2 = document.getElementById('p2-name').value || 'Player 2';
-    const existing = wrap.querySelector('.match-ready');
-    if (existing) existing.remove();
-    const ready = el('div', { class: 'match-ready' });
-    ready.appendChild(el('div', { class: 'match-ready__title' }, 'Match ready'));
-    ready.appendChild(el('p', { class: 'match-ready__detail' }, `Variant: ${v.name}`));
-    ready.appendChild(el('p', { class: 'match-ready__detail' }, `Time control: ${time}`));
-    ready.appendChild(el('p', { class: 'match-ready__detail' }, `${name1} vs ${name2}`));
-    ready.appendChild(el('p', { class: 'match-ready__detail' }, `Board: ${v.board}`));
-    wrap.appendChild(ready);
+    if (!v.key) return;
+    launchGame(v.key);
   }));
 
   wrap.appendChild(form);
+}
+
+function launchGame(variantKey) {
+  const boardWrap = document.getElementById('chess-board-live');
+  boardWrap.innerHTML = '<div style="padding:20px;color:#666;font-size:0.9rem;">Loading engine...</div>';
+  boardWrap.style.display = 'block';
+
+  const base = MG.url('/').replace(/\/$/, '').replace('/MODDABLE/moddable-website', '/MODDABLE/moddable-chess');
+  const scripts = ['js/chess-engine.js','js/chess-moves.js','js/chess-play.js','js/chess-variants.js','js/board-renderer.js'];
+
+  function loadScripts(list, cb) {
+    if (list.length === 0) { cb(); return; }
+    if (window.MCE && list.length === scripts.length) { cb(); return; }
+    const s = document.createElement('script');
+    s.src = base + '/' + list[0];
+    s.onload = () => loadScripts(list.slice(1), cb);
+    document.body.appendChild(s);
+  }
+
+  loadScripts(scripts, () => {
+    fetch(base + '/assets/pieces.svg')
+      .then(r => r.text())
+      .then(svg => {
+        if (!document.getElementById('mce-pieces-defs')) {
+          const div = document.createElement('div');
+          div.id = 'mce-pieces-defs';
+          div.innerHTML = svg;
+          document.body.appendChild(div);
+        }
+        startLiveGame(variantKey);
+      });
+  });
+}
+
+function startLiveGame(variantKey) {
+  const wrap = document.getElementById('chess-board-live');
+  wrap.innerHTML = '';
+
+  const game = MCE.createGame(variantKey);
+  if (variantKey === 'chess960') MCE.loadFEN(game, MCE.randomFEN960());
+  if (variantKey === 'racingKings') MCE.loadFEN(game, '8/8/8/8/8/8/krbnNBRK/qrbnNBRQ w - - 0 1');
+
+  let selected = null;
+
+  function render() {
+    const allMoves = MCE.legalMoves(game);
+    const movesForSel = selected !== null ? allMoves.filter(m => m.from === selected) : [];
+    MCE.renderBoard(wrap, game, {
+      size: Math.min(480, wrap.offsetWidth - 4),
+      selected: selected,
+      legalMoves: movesForSel,
+      onSquareClick: handleClick,
+    });
+    const status = MCE.getStatus(game);
+    const statusEl = document.getElementById('chess-live-status');
+    const turn = game.turn === MCE.WHITE ? 'White' : 'Black';
+    if (status === 'checkmate') statusEl.textContent = 'Checkmate — ' + (game.turn === MCE.WHITE ? 'Black' : 'White') + ' wins!';
+    else if (status === 'stalemate') statusEl.textContent = 'Stalemate — draw';
+    else if (status === 'check') statusEl.textContent = turn + ' to move (check!)';
+    else statusEl.textContent = turn + ' to move';
+  }
+
+  function handleClick(sq) {
+    const piece = game.board[sq];
+    const allMoves = MCE.legalMoves(game);
+    if (selected !== null) {
+      let cands = allMoves.filter(m => m.from === selected && m.to === sq);
+      if (cands.length > 1) cands = cands.filter(m => m.promo === 'q');
+      if (cands.length > 0) {
+        MCE.makeMove(game, cands[0]);
+        selected = null;
+        render();
+        return;
+      }
+    }
+    if (piece && MCE.pieceColor(piece) === game.turn) selected = sq;
+    else selected = null;
+    render();
+  }
+
+  const statusDiv = el('div', { id: 'chess-live-status', class: 'match-ready__title' }, 'White to move');
+  wrap.parentNode.insertBefore(statusDiv, wrap.nextSibling);
+  render();
 }
 
 renderPicker();

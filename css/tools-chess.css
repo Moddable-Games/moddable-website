@@ -237,3 +237,26 @@
   color: #555;
   margin: 4px 0;
 }
+
+.chess-board-live {
+  display: none;
+  background: #fff;
+  border: 1px solid var(--mg-hairline-light);
+  border-radius: 16px;
+  padding: 20px;
+  text-align: center;
+}
+
+.chess-board-live svg {
+  max-width: 100%;
+  height: auto;
+  border-radius: 4px;
+}
+
+#chess-live-status {
+  text-align: center;
+  margin-top: 12px;
+  font-family: 'Inter Tight', sans-serif;
+  font-weight: 600;
+  color: var(--mg-ink);
+}
