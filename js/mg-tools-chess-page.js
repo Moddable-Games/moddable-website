@@ -129,7 +129,7 @@ function renderMatch() {
     header.appendChild(el('h3', {class: 'chess-embed__title'}, v.name));
     const meta = el('div', {class: 'chess-embed__meta'});
     meta.appendChild(el('span', {}, p1Name + ' vs ' + p2Name));
-    meta.appendChild(el('span', {}, mode === 'solo' ? 'vs AI' : 'Pass & Play'));
+    if (mode === 'pass') meta.appendChild(el('span', {}, 'Pass & Play'));
     header.appendChild(meta);
     boardSection.appendChild(header);
 
