@@ -126,12 +126,13 @@ function renderMatch() {
     boardSection.style.display = 'block';
     const iframe = boardSection.querySelector('iframe') || document.createElement('iframe');
     iframe.src = 'https://chess.moddable.games/play/?variant=' + v.key + '&embed=1'
-      + '&theme=light&radius=12px'
+      + '&theme=light&radius=12px&boardonly=1'
       + '&p1=' + encodeURIComponent(p1Name)
       + '&p2=' + encodeURIComponent(p2Name)
       + '&mode=' + mode;
     iframe.className = 'chess-embed__iframe';
     iframe.setAttribute('title', 'Play ' + v.name);
+    iframe.setAttribute('scrolling', 'no');
     if (!boardSection.querySelector('iframe')) boardSection.appendChild(iframe);
     boardSection.scrollIntoView({ behavior: 'smooth', block: 'start' });
   }));
