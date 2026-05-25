@@ -253,12 +253,27 @@
   border-radius: 4px;
 }
 
-#chess-live-status {
-  text-align: center;
-  margin-top: 12px;
-  font-family: 'Inter Tight', sans-serif;
+.chess-embed {
+  background: #fff;
+  border: 1px solid var(--mg-hairline-light);
+  border-radius: 16px;
+  padding: 24px;
+}
+
+.chess-embed__title {
+  font-family: var(--mg-font-display);
   font-weight: 600;
+  font-size: 1.1rem;
   color: var(--mg-ink);
+  margin: 0 0 16px;
+}
+
+.chess-embed__iframe {
+  width: 100%;
+  height: 560px;
+  border: none;
+  border-radius: 12px;
+  background: var(--mg-canvas-light);
 }
 
 .chess-engine-band {

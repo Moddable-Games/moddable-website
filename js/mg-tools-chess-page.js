@@ -116,10 +116,18 @@ function renderMatch() {
   p2Row.appendChild(p2);
   form.appendChild(p2Row);
 
-  const startBtn = MG.linkBtn('Play on chess.moddable.games', 'https://chess.moddable.games/play/', 'blue');
-  startBtn.setAttribute('target', '_blank');
-  startBtn.setAttribute('rel', 'noopener');
-  form.appendChild(startBtn);
+  form.appendChild(btn('Start Match', 'blue', () => {
+    const v = VARIANTS[currentIdx];
+    if (!v.key) return;
+    const boardSection = document.getElementById('chess-embed-wrap');
+    boardSection.style.display = 'block';
+    const iframe = boardSection.querySelector('iframe') || document.createElement('iframe');
+    iframe.src = 'https://chess.moddable.games/play/?variant=' + v.key + '&embed=1';
+    iframe.className = 'chess-embed__iframe';
+    iframe.setAttribute('title', 'Play ' + v.name);
+    if (!boardSection.querySelector('iframe')) boardSection.appendChild(iframe);
+    boardSection.scrollIntoView({ behavior: 'smooth', block: 'start' });
+  }));
 
   wrap.appendChild(form);
 }
