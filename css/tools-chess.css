@@ -287,7 +287,7 @@
 
 .chess-embed__iframe {
   width: 100%;
-  height: 500px;
+  aspect-ratio: 1 / 1;
   border: none;
   border-radius: 8px;
   background: #fff;
