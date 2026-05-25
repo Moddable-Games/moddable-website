@@ -140,6 +140,12 @@ Pages load `mg-loader.js` (shared modules) + their own page script. Data is fetc
 - Team member detail pages with authored posts, long bios, teammate links (closes #32)
 
 #### 2026-05-25
+- Rebuild Nukes tools (#49): strike planner, combat calculator, hostage tracker, unit reference — based on real rulebook
+- Chess tools: 20 playable variants (added No Castling, Torpedo, Horde, Extinction, Breakthrough, Maharaja)
+- Chess game page: stats reflect v0.4.2 engine, CTAs link to chess.moddable.games, 6-category variant grid
+- Fix nav dropdowns clipped by overflow:hidden on header
+- Featured card style (dark bg) for Dungeon Chess on Moddable Chess page
+- Hero cube centred on mobile
 - Fix mobile nav: drawer hidden on load, prevent horizontal overflow
 - Fix homepage hero bg repeating on mobile
 - Fix team page pop-out overlap on mobile (increased row-gap)
