@@ -145,7 +145,7 @@ renderMatch();
 
 const engineBtns = document.getElementById('engine-btns');
 if (engineBtns) {
-  const playBtn = MG.linkBtn('Moddable Chess', MG.url('/games/moddable-chess/'), 'primary');
+  const playBtn = MG.linkBtn('Moddable Chess', '/games/moddable-chess/', 'primary');
   const srcBtn = MG.linkBtn('View source on GitHub', 'https://github.com/Moddable-Games/moddable-chess', 'dark');
   srcBtn.setAttribute('target', '_blank');
   srcBtn.setAttribute('rel', 'noopener');
