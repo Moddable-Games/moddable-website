@@ -20,8 +20,8 @@
 <meta name="twitter:title" content="Chess Variant Loader">
 <meta name="twitter:description" content="Chess variant loader — load and play from 2000+ documented chess variants.">
 <meta name="twitter:image" content="https://web.moddable.games/img/og/tools-chess.png">
-<link rel="stylesheet" href="../../css/_mg.css">
-<link rel="stylesheet" href="../../css/tools-chess.css">
+<link rel="stylesheet" href="../../css/_mg.css?v=1.0.0">
+<link rel="stylesheet" href="../../css/tools-chess.css?v=1.0.0">
 </head>
 <body>
 <div id="nav-root"></div>
@@ -77,11 +77,24 @@
 
     <div id="chess-board-live" class="chess-board-live"></div>
 
+    <div class="chess-card chess-card--engine">
+      <div class="chess-card__header">
+        <div class="chess-card__accent chess-card__accent--blue"></div>
+        <div>
+          <div class="chess-card__eyebrow chess-card__eyebrow--blue">OPEN SOURCE</div>
+          <h3 class="chess-card__title">Moddable Chess Engine</h3>
+          <p class="chess-card__desc">The variants above are powered by our open-source chess engine — variable boards, custom pieces, fog of war, and more.</p>
+        </div>
+      </div>
+      <p class="chess-engine-promo__text">Built for extensibility. Add a variant in under 50 lines. Supports 8x8 through 12x8 boards, fairy pieces (Archbishop, Chancellor, Sage), and multiplayer.</p>
+      <div class="chess-engine-promo__btns" id="engine-btns"></div>
+    </div>
+
   </div>
 </section>
 
 <div id="footer-root"></div>
-<script src="../../js/mg-loader.js"></script>
-<script src="../../js/mg-tools-chess-page.js"></script>
+<script src="../../js/mg-loader.js?v=1.0.0"></script>
+<script src="../../js/mg-tools-chess-page.js?v=1.0.0"></script>
 </body>
 </html>

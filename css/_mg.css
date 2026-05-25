@@ -423,7 +423,7 @@ button:focus-visible, a:focus-visible, input:focus-visible, textarea:focus-visib
 .filter-btn { font-family: var(--mg-font-body); font-weight: 600; font-size: 13px; height: 36px; padding: 0 14px; border-radius: 9999px; border: 1px solid var(--mg-faint); background: transparent; color: var(--mg-ink); cursor: pointer; transition: all 150ms; }
 .filter-btn--active { border: none; background: #000; color: #fff; }
 
-.home-nuke { background: #000; color: #fff; padding: 140px 24px 220px; position: relative; overflow: visible; text-align: center; }
+.home-nuke { background: #000; color: #fff; padding: 140px 24px 220px; position: relative; overflow: hidden; text-align: center; }
 .home-nuke__bloom { position: absolute; left: 50%; top: 55%; transform: translateX(-50%); width: 1100px; height: 420px; background: radial-gradient(ellipse, rgba(209,26,26,0.38) 0%, transparent 65%); pointer-events: none; filter: blur(24px); }
 .home-nuke__inner { position: relative; max-width: 1200px; margin: 0 auto; }
 .home-nuke__heading { font-family: var(--mg-font-display); font-weight: 600; font-size: clamp(44px, 7vw, 96px); line-height: 0.95; letter-spacing: -0.025em; margin: 0 auto 32px; max-width: 900px; text-shadow: 0 4px 30px rgba(0,0,0,0.6); }

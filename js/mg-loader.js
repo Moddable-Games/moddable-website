@@ -4,6 +4,7 @@
    ========================================================================= */
 
 (function() {
+  var V = '1.0.0';
   const scripts = document.querySelectorAll('script[src*="mg-loader.js"]');
   const src = scripts[scripts.length - 1].getAttribute('src');
   const base = src.replace('mg-loader.js', '');
@@ -19,6 +20,6 @@
     'mg-mod-page.js'
   ];
   for (var i = 0; i < modules.length; i++) {
-    document.write('<script src="' + base + modules[i] + '"><\/script>');
+    document.write('<script src="' + base + modules[i] + '?v=' + V + '"><\/script>');
   }
 })();

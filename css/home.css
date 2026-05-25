@@ -19,7 +19,7 @@
   #hero-lower__text .home-hero__btns { justify-content:flex-start; }
   @media (max-width: 768px) { #hero-lower { flex-direction:column; } #hero-lower__text { text-align:center; } #hero-lower__text .home-hero__lede { text-align:center; margin:0 auto 24px; } #hero-lower__text .home-hero__btns { justify-content:center; } }
 
-  .home-tabs { background:#0a0d2a; padding:80px 24px 140px; position:relative; overflow:visible; }
+  .home-tabs { background:#0a0d2a; padding:80px 24px 140px; position:relative; overflow:hidden; }
   .home-tabs::before { content:''; position:absolute; inset:0; background:radial-gradient(ellipse 70% 50% at 50% 80%, rgba(111,181,255,0.1) 0%, transparent 70%); pointer-events:none; }
   .home-tabs__inner { position:relative; max-width:1000px; margin:0 auto; }
   .home-tabs__nav { display:flex; gap:4px; justify-content:center; margin:-120px auto 80px; position:relative; z-index:5; max-width:max-content; border-bottom:1px solid rgba(255,255,255,0.1); }

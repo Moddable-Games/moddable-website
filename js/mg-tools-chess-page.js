@@ -211,4 +211,10 @@ function startLiveGame(variantKey) {
 renderPicker();
 renderRules();
 renderMatch();
+
+const engineBtns = document.getElementById('engine-btns');
+if (engineBtns) {
+  engineBtns.appendChild(MG.linkBtn('Play online', 'https://chess.moddable.games/play/', 'primary'));
+  engineBtns.appendChild(MG.linkBtn('View source', 'https://github.com/Moddable-Games/moddable-chess', 'outline-dark'));
+}
 })();

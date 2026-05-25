@@ -40,9 +40,9 @@
     }
     inner.appendChild(grid);
 
-    const bottom = el('div', { style:{ paddingTop:'40px', display:'flex', flexWrap:'wrap', gap:'16px', justifyContent:'space-between', fontFamily:F.mono, fontSize:'12px', color:'rgba(255,255,255,0.45)', lineHeight:'1.6' }});
+    const bottom = el('div', { style:{ paddingTop:'40px', display:'flex', flexWrap:'wrap', gap:'16px', justifyContent:'space-between', alignItems:'center', fontFamily:F.mono, fontSize:'12px', color:'rgba(255,255,255,0.45)', lineHeight:'1.6' }});
     bottom.appendChild(el('span', {}, '© 2026 Moddable.Games'));
-    bottom.appendChild(el('span', { style:{ maxWidth:'700px', textAlign:'right' }}, 'Fan-made. Not affiliated with Hasbro, Asmodee, Fantasy Flight, or any rights-holder of the games we mod. All trademarks belong to their respective owners.'));
+    bottom.appendChild(el('span', {}, 'v' + window.MG.VERSION));
     inner.appendChild(bottom);
     f.appendChild(inner);
     return f;
