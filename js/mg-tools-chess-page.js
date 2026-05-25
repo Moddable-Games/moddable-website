@@ -125,7 +125,10 @@ function renderMatch() {
     const boardSection = document.getElementById('chess-embed-wrap');
     boardSection.style.display = 'block';
     const iframe = boardSection.querySelector('iframe') || document.createElement('iframe');
-    iframe.src = 'https://chess.moddable.games/play/?variant=' + v.key + '&embed=1'
+    const chessBase = location.hostname === 'localhost'
+      ? '/MODDABLE/moddable-chess/play/'
+      : 'https://chess.moddable.games/play/';
+    iframe.src = chessBase + '?variant=' + v.key + '&embed=1'
       + '&theme=light&radius=12px&boardonly=1'
       + '&p1=' + encodeURIComponent(p1Name)
       + '&p2=' + encodeURIComponent(p2Name)
