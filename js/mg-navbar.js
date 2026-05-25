@@ -19,7 +19,7 @@
       height:'64px', background:'#000', position:'fixed', top:0, left:0, right:0, zIndex:50,
       borderBottom:'1px solid rgba(255,255,255,0.08)',
       display:'flex', alignItems:'center', padding:'0 24px', gap:'24px',
-      boxSizing:'border-box',
+      boxSizing:'border-box', overflow:'hidden',
     })});
 
     const skip = el('a', { href:'#main-content', class:'mg-skip-link' }, 'Skip to content');
@@ -105,7 +105,7 @@
 
     const drawer = el('div', {
       id:'mg-mobile-drawer',
-      style: css({ position:'fixed', top:'64px', left:0, right:0, bottom:0, background:'#000', zIndex:49, padding:'32px 24px', overflowY:'auto' }),
+      style: css({ position:'fixed', top:'64px', left:0, right:0, bottom:0, background:'#000', zIndex:49, padding:'32px 24px', overflowY:'auto', display:'none' }),
     });
     const drawerNav = el('nav', { 'aria-label':'Main navigation', style:{ display:'flex', flexDirection:'column', gap:'4px' }});
     for (const item of NAV_ITEMS) {
