@@ -261,16 +261,84 @@
   color: var(--mg-ink);
 }
 
-.chess-engine-promo__text {
-  font-size: 0.95rem;
-  line-height: 1.6;
-  color: #555;
-  margin-bottom: 16px;
+.chess-engine-band {
+  background: var(--mg-cosmic-deep);
+  color: #fff;
+  padding: 80px 32px;
+  position: relative;
+  overflow: hidden;
+  text-align: center;
 }
 
-.chess-engine-promo__btns {
+.chess-engine-band__hex {
+  position: absolute;
+  inset: 0;
+  background-image: url('../../img/hex-grid-blue.svg');
+  background-size: 56px 64px;
+  opacity: 0.06;
+  pointer-events: none;
+  animation: hexFloat 30s linear infinite;
+}
+
+.chess-engine-band__inner {
+  position: relative;
+  max-width: 800px;
+  margin: 0 auto;
+}
+
+.chess-engine-band__heading {
+  font-family: var(--mg-font-display);
+  font-weight: 700;
+  font-size: clamp(28px, 4vw, 40px);
+  line-height: 1.1;
+  letter-spacing: -0.02em;
+  margin: 0 0 16px;
+}
+
+.chess-engine-band__body {
+  font-family: var(--mg-font-body);
+  font-size: 17px;
+  line-height: 1.6;
+  color: rgba(255,255,255,0.75);
+  max-width: 560px;
+  margin: 0 auto 36px;
+}
+
+.chess-engine-band__grid {
+  display: grid;
+  grid-template-columns: repeat(4, 1fr);
+  gap: 16px;
+  margin-bottom: 36px;
+}
+
+.chess-engine-band__usp {
   display: flex;
-  gap: 10px;
+  flex-direction: column;
+  gap: 4px;
+  padding: 16px 12px;
+  background: rgba(255,255,255,0.04);
+  border: 1px solid rgba(255,255,255,0.1);
+  border-radius: 12px;
+}
+
+.chess-engine-band__usp-num {
+  font-family: var(--mg-font-display);
+  font-weight: 700;
+  font-size: 28px;
+  color: var(--mg-cosmic-glow);
+}
+
+.chess-engine-band__usp-label {
+  font-family: var(--mg-font-mono);
+  font-size: 11px;
+  color: rgba(255,255,255,0.6);
+  letter-spacing: 0.3px;
+}
+
+.chess-engine-band__btns {
+  display: flex;
+  gap: 12px;
+  justify-content: center;
   flex-wrap: wrap;
 }
 
@@ -280,4 +348,6 @@
   .rules-ref__label { margin-top: 8px; }
   .match-form__row { flex-direction: column; align-items: stretch; gap: 6px; }
   .match-form__label { min-width: unset; }
+  .chess-engine-band { padding: 56px 20px; }
+  .chess-engine-band__grid { grid-template-columns: 1fr 1fr; }
 }

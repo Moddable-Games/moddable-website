@@ -116,97 +116,14 @@ function renderMatch() {
   p2Row.appendChild(p2);
   form.appendChild(p2Row);
 
-  form.appendChild(btn('Start Match', 'blue', () => {
-    const v = VARIANTS[currentIdx];
-    if (!v.key) return;
-    launchGame(v.key);
-  }));
+  const startBtn = MG.linkBtn('Play on chess.moddable.games', 'https://chess.moddable.games/play/', 'blue');
+  startBtn.setAttribute('target', '_blank');
+  startBtn.setAttribute('rel', 'noopener');
+  form.appendChild(startBtn);
 
   wrap.appendChild(form);
 }
 
-function launchGame(variantKey) {
-  const boardWrap = document.getElementById('chess-board-live');
-  boardWrap.innerHTML = '<div style="padding:20px;color:#666;font-size:0.9rem;">Loading engine...</div>';
-  boardWrap.style.display = 'block';
-
-  const base = MG.url('/').replace(/\/$/, '').replace('/MODDABLE/moddable-website', '/MODDABLE/moddable-chess');
-  const scripts = ['js/chess-engine.js','js/chess-moves.js','js/chess-play.js','js/chess-variants.js','js/board-renderer.js'];
-
-  function loadScripts(list, cb) {
-    if (list.length === 0) { cb(); return; }
-    if (window.MCE && list.length === scripts.length) { cb(); return; }
-    const s = document.createElement('script');
-    s.src = base + '/' + list[0];
-    s.onload = () => loadScripts(list.slice(1), cb);
-    document.body.appendChild(s);
-  }
-
-  loadScripts(scripts, () => {
-    fetch(base + '/assets/pieces.svg')
-      .then(r => r.text())
-      .then(svg => {
-        if (!document.getElementById('mce-pieces-defs')) {
-          const div = document.createElement('div');
-          div.id = 'mce-pieces-defs';
-          div.innerHTML = svg;
-          document.body.appendChild(div);
-        }
-        startLiveGame(variantKey);
-      });
-  });
-}
-
-function startLiveGame(variantKey) {
-  const wrap = document.getElementById('chess-board-live');
-  wrap.innerHTML = '';
-
-  const game = MCE.createGame(variantKey);
-  if (variantKey === 'chess960') MCE.loadFEN(game, MCE.randomFEN960());
-  if (variantKey === 'racingKings') MCE.loadFEN(game, '8/8/8/8/8/8/krbnNBRK/qrbnNBRQ w - - 0 1');
-
-  let selected = null;
-
-  function render() {
-    const allMoves = MCE.legalMoves(game);
-    const movesForSel = selected !== null ? allMoves.filter(m => m.from === selected) : [];
-    MCE.renderBoard(wrap, game, {
-      size: Math.min(480, wrap.offsetWidth - 4),
-      selected: selected,
-      legalMoves: movesForSel,
-      onSquareClick: handleClick,
-    });
-    const status = MCE.getStatus(game);
-    const statusEl = document.getElementById('chess-live-status');
-    const turn = game.turn === MCE.WHITE ? 'White' : 'Black';
-    if (status === 'checkmate') statusEl.textContent = 'Checkmate — ' + (game.turn === MCE.WHITE ? 'Black' : 'White') + ' wins!';
-    else if (status === 'stalemate') statusEl.textContent = 'Stalemate — draw';
-    else if (status === 'check') statusEl.textContent = turn + ' to move (check!)';
-    else statusEl.textContent = turn + ' to move';
-  }
-
-  function handleClick(sq) {
-    const piece = game.board[sq];
-    const allMoves = MCE.legalMoves(game);
-    if (selected !== null) {
-      let cands = allMoves.filter(m => m.from === selected && m.to === sq);
-      if (cands.length > 1) cands = cands.filter(m => m.promo === 'q');
-      if (cands.length > 0) {
-        MCE.makeMove(game, cands[0]);
-        selected = null;
-        render();
-        return;
-      }
-    }
-    if (piece && MCE.pieceColor(piece) === game.turn) selected = sq;
-    else selected = null;
-    render();
-  }
-
-  const statusDiv = el('div', { id: 'chess-live-status', class: 'match-ready__title' }, 'White to move');
-  wrap.parentNode.insertBefore(statusDiv, wrap.nextSibling);
-  render();
-}
 
 renderPicker();
 renderRules();
@@ -214,7 +131,11 @@ renderMatch();
 
 const engineBtns = document.getElementById('engine-btns');
 if (engineBtns) {
-  engineBtns.appendChild(MG.linkBtn('Play online', 'https://chess.moddable.games/play/', 'primary'));
-  engineBtns.appendChild(MG.linkBtn('View source', 'https://github.com/Moddable-Games/moddable-chess', 'outline-dark'));
+  const playBtn = MG.linkBtn('Moddable Chess', MG.url('/games/moddable-chess/'), 'primary');
+  const srcBtn = MG.linkBtn('View source on GitHub', 'https://github.com/Moddable-Games/moddable-chess', 'outline-light');
+  srcBtn.setAttribute('target', '_blank');
+  srcBtn.setAttribute('rel', 'noopener');
+  engineBtns.appendChild(playBtn);
+  engineBtns.appendChild(srcBtn);
 }
 })();
