@@ -119,10 +119,16 @@ function renderMatch() {
   form.appendChild(btn('Start Match', 'blue', () => {
     const v = VARIANTS[currentIdx];
     if (!v.key) return;
+    const p1Name = (document.getElementById('p1-name').value.trim()) || 'White';
+    const p2Name = (document.getElementById('p2-name').value.trim()) || 'Black';
+    const mode = p2Name.toLowerCase() === 'ai' ? 'solo' : 'pass';
     const boardSection = document.getElementById('chess-embed-wrap');
     boardSection.style.display = 'block';
     const iframe = boardSection.querySelector('iframe') || document.createElement('iframe');
-    iframe.src = 'https://chess.moddable.games/play/?variant=' + v.key + '&embed=1';
+    iframe.src = 'https://chess.moddable.games/play/?variant=' + v.key + '&embed=1'
+      + '&p1=' + encodeURIComponent(p1Name)
+      + '&p2=' + encodeURIComponent(p2Name)
+      + '&mode=' + mode;
     iframe.className = 'chess-embed__iframe';
     iframe.setAttribute('title', 'Play ' + v.name);
     if (!boardSection.querySelector('iframe')) boardSection.appendChild(iframe);
