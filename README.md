@@ -139,6 +139,21 @@ Pages load `mg-loader.js` (shared modules) + their own page script. Data is fetc
 - Repo made public, GitHub Pages live at web.moddable.games
 - Team member detail pages with authored posts, long bios, teammate links (closes #32)
 
+#### 2026-05-25
+- Fix mobile nav: drawer hidden on load, prevent horizontal overflow
+- Fix homepage hero bg repeating on mobile
+- Fix team page pop-out overlap on mobile (increased row-gap)
+- Version system: `bump.sh` single-source from `version.txt`, footer displays version
+- Cache-busting `?v=` on all CSS/JS loads across 52 HTML files
+- Removed fan-made disclaimer from footer (to licensing page later)
+- Chess embed: live playable board via iframe from chess.moddable.games
+- Chess engine params: `theme=light`, `boardonly=1`, `bg=`, `accent=`, `radius=`
+- Match setup: mode selector (vs AI / Pass & Play), player names passed to engine
+- Dynamic iframe aspect ratio from variant board dimensions
+- Chess engine promo: full-width dark band section with USPs
+- Press kit: styled bullet lists as bordered accent cards
+- Auto-detect local moddable-chess path for iframe testing
+
 #### 2026-05-23
 - Refactored `MG.data` to Promise-based API: `get(name)` → Promise, `get(type, slug)` → single item lookup
 - Deduplicates in-flight fetches (no double-requests for same resource)
