@@ -9,19 +9,19 @@
 <link rel="manifest" href="/site.webmanifest">
 <meta name="theme-color" content="#0a0d2a">
 <title>Nukes tools — Moddable.Games</title>
-<meta name="description" content="Nukes tools — target picker, fallout tracker, resource converter.">
+<meta name="description" content="Nukes game tools — strike planner, combat calculator, and hostage tracker for the hex strategy game.">
 <meta property="og:title" content="Nukes tools">
-<meta property="og:description" content="Nukes tools — target picker, fallout tracker, resource converter.">
+<meta property="og:description" content="Nukes game tools — strike planner, combat calculator, and hostage tracker.">
 <meta property="og:url" content="https://web.moddable.games/tools/nukes/">
 <meta property="og:type" content="website">
 <meta property="og:site_name" content="Moddable.Games">
 <meta property="og:image" content="https://web.moddable.games/img/og/tools-nukes.png">
 <meta name="twitter:card" content="summary_large_image">
 <meta name="twitter:title" content="Nukes tools">
-<meta name="twitter:description" content="Nukes tools — target picker, fallout tracker, resource converter.">
+<meta name="twitter:description" content="Nukes game tools — strike planner, combat calculator, and hostage tracker.">
 <meta name="twitter:image" content="https://web.moddable.games/img/og/tools-nukes.png">
-<link rel="stylesheet" href="../../css/_mg.css?v=1.0.16">
-<link rel="stylesheet" href="../../css/tools-nukes.css?v=1.0.16">
+<link rel="stylesheet" href="../../css/_mg.css?v=1.0.17">
+<link rel="stylesheet" href="../../css/tools-nukes.css?v=1.0.17">
 </head>
 <body>
 <div id="nav-root"></div>
@@ -29,65 +29,77 @@
 <section class="nukes-hero">
   <div class="nukes-hero__bloom"></div>
   <div class="nukes-hero__inner">
-    <a href="/tools/" class="nukes-hero__back">← All tools</a>
-    <div class="nukes-hero__eyebrow">NUKE CATAN</div>
+    <a href="/tools/" class="nukes-hero__back">&larr; All tools</a>
+    <div class="nukes-hero__eyebrow">NUKES</div>
     <h1 class="nukes-hero__title">Nukes tools.</h1>
-    <p class="nukes-hero__lede">Target picker and fallout tracker for <em>Nuke Catan</em>. Plan your strike. Live with the consequences.</p>
+    <p class="nukes-hero__lede">Strike planner, combat calculator, and hostage tracker for <em>Nukes</em> — cold-war hex strategy with nuclear brinkmanship.</p>
   </div>
 </section>
 
 <section class="nukes-content">
   <div class="nukes-content__inner">
 
-    <!-- Target Picker -->
+    <!-- Strike Planner -->
     <div class="nukes-card">
       <div class="nukes-card__header">
         <div class="nukes-card__accent nukes-card__accent--red"></div>
         <div>
-          <div class="nukes-card__eyebrow nukes-card__eyebrow--red">NUKES</div>
-          <h3 class="nukes-card__title">Target picker</h3>
-          <p class="nukes-card__desc">Click a hex to launch. Adjacent hexes pick up fallout markers automatically.</p>
+          <div class="nukes-card__eyebrow nukes-card__eyebrow--red">STRIKE PLANNER</div>
+          <h3 class="nukes-card__title">Hex strike planner</h3>
+          <p class="nukes-card__desc">Click a hex to nuke it. Target becomes biohazard; all units on target + 6 surrounding hexes are destroyed.</p>
         </div>
       </div>
       <div id="hex-map"><div id="hex-map-inner"></div><svg id="hex-svg" width="100%" viewBox="0 0 370 200"></svg></div>
       <div class="target-picker__footer">
-        <div id="strike-count">Strikes: <strong class="nukes-card__eyebrow--red">0</strong> · Fallout hexes: <strong>0</strong></div>
+        <div id="strike-count">Strikes: <strong class="nukes-card__eyebrow--red">0</strong> · Destroyed hexes: <strong>0</strong></div>
         <div id="clear-btn"></div>
       </div>
     </div>
 
-    <!-- Fallout Tracker -->
-    <div class="nukes-card">
-      <div class="nukes-card__header">
-        <div class="nukes-card__accent nukes-card__accent--orange"></div>
-        <div>
-          <div class="nukes-card__eyebrow nukes-card__eyebrow--orange">FALLOUT</div>
-          <h3 class="nukes-card__title">Fallout tracker</h3>
-          <p class="nukes-card__desc">Track contaminated zones and count down their recovery.</p>
-        </div>
-      </div>
-      <div id="fallout-list"></div>
-      <div id="fallout-btns"></div>
-    </div>
-
-    <!-- Resource Economy -->
+    <!-- Combat Calculator -->
     <div class="nukes-card">
       <div class="nukes-card__header">
         <div class="nukes-card__accent nukes-card__accent--blue"></div>
         <div>
-          <div class="nukes-card__eyebrow nukes-card__eyebrow--blue">NUKE CATAN ECONOMY</div>
-          <h3 class="nukes-card__title">Resource converter</h3>
-          <p class="nukes-card__desc">The Nuke Catan resource rename cheatsheet. Keep it open at the table.</p>
+          <div class="nukes-card__eyebrow nukes-card__eyebrow--blue">COMBAT</div>
+          <h3 class="nukes-card__title">Strength calculator</h3>
+          <p class="nukes-card__desc">Calculate attacker vs defender strength. Attacker must be strictly greater to attack.</p>
         </div>
       </div>
-      <div id="resource-table"></div>
+      <div id="combat-calc"></div>
+    </div>
+
+    <!-- Hostage Tracker -->
+    <div class="nukes-card">
+      <div class="nukes-card__header">
+        <div class="nukes-card__accent nukes-card__accent--orange"></div>
+        <div>
+          <div class="nukes-card__eyebrow nukes-card__eyebrow--orange">HOSTAGES</div>
+          <h3 class="nukes-card__title">Hostage tracker</h3>
+          <p class="nukes-card__desc">Track hostages held per player. Return 1–3 per turn to earn moves. Run out and you're eliminated.</p>
+        </div>
+      </div>
+      <div id="hostage-tracker"></div>
+    </div>
+
+    <!-- Unit Reference -->
+    <div class="nukes-card">
+      <div class="nukes-card__header">
+        <div class="nukes-card__accent nukes-card__accent--green"></div>
+        <div>
+          <div class="nukes-card__eyebrow nukes-card__eyebrow--green">REFERENCE</div>
+          <h3 class="nukes-card__title">Unit types</h3>
+          <p class="nukes-card__desc">Token count determines unit type. This is the fluid platoon principle.</p>
+        </div>
+      </div>
+      <div id="unit-table"></div>
     </div>
 
   </div>
 </section>
 
 <div id="footer-root"></div>
-<script src="../../js/mg-loader.js?v=1.0.16"></script>
-<script src="../../js/mg-tools-nukes-page.js?v=1.0.16"></script>
+<script src="../../js/mg-loader.js?v=1.0.17"></script>
+<script src="../../js/mg-tools-nukes-page.js?v=1.0.17"></script>
 </body>
 </html>

@@ -12,6 +12,7 @@
 .dc-system-card__name { font-family: var(--mg-font-mono); font-size: 13px; font-weight: 600; color: #4eb735; letter-spacing: 0.5px; margin-bottom: 8px; }
 .dc-system-card__desc { font-family: var(--mg-font-body); font-size: 14px; line-height: 1.6; color: rgba(255,255,255,0.65); margin: 0; }
 
-@media (max-width: 640px) {
-  #hero-cube { width: clamp(200px, 60vw, 280px); height: clamp(200px, 60vw, 280px); }
+@media (max-width: 768px) {
+  .game-hero__logo { justify-self: center; max-width: 160px; }
+  #hero-cube { width: clamp(200px, 60vw, 280px); height: clamp(200px, 60vw, 280px); margin: 0 auto; }
 }

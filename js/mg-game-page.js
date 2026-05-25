@@ -96,12 +96,14 @@ function render(game) {
   const vg = document.getElementById('variants-grid');
   if (vg && game.variants) {
     game.variants.forEach(s => {
-      const a = el('article', {class: 'mg-card'});
-      a.appendChild(el('div', {class: `mg-card__eyebrow mg-eyebrow--${game.accent}`}, s.n));
+      const cardAccent = s.accent ? (T[s.accent] || s.accent) : null;
+      const a = el('article', {class: 'mg-card' + (cardAccent ? ' mg-card--featured' : '')});
+      a.appendChild(el('div', {class: `mg-card__eyebrow mg-eyebrow--${s.accent || game.accent}`}, s.n));
       a.appendChild(el('h3', {class: 'mg-card__title'}, s.title));
       a.appendChild(el('p', {class: 'mg-card__body'}, s.body));
       if (s.href) {
         const link = el('a', {href: s.href.startsWith('/') ? url(s.href) : s.href, class: 'mg-card__link'});
+        if (cardAccent) link.style.color = cardAccent;
         link.textContent = 'Learn more →';
         a.appendChild(link);
       }

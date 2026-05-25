@@ -522,7 +522,7 @@
       ],
       [
         "Players",
-        "2-4"
+        "2–6"
       ],
       [
         "Status",
@@ -530,11 +530,11 @@
       ],
       [
         "Engine",
-        "Open source"
+        "v0.4.2"
       ],
       [
         "Board types",
-        "8×8 to 12×8"
+        "7×7 to 12×8"
       ],
       [
         "Updated",
@@ -573,24 +573,35 @@
     "variants": [
       {
         "n": "01",
-        "title": "Regular (8×8)",
-        "body": "Standard chess as the baseline. The same rules you know — running on our engine so you can fork it."
+        "title": "Standard + Classics",
+        "body": "Regular chess plus Fischer Random, No Castling, and Torpedo — familiar rules with one twist each."
       },
       {
         "n": "02",
-        "title": "4-Player",
-        "body": "Two teams or free-for-all on a cross-shaped board. The diplomacy variant."
+        "title": "Alternate Win Conditions",
+        "body": "King of the Hill, Three-Check, Racing Kings, Extinction — different paths to victory."
       },
       {
         "n": "03",
-        "title": "Hexagonal (Glinski)",
-        "body": "Pieces move along hex edges. Six directions instead of eight. Deeper positional play."
+        "title": "Chaos Variants",
+        "body": "Atomic, Duck Chess, Fog of War, Horde, Rifle — explosive mechanics that shatter standard strategy."
       },
       {
         "n": "04",
+        "title": "Big Boards",
+        "body": "Capablanca (10×8), Grand (10×10), Courier (12×8) — wider boards with fairy pieces. Plus Breakthrough on 7×7."
+      },
+      {
+        "n": "05",
+        "title": "Asymmetric",
+        "body": "Maharaja & Sepoys, Antichess, Marseillais — unequal forces or unequal turns. Mind-bending."
+      },
+      {
+        "n": "06",
         "title": "Dungeon Chess",
-        "body": "Our original variant — four asymmetric species, 75 XP drafting, cannon mechanics, and modular dungeon boards. Now its own standalone game.",
-        "href": "/games/dungeon-chess/"
+        "body": "Our original variant — four asymmetric species, XP drafting, cannon mechanics, and modular dungeon boards. Now its own standalone game.",
+        "href": "/games/dungeon-chess/",
+        "accent": "green"
       }
     ],
     "features": [

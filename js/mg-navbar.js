@@ -19,7 +19,7 @@
       height:'64px', background:'#000', position:'fixed', top:0, left:0, right:0, zIndex:50,
       borderBottom:'1px solid rgba(255,255,255,0.08)',
       display:'flex', alignItems:'center', padding:'0 24px', gap:'24px',
-      boxSizing:'border-box', overflow:'hidden',
+      boxSizing:'border-box',
     })});
 
     const skip = el('a', { href:'#main-content', class:'mg-skip-link' }, 'Skip to content');

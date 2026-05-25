@@ -54,10 +54,12 @@ document.querySelector('[data-color]').style.color = '#6fb5ff';
 document.querySelector('[data-color]').style.textShadow = '0 0 8px rgba(111,181,255,0.5)';
 document.querySelector('[data-bloom]').style.background = 'radial-gradient(ellipse,rgba(12,79,141,0.35) 0%,transparent 65%)';
 
-document.getElementById('hero-btns').appendChild(linkBtn('Play now','#','blue'));
-document.getElementById('hero-btns').appendChild(linkBtn('Browse variants','#','outline-dark'));
+const playLink = linkBtn('Play now','https://chess.moddable.games/play/','blue');
+playLink.setAttribute('target','_blank'); playLink.setAttribute('rel','noopener');
+document.getElementById('hero-btns').appendChild(playLink);
+document.getElementById('hero-btns').appendChild(linkBtn('Browse variants','/tools/chess/','outline-dark'));
 
-const STATS = [['Variants','4+'],['Players','2–4'],['Status','Open alpha'],['Engine','Live'],['Board types','Square + Hex'],['Updated','May 2026']];
+const STATS = [['Variants','20'],['Players','2–6'],['Status','Open alpha'],['Engine','v0.4.2'],['Board types','Square · 7×7 to 12×8'],['Updated','May 2026']];
 const sb = document.getElementById('stats-bar');
 STATS.forEach(([k,v],i) => {
   if(i>0) sb.appendChild(el('span',{class:'stats-row__divider'}));
@@ -68,10 +70,12 @@ STATS.forEach(([k,v],i) => {
 });
 
 const VARIANTS = [
-  {n:'01', title:'Regular (8×8)',        body:'Standard chess as the baseline. The same rules you know — running on our engine so you can fork it.'},
-  {n:'02', title:'4-Player',             body:'Two teams or free-for-all on a cross-shaped board. The diplomacy variant.'},
-  {n:'03', title:'Hexagonal (Glinski)',   body:'Pieces move along hex edges. Six directions instead of eight. Deeper positional play.'},
-  {n:'04', title:'Dungeon Chess',         body:'Our original variant — four asymmetric species, 75 XP drafting, cannon mechanics, and modular dungeon boards. Now its own standalone game.', href:'/games/dungeon-chess/'},
+  {n:'01', title:'Standard + Classics',   body:'Regular chess plus Fischer Random, No Castling, and Torpedo — familiar rules with one twist each.'},
+  {n:'02', title:'Alternate Win Conditions', body:'King of the Hill, Three-Check, Racing Kings, Extinction — different paths to victory.'},
+  {n:'03', title:'Chaos Variants',        body:'Atomic, Duck Chess, Fog of War, Horde, Rifle — explosive mechanics that shatter standard strategy.'},
+  {n:'04', title:'Big Boards',            body:'Capablanca (10×8), Grand (10×10), Courier (12×8) — wider boards with fairy pieces. Plus Breakthrough on 7×7.'},
+  {n:'05', title:'Asymmetric',            body:'Maharaja & Sepoys, Antichess, Marseillais — unequal forces or unequal turns. Mind-bending.'},
+  {n:'06', title:'Dungeon Chess',         body:'Our original variant — four asymmetric species, XP drafting, cannon mechanics, and modular dungeon boards. Now its own standalone game.', href:'/games/dungeon-chess/'},
 ];
 const vg = document.getElementById('variants-grid');
 VARIANTS.forEach(s => {
@@ -93,8 +97,12 @@ FEATURES.forEach(f => {
   ef.appendChild(el('span',{class:'mg-dark-center__pill'},f));
 });
 
-document.getElementById('engine-cta').appendChild(linkBtn('Try the engine','#','blue'));
-document.getElementById('engine-cta').appendChild(linkBtn('View on GitHub','#','outline-dark'));
+const tryBtn = linkBtn('Try the engine','https://chess.moddable.games/play/','blue');
+tryBtn.setAttribute('target','_blank'); tryBtn.setAttribute('rel','noopener');
+document.getElementById('engine-cta').appendChild(tryBtn);
+const ghBtn = linkBtn('View on GitHub','https://github.com/Moddable-Games/moddable-chess','outline-dark');
+ghBtn.setAttribute('target','_blank'); ghBtn.setAttribute('rel','noopener');
+document.getElementById('engine-cta').appendChild(ghBtn);
 
 const HOOKS = [
   {name:'board.lua',      desc:'Board geometry — square, hex, or anything. Define the grid, valid positions, and rendering rules.'},

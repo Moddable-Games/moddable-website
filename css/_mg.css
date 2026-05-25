@@ -323,6 +323,10 @@ button:focus-visible, a:focus-visible, input:focus-visible, textarea:focus-visib
 /* ── Cards (generic) ─────────────────────────────────────────────────── */
 .mg-card { background: #fff; border: 1px solid var(--mg-hairline-light); border-radius: 16px; padding: 24px; }
 .mg-card--light { background: var(--mg-canvas-light); }
+.mg-card--featured { background: var(--mg-ink); border-color: var(--mg-ink); }
+.mg-card--featured .mg-card__title { color: #fff; }
+.mg-card--featured .mg-card__body { color: rgba(255,255,255,0.7); }
+.mg-card--featured .mg-card__link { color: #6fb5ff; }
 .mg-card--row { display: flex; gap: 16px; align-items: flex-start; border-radius: 14px; }
 .mg-card__eyebrow { font-family: var(--mg-font-pixel); font-size: 9px; letter-spacing: 1.5px; margin-bottom: 14px; }
 .mg-card__title { font-family: var(--mg-font-display); font-weight: 600; font-size: 22px; line-height: 1.2; letter-spacing: -0.25px; color: var(--mg-ink); margin: 0 0 10px; }

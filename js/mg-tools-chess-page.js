@@ -18,6 +18,12 @@ const VARIANTS = [
   { name: 'Capablanca Chess', players: '2', board: '10×8', win: 'Checkmate', special: 'Two extra pieces: Archbishop (B+N) and Chancellor (R+N). Wider board.', key: 'capablanca' },
   { name: 'Grand Chess', players: '2', board: '10×10', win: 'Checkmate', special: 'Same new pieces as Capablanca, bigger board, pawns start on rank 3.', key: 'grand' },
   { name: 'Courier Chess', players: '2', board: '12×8', win: 'Checkmate', special: 'Medieval German variant from the 1200s. Extra bishops and sage pieces.', key: 'courier' },
+  { name: 'No Castling', players: '2', board: '8×8', win: 'Checkmate', special: 'Standard chess with castling removed. Kings must develop naturally.', key: 'noCastling' },
+  { name: 'Torpedo Chess', players: '2', board: '8×8', win: 'Checkmate', special: 'Pawns can move two squares forward from any rank, not just the starting rank.', key: 'torpedo' },
+  { name: 'Horde Chess', players: '2', board: '8×8', win: 'White checkmates or Black destroys horde', special: 'White has a full army. Black has 36 pawns. Asymmetric survival.', key: 'horde' },
+  { name: 'Extinction Chess', players: '2', board: '8×8', win: 'Capture all of one piece type', special: 'Lose all your knights, bishops, rooks, or pawns — you lose the game.', key: 'extinction' },
+  { name: 'Breakthrough', players: '2', board: '7×7', win: 'Reach opposite rank', special: 'Pawns only — first to reach the far side wins. No captures backward.', key: 'breakthrough' },
+  { name: 'Maharaja & Sepoys', players: '2', board: '8×8', win: 'Checkmate', special: 'One player has a full army. The other has one piece that moves as queen + knight.', key: 'maharaja' },
 ];
 
 let currentIdx = Math.floor(Math.random() * VARIANTS.length);
