@@ -124,19 +124,29 @@ function renderMatch() {
     const mode = p2Name.toLowerCase() === 'ai' ? 'solo' : 'pass';
     const boardSection = document.getElementById('chess-embed-wrap');
     boardSection.style.display = 'block';
-    const iframe = boardSection.querySelector('iframe') || document.createElement('iframe');
+    boardSection.innerHTML = '';
+
+    const header = el('div', {class: 'chess-embed__header'});
+    header.appendChild(el('h3', {class: 'chess-embed__title'}, v.name));
+    const meta = el('div', {class: 'chess-embed__meta'});
+    meta.appendChild(el('span', {}, p1Name + ' vs ' + p2Name));
+    meta.appendChild(el('span', {}, mode === 'solo' ? 'vs AI' : 'Pass & Play'));
+    header.appendChild(meta);
+    boardSection.appendChild(header);
+
+    const iframe = document.createElement('iframe');
     const chessBase = location.hostname === 'localhost'
       ? '/MODDABLE/moddable-chess/play/'
       : 'https://chess.moddable.games/play/';
     iframe.src = chessBase + '?variant=' + v.key + '&embed=1'
-      + '&theme=light&radius=12px&boardonly=1'
+      + '&theme=light&radius=8px&boardonly=1'
       + '&p1=' + encodeURIComponent(p1Name)
       + '&p2=' + encodeURIComponent(p2Name)
       + '&mode=' + mode;
     iframe.className = 'chess-embed__iframe';
     iframe.setAttribute('title', 'Play ' + v.name);
     iframe.setAttribute('scrolling', 'no');
-    if (!boardSection.querySelector('iframe')) boardSection.appendChild(iframe);
+    boardSection.appendChild(iframe);
     boardSection.scrollIntoView({ behavior: 'smooth', block: 'start' });
   }));
 
