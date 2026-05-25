@@ -86,42 +86,41 @@ function renderMatch() {
   variantRow.appendChild(sel);
   form.appendChild(variantRow);
 
-  const timeRow = el('div', { class: 'match-form__row' });
-  timeRow.appendChild(el('span', { class: 'match-form__label' }, 'Time'));
-  const timeSel = document.createElement('select');
-  timeSel.className = 'match-form__select';
-  timeSel.id = 'time-select';
-  ['No limit', '5 min', '10 min', '15 min', '30 min'].forEach(t => {
+  const modeRow = el('div', { class: 'match-form__row' });
+  modeRow.appendChild(el('span', { class: 'match-form__label' }, 'Mode'));
+  const modeSel = document.createElement('select');
+  modeSel.className = 'match-form__select';
+  modeSel.id = 'mode-select';
+  [['solo', 'vs AI'], ['pass', 'Pass & Play']].forEach(([val, label]) => {
     const opt = document.createElement('option');
-    opt.value = t;
-    opt.textContent = t;
-    timeSel.appendChild(opt);
+    opt.value = val; opt.textContent = label;
+    modeSel.appendChild(opt);
   });
-  timeRow.appendChild(timeSel);
-  form.appendChild(timeRow);
+  modeRow.appendChild(modeSel);
+  form.appendChild(modeRow);
 
   const p1Row = el('div', { class: 'match-form__row' });
-  p1Row.appendChild(el('span', { class: 'match-form__label' }, 'Player 1'));
+  p1Row.appendChild(el('span', { class: 'match-form__label' }, 'White'));
   const p1 = document.createElement('input');
   p1.type = 'text'; p1.className = 'match-form__input';
-  p1.placeholder = 'Name'; p1.id = 'p1-name';
+  p1.placeholder = 'Your name'; p1.id = 'p1-name';
   p1Row.appendChild(p1);
   form.appendChild(p1Row);
 
   const p2Row = el('div', { class: 'match-form__row' });
-  p2Row.appendChild(el('span', { class: 'match-form__label' }, 'Player 2'));
+  p2Row.appendChild(el('span', { class: 'match-form__label' }, 'Black'));
   const p2 = document.createElement('input');
   p2.type = 'text'; p2.className = 'match-form__input';
-  p2.placeholder = 'Name'; p2.id = 'p2-name';
+  p2.placeholder = 'Opponent name'; p2.id = 'p2-name';
   p2Row.appendChild(p2);
   form.appendChild(p2Row);
 
   form.appendChild(btn('Start Match', 'blue', () => {
     const v = VARIANTS[currentIdx];
     if (!v.key) return;
+    const mode = document.getElementById('mode-select').value;
     const p1Name = (document.getElementById('p1-name').value.trim()) || 'White';
-    const p2Name = (document.getElementById('p2-name').value.trim()) || 'Black';
-    const mode = p2Name.toLowerCase() === 'ai' ? 'solo' : 'pass';
+    const p2Name = mode === 'solo' ? 'AI' : ((document.getElementById('p2-name').value.trim()) || 'Black');
     const boardSection = document.getElementById('chess-embed-wrap');
     boardSection.style.display = 'block';
     boardSection.innerHTML = '';
@@ -134,6 +133,10 @@ function renderMatch() {
     header.appendChild(meta);
     boardSection.appendChild(header);
 
+    const dims = v.board.split('×').map(Number);
+    const cols = dims[0] || 8;
+    const rows = dims[1] || 8;
+
     const iframe = document.createElement('iframe');
     const chessBase = location.hostname === 'localhost'
       ? '/MODDABLE/moddable-chess/play/'
@@ -144,6 +147,7 @@ function renderMatch() {
       + '&p2=' + encodeURIComponent(p2Name)
       + '&mode=' + mode;
     iframe.className = 'chess-embed__iframe';
+    iframe.style.aspectRatio = cols + ' / ' + rows;
     iframe.setAttribute('title', 'Play ' + v.name);
     iframe.setAttribute('scrolling', 'no');
     boardSection.appendChild(iframe);
