@@ -17,7 +17,15 @@
   #hero-cube-wrap canvas { width:100% !important; height:100% !important; display:block; }
   #hero-lower__text .home-hero__lede { margin:0 0 24px; text-align:left; }
   #hero-lower__text .home-hero__btns { justify-content:flex-start; }
-  @media (max-width: 768px) { #hero-lower { flex-direction:column; } #hero-lower__text { text-align:center; } #hero-lower__text .home-hero__lede { text-align:center; margin:0 auto 24px; } #hero-lower__text .home-hero__btns { justify-content:center; } }
+  @media (max-width: 768px) {
+    #hero { min-height: auto; }
+    #hero-content { padding: 80px 20px 120px; }
+    #hero-bg { height: 100%; }
+    #hero-lower { flex-direction:column; }
+    #hero-lower__text { text-align:center; }
+    #hero-lower__text .home-hero__lede { text-align:center; margin:0 auto 24px; }
+    #hero-lower__text .home-hero__btns { justify-content:center; }
+  }
 
   .home-tabs { background:#0a0d2a; padding:80px 24px 140px; position:relative; overflow:hidden; }
   .home-tabs::before { content:''; position:absolute; inset:0; background:radial-gradient(ellipse 70% 50% at 50% 80%, rgba(111,181,255,0.1) 0%, transparent 70%); pointer-events:none; }
