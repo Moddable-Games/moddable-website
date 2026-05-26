@@ -67,65 +67,6 @@
       related: ['Flooded Catan', 'The Diamond Mine', 'Hyper Imperium']
     },
 
-    'fog-of-war-chess': {
-      accent: 'red',
-      heroTitle: 'Fog of War <em>Chess</em>.',
-      lede: 'Players see only the squares their own pieces can legally move to — no checks, no checkmates, only capture the king. Invented by Jens Bæk Nielsen & Torben Osted (1989).',
-      stats: [['Players','2'],['Time','20–40 min'],['Age','10+'],['Source','chessvariants.com'],['License','Public domain']],
-      sections: [
-        { id:'1', title:'Visibility', body:"You see only squares your pieces can move to or attack. Empty squares in your vision are shown normally. Enemy pieces only appear when they occupy a square threatened by one of your pieces. Your own pieces are always visible to you. Squares outside your vision appear as fog (grey/hidden)." },
-        { id:'2', title:'No check', body:"There is no check or checkmate in Fog of War Chess. The king can move into danger unknowingly — since you cannot see enemy attack lines that are outside your vision, the king receives no warning. This fundamentally changes the endgame: you must hunt the enemy king rather than corner it." },
-        { id:'3', title:'Win condition', body:"Capture the enemy king like any other piece. When you move a piece to the square occupied by the enemy king, the game ends immediately. There is no stalemate — if you cannot move, you lose. Draws are possible only by agreement or threefold repetition of visible board state." },
-        { id:'4', title:'Castling', body:"Castling is allowed only if both the king and the rook involved are within your field of vision (which they always are, since your own pieces' squares are visible). Standard castling rules otherwise apply: neither piece may have moved, no squares between them may be occupied, and the king may not pass through a square attacked by an enemy piece — but since you may not know if a square is attacked, castling through fog is at your own risk." },
-        { id:'5', title:'En passant', body:"En passant capture is allowed only if you can see the square the enemy pawn passed through. Since a pawn's two-square advance passes through an intermediate square, you must have vision of that intermediate square at the moment of capture. If the enemy pawn's advance was invisible to you, en passant is not available." }
-      ],
-      components: [
-        { kind:'Required', list:['Standard chess set (any size)','Two identical chess boards (one per player)','Opaque screen or divider between players'] },
-        { kind:'Printable', list:['Fog overlay tokens (PDF, included)','Quick-reference visibility rules card','Setup diagram for screen placement'] },
-        { kind:'House', list:['A referee (or digital app) to manage hidden information','Notepad for tracking opponent captures','Timer (optional, recommended 15 min per side)'] }
-      ],
-      related: ['4-Player Chess', 'Hexagonal Chess (Glinski)', 'Nuke Catan']
-    },
-
-    '4-player-chess': {
-      accent: 'blue',
-      heroTitle: '4-Player <em>Chess</em>.',
-      lede: 'Four players, four armies, one board. Free-for-all or teams. The de facto standard for multi-player chess — widely available online and as print-and-play.',
-      stats: [['Players','4'],['Time','30 min'],['Age','10+'],['Source','chess.com/variants'],['License','Public domain']],
-      sections: [
-        { id:'1', title:'The board', body:"A 14×14 grid with the 3×3 corner squares removed, creating a cross shape. Four armies (Red, Blue, Yellow, Green) start from the four edges in standard chess formation. Each player has the full complement: 1 king, 1 queen, 2 rooks, 2 bishops, 2 knights, and 8 pawns." },
-        { id:'2', title:'Turn order', body:"Play proceeds clockwise: Red, Blue, Yellow, Green. If a player is eliminated (king captured), their remaining pieces stay on the board as neutral obstacles — they cannot move or be controlled, but they can be captured. Neutral pieces do not give check." },
-        { id:'3', title:'Teams mode', body:"Opposite players are partners (Red+Yellow vs Blue+Green). When a king is captured, that player's remaining pieces transfer to the capturer and become that player's colour. Partners may not capture each other's pieces. The team whose opponents are both eliminated wins." },
-        { id:'4', title:'Scoring (FFA)', body:"In free-for-all mode, points are awarded for each piece captured: pawn = 1 point, knight = 3, bishop = 3, rook = 5, queen = 9, king = 20. The game ends when one player remains or time runs out. Highest score wins. Checkmate is not required — only king capture ends a player's game." },
-        { id:'5', title:'Promotion', body:"Pawns promote only upon reaching the far edge — the edge directly opposite their starting position. Side edges do not count for promotion. A pawn that reaches a side edge simply stops and must continue moving forward on subsequent turns. Promotion choices are the same as standard chess: queen, rook, bishop, or knight." }
-      ],
-      components: [
-        { kind:'Required', list:['4-player chess board (14×14 cross shape)','4 sets of chess pieces in distinct colours','Chess clock (optional, recommended)'] },
-        { kind:'Printable', list:['Board template (PDF, included)','Scoring sheet for free-for-all mode','Teams mode quick-reference card'] },
-        { kind:'House', list:['4 players (no AI substitution in tabletop)','Point tracker (paper or app)','Timer set to 10 min per player (FFA) or 15 min per team'] }
-      ],
-      related: ['Fog of War Chess', 'Hexagonal Chess (Glinski)', 'Talisman: Hexed']
-    },
-
-    'hexagonal-chess': {
-      accent: 'red',
-      heroTitle: 'Hexagonal <em>Chess</em>.',
-      lede: "Gliński's hexagonal chess — 91 cells, three colours, six directions. The most popular hex-chess variant in history, played by millions since 1936.",
-      stats: [['Players','2'],['Time','30 min'],['Age','10+'],['Source','chessvariants.com'],['License','Public domain']],
-      sections: [
-        { id:'1', title:'The board', body:"91 hexagonal cells arranged in a larger hexagon with side length 6. Cells are coloured in three alternating colours (light, medium, dark) so that no two adjacent cells share a colour. The board is oriented with a pointed edge facing each player." },
-        { id:'2', title:'Piece movement', body:"Rooks move along straight lines (any of the 6 hex directions). Bishops move diagonally — staying on one cell colour. Queens combine rook + bishop movement. Knights leap: one step straight then one step diagonally, jumping over intervening pieces. Kings move one step in any direction. Pawns advance straight forward and capture one step diagonally-forward." },
-        { id:'3', title:'Starting position', body:"Each player starts with: 1 king, 1 queen, 3 bishops (one per colour), 2 rooks, 2 knights, and 9 pawns. Pieces are arranged symmetrically on the board's first three ranks. The three bishops ensure every cell colour is covered." },
-        { id:'4', title:'Promotion & en passant', body:"Pawns promote on the far edge (the opponent's back rank of cells). Promotion options: queen, rook, bishop, or knight. En passant applies when a pawn uses its initial two-step move and passes a cell threatened by an enemy pawn — the capturing pawn takes as if the opponent moved one step." },
-        { id:'5', title:'Check & checkmate', body:"Standard rules apply: a king in check must escape. Checkmate (no legal move to escape check) loses the game. Stalemate is a draw. The six directions of attack and three-colour bishop system create novel tactical patterns not found in square chess." }
-      ],
-      components: [
-        { kind:'Required', list:['Hexagonal chess board (91 cells, 3 colours)','2 sets of chess pieces (standard or hex-specific)','Each side: 1 king, 1 queen, 3 bishops, 2 rooks, 2 knights, 9 pawns'] },
-        { kind:'Printable', list:['Board template (PDF, included)','Piece movement reference diagrams','Starting position setup guide'] },
-        { kind:'House', list:['Chess clock (optional, 15 min per side)','Flat surface large enough for hex board','Familiarity with standard chess helpful but not required'] }
-      ],
-      related: ['4-Player Chess', 'Fog of War Chess', 'Hyper Imperium']
-    },
 
     'anti-monopoly': {
       accent: 'red',

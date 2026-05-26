@@ -126,12 +126,19 @@ HOOKS.forEach(h => {
   d.appendChild(txt); hg.appendChild(d);
 });
 
-// Community mods
-const COMM = [
-  {category:'Total conversion',baseGame:'Chess',title:'Fog of War Chess',body:'See only squares your pieces can move to. No checks — capture the king to win.',stats:'2 players · 20–40 min · 10+',href:url('/mods/fog-of-war-chess/')},
-  {category:'Reskin',baseGame:'Chess',title:'4-Player Chess',body:'Four players, four armies, one board. Free-for-all or teams.',stats:'4 players · 30 min · 10+',href:url('/mods/4-player-chess/')},
-  {category:'Total conversion',baseGame:'Chess',title:'Hexagonal Chess (Glinski)',body:'Chess on 91 hexagonal cells. Three colours, six directions.',stats:'2 players · 30 min · 10+',href:url('/mods/hexagonal-chess/')},
-];
+// Community variants — pull from chess-variants.json
 const cg = document.getElementById('comm-grid');
-COMM.forEach(m => cg.appendChild(MG.modCard(m)));
+MG.data.get('chess-variants').then(function(variants) {
+  const featured = ['fog-of-war', 'antichess', 'racing-kings'];
+  featured.forEach(function(slug) {
+    const v = variants.find(function(x) { return x.slug === slug; });
+    if (!v) return;
+    cg.appendChild(MG.modCard({
+      category: 'Total conversion', baseGame: 'Chess',
+      title: v.title, body: v.special,
+      stats: v.players + ' players · ' + v.board,
+      href: url('/tools/chess/'),
+    }));
+  });
+});
 })();

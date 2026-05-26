@@ -27,33 +27,6 @@
     "source": "Moddable.Games"
   },
   {
-    "category": "Total conversion",
-    "baseGame": "Chess",
-    "title": "Fog of War Chess",
-    "body": "Players see only the squares their own pieces can legally move to — no checks, no checkmates, only capture the king. Invented by Jens Bæk Nielsen & Torben Osted (1989).",
-    "stats": "2 players · 20–40 min · 10+",
-    "path": "/mods/fog-of-war-chess/",
-    "source": "chessvariants.com"
-  },
-  {
-    "category": "Reskin",
-    "baseGame": "Chess",
-    "title": "4-Player Chess",
-    "body": "Four players, four armies, one board. Free-for-all or teams. The de facto standard for multi-player chess — widely available on chess.com and as PnP.",
-    "stats": "4 players · 30 min · 10+",
-    "path": "/mods/4-player-chess/",
-    "source": "chess.com/variants"
-  },
-  {
-    "category": "Total conversion",
-    "baseGame": "Chess",
-    "title": "Hexagonal Chess (Glinski)",
-    "body": "Władysław Gliński's 1936 hex-board variant. 91 hexagonal cells, 9 pawns per side, bishops that each stay on one of three cell colours. Fully documented and free to print.",
-    "stats": "2 players · 30–60 min · 12+",
-    "path": "/mods/hexagonal-chess/",
-    "source": "chessvariants.com"
-  },
-  {
     "category": "Rebalance",
     "baseGame": "Monopoly",
     "title": "Econopoly",
