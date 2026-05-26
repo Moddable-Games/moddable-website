@@ -119,6 +119,15 @@ Pages load `mg-loader.js` (shared modules) + their own page script. Data is fetc
 
 ### Changelog
 
+#### 2026-05-26
+- Update chess variant count 20→39 across all pages (closes #55, #54)
+- Remove dead `mg-game-dungeon-chess-page.js` — orphaned file not loaded anywhere (closes #52)
+- Fix inline `style="display:none"` on chess tools page → CSS class with classList toggle
+- Refactor navbar, footer, and cards from inline `style:{}` objects to dedicated CSS files
+- New files: `css/navbar.css`, `css/footer.css`, `css/cards.css` (63 rules total)
+- Loader auto-injects component CSS via `document.write` — no per-page HTML changes needed
+- Only data-driven dynamic values (accent colors, image URLs) remain as inline style strings
+
 #### 2026-05-24
 - Added per-page OG/Twitter meta tags via `build/stamp-meta.py` (closes #35)
 - Fleshed out 4 stub pages: /press (stat cards, swatches, assets), /subscribe (form + success state), /tools/decks (deck builder), /tools/chess (variant picker)
