@@ -10,6 +10,7 @@ function slugToKey(slug) {
 data.get('chess-variants').then(function(raw) {
   const VARIANTS = raw
     .sort((a, b) => a.order - b.order)
+    .filter(v => v.playable !== false)
     .map(v => ({
       name: v.title,
       players: v.players,
