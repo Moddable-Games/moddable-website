@@ -92,8 +92,14 @@ function render(game) {
     });
   }
 
-  // Variants grid (same as steps but in variants-grid container)
+  // Variants grid — update count from chess-variants.json if available
   const vg = document.getElementById('variants-grid');
+  const vcEl = document.getElementById('variant-count');
+  if (vcEl) {
+    MG.data.get('chess-variants').then(function(variants) {
+      vcEl.textContent = variants.length;
+    });
+  }
   if (vg && game.variants) {
     game.variants.forEach(s => {
       const cardAccent = s.accent ? (T[s.accent] || s.accent) : null;
