@@ -9,8 +9,8 @@
   document.getElementById('games-hero-hex').style.backgroundImage = "url('" + url('/img/hex-grid-blue.svg') + "')";
 
   var hb = document.getElementById('horizon-btns');
-  hb.appendChild(linkBtn('Join the Discord', url('/community/'), 'primary'));
-  hb.appendChild(linkBtn('See the roadmap', url('/about/roadmap/'), 'outline-dark'));
+  hb.appendChild(linkBtn('Join the Discord', '/community/', 'primary'));
+  hb.appendChild(linkBtn('See the roadmap', '/about/roadmap/', 'outline-dark'));
 
   var grid = document.getElementById('games-grid');
 

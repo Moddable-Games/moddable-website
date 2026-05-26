@@ -57,7 +57,9 @@
     searchBtn.addEventListener('click', () => { if (window.MG.openSearch) window.MG.openSearch(); });
     right.appendChild(searchBtn);
 
-    right.appendChild(linkBtn('MOD A GAME', url('/submit/'), 'primary', { height:'38px', fontSize:'13px', padding:'0 16px' }));
+    const cta = linkBtn('MOD A GAME', '/submit/', 'primary');
+    cta.classList.add('mg-btn--sm');
+    right.appendChild(cta);
     header.appendChild(right);
 
     const hamburger = el('button', { class:'mg-navbar__hamburger', 'aria-label':'Menu' }, '☰');

@@ -170,6 +170,11 @@ button:focus-visible, a:focus-visible, input:focus-visible, textarea:focus-visib
   white-space: nowrap;
   transition: background 200ms cubic-bezier(.2,.8,.2,1), transform 200ms cubic-bezier(.34,1.56,.64,1), box-shadow 200ms ease;
 }
+.mg-btn--sm {
+  height: 38px;
+  font-size: 13px;
+  padding: 0 16px;
+}
 .mg-btn:hover {
   background: var(--btn-hover-bg, var(--btn-bg, #fff));
   transform: scale(1.05);
