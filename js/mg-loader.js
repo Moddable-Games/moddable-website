@@ -4,10 +4,15 @@
    ========================================================================= */
 
 (function() {
-  var V = '1.0.23';
+  var V = '1.0.24';
   const scripts = document.querySelectorAll('script[src*="mg-loader.js"]');
   const src = scripts[scripts.length - 1].getAttribute('src');
   const base = src.replace(/mg-loader\.js.*$/, '');
+  var cssBase = base.replace(/js\/$/, 'css/');
+  var styles = ['navbar.css', 'footer.css', 'cards.css'];
+  for (var s = 0; s < styles.length; s++) {
+    document.write('<link rel="stylesheet" href="' + cssBase + styles[s] + '?v=' + V + '">');
+  }
   var modules = [
     'mg-core.js',
     'mg-mods-content.js',
