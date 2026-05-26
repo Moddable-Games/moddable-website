@@ -150,6 +150,35 @@ button:focus-visible, a:focus-visible, input:focus-visible, textarea:focus-visib
   50% { transform: scale(1.02); }
 }
 
+/* ── Buttons ────────────────────────────────────────────────────────── */
+.mg-btn {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  height: 48px;
+  padding: 0 22px;
+  border-radius: 9999px;
+  border: var(--btn-border, none);
+  background: var(--btn-bg, #fff);
+  color: var(--btn-fg, #000);
+  font-family: var(--mg-font-body);
+  font-weight: 600;
+  font-size: 15px;
+  letter-spacing: 0.2px;
+  cursor: pointer;
+  text-decoration: none;
+  white-space: nowrap;
+  transition: background 200ms cubic-bezier(.2,.8,.2,1), transform 200ms cubic-bezier(.34,1.56,.64,1), box-shadow 200ms ease;
+}
+.mg-btn:hover {
+  background: var(--btn-hover-bg, var(--btn-bg, #fff));
+  transform: scale(1.05);
+  box-shadow: 0 6px 20px rgba(0,0,0,0.2);
+}
+.mg-btn:active {
+  transform: scale(0.96);
+}
+
 /* Button hover enhancements */
 .mg-btn-pop {
   transition: transform 0.2s cubic-bezier(0.34, 1.56, 0.64, 1), box-shadow 0.2s ease;
@@ -210,6 +239,7 @@ button:focus-visible, a:focus-visible, input:focus-visible, textarea:focus-visib
   [data-reveal] { opacity: 1; animation: none !important; }
   .hero-anim > * { opacity: 1; animation: none !important; }
   .mg-lift:hover { transform: none; }
+  .mg-btn:hover { transform: none; }
   .mg-btn-pop:hover { transform: none; }
   .mg-pulse:hover { animation: none; }
 }
@@ -476,6 +506,7 @@ button:focus-visible, a:focus-visible, input:focus-visible, textarea:focus-visib
 .home-engine__heading em { color: var(--mg-cosmic-glow); font-style: italic; }
 .home-engine__body { font-family: var(--mg-font-body); font-size: 18px; line-height: 1.65; color: rgba(255,255,255,0.82); max-width: 600px; margin: 0 0 40px; }
 .home-engine__grid { display: grid; grid-template-columns: repeat(auto-fit, minmax(220px, 1fr)); gap: 16px; max-width: 800px; }
+.home-tabs__cards { display: flex; flex-direction: column; gap: 12px; width: 100%; }
 .home-engine__card { padding: 20px; background: rgba(255,255,255,0.06); border: 1px solid rgba(255,255,255,0.1); border-radius: 14px; }
 .home-engine__card-title { font-family: var(--mg-font-display); font-weight: 600; font-size: 15px; color: #fff; margin-bottom: 6px; }
 .home-engine__card-body { font-family: var(--mg-font-body); font-size: 13px; line-height: 1.5; color: rgba(255,255,255,0.65); }

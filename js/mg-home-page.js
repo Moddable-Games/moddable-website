@@ -260,11 +260,11 @@ stats.forEach(([k,v], i) => {
     if (tab.visual) {
       visual.innerHTML = tab.visual;
     } else if (tab.cards) {
-      const grid = el('div', {style:'display:flex;flex-direction:column;gap:12px;width:100%;'});
+      const grid = el('div', {class:'home-tabs__cards'});
       tab.cards.forEach(([title, body]) => {
-        const card = el('div', {style:'padding:16px 20px;background:rgba(255,255,255,0.06);border:1px solid rgba(255,255,255,0.1);border-radius:12px;'});
-        card.appendChild(el('div', {style:'font-family:var(--mg-font-display);font-weight:600;font-size:14px;color:#fff;margin-bottom:4px;'}, title));
-        card.appendChild(el('div', {style:'font-family:var(--mg-font-body);font-size:13px;color:rgba(255,255,255,0.6);line-height:1.5;'}, body));
+        const card = el('div', {class:'home-engine__card'});
+        card.appendChild(el('div', {class:'home-engine__card-title'}, title));
+        card.appendChild(el('div', {class:'home-engine__card-body'}, body));
         grid.appendChild(card);
       });
       visual.appendChild(grid);
