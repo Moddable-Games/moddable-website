@@ -128,7 +128,7 @@ function renderMatch() {
     const p1Name = (document.getElementById('p1-name').value.trim()) || 'White';
     const p2Name = mode === 'solo' ? 'AI' : ((document.getElementById('p2-name').value.trim()) || 'Black');
     const boardSection = document.getElementById('chess-embed-wrap');
-    boardSection.style.display = 'block';
+    boardSection.classList.remove('chess-embed--hidden');
     boardSection.innerHTML = '';
 
     const header = el('div', {class: 'chess-embed__header'});

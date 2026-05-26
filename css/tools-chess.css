@@ -253,6 +253,10 @@
   border-radius: 4px;
 }
 
+.chess-embed--hidden {
+  display: none;
+}
+
 .chess-embed {
   background: #fff;
   border: 1px solid var(--mg-hairline-light);
