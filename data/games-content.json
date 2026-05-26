@@ -405,7 +405,7 @@
         "12+"
       ],
       [
-        "Species",
+        "Factions",
         "4"
       ],
       [
@@ -414,7 +414,7 @@
       ],
       [
         "Status",
-        "Alpha"
+        "Live"
       ],
       [
         "Updated",
@@ -430,7 +430,7 @@
         ],
         [
           "Play Online",
-          "https://chess.moddable.games/play/",
+          "https://dungeon.moddable.games",
           "outline-dark"
         ]
       ],
@@ -439,8 +439,8 @@
     "steps": [
       {
         "n": "01",
-        "title": "Choose your species",
-        "body": "Humans, Undead, Redskins, or Greenskins. Each has 6 unique unit types with different costs, movements, and special abilities."
+        "title": "Choose your faction",
+        "body": "Humans, Undead, Demonics, or Greenskins. Each has 6 unique unit types with different costs, movements, and special abilities."
       },
       {
         "n": "02",
@@ -458,7 +458,7 @@
         "body": "The game ends the moment a King is captured. Protect yours, hunt theirs. Check forces a response — but there's no stalemate here."
       }
     ],
-    "races": [
+    "factions": [
       {
         "name": "Humans",
         "accent": "#c0c8d0",
@@ -472,7 +472,7 @@
         "desc": "Movement trickery. Wraiths phase through gaps, the Vampire reverses move/attack axes, and the Warlock attacks diagonally at range."
       },
       {
-        "name": "Redskins",
+        "name": "Demonics",
         "accent": "#d11a1a",
         "icon": "🔥",
         "desc": "Devastating firepower. Kobolds and Iron Golems use cannon attacks — sliding through a screen piece to strike at range. The Red Dragon attacks as a knight."
@@ -481,13 +481,13 @@
         "name": "Greenskins",
         "accent": "#3a9928",
         "icon": "👺",
-        "desc": "Brute force. Goblins and Ogres bring cannon attacks like the Redskins, while the Shaman commands full queen movement. The Warlord strikes as a knight."
+        "desc": "Brute force. Goblins and Ogres bring cannon attacks like Demonics, while the Shaman commands full queen movement. The Warlord strikes as a knight."
       }
     ],
     "hooks": [
       {
-        "name": "races.yaml",
-        "desc": "Four playable races with distinct piece types, spells, and XP trees. Fork one, rewrite all four, or add a fifth."
+        "name": "factions.yaml",
+        "desc": "Four playable factions with distinct piece types, abilities, and XP trees. Fork one, rewrite all four, or add a fifth."
       },
       {
         "name": "board.lua",

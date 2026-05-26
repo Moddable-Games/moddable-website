@@ -32,8 +32,8 @@
   {
     "title": "Dungeon Chess",
     "accent": "green",
-    "status": "Alpha",
-    "desc": "Asymmetric fantasy strategy on modular dungeon boards. Four species, 24 units, XP drafting.",
+    "status": "Live",
+    "desc": "Asymmetric fantasy strategy on modular dungeon boards. Four factions, 24 units, XP drafting.",
     "players": "2–4",
     "time": "30–120 min",
     "path": "/games/dungeon-chess/",

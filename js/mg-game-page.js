@@ -162,10 +162,11 @@ function render(game) {
     });
   }
 
-  // Races/variants grid
+  // Factions/races grid
   const rg = document.getElementById('races-grid');
-  if (rg && game.races) {
-    game.races.forEach(r => {
+  const factionData = game.factions || game.races;
+  if (rg && factionData) {
+    factionData.forEach(r => {
       const d = el('div', {class: 'mg-card mg-card--light mg-card--row'});
       const icon = el('div', {class: 'mg-card__icon'});
       icon.style.background = r.accent;

@@ -9,10 +9,10 @@ document.querySelector('[data-accent]').style.background = T.green;
 document.querySelector('[data-color]').style.color = '#4db83a';
 document.querySelector('[data-color]').style.textShadow = '0 0 8px rgba(58,153,40,0.5)';
 
-document.getElementById('hero-btns').appendChild(linkBtn('Join the playtest','#','green'));
+document.getElementById('hero-btns').appendChild(linkBtn('Play Online','https://dungeon.moddable.games','green'));
 document.getElementById('hero-btns').appendChild(linkBtn('Read the Rules', rulesUrl('dungeon-chess'),'outline-dark'));
 
-const STATS = [['Players','2–6'],['Modes','Skirmish + Legacy'],['Time','30–120 min'],['Age','12+'],['Status','Pre-alpha'],['Crowdfunding','Q4 2026'],['Updated','May 2026']];
+const STATS = [['Players','2–4'],['Factions','4'],['Time','30–120 min'],['Age','12+'],['Status','Live'],['Engine','MCE v0.4.2'],['Updated','May 2026']];
 const sb = document.getElementById('stats-bar');
 STATS.forEach(([k,v],i) => {
   if(i>0) sb.appendChild(el('span',{class:'stats-row__divider'}));
@@ -23,10 +23,10 @@ STATS.forEach(([k,v],i) => {
 });
 
 const STEPS = [
-  {n:'01', title:'Draft your warband',  body:'Pick a race — Humans, Undead, Redskins, or Greenskins. Each starts with a King, two Champions, and four Pawns. No two races play the same.'},
-  {n:'02', title:'Explore the dungeon',  body:'Tiles are placed face-down. Moving onto a new tile reveals it — traps, treasures, environmental effects. The board grows as you play.'},
-  {n:'03', title:'Cast and level up',    body:'Capture enemy pieces to earn XP. Spend it to promote Pawns, unlock racial spells, or activate persistent dungeon effects.'},
-  {n:'04', title:'Win the campaign',     body:'Skirmish mode ends when a King falls. Legacy mode chains battles into a persistent campaign — your survivors carry wounds, XP, and grudges.'},
+  {n:'01', title:'Choose your faction',  body:'Humans, Undead, Demonics, or Greenskins. Each has 6 unique unit types with different costs, movements, and special abilities.'},
+  {n:'02', title:'Draft your warband',   body:'Spend 75 XP to build your team. Must include a King and at least one Pawn. Every point is a tactical commitment — no two warbands are alike.'},
+  {n:'03', title:'Deploy and battle',    body:'Place your units in your spawn zone, then take turns moving one piece. Capture enemies by moving onto their square. Terrain matters — water blocks, gaps divide, corridors create chokepoints.'},
+  {n:'04', title:'Capture the King',     body:'The game ends the moment a King is captured. Protect yours, hunt theirs. Check forces a response — but there is no stalemate here.'},
 ];
 const sg = document.getElementById('steps-grid');
 STEPS.forEach(s => {
@@ -38,10 +38,10 @@ STEPS.forEach(s => {
 });
 
 const RACES = [
-  {name:'Demonics',  accent:'#d11a1a', desc:'Burn everything. Demonics gain power from destruction — capturing pieces fuels area-of-effect hellfire.'},
-  {name:'Wraiths',   accent:'#6b4fa0', desc:'Phase through walls. Wraiths ignore terrain and can haunt tiles, making them dangerous for enemies.'},
-  {name:'Knights',   accent:'#c5a022', desc:'Hold the line. Knights gain defensive bonuses from formation — adjacent allies strengthen each other.'},
-  {name:'Verdants',  accent:'#3a9928', desc:'Grow the board. Verdants place new tiles, heal allies, and turn hazards into advantages.'},
+  {name:'Humans',    accent:'#c0c8d0', desc:'Balanced generalists. Archers attack across gaps, the Wizard splits movement and attack, and the Princess slides like a bishop.'},
+  {name:'Undead',    accent:'#6b4fa0', desc:'Movement trickery. Wraiths phase through gaps, the Vampire reverses move/attack axes, and the Warlock attacks diagonally at range.'},
+  {name:'Demonics',  accent:'#d11a1a', desc:'Devastating firepower. Kobolds and Iron Golems use cannon attacks — sliding through a screen piece to strike at range. The Red Dragon attacks as a knight.'},
+  {name:'Greenskins',accent:'#3a9928', desc:'Brute force. Goblins and Ogres bring cannon attacks, while the Shaman commands full queen movement. The Warlord strikes as a knight.'},
 ];
 const rg = document.getElementById('races-grid');
 RACES.forEach(r => {
@@ -60,10 +60,10 @@ RACES.forEach(r => {
 });
 
 const HOOKS = [
-  {name:'races.yaml',    desc:'Four playable races with distinct piece types, spells, and XP trees. Fork one, rewrite all four, or add a fifth.'},
-  {name:'board.lua',     desc:'Dungeon tile generation rules. Change the mix of traps vs treasures, board shape, or add entirely new tile types.'},
-  {name:'campaign.yaml', desc:'Legacy progression — how XP persists between sessions, what carries over, and when the campaign ends.'},
-  {name:'spells.yaml',   desc:'Every racial spell with costs, effects, and targeting rules. Balance them, remove them, or add cross-race combos.'},
+  {name:'factions.json',  desc:'Four playable factions with distinct piece types, abilities, and XP trees. Fork one, rewrite all four, or add a fifth.'},
+  {name:'maps.json',      desc:'Modular dungeon boards with terrain types. Change the shape, add hazards, or create entirely new battlegrounds.'},
+  {name:'abilities.json', desc:'Hex abilities and unit specials. Rebalance, remove, or add new faction-specific powers.'},
+  {name:'units.json',     desc:'Every unit definition — cost, movement, attack pattern, and special rules. The core data that drives the game.'},
 ];
 const hg = document.getElementById('hooks-grid');
 HOOKS.forEach(h => {
