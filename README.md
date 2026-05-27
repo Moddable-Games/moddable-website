@@ -137,6 +137,9 @@ Pages load `mg-loader.js` (shared modules) + their own page script. Data is fetc
 - Copied Talisman: Hexed + Econopoly logos from moddable-rules; Hyper Imperium already had one
 - Fix mod detail page hero never rendering (DOMContentLoaded race condition)
 - Component list styling: accent-coloured outlined bullets, better spacing
+- Generated ALL remaining OG images — zero template placeholders left (closes #53)
+- 4 build scripts for future regeneration: `gen-team-og.py`, `gen-mod-og.py`, `gen-tools-og.py`, `gen-remaining-og.py`
+- Created #61 (missing mod/tool logos) and moddable-chess#44 (board themes)
 
 #### 2026-05-26
 - Update chess variant count 20→39 across all pages (closes #55, #54)
