@@ -37,6 +37,7 @@ TOOLS = [
         'subtitle': 'Strike planner · Combat · Resources',
         'color': (209, 26, 26),
         'icon': 'nuke',
+        'logo': 'img/nukes-logo.png',
     },
     {
         'slug': 'tools-talisman',
@@ -151,11 +152,22 @@ for tool in TOOLS:
     glow_layer = glow_layer.filter(ImageFilter.GaussianBlur(radius=100))
     img = Image.alpha_composite(img, glow_layer)
 
-    # Icon on right
-    icon_layer = Image.new('RGBA', (WIDTH, HEIGHT), (0, 0, 0, 0))
-    id = ImageDraw.Draw(icon_layer)
-    draw_icon(id, tool['icon'], 920, 315, tool['color'], 140)
-    img = Image.alpha_composite(img, icon_layer)
+    # Logo or icon on right
+    if tool.get('logo') and os.path.exists(tool['logo']):
+        tool_logo = Image.open(tool['logo']).convert('RGBA')
+        max_size = 220
+        ratio = min(max_size / tool_logo.width, max_size / tool_logo.height)
+        lw = int(tool_logo.width * ratio)
+        lh = int(tool_logo.height * ratio)
+        tool_logo = tool_logo.resize((lw, lh), Image.LANCZOS)
+        logo_layer = Image.new('RGBA', (WIDTH, HEIGHT), (0, 0, 0, 0))
+        logo_layer.paste(tool_logo, (920 - lw//2, 315 - lh//2), tool_logo)
+        img = Image.alpha_composite(img, logo_layer)
+    else:
+        icon_layer = Image.new('RGBA', (WIDTH, HEIGHT), (0, 0, 0, 0))
+        id = ImageDraw.Draw(icon_layer)
+        draw_icon(id, tool['icon'], 920, 315, tool['color'], 140)
+        img = Image.alpha_composite(img, icon_layer)
 
     # Text
     draw = ImageDraw.Draw(img)
