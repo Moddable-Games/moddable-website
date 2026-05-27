@@ -111,16 +111,17 @@ function objectiveSection(title, objs, accent) {
   return wrap;
 }
 
-function renderAll() {
+function renderAll(scrollTo) {
   renderPlayerBtns(); renderHandBtns(); deal(); renderObjectives();
   document.querySelectorAll('.ti-expansion-toggles').forEach(t => { t.innerHTML = ''; renderExpansionTogglesInto(t); });
+  if (scrollTo) scrollTo.scrollIntoView({ block: 'nearest' });
 }
 
 function renderExpansionTogglesInto(container) {
   ti4Data.expansions.forEach(exp => {
     container.appendChild(mkTogBtn(exp.label, enabledExpansions[exp.key], () => {
       enabledExpansions[exp.key] = !enabledExpansions[exp.key];
-      renderAll();
+      renderAll(container);
     }));
   });
 }
