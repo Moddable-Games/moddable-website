@@ -19,22 +19,30 @@
   var navbar = MG.navbar;
   var footer = MG.footer;
 
-  var navRoot = document.getElementById('nav-root');
-  var footerRoot = document.getElementById('footer-root');
-  if (navRoot) navRoot.appendChild(navbar('Mods'));
-  if (footerRoot) footerRoot.appendChild(footer());
-
   var accent = page.accent || 'blue';
   var CATEGORY_MAP = { red: 'Total conversion', green: 'Rebalance', blue: 'Reskin' };
 
-  MG.data.get('mods').then(function(mods) {
-    var listing = mods.find(function(m) { return m.path.indexOf(slug) !== -1; });
-    renderHero(listing);
-    renderRules();
-    renderComponents();
-    renderRelated(mods);
-    document.title = (listing ? listing.title : slug) + ' — Moddable.Games';
-  });
+  function init() {
+    var navRoot = document.getElementById('nav-root');
+    var footerRoot = document.getElementById('footer-root');
+    if (navRoot) navRoot.appendChild(navbar('Mods'));
+    if (footerRoot) footerRoot.appendChild(footer());
+
+    MG.data.get('mods').then(function(mods) {
+      var listing = mods.find(function(m) { return m.path.indexOf(slug) !== -1; });
+      renderHero(listing);
+      renderRules();
+      renderComponents();
+      renderRelated(mods);
+      document.title = (listing ? listing.title : slug) + ' — Moddable.Games';
+    });
+  }
+
+  if (document.readyState === 'loading') {
+    document.addEventListener('DOMContentLoaded', init);
+  } else {
+    init();
+  }
 
   function renderHero(listing) {
     var hero = document.getElementById('mod-hero');

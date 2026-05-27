@@ -294,7 +294,7 @@ button:focus-visible, a:focus-visible, input:focus-visible, textarea:focus-visib
 .mod-hero__title--green em { color: #4db83a; }
 .mod-hero__lede { font-family: var(--mg-font-body); font-size: 19px; line-height: 1.55; color: rgba(255,255,255,0.78); max-width: 720px; margin: 0 0 36px; }
 .mod-hero__btns { display: flex; gap: 12px; flex-wrap: wrap; margin-bottom: 40px; }
-.mod-hero__logo { position: absolute; right: 32px; top: 50%; transform: translateY(-50%); width: clamp(160px, 20vw, 280px); height: auto; opacity: 0.85; pointer-events: none; }
+.mod-hero__logo { position: absolute; right: 32px; top: 56px; bottom: 180px; width: clamp(160px, 20vw, 280px); height: auto; margin: auto 0; opacity: 0.85; pointer-events: none; }
 @media (max-width: 900px) { .mod-hero__logo { display: none; } }
 
 /* ── Stats row (dark bg) ─────────────────────────────────────────────── */
@@ -438,9 +438,12 @@ button:focus-visible, a:focus-visible, input:focus-visible, textarea:focus-visib
 .toc-list__num { font-family: var(--mg-font-mono); font-size: 11px; color: var(--mg-stone); min-width: 18px; }
 
 /* ── Component list (Talisman etc.) ──────────────────────────────────── */
-.component-list { list-style: none; padding: 0; margin: 0; display: flex; flex-direction: column; gap: 10px; }
-.component-list__item { display: flex; gap: 10px; align-items: flex-start; font-family: var(--mg-font-body); font-size: 14px; color: var(--mg-body-color); line-height: 1.45; }
-.component-list__bullet { width: 6px; height: 6px; margin-top: 8px; background: var(--mg-blue); border-radius: 1px; flex: none; }
+.component-list { list-style: none; padding: 0; margin: 0; display: flex; flex-direction: column; gap: 12px; }
+.component-list__item { display: flex; gap: 12px; align-items: flex-start; font-family: var(--mg-font-body); font-size: 14px; color: var(--mg-ink); line-height: 1.5; }
+.component-list__bullet { width: 7px; height: 7px; margin-top: 7px; border-radius: 2px; flex: none; border: 2px solid var(--mg-blue); }
+.mg-card:has(.mg-eyebrow--red) .component-list__bullet { border-color: #d11a1a; }
+.mg-card:has(.mg-eyebrow--green) .component-list__bullet { border-color: #3a9928; }
+.mg-card:has(.mg-eyebrow--blue) .component-list__bullet { border-color: #0c4f8d; }
 
 /* ── Utility ─────────────────────────────────────────────────────────── */
 .mg-grid-2 { display: grid; grid-template-columns: repeat(2, 1fr); gap: 14px; }
