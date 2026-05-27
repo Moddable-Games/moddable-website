@@ -6,12 +6,12 @@ document.getElementById('nav-root').appendChild(navbar('Mods'));
 document.getElementById('footer-root').appendChild(footer());
 
 // Hero parallax + colour tint cycle + cube + mouse tracking
-const heroBg = document.getElementById('hero-bg');
+const heroBgInner = document.getElementById('hero-bg__inner');
 const heroSection = document.getElementById('hero');
 const heroTint = document.getElementById('hero-tint');
 const heroCubeWrap = document.getElementById('hero-cube-wrap');
 
-window.addEventListener('scroll', () => { heroBg.style.transform = `translateY(${window.scrollY * -0.3}px)`; }, { passive:true });
+window.addEventListener('scroll', () => { heroBgInner.style.transform = `translateY(${window.scrollY * -0.3}px)`; }, { passive:true });
 
 // Colour tint cycling on hex-land background (crossfade layers)
 (function() {
@@ -114,7 +114,7 @@ hb.appendChild(linkBtn('Browse the mods', '/mods/', 'primary'));
 hb.appendChild(linkBtn('Read the manifesto', '/about/', 'outline-dark'));
 
 // Mod gallery — featured subset from shared data
-const HOME_MOD_TITLES = ['Talisman: Hexed','Hyper Imperium','Nuke Catan','Econopoly','Fog of War Chess','CivRisk'];
+const HOME_MOD_TITLES = ['Talisman: Hexed','Hyper Imperium','Nuke Catan','Econopoly','Flooded Catan','CivRisk'];
 const filters = ['All','Total conversion','Rebalance','Reskin'];
 let activeFilter = 'All';
 const filtersEl = document.getElementById('gallery-filters');

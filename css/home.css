@@ -1,8 +1,9 @@
   body { background: #000; color: #fff; }
   #hero { position:relative; min-height:780px; background:#000; overflow:hidden; isolation:isolate; }
-  #hero-bg { position:absolute; top:0; left:0; right:0; height:130%; background:linear-gradient(180deg,#0a0d2a 0%,#1a3680 45%,#000 100%); will-change:transform; }
-  #hero-bg::before { content:''; position:absolute; inset:0; background:url('../img/hex-land.jpg') center 70% / cover no-repeat; opacity:0.35; mix-blend-mode:screen; mask-image:linear-gradient(180deg, transparent 0%, black 15%, black 70%, transparent 95%); -webkit-mask-image:linear-gradient(180deg, transparent 0%, black 15%, black 70%, transparent 95%); }
-  #hero-bg::after { content:''; position:absolute; inset:0; background:radial-gradient(ellipse 80% 40% at 50% 100%,rgba(58,123,232,0.55) 0%,transparent 70%); }
+  #hero-bg { position:absolute; inset:0; overflow:hidden; }
+  #hero-bg__inner { position:absolute; top:0; left:0; right:0; height:130%; background:linear-gradient(180deg,#0a0d2a 0%,#1a3680 45%,#000 100%); }
+  #hero-bg__inner::before { content:''; position:absolute; inset:0; background:url('../img/hex-land.jpg') center 70% / cover no-repeat; opacity:0.35; mix-blend-mode:screen; mask-image:linear-gradient(180deg, transparent 0%, black 15%, black 70%, transparent 95%); -webkit-mask-image:linear-gradient(180deg, transparent 0%, black 15%, black 70%, transparent 95%); }
+  #hero-bg__inner::after { content:''; position:absolute; inset:0; background:radial-gradient(ellipse 80% 40% at 50% 100%,rgba(58,123,232,0.55) 0%,transparent 70%); }
   #hero-tint { position:absolute; inset:0; pointer-events:none; }
   .hero-tint__layer { position:absolute; inset:0; opacity:0; mix-blend-mode:hard-light; transition: opacity 3s ease-in-out; }
   .hero-tint__layer--active { opacity:0.5; }
@@ -27,7 +28,7 @@
     #hero-lower__text .home-hero__btns { justify-content:center; }
   }
 
-  .home-tabs { background:#0a0d2a; padding:80px 24px 140px; position:relative; overflow:hidden; }
+  .home-tabs { background:#0a0d2a; padding:80px 24px 140px; position:relative; }
   .home-tabs::before { content:''; position:absolute; inset:0; background:radial-gradient(ellipse 70% 50% at 50% 80%, rgba(111,181,255,0.1) 0%, transparent 70%); pointer-events:none; }
   .home-tabs__inner { position:relative; max-width:1000px; margin:0 auto; }
   .home-tabs__nav { display:flex; gap:4px; justify-content:center; margin:-120px auto 80px; position:relative; z-index:5; max-width:max-content; border-bottom:1px solid rgba(255,255,255,0.1); }

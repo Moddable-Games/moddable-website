@@ -119,6 +119,12 @@ Pages load `mg-loader.js` (shared modules) + their own page script. Data is fetc
 
 ### Changelog
 
+#### 2026-05-27
+- Fix homepage crash: "Fog of War Chess" removed from mods.json but still referenced in homepage featured list
+- Fix hero parallax spilling past section boundary — wrap in overflow:hidden container
+- Fix home-tabs nav hidden under section above — remove overflow:hidden that clipped negative margin
+- Bump version 1.0.29 → 1.0.30 (was missing from previous commit)
+
 #### 2026-05-26
 - Update chess variant count 20→39 across all pages (closes #55, #54)
 - Remove dead `mg-game-dungeon-chess-page.js` — orphaned file not loaded anywhere (closes #52)
