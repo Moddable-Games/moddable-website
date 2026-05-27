@@ -12,6 +12,10 @@ document.querySelector('[data-hex]').style.backgroundImage = "url('" + url('/img
 document.querySelector('[data-accent]').style.background = T.green;
 document.querySelector('[data-bloom]').style.background = 'radial-gradient(ellipse,rgba(58,153,40,0.35) 0%,transparent 65%)';
 
+var heroLogo = document.querySelector('.game-hero__logo');
+heroLogo.src = url('/img/moddable-hexmaps-cube.svg');
+heroLogo.alt = 'Moddable Hexmaps';
+
 var genLink = linkBtn('Generate maps', 'https://hex.moddable.games/generate/', 'green');
 genLink.setAttribute('target', '_blank');
 genLink.setAttribute('rel', 'noopener');

@@ -23,10 +23,24 @@
 
 .mg-footer__grid {
   display: grid;
-  grid-template-columns: repeat(auto-fit, minmax(180px, 1fr));
-  gap: 32px;
+  grid-template-columns: 1.4fr repeat(5, 1fr);
+  gap: 24px;
   padding-bottom: 56px;
   border-bottom: 1px solid rgba(255,255,255,0.12);
+}
+
+@media (max-width: 900px) {
+  .mg-footer__grid {
+    grid-template-columns: repeat(3, 1fr);
+    gap: 32px 24px;
+  }
+}
+
+@media (max-width: 560px) {
+  .mg-footer__grid {
+    grid-template-columns: 1fr 1fr;
+    gap: 28px 20px;
+  }
 }
 
 .mg-footer__logo-wrap {
