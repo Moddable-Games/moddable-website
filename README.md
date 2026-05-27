@@ -122,6 +122,12 @@ Pages load `mg-loader.js` (shared modules) + their own page script. Data is fetc
 ### Changelog
 
 #### 2026-05-27
+- New tools: Resource Dashboard, Bag Tracker, Role Distributor (all fully configurable with game presets)
+- Removed: Map Grid Generator (redundant), Voting Booth (needs server), Combat Odds (parked for redesign #67)
+- Fixed invisible buttons on tools page (wrong variants for light backgrounds)
+- Tools index: added Hex Map Generator card, updated mod-specific card descriptions
+- Hexmaps tools card links to engine page (not external generator)
+- Nukes game page: added "Generate Map" hero CTA
 - Embed moddable-hexmaps engine in tools pages: `/tools/nukes/`, `/tools/talisman/`, `/tools/ti/` (#62)
 - Shared embed module (`js/mg-hexmap-embed.js`) + CSS (`css/tools-hexmaps.css`)
 - "Powered by Moddable Hexmaps" engine band on all three pages
