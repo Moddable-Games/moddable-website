@@ -129,15 +129,12 @@ function renderExpansionTogglesInto(container) {
 fetch(MG.url('/data/ti4.json')).then(r => r.json()).then(d => {
   ti4Data = d;
 
-  const factionCard = document.getElementById('faction-hands').closest('.ti-card') || document.getElementById('player-btns').parentElement.parentElement;
-  const toggleWrap = el('div',{class:'ti-expansion-toggles'});
-  renderExpansionTogglesInto(toggleWrap);
   const controlsEl = document.querySelector('.ti-controls');
-  if (controlsEl) controlsEl.prepend(toggleWrap);
-
-  const countEl = el('span',{class:'ti-faction-count',id:'faction-count'});
-  const dealBtn = document.getElementById('deal-btn');
-  if (dealBtn) dealBtn.parentElement.insertBefore(countEl, dealBtn);
+  if (controlsEl) {
+    const toggleWrap = el('div',{class:'ti-expansion-toggles'});
+    renderExpansionTogglesInto(toggleWrap);
+    controlsEl.parentElement.insertBefore(toggleWrap, controlsEl);
+  }
 
   renderPlayerBtns(); renderHandBtns(); deal();
   renderObjectives();
