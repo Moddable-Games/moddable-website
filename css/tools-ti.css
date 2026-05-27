@@ -1,5 +1,8 @@
 body { background:#f5f4ef; }
-.tog-btn { width:36px;height:36px;border-radius:9999px;cursor:pointer;font-family:var(--mg-font-mono);font-weight:600;font-size:13px;transition:all 120ms; }
+.tog-btn { min-width:36px;height:36px;padding:0 12px;border-radius:9999px;cursor:pointer;font-family:var(--mg-font-mono);font-weight:600;font-size:13px;transition:all 120ms; }
+.ti-expansion-toggles { display:flex;gap:8px;flex-wrap:wrap;margin-bottom:12px; }
+.ti-faction-count { font-family:var(--mg-font-mono);font-size:12px;color:#636b78;margin-right:12px; }
+.ti-faction__exp { font-family:var(--mg-font-mono);font-size:9px;color:#636b78;margin-top:2px; }
 
 /* ── TI Hero ── */
 .ti-hero { background:#000;color:#fff;padding:56px 32px 72px;position:relative;overflow:hidden; }

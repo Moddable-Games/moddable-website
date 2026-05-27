@@ -1,26 +1,10 @@
 (function() {
-const { T, el, btn, navbar, footer } = MG;
+const { T, el, btn, navbar, footer, data } = MG;
 document.getElementById('nav-root').appendChild(navbar('Tools'));
 document.getElementById('footer-root').appendChild(footer());
 
-/* ── FACTION PICKER ── */
-const FACTIONS = [
-  { name:'Federation of Sol',   color:'#c8d400', flag:'FoS' },
-  { name:'Mentak Coalition',    color:'#e89a1a', flag:'MC'  },
-  { name:'Yin Brotherhood',     color:'#a4a4a4', flag:'YB'  },
-  { name:'Embers of Muaat',     color:'#d11a1a', flag:'EM'  },
-  { name:'Arborec',             color:'#3a9928', flag:'AR'  },
-  { name:'L1Z1X Mindnet',       color:'#1a1a3a', flag:'L1'  },
-  { name:'Winnu',               color:'#c97afb', flag:'WN'  },
-  { name:'Naalu Collective',    color:'#3a7be8', flag:'NA'  },
-  { name:'Barony of Letnev',    color:'#5d2a8a', flag:'BL'  },
-  { name:'Xxcha Kingdom',       color:'#0c4f8d', flag:'XX'  },
-  { name:'Empyrean',            color:'#e63232', flag:'EP'  },
-  { name:'Argent Flight',       color:'#6fb5ff', flag:'AF'  },
-  { name:"Vuil'raith Cabal",    color:'#636b78', flag:'VR'  },
-  { name:'Naaz-Rokha Alliance', color:'#428619', flag:'NR'  },
-  { name:'Titans of Ul',        color:'#936d62', flag:'TU'  },
-];
+let ti4Data = null;
+let enabledExpansions = { base: true, pok: true };
 let playerCount = 4, handSize = 3;
 
 function mkTogBtn(label, active, onClick) {
@@ -32,9 +16,24 @@ function mkTogBtn(label, active, onClick) {
   return b;
 }
 
+function getFactions() {
+  return ti4Data.factions.filter(f => enabledExpansions[f.expansion]);
+}
+
+function renderExpansionToggles(container) {
+  const row = el('div',{class:'ti-expansion-toggles'});
+  ti4Data.expansions.forEach(exp => {
+    row.appendChild(mkTogBtn(exp.label, enabledExpansions[exp.key], () => {
+      enabledExpansions[exp.key] = !enabledExpansions[exp.key];
+      renderAll();
+    }));
+  });
+  container.appendChild(row);
+}
+
 function renderPlayerBtns() {
   const wrap = document.getElementById('player-btns'); wrap.innerHTML = '';
-  [3,4,5,6].forEach(n => wrap.appendChild(mkTogBtn(n, n===playerCount, () => { playerCount=n; renderPlayerBtns(); renderHandBtns(); deal(); })));
+  [3,4,5,6,7,8].forEach(n => wrap.appendChild(mkTogBtn(n, n===playerCount, () => { playerCount=n; renderPlayerBtns(); renderHandBtns(); deal(); })));
 }
 function renderHandBtns() {
   const wrap = document.getElementById('hand-btns'); wrap.innerHTML = '';
@@ -42,10 +41,12 @@ function renderHandBtns() {
 }
 
 function deal() {
-  const shuffled = [...FACTIONS].sort(() => Math.random()-0.5);
+  const factions = getFactions();
+  const shuffled = [...factions].sort(() => Math.random()-0.5);
   const hands = document.getElementById('faction-hands'); hands.innerHTML = '';
   for (let p=0; p<playerCount; p++) {
     const row = shuffled.slice(p*handSize, p*handSize+handSize);
+    if (row.length === 0) continue;
     const wrap = el('div',{class:'ti-hand'});
     wrap.appendChild(el('div',{class:'ti-hand__label'},`PLAYER ${p+1}`));
     const row2 = el('div',{class:'ti-hand__row'});
@@ -56,25 +57,30 @@ function deal() {
       card.style.borderColor = f.color;
       const badge = el('div',{class:'ti-faction__badge'},f.flag);
       badge.style.background = f.color;
-      badge.style.color = f.name==='L1Z1X Mindnet'?'#fff':'#000';
+      const darkBg = ['L1Z1X Mindnet','Nekro Virus','Barony of Letnev'].includes(f.name);
+      badge.style.color = darkBg ? '#fff' : '#000';
       card.appendChild(badge);
-      card.appendChild(el('div',{class:'ti-faction__name'},f.name));
+      const nameEl = el('div',{class:'ti-faction__name'},f.name);
+      card.appendChild(nameEl);
+      if (f.expansion !== 'base') {
+        const tag = el('span',{class:'ti-faction__exp'},'PoK');
+        card.appendChild(tag);
+      }
       row2.appendChild(card);
     });
     wrap.appendChild(row2); hands.appendChild(wrap);
   }
+  const countEl = document.getElementById('faction-count');
+  if (countEl) countEl.textContent = factions.length + ' factions';
 }
 
-document.getElementById('deal-btn').appendChild(btn('Deal factions','dark', deal));
-renderPlayerBtns(); renderHandBtns(); deal();
-
-/* ── HEXMAP EMBED ── */
-MG_HexEmbed.init('twilight');
-MG_HexEmbed.renderBtns();
-
-/* ── OBJECTIVE TRACKER ── */
-const STAGE_I = ['Corner the Market','Erect a Monument','Establish a Perimeter','Found a Golden Age','Grow Exploration','Imperial Point','Intimidate Council','Lead from the Front','Negotiate Trade Routes','Sway the Council'];
-const STAGE_II = ['Centralize Galactic Trade','Conquer the Weak','Form Galactic Brain Trust','Found the Council','Galvanize the People','Manipulate Galactic Law','Master the Laws of War','Revolutionize Warfare','Subdue the Galaxy','Unify the Colonies'];
+function renderObjectives() {
+  const og = document.getElementById('objectives-grid'); og.innerHTML = '';
+  const s1 = ti4Data.objectives.stage1.filter(o => enabledExpansions[o.expansion]).map(o => o.text);
+  const s2 = ti4Data.objectives.stage2.filter(o => enabledExpansions[o.expansion]).map(o => o.text);
+  og.appendChild(objectiveSection('STAGE I (' + s1.length + ')', s1, '#3a9928'));
+  og.appendChild(objectiveSection('STAGE II (' + s2.length + ')', s2, '#0c4f8d'));
+}
 
 function objectiveSection(title, objs, accent) {
   const wrap = el('div');
@@ -105,9 +111,41 @@ function objectiveSection(title, objs, accent) {
   return wrap;
 }
 
-const og = document.getElementById('objectives-grid');
-og.appendChild(objectiveSection('STAGE I', STAGE_I, '#3a9928'));
-og.appendChild(objectiveSection('STAGE II', STAGE_II, '#0c4f8d'));
+function renderAll() {
+  renderPlayerBtns(); renderHandBtns(); deal(); renderObjectives();
+  const toggles = document.querySelectorAll('.ti-expansion-toggles');
+  toggles.forEach(t => { t.innerHTML = ''; renderExpansionTogglesInto(t); });
+}
+
+function renderExpansionTogglesInto(container) {
+  ti4Data.expansions.forEach(exp => {
+    container.appendChild(mkTogBtn(exp.label, enabledExpansions[exp.key], () => {
+      enabledExpansions[exp.key] = !enabledExpansions[exp.key];
+      renderAll();
+    }));
+  });
+}
+
+fetch(MG.url('/data/ti4.json')).then(r => r.json()).then(d => {
+  ti4Data = d;
+
+  const factionCard = document.getElementById('faction-hands').closest('.ti-card') || document.getElementById('player-btns').parentElement.parentElement;
+  const toggleWrap = el('div',{class:'ti-expansion-toggles'});
+  renderExpansionTogglesInto(toggleWrap);
+  const controlsEl = document.querySelector('.ti-controls');
+  if (controlsEl) controlsEl.prepend(toggleWrap);
+
+  const countEl = el('span',{class:'ti-faction-count',id:'faction-count'});
+  const dealBtn = document.getElementById('deal-btn');
+  if (dealBtn) dealBtn.parentElement.insertBefore(countEl, dealBtn);
+
+  renderPlayerBtns(); renderHandBtns(); deal();
+  renderObjectives();
+});
+
+/* ── HEXMAP EMBED ── */
+MG_HexEmbed.init('twilight');
+MG_HexEmbed.renderBtns();
 
 /* ── AGENDA VOTER ── */
 const AGENDAS = [
