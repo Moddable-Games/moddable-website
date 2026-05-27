@@ -33,7 +33,7 @@ const MOD_TOOLS = [
   { title:'Nukes',             sub:'Hex map generator · Strike planner · Combat calculator · Hostage tracker', color:'#d11a1a', href:url('/tools/nukes/') },
   { title:'Card Deck Builder', sub:'Design · Shuffle · Deal — custom decks for any game', color:'#3a9928', href:url('/tools/decks/') },
   { title:'Chess Variants',    sub:'39 variants · Rules reference · Match setup', color:'#0c4f8d', href:url('/tools/chess/') },
-  { title:'Hex Map Generator', sub:'Nukes · Talisman · Twilight Imperium — seeded maps, Canvas rendering', color:'#3a9928', href:'https://hex.moddable.games/generate/' },
+  { title:'Hex Map Generator', sub:'Nukes · Talisman · Twilight Imperium — seeded maps, Canvas rendering', color:'#3a9928', href:url('/engines/moddable-hexmaps/') },
 ];
 const mtg = document.getElementById('mod-tools-grid');
 MOD_TOOLS.forEach(t => {
