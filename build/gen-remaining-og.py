@@ -66,22 +66,34 @@ def save(img, path):
 
 def gen_about():
     img = base_image()
-    # 4 team photos — BIG breakout style
+    # 4 team photos in 2x2 grid on right, big and centred
     photos = ['assets/team/mark.png', 'assets/team/kevin.png',
               'assets/team/akmal.png', 'assets/team/iqbal.png']
-    x_start = 580
+    pw = 160
+    gap = 16
+    grid_w = pw * 2 + gap
+    grid_h = pw * 2 + gap  # will be cropped shorter
+    zone_left = 560
+    zone_right = WIDTH - 80
+    zone_cx = (zone_left + zone_right) // 2
+    zone_cy = HEIGHT // 2
+    x_start = zone_cx - grid_w // 2
+    y_start = zone_cy - 160  # shift up slightly
+
+    positions = [(0, 0), (1, 0), (0, 1), (1, 1)]
     for i, p in enumerate(photos):
         if not os.path.exists(p):
             continue
         photo = Image.open(p).convert('RGBA')
-        pw = 200
         ph = int(photo.height * pw / photo.width)
         photo = photo.resize((pw, ph), Image.LANCZOS)
-        visible = int(ph * 0.65)
+        visible = int(ph * 0.55)
         photo = photo.crop((0, 0, pw, visible))
+        col, row = positions[i]
+        lx = x_start + col * (pw + gap)
+        ly = y_start + row * (visible + gap)
         layer = Image.new('RGBA', (WIDTH, HEIGHT), (0, 0, 0, 0))
-        y_pos = HEIGHT - 50 - visible
-        layer.paste(photo, (x_start + i * 160, y_pos), photo)
+        layer.paste(photo, (lx, ly), photo)
         img = Image.alpha_composite(img, layer)
     add_text(img, 'MODDABLE.GAMES', 'About', 'The workshop behind the mods')
     save(img, 'img/og/about.png')
