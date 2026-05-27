@@ -122,6 +122,10 @@ Pages load `mg-loader.js` (shared modules) + their own page script. Data is fetc
 ### Changelog
 
 #### 2026-05-27
+- Embed moddable-hexmaps engine in tools pages: `/tools/nukes/`, `/tools/talisman/`, `/tools/ti/` (#62)
+- Shared embed module (`js/mg-hexmap-embed.js`) + CSS (`css/tools-hexmaps.css`)
+- "Powered by Moddable Hexmaps" engine band on all three pages
+- Seed sharing via URL params works through iframe
 - New `/engines/` section: top-level nav item, index page, Moddable Chess + Moddable Hexmaps pages
 - Reclassified Chess and Hexmaps from "Games" to "Engines" — they're SDKs, not games
 - Nav updated: `Mods | Games | Engines | Tools | News | About`
