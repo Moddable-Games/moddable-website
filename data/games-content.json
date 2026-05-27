@@ -14,7 +14,7 @@
     "stats": [
       [
         "Players",
-        "2–3"
+        "2\u20133"
       ],
       [
         "Turns",
@@ -51,6 +51,11 @@
         [
           "Browse on GitHub",
           "https://github.com/Moddable-Games/Nukes-Rulebook/blob/main/games/nukes/content/rulebook.md",
+          "outline-dark"
+        ],
+        [
+          "Generate Map",
+          "https://hex.moddable.games/generate/?game=nukes",
           "outline-dark"
         ]
       ],
@@ -100,7 +105,7 @@
       },
       {
         "name": "button.lua",
-        "desc": "The Button rules — when it can be pressed, how large the fallout radius is, what the point penalty for losing your capital is."
+        "desc": "The Button rules \u2014 when it can be pressed, how large the fallout radius is, what the point penalty for losing your capital is."
       },
       {
         "name": "endgame.md",
@@ -113,21 +118,21 @@
         "baseGame": "Nukes",
         "title": "Nukes: Diplomacy Mode",
         "body": "Extended negotiation phase. Three-turn pacts become binding contracts with penalties for breaking them.",
-        "stats": "3 players · 90 min · 14+"
+        "stats": "3 players \u00b7 90 min \u00b7 14+"
       },
       {
         "category": "Total conversion",
         "baseGame": "Nukes",
         "title": "Nukes: Cold Space",
         "body": "The same mechanics on a star map. Planets instead of hexes, fleets instead of armies, and the button launches a supernova.",
-        "stats": "2–4 players · 120 min · 14+"
+        "stats": "2\u20134 players \u00b7 120 min \u00b7 14+"
       },
       {
         "category": "Reskin",
         "baseGame": "Nukes",
         "title": "Nukes: Retro",
         "body": "1950s propaganda art style. Same rules, different aesthetic. Print-and-play with period-accurate typography.",
-        "stats": "3 players · 60 min · 14+"
+        "stats": "3 players \u00b7 60 min \u00b7 14+"
       }
     ]
   },
@@ -146,7 +151,7 @@
     "stats": [
       [
         "Players",
-        "3–6"
+        "3\u20136"
       ],
       [
         "Time",
@@ -206,7 +211,7 @@
       {
         "n": "01",
         "title": "Deal the deck",
-        "body": "54 cards, shuffled. Each player gets 7. The remaining stack is the Mongo pile — it changes shape every round."
+        "body": "54 cards, shuffled. Each player gets 7. The remaining stack is the Mongo pile \u2014 it changes shape every round."
       },
       {
         "n": "02",
@@ -231,7 +236,7 @@
       },
       {
         "name": "deck.yaml",
-        "desc": "Card definitions — suits, values, special behaviours. Add a fifth suit, remove the Jokers, invent wildcards."
+        "desc": "Card definitions \u2014 suits, values, special behaviours. Add a fifth suit, remove the Jokers, invent wildcards."
       },
       {
         "name": "scoring.lua",
@@ -244,21 +249,21 @@
         "baseGame": "Mongo",
         "title": "Mongo: Quick Draw",
         "body": "5-card hands instead of 7. Faster rounds, more volatile rule changes. Lunch-break mode.",
-        "stats": "3–5 players · 15 min · 10+"
+        "stats": "3\u20135 players \u00b7 15 min \u00b7 10+"
       },
       {
         "category": "Total conversion",
         "baseGame": "Mongo",
         "title": "Mongo: Spell Deck",
-        "body": "Fantasy theme. Rules become spells — \"all cards played face-down\" becomes \"Fog of War\", etc.",
-        "stats": "3–5 players · 45 min · 12+"
+        "body": "Fantasy theme. Rules become spells \u2014 \"all cards played face-down\" becomes \"Fog of War\", etc.",
+        "stats": "3\u20135 players \u00b7 45 min \u00b7 12+"
       },
       {
         "category": "Reskin",
         "baseGame": "Mongo",
         "title": "Mongo: Neon",
         "body": "Cyberpunk card art. Same rules, UV-reactive card backs for night sessions.",
-        "stats": "3–5 players · 30 min · 12+"
+        "stats": "3\u20135 players \u00b7 30 min \u00b7 12+"
       }
     ]
   },
@@ -277,7 +282,7 @@
     "stats": [
       [
         "Players",
-        "1–4"
+        "1\u20134"
       ],
       [
         "Time",
@@ -324,12 +329,12 @@
       {
         "n": "02",
         "title": "Pick a faction",
-        "body": "Twelve faction decks: Cartographers, Storm-callers, Salvagers, Iron Banks… each breaks one rule."
+        "body": "Twelve faction decks: Cartographers, Storm-callers, Salvagers, Iron Banks\u2026 each breaks one rule."
       },
       {
         "n": "03",
         "title": "Trade and tile",
-        "body": "Flip a tile to reveal a biome (sky, sea, surface). Trade resources — the speaker can veto one deal per round."
+        "body": "Flip a tile to reveal a biome (sky, sea, surface). Trade resources \u2014 the speaker can veto one deal per round."
       },
       {
         "n": "04",
@@ -344,7 +349,7 @@
       },
       {
         "name": "biomes.yaml",
-        "desc": "Define new tile biomes — terrain, resources, victory contribution."
+        "desc": "Define new tile biomes \u2014 terrain, resources, victory contribution."
       },
       {
         "name": "endgame.lua",
@@ -361,21 +366,21 @@
         "baseGame": "Endless Skies",
         "title": "Endless Skies: Inkwell",
         "body": "All-monochrome tile set. Every faction recoloured into Edo-period woodblock palette.",
-        "stats": "2–4 players · 90 min · 12+"
+        "stats": "2\u20134 players \u00b7 90 min \u00b7 12+"
       },
       {
         "category": "Rebalance",
         "baseGame": "Endless Skies",
         "title": "Solo Skies",
         "body": "A solo-mode bot using a 32-card AI deck. Three difficulty tiers.",
-        "stats": "1 player · 60 min · 14+"
+        "stats": "1 player \u00b7 60 min \u00b7 14+"
       },
       {
         "category": "Total conversion",
         "baseGame": "Endless Skies",
         "title": "Subterranean",
         "body": "Same engine, underground theme. The Void becomes the Magma Heart. Hex tiles flipped sides.",
-        "stats": "2–4 players · 90 min · 12+"
+        "stats": "2\u20134 players \u00b7 90 min \u00b7 12+"
       }
     ]
   },
@@ -394,11 +399,11 @@
     "stats": [
       [
         "Players",
-        "2–4"
+        "2\u20134"
       ],
       [
         "Time",
-        "30–120 min"
+        "30\u2013120 min"
       ],
       [
         "Age",
@@ -445,42 +450,42 @@
       {
         "n": "02",
         "title": "Draft your warband",
-        "body": "Spend 75 XP to build your team. Must include a King and at least one Pawn. Every point is a tactical commitment — no two warbands are alike."
+        "body": "Spend 75 XP to build your team. Must include a King and at least one Pawn. Every point is a tactical commitment \u2014 no two warbands are alike."
       },
       {
         "n": "03",
         "title": "Deploy and battle",
-        "body": "Place your units in your spawn zone, then take turns moving one piece. Capture enemies by moving onto their square. Terrain matters — water blocks, gaps divide, corridors create chokepoints."
+        "body": "Place your units in your spawn zone, then take turns moving one piece. Capture enemies by moving onto their square. Terrain matters \u2014 water blocks, gaps divide, corridors create chokepoints."
       },
       {
         "n": "04",
         "title": "Capture the King",
-        "body": "The game ends the moment a King is captured. Protect yours, hunt theirs. Check forces a response — but there's no stalemate here."
+        "body": "The game ends the moment a King is captured. Protect yours, hunt theirs. Check forces a response \u2014 but there's no stalemate here."
       }
     ],
     "factions": [
       {
         "name": "Humans",
         "accent": "#c0c8d0",
-        "icon": "⚔",
+        "icon": "\u2694",
         "desc": "Balanced generalists. Archers attack across gaps, the Wizard splits movement and attack, and the Princess slides like a bishop."
       },
       {
         "name": "Undead",
         "accent": "#6b4fa0",
-        "icon": "💀",
+        "icon": "\ud83d\udc80",
         "desc": "Movement trickery. Wraiths phase through gaps, the Vampire reverses move/attack axes, and the Warlock attacks diagonally at range."
       },
       {
         "name": "Demonics",
         "accent": "#d11a1a",
-        "icon": "🔥",
-        "desc": "Devastating firepower. Kobolds and Iron Golems use cannon attacks — sliding through a screen piece to strike at range. The Red Dragon attacks as a knight."
+        "icon": "\ud83d\udd25",
+        "desc": "Devastating firepower. Kobolds and Iron Golems use cannon attacks \u2014 sliding through a screen piece to strike at range. The Red Dragon attacks as a knight."
       },
       {
         "name": "Greenskins",
         "accent": "#3a9928",
-        "icon": "👺",
+        "icon": "\ud83d\udc7a",
         "desc": "Brute force. Goblins and Ogres bring cannon attacks like Demonics, while the Shaman commands full queen movement. The Warlord strikes as a knight."
       }
     ],
@@ -495,7 +500,7 @@
       },
       {
         "name": "campaign.yaml",
-        "desc": "Legacy progression — how XP persists between sessions, what carries over, and when the campaign ends."
+        "desc": "Legacy progression \u2014 how XP persists between sessions, what carries over, and when the campaign ends."
       },
       {
         "name": "spells.yaml",
@@ -522,7 +527,7 @@
       ],
       [
         "Players",
-        "2–6"
+        "2\u20136"
       ],
       [
         "Status",
@@ -534,7 +539,7 @@
       ],
       [
         "Board types",
-        "7×7 to 12×8"
+        "7\u00d77 to 12\u00d78"
       ],
       [
         "Updated",
@@ -574,32 +579,32 @@
       {
         "n": "01",
         "title": "Standard + Classics",
-        "body": "Regular chess plus Fischer Random, No Castling, and Torpedo — familiar rules with one twist each."
+        "body": "Regular chess plus Fischer Random, No Castling, and Torpedo \u2014 familiar rules with one twist each."
       },
       {
         "n": "02",
         "title": "Alternate Win Conditions",
-        "body": "King of the Hill, Three-Check, Racing Kings, Extinction — different paths to victory."
+        "body": "King of the Hill, Three-Check, Racing Kings, Extinction \u2014 different paths to victory."
       },
       {
         "n": "03",
         "title": "Chaos Variants",
-        "body": "Atomic, Duck Chess, Fog of War, Horde, Rifle — explosive mechanics that shatter standard strategy."
+        "body": "Atomic, Duck Chess, Fog of War, Horde, Rifle \u2014 explosive mechanics that shatter standard strategy."
       },
       {
         "n": "04",
         "title": "Big Boards",
-        "body": "Capablanca (10×8), Grand (10×10), Courier (12×8) — wider boards with fairy pieces. Plus Breakthrough on 7×7."
+        "body": "Capablanca (10\u00d78), Grand (10\u00d710), Courier (12\u00d78) \u2014 wider boards with fairy pieces. Plus Breakthrough on 7\u00d77."
       },
       {
         "n": "05",
         "title": "Asymmetric",
-        "body": "Maharaja & Sepoys, Antichess, Marseillais — unequal forces or unequal turns. Mind-bending."
+        "body": "Maharaja & Sepoys, Antichess, Marseillais \u2014 unequal forces or unequal turns. Mind-bending."
       },
       {
         "n": "06",
         "title": "Dungeon Chess",
-        "body": "Our original variant — four asymmetric species, XP drafting, cannon mechanics, and modular dungeon boards. Now its own standalone game.",
+        "body": "Our original variant \u2014 four asymmetric species, XP drafting, cannon mechanics, and modular dungeon boards. Now its own standalone game.",
         "href": "/games/dungeon-chess/",
         "accent": "green"
       }
@@ -612,7 +617,7 @@
     "hooks": [
       {
         "name": "board.lua",
-        "desc": "Board geometry — square, hex, or anything. Define the grid, valid positions, and rendering rules."
+        "desc": "Board geometry \u2014 square, hex, or anything. Define the grid, valid positions, and rendering rules."
       },
       {
         "name": "pieces.yaml",
@@ -624,7 +629,7 @@
       },
       {
         "name": "ai.lua",
-        "desc": "Bot behavior for each variant. The teaching engine learns from every game played — human or bot."
+        "desc": "Bot behavior for each variant. The teaching engine learns from every game played \u2014 human or bot."
       }
     ],
     "communityLabel": "Supported variants.",
@@ -633,78 +638,78 @@
         "category": "Total conversion",
         "baseGame": "Chess",
         "title": "Fog of War Chess",
-        "body": "Players see only squares their pieces can move to. No checks, no checkmates — capture the king to win. Invented 1989.",
-        "stats": "2 players · 20–40 min · 10+"
+        "body": "Players see only squares their pieces can move to. No checks, no checkmates \u2014 capture the king to win. Invented 1989.",
+        "stats": "2 players \u00b7 20\u201340 min \u00b7 10+"
       },
       {
         "category": "Reskin",
         "baseGame": "Chess",
         "title": "4-Player Chess",
         "body": "Four armies on a cross-shaped board. Free-for-all or 2v2 teams. The de facto standard for multiplayer chess.",
-        "stats": "4 players · 30 min · 10+"
+        "stats": "4 players \u00b7 30 min \u00b7 10+"
       },
       {
         "category": "Total conversion",
         "baseGame": "Chess",
         "title": "Hexagonal Chess (Glinski)",
-        "body": "91 hexagonal cells, 9 pawns per side, bishops on three cell colours. Władysław Gliński, 1936.",
-        "stats": "2 players · 30–60 min · 12+"
+        "body": "91 hexagonal cells, 9 pawns per side, bishops on three cell colours. W\u0142adys\u0142aw Gli\u0144ski, 1936.",
+        "stats": "2 players \u00b7 30\u201360 min \u00b7 12+"
       },
       {
         "category": "Total conversion",
         "baseGame": "Chess",
         "title": "Alice Chess",
         "body": "Two boards, one army. Pieces transfer to the other board after each move. Conceived by V.R. Parton, 1953.",
-        "stats": "2 players · 30–45 min · 12+"
+        "stats": "2 players \u00b7 30\u201345 min \u00b7 12+"
       },
       {
         "category": "Total conversion",
         "baseGame": "Chess",
         "title": "Capablanca Chess",
-        "body": "10×8 board with two new pieces: Archbishop (bishop+knight) and Chancellor (rook+knight). José Capablanca, 1920s.",
-        "stats": "2 players · 45–90 min · 12+"
+        "body": "10\u00d78 board with two new pieces: Archbishop (bishop+knight) and Chancellor (rook+knight). Jos\u00e9 Capablanca, 1920s.",
+        "stats": "2 players \u00b7 45\u201390 min \u00b7 12+"
       },
       {
         "category": "Total conversion",
         "baseGame": "Chess",
         "title": "Courier Chess",
-        "body": "Medieval 12×8 variant with 24 pieces per side including couriers and sages. Documented since 1202.",
-        "stats": "2 players · 60–90 min · 14+"
+        "body": "Medieval 12\u00d78 variant with 24 pieces per side including couriers and sages. Documented since 1202.",
+        "stats": "2 players \u00b7 60\u201390 min \u00b7 14+"
       },
       {
         "category": "Total conversion",
         "baseGame": "Chess",
         "title": "Omega Chess",
-        "body": "10×10 board plus corner squares. Adds Champion (knight+king area) and Wizard (camel+ferz). Daniel MacDonald, 1992.",
-        "stats": "2 players · 45–90 min · 12+"
+        "body": "10\u00d710 board plus corner squares. Adds Champion (knight+king area) and Wizard (camel+ferz). Daniel MacDonald, 1992.",
+        "stats": "2 players \u00b7 45\u201390 min \u00b7 12+"
       },
       {
         "category": "Total conversion",
         "baseGame": "Chess",
         "title": "Grand Chess",
-        "body": "10×10 board with Archbishop and Chancellor. No castling, pawns promote on rank 8 or 9. Christian Freeling, 1984.",
-        "stats": "2 players · 45–75 min · 12+"
+        "body": "10\u00d710 board with Archbishop and Chancellor. No castling, pawns promote on rank 8 or 9. Christian Freeling, 1984.",
+        "stats": "2 players \u00b7 45\u201375 min \u00b7 12+"
       },
       {
         "category": "Total conversion",
         "baseGame": "Chess",
         "title": "XiangQi (Chinese Chess)",
-        "body": "9×10 board with river and palace. Cannons capture by jumping, generals face off across the board. Over 1000 years old.",
-        "stats": "2 players · 30–60 min · 10+"
+        "body": "9\u00d710 board with river and palace. Cannons capture by jumping, generals face off across the board. Over 1000 years old.",
+        "stats": "2 players \u00b7 30\u201360 min \u00b7 10+"
       },
       {
         "category": "Reskin",
         "baseGame": "Chess",
         "title": "3-Board Chess",
         "body": "Three standard boards side by side. Pieces can move between boards along shared edges. Multiplayer spatial chaos.",
-        "stats": "3 players · 45–60 min · 12+"
+        "stats": "3 players \u00b7 45\u201360 min \u00b7 12+"
       },
       {
         "category": "Reskin",
         "baseGame": "Chess",
         "title": "4-Board Chess",
-        "body": "Four boards in a 2×2 grid. Pieces transfer between boards at shared edges. Team or free-for-all.",
-        "stats": "4 players · 60–90 min · 12+"
+        "body": "Four boards in a 2\u00d72 grid. Pieces transfer between boards at shared edges. Team or free-for-all.",
+        "stats": "4 players \u00b7 60\u201390 min \u00b7 12+"
       }
     ]
   }

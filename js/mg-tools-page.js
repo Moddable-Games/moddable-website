@@ -28,15 +28,17 @@ let activeCategory = 'all';
 
 /* ── MOD-SPECIFIC LINKS ── */
 const MOD_TOOLS = [
-  { title:'Twilight Imperium', sub:'Faction picker · Objective tracker · Agenda voter', color:'#0c4f8d', href:url('/tools/ti/') },
-  { title:'Talisman: Hexed',   sub:'Character lottery · Hex board · Encounter draw', color:'#5d2a8a', href:url('/tools/talisman/') },
-  { title:'Nukes',             sub:'Strike planner · Combat calculator · Hostage tracker', color:'#d11a1a', href:url('/tools/nukes/') },
+  { title:'Twilight Imperium', sub:'Galaxy generator · Faction picker · Objective tracker · Agenda voter', color:'#0c4f8d', href:url('/tools/ti/') },
+  { title:'Talisman: Hexed',   sub:'Hex board generator · Character lottery · Encounter draw', color:'#5d2a8a', href:url('/tools/talisman/') },
+  { title:'Nukes',             sub:'Hex map generator · Strike planner · Combat calculator · Hostage tracker', color:'#d11a1a', href:url('/tools/nukes/') },
   { title:'Card Deck Builder', sub:'Design · Shuffle · Deal — custom decks for any game', color:'#3a9928', href:url('/tools/decks/') },
   { title:'Chess Variants',    sub:'39 variants · Rules reference · Match setup', color:'#0c4f8d', href:url('/tools/chess/') },
+  { title:'Hex Map Generator', sub:'Nukes · Talisman · Twilight Imperium — seeded maps, Canvas rendering', color:'#3a9928', href:'https://hex.moddable.games/generate/' },
 ];
 const mtg = document.getElementById('mod-tools-grid');
 MOD_TOOLS.forEach(t => {
-  const a = el('a',{href:t.href,class:'mod-tool-card'});
+  const isExt = t.href.startsWith('http');
+  const a = el('a',{href:t.href,class:'mod-tool-card', ...(isExt ? {target:'_blank',rel:'noopener'} : {})});
   a.addEventListener('mouseenter',()=>{ a.style.borderColor=t.color; });
   a.addEventListener('mouseleave',()=>{ a.style.borderColor=''; });
   const bar = el('div',{class:'mod-tool-card__bar'});
