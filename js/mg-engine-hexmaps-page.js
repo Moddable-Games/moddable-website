@@ -105,15 +105,22 @@ STYLES.forEach(function(s) {
 });
 
 var CONSUMERS = [
-  { title: 'Nukes', desc: 'Cold-war territory control', href: '/games/nukes/' },
-  { title: 'TI4 Map Generator', desc: 'Twilight Imperium tools', href: '/tools/ti/' },
-  { title: 'Talisman Tools', desc: 'Hex board generator', href: '/tools/talisman/' }
+  { title: 'Nukes', desc: 'Cold-war territory control on a hex map. Three superpowers, fifteen turns, one button that ends everything.', href: '/games/nukes/', accent: T.red },
+  { title: 'TI4 Map Generator', desc: 'Balanced galactic hex maps from the full Twilight Imperium tile pool.', href: '/tools/ti/', accent: T.blue },
+  { title: 'Talisman Tools', desc: 'Fantasy hex board generator with inner, middle, and outer ring terrain.', href: '/tools/talisman/', accent: T.green }
 ];
 var cg = document.getElementById('consumers-grid');
 CONSUMERS.forEach(function(c) {
-  var card = el('a', { href: url(c.href), class: 'mg-card mg-lift' });
+  var card = el('a', { href: url(c.href), class: 'mg-card mg-lift', 'data-reveal': 'up' });
+  card.style.borderTop = '3px solid ' + c.accent;
+  card.style.textDecoration = 'none';
   card.appendChild(el('h3', { class: 'mg-card__title' }, c.title));
   card.appendChild(el('p', { class: 'mg-card__body' }, c.desc));
+  var link = el('span', { class: 'mg-card__link' });
+  link.style.color = c.accent;
+  link.textContent = 'Explore →';
+  card.appendChild(link);
   cg.appendChild(card);
 });
+MG.initReveal();
 })();
