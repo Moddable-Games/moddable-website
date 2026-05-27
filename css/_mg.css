@@ -294,6 +294,8 @@ button:focus-visible, a:focus-visible, input:focus-visible, textarea:focus-visib
 .mod-hero__title--green em { color: #4db83a; }
 .mod-hero__lede { font-family: var(--mg-font-body); font-size: 19px; line-height: 1.55; color: rgba(255,255,255,0.78); max-width: 720px; margin: 0 0 36px; }
 .mod-hero__btns { display: flex; gap: 12px; flex-wrap: wrap; margin-bottom: 40px; }
+.mod-hero__logo { position: absolute; right: 32px; top: 50%; transform: translateY(-50%); width: clamp(160px, 20vw, 280px); height: auto; opacity: 0.85; pointer-events: none; }
+@media (max-width: 900px) { .mod-hero__logo { display: none; } }
 
 /* ── Stats row (dark bg) ─────────────────────────────────────────────── */
 .stats-row { display: flex; gap: 0; align-items: center; flex-wrap: wrap; padding-top: 28px; border-top: 1px solid rgba(255,255,255,0.12); }

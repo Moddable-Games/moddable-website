@@ -78,6 +78,15 @@
     }
     inner.appendChild(statsRow);
 
+    if (listing && listing.logo) {
+      var logoImg = el('img', {
+        src: MG.url('/' + listing.logo),
+        alt: listing.title,
+        class: 'mod-hero__logo'
+      });
+      inner.appendChild(logoImg);
+    }
+
     hero.appendChild(glow);
     hero.appendChild(inner);
   }

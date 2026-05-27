@@ -41,6 +41,17 @@
   background-size: 28px 32px;
 }
 
+.mod-card__thumb-logo {
+  position: absolute;
+  top: 50%;
+  left: 50%;
+  transform: translate(-50%, -50%);
+  width: 60%;
+  height: auto;
+  max-width: none;
+  z-index: 1;
+}
+
 .mod-card__meta {
   display: flex;
   align-items: center;

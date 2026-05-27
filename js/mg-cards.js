@@ -1,7 +1,7 @@
 (function() {
   const { T, CATEGORY_COLORS, el, url } = window.MG;
 
-  function modCard({ category, title, baseGame, stats, body, href = '#', source = '' }) {
+  function modCard({ category, title, baseGame, stats, body, href = '#', source = '', logo = '' }) {
     const accent = CATEGORY_COLORS[category] || T.blue;
     const card = el('article', { 'data-reveal':'up', class:'mod-card' });
 
@@ -14,6 +14,9 @@
 
     const thumb = el('div', { class:'mod-card__thumb', style:`background:linear-gradient(135deg, #0a0d2a 0%, ${accent} 100%)` });
     thumb.appendChild(el('div', { class:'mod-card__thumb-hex', style:`background-image:url("${url('/img/hex-grid-white.svg')}")` }));
+    if (logo) {
+      thumb.appendChild(el('img', { src: url('/' + logo), alt: title, class:'mod-card__thumb-logo' }));
+    }
     inner.appendChild(thumb);
 
     const meta = el('div', { class:'mod-card__meta' });
