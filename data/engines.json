@@ -8,7 +8,7 @@
     "repo": "https://github.com/Moddable-Games/moddable-chess",
     "logo": "/img/moddable-chess-cube.svg",
     "stats": [
-      { "value": "20+", "label": "playable variants" },
+      { "value": "54", "label": "playable variants" },
       { "value": "2000+", "label": "documented variants" },
       { "value": "1", "label": "AI opponent" }
     ],
