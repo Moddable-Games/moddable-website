@@ -66,22 +66,22 @@ def save(img, path):
 
 def gen_about():
     img = base_image()
-    # 4 team photos in a row on right
+    # 4 team photos — BIG breakout style
     photos = ['assets/team/mark.png', 'assets/team/kevin.png',
               'assets/team/akmal.png', 'assets/team/iqbal.png']
-    x_start = 640
+    x_start = 580
     for i, p in enumerate(photos):
         if not os.path.exists(p):
             continue
         photo = Image.open(p).convert('RGBA')
-        pw = 120
+        pw = 200
         ph = int(photo.height * pw / photo.width)
         photo = photo.resize((pw, ph), Image.LANCZOS)
         visible = int(ph * 0.65)
         photo = photo.crop((0, 0, pw, visible))
         layer = Image.new('RGBA', (WIDTH, HEIGHT), (0, 0, 0, 0))
         y_pos = HEIGHT - 50 - visible
-        layer.paste(photo, (x_start + i * 135, y_pos), photo)
+        layer.paste(photo, (x_start + i * 160, y_pos), photo)
         img = Image.alpha_composite(img, layer)
     add_text(img, 'MODDABLE.GAMES', 'About', 'The workshop behind the mods')
     save(img, 'img/og/about.png')
@@ -90,57 +90,79 @@ def gen_about():
 def gen_roadmap():
     img = base_image()
     draw = ImageDraw.Draw(img)
-    # Timeline: horizontal dots connected by line
-    y = 380
-    dots = [(700, y), (830, y), (960, y), (1090, y)]
-    draw.line([(680, y), (1110, y)], fill=(*GLOW_BLUE, 120), width=2)
-    for i, (dx, dy) in enumerate(dots):
-        r = 10 if i < 3 else 8
-        alpha = 220 if i < 3 else 100
-        draw.ellipse([dx-r, dy-r, dx+r, dy+r], fill=(*GLOW_BLUE, alpha))
-    # Labels
-    labels = ['Launch', 'Engine', 'API', 'Future']
-    for i, (dx, dy) in enumerate(dots):
-        draw.text((dx - 15, dy + 20), labels[i],
-                  fill=(180, 185, 200, 200), font=load_font(11))
+    # Bold vertical timeline on right side
+    tx = 900
+    y_start = 140
+    y_end = 520
+    # Main vertical line
+    draw.line([(tx, y_start), (tx, y_end)], fill=(*GLOW_BLUE, 80), width=3)
+    # Milestones
+    milestones = [
+        ('Q1 2026', 'Site Launch', True),
+        ('Q2 2026', 'Online Engine', True),
+        ('Q3 2026', 'Public API', False),
+        ('Q4 2026', 'Mobile App', False),
+    ]
+    spacing = (y_end - y_start) // (len(milestones) - 1)
+    for i, (date, label, done) in enumerate(milestones):
+        my = y_start + i * spacing
+        # Dot
+        r = 10
+        if done:
+            draw.ellipse([tx - r, my - r, tx + r, my + r], fill=(*GLOW_BLUE, 220))
+        else:
+            draw.ellipse([tx - r, my - r, tx + r, my + r],
+                         outline=(*GLOW_BLUE, 150), width=2)
+        # Date left of line
+        draw.text((tx - 120, my - 8), date,
+                  fill=(*GLOW_BLUE, 180), font=load_font(12, True))
+        # Label right of line
+        draw.text((tx + 24, my - 8), label,
+                  fill=(220, 225, 235, 220 if done else 120), font=load_font(15, done))
     add_text(img, 'MODDABLE.GAMES', 'Roadmap', 'Where we are headed')
     save(img, 'img/og/about-roadmap.png')
 
 
 def gen_community():
     img = base_image()
-    # Hex grid overlay on right
+    # Prominent hex grid covering right 60% with stronger opacity
     hex_layer = Image.new('RGBA', (WIDTH, HEIGHT), (0, 0, 0, 0))
     hd = ImageDraw.Draw(hex_layer)
-    hex_size = 36
+    hex_size = 44
     for row in range(HEIGHT // hex_size + 2):
-        for col in range(WIDTH // hex_size + 2):
-            hx = 600 + col * hex_size + (hex_size // 2 if row % 2 else 0)
+        for col in range(20):
+            hx = 500 + col * hex_size + (hex_size // 2 if row % 2 else 0)
             hy = row * hex_size
-            if hx < WIDTH + 50:
-                hd.regular_polygon((hx, hy, hex_size // 3), 6,
-                                   fill=None, outline=(111, 181, 255, 25))
+            # Fade opacity from left to right
+            t = min(1.0, (hx - 500) / 500)
+            alpha = int(20 + 50 * t)
+            hd.regular_polygon((hx, hy, hex_size // 3), 6,
+                               fill=None, outline=(111, 181, 255, alpha))
     img = Image.alpha_composite(img, hex_layer)
+    # Large "2.4K" stat on right
+    draw = ImageDraw.Draw(img)
+    draw.text((820, 260), '2.4K', fill=(111, 181, 255, 60), font=load_font(140, True))
+    draw.text((820, 410), 'MEMBERS', fill=(111, 181, 255, 40), font=load_font(20, True))
     add_text(img, 'DISCORD', 'Join the Table', '2,400+ rule-tinkerers and designers')
     save(img, 'img/og/community.png')
 
 
 def gen_news():
     img = base_image()
-    # 3 news covers as angled cards
+    # 3 news covers as stacked cards, vertically centred on right
     covers = ['img/news/beyond-the-box.jpg', 'img/news/the-ancients.jpg',
               'img/news/making-mods-matter.jpg']
-    positions = [(780, 140, -5), (850, 180, 0), (920, 150, 5)]
+    positions = [(700, 220, -4), (800, 260, 0), (900, 240, 4)]
     for i, (cx, cy, angle) in enumerate(positions):
         path = covers[i]
         if not os.path.exists(path):
             continue
         cover = Image.open(path).convert('RGBA')
-        cw, ch = 200, 130
+        cw, ch = 240, 160
         cover = cover.resize((cw, ch), Image.LANCZOS)
-        # Add border
-        bordered = Image.new('RGBA', (cw + 8, ch + 8), (255, 255, 255, 40))
-        bordered.paste(cover, (4, 4), cover)
+        # Add rounded border
+        bordered = Image.new('RGBA', (cw + 12, ch + 12), (255, 255, 255, 50))
+        bordered.paste(cover, (6, 6), cover)
         bordered = bordered.rotate(angle, expand=True, fillcolor=(0, 0, 0, 0))
         layer = Image.new('RGBA', (WIDTH, HEIGHT), (0, 0, 0, 0))
         layer.paste(bordered, (cx, cy), bordered)
@@ -151,18 +173,27 @@ def gen_news():
 
 def gen_games():
     img = base_image()
-    # 3 game logos side by side
+    # 3 game logos — centred in right half with equal margins
     logos = ['img/nukes-logo.png', 'img/endless-skies-logo.png', 'img/mongo-logo.png']
-    x_start = 680
+    logo_size = 140
+    gap = 20
+    total_w = logo_size * 3 + gap * 2
+    # Right zone: from 560 to 1120 (equal 80px margin on right as left text has)
+    zone_left = 560
+    zone_right = WIDTH - 80
+    zone_center = (zone_left + zone_right) // 2
+    x_start = zone_center - total_w // 2
     for i, path in enumerate(logos):
         if not os.path.exists(path):
             continue
         logo = Image.open(path).convert('RGBA')
-        lh = 140
+        lh = logo_size
         lw = int(logo.width * lh / logo.height)
         logo = logo.resize((lw, lh), Image.LANCZOS)
         layer = Image.new('RGBA', (WIDTH, HEIGHT), (0, 0, 0, 0))
-        layer.paste(logo, (x_start + i * 170, 245), logo)
+        lx = x_start + i * (logo_size + gap) + (logo_size - lw) // 2
+        ly = (HEIGHT - lh) // 2
+        layer.paste(logo, (lx, ly), logo)
         img = Image.alpha_composite(img, layer)
     add_text(img, 'ORIGINALS', 'Our Games', '3 games designed to be modded')
     save(img, 'img/og/games.png')
@@ -185,20 +216,21 @@ def gen_press():
 def gen_submit():
     img = base_image(accent_color=GREEN)
     draw = ImageDraw.Draw(img)
-    # 3 numbered steps connected by line
-    y = 340
-    steps = [(780, y), (920, y), (1060, y)]
-    draw.line([(780, y), (1060, y)], fill=(*GREEN, 120), width=2)
-    for i, (sx, sy) in enumerate(steps):
-        draw.ellipse([sx - 20, sy - 20, sx + 20, sy + 20],
-                     outline=(*GREEN, 200), width=2)
-        draw.text((sx - 5, sy - 8), str(i + 1),
-                  fill=(*GREEN, 220), font=load_font(16, True))
-    # Labels
-    labels = ['Describe', 'Upload', 'Publish']
-    for i, (sx, sy) in enumerate(steps):
-        draw.text((sx - 20, sy + 30), labels[i],
-                  fill=(180, 185, 200, 200), font=load_font(12))
+    # 3 bold vertical steps on right side
+    tx = 900
+    y_start = 180
+    y_end = 480
+    spacing = (y_end - y_start) // 2
+    # Vertical line
+    draw.line([(tx, y_start), (tx, y_end)], fill=(*GREEN, 80), width=3)
+    steps = [('1', 'Describe your mod'), ('2', 'Upload the rules'), ('3', 'Publish & share')]
+    for i, (num, label) in enumerate(steps):
+        sy = y_start + i * spacing
+        r = 18
+        draw.ellipse([tx - r, sy - r, tx + r, sy + r], fill=(*GREEN, 200))
+        draw.text((tx - 6, sy - 10), num, fill=(255, 255, 255, 255), font=load_font(18, True))
+        draw.text((tx + 32, sy - 9), label,
+                  fill=(220, 225, 235, 220), font=load_font(16))
     add_text(img, 'COMMUNITY', 'Submit a Mod', 'Share your rules with the table', accent=GREEN)
     save(img, 'img/og/submit.png')
 
