@@ -391,13 +391,14 @@ renderToolCards();
 (function() {
   const body = document.getElementById('resources-body');
   const RESOURCE_PRESETS = {
-    custom:    { label:'Custom', resources:['Gold','Wood','Stone'] },
+    custom:    { label:'Custom', resources:[] },
     nukes:    { label:'Nukes', resources:['Hostages','Isotopes','Bases'] },
     ti4:      { label:'TI4', resources:['Trade Goods','Influence','Commodities'] },
     econopoly:{ label:'Econopoly', resources:['Cash','Property','Stock'] },
+    catan:    { label:'Catan', resources:['Wood','Brick','Sheep','Wheat','Ore'] },
   };
-  let preset = 'custom';
-  let resources = [...RESOURCE_PRESETS.custom.resources];
+  let preset = 'catan';
+  let resources = [...RESOURCE_PRESETS.catan.resources];
   let players = [
     { name:'Player 1', values:{}, log:[] },
     { name:'Player 2', values:{}, log:[] },
@@ -418,6 +419,30 @@ renderToolCards();
       presetRow.appendChild(b);
     });
     body.appendChild(presetRow);
+
+    const addResRow = el('div',{class:'res-add'});
+    const resInput = document.createElement('input'); resInput.className='res-add__input'; resInput.placeholder='Add resource type...';
+    const addResFn = () => { const v=resInput.value.trim(); if(v&&!resources.includes(v)){resources.push(v);resInput.value='';renderDashboard();} };
+    resInput.addEventListener('keydown', e => { if(e.key==='Enter') addResFn(); });
+    addResRow.appendChild(resInput);
+    addResRow.appendChild(btn('Add','dark', addResFn));
+    if (resources.length > 0) {
+      const chips = el('div',{class:'res-chips'});
+      resources.forEach((r,i) => {
+        const chip = el('span',{class:'res-chip'}, r);
+        const rm = el('button',{class:'res-chip__remove'},'×');
+        rm.addEventListener('click', () => { resources.splice(i,1); players.forEach(p => delete p.values[r]); renderDashboard(); });
+        chip.appendChild(rm);
+        chips.appendChild(chip);
+      });
+      addResRow.appendChild(chips);
+    }
+    body.appendChild(addResRow);
+
+    if (resources.length === 0) {
+      body.appendChild(el('div',{class:'res-empty'}, 'Add resource types above to start tracking.'));
+      return;
+    }
 
     const grid = el('div',{class:'res-grid'});
     players.forEach((p, pi) => {
@@ -463,9 +488,10 @@ renderToolCards();
   const body = document.getElementById('combat-odds-body');
   const PRESETS = {
     custom:  { label:'Custom', atk:{dice:2,sides:6,hit:4}, def:{dice:2,sides:6,hit:5} },
-    nukes:   { label:'Nukes', atk:{dice:3,sides:6,hit:4}, def:{dice:2,sides:6,hit:5} },
     ti4:     { label:'TI4 Space', atk:{dice:3,sides:10,hit:6}, def:{dice:2,sides:10,hit:7} },
     dungeon: { label:'Dungeon Chess', atk:{dice:2,sides:8,hit:5}, def:{dice:1,sides:8,hit:4} },
+    risk:    { label:'Risk', atk:{dice:3,sides:6,hit:1}, def:{dice:2,sides:6,hit:1} },
+    catan:   { label:'Catan (Robber)', atk:{dice:1,sides:6,hit:4}, def:{dice:1,sides:6,hit:4} },
   };
   let activePreset = 'custom';
   let atkDice=2, atkSides=6, atkHit=4, defDice=2, defSides=6, defHit=5;
@@ -564,16 +590,16 @@ renderToolCards();
 (function() {
   const body = document.getElementById('bag-tracker-body');
   const PRESETS = {
-    custom: { label:'Custom', items:[{name:'Item A',total:10},{name:'Item B',total:10},{name:'Item C',total:5}] },
+    custom: { label:'Custom', items:[] },
     catan: { label:'Catan', items:[{name:'Wood',total:19},{name:'Brick',total:19},{name:'Sheep',total:19},{name:'Wheat',total:19},{name:'Ore',total:19}] },
     carcassonne: { label:'Carcassonne', items:[{name:'Road',total:24},{name:'City',total:22},{name:'Monastery',total:6},{name:'Field-only',total:4},{name:'Road+City',total:16}] },
     scrabble: { label:'Scrabble', items:[{name:'Vowels (AEIOU)',total:44},{name:'Common (RSTLNE)',total:36},{name:'Mid (DGHBCM)',total:17},{name:'Rare (JKQXZ)',total:5}] },
   };
   let activePreset = 'catan';
+  let currentItems = PRESETS.catan.items.map(i => ({...i}));
   let drawn = {};
 
-  function getItems() { return PRESETS[activePreset].items; }
-  function totalRemaining() { return getItems().reduce((sum,it) => sum + Math.max(0, it.total - (drawn[it.name]||0)), 0); }
+  function totalRemaining() { return currentItems.reduce((sum,it) => sum + Math.max(0, it.total - (drawn[it.name]||0)), 0); }
 
   function renderBag() {
     body.innerHTML = '';
@@ -582,45 +608,68 @@ renderToolCards();
       const b = document.createElement('button');
       b.className = 'tools-filter__btn' + (key===activePreset ? ' tools-filter__btn--active' : '');
       b.textContent = cfg.label;
-      b.addEventListener('click', () => { activePreset=key; drawn={}; renderBag(); });
+      b.addEventListener('click', () => { activePreset=key; currentItems=cfg.items.map(i=>({...i})); drawn={}; renderBag(); });
       presetRow.appendChild(b);
     });
     body.appendChild(presetRow);
 
-    const remaining = totalRemaining();
-    const summary = el('div',{class:'bag-summary'});
-    summary.appendChild(el('span',{class:'bag-summary__count'}, String(remaining)));
-    summary.appendChild(el('span',{class:'bag-summary__label'}, ' remaining in bag'));
-    body.appendChild(summary);
+    if (currentItems.length === 0) {
+      body.appendChild(el('div',{class:'bag-empty'}, 'Add items to track what remains in the bag.'));
+    }
 
-    const list = el('div',{class:'bag-list'});
-    getItems().forEach(it => {
-      const d = drawn[it.name] || 0;
-      const left = Math.max(0, it.total - d);
-      const pct = remaining > 0 ? (left / remaining * 100).toFixed(0) : '0';
+    if (currentItems.length > 0) {
+      const remaining = totalRemaining();
+      const summary = el('div',{class:'bag-summary'});
+      summary.appendChild(el('span',{class:'bag-summary__count'}, String(remaining)));
+      summary.appendChild(el('span',{class:'bag-summary__label'}, ' remaining in bag'));
+      body.appendChild(summary);
 
-      const row = el('div',{class:'bag-row'});
-      row.appendChild(el('span',{class:'bag-row__name'}, it.name));
-      row.appendChild(el('span',{class:'bag-row__odds'}, pct + '%'));
-      row.appendChild(el('span',{class:'bag-row__count'}, left + '/' + it.total));
+      const list = el('div',{class:'bag-list'});
+      currentItems.forEach((it, idx) => {
+        const d = drawn[it.name] || 0;
+        const left = Math.max(0, it.total - d);
+        const pct = remaining > 0 ? (left / remaining * 100).toFixed(0) : '0';
 
-      const minus = document.createElement('button');
-      minus.className = 'bag-row__btn'; minus.textContent = '+1 drawn';
-      minus.addEventListener('click', () => { if (left > 0) { drawn[it.name] = d + 1; renderBag(); } });
-      row.appendChild(minus);
+        const row = el('div',{class:'bag-row'});
+        row.appendChild(el('span',{class:'bag-row__name'}, it.name));
+        row.appendChild(el('span',{class:'bag-row__odds'}, pct + '%'));
+        row.appendChild(el('span',{class:'bag-row__count'}, left + '/' + it.total));
 
-      const undo = document.createElement('button');
-      undo.className = 'bag-row__btn bag-row__btn--undo'; undo.textContent = 'Undo';
-      undo.addEventListener('click', () => { if (d > 0) { drawn[it.name] = d - 1; renderBag(); } });
-      row.appendChild(undo);
+        const drawBtn = document.createElement('button');
+        drawBtn.className = 'bag-row__btn'; drawBtn.textContent = '+1 drawn';
+        drawBtn.addEventListener('click', () => { if (left > 0) { drawn[it.name] = d + 1; renderBag(); } });
+        row.appendChild(drawBtn);
 
-      list.appendChild(row);
-    });
-    body.appendChild(list);
+        const undo = document.createElement('button');
+        undo.className = 'bag-row__btn bag-row__btn--undo'; undo.textContent = 'Undo';
+        undo.addEventListener('click', () => { if (d > 0) { drawn[it.name] = d - 1; renderBag(); } });
+        row.appendChild(undo);
 
-    const btns = el('div',{class:'bag-btns'});
-    btns.appendChild(btn('Reset bag','outline-light', () => { drawn={}; renderBag(); }));
-    body.appendChild(btns);
+        const rm = document.createElement('button');
+        rm.className = 'bag-row__btn bag-row__btn--undo'; rm.textContent = '×';
+        rm.addEventListener('click', () => { currentItems.splice(idx,1); delete drawn[it.name]; renderBag(); });
+        row.appendChild(rm);
+
+        list.appendChild(row);
+      });
+      body.appendChild(list);
+    }
+
+    const addRow = el('div',{class:'bag-add'});
+    const nameInput = document.createElement('input'); nameInput.className='bag-add__input'; nameInput.placeholder='Item name...';
+    const totalInput = document.createElement('input'); totalInput.className='bag-add__input bag-add__input--num'; totalInput.type='number'; totalInput.placeholder='Qty'; totalInput.min='1';
+    const addFn = () => { const n=nameInput.value.trim(); const t=parseInt(totalInput.value)||0; if(n&&t>0){currentItems.push({name:n,total:t});nameInput.value='';totalInput.value='';renderBag();} };
+    nameInput.addEventListener('keydown', e => { if(e.key==='Enter') addFn(); });
+    totalInput.addEventListener('keydown', e => { if(e.key==='Enter') addFn(); });
+    addRow.appendChild(nameInput); addRow.appendChild(totalInput);
+    addRow.appendChild(btn('Add','dark', addFn));
+    body.appendChild(addRow);
+
+    if (currentItems.length > 0) {
+      const btns2 = el('div',{class:'bag-btns'});
+      btns2.appendChild(btn('Reset draws','outline-light', () => { drawn={}; renderBag(); }));
+      body.appendChild(btns2);
+    }
   }
   renderBag();
 })();
@@ -629,13 +678,14 @@ renderToolCards();
 (function() {
   const body = document.getElementById('roles-body');
   const PRESETS = {
-    custom: { label:'Custom', roles:['Town','Town','Town','Mafia','Mafia'] },
-    mafia: { label:'Mafia (7p)', roles:['Mafia','Mafia','Doctor','Detective','Town','Town','Town'] },
-    werewolf: { label:'Werewolf (8p)', roles:['Werewolf','Werewolf','Seer','Witch','Hunter','Villager','Villager','Villager'] },
-    botc: { label:'BotC (7p)', roles:['Imp','Poisoner','Washerwoman','Librarian','Investigator','Chef','Empath'] },
-    resistance: { label:'Resistance (6p)', roles:['Spy','Spy','Resistance','Resistance','Resistance','Resistance'] },
+    custom: { label:'Custom', roles:[] },
+    mafia: { label:'Mafia', roles:['Mafia','Mafia','Doctor','Detective','Town','Town','Town'] },
+    werewolf: { label:'Werewolf', roles:['Werewolf','Werewolf','Seer','Witch','Hunter','Villager','Villager','Villager'] },
+    botc: { label:'BotC', roles:['Imp','Poisoner','Washerwoman','Librarian','Investigator','Chef','Empath'] },
+    resistance: { label:'Resistance', roles:['Spy','Spy','Resistance','Resistance','Resistance','Resistance'] },
   };
   let activePreset = 'mafia';
+  let currentRoles = [...PRESETS.mafia.roles];
   let assigned = null;
   let revealed = {};
 
@@ -648,34 +698,47 @@ renderToolCards();
       const b = document.createElement('button');
       b.className = 'tools-filter__btn' + (key===activePreset ? ' tools-filter__btn--active' : '');
       b.textContent = cfg.label;
-      b.addEventListener('click', () => { activePreset=key; assigned=null; revealed={}; renderRoles(); });
+      b.addEventListener('click', () => { activePreset=key; currentRoles=[...cfg.roles]; assigned=null; revealed={}; renderRoles(); });
       presetRow.appendChild(b);
     });
     body.appendChild(presetRow);
 
     if (!assigned) {
       const info = el('div',{class:'role-info'});
-      const roles = PRESETS[activePreset].roles;
+      info.appendChild(el('div',{class:'role-info__count'}, currentRoles.length + ' players'));
       const counts = {};
-      roles.forEach(r => { counts[r] = (counts[r]||0) + 1; });
-      info.appendChild(el('div',{class:'role-info__count'}, roles.length + ' players'));
+      currentRoles.forEach(r => { counts[r] = (counts[r]||0) + 1; });
       const chips = el('div',{class:'role-chips'});
       Object.entries(counts).forEach(([role, count]) => {
-        chips.appendChild(el('span',{class:'role-chip'}, role + (count > 1 ? ' ×' + count : '')));
+        const chip = el('span',{class:'role-chip'});
+        chip.textContent = role + (count > 1 ? ' ×' + count : '');
+        const rm = el('button',{class:'role-chip__remove'},'×');
+        rm.addEventListener('click', (e) => { e.stopPropagation(); const idx = currentRoles.indexOf(role); if(idx>-1){currentRoles.splice(idx,1);renderRoles();} });
+        chip.appendChild(rm);
+        chips.appendChild(chip);
       });
       info.appendChild(chips);
       body.appendChild(info);
-      body.appendChild(btn('Deal roles','dark', () => { assigned = shuffle(PRESETS[activePreset].roles); revealed={}; renderRoles(); }));
+
+      const addRow = el('div',{class:'role-add'});
+      const input = document.createElement('input'); input.className='role-add__input'; input.placeholder='Role name...';
+      const addFn = () => { const v=input.value.trim(); if(v){currentRoles.push(v);input.value='';renderRoles();} };
+      input.addEventListener('keydown', e => { if(e.key==='Enter') addFn(); });
+      addRow.appendChild(input);
+      addRow.appendChild(btn('Add role','dark', addFn));
+      body.appendChild(addRow);
+
+      if (currentRoles.length >= 2) {
+        body.appendChild(btn('Deal roles','dark', () => { assigned = shuffle(currentRoles); revealed={}; renderRoles(); }));
+      }
       return;
     }
 
     const grid = el('div',{class:'role-grid'});
     assigned.forEach((role, i) => {
       const card = el('div',{class:'role-card' + (revealed[i] ? ' role-card--revealed' : '')});
-      const label = el('div',{class:'role-card__player'}, 'Player ' + (i+1));
-      const roleEl = el('div',{class:'role-card__role'}, revealed[i] ? role : '???');
-      card.appendChild(label);
-      card.appendChild(roleEl);
+      card.appendChild(el('div',{class:'role-card__player'}, 'Player ' + (i+1)));
+      card.appendChild(el('div',{class:'role-card__role'}, revealed[i] ? role : '???'));
       card.addEventListener('click', () => { revealed[i] = !revealed[i]; renderRoles(); });
       grid.appendChild(card);
     });
@@ -683,8 +746,8 @@ renderToolCards();
     body.appendChild(el('div',{class:'role-hint'}, 'Tap a card to reveal/hide. Pass the device to each player.'));
 
     const btns2 = el('div',{class:'role-btns'});
-    btns2.appendChild(btn('Reshuffle','dark', () => { assigned = shuffle(PRESETS[activePreset].roles); revealed={}; renderRoles(); }));
-    btns2.appendChild(btn('New game','outline-light', () => { assigned=null; revealed={}; renderRoles(); }));
+    btns2.appendChild(btn('Reshuffle','dark', () => { assigned = shuffle(currentRoles); revealed={}; renderRoles(); }));
+    btns2.appendChild(btn('Edit roles','outline-light', () => { assigned=null; revealed={}; renderRoles(); }));
     body.appendChild(btns2);
   }
   renderRoles();

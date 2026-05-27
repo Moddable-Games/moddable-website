@@ -281,6 +281,13 @@ input[type=range] { width: 100%; accent-color: #0c4f8d; }
 .res-row__btn--plus { background: var(--mg-green); border-color: var(--mg-green); color: #fff; }
 .res-row__btn--plus:hover { opacity: 0.85; border-color: var(--mg-green); }
 .res-btns { display: flex; gap: 10px; flex-wrap: wrap; }
+.res-add { display: flex; gap: 10px; flex-wrap: wrap; align-items: center; margin-bottom: 16px; }
+.res-add__input { height: 36px; padding: 0 14px; border-radius: 9999px; border: 1px solid var(--mg-hairline-light); font-family: var(--mg-font-body); font-size: 14px; background: #f5f4ef; color: var(--mg-ink); outline: none; width: 160px; }
+.res-chips { display: flex; gap: 6px; flex-wrap: wrap; width: 100%; margin-top: 8px; }
+.res-chip { font-family: var(--mg-font-mono); font-size: 12px; padding: 4px 10px; background: #f5f4ef; border: 1px solid var(--mg-hairline-light); border-radius: 9999px; color: var(--mg-ink); display: inline-flex; align-items: center; gap: 6px; }
+.res-chip__remove { background: none; border: none; color: var(--mg-mute); cursor: pointer; font-size: 14px; padding: 0; line-height: 1; }
+.res-chip__remove:hover { color: #d11a1a; }
+.res-empty { font-family: var(--mg-font-body); font-size: 14px; color: var(--mg-mute); text-align: center; padding: 24px 0; }
 
 /* Combat Odds Calculator */
 .odds-presets { display: flex; gap: 8px; flex-wrap: wrap; margin-bottom: 20px; }
@@ -292,7 +299,7 @@ input[type=range] { width: 100%; accent-color: #0c4f8d; }
 .odds-row__key { font-family: var(--mg-font-body); font-size: 13px; color: #4f5764; }
 .odds-input { width: 56px; padding: 6px 10px; border: 1px solid var(--mg-hairline-light); border-radius: 8px; font-family: var(--mg-font-mono); font-size: 14px; text-align: center; background: #f5f4ef; }
 .odds-input:focus { outline: none; border-color: var(--mg-red); }
-.odds-result { margin-top: 16px; }
+.odds-result { margin-top: 16px; margin-bottom: 20px; }
 .odds-bars { display: flex; flex-direction: column; gap: 10px; margin-bottom: 12px; }
 .odds-bar-row { display: flex; align-items: center; gap: 10px; }
 .odds-bar-row__label { font-family: var(--mg-font-body); font-size: 13px; color: var(--mg-ink); min-width: 100px; }
@@ -315,6 +322,10 @@ input[type=range] { width: 100%; accent-color: #0c4f8d; }
 .bag-row__btn:hover { border-color: var(--mg-ink); }
 .bag-row__btn--undo { color: var(--mg-mute); }
 .bag-btns { display: flex; gap: 10px; }
+.bag-add { display: flex; gap: 10px; flex-wrap: wrap; align-items: center; margin-bottom: 16px; margin-top: 16px; }
+.bag-add__input { height: 36px; padding: 0 14px; border-radius: 9999px; border: 1px solid var(--mg-hairline-light); font-family: var(--mg-font-body); font-size: 14px; background: #f5f4ef; color: var(--mg-ink); outline: none; }
+.bag-add__input--num { width: 70px; text-align: center; }
+.bag-empty { font-family: var(--mg-font-body); font-size: 14px; color: var(--mg-mute); text-align: center; padding: 24px 0; }
 
 /* Role Distributor */
 .role-presets { display: flex; gap: 8px; flex-wrap: wrap; margin-bottom: 20px; }
@@ -332,6 +343,10 @@ input[type=range] { width: 100%; accent-color: #0c4f8d; }
 .role-card--revealed .role-card__role { color: var(--mg-red); }
 .role-hint { font-family: var(--mg-font-body); font-size: 13px; color: var(--mg-mute); margin-bottom: 16px; }
 .role-btns { display: flex; gap: 10px; flex-wrap: wrap; }
+.role-add { display: flex; gap: 10px; flex-wrap: wrap; align-items: center; margin-bottom: 16px; }
+.role-add__input { height: 36px; padding: 0 14px; border-radius: 9999px; border: 1px solid var(--mg-hairline-light); font-family: var(--mg-font-body); font-size: 14px; background: #f5f4ef; color: var(--mg-ink); outline: none; width: 160px; }
+.role-chip__remove { background: none; border: none; color: var(--mg-mute); cursor: pointer; font-size: 14px; padding: 0; line-height: 1; margin-left: 4px; }
+.role-chip__remove:hover { color: #d11a1a; }
 
 @media (max-width: 768px) {
   .tools-hero__inner { flex-direction: column; text-align: center; }
