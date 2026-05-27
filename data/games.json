@@ -39,15 +39,5 @@
     "path": "/games/dungeon-chess/",
     "rulebook": "dungeon-chess",
     "type": "game"
-  },
-  {
-    "title": "Moddable Chess",
-    "accent": "blue",
-    "status": "Open alpha · Live",
-    "desc": "2000+ chess variants, one modular engine. Regular, 4-Player, Hexagonal, and more — playable online.",
-    "players": "2–6",
-    "time": "10–120 min",
-    "path": "/games/moddable-chess/",
-    "type": "platform"
   }
 ]

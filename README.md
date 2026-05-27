@@ -2,7 +2,7 @@
 
 **Creating games you already own.**
 
-A multi-page marketing site and tools platform for an open-source board game modding workshop. Twelve mods. Three original games. One Discord.
+A multi-page marketing site and tools platform for an open-source board game modding workshop. Twelve mods. Four original games. Two open-source engines. One Discord.
 
 ---
 
@@ -27,8 +27,10 @@ Modular JS architecture: one loader (`js/mg-loader.js`) loads 12 shared modules 
 | `/games/nukes/` | Nukes |
 | `/games/mongo/` | Mongo |
 | `/games/endless-skies/` | Endless Skies |
-| `/games/moddable-chess/` | Moddable Chess |
 | `/games/dungeon-chess/` | Dungeon Chess |
+| `/engines/` | Engines hub |
+| `/engines/moddable-chess/` | Moddable Chess engine |
+| `/engines/moddable-hexmaps/` | Moddable Hexmaps engine |
 | `/news/` | News index |
 | `/news/[slug]/` | 12 article pages |
 | `/tools/` | Tools hub (dice, names, scores) |
@@ -120,6 +122,15 @@ Pages load `mg-loader.js` (shared modules) + their own page script. Data is fetc
 ### Changelog
 
 #### 2026-05-27
+- New `/engines/` section: top-level nav item, index page, Moddable Chess + Moddable Hexmaps pages
+- Reclassified Chess and Hexmaps from "Games" to "Engines" — they're SDKs, not games
+- Nav updated: `Mods | Games | Engines | Tools | News | About`
+- Moved `/games/moddable-chess/` → `/engines/moddable-chess/` (old URL redirects)
+- Created `/engines/moddable-hexmaps/` showcase page (green accent, no embed yet — pending hexmaps#7)
+- Footer, search, tools chess page, news.json all updated to new paths
+- Games index: removed chess, added "Powered by our engines" callout
+- Created `data/engines.json` as data source for engine listings
+- Cross-project issues: moddable-chess#47, moddable-hexmaps#17
 - Fix homepage crash: "Fog of War Chess" removed from mods.json but still referenced in homepage featured list
 - Fix hero parallax spilling past section boundary — wrap in overflow:hidden container
 - Fix home-tabs nav hidden under section above — remove overflow:hidden that clipped negative margin

@@ -8,6 +8,9 @@
 
   document.getElementById('games-hero-hex').style.backgroundImage = "url('" + url('/img/hex-grid-blue.svg') + "')";
 
+  var eb = document.getElementById('engines-link-btns');
+  eb.appendChild(linkBtn('Explore engines', '/engines/', 'blue'));
+
   var hb = document.getElementById('horizon-btns');
   hb.appendChild(linkBtn('Join the Discord', '/community/', 'primary'));
   hb.appendChild(linkBtn('See the roadmap', '/about/roadmap/', 'outline-dark'));

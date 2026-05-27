@@ -4,7 +4,7 @@
    ========================================================================= */
 
 window.MG = (() => {
-  const VERSION = '1.0.36';
+  const VERSION = '1.0.37';
   const META_BASE = (document.querySelector('meta[name="mg-base"]') || {}).content;
   const BASE = META_BASE != null ? META_BASE
     : location.pathname.includes('/MODDABLE/moddable-website')
@@ -143,6 +143,7 @@ window.MG = (() => {
       return Promise.all(names.map(fetchOne)).then(() => ({
         mods: cache.mods || null,
         games: cache.games || null,
+        engines: cache.engines || null,
         news: cache.news || null,
         team: cache.team || null,
       }));

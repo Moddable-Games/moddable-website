@@ -225,7 +225,7 @@ stats.forEach(([k,v], i) => {
       heading: 'Play with friends — or <em>instructive bots.</em>',
       body: 'Every game played online — human-vs-human or human-vs-bot — improves the next bot you\'ll face. The engine is a teaching engine first, an opponent second.',
       pills: ['Adaptive','Replays','Solo + Multi'],
-      buttons: [['Play Nukes online','#','blue'],['Try Moddable Chess','/games/moddable-chess/','outline-dark']]
+      buttons: [['Play Nukes online','#','blue'],['Try Moddable Chess','/engines/moddable-chess/','outline-dark']]
     }
   ];
 

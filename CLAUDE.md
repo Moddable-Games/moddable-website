@@ -29,16 +29,22 @@ One shared component library (`_mg.js` + `_mg.css`), one page per HTML file.
 │   └── mg-loader.js        ← entry point; loads shared modules
 ├── data/
 │   ├── mods.json           ← mod library (13 entries)
-│   ├── games.json          ← games (5 entries)
+│   ├── games.json          ← games (4 entries)
+│   ├── engines.json        ← engine/SDK listings (2 entries)
 │   ├── news.json           ← news posts (12 entries)
 │   └── team.json           ← team members (4 entries)
 │
 ├── mods/
 │   ├── index.html          ← mods library (filterable, searchable)
 │   └── talisman-hexed/index.html ← Talisman: Hexed detail page
+├── engines/
+│   ├── index.html          ← engines index (Chess, Hexmaps)
+│   ├── moddable-chess/index.html    ← Chess engine page
+│   └── moddable-hexmaps/index.html  ← Hexmaps engine page
 ├── games/
 │   ├── endless-skies/index.html  ← Endless Skies game page
 │   ├── mongo/index.html          ← Mongo game page
+│   ├── dungeon-chess/index.html  ← Dungeon Chess game page
 │   └── nukes/index.html          ← Nukes game page
 ├── news/
 │   ├── index.html          ← news index

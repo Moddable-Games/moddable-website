@@ -1,0 +1,41 @@
+[
+  {
+    "slug": "moddable-chess",
+    "title": "Moddable Chess",
+    "tagline": "2000+ chess variants. One modular engine.",
+    "accent": "blue",
+    "url": "https://chess.moddable.games/",
+    "repo": "https://github.com/Moddable-Games/moddable-chess",
+    "logo": "/img/moddable-chess-cube.svg",
+    "stats": [
+      { "value": "20+", "label": "playable variants" },
+      { "value": "2000+", "label": "documented variants" },
+      { "value": "1", "label": "AI opponent" }
+    ],
+    "features": ["SVG board renderer", "AI opponent (minimax)", "Embed API", "Extension API", "Touch/mobile support"],
+    "consumers": [
+      { "title": "Dungeon Chess", "href": "/games/dungeon-chess/" },
+      { "title": "Chess Variant Loader", "href": "/tools/chess/" }
+    ]
+  },
+  {
+    "slug": "moddable-hexmaps",
+    "title": "Moddable Hexmaps",
+    "tagline": "Hex map generation for any game. Seeded, shareable, moddable.",
+    "accent": "green",
+    "url": "https://hex.moddable.games/",
+    "repo": "https://github.com/Moddable-Games/moddable-hexmaps",
+    "logo": "/img/moddable-hexmaps-cube.svg",
+    "stats": [
+      { "value": "3", "label": "supported games" },
+      { "value": "∞", "label": "seeded maps" },
+      { "value": "3", "label": "render styles" }
+    ],
+    "features": ["Canvas renderer", "Seeded RNG", "Import/export JSON", "Style selector", "Editor mode"],
+    "consumers": [
+      { "title": "Nukes", "href": "/games/nukes/" },
+      { "title": "Talisman: Hexed", "href": "/mods/talisman-hexed/" },
+      { "title": "Hyper Imperium", "href": "/mods/hyper-imperium/" }
+    ]
+  }
+]
