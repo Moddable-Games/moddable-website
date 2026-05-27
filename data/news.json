@@ -14,7 +14,9 @@
     "readTime": "7 min read",
     "author": "Iqbal Ridzuan",
     "authorHandle": "Lead Designer · moddable team",
-    "toc": [{"label": "The illustrator", "id": "the-illustrator"}, {"label": "The graphic designer", "id": "the-graphic-designer"}, {"label": "The rulebook editor", "id": "the-rulebook-editor"}, {"label": "The worldbuilder", "id": "the-worldbuilder"}, {"label": "The community", "id": "the-community"}]
+    "teamSlug": "iqbal",
+    "toc": [{"label": "The illustrator", "id": "the-illustrator"}, {"label": "The graphic designer", "id": "the-graphic-designer"}, {"label": "The rulebook editor", "id": "the-rulebook-editor"}, {"label": "The worldbuilder", "id": "the-worldbuilder"}, {"label": "The community", "id": "the-community"}],
+    "modCard": {"title": "Our Games", "version": "3 originals · Built to be modded", "href": "/games/", "btnLabel": "Explore games"}
   },
   {
     "slug": "the-ancients",
@@ -31,7 +33,9 @@
     "readTime": "7 min read",
     "author": "Kevin Chand",
     "authorHandle": "Chief Playtester",
-    "toc": [{"label": "Games older than history", "id": "games-older-than-history"}, {"label": "Modern mechanics, ancient origins", "id": "modern-mechanics-ancient-origins"}, {"label": "Games as cultural fabric", "id": "games-as-cultural-fabric"}, {"label": "What made them last", "id": "what-made-them-last"}, {"label": "Evolution over replacement", "id": "evolution-over-replacement"}, {"label": "Building for a thousand years", "id": "building-for-a-thousand-years"}]
+    "teamSlug": "kevin",
+    "toc": [{"label": "Games older than history", "id": "games-older-than-history"}, {"label": "Modern mechanics, ancient origins", "id": "modern-mechanics-ancient-origins"}, {"label": "Games as cultural fabric", "id": "games-as-cultural-fabric"}, {"label": "What made them last", "id": "what-made-them-last"}, {"label": "Evolution over replacement", "id": "evolution-over-replacement"}, {"label": "Building for a thousand years", "id": "building-for-a-thousand-years"}],
+    "modCard": {"title": "Moddable Community", "version": "Discord · Open to all", "href": "/community/", "btnLabel": "Join the Discord"}
   },
   {
     "slug": "making-mods-matter",
@@ -48,8 +52,9 @@
     "readTime": "5 min read",
     "author": "Kevin Chand",
     "authorHandle": "@kchand · chief playtester",
+    "teamSlug": "kevin",
     "toc": [{"label": "A quiet revolution", "id": "a-quiet-revolution"}, {"label": "Systems thinking", "id": "systems-thinking"}, {"label": "Standing on centuries of play", "id": "standing-on-centuries-of-play"}, {"label": "Players as collaborators", "id": "players-as-collaborators"}, {"label": "What we're building", "id": "what-were-building"}],
-    "modCard": {"title": "Moddable Community", "version": "Discord · Open to all"}
+    "modCard": {"title": "Moddable Community", "version": "Discord · Open to all", "href": "/community/", "btnLabel": "Join the Discord"}
   },
   {
     "slug": "the-house-always-wins",
@@ -66,7 +71,9 @@
     "readTime": "5 min read",
     "author": "Kevin Chand",
     "authorHandle": "Chief Playtester",
-    "toc": [{"label": "Rules that rewrote themselves", "id": "rules-that-rewrote-themselves"}, {"label": "Why does this matter", "id": "why-does-this-matter"}, {"label": "Versioning the tabletop", "id": "versioning-the-tabletop"}]
+    "teamSlug": "kevin",
+    "toc": [{"label": "Rules that rewrote themselves", "id": "rules-that-rewrote-themselves"}, {"label": "Why does this matter", "id": "why-does-this-matter"}, {"label": "Versioning the tabletop", "id": "versioning-the-tabletop"}],
+    "modCard": {"title": "Submit a Mod", "version": "Share your house rules", "href": "/submit/", "btnLabel": "Submit yours"}
   },
   {
     "slug": "open-sourcing-tabletop-games",
@@ -83,8 +90,9 @@
     "readTime": "6 min read",
     "author": "Mark Smalley",
     "authorHandle": "CEO & Founder",
+    "teamSlug": "mark",
     "toc": [{"label": "So what does \"open-source\" even mean?", "id": "so-what-does-open-source-even-mean"}, {"label": "The fear and the opportunity", "id": "the-fear-and-the-opportunity"}, {"label": "Enduring ecosystems over isolated hits", "id": "enduring-ecosystems-over-isolated-hits"}, {"label": "What we believe", "id": "what-we-believe"}],
-    "modCard": {"title": "Moddable.Games", "version": "12 mods · 3 games · open source"}
+    "modCard": {"title": "Moddable.Games", "version": "12 mods · 3 games · open source", "href": "/mods/", "btnLabel": "Browse the library"}
   },
   {
     "slug": "tis-the-season-for-traditions",
@@ -101,7 +109,9 @@
     "readTime": "5 min read",
     "author": "Mark Smalley",
     "authorHandle": "CEO & Founder",
-    "toc": [{"label": "Presence at the table", "id": "presence-at-the-table"}, {"label": "Games as seasonal identity", "id": "games-as-seasonal-identity"}, {"label": "Touch matters", "id": "touch-matters"}]
+    "teamSlug": "mark",
+    "toc": [{"label": "Presence at the table", "id": "presence-at-the-table"}, {"label": "Games as seasonal identity", "id": "games-as-seasonal-identity"}, {"label": "Touch matters", "id": "touch-matters"}],
+    "modCard": {"title": "Moddable Community", "version": "Discord · Open to all", "href": "/community/", "btnLabel": "Join the Discord"}
   },
   {
     "slug": "making-a-masterpiece-by-modification",
@@ -118,8 +128,9 @@
     "readTime": "9 min read",
     "author": "Kevin Chand",
     "authorHandle": "Chief Playtester",
+    "teamSlug": "kevin",
     "toc": [{"label": "The Silk Road transmissions", "id": "the-silk-road-transmissions"}, {"label": "Europe and the modern game", "id": "europe-and-the-modern-game"}, {"label": "Historical variants", "id": "historical-variants"}, {"label": "The modern modding era", "id": "the-modern-modding-era"}, {"label": "Why this matters to us", "id": "why-this-matters-to-us"}],
-    "modCard": {"title": "Chess Variants", "version": "Fog of War · 4-Player · Hexagonal"}
+    "modCard": {"title": "Moddable Chess", "version": "39 variants · Play online", "href": "/games/moddable-chess/", "btnLabel": "Play now"}
   },
   {
     "slug": "twilights-prophecies-thunder-on",
@@ -136,8 +147,9 @@
     "readTime": "7 min read",
     "author": "Mark Smalley",
     "authorHandle": "CEO & Founder",
+    "teamSlug": "mark",
     "toc": [{"label": "Thunder's Edge arrives", "id": "thunders-edge-arrives"}, {"label": "The modding community", "id": "the-modding-community"}, {"label": "Hyper Imperium", "id": "hyper-imperium"}],
-    "modCard": {"title": "Hyper Imperium", "version": "v1.0.0 · Rebalance"}
+    "modCard": {"title": "Hyper Imperium", "version": "v1.0.0 · Rebalance", "href": "/mods/hyper-imperium/", "btnLabel": "View the mod"}
   },
   {
     "slug": "nuking-catan",
@@ -152,10 +164,11 @@
     "theme": "red",
     "category": "CATAN",
     "readTime": "6 min read",
-    "author": "ascelot",
-    "authorHandle": "@ascelot · moddable team",
+    "author": "Mark Smalley",
+    "authorHandle": "Founder",
+    "teamSlug": "mark",
     "toc": [{"label": "So we set it on fire", "id": "so-we-set-it-on-fire"}, {"label": "What we left intact", "id": "what-we-left-intact"}, {"label": "What you'll need", "id": "what-youll-need"}],
-    "modCard": {"title": "Nuke Catan", "version": "v2.1.0 · Total Conversion"}
+    "modCard": {"title": "Nuke Catan", "version": "v2.1.0 · Total Conversion", "href": "/mods/nuke-catan/", "btnLabel": "View the mod"}
   },
   {
     "slug": "spiralling-paths-of-power-and-peril",
@@ -172,8 +185,9 @@
     "readTime": "7 min read",
     "author": "Kevin Chand",
     "authorHandle": "Chief Playtester",
+    "teamSlug": "kevin",
     "toc": [{"label": "From Necromancer to Games Workshop", "id": "from-necromancer-to-games-workshop"}, {"label": "Five editions, five eras", "id": "five-editions-five-eras"}, {"label": "Why it survives", "id": "why-it-survives"}, {"label": "The static spiral problem", "id": "the-static-spiral-problem"}],
-    "modCard": {"title": "Talisman: Hexed", "version": "v1.0.0 · Reskin"}
+    "modCard": {"title": "Talisman: Hexed", "version": "v1.0.0 · Reskin", "href": "/mods/talisman-hexed/", "btnLabel": "View the mod"}
   },
   {
     "slug": "monopolising-modified-variations",
@@ -190,8 +204,9 @@
     "readTime": "6 min read",
     "author": "Kevin Chand",
     "authorHandle": "Chief Playtester",
+    "teamSlug": "kevin",
     "toc": [{"label": "Mods vs. variants", "id": "mods-vs-variants"}, {"label": "Common modification approaches", "id": "common-modification-approaches"}, {"label": "The official editions problem", "id": "the-official-editions-problem"}, {"label": "Econopoly: our take", "id": "econopoly-our-take"}],
-    "modCard": {"title": "Econopoly", "version": "v1.4.0 · Rebalance"}
+    "modCard": {"title": "Econopoly", "version": "v1.4.0 · Rebalance", "href": "/mods/econopoly/", "btnLabel": "View the mod"}
   },
   {
     "slug": "conquering-the-constrains-of-chess",
@@ -208,7 +223,8 @@
     "readTime": "8 min read",
     "author": "Mark Smalley",
     "authorHandle": "CEO & Founder",
+    "teamSlug": "mark",
     "toc": [{"label": "The problem with predictability", "id": "the-problem-with-predictability"}, {"label": "Hexagons and infinite setups", "id": "hexagons-and-infinite-setups"}, {"label": "Accessibility as a design principle", "id": "accessibility-as-a-design-principle"}, {"label": "What Moddable.Games is building", "id": "what-moddablegames-is-building"}],
-    "modCard": {"title": "Chess Variants", "version": "Fog of War · 4-Player · Hexagonal"}
+    "modCard": {"title": "Moddable Chess", "version": "39 variants · Play online", "href": "/games/moddable-chess/", "btnLabel": "Play now"}
   }
 ]

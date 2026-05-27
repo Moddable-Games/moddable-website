@@ -124,6 +124,12 @@ Pages load `mg-loader.js` (shared modules) + their own page script. Data is fetc
 - Fix hero parallax spilling past section boundary — wrap in overflow:hidden container
 - Fix home-tabs nav hidden under section above — remove overflow:hidden that clipped negative margin
 - Bump version 1.0.29 → 1.0.30 (was missing from previous commit)
+- News articles: author sidebar card with breakout team photo, name, role, profile link
+- News articles: real share links (X, Facebook, LinkedIn, copy URL)
+- News articles: all 12 posts now have callout cards with real links (no more dead # hrefs)
+- News articles: hybrid auto-derive callout from tags when no manual modCard specified
+- News articles: improved right rail spacing (topics, mod card)
+- Added `teamSlug` field to all news posts — author rendered from team.json, not hardcoded
 
 #### 2026-05-26
 - Update chess variant count 20→39 across all pages (closes #55, #54)

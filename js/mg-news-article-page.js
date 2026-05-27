@@ -10,14 +10,17 @@
   document.getElementById('nav-root').appendChild(MG.navbar('News'));
   document.getElementById('footer-root').appendChild(MG.footer());
 
-  MG.data.get('news').then(function(posts) {
+  MG.data.load(['news', 'team', 'mods']).then(function(store) {
+    var posts = store.news;
+    var team = store.team;
+    var mods = store.mods;
     var post = posts.find(function(p) { return p.slug === slug; });
     if (!post) return;
 
     document.title = post.title + ' — Moddable.Games';
     renderHeader(post);
-    renderLeftRail(post);
-    renderRightRail(post);
+    renderLeftRail(post, team);
+    renderRightRail(post, mods);
     renderArticleBody(post);
     renderRelated(posts, post);
     initParallax();
@@ -50,31 +53,79 @@
     header.appendChild(inner);
   }
 
-  function renderLeftRail(post) {
+  function renderLeftRail(post, team) {
     var rail = document.getElementById('left-rail');
     if (!rail) return;
 
-    rail.appendChild(el('div', {class: 'post-rail__eyebrow'}, 'AUTHOR'));
-    var author = el('div', {class: 'post-author'});
-    author.appendChild(el('div', {class: 'post-author__avatar'}));
-    var info = el('div');
-    info.appendChild(el('div', {class: 'post-author__name'}, post.author));
-    info.appendChild(el('div', {class: 'post-author__handle'}, post.authorHandle));
-    author.appendChild(info);
-    rail.appendChild(author);
+    var member = team.find(function(t) { return t.slug === post.teamSlug; });
+
+    var authorCard = el('div', {class: 'post-author-card'});
+    var avatarWrap = el('a', {class: 'post-author-card__avatar', href: member ? url('/team/' + member.slug + '/') : '#'});
+    if (member) {
+      avatarWrap.style.background = 'linear-gradient(135deg, ' + member.color + ', #0a0d2a)';
+      var img = el('img', {
+        src: url('/assets/team/' + member.img),
+        alt: member.name,
+        class: 'post-author-card__img'
+      });
+      avatarWrap.appendChild(img);
+    }
+    authorCard.appendChild(avatarWrap);
+
+    var info = el('div', {class: 'post-author-card__info'});
+    var name = member ? member.name : post.author;
+    var role = member ? member.role : post.authorHandle;
+    info.appendChild(el('div', {class: 'post-author-card__name'}, name));
+    info.appendChild(el('div', {class: 'post-author-card__role'}, role));
+    authorCard.appendChild(info);
+
+    if (member) {
+      var profileLink = el('a', {
+        href: url('/team/' + member.slug + '/'),
+        class: 'post-author-card__link'
+      }, 'View profile →');
+      authorCard.appendChild(profileLink);
+    }
+    rail.appendChild(authorCard);
 
     rail.appendChild(el('div', {class: 'post-rail__eyebrow post-rail__eyebrow--green'}, 'SHARE'));
+    var pageUrl = encodeURIComponent(window.location.href);
+    var pageTitle = encodeURIComponent(post.title + ' — Moddable.Games');
+    var shares = [
+      {label: 'X', icon: '𝕏', href: 'https://x.com/intent/tweet?url=' + pageUrl + '&text=' + pageTitle},
+      {label: 'Facebook', icon: 'f', href: 'https://www.facebook.com/sharer/sharer.php?u=' + pageUrl},
+      {label: 'LinkedIn', icon: 'in', href: 'https://www.linkedin.com/sharing/share-offsite/?url=' + pageUrl},
+      {label: 'Copy', icon: '⎘', action: 'copy'}
+    ];
     var shareBtns = el('div', {class: 'post-share-btns'});
-    ['X','FB','LI','Copy'].forEach(function(s) {
-      var b = document.createElement('button');
-      b.textContent = s;
-      b.className = 'post-share-btn';
-      shareBtns.appendChild(b);
+    shares.forEach(function(s) {
+      if (s.action === 'copy') {
+        var b = el('button', {class: 'post-share-btn', 'aria-label': 'Copy link', title: 'Copy link'});
+        b.textContent = s.icon;
+        b.addEventListener('click', function() {
+          navigator.clipboard.writeText(window.location.href).then(function() {
+            b.textContent = '✓';
+            setTimeout(function() { b.textContent = s.icon; }, 2000);
+          });
+        });
+        shareBtns.appendChild(b);
+      } else {
+        var a = el('a', {
+          href: s.href,
+          target: '_blank',
+          rel: 'noopener',
+          class: 'post-share-btn',
+          'aria-label': 'Share on ' + s.label,
+          title: 'Share on ' + s.label
+        });
+        a.textContent = s.icon;
+        shareBtns.appendChild(a);
+      }
     });
     rail.appendChild(shareBtns);
   }
 
-  function renderRightRail(post) {
+  function renderRightRail(post, mods) {
     var rail = document.getElementById('right-rail');
     if (!rail) return;
 
@@ -108,18 +159,31 @@
       rail.appendChild(tagSection);
     }
 
-    if (post.modCard) {
+    var cardData = post.modCard || deriveModCard(post, mods);
+    if (cardData) {
       var mc = el('div', {class: 'post-mod-card'});
       mc.appendChild(el('div', {class: 'post-mod-card__eyebrow'}, 'THE MOD'));
-      mc.appendChild(el('div', {class: 'post-mod-card__title'}, post.modCard.title));
-      mc.appendChild(el('div', {class: 'post-mod-card__version'}, post.modCard.version));
+      mc.appendChild(el('div', {class: 'post-mod-card__title'}, cardData.title));
+      mc.appendChild(el('div', {class: 'post-mod-card__version'}, cardData.version));
       var dlWrap = el('div');
-      var dlBtn = linkBtn('Download rules', '#', 'red');
+      var dlBtn = linkBtn(cardData.btnLabel || 'View the mod', cardData.href || '/mods/', 'red');
       dlBtn.classList.add('post-mod-card__dl');
       dlWrap.appendChild(dlBtn);
       mc.appendChild(dlWrap);
       rail.appendChild(mc);
     }
+  }
+
+  function deriveModCard(post, mods) {
+    if (!post.tags || !mods) return {title: 'Moddable Community', version: 'Discord · Open to all', href: '/community/', btnLabel: 'Join the Discord'};
+    var match = null;
+    for (var i = 0; i < mods.length; i++) {
+      if (post.tags.indexOf(mods[i].baseGame) !== -1) { match = mods[i]; break; }
+    }
+    if (match) {
+      return {title: match.title, version: match.category, href: match.path, btnLabel: 'View the mod'};
+    }
+    return {title: 'Moddable Community', version: 'Discord · Open to all', href: '/community/', btnLabel: 'Join the Discord'};
   }
 
   function renderArticleBody(post) {
