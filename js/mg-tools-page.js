@@ -489,9 +489,8 @@ renderToolCards();
   const PRESETS = {
     custom:  { label:'Custom', atk:{dice:2,sides:6,hit:4}, def:{dice:2,sides:6,hit:5} },
     ti4:     { label:'TI4 Space', atk:{dice:3,sides:10,hit:6}, def:{dice:2,sides:10,hit:7} },
-    dungeon: { label:'Dungeon Chess', atk:{dice:2,sides:8,hit:5}, def:{dice:1,sides:8,hit:4} },
     risk:    { label:'Risk', atk:{dice:3,sides:6,hit:1}, def:{dice:2,sides:6,hit:1} },
-    catan:   { label:'Catan (Robber)', atk:{dice:1,sides:6,hit:4}, def:{dice:1,sides:6,hit:4} },
+    warhammer:{ label:'Warhammer', atk:{dice:4,sides:6,hit:4}, def:{dice:4,sides:6,hit:5} },
   };
   let activePreset = 'custom';
   let atkDice=2, atkSides=6, atkHit=4, defDice=2, defSides=6, defHit=5;
@@ -545,7 +544,7 @@ renderToolCards();
         const input = document.createElement('input');
         input.type='number'; input.min=min; input.max=max; input.value=val;
         input.className='odds-input';
-        input.addEventListener('change', () => { cb(parseInt(input.value)||val); });
+        input.addEventListener('input', () => { cb(parseInt(input.value)||val); });
         row.appendChild(input);
         side.appendChild(row);
       });
