@@ -13,9 +13,24 @@ body { background:#f5f4ef; }
 .ti-hero__title { font-family:var(--mg-font-display);font-weight:600;font-size:clamp(44px,5.5vw,80px);line-height:1.0;letter-spacing:-0.025em;margin:0 0 18px; }
 .ti-hero__lede { font-family:var(--mg-font-body);font-size:17px;line-height:1.55;color:rgba(255,255,255,0.75);max-width:560px;margin:0; }
 
+/* ── Jump nav ── */
+.ti-jumpnav { background:#f5f4ef;border-bottom:1px solid #e6e3d8;position:sticky;top:64px;z-index:40;padding:12px 32px; }
+.ti-jumpnav__inner { max-width:900px;margin:0 auto;display:flex;gap:8px;flex-wrap:wrap;justify-content:center; }
+.ti-jumpnav__link { font-family:var(--mg-font-body);font-weight:600;font-size:13px;height:32px;padding:0 14px;border-radius:9999px;border:1px solid #e6e3d8;background:transparent;color:var(--mg-ink);cursor:pointer;transition:all 150ms;text-decoration:none;display:inline-flex;align-items:center; }
+.ti-jumpnav__link:hover { border-color:var(--mg-ink); }
+.ti-jumpnav__link.active { background:var(--mg-ink);color:#fff;border-color:var(--mg-ink); }
+.ti-jumpnav__link--blue { border-color:#0c4f8d;color:#0c4f8d; }
+.ti-jumpnav__link--blue:hover,.ti-jumpnav__link--blue.active { background:#0c4f8d;color:#fff;border-color:#0c4f8d; }
+.ti-jumpnav__link--green { border-color:#3a9928;color:#3a9928; }
+.ti-jumpnav__link--green:hover,.ti-jumpnav__link--green.active { background:#3a9928;color:#fff;border-color:#3a9928; }
+.ti-jumpnav__link--red { border-color:#d11a1a;color:#d11a1a; }
+.ti-jumpnav__link--red:hover,.ti-jumpnav__link--red.active { background:#d11a1a;color:#fff;border-color:#d11a1a; }
+
 /* ── Tools body section ── */
 .ti-body { background:#f5f4ef;padding:48px 32px 96px; }
 .ti-body__inner { max-width:900px;margin:0 auto;display:flex;flex-direction:column;gap:24px; }
+.ti-card { scroll-margin-top:128px; }
+.hexmap-embed { scroll-margin-top:128px; }
 
 /* ── Tool cards ── */
 .ti-card { background:#fff;border:1px solid #e6e3d8;border-radius:20px;padding:32px; }

@@ -206,4 +206,41 @@ function renderAgenda() {
   sec.appendChild(btns2);
 }
 
+/* ── JUMP NAV ACTIVE STATE ── */
+(function() {
+  const links = document.querySelectorAll('.ti-jumpnav__link');
+  const sections = Array.from(links).map(a => document.querySelector(a.getAttribute('href'))).filter(Boolean);
+  let suppress = false;
+
+  function setActive(id) {
+    links.forEach(a => a.classList.toggle('active', a.getAttribute('href') === '#' + id));
+  }
+
+  const observer = new IntersectionObserver(entries => {
+    if (suppress) return;
+    entries.forEach(entry => { if (entry.isIntersecting) setActive(entry.target.id); });
+  }, { rootMargin: '-130px 0px -50% 0px' });
+
+  sections.forEach(s => observer.observe(s));
+
+  links.forEach(a => {
+    a.addEventListener('click', () => {
+      setActive(a.getAttribute('href').slice(1));
+      suppress = true;
+      setTimeout(() => { suppress = false; }, 800);
+    });
+  });
+
+  if (window.location.hash) {
+    const id = window.location.hash.slice(1);
+    setActive(id);
+    const target = document.getElementById(id);
+    if (target) {
+      suppress = true;
+      setTimeout(() => { target.scrollIntoView({ behavior:'smooth' }); }, 100);
+      setTimeout(() => { suppress = false; }, 900);
+    }
+  }
+})();
+
 })();

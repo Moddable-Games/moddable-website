@@ -37,11 +37,20 @@
   </div>
 </section>
 
+<nav class="ti-jumpnav">
+  <div class="ti-jumpnav__inner">
+    <a href="#ti-galaxy" class="ti-jumpnav__link">Galaxy</a>
+    <a href="#ti-factions" class="ti-jumpnav__link ti-jumpnav__link--blue">Factions</a>
+    <a href="#ti-objectives" class="ti-jumpnav__link ti-jumpnav__link--green">Objectives</a>
+    <a href="#ti-agenda" class="ti-jumpnav__link ti-jumpnav__link--red">Agenda</a>
+  </div>
+</nav>
+
 <section class="ti-body">
   <div class="ti-body__inner">
 
     <!-- Hex Map Generator (embedded from Moddable Hexmaps) -->
-    <div class="hexmap-embed">
+    <div class="hexmap-embed" id="ti-galaxy">
       <div class="hexmap-embed__header">
         <div class="hexmap-embed__accent"></div>
         <div>
@@ -56,7 +65,7 @@
     </div>
 
     <!-- Faction Picker -->
-    <div class="ti-card">
+    <div class="ti-card" id="ti-factions">
       <div class="ti-card__header">
         <div class="ti-card__accent ti-card__accent--blue"></div>
         <div>
@@ -81,7 +90,7 @@
     </div>
 
     <!-- Objective Tracker -->
-    <div class="ti-card">
+    <div class="ti-card" id="ti-objectives">
       <div class="ti-card__header">
         <div class="ti-card__accent ti-card__accent--green"></div>
         <div>
@@ -95,7 +104,7 @@
     </div>
 
     <!-- Agenda Voter -->
-    <div class="ti-card">
+    <div class="ti-card" id="ti-agenda">
       <div class="ti-card__header">
         <div class="ti-card__accent ti-card__accent--red"></div>
         <div>

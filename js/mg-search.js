@@ -31,6 +31,7 @@
   ];
 
   let newsIndex = null;
+  let rulesIndex = null;
 
   function loadNewsIndex() {
     if (newsIndex) return;
@@ -39,20 +40,39 @@
     });
   }
 
+  function loadRulesIndex() {
+    if (rulesIndex) return;
+    fetch('https://rules.moddable.games/dist/rules-index.json')
+      .then(r => r.json())
+      .then(data => {
+        rulesIndex = data.map(entry => ({
+          type: 'rule',
+          title: entry.heading,
+          desc: entry.gameTitle + ' — ' + entry.section,
+          href: 'https://rules.moddable.games/dist/' + entry.game + '/#' + entry.anchor
+        }));
+      })
+      .catch(() => {});
+  }
+
   function getSearchIndex() {
-    return newsIndex ? SEARCH_INDEX.concat(newsIndex) : SEARCH_INDEX;
+    let idx = SEARCH_INDEX;
+    if (newsIndex) idx = idx.concat(newsIndex);
+    if (rulesIndex) idx = idx.concat(rulesIndex);
+    return idx;
   }
 
   let searchOverlay = null;
 
   function openSearch() {
     loadNewsIndex();
+    loadRulesIndex();
     if (searchOverlay) { searchOverlay.remove(); searchOverlay = null; }
 
     const overlay = el('div', {class:'mg-search-overlay'});
     const panel = el('div', {class:'mg-search-panel'});
     const header = el('div', {class:'mg-search-panel__header'});
-    const input = el('input', {type:'text', class:'mg-search-panel__input', placeholder:'Search mods, games, news, tools…', autofocus:'true'});
+    const input = el('input', {type:'text', class:'mg-search-panel__input', placeholder:'Search mods, games, rules, tools…', autofocus:'true'});
     header.appendChild(input);
     panel.appendChild(header);
 
@@ -72,7 +92,7 @@
     function renderResults(query) {
       results.innerHTML = '';
       if (!query) {
-        results.innerHTML = '<div class="mg-search-panel__empty"><div class="mg-search-panel__empty-title">Start typing to search</div><div class="mg-search-panel__empty-hint">Mods, games, news articles, and tools</div></div>';
+        results.innerHTML = '<div class="mg-search-panel__empty"><div class="mg-search-panel__empty-title">Start typing to search</div><div class="mg-search-panel__empty-hint">Mods, games, rules, news, and tools</div></div>';
         return;
       }
       const q = query.toLowerCase();

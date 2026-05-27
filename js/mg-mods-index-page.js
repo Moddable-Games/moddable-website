@@ -24,7 +24,7 @@
         var b = document.createElement('button');
         b.className = 'mods-filter__btn' + (a ? ' mods-filter__btn--active' : '');
         b.textContent = f;
-        b.addEventListener('click', function() { activeCat = f; renderFilters(); renderGrid(); });
+        b.addEventListener('click', function() { activeCat = f; renderFilters(); renderGrid(); grid.scrollIntoView({ behavior:'smooth', block:'start' }); });
         el2.appendChild(b);
       });
     }
@@ -44,7 +44,7 @@
       MG.initReveal();
     }
 
-    document.getElementById('search-input').addEventListener('input', function(e) { searchVal = e.target.value; renderGrid(); });
+    document.getElementById('search-input').addEventListener('input', function(e) { searchVal = e.target.value; renderGrid(); grid.scrollIntoView({ behavior:'smooth', block:'start' }); });
 
     var hashCat = decodeURIComponent(location.hash.slice(1));
     if (hashCat && filters.indexOf(hashCat) !== -1) activeCat = hashCat;

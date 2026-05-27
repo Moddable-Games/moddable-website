@@ -4,28 +4,26 @@ document.getElementById('nav-root').appendChild(navbar('Tools'));
 document.getElementById('footer-root').appendChild(footer());
 
 /* ── TOOL DEFINITIONS ── */
+const SECTIONS = [
+  { key:'game-night', heading:'Game Night',  sub:'Tools you reach for at the table.' },
+  { key:'planning',   heading:'Planning',    sub:'Setup, tracking, and between-game prep.' },
+];
+
+const SECTION_ACCENT = { 'game-night':'blue', planning:'green' };
+
+const FEATURED_TOOL = { id:'rules', title:'Look it up.', eyebrow:'RULES LOOKUP', desc:'Search across all published rulebooks. Find the exact rule mid-game, no page-flipping.' };
+
 const TOOLS = [
-  { id:'dice',       title:'Roll anything.',        eyebrow:'DICE ROLLER',         category:'game-night', accent:'glow',  desc:'Standard RPG dice from d4 to d100, with modifiers.' },
-  { id:'name-gen',   title:'Name your character.',  eyebrow:'NAME GENERATOR',      category:'creative',   accent:'blue',  desc:'Works for any hex-tile explorer, faction leader, or rule-bending rogue.' },
-  { id:'score',      title:'Keep the count.',       eyebrow:'SCORE TRACKER',       category:'planning',   accent:'green', desc:'Tracks up to 6 players. Good for Catan VP, TI4 objectives, anything with points.' },
-  { id:'timer',      title:"Time's up.",            eyebrow:'TURN TIMER',          category:'game-night', accent:'red',   desc:'Per-player countdown timer with cumulative stats.' },
-  { id:'initiative', title:'Who goes next.',        eyebrow:'INITIATIVE TRACKER',  category:'game-night', accent:'blue',  desc:'Turn order tracker with initiative rolls.' },
-  { id:'resources',  title:'Track the economy.',    eyebrow:'RESOURCE DASHBOARD',  category:'planning',   accent:'green', desc:'Multi-resource bank per player with trade logging. Built for Econopoly, Nukes, TI4.' },
-  { id:'bag-tracker',title:"What's left?",           eyebrow:'BAG TRACKER',         category:'planning',   accent:'blue',  desc:'Track drawn tiles/cards. See remaining odds. Presets for Catan, Carcassonne, Scrabble.' },
-  { id:'roles',      title:'Who are you, really?',  eyebrow:'ROLE DISTRIBUTOR',    category:'game-night', accent:'red',   desc:'Assign hidden roles for social deduction games. Tap-to-reveal, no app needed.' },
-  { id:'rules',      title:'House rules, settled.', eyebrow:'RULES REFEREE',       category:'planning',   accent:'red',   desc:"Record your group's house rules. Search them mid-game. Never argue twice." },
-  { id:'seating',    title:'Take your seats.',      eyebrow:'SEATING RANDOMIZER',  category:'game-night', accent:'glow',  desc:'Random player seating around the table.' },
+  { id:'dice',       title:'Roll anything.',        eyebrow:'DICE ROLLER',         category:'game-night', desc:'Standard RPG dice from d4 to d100, with modifiers.' },
+  { id:'timer',      title:"Time's up.",            eyebrow:'TURN TIMER',          category:'game-night', desc:'Per-player countdown timer with cumulative stats.' },
+  { id:'initiative', title:'Who goes next.',        eyebrow:'INITIATIVE TRACKER',  category:'game-night', desc:'Turn order tracker with initiative rolls.' },
+  { id:'roles',      title:'Who are you, really?',  eyebrow:'ROLE DISTRIBUTOR',    category:'game-night', desc:'Assign hidden roles for social deduction games. Tap-to-reveal, no app needed.' },
+  { id:'seating',    title:'Take your seats.',      eyebrow:'SEATING RANDOMIZER',  category:'game-night', desc:'Random player seating around the table.' },
+  { id:'name-gen',   title:'Name your character.',  eyebrow:'NAME GENERATOR',      category:'game-night', desc:'Works for any hex-tile explorer, faction leader, or rule-bending rogue.' },
+  { id:'score',      title:'Keep the count.',       eyebrow:'SCORE TRACKER',       category:'planning',   desc:'Tracks up to 6 players. Good for Catan VP, TI4 objectives, anything with points.' },
+  { id:'resources',  title:'Track the economy.',    eyebrow:'RESOURCE DASHBOARD',  category:'planning',   desc:'Multi-resource bank per player with trade logging. Built for Econopoly, Nukes, TI4.' },
+  { id:'bag-tracker',title:"What's left?",           eyebrow:'BAG TRACKER',         category:'planning',   desc:'Track drawn tiles/cards. See remaining odds. Presets for Catan, Carcassonne, Scrabble.' },
 ];
-
-const CATEGORIES = [
-  { key:'all',          label:'All Tools' },
-  { key:'game-night',   label:'Game Night' },
-  { key:'planning',     label:'Planning' },
-  { key:'creative',     label:'Creative' },
-  { key:'mod-specific', label:'Mod-Specific' },
-];
-
-let activeCategory = 'all';
 
 /* ── MOD-SPECIFIC LINKS ── */
 const MOD_TOOLS = [
@@ -53,55 +51,57 @@ MOD_TOOLS.forEach(t => {
   mtg.appendChild(a);
 });
 
-/* ── FILTER BAR ── */
-function renderFilterBar() {
-  const bar = document.getElementById('tools-category-bar');
-  bar.innerHTML = '';
-  CATEGORIES.forEach(cat => {
-    const b = document.createElement('button');
-    b.className = 'tools-filter__btn' + (cat.key === activeCategory ? ' tools-filter__btn--active' : '');
-    b.textContent = cat.label;
-    b.addEventListener('click', () => { activeCategory = cat.key; renderFilterBar(); filterTools(); });
-    bar.appendChild(b);
-  });
-}
-
-function filterTools() {
-  document.querySelectorAll('.tool-card[data-category]').forEach(card => {
-    const cat = card.getAttribute('data-category');
-    const show = activeCategory === 'all' || cat === activeCategory;
-    card.classList.toggle('tool-card--hidden', !show);
-  });
-  const modSection = document.getElementById('mod-tools-section');
-  const showMod = activeCategory === 'all' || activeCategory === 'mod-specific';
-  modSection.classList.toggle('tools-section--hidden', !showMod);
-}
-
-/* ── RENDER CARD SHELLS ── */
+/* ── RENDER FEATURED + SECTIONED TOOL CARDS ── */
 function renderToolCards() {
   const grid = document.getElementById('tools-grid');
-  TOOLS.forEach(tool => {
-    const card = el('div', {class:'tool-card', 'data-category':tool.category});
-    card.id = 'tool-' + tool.id;
 
-    const header = el('div', {class:'tool-card__header'});
-    header.appendChild(el('div', {class:'tool-card__accent tool-card__accent--' + tool.accent}));
-    const headerText = el('div');
-    headerText.appendChild(el('div', {class:'tool-card__eyebrow tool-card__eyebrow--' + tool.accent}, tool.eyebrow));
-    headerText.appendChild(el('h3', {class:'tool-card__title'}, tool.title));
-    headerText.appendChild(el('p', {class:'tool-card__desc'}, tool.desc));
-    header.appendChild(headerText);
-    card.appendChild(header);
+  const featured = el('div', {class:'tool-card tool-card--featured'});
+  featured.id = 'section-rules';
+  const fHeader = el('div', {class:'tool-card__header'});
+  fHeader.appendChild(el('div', {class:'tool-card__accent tool-card__accent--red'}));
+  const fText = el('div');
+  fText.appendChild(el('div', {class:'tool-card__eyebrow tool-card__eyebrow--red'}, FEATURED_TOOL.eyebrow));
+  fText.appendChild(el('h3', {class:'tool-card__title'}, FEATURED_TOOL.title));
+  fText.appendChild(el('p', {class:'tool-card__desc'}, FEATURED_TOOL.desc));
+  fHeader.appendChild(fText);
+  featured.appendChild(fHeader);
+  const fBody = el('div', {class:'tool-card__body'});
+  fBody.id = FEATURED_TOOL.id + '-body';
+  featured.appendChild(fBody);
+  grid.appendChild(featured);
 
-    const body = el('div', {class: 'tool-card__body'});
-    body.id = tool.id + '-body';
-    card.appendChild(body);
+  SECTIONS.forEach(section => {
+    const sectionTools = TOOLS.filter(t => t.category === section.key);
+    if (!sectionTools.length) return;
 
-    grid.appendChild(card);
+    const accent = SECTION_ACCENT[section.key];
+    const heading = el('div', {class:'tools-section-header', id:'section-' + section.key});
+    heading.appendChild(el('h2', {class:'tools-section__heading tools-section__heading--' + accent}, section.heading));
+    heading.appendChild(el('p', {class:'tools-section__sub'}, section.sub));
+    grid.appendChild(heading);
+
+    sectionTools.forEach(tool => {
+      const card = el('div', {class:'tool-card'});
+      card.id = 'tool-' + tool.id;
+
+      const header = el('div', {class:'tool-card__header'});
+      header.appendChild(el('div', {class:'tool-card__accent tool-card__accent--' + accent}));
+      const headerText = el('div');
+      headerText.appendChild(el('div', {class:'tool-card__eyebrow tool-card__eyebrow--' + accent}, tool.eyebrow));
+      headerText.appendChild(el('h3', {class:'tool-card__title'}, tool.title));
+      headerText.appendChild(el('p', {class:'tool-card__desc'}, tool.desc));
+      header.appendChild(headerText);
+      card.appendChild(header);
+
+      const body = el('div', {class:'tool-card__body'});
+      body.id = tool.id + '-body';
+      card.appendChild(body);
+
+      grid.appendChild(card);
+    });
   });
 }
 
-renderFilterBar();
 renderToolCards();
 
 /* ── DICE ROLLER ── */
@@ -649,49 +649,145 @@ renderToolCards();
   renderRoles();
 })();
 
-/* ── RULES REFEREE ── */
+/* ── RULES LOOKUP ── */
 (function() {
   const body = document.getElementById('rules-body');
-  let rules = JSON.parse(localStorage.getItem('mg-house-rules') || '[]');
+  let rulesIndex = null;
+  let rulesLoading = false;
+  let activeGame = 'all';
+  let query = '';
 
-  const addRow = el('div',{class:'rules-add'});
-  const ruleInput = document.createElement('input'); ruleInput.className='rules-add__input'; ruleInput.placeholder='Type a house rule...';
-  const addFn = () => { const text = ruleInput.value.trim(); if(text){rules.push(text);save();ruleInput.value='';renderRules();} };
-  ruleInput.addEventListener('keydown', e => { if(e.key==='Enter') addFn(); });
-  addRow.appendChild(ruleInput);
-  addRow.appendChild(btn('Add Rule','red',addFn));
-  body.appendChild(addRow);
+  const RULES_API = 'https://rules.moddable.games/dist/rules-index.json';
 
-  const searchRow = el('div',{class:'rules-search'});
-  const searchInput = document.createElement('input'); searchInput.className='rules-search__input'; searchInput.placeholder='Search rules...';
-  searchInput.addEventListener('input', () => renderRules(searchInput.value.toLowerCase()));
-  searchRow.appendChild(searchInput);
-  body.appendChild(searchRow);
+  function loadIndex() {
+    if (rulesIndex || rulesLoading) return;
+    rulesLoading = true;
+    fetch(RULES_API)
+      .then(r => r.json())
+      .then(data => { rulesIndex = data; rulesLoading = false; render(); })
+      .catch(() => { rulesLoading = false; render(); });
+  }
 
-  const list = el('div',{class:'rules-list'});
-  body.appendChild(list);
+  function getGames() {
+    if (!rulesIndex) return [];
+    const seen = new Set();
+    return rulesIndex.filter(e => { if (seen.has(e.game)) return false; seen.add(e.game); return true; }).map(e => ({ key: e.game, label: e.gameTitle }));
+  }
 
-  function save() { localStorage.setItem('mg-house-rules', JSON.stringify(rules)); }
+  function searchIndex() {
+    if (!rulesIndex) return [];
+    const q = query.toLowerCase().trim();
+    if (!q) return [];
+    let pool = activeGame === 'all' ? rulesIndex : rulesIndex.filter(e => e.game === activeGame);
+    const terms = q.split(/\s+/);
+    const scored = pool.map(entry => {
+      let score = 0;
+      for (const t of terms) {
+        if (entry.heading.toLowerCase().includes(t)) score += 3;
+        else if (entry.section.toLowerCase().includes(t)) score += 2;
+        else if (entry.content.toLowerCase().includes(t)) score += 1;
+        else return null;
+      }
+      return { entry, score };
+    }).filter(Boolean);
+    scored.sort((a, b) => b.score - a.score);
+    return scored.slice(0, 12).map(s => s.entry);
+  }
 
-  function renderRules(filter) {
-    list.innerHTML = '';
-    const filtered = filter ? rules.filter(r => r.toLowerCase().includes(filter)) : rules;
-    if (filtered.length === 0) {
-      list.appendChild(el('div',{class:'rules-empty'}, rules.length === 0 ? 'No rules yet. Add your first house rule above.' : 'No rules match your search.'));
+  function render() {
+    body.innerHTML = '';
+
+    const search = document.createElement('input');
+    search.className = 'rules-lookup__search';
+    search.placeholder = 'Search rules...';
+    search.value = query;
+    search.addEventListener('input', () => { query = search.value; renderResults(); });
+    body.appendChild(search);
+
+    if (rulesIndex) {
+      const filters = el('div',{class:'rules-lookup__filters'});
+      const allBtn = document.createElement('button');
+      allBtn.className = 'rules-lookup__filter' + (activeGame === 'all' ? ' rules-lookup__filter--active' : '');
+      allBtn.textContent = 'All';
+      allBtn.addEventListener('click', () => { activeGame = 'all'; render(); });
+      filters.appendChild(allBtn);
+      getGames().forEach(g => {
+        const b = document.createElement('button');
+        b.className = 'rules-lookup__filter' + (activeGame === g.key ? ' rules-lookup__filter--active' : '');
+        b.textContent = g.label;
+        b.addEventListener('click', () => { activeGame = g.key; render(); });
+        filters.appendChild(b);
+      });
+      body.appendChild(filters);
+    }
+
+    const results = el('div',{class:'rules-lookup__results'});
+    results.id = 'rules-results';
+    body.appendChild(results);
+    renderResults();
+    setTimeout(() => search.focus(), 50);
+  }
+
+  function renderResults() {
+    const container = document.getElementById('rules-results');
+    if (!container) return;
+    container.innerHTML = '';
+
+    if (rulesLoading) {
+      container.appendChild(el('div',{class:'rules-lookup__status'}, 'Loading...'));
       return;
     }
-    filtered.forEach((r) => {
-      const idx = rules.indexOf(r);
-      const entry = el('div',{class:'rules-entry'});
-      entry.appendChild(el('span',{class:'rules-entry__num'},'#'+(idx+1)));
-      entry.appendChild(el('span',{class:'rules-entry__text'},r));
-      const rm = el('button',{class:'rules-entry__remove'},'×');
-      rm.addEventListener('click', () => { rules.splice(idx,1); save(); renderRules(filter); });
-      entry.appendChild(rm);
-      list.appendChild(entry);
+    if (!rulesIndex) {
+      container.appendChild(el('div',{class:'rules-lookup__status'}, 'Could not load rules index.'));
+      return;
+    }
+    if (!query.trim()) {
+      const hint = el('div',{class:'rules-lookup__empty'});
+      hint.appendChild(el('div',{class:'rules-lookup__empty-count'}, rulesIndex.length + ' rules indexed'));
+      hint.appendChild(el('div',{class:'rules-lookup__empty-hint'}, 'Try "cannon mechanic", "victory", or "infantry movement"'));
+      container.appendChild(hint);
+      return;
+    }
+
+    const hits = searchIndex();
+    if (hits.length === 0) {
+      container.appendChild(el('div',{class:'rules-lookup__status'}, 'No results for "' + query.trim() + '"'));
+      return;
+    }
+
+    const count = el('div',{class:'rules-lookup__count'}, hits.length + ' result' + (hits.length === 1 ? '' : 's'));
+    container.appendChild(count);
+
+    const terms = query.toLowerCase().trim().split(/\s+/).filter(Boolean);
+    function highlight(text) {
+      if (!terms.length) return text;
+      const escaped = terms.map(t => t.replace(/[.*+?^${}()|[\]\\]/g, '\\$&'));
+      const re = new RegExp('(' + escaped.join('|') + ')', 'gi');
+      return text.replace(re, '<mark>$1</mark>');
+    }
+
+    hits.forEach(entry => {
+      const link = document.createElement('a');
+      link.className = 'rules-lookup__hit';
+      link.href = 'https://rules.moddable.games/dist/' + entry.game + '/#' + entry.anchor;
+      link.target = '_blank';
+      link.rel = 'noopener';
+      const meta = el('div',{class:'rules-lookup__hit-meta'});
+      meta.appendChild(el('span',{class:'rules-lookup__hit-game'}, entry.gameTitle));
+      meta.appendChild(el('span',{class:'rules-lookup__hit-section'}, entry.section));
+      link.appendChild(meta);
+      const heading = el('div',{class:'rules-lookup__hit-heading'});
+      heading.innerHTML = highlight(entry.heading);
+      link.appendChild(heading);
+      const excerpt = el('div',{class:'rules-lookup__hit-excerpt'});
+      excerpt.innerHTML = highlight(entry.content);
+      link.appendChild(excerpt);
+      container.appendChild(link);
     });
   }
-  renderRules();
+
+  loadIndex();
+  render();
 })();
 
 /* ── SEATING RANDOMIZER ── */
@@ -744,6 +840,48 @@ renderToolCards();
       table.appendChild(seat);
     });
     resultEl.appendChild(table);
+  }
+})();
+
+/* ── JUMP NAV ACTIVE STATE ── */
+(function() {
+  const links = document.querySelectorAll('.tools-jumpnav__link');
+  const sections = Array.from(links).map(a => document.querySelector(a.getAttribute('href'))).filter(Boolean);
+  let suppressObserver = false;
+
+  function setActive(id) {
+    links.forEach(a => {
+      a.classList.toggle('active', a.getAttribute('href') === '#' + id);
+    });
+  }
+
+  const observer = new IntersectionObserver(entries => {
+    if (suppressObserver) return;
+    entries.forEach(entry => {
+      if (entry.isIntersecting) setActive(entry.target.id);
+    });
+  }, { rootMargin: '-130px 0px -50% 0px' });
+
+  sections.forEach(s => observer.observe(s));
+
+  links.forEach(a => {
+    a.addEventListener('click', () => {
+      const id = a.getAttribute('href').slice(1);
+      setActive(id);
+      suppressObserver = true;
+      setTimeout(() => { suppressObserver = false; }, 800);
+    });
+  });
+
+  if (window.location.hash) {
+    const id = window.location.hash.slice(1);
+    setActive(id);
+    const target = document.getElementById(id);
+    if (target) {
+      suppressObserver = true;
+      setTimeout(() => { target.scrollIntoView({ behavior:'smooth' }); }, 100);
+      setTimeout(() => { suppressObserver = false; }, 900);
+    }
   }
 })();
 
