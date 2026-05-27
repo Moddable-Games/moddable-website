@@ -17,6 +17,11 @@ COLORS = {
     'Reskin': (12, 79, 141),
 }
 
+# Map slug → logo path (when available)
+LOGOS = {
+    'hyper-imperium': 'img/hyper-imperium-logo.png',
+}
+
 
 def load_font(size, bold=False):
     paths = [
@@ -88,6 +93,21 @@ for mod in mods:
     mask = Image.new('L', (card_w, card_h), 0)
     ImageDraw.Draw(mask).rounded_rectangle([0, 0, card_w-1, card_h-1], radius=24, fill=255)
     card.putalpha(mask)
+
+    # Overlay mod logo on card if available
+    logo_path = LOGOS.get(slug)
+    if logo_path and os.path.exists(logo_path):
+        mod_logo = Image.open(logo_path).convert('RGBA')
+        # Scale to fit within card with padding
+        max_logo_size = int(card_w * 0.65)
+        ratio = min(max_logo_size / mod_logo.width, max_logo_size / mod_logo.height)
+        lw = int(mod_logo.width * ratio)
+        lh = int(mod_logo.height * ratio)
+        mod_logo = mod_logo.resize((lw, lh), Image.LANCZOS)
+        # Center on card
+        lx = (card_w - lw) // 2
+        ly = (card_h - lh) // 2
+        card.paste(mod_logo, (lx, ly), mod_logo)
 
     card_layer = Image.new('RGBA', (WIDTH, HEIGHT), (0, 0, 0, 0))
     card_layer.paste(card, (card_x, card_y), card)
