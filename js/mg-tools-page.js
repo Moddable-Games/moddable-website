@@ -11,7 +11,6 @@ const TOOLS = [
   { id:'timer',      title:"Time's up.",            eyebrow:'TURN TIMER',          category:'game-night', accent:'red',   desc:'Per-player countdown timer with cumulative stats.' },
   { id:'initiative', title:'Who goes next.',        eyebrow:'INITIATIVE TRACKER',  category:'game-night', accent:'blue',  desc:'Turn order tracker with initiative rolls.' },
   { id:'resources',  title:'Track the economy.',    eyebrow:'RESOURCE DASHBOARD',  category:'planning',   accent:'green', desc:'Multi-resource bank per player with trade logging. Built for Econopoly, Nukes, TI4.' },
-  { id:'combat-odds',title:'Know before you strike.',eyebrow:'COMBAT ODDS',        category:'planning',   accent:'red',   desc:'Monte Carlo probability sim. Input units, get win% and expected casualties.' },
   { id:'bag-tracker',title:"What's left?",           eyebrow:'BAG TRACKER',         category:'planning',   accent:'blue',  desc:'Track drawn tiles/cards. See remaining odds. Presets for Catan, Carcassonne, Scrabble.' },
   { id:'roles',      title:'Who are you, really?',  eyebrow:'ROLE DISTRIBUTOR',    category:'game-night', accent:'red',   desc:'Assign hidden roles for social deduction games. Tap-to-reveal, no app needed.' },
   { id:'rules',      title:'House rules, settled.', eyebrow:'RULES REFEREE',       category:'planning',   accent:'red',   desc:"Record your group's house rules. Search them mid-game. Never argue twice." },
@@ -481,108 +480,6 @@ renderToolCards();
     body.appendChild(btnsRow);
   }
   renderDashboard();
-})();
-
-/* ── COMBAT ODDS CALCULATOR ── */
-(function() {
-  const body = document.getElementById('combat-odds-body');
-  const PRESETS = {
-    custom:  { label:'Custom', atk:{dice:2,sides:6,hit:4}, def:{dice:2,sides:6,hit:5} },
-    ti4:     { label:'TI4 Space', atk:{dice:3,sides:10,hit:6}, def:{dice:2,sides:10,hit:7} },
-    risk:    { label:'Risk', atk:{dice:3,sides:6,hit:1}, def:{dice:2,sides:6,hit:1} },
-    warhammer:{ label:'Warhammer', atk:{dice:4,sides:6,hit:4}, def:{dice:4,sides:6,hit:5} },
-  };
-  let activePreset = 'custom';
-  let atkDice=2, atkSides=6, atkHit=4, defDice=2, defSides=6, defHit=5;
-  const SIMS = 10000;
-
-  function runSim() {
-    let atkWins = 0, ties = 0;
-    let totalAtkHits = 0, totalDefHits = 0;
-    for (let i = 0; i < SIMS; i++) {
-      let ah = 0, dh = 0;
-      for (let d = 0; d < atkDice; d++) { if (Math.floor(Math.random()*atkSides)+1 >= atkHit) ah++; }
-      for (let d = 0; d < defDice; d++) { if (Math.floor(Math.random()*defSides)+1 >= defHit) dh++; }
-      if (ah > dh) atkWins++;
-      else if (ah === dh) ties++;
-      totalAtkHits += ah; totalDefHits += dh;
-    }
-    return { atkWin: (atkWins/SIMS*100).toFixed(1), tie: (ties/SIMS*100).toFixed(1), defWin: ((SIMS-atkWins-ties)/SIMS*100).toFixed(1), avgAtkHits: (totalAtkHits/SIMS).toFixed(1), avgDefHits: (totalDefHits/SIMS).toFixed(1) };
-  }
-
-  function renderCalc() {
-    body.innerHTML = '';
-
-    const presetRow = el('div',{class:'odds-presets'});
-    Object.entries(PRESETS).forEach(([key, cfg]) => {
-      const b = document.createElement('button');
-      b.className = 'tools-filter__btn' + (key === activePreset ? ' tools-filter__btn--active' : '');
-      b.textContent = cfg.label;
-      b.addEventListener('click', () => {
-        activePreset = key;
-        atkDice=cfg.atk.dice; atkSides=cfg.atk.sides; atkHit=cfg.atk.hit;
-        defDice=cfg.def.dice; defSides=cfg.def.sides; defHit=cfg.def.hit;
-        renderCalc();
-      });
-      presetRow.appendChild(b);
-    });
-    body.appendChild(presetRow);
-
-    const grid = el('div',{class:'odds-grid'});
-
-    function buildSide(label, dice, sides, hit, onChange) {
-      const side = el('div',{class:'odds-side'});
-      side.appendChild(el('div',{class:'odds-side__label'}, label));
-      const rows = [
-        ['Dice', dice, 1, 20, v => { onChange('dice', v); }],
-        ['Sides', sides, 2, 20, v => { onChange('sides', v); }],
-        ['Hits on', hit, 1, 20, v => { onChange('hit', v); }],
-      ];
-      rows.forEach(([lbl, val, min, max, cb]) => {
-        const row = el('div',{class:'odds-row'});
-        row.appendChild(el('span',{class:'odds-row__key'}, lbl));
-        const input = document.createElement('input');
-        input.type='number'; input.min=min; input.max=max; input.value=val;
-        input.className='odds-input';
-        input.addEventListener('input', () => { cb(parseInt(input.value)||val); });
-        row.appendChild(input);
-        side.appendChild(row);
-      });
-      return side;
-    }
-
-    grid.appendChild(buildSide('Attacker', atkDice, atkSides, atkHit, (f,v) => {
-      if (f==='dice') atkDice=v; if (f==='sides') atkSides=v; if (f==='hit') atkHit=v;
-    }));
-    grid.appendChild(el('div',{class:'odds-vs'}, 'vs'));
-    grid.appendChild(buildSide('Defender', defDice, defSides, defHit, (f,v) => {
-      if (f==='dice') defDice=v; if (f==='sides') defSides=v; if (f==='hit') defHit=v;
-    }));
-    body.appendChild(grid);
-
-    const resultEl = el('div',{class:'odds-result', id:'odds-result'});
-    body.appendChild(resultEl);
-
-    body.appendChild(btn('Calculate odds','dark', () => {
-      const r = runSim();
-      const res = document.getElementById('odds-result');
-      res.innerHTML = '';
-      const bars = el('div',{class:'odds-bars'});
-      [['Attacker wins', r.atkWin, '#d11a1a'], ['Tie', r.tie, '#636b78'], ['Defender wins', r.defWin, '#0c4f8d']].forEach(([lbl, pct, col]) => {
-        const row = el('div',{class:'odds-bar-row'});
-        row.appendChild(el('span',{class:'odds-bar-row__label'}, lbl));
-        row.appendChild(el('span',{class:'odds-bar-row__pct'}, pct + '%'));
-        const track = el('div',{class:'odds-bar-row__track'});
-        const fill = el('div',{class:'odds-bar-row__fill'});
-        fill.style.width = pct + '%'; fill.style.background = col;
-        track.appendChild(fill); row.appendChild(track);
-        bars.appendChild(row);
-      });
-      res.appendChild(bars);
-      res.appendChild(el('div',{class:'odds-meta'}, 'Avg hits — Attacker: ' + r.avgAtkHits + ' · Defender: ' + r.avgDefHits + ' · (' + SIMS.toLocaleString() + ' simulations)'));
-    }));
-  }
-  renderCalc();
 })();
 
 /* ── BAG TRACKER ── */
