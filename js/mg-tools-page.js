@@ -164,7 +164,7 @@ renderToolCards();
       }
     });
   }
-  body.appendChild(btn('Roll the dice', 'primary', rollDice));
+  body.appendChild(btn('Roll the dice', 'dark', rollDice));
 })();
 
 /* ── NAME GENERATOR ── */
@@ -207,8 +207,8 @@ renderToolCards();
   generateName();
 
   const btnsWrap = el('div',{class:'name-gen__btns'});
-  btnsWrap.appendChild(btn('Generate', 'primary', generateName));
-  btnsWrap.appendChild(btn('Regenerate first', 'outline-dark', () => {
+  btnsWrap.appendChild(btn('Generate', 'dark', generateName));
+  btnsWrap.appendChild(btn('Regenerate first', 'outline-light', () => {
     const parts = NAME_PARTS[nameStyle];
     nameResult.textContent = parts.first[Math.floor(Math.random()*parts.first.length)];
   }));
@@ -265,7 +265,7 @@ renderToolCards();
   btnsEl.appendChild(btn('Add player', 'dark', () => {
     if (players.length < MAX_PLAYERS) { players.push({name:'Player '+(players.length+1),score:0,color:PLAYER_COLORS[players.length]}); renderScoreboard(); }
   }));
-  btnsEl.appendChild(btn('Reset scores', 'outline-dark', () => { players.forEach(p => p.score = 0); renderScoreboard(); }));
+  btnsEl.appendChild(btn('Reset scores', 'outline-light', () => { players.forEach(p => p.score = 0); renderScoreboard(); }));
 })();
 
 /* ── TURN TIMER ── */
@@ -318,10 +318,10 @@ renderToolCards();
     displayEl.appendChild(el('div',{class:'timer-display'},formatTime(timeRemaining)));
     displayEl.appendChild(el('div',{class:'timer-current'},timerPlayers[currentPlayerIdx]+"'s turn"));
     const bw=el('div',{class:'timer-buttons'});
-    bw.appendChild(btn('Pause','outline-dark',()=>{clearInterval(interval);running=false;
-      const rw=el('div',{class:'timer-buttons'});rw.appendChild(btn('Resume','red',()=>{running=true;interval=setInterval(tick,1000);renderRunning();}));rw.appendChild(btn('Next Player','outline-dark',nextPlayer));controlsEl.innerHTML='';controlsEl.appendChild(rw);renderStats();
+    bw.appendChild(btn('Pause','outline-light',()=>{clearInterval(interval);running=false;
+      const rw=el('div',{class:'timer-buttons'});rw.appendChild(btn('Resume','red',()=>{running=true;interval=setInterval(tick,1000);renderRunning();}));rw.appendChild(btn('Next Player','outline-light',nextPlayer));controlsEl.innerHTML='';controlsEl.appendChild(rw);renderStats();
     }));
-    bw.appendChild(btn('Next Player','primary',nextPlayer));controlsEl.innerHTML='';controlsEl.appendChild(bw);renderStats();
+    bw.appendChild(btn('Next Player','dark',nextPlayer));controlsEl.innerHTML='';controlsEl.appendChild(bw);renderStats();
   }
 
   function renderExpired(){
@@ -330,7 +330,7 @@ renderToolCards();
     displayEl.appendChild(el('div',{class:'timer-current'},timerPlayers[currentPlayerIdx]+' — time expired!'));
     const bw=el('div',{class:'timer-buttons'});
     bw.appendChild(btn('Next Player','red',nextPlayer));
-    bw.appendChild(btn('Reset','outline-dark',()=>{clearInterval(interval);running=false;currentPlayerIdx=0;Object.keys(cumulativeTime).forEach(k=>cumulativeTime[k]=0);renderSetup();}));
+    bw.appendChild(btn('Reset','outline-light',()=>{clearInterval(interval);running=false;currentPlayerIdx=0;Object.keys(cumulativeTime).forEach(k=>cumulativeTime[k]=0);renderSetup();}));
     controlsEl.innerHTML='';controlsEl.appendChild(bw);renderStats();
   }
 
@@ -376,9 +376,9 @@ renderToolCards();
     if(combatants.length>0){
       const bw=el('div',{class:'init-buttons'});
       bw.appendChild(btn('Next Turn','blue',()=>{currentTurn++;if(currentTurn>=combatants.length){currentTurn=0;round++;}render();}));
-      bw.appendChild(btn('New Round','outline-dark',()=>{currentTurn=0;round++;render();}));
-      bw.appendChild(btn('Randomize All','outline-dark',()=>{combatants.forEach(c=>{c.initiative=Math.floor(Math.random()*20)+1;});combatants.sort((a,b)=>b.initiative-a.initiative);currentTurn=0;render();}));
-      bw.appendChild(btn('Clear All','outline-dark',()=>{combatants=[];currentTurn=0;round=1;render();}));
+      bw.appendChild(btn('New Round','outline-light',()=>{currentTurn=0;round++;render();}));
+      bw.appendChild(btn('Randomize All','outline-light',()=>{combatants.forEach(c=>{c.initiative=Math.floor(Math.random()*20)+1;});combatants.sort((a,b)=>b.initiative-a.initiative);currentTurn=0;render();}));
+      bw.appendChild(btn('Clear All','outline-light',()=>{combatants=[];currentTurn=0;round=1;render();}));
       body.appendChild(bw);
     }
   }
@@ -469,7 +469,7 @@ renderToolCards();
   renderGrid();
 
   const btnsWrap = el('div',{class:'map-grid__btns'});
-  btnsWrap.appendChild(btn('Export SVG', 'primary', () => {
+  btnsWrap.appendChild(btn('Export SVG', 'dark', () => {
     const svg = canvas.querySelector('svg');
     if (!svg) return;
     const blob = new Blob([svg.outerHTML], {type:'image/svg+xml'});
@@ -556,7 +556,7 @@ renderToolCards();
     body.appendChild(addRow);
 
     if (options.length >= 2) {
-      body.appendChild(btn('Start Vote','primary', () => { voted=false; renderVoting(); }));
+      body.appendChild(btn('Start Vote','dark', () => { voted=false; renderVoting(); }));
     }
   }
 
@@ -594,8 +594,8 @@ renderToolCards();
 
     const bw = el('div',{class:'vote-buttons'});
     bw.appendChild(btn('Vote Again','green', () => { voted=false; renderVoting(); }));
-    bw.appendChild(btn('Reset Poll','outline-dark', () => { options.forEach(o=>votes[o]=0); voted=false; renderVoting(); }));
-    bw.appendChild(btn('New Question','outline-dark', () => { question=''; options=[]; votes={}; voted=false; renderSetup(); }));
+    bw.appendChild(btn('Reset Poll','outline-light', () => { options.forEach(o=>votes[o]=0); voted=false; renderVoting(); }));
+    bw.appendChild(btn('New Question','outline-light', () => { question=''; options=[]; votes={}; voted=false; renderSetup(); }));
     body.appendChild(bw);
   }
   renderSetup();
@@ -611,7 +611,7 @@ renderToolCards();
   const addFn = () => { const name=nameInput.value.trim(); if(name&&!players.includes(name)){players.push(name);nameInput.value='';renderPlayers();} };
   nameInput.addEventListener('keydown', e => { if(e.key==='Enter') addFn(); });
   addRow.appendChild(nameInput);
-  addRow.appendChild(btn('Add','primary',addFn));
+  addRow.appendChild(btn('Add','dark',addFn));
   body.appendChild(addRow);
 
   const tags = el('div',{class:'seating-tags'});
@@ -621,8 +621,8 @@ renderToolCards();
   body.appendChild(resultEl);
 
   const btnsWrap = el('div',{class:'seating-buttons'});
-  btnsWrap.appendChild(btn('Randomize Seats','primary', randomize));
-  btnsWrap.appendChild(btn('Clear All','outline-dark', () => { players=[]; renderPlayers(); resultEl.innerHTML=''; }));
+  btnsWrap.appendChild(btn('Randomize Seats','dark', randomize));
+  btnsWrap.appendChild(btn('Clear All','outline-light', () => { players=[]; renderPlayers(); resultEl.innerHTML=''; }));
   body.appendChild(btnsWrap);
 
   function renderPlayers() {
