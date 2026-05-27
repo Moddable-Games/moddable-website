@@ -113,8 +113,7 @@ function objectiveSection(title, objs, accent) {
 
 function renderAll() {
   renderPlayerBtns(); renderHandBtns(); deal(); renderObjectives();
-  const toggles = document.querySelectorAll('.ti-expansion-toggles');
-  toggles.forEach(t => { t.innerHTML = ''; renderExpansionTogglesInto(t); });
+  document.querySelectorAll('.ti-expansion-toggles').forEach(t => { t.innerHTML = ''; renderExpansionTogglesInto(t); });
 }
 
 function renderExpansionTogglesInto(container) {
@@ -128,14 +127,7 @@ function renderExpansionTogglesInto(container) {
 
 fetch(MG.url('/data/ti4.json')).then(r => r.json()).then(d => {
   ti4Data = d;
-
-  const controlsEl = document.querySelector('.ti-controls');
-  if (controlsEl) {
-    const toggleWrap = el('div',{class:'ti-expansion-toggles'});
-    renderExpansionTogglesInto(toggleWrap);
-    controlsEl.parentElement.insertBefore(toggleWrap, controlsEl);
-  }
-
+  document.querySelectorAll('.ti-expansion-toggles').forEach(t => renderExpansionTogglesInto(t));
   renderPlayerBtns(); renderHandBtns(); deal();
   renderObjectives();
   drawAgenda();
