@@ -270,6 +270,10 @@ function renderHostages() {
 
 renderHostages();
 
+/* ── HEXMAP EMBED ── */
+MG_HexEmbed.init('nukes');
+MG_HexEmbed.renderBtns();
+
 /* ── UNIT REFERENCE TABLE ── */
 const UNITS = [
   ['Tokens', 'Type', 'Movement', 'Terrain restriction'],

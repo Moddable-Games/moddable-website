@@ -15,13 +15,14 @@
 <meta property="og:url" content="https://web.moddable.games/tools/ti/">
 <meta property="og:type" content="website">
 <meta property="og:site_name" content="Moddable.Games">
-<meta property="og:image" content="https://web.moddable.games/img/og/tools-ti.png?v=1.0.37">
+<meta property="og:image" content="https://web.moddable.games/img/og/tools-ti.png?v=1.0.38">
 <meta name="twitter:card" content="summary_large_image">
 <meta name="twitter:title" content="Twilight Imperium tools">
 <meta name="twitter:description" content="Twilight Imperium tools — faction picker, objective tracker, agenda voter.">
-<meta name="twitter:image" content="https://web.moddable.games/img/og/tools-ti.png?v=1.0.37">
-<link rel="stylesheet" href="../../css/_mg.css?v=1.0.37">
-<link rel="stylesheet" href="../../css/tools-ti.css?v=1.0.37">
+<meta name="twitter:image" content="https://web.moddable.games/img/og/tools-ti.png?v=1.0.38">
+<link rel="stylesheet" href="../../css/_mg.css?v=1.0.38">
+<link rel="stylesheet" href="../../css/tools-ti.css?v=1.0.38">
+<link rel="stylesheet" href="../../css/tools-hexmaps.css?v=1.0.38">
 </head>
 <body>
 <div id="nav-root"></div>
@@ -38,6 +39,21 @@
 
 <section class="ti-body">
   <div class="ti-body__inner">
+
+    <!-- Hex Map Generator (embedded from Moddable Hexmaps) -->
+    <div class="hexmap-embed">
+      <div class="hexmap-embed__header">
+        <div class="hexmap-embed__accent"></div>
+        <div>
+          <div class="hexmap-embed__eyebrow">HEX MAP</div>
+          <h3 class="hexmap-embed__title">Galaxy generator</h3>
+          <p class="hexmap-embed__desc">Generate randomised 3-ring galaxy maps for Twilight Imperium. Place home systems and anomalies.</p>
+        </div>
+      </div>
+      <div class="hexmap-embed__controls" id="hexmap-controls"></div>
+      <div id="hexmap-frame-wrap"></div>
+      <div class="hexmap-embed__actions" id="hexmap-actions"></div>
+    </div>
 
     <!-- Faction Picker -->
     <div class="ti-card">
@@ -92,8 +108,37 @@
   </div>
 </section>
 
+<section class="hex-engine-band">
+  <div class="hex-engine-band__hex"></div>
+  <div class="hex-engine-band__inner">
+    <div class="mg-eyebrow mg-eyebrow--glow">OPEN SOURCE</div>
+    <h2 class="hex-engine-band__heading">Powered by Moddable Hexmaps</h2>
+    <p class="hex-engine-band__body">The galaxy map on this page runs on our open-source engine — Canvas-based rendering, seeded RNG, and full URL param API for embedding.</p>
+    <div class="hex-engine-band__grid">
+      <div class="hex-engine-band__usp">
+        <span class="hex-engine-band__usp-num">3</span>
+        <span class="hex-engine-band__usp-label">Games supported</span>
+      </div>
+      <div class="hex-engine-band__usp">
+        <span class="hex-engine-band__usp-num">6</span>
+        <span class="hex-engine-band__usp-label">Tile types</span>
+      </div>
+      <div class="hex-engine-band__usp">
+        <span class="hex-engine-band__usp-num">3</span>
+        <span class="hex-engine-band__usp-label">Ring galaxy</span>
+      </div>
+      <div class="hex-engine-band__usp">
+        <span class="hex-engine-band__usp-num">3–8</span>
+        <span class="hex-engine-band__usp-label">Players</span>
+      </div>
+    </div>
+    <div class="hex-engine-band__btns" id="hex-engine-btns"></div>
+  </div>
+</section>
+
 <div id="footer-root"></div>
-<script src="../../js/mg-loader.js?v=1.0.37"></script>
-<script src="../../js/mg-tools-ti-page.js?v=1.0.37"></script>
+<script src="../../js/mg-loader.js?v=1.0.38"></script>
+<script src="../../js/mg-hexmap-embed.js?v=1.0.38"></script>
+<script src="../../js/mg-tools-ti-page.js?v=1.0.38"></script>
 </body>
 </html>

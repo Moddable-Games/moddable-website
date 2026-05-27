@@ -48,62 +48,9 @@ function drawChars() {
 renderCharBtns(); drawChars();
 document.getElementById('char-draw-btn').appendChild(btn('Draw characters','dark',drawChars));
 
-/* ── HEX BOARD GENERATOR ── */
-let boardSeed = Math.floor(Math.random()*9999);
-const RING_META = [
-  { count:1,  radius:0,   color:'#d11a1a', label:'Crown of Command' },
-  { count:6,  radius:58,  color:'#5d2a8a', label:'Inner (dungeon approach)' },
-  { count:12, radius:116, color:'#0c4f8d', label:'Middle (highlands)' },
-  { count:18, radius:174, color:'#3a9928', label:'Outer (world)' },
-];
-
-function drawBoard() {
-  document.getElementById('board-seed').textContent = `seed: ${boardSeed.toString().padStart(4,'0')}`;
-  const svg = document.getElementById('board-svg');
-  const ns = 'http://www.w3.org/2000/svg';
-  svg.innerHTML = '';
-  RING_META.forEach((ring,ri) => {
-    for (let i=0; i<ring.count; i++) {
-      const angle = (i/ring.count)*Math.PI*2 - Math.PI/2;
-      const cx = Math.round(Math.cos(angle)*ring.radius);
-      const cy = Math.round(Math.sin(angle)*ring.radius);
-      const g = document.createElementNS(ns,'g');
-      const poly = document.createElementNS(ns,'polygon');
-      poly.setAttribute('transform',`translate(${cx},${cy})`);
-      poly.setAttribute('points','0,-22 19,-11 19,11 0,22 -19,11 -19,-11');
-      const type = ((boardSeed*7+ri*13+i)%5);
-      const alpha = 0.5 + type*0.1;
-      poly.setAttribute('fill', ring.color + Math.round(alpha*255).toString(16).padStart(2,'0'));
-      poly.setAttribute('stroke', ring.color);
-      poly.setAttribute('stroke-width','1.5');
-      poly.setAttribute('stroke-opacity','0.6');
-      g.appendChild(poly);
-      if (ri===0) {
-        const txt = document.createElementNS(ns,'text');
-        txt.setAttribute('x',cx); txt.setAttribute('y',cy+5);
-        txt.setAttribute('font-size','11'); txt.setAttribute('fill','#fff');
-        txt.setAttribute('text-anchor','middle'); txt.setAttribute('pointer-events','none');
-        txt.textContent = '♛'; g.appendChild(txt);
-      }
-      svg.appendChild(g);
-    }
-  });
-  // Legend
-  const legend = document.getElementById('board-legend'); legend.innerHTML = '';
-  RING_META.forEach(r => {
-    const chip = el('div',{class:'board-legend__chip'});
-    const swatch = el('div',{class:'board-legend__swatch'});
-    swatch.style.background = r.color;
-    chip.appendChild(swatch);
-    const lbl = el('span',{class:'board-legend__label'});
-    lbl.textContent = r.label;
-    chip.appendChild(lbl);
-    legend.appendChild(chip);
-  });
-}
-
-drawBoard();
-document.getElementById('board-reshuffle-btn').appendChild(btn('Reshuffle','dark',()=>{ boardSeed=Math.floor(Math.random()*9999); drawBoard(); }));
+/* ── HEX BOARD GENERATOR (Moddable Hexmaps embed) ── */
+MG_HexEmbed.init('talisman');
+MG_HexEmbed.renderBtns();
 
 /* ── ENCOUNTER QUICK-DRAW ── */
 const ENCOUNTERS = {

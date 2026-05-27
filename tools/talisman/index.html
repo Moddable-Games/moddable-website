@@ -15,13 +15,14 @@
 <meta property="og:url" content="https://web.moddable.games/tools/talisman/">
 <meta property="og:type" content="website">
 <meta property="og:site_name" content="Moddable.Games">
-<meta property="og:image" content="https://web.moddable.games/img/og/tools-talisman.png?v=1.0.37">
+<meta property="og:image" content="https://web.moddable.games/img/og/tools-talisman.png?v=1.0.38">
 <meta name="twitter:card" content="summary_large_image">
 <meta name="twitter:title" content="Talisman tools">
 <meta name="twitter:description" content="Talisman: Hexed tools — character lottery, hex board generator, encounter quick-draw.">
-<meta name="twitter:image" content="https://web.moddable.games/img/og/tools-talisman.png?v=1.0.37">
-<link rel="stylesheet" href="../../css/_mg.css?v=1.0.37">
-<link rel="stylesheet" href="../../css/tools-talisman.css?v=1.0.37">
+<meta name="twitter:image" content="https://web.moddable.games/img/og/tools-talisman.png?v=1.0.38">
+<link rel="stylesheet" href="../../css/_mg.css?v=1.0.38">
+<link rel="stylesheet" href="../../css/tools-talisman.css?v=1.0.38">
+<link rel="stylesheet" href="../../css/tools-hexmaps.css?v=1.0.38">
 </head>
 <body>
 <div id="nav-root"></div>
@@ -57,24 +58,19 @@
       <div id="char-grid" class="char-grid"></div>
     </div>
 
-    <!-- Hex Board Generator -->
-    <div class="tool-card">
-      <div class="tool-card__header">
-        <div class="tool-card__accent tool-card__accent--blue"></div>
+    <!-- Hex Board Generator (embedded from Moddable Hexmaps) -->
+    <div class="hexmap-embed">
+      <div class="hexmap-embed__header">
+        <div class="hexmap-embed__accent"></div>
         <div>
-          <div class="tool-card__eyebrow tool-card__eyebrow--blue">BOARD SETUP</div>
-          <h3 class="tool-card__title">Hex board generator</h3>
-          <p class="tool-card__desc">A fresh 4-ring layout on each shuffle. Visual reference for building the Hexed map.</p>
+          <div class="hexmap-embed__eyebrow">HEX MAP</div>
+          <h3 class="hexmap-embed__title">Hex board generator</h3>
+          <p class="hexmap-embed__desc">Generate randomised 4-ring hex maps for Talisman: Hexed. Click hexes to reassign terrain rings.</p>
         </div>
       </div>
-      <div class="board-controls">
-        <div id="board-seed" class="board-seed"></div>
-        <div id="board-reshuffle-btn"></div>
-      </div>
-      <div id="board-wrap" class="board-wrap">
-        <svg id="board-svg" width="100%" viewBox="-220 -220 440 440"></svg>
-      </div>
-      <div id="board-legend" class="board-legend"></div>
+      <div class="hexmap-embed__controls" id="hexmap-controls"></div>
+      <div id="hexmap-frame-wrap"></div>
+      <div class="hexmap-embed__actions" id="hexmap-actions"></div>
     </div>
 
     <!-- Encounter Quick-draw -->
@@ -95,8 +91,37 @@
   </div>
 </section>
 
+<section class="hex-engine-band">
+  <div class="hex-engine-band__hex"></div>
+  <div class="hex-engine-band__inner">
+    <div class="mg-eyebrow mg-eyebrow--glow">OPEN SOURCE</div>
+    <h2 class="hex-engine-band__heading">Powered by Moddable Hexmaps</h2>
+    <p class="hex-engine-band__body">The hex map on this page runs on our open-source engine — Canvas-based rendering, seeded RNG, and full URL param API for embedding.</p>
+    <div class="hex-engine-band__grid">
+      <div class="hex-engine-band__usp">
+        <span class="hex-engine-band__usp-num">3</span>
+        <span class="hex-engine-band__usp-label">Games supported</span>
+      </div>
+      <div class="hex-engine-band__usp">
+        <span class="hex-engine-band__usp-num">6</span>
+        <span class="hex-engine-band__usp-label">Terrain types</span>
+      </div>
+      <div class="hex-engine-band__usp">
+        <span class="hex-engine-band__usp-num">4–5</span>
+        <span class="hex-engine-band__usp-label">Ring sizes</span>
+      </div>
+      <div class="hex-engine-band__usp">
+        <span class="hex-engine-band__usp-num">∞</span>
+        <span class="hex-engine-band__usp-label">Seeded maps</span>
+      </div>
+    </div>
+    <div class="hex-engine-band__btns" id="hex-engine-btns"></div>
+  </div>
+</section>
+
 <div id="footer-root"></div>
-<script src="../../js/mg-loader.js?v=1.0.37"></script>
-<script src="../../js/mg-tools-talisman-page.js?v=1.0.37"></script>
+<script src="../../js/mg-loader.js?v=1.0.38"></script>
+<script src="../../js/mg-hexmap-embed.js?v=1.0.38"></script>
+<script src="../../js/mg-tools-talisman-page.js?v=1.0.38"></script>
 </body>
 </html>

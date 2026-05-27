@@ -68,6 +68,10 @@ function deal() {
 document.getElementById('deal-btn').appendChild(btn('Deal factions','dark', deal));
 renderPlayerBtns(); renderHandBtns(); deal();
 
+/* ── HEXMAP EMBED ── */
+MG_HexEmbed.init('twilight');
+MG_HexEmbed.renderBtns();
+
 /* ── OBJECTIVE TRACKER ── */
 const STAGE_I = ['Corner the Market','Erect a Monument','Establish a Perimeter','Found a Golden Age','Grow Exploration','Imperial Point','Intimidate Council','Lead from the Front','Negotiate Trade Routes','Sway the Council'];
 const STAGE_II = ['Centralize Galactic Trade','Conquer the Weak','Form Galactic Brain Trust','Found the Council','Galvanize the People','Manipulate Galactic Law','Master the Laws of War','Revolutionize Warfare','Subdue the Galaxy','Unify the Colonies'];
