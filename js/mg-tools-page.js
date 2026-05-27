@@ -11,7 +11,6 @@ const TOOLS = [
   { id:'timer',      title:"Time's up.",            eyebrow:'TURN TIMER',          category:'game-night', accent:'red',   desc:'Per-player countdown timer with cumulative stats.' },
   { id:'initiative', title:'Who goes next.',        eyebrow:'INITIATIVE TRACKER',  category:'game-night', accent:'blue',  desc:'Turn order tracker with initiative rolls.' },
   { id:'rules',      title:'House rules, settled.', eyebrow:'RULES REFEREE',       category:'planning',   accent:'red',   desc:"Record your group's house rules. Search them mid-game. Never argue twice." },
-  { id:'vote',       title:'Settle it fairly.',     eyebrow:'VOTING BOOTH',        category:'planning',   accent:'green', desc:'Anonymous polling for group decisions. Create a question, add options, vote.' },
   { id:'seating',    title:'Take your seats.',      eyebrow:'SEATING RANDOMIZER',  category:'game-night', accent:'glow',  desc:'Random player seating around the table.' },
 ];
 
@@ -427,82 +426,6 @@ renderToolCards();
     });
   }
   renderRules();
-})();
-
-/* ── VOTING BOOTH ── */
-(function() {
-  const body = document.getElementById('vote-body');
-  let question = '', options = [], votes = {}, voted = false;
-
-  function renderSetup() {
-    body.innerHTML = '';
-    const qInput = document.createElement('input'); qInput.className='vote-input vote-input--question'; qInput.placeholder='What are we voting on?'; qInput.value=question;
-    qInput.addEventListener('input', () => { question = qInput.value; });
-    body.appendChild(qInput);
-
-    const optList = el('div',{class:'vote-options'});
-    options.forEach((opt, i) => {
-      const row = el('div',{class:'vote-option-row'});
-      row.appendChild(el('span',{class:'vote-option-row__text'},opt));
-      const rm = el('button',{class:'vote-option-row__remove'},'×');
-      rm.addEventListener('click', () => { options.splice(i,1); delete votes[opt]; renderSetup(); });
-      row.appendChild(rm);
-      optList.appendChild(row);
-    });
-    body.appendChild(optList);
-
-    const addRow = el('div',{class:'vote-add'});
-    const optInput = document.createElement('input'); optInput.className='vote-input'; optInput.placeholder='Add an option...';
-    const addOpt = () => { const t=optInput.value.trim(); if(t&&!options.includes(t)){options.push(t);votes[t]=0;optInput.value='';renderSetup();} };
-    optInput.addEventListener('keydown', e => { if(e.key==='Enter') addOpt(); });
-    addRow.appendChild(optInput);
-    addRow.appendChild(btn('Add','green',addOpt));
-    body.appendChild(addRow);
-
-    if (options.length >= 2) {
-      body.appendChild(btn('Start Vote','dark', () => { voted=false; renderVoting(); }));
-    }
-  }
-
-  function renderVoting() {
-    body.innerHTML = '';
-    body.appendChild(el('h4',{class:'vote-question'},question || 'Vote'));
-    const optList = el('div',{class:'vote-ballot'});
-    options.forEach(opt => {
-      const b = document.createElement('button'); b.className='vote-ballot__option';
-      b.textContent = opt;
-      b.addEventListener('click', () => { if(!voted){votes[opt]++;voted=true;renderResults();} });
-      optList.appendChild(b);
-    });
-    body.appendChild(optList);
-    if (!voted) body.appendChild(el('div',{class:'vote-hint'},'Select one option to cast your vote.'));
-  }
-
-  function renderResults() {
-    body.innerHTML = '';
-    body.appendChild(el('h4',{class:'vote-question'},question || 'Results'));
-    const total = Object.values(votes).reduce((a,b)=>a+b,0) || 1;
-    const sorted = options.slice().sort((a,b)=>votes[b]-votes[a]);
-    const results = el('div',{class:'vote-results'});
-    sorted.forEach(opt => {
-      const pct = Math.round(votes[opt] / total * 100);
-      const row = el('div',{class:'vote-result-row'});
-      row.appendChild(el('span',{class:'vote-result-row__label'},opt));
-      row.appendChild(el('span',{class:'vote-result-row__count'},votes[opt]+' vote'+(votes[opt]!==1?'s':'')));
-      const bar = el('div',{class:'vote-result-row__bar'});
-      const fill = el('div',{class:'vote-result-row__fill'}); fill.style.width = pct+'%';
-      bar.appendChild(fill); row.appendChild(bar);
-      results.appendChild(row);
-    });
-    body.appendChild(results);
-
-    const bw = el('div',{class:'vote-buttons'});
-    bw.appendChild(btn('Vote Again','green', () => { voted=false; renderVoting(); }));
-    bw.appendChild(btn('Reset Poll','outline-light', () => { options.forEach(o=>votes[o]=0); voted=false; renderVoting(); }));
-    bw.appendChild(btn('New Question','outline-light', () => { question=''; options=[]; votes={}; voted=false; renderSetup(); }));
-    body.appendChild(bw);
-  }
-  renderSetup();
 })();
 
 /* ── SEATING RANDOMIZER ── */
