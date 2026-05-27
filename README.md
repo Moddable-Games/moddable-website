@@ -130,6 +130,13 @@ Pages load `mg-loader.js` (shared modules) + their own page script. Data is fetc
 - News articles: hybrid auto-derive callout from tags when no manual modCard specified
 - News articles: improved right rail spacing (topics, mod card)
 - Added `teamSlug` field to all news posts — author rendered from team.json, not hardcoded
+- Per-team-member OG images with breakout photo + shadow slit effect
+- Replaced 16 template OG images: 10 mod pages (hex-grid cards) + 6 tool pages (geometric icons)
+- OG scripts data-driven: `build/gen-mod-og.py` (reads mods.json), `build/gen-tools-og.py`
+- Mod logos: added `logo` field to mods.json, logos display on cards, detail heroes, and OG images
+- Copied Talisman: Hexed + Econopoly logos from moddable-rules; Hyper Imperium already had one
+- Fix mod detail page hero never rendering (DOMContentLoaded race condition)
+- Component list styling: accent-coloured outlined bullets, better spacing
 
 #### 2026-05-26
 - Update chess variant count 20→39 across all pages (closes #55, #54)
