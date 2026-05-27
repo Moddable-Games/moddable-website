@@ -10,7 +10,6 @@ const TOOLS = [
   { id:'score',      title:'Keep the count.',       eyebrow:'SCORE TRACKER',       category:'planning',   accent:'green', desc:'Tracks up to 6 players. Good for Catan VP, TI4 objectives, anything with points.' },
   { id:'timer',      title:"Time's up.",            eyebrow:'TURN TIMER',          category:'game-night', accent:'red',   desc:'Per-player countdown timer with cumulative stats.' },
   { id:'initiative', title:'Who goes next.',        eyebrow:'INITIATIVE TRACKER',  category:'game-night', accent:'blue',  desc:'Turn order tracker with initiative rolls.' },
-  { id:'map-grid',   title:'Print a battlefield.',  eyebrow:'MAP GRID GENERATOR',  category:'creative',   accent:'blue',  desc:'Instant printable grids — square, hex, or isometric. Export as SVG.' },
   { id:'rules',      title:'House rules, settled.', eyebrow:'RULES REFEREE',       category:'planning',   accent:'red',   desc:"Record your group's house rules. Search them mid-game. Never argue twice." },
   { id:'vote',       title:'Settle it fairly.',     eyebrow:'VOTING BOOTH',        category:'planning',   accent:'green', desc:'Anonymous polling for group decisions. Create a question, add options, vote.' },
   { id:'seating',    title:'Take your seats.',      eyebrow:'SEATING RANDOMIZER',  category:'game-night', accent:'glow',  desc:'Random player seating around the table.' },
@@ -383,101 +382,6 @@ renderToolCards();
     }
   }
   render();
-})();
-
-/* ── MAP GRID GENERATOR ── */
-(function() {
-  const body = document.getElementById('map-grid-body');
-  let gridType = 'square', cols = 12, rows = 8, cellSize = 40;
-
-  const controls = el('div',{class:'map-grid__controls'});
-  const typeRow = el('div',{class:'map-grid__types'});
-  ['square','hex','iso'].forEach(t => {
-    const b = document.createElement('button');
-    b.className = 'tools-filter__btn' + (t === gridType ? ' tools-filter__btn--active' : '');
-    b.textContent = t.charAt(0).toUpperCase() + t.slice(1);
-    b.setAttribute('data-type', t);
-    b.addEventListener('click', () => { gridType = t; refreshTypeBtns(); renderGrid(); });
-    typeRow.appendChild(b);
-  });
-  controls.appendChild(typeRow);
-
-  function refreshTypeBtns() {
-    typeRow.querySelectorAll('[data-type]').forEach(b => {
-      b.className = 'tools-filter__btn' + (b.getAttribute('data-type') === gridType ? ' tools-filter__btn--active' : '');
-    });
-  }
-
-  const sizeRow = el('div',{class:'map-grid__size-row'});
-  sizeRow.innerHTML = '<label class="map-grid__label">Cols:</label>';
-  const colInput = document.createElement('input'); colInput.type='number'; colInput.value=cols; colInput.min='2'; colInput.max='30'; colInput.className='map-grid__input';
-  colInput.addEventListener('change', () => { cols = parseInt(colInput.value)||12; renderGrid(); });
-  sizeRow.appendChild(colInput);
-  const rowLabel = document.createElement('label'); rowLabel.className='map-grid__label'; rowLabel.textContent='Rows:';
-  sizeRow.appendChild(rowLabel);
-  const rowInput = document.createElement('input'); rowInput.type='number'; rowInput.value=rows; rowInput.min='2'; rowInput.max='30'; rowInput.className='map-grid__input';
-  rowInput.addEventListener('change', () => { rows = parseInt(rowInput.value)||8; renderGrid(); });
-  sizeRow.appendChild(rowInput);
-  controls.appendChild(sizeRow);
-  body.appendChild(controls);
-
-  const canvas = el('div',{class:'map-grid__canvas'});
-  body.appendChild(canvas);
-
-  function renderGrid() {
-    const w = cols * cellSize + (gridType === 'hex' ? cellSize * 0.5 : 0);
-    const h = rows * cellSize * (gridType === 'hex' ? 0.87 : 1) + (gridType === 'iso' ? cols * cellSize * 0.5 : 0);
-    let paths = '';
-
-    if (gridType === 'square') {
-      for (let x = 0; x <= cols; x++) paths += '<line x1="'+(x*cellSize)+'" y1="0" x2="'+(x*cellSize)+'" y2="'+(rows*cellSize)+'" stroke="#999" stroke-width="0.5"/>';
-      for (let y = 0; y <= rows; y++) paths += '<line x1="0" y1="'+(y*cellSize)+'" x2="'+(cols*cellSize)+'" y2="'+(y*cellSize)+'" stroke="#999" stroke-width="0.5"/>';
-      canvas.innerHTML = '<svg viewBox="0 0 '+(cols*cellSize)+' '+(rows*cellSize)+'" class="map-grid__svg">'+paths+'</svg>';
-    } else if (gridType === 'hex') {
-      const r = cellSize * 0.5;
-      const h60 = r * Math.sqrt(3);
-      for (let row = 0; row < rows; row++) {
-        for (let col = 0; col < cols; col++) {
-          const cx = r + col * r * 1.5;
-          const cy = h60 * 0.5 + row * h60 + (col % 2 === 1 ? h60 * 0.5 : 0);
-          let hex = '';
-          for (let i = 0; i < 6; i++) {
-            const angle = Math.PI / 180 * (60 * i - 30);
-            hex += (i===0?'M':'L') + (cx + r * Math.cos(angle)).toFixed(1) + ',' + (cy + r * Math.sin(angle)).toFixed(1);
-          }
-          paths += '<path d="'+hex+'Z" fill="none" stroke="#999" stroke-width="0.5"/>';
-        }
-      }
-      const svgW = cols * r * 1.5 + r * 0.5;
-      const svgH = rows * h60 + h60 * 0.5;
-      canvas.innerHTML = '<svg viewBox="0 0 '+svgW.toFixed(0)+' '+svgH.toFixed(0)+'" class="map-grid__svg">'+paths+'</svg>';
-    } else {
-      for (let row = 0; row <= rows; row++) {
-        const y = row * cellSize * 0.5;
-        const x1 = row * cellSize * 0.5;
-        paths += '<line x1="'+x1+'" y1="'+y+'" x2="'+(x1 + cols * cellSize)+'" y2="'+y+'" stroke="#999" stroke-width="0.5"/>';
-      }
-      for (let col = 0; col <= cols; col++) {
-        const x = col * cellSize;
-        paths += '<line x1="'+(x + rows * cellSize * 0.5)+'" y1="0" x2="'+x+'" y2="'+(rows * cellSize * 0.5)+'" stroke="#999" stroke-width="0.5"/>';
-      }
-      const svgW = cols * cellSize + rows * cellSize * 0.5;
-      const svgH = rows * cellSize * 0.5;
-      canvas.innerHTML = '<svg viewBox="0 0 '+svgW+' '+svgH+'" class="map-grid__svg">'+paths+'</svg>';
-    }
-  }
-  renderGrid();
-
-  const btnsWrap = el('div',{class:'map-grid__btns'});
-  btnsWrap.appendChild(btn('Export SVG', 'dark', () => {
-    const svg = canvas.querySelector('svg');
-    if (!svg) return;
-    const blob = new Blob([svg.outerHTML], {type:'image/svg+xml'});
-    const a = document.createElement('a');
-    a.href = URL.createObjectURL(blob); a.download = 'grid-'+gridType+'.svg'; a.click();
-    URL.revokeObjectURL(a.href);
-  }));
-  body.appendChild(btnsWrap);
 })();
 
 /* ── RULES REFEREE ── */
