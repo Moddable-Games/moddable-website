@@ -301,6 +301,38 @@ input[type=range] { width: 100%; accent-color: #0c4f8d; }
 .odds-bar-row__fill { height: 100%; border-radius: 9999px; transition: width 300ms ease; min-width: 2px; }
 .odds-meta { font-family: var(--mg-font-mono); font-size: 12px; color: var(--mg-stone); }
 
+/* Bag Tracker */
+.bag-presets { display: flex; gap: 8px; flex-wrap: wrap; margin-bottom: 20px; }
+.bag-summary { margin-bottom: 16px; }
+.bag-summary__count { font-family: var(--mg-font-display); font-weight: 700; font-size: 36px; color: var(--mg-ink); }
+.bag-summary__label { font-family: var(--mg-font-body); font-size: 15px; color: var(--mg-mute); }
+.bag-list { display: flex; flex-direction: column; gap: 8px; margin-bottom: 16px; }
+.bag-row { display: flex; align-items: center; gap: 10px; padding: 10px 14px; background: #f5f4ef; border-radius: 10px; }
+.bag-row__name { font-family: var(--mg-font-body); font-weight: 600; font-size: 14px; color: var(--mg-ink); flex: 1; }
+.bag-row__odds { font-family: var(--mg-font-mono); font-weight: 600; font-size: 14px; color: var(--mg-blue); min-width: 36px; }
+.bag-row__count { font-family: var(--mg-font-mono); font-size: 12px; color: var(--mg-stone); min-width: 44px; }
+.bag-row__btn { font-family: var(--mg-font-body); font-size: 12px; font-weight: 600; padding: 4px 10px; border-radius: 9999px; border: 1px solid var(--mg-hairline-light); background: #fff; color: var(--mg-ink); cursor: pointer; transition: all 120ms; }
+.bag-row__btn:hover { border-color: var(--mg-ink); }
+.bag-row__btn--undo { color: var(--mg-mute); }
+.bag-btns { display: flex; gap: 10px; }
+
+/* Role Distributor */
+.role-presets { display: flex; gap: 8px; flex-wrap: wrap; margin-bottom: 20px; }
+.role-info { margin-bottom: 16px; }
+.role-info__count { font-family: var(--mg-font-display); font-weight: 600; font-size: 18px; color: var(--mg-ink); margin-bottom: 8px; }
+.role-chips { display: flex; gap: 6px; flex-wrap: wrap; }
+.role-chip { font-family: var(--mg-font-mono); font-size: 12px; padding: 4px 10px; background: #f5f4ef; border: 1px solid var(--mg-hairline-light); border-radius: 9999px; color: var(--mg-ink); }
+.role-grid { display: grid; grid-template-columns: repeat(auto-fit, minmax(120px, 1fr)); gap: 10px; margin-bottom: 12px; }
+.role-card { background: #14161c; border-radius: 14px; padding: 18px 14px; text-align: center; cursor: pointer; transition: all 150ms; user-select: none; }
+.role-card:hover { transform: translateY(-2px); }
+.role-card--revealed { background: #f5f4ef; border: 2px solid var(--mg-red); }
+.role-card__player { font-family: var(--mg-font-mono); font-size: 11px; color: rgba(255,255,255,0.5); margin-bottom: 6px; }
+.role-card--revealed .role-card__player { color: var(--mg-mute); }
+.role-card__role { font-family: var(--mg-font-display); font-weight: 700; font-size: 16px; color: #fff; }
+.role-card--revealed .role-card__role { color: var(--mg-red); }
+.role-hint { font-family: var(--mg-font-body); font-size: 13px; color: var(--mg-mute); margin-bottom: 16px; }
+.role-btns { display: flex; gap: 10px; flex-wrap: wrap; }
+
 @media (max-width: 768px) {
   .tools-hero__inner { flex-direction: column; text-align: center; }
   .tools-hero__dice { display: none; }
@@ -314,4 +346,5 @@ input[type=range] { width: 100%; accent-color: #0c4f8d; }
   .odds-grid { grid-template-columns: 1fr; gap: 20px; }
   .odds-vs { padding-top: 0; }
   .res-grid { grid-template-columns: 1fr; }
+  .role-grid { grid-template-columns: repeat(auto-fit, minmax(100px, 1fr)); }
 }

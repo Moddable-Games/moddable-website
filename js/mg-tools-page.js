@@ -12,6 +12,8 @@ const TOOLS = [
   { id:'initiative', title:'Who goes next.',        eyebrow:'INITIATIVE TRACKER',  category:'game-night', accent:'blue',  desc:'Turn order tracker with initiative rolls.' },
   { id:'resources',  title:'Track the economy.',    eyebrow:'RESOURCE DASHBOARD',  category:'planning',   accent:'green', desc:'Multi-resource bank per player with trade logging. Built for Econopoly, Nukes, TI4.' },
   { id:'combat-odds',title:'Know before you strike.',eyebrow:'COMBAT ODDS',        category:'planning',   accent:'red',   desc:'Monte Carlo probability sim. Input units, get win% and expected casualties.' },
+  { id:'bag-tracker',title:"What's left?",           eyebrow:'BAG TRACKER',         category:'planning',   accent:'blue',  desc:'Track drawn tiles/cards. See remaining odds. Presets for Catan, Carcassonne, Scrabble.' },
+  { id:'roles',      title:'Who are you, really?',  eyebrow:'ROLE DISTRIBUTOR',    category:'game-night', accent:'red',   desc:'Assign hidden roles for social deduction games. Tap-to-reveal, no app needed.' },
   { id:'rules',      title:'House rules, settled.', eyebrow:'RULES REFEREE',       category:'planning',   accent:'red',   desc:"Record your group's house rules. Search them mid-game. Never argue twice." },
   { id:'seating',    title:'Take your seats.',      eyebrow:'SEATING RANDOMIZER',  category:'game-night', accent:'glow',  desc:'Random player seating around the table.' },
 ];
@@ -556,6 +558,136 @@ renderToolCards();
     }));
   }
   renderCalc();
+})();
+
+/* ── BAG TRACKER ── */
+(function() {
+  const body = document.getElementById('bag-tracker-body');
+  const PRESETS = {
+    custom: { label:'Custom', items:[{name:'Item A',total:10},{name:'Item B',total:10},{name:'Item C',total:5}] },
+    catan: { label:'Catan', items:[{name:'Wood',total:19},{name:'Brick',total:19},{name:'Sheep',total:19},{name:'Wheat',total:19},{name:'Ore',total:19}] },
+    carcassonne: { label:'Carcassonne', items:[{name:'Road',total:24},{name:'City',total:22},{name:'Monastery',total:6},{name:'Field-only',total:4},{name:'Road+City',total:16}] },
+    scrabble: { label:'Scrabble', items:[{name:'Vowels (AEIOU)',total:44},{name:'Common (RSTLNE)',total:36},{name:'Mid (DGHBCM)',total:17},{name:'Rare (JKQXZ)',total:5}] },
+  };
+  let activePreset = 'catan';
+  let drawn = {};
+
+  function getItems() { return PRESETS[activePreset].items; }
+  function totalRemaining() { return getItems().reduce((sum,it) => sum + Math.max(0, it.total - (drawn[it.name]||0)), 0); }
+
+  function renderBag() {
+    body.innerHTML = '';
+    const presetRow = el('div',{class:'bag-presets'});
+    Object.entries(PRESETS).forEach(([key,cfg]) => {
+      const b = document.createElement('button');
+      b.className = 'tools-filter__btn' + (key===activePreset ? ' tools-filter__btn--active' : '');
+      b.textContent = cfg.label;
+      b.addEventListener('click', () => { activePreset=key; drawn={}; renderBag(); });
+      presetRow.appendChild(b);
+    });
+    body.appendChild(presetRow);
+
+    const remaining = totalRemaining();
+    const summary = el('div',{class:'bag-summary'});
+    summary.appendChild(el('span',{class:'bag-summary__count'}, String(remaining)));
+    summary.appendChild(el('span',{class:'bag-summary__label'}, ' remaining in bag'));
+    body.appendChild(summary);
+
+    const list = el('div',{class:'bag-list'});
+    getItems().forEach(it => {
+      const d = drawn[it.name] || 0;
+      const left = Math.max(0, it.total - d);
+      const pct = remaining > 0 ? (left / remaining * 100).toFixed(0) : '0';
+
+      const row = el('div',{class:'bag-row'});
+      row.appendChild(el('span',{class:'bag-row__name'}, it.name));
+      row.appendChild(el('span',{class:'bag-row__odds'}, pct + '%'));
+      row.appendChild(el('span',{class:'bag-row__count'}, left + '/' + it.total));
+
+      const minus = document.createElement('button');
+      minus.className = 'bag-row__btn'; minus.textContent = '+1 drawn';
+      minus.addEventListener('click', () => { if (left > 0) { drawn[it.name] = d + 1; renderBag(); } });
+      row.appendChild(minus);
+
+      const undo = document.createElement('button');
+      undo.className = 'bag-row__btn bag-row__btn--undo'; undo.textContent = 'Undo';
+      undo.addEventListener('click', () => { if (d > 0) { drawn[it.name] = d - 1; renderBag(); } });
+      row.appendChild(undo);
+
+      list.appendChild(row);
+    });
+    body.appendChild(list);
+
+    const btns = el('div',{class:'bag-btns'});
+    btns.appendChild(btn('Reset bag','outline-light', () => { drawn={}; renderBag(); }));
+    body.appendChild(btns);
+  }
+  renderBag();
+})();
+
+/* ── ROLE DISTRIBUTOR ── */
+(function() {
+  const body = document.getElementById('roles-body');
+  const PRESETS = {
+    custom: { label:'Custom', roles:['Town','Town','Town','Mafia','Mafia'] },
+    mafia: { label:'Mafia (7p)', roles:['Mafia','Mafia','Doctor','Detective','Town','Town','Town'] },
+    werewolf: { label:'Werewolf (8p)', roles:['Werewolf','Werewolf','Seer','Witch','Hunter','Villager','Villager','Villager'] },
+    botc: { label:'BotC (7p)', roles:['Imp','Poisoner','Washerwoman','Librarian','Investigator','Chef','Empath'] },
+    resistance: { label:'Resistance (6p)', roles:['Spy','Spy','Resistance','Resistance','Resistance','Resistance'] },
+  };
+  let activePreset = 'mafia';
+  let assigned = null;
+  let revealed = {};
+
+  function shuffle(arr) { const a=[...arr]; for(let i=a.length-1;i>0;i--){const j=Math.floor(Math.random()*(i+1));[a[i],a[j]]=[a[j],a[i]];} return a; }
+
+  function renderRoles() {
+    body.innerHTML = '';
+    const presetRow = el('div',{class:'role-presets'});
+    Object.entries(PRESETS).forEach(([key,cfg]) => {
+      const b = document.createElement('button');
+      b.className = 'tools-filter__btn' + (key===activePreset ? ' tools-filter__btn--active' : '');
+      b.textContent = cfg.label;
+      b.addEventListener('click', () => { activePreset=key; assigned=null; revealed={}; renderRoles(); });
+      presetRow.appendChild(b);
+    });
+    body.appendChild(presetRow);
+
+    if (!assigned) {
+      const info = el('div',{class:'role-info'});
+      const roles = PRESETS[activePreset].roles;
+      const counts = {};
+      roles.forEach(r => { counts[r] = (counts[r]||0) + 1; });
+      info.appendChild(el('div',{class:'role-info__count'}, roles.length + ' players'));
+      const chips = el('div',{class:'role-chips'});
+      Object.entries(counts).forEach(([role, count]) => {
+        chips.appendChild(el('span',{class:'role-chip'}, role + (count > 1 ? ' ×' + count : '')));
+      });
+      info.appendChild(chips);
+      body.appendChild(info);
+      body.appendChild(btn('Deal roles','dark', () => { assigned = shuffle(PRESETS[activePreset].roles); revealed={}; renderRoles(); }));
+      return;
+    }
+
+    const grid = el('div',{class:'role-grid'});
+    assigned.forEach((role, i) => {
+      const card = el('div',{class:'role-card' + (revealed[i] ? ' role-card--revealed' : '')});
+      const label = el('div',{class:'role-card__player'}, 'Player ' + (i+1));
+      const roleEl = el('div',{class:'role-card__role'}, revealed[i] ? role : '???');
+      card.appendChild(label);
+      card.appendChild(roleEl);
+      card.addEventListener('click', () => { revealed[i] = !revealed[i]; renderRoles(); });
+      grid.appendChild(card);
+    });
+    body.appendChild(grid);
+    body.appendChild(el('div',{class:'role-hint'}, 'Tap a card to reveal/hide. Pass the device to each player.'));
+
+    const btns2 = el('div',{class:'role-btns'});
+    btns2.appendChild(btn('Reshuffle','dark', () => { assigned = shuffle(PRESETS[activePreset].roles); revealed={}; renderRoles(); }));
+    btns2.appendChild(btn('New game','outline-light', () => { assigned=null; revealed={}; renderRoles(); }));
+    body.appendChild(btns2);
+  }
+  renderRoles();
 })();
 
 /* ── RULES REFEREE ── */
