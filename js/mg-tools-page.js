@@ -33,7 +33,6 @@ const MOD_TOOLS = [
   { title:'Combat Odds',       sub:'Monte Carlo simulator · Risk · TI4 Space · Custom dice systems', color:'#d11a1a', href:url('/tools/combat/') },
   { title:'Card Deck Builder', sub:'Design · Shuffle · Deal — custom decks for any game', color:'#3a9928', href:url('/tools/decks/') },
   { title:'Chess Variants',    sub:'54 variants · Rules reference · Match setup', color:'#0c4f8d', href:url('/tools/chess/') },
-  { title:'Hex Map Generator', sub:'Nukes · Talisman · Twilight Imperium — seeded maps, Canvas rendering', color:'#3a9928', href:url('/engines/moddable-hexmaps/') },
 ];
 const mtg = document.getElementById('mod-tools-grid');
 MOD_TOOLS.forEach(t => {
