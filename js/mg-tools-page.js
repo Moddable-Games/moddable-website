@@ -30,7 +30,7 @@ const MOD_TOOLS = [
   { title:'Twilight Imperium', sub:'Galaxy generator · Faction picker · Objective tracker · Agenda voter', color:'#0c4f8d', href:url('/tools/ti/') },
   { title:'Talisman: Hexed',   sub:'Hex board generator · Character lottery · Encounter draw', color:'#5d2a8a', href:url('/tools/talisman/') },
   { title:'Nukes',             sub:'Hex map generator · Combat calculator · Hostage tracker · Unit reference', color:'#d11a1a', href:url('/tools/nukes/') },
-  { title:'Combat Odds',       sub:'Monte Carlo simulator · Risk · TI4 Space · Custom dice systems', color:'#d11a1a', href:url('/tools/combat/') },
+  { title:'Battle Simulator',  sub:'Monte Carlo odds · Risk · TI4 · Axis & Allies · X-Wing · Blood Bowl · Memoir \'44', color:'#d11a1a', href:url('/tools/combat/') },
   { title:'Card Deck Builder', sub:'Design · Shuffle · Deal — custom decks for any game', color:'#3a9928', href:url('/tools/decks/') },
   { title:'Chess Variants',    sub:'54 variants · Rules reference · Match setup', color:'#0c4f8d', href:url('/tools/chess/') },
 ];

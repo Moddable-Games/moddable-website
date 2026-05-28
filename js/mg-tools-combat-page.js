@@ -8,6 +8,9 @@ const TABS = [
   { id: 'risk', label: 'Risk' },
   { id: 'ti4', label: 'TI4 Space' },
   { id: 'aa', label: 'Axis & Allies' },
+  { id: 'xwing', label: 'X-Wing' },
+  { id: 'bloodbowl', label: 'Blood Bowl' },
+  { id: 'memoir', label: 'Memoir \'44' },
   { id: 'custom', label: 'Custom' }
 ];
 let activeTab = 'risk';
@@ -31,6 +34,9 @@ function renderPanel() {
   if (activeTab === 'risk') renderRisk(panel);
   else if (activeTab === 'ti4') renderTI4(panel);
   else if (activeTab === 'aa') renderAA(panel);
+  else if (activeTab === 'xwing') renderXWing(panel);
+  else if (activeTab === 'bloodbowl') renderBloodBowl(panel);
+  else if (activeTab === 'memoir') renderMemoir(panel);
   else renderCustom(panel);
 }
 
@@ -437,6 +443,270 @@ function renderAA(panel) {
       draw: (draws / ITERATIONS) * 100,
       detail: 'Avg attacker survivors: ' + (totalAtkSurv / ITERATIONS).toFixed(1)
         + ' · Avg defender survivors: ' + (totalDefSurv / ITERATIONS).toFixed(1)
+    });
+  }
+
+  runWrap.appendChild(btn('Run simulation', 'dark', runSim));
+  runWrap.appendChild(el('span', { class: 'combat-run__iters' }, ITERATIONS.toLocaleString() + ' iterations'));
+}
+
+/* ── X-WING ── */
+const XWING_ATK_FACES = ['hit','hit','hit','crit','focus','focus','blank','blank'];
+const XWING_DEF_FACES = ['evade','evade','evade','focus','focus','blank','blank','blank'];
+
+function rollXWingDice(count, faces) {
+  const results = {};
+  for (let i = 0; i < count; i++) {
+    const face = faces[Math.floor(Math.random() * faces.length)];
+    results[face] = (results[face] || 0) + 1;
+  }
+  return results;
+}
+
+function simXWing(atkDice, defDice, atkFocus, defFocus) {
+  const atk = rollXWingDice(atkDice, XWING_ATK_FACES);
+  const def = rollXWingDice(defDice, XWING_DEF_FACES);
+  let hits = (atk.hit || 0) + (atk.crit || 0);
+  if (atkFocus) hits += (atk.focus || 0);
+  let evades = (def.evade || 0);
+  if (defFocus) evades += (def.focus || 0);
+  const damage = Math.max(0, hits - evades);
+  return damage;
+}
+
+function renderXWing(panel) {
+  let atkDice = 3, defDice = 2, atkFocus = true, defFocus = false;
+
+  const section = el('div', { class: 'combat-section' });
+  section.appendChild(el('h3', { class: 'combat-section__title' }, 'X-Wing Attack'));
+
+  const r1 = el('div', { class: 'combat-row' });
+  r1.appendChild(el('span', { class: 'combat-row__label' }, 'Attack dice:'));
+  const aSel = document.createElement('select');
+  aSel.className = 'combat-select';
+  [1,2,3,4,5,6].forEach(n => { const o = document.createElement('option'); o.value=n; o.textContent=n; if(n===atkDice) o.selected=true; aSel.appendChild(o); });
+  aSel.addEventListener('change', () => { atkDice = parseInt(aSel.value); });
+  r1.appendChild(aSel);
+  section.appendChild(r1);
+
+  const r2 = el('div', { class: 'combat-row' });
+  r2.appendChild(el('span', { class: 'combat-row__label' }, 'Defence dice:'));
+  const dSel = document.createElement('select');
+  dSel.className = 'combat-select';
+  [0,1,2,3,4,5,6].forEach(n => { const o = document.createElement('option'); o.value=n; o.textContent=n; if(n===defDice) o.selected=true; dSel.appendChild(o); });
+  dSel.addEventListener('change', () => { defDice = parseInt(dSel.value); });
+  r2.appendChild(dSel);
+  section.appendChild(r2);
+
+  const r3 = el('div', { class: 'combat-row' });
+  r3.appendChild(el('span', { class: 'combat-row__label' }, 'Attacker focus:'));
+  const afChk = document.createElement('input');
+  afChk.type = 'checkbox'; afChk.checked = atkFocus;
+  afChk.addEventListener('change', () => { atkFocus = afChk.checked; });
+  r3.appendChild(afChk);
+  r3.appendChild(el('span', { class: 'combat-unit__stat' }, 'converts focus → hits'));
+  section.appendChild(r3);
+
+  const r4 = el('div', { class: 'combat-row' });
+  r4.appendChild(el('span', { class: 'combat-row__label' }, 'Defender focus:'));
+  const dfChk = document.createElement('input');
+  dfChk.type = 'checkbox'; dfChk.checked = defFocus;
+  dfChk.addEventListener('change', () => { defFocus = dfChk.checked; });
+  r4.appendChild(dfChk);
+  r4.appendChild(el('span', { class: 'combat-unit__stat' }, 'converts focus → evades'));
+  section.appendChild(r4);
+
+  panel.appendChild(section);
+
+  const runWrap = el('div', { class: 'combat-run' });
+  const resultsWrap = el('div');
+  panel.appendChild(runWrap);
+  panel.appendChild(resultsWrap);
+
+  function runSim() {
+    let totalDmg = 0;
+    const dmgDist = {};
+    for (let i = 0; i < ITERATIONS; i++) {
+      const d = simXWing(atkDice, defDice, atkFocus, defFocus);
+      totalDmg += d;
+      dmgDist[d] = (dmgDist[d] || 0) + 1;
+    }
+    const avgDmg = (totalDmg / ITERATIONS).toFixed(2);
+    const zeroPct = ((dmgDist[0] || 0) / ITERATIONS * 100);
+    const onePlusPct = 100 - zeroPct;
+
+    resultsWrap.innerHTML = '';
+    showResults(resultsWrap, {
+      atkWin: onePlusPct,
+      defWin: zeroPct,
+      detail: 'Avg damage dealt: ' + avgDmg + ' · Zero damage: ' + zeroPct.toFixed(1) + '%'
+    });
+  }
+
+  runWrap.appendChild(btn('Run simulation', 'dark', runSim));
+  runWrap.appendChild(el('span', { class: 'combat-run__iters' }, ITERATIONS.toLocaleString() + ' iterations'));
+}
+
+/* ── BLOOD BOWL ── */
+const BB_BLOCK_FACES = ['attacker_down','both_down','push','push','defender_stumbles','defender_down'];
+
+function rollBlockDice(count, chooseBest) {
+  const rolls = [];
+  for (let i = 0; i < Math.abs(count); i++) {
+    rolls.push(BB_BLOCK_FACES[Math.floor(Math.random() * 6)]);
+  }
+  const priority = chooseBest
+    ? ['defender_down','defender_stumbles','push','both_down','attacker_down']
+    : ['attacker_down','both_down','push','defender_stumbles','defender_down'];
+  rolls.sort((a,b) => priority.indexOf(a) - priority.indexOf(b));
+  return rolls[0];
+}
+
+function renderBloodBowl(panel) {
+  let diceCount = 1, hasDodge = false, hasBlock = true;
+
+  const section = el('div', { class: 'combat-section' });
+  section.appendChild(el('h3', { class: 'combat-section__title' }, 'Blood Bowl Block'));
+
+  const r1 = el('div', { class: 'combat-row' });
+  r1.appendChild(el('span', { class: 'combat-row__label' }, 'Block dice:'));
+  const dSel = document.createElement('select');
+  dSel.className = 'combat-select';
+  [[-2,'2 (defender chooses)'],[-1,'1 (defender chooses)'],[1,'1'],[2,'2 (attacker chooses)'],[3,'3 (attacker chooses)']].forEach(([v,l]) => {
+    const o = document.createElement('option'); o.value=v; o.textContent=l;
+    if(v===diceCount) o.selected=true; dSel.appendChild(o);
+  });
+  dSel.addEventListener('change', () => { diceCount = parseInt(dSel.value); });
+  r1.appendChild(dSel);
+  section.appendChild(r1);
+
+  const r2 = el('div', { class: 'combat-row' });
+  r2.appendChild(el('span', { class: 'combat-row__label' }, 'Attacker has Block:'));
+  const blkChk = document.createElement('input');
+  blkChk.type = 'checkbox'; blkChk.checked = hasBlock;
+  blkChk.addEventListener('change', () => { hasBlock = blkChk.checked; });
+  r2.appendChild(blkChk);
+  r2.appendChild(el('span', { class: 'combat-unit__stat' }, 'both_down = safe'));
+  section.appendChild(r2);
+
+  const r3 = el('div', { class: 'combat-row' });
+  r3.appendChild(el('span', { class: 'combat-row__label' }, 'Defender has Dodge:'));
+  const dodChk = document.createElement('input');
+  dodChk.type = 'checkbox'; dodChk.checked = hasDodge;
+  dodChk.addEventListener('change', () => { hasDodge = dodChk.checked; });
+  r3.appendChild(dodChk);
+  r3.appendChild(el('span', { class: 'combat-unit__stat' }, 'stumbles = push'));
+  section.appendChild(r3);
+
+  panel.appendChild(section);
+
+  const runWrap = el('div', { class: 'combat-run' });
+  const resultsWrap = el('div');
+  panel.appendChild(runWrap);
+  panel.appendChild(resultsWrap);
+
+  function runSim() {
+    let knockdowns = 0, pushes = 0, turnovers = 0;
+    for (let i = 0; i < ITERATIONS; i++) {
+      const chooseBest = diceCount > 0;
+      const result = rollBlockDice(diceCount, chooseBest);
+      if (result === 'defender_down') { knockdowns++; }
+      else if (result === 'defender_stumbles') {
+        if (hasDodge) pushes++;
+        else knockdowns++;
+      }
+      else if (result === 'push') { pushes++; }
+      else if (result === 'both_down') {
+        if (hasBlock) pushes++;
+        else turnovers++;
+      }
+      else if (result === 'attacker_down') { turnovers++; }
+    }
+
+    resultsWrap.innerHTML = '';
+    showResults(resultsWrap, {
+      atkWin: (knockdowns / ITERATIONS) * 100,
+      draw: (pushes / ITERATIONS) * 100,
+      defWin: (turnovers / ITERATIONS) * 100,
+      detail: 'Knockdown: ' + (knockdowns/ITERATIONS*100).toFixed(1) + '% · Push: ' + (pushes/ITERATIONS*100).toFixed(1) + '% · Turnover: ' + (turnovers/ITERATIONS*100).toFixed(1) + '%'
+    });
+  }
+
+  runWrap.appendChild(btn('Run simulation', 'dark', runSim));
+  runWrap.appendChild(el('span', { class: 'combat-run__iters' }, ITERATIONS.toLocaleString() + ' iterations'));
+}
+
+/* ── MEMOIR '44 ── */
+const MEMOIR_FACES = ['infantry','infantry','armor','grenade','star','flag'];
+
+function renderMemoir(panel) {
+  let atkDice = 3, targetType = 'infantry', inCover = false;
+
+  const section = el('div', { class: 'combat-section' });
+  section.appendChild(el('h3', { class: 'combat-section__title' }, 'Memoir \'44 Combat'));
+
+  const r1 = el('div', { class: 'combat-row' });
+  r1.appendChild(el('span', { class: 'combat-row__label' }, 'Combat dice:'));
+  const dSel = document.createElement('select');
+  dSel.className = 'combat-select';
+  [1,2,3,4,5,6].forEach(n => { const o = document.createElement('option'); o.value=n; o.textContent=n; if(n===atkDice) o.selected=true; dSel.appendChild(o); });
+  dSel.addEventListener('change', () => { atkDice = parseInt(dSel.value); });
+  r1.appendChild(dSel);
+  section.appendChild(r1);
+
+  const r2 = el('div', { class: 'combat-row' });
+  r2.appendChild(el('span', { class: 'combat-row__label' }, 'Target type:'));
+  const tSel = document.createElement('select');
+  tSel.className = 'combat-select';
+  [['infantry','Infantry'],['armor','Armor']].forEach(([v,l]) => {
+    const o = document.createElement('option'); o.value=v; o.textContent=l;
+    if(v===targetType) o.selected=true; tSel.appendChild(o);
+  });
+  tSel.addEventListener('change', () => { targetType = tSel.value; });
+  r2.appendChild(tSel);
+  section.appendChild(r2);
+
+  const r3 = el('div', { class: 'combat-row' });
+  r3.appendChild(el('span', { class: 'combat-row__label' }, 'Target in cover:'));
+  const covChk = document.createElement('input');
+  covChk.type = 'checkbox'; covChk.checked = inCover;
+  covChk.addEventListener('change', () => { inCover = covChk.checked; });
+  r3.appendChild(covChk);
+  r3.appendChild(el('span', { class: 'combat-unit__stat' }, 'flags don\'t force retreat'));
+  section.appendChild(r3);
+
+  panel.appendChild(section);
+
+  const runWrap = el('div', { class: 'combat-run' });
+  const resultsWrap = el('div');
+  panel.appendChild(runWrap);
+  panel.appendChild(resultsWrap);
+
+  function runSim() {
+    let totalHits = 0, totalRetreats = 0;
+    const hitDist = {};
+    for (let i = 0; i < ITERATIONS; i++) {
+      let hits = 0, retreats = 0;
+      for (let d = 0; d < atkDice; d++) {
+        const face = MEMOIR_FACES[Math.floor(Math.random() * 6)];
+        if (face === targetType) hits++;
+        else if (face === 'grenade') hits++;
+        else if (face === 'star') hits++;
+        else if (face === 'flag' && !inCover) retreats++;
+      }
+      totalHits += hits;
+      totalRetreats += retreats;
+      hitDist[hits] = (hitDist[hits] || 0) + 1;
+    }
+    const avgHits = (totalHits / ITERATIONS).toFixed(2);
+    const avgRetreats = (totalRetreats / ITERATIONS).toFixed(2);
+    const zeroPct = ((hitDist[0] || 0) / ITERATIONS * 100);
+
+    resultsWrap.innerHTML = '';
+    showResults(resultsWrap, {
+      atkWin: 100 - zeroPct,
+      defWin: zeroPct,
+      detail: 'Avg hits: ' + avgHits + ' · Avg retreats: ' + avgRetreats + ' · Zero hits: ' + zeroPct.toFixed(1) + '%'
     });
   }
 

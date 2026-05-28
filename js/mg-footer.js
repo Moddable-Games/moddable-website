@@ -6,7 +6,7 @@
       { title:'Mods',      href:url('/mods/'),      links:[['Total conversions',url('/mods/#Total conversion')],['Rebalances',url('/mods/#Rebalance')],['Reskins',url('/mods/#Reskin')],['Submit a mod',url('/submit/')]] },
       { title:'Games',     href:url('/games/'),     links:[['Endless Skies',url('/games/endless-skies/')],['Mongo',url('/games/mongo/')],['Nukes',url('/games/nukes/')],['Dungeon Chess',url('/games/dungeon-chess/')]] },
       { title:'Engines',   href:url('/engines/'),   links:[['Moddable Chess',url('/engines/moddable-chess/')],['Moddable Hexmaps',url('/engines/moddable-hexmaps/')]] },
-      { title:'Tools',     href:url('/tools/'),     links:[['TI4 tools',url('/tools/ti/')],['Talisman tools',url('/tools/talisman/')],['Nukes tools',url('/tools/nukes/')],['Combat odds',url('/tools/combat/')],['Deck builder',url('/tools/decks/')],['Chess variants',url('/tools/chess/')]] },
+      { title:'Tools',     href:url('/tools/'),     links:[['TI4 tools',url('/tools/ti/')],['Talisman tools',url('/tools/talisman/')],['Nukes tools',url('/tools/nukes/')],['Battle sim',url('/tools/combat/')],['Deck builder',url('/tools/decks/')],['Chess variants',url('/tools/chess/')]] },
       { title:'Community', href:url('/community/'), links:[['Discord',url('/community/')],['News',url('/news/')],['About',url('/about/')],['Team',url('/team/')],['Press',url('/press/')],['Subscribe',url('/subscribe/')]] },
     ];
 
