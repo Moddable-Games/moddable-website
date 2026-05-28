@@ -14,7 +14,8 @@ const TABS = [
   { id: 'memoir', label: 'Memoir \'44' },
   { id: 'custom', label: 'Custom' }
 ];
-let activeTab = 'roller';
+const hashTab = window.location.hash.slice(1);
+let activeTab = TABS.some(t => t.id === hashTab) ? hashTab : 'roller';
 
 /* ── Tab bar ── */
 function renderTabs() {
@@ -24,7 +25,12 @@ function renderTabs() {
     const b = document.createElement('button');
     b.className = 'combat-tabs__btn' + (t.id === activeTab ? ' combat-tabs__btn--active' : '');
     b.textContent = t.label;
-    b.addEventListener('click', () => { activeTab = t.id; renderTabs(); renderPanel(); });
+    b.addEventListener('click', () => {
+      activeTab = t.id;
+      history.replaceState(null, '', '#' + t.id);
+      renderTabs();
+      renderPanel();
+    });
     wrap.appendChild(b);
   });
 }
