@@ -23,6 +23,7 @@
   var CATEGORY_MAP = { red: 'Total conversion', green: 'Rebalance', blue: 'Reskin' };
 
   function init() {
+    document.body.setAttribute('data-accent', accent);
     var navRoot = document.getElementById('nav-root');
     var footerRoot = document.getElementById('footer-root');
     if (navRoot) navRoot.appendChild(navbar('Mods'));
@@ -123,6 +124,8 @@
       art.appendChild(el('p', {class: 'rules-section__body'}, s.body));
       rulesBody.appendChild(art);
     });
+
+    if (MG.initTocSpy) MG.initTocSpy();
   }
 
   function renderComponents() {
