@@ -46,7 +46,7 @@ body { background:#f5f4ef; }
 .combat-unit__remove { width:28px; height:28px; border:none; background:rgba(209,26,26,0.08); color:#d11a1a; font-size:16px; cursor:pointer; border-radius:6px; flex-shrink:0; }
 .combat-unit__remove:hover { background:rgba(209,26,26,0.16); }
 .combat-unit .combat-input { width:48px; font-size:15px; padding:6px 4px; }
-.combat-unit__name-input.combat-input { width:80px; text-align:left; flex-shrink:1; min-width:60px; }
+.combat-unit__name-input.combat-input { width:auto; flex:1; text-align:left; min-width:80px; }
 
 /* Add unit button inside side panel */
 .combat-side .mg-btn { font-size:13px; padding:8px 16px; margin-top:8px; align-self:flex-start; background:#14161c; color:#fff; border-color:#14161c; }
