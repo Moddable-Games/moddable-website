@@ -20,7 +20,7 @@
     const logoWrap = el('div', { class:'mg-footer__logo-wrap' });
     logoWrap.appendChild(el('img', { src:url('/img/moddable-logo-white.png'), alt:'Moddable Games', class:'mg-footer__logo' }));
     brand.appendChild(logoWrap);
-    brand.appendChild(el('p', { class:'mg-footer__tagline' }, 'Creating games you already own. Twelve mods. Four games. Two engines. One Discord.'));
+    brand.appendChild(el('p', { class:'mg-footer__tagline' }, 'Creating games you already own. Nine mods. Four games. Two engines. One Discord.'));
     grid.appendChild(brand);
 
     for (const col of COLS) {

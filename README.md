@@ -2,7 +2,7 @@
 
 **Creating games you already own.**
 
-A multi-page marketing site and tools platform for an open-source board game modding workshop. Twelve mods. Four original games. Two open-source engines. One Discord.
+A multi-page marketing site and tools platform for an open-source board game modding workshop. Nine mods. Four original games. Two open-source engines. One Discord.
 
 ---
 
