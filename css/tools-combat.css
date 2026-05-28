@@ -27,7 +27,7 @@ body { background:#f5f4ef; }
 .combat-section__title { font-family:var(--mg-font-display); font-weight:600; font-size:18px; color:#14161c; margin:0 0 14px; }
 .combat-row { display:flex; align-items:center; gap:12px; margin-bottom:10px; flex-wrap:wrap; }
 .combat-row__label { font-family:var(--mg-font-body); font-size:13px; color:#4f5764; min-width:100px; }
-.combat-input { width:64px; padding:6px 10px; border:1px solid #e6e3d8; border-radius:8px; font-family:var(--mg-font-mono); font-size:14px; text-align:center; background:#f5f4ef; }
+.combat-input { width:64px; padding:8px 10px; border:1px solid #e6e3d8; border-radius:8px; font-family:var(--mg-font-mono); font-size:16px; text-align:center; background:#f5f4ef; }
 .combat-input:focus { outline:none; border-color:#0c4f8d; }
 .combat-select { padding:6px 12px; border:1px solid #e6e3d8; border-radius:8px; font-family:var(--mg-font-body); font-size:13px; background:#f5f4ef; }
 .combat-select:focus { outline:none; border-color:#0c4f8d; }
@@ -39,15 +39,16 @@ body { background:#f5f4ef; }
 .combat-vs { font-family:var(--mg-font-display); font-weight:700; font-size:18px; color:#636b78; align-self:center; text-align:center; padding-top:40px; }
 
 /* ── Unit rows (TI4 / Custom) ─────────────────────────────────────── */
-.combat-unit { display:flex; align-items:center; gap:6px; padding:8px 12px; background:#fff; border-radius:10px; border:1px solid #e6e3d8; }
-.combat-unit__name { font-family:var(--mg-font-body); font-size:13px; color:#14161c; flex:1; min-width:0; }
-.combat-unit__stat { font-family:var(--mg-font-mono); font-size:11px; color:#636b78; flex-shrink:0; }
-.combat-unit__count { width:48px; }
-.combat-unit__remove { width:24px; height:24px; border:none; background:transparent; color:#d11a1a; font-size:16px; cursor:pointer; border-radius:4px; flex-shrink:0; }
-.combat-unit__remove:hover { background:rgba(209,26,26,0.1); }
+.combat-unit { display:flex; align-items:center; gap:8px; padding:10px 14px; background:#fff; border-radius:10px; border:1px solid #e6e3d8; }
+.combat-unit__name { font-family:var(--mg-font-body); font-size:14px; color:#14161c; flex:1; min-width:0; }
+.combat-unit__stat { font-family:var(--mg-font-mono); font-size:13px; color:#4f5764; flex-shrink:0; }
+.combat-unit__count { width:52px; }
+.combat-unit__remove { width:28px; height:28px; border:none; background:rgba(209,26,26,0.08); color:#d11a1a; font-size:16px; cursor:pointer; border-radius:6px; flex-shrink:0; }
+.combat-unit__remove:hover { background:rgba(209,26,26,0.16); }
+.combat-unit .combat-input { width:56px; font-size:16px; padding:8px 6px; }
 
 /* Add unit button inside side panel */
-.combat-side .mg-btn { font-size:12px; padding:6px 14px; margin-top:4px; align-self:flex-start; }
+.combat-side .mg-btn { font-size:13px; padding:8px 16px; margin-top:8px; align-self:flex-start; background:#14161c; color:#fff; border-color:#14161c; }
 
 /* ── Results ──────────────────────────────────────────────────────── */
 .combat-results { margin-top:24px; padding-top:24px; border-top:1px solid #e6e3d8; }
