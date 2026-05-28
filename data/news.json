@@ -130,7 +130,7 @@
     "authorHandle": "Chief Playtester",
     "teamSlug": "kevin",
     "toc": [{"label": "The Silk Road transmissions", "id": "the-silk-road-transmissions"}, {"label": "Europe and the modern game", "id": "europe-and-the-modern-game"}, {"label": "Historical variants", "id": "historical-variants"}, {"label": "The modern modding era", "id": "the-modern-modding-era"}, {"label": "Why this matters to us", "id": "why-this-matters-to-us"}],
-    "modCard": {"title": "Moddable Chess", "version": "54 variants · Play online", "href": "/engines/moddable-chess/", "btnLabel": "Play now"}
+    "modCard": {"title": "Moddable Chess", "version": "64 variants · Play online", "href": "/engines/moddable-chess/", "btnLabel": "Play now"}
   },
   {
     "slug": "twilights-prophecies-thunder-on",
@@ -225,6 +225,6 @@
     "authorHandle": "CEO & Founder",
     "teamSlug": "mark",
     "toc": [{"label": "The problem with predictability", "id": "the-problem-with-predictability"}, {"label": "Hexagons and infinite setups", "id": "hexagons-and-infinite-setups"}, {"label": "Accessibility as a design principle", "id": "accessibility-as-a-design-principle"}, {"label": "What Moddable.Games is building", "id": "what-moddablegames-is-building"}],
-    "modCard": {"title": "Moddable Chess", "version": "54 variants · Play online", "href": "/engines/moddable-chess/", "btnLabel": "Play now"}
+    "modCard": {"title": "Moddable Chess", "version": "64 variants · Play online", "href": "/engines/moddable-chess/", "btnLabel": "Play now"}
   }
 ]

@@ -28,7 +28,7 @@ One shared component library (`_mg.js` + `_mg.css`), one page per HTML file.
 ├── js/
 │   └── mg-loader.js        ← entry point; loads shared modules
 ├── data/
-│   ├── mods.json           ← mod library (13 entries)
+│   ├── mods.json           ← mod library (9 entries)
 │   ├── games.json          ← games (4 entries)
 │   ├── engines.json        ← engine/SDK listings (2 entries)
 │   ├── news.json           ← news posts (12 entries)
@@ -36,27 +36,37 @@ One shared component library (`_mg.js` + `_mg.css`), one page per HTML file.
 │
 ├── mods/
 │   ├── index.html          ← mods library (filterable, searchable)
-│   └── talisman-hexed/index.html ← Talisman: Hexed detail page
+│   └── <slug>/index.html   ← detail page per mod (9 total)
 ├── engines/
 │   ├── index.html          ← engines index (Chess, Hexmaps)
 │   ├── moddable-chess/index.html    ← Chess engine page
 │   └── moddable-hexmaps/index.html  ← Hexmaps engine page
 ├── games/
+│   ├── index.html                ← games index
 │   ├── endless-skies/index.html  ← Endless Skies game page
 │   ├── mongo/index.html          ← Mongo game page
 │   ├── dungeon-chess/index.html  ← Dungeon Chess game page
 │   └── nukes/index.html          ← Nukes game page
 ├── news/
 │   ├── index.html          ← news index
-│   └── nuking-catan/index.html   ← "Nuking Catan" article
+│   └── <slug>/index.html   ← article pages (12 total)
 ├── tools/
-│   ├── index.html          ← tools hub (dice roller, name gen, score tracker)
-│   ├── ti/index.html       ← TI tools (faction picker, objectives, agenda voter)
+│   ├── index.html          ← tools hub
+│   ├── ti/index.html       ← TI4 tools (faction picker, objectives, agenda voter)
 │   ├── talisman/index.html ← Talisman tools (character lottery, hex board, encounter draw)
-│   └── nukes/index.html    ← Nukes tools (target picker, fallout tracker, resource converter)
+│   ├── nukes/index.html    ← Nukes tools (target picker, fallout tracker, resource converter)
+│   ├── dice/index.html     ← Dice lab (multi-system roller)
+│   ├── decks/index.html    ← Deck builder
+│   └── chess/index.html    ← Chess variant explorer
 ├── submit/index.html       ← 3-step mod submission form
-├── about/index.html        ← about page
-├── team/index.html         ← team page
+├── subscribe/index.html    ← email subscribe page
+├── about/
+│   ├── index.html          ← about page
+│   └── roadmap/index.html  ← public roadmap
+├── team/
+│   ├── index.html          ← team page
+│   └── <name>/index.html   ← team member detail pages (4 total)
+├── press/index.html        ← press/media page
 └── community/index.html    ← community / Discord page
 ```
 
@@ -185,48 +195,33 @@ hand-rolled sections — so they stay visually consistent.
 
 ## Pages that still need work / known gaps
 
-- `mod-detail.html` only covers **Talisman: Hexed**. The other 11 mods in the
-  library don't have detail pages yet. Each would follow the same structure:
-  sticky TOC sidebar, numbered rule sections, components list, related mods.
+- The **submit form** (`submit/index.html`) has no backend — it shows a success
+  state on submit but doesn't POST anywhere.
 
-- `game-detail.html` (Endless Skies) has a community mods section — those cards
-  link to `#` as no detail pages exist for community submissions yet.
-
-- The **submit form** (`submit.html`) has no backend — it shows a success state
-  on submit but doesn't POST anywhere.
-
-- `news-post.html` is the only article. The news index links all posts to it.
-  Real articles for each entry in the news index would be future work.
-
-- `tools-ti.html` agenda voter draws from a hardcoded 6-agenda list. The full
+- `tools/ti/` agenda voter draws from a hardcoded 6-agenda list. The full
   TI4 agenda deck has 44 cards — expanding this would be straightforward.
 
-- No **404 page** exists yet.
-
-- No **search page** / global search exists — the search in `mods.html` and
-  `news.html` is local to each page's in-memory data.
+- No **global search** — the search in mods and news indexes is local to each
+  page's in-memory data.
 
 ---
 
 ## Mods library data (source of truth: `data/mods.json`)
 
-13 entries across 5 base games. Four are Moddable originals; nine are real
+9 entries across 5 base games. Three are Moddable originals; six are real
 publicly available community variants with attributions.
 
 | Title | Base game | Category | Source |
 |---|---|---|---|
 | Talisman: Hexed | Talisman 4e | Reskin | Moddable.Games |
 | Hyper Imperium | Twilight Imperium 4e | Rebalance | Moddable.Games |
-| Nuke Catan | Catan | Total conversion | Moddable.Games |
-| Fog of War Chess | Chess | Total conversion | chessvariants.com |
-| 4-Player Chess | Chess | Reskin | chess.com/variants |
-| Hexagonal Chess (Glinski) | Chess | Total conversion | chessvariants.com |
-| Auction Monopoly | Monopoly | Rebalance | Monopoly official rules |
-| Anti-Monopoly | Monopoly | Total conversion | Public domain |
+| Econopoly | Monopoly | Rebalance | Moddable.Games |
+| Anti-Monopoly | Monopoly | Total conversion | Public domain variant |
 | Flooded Catan | Catan | Rebalance | catan.fandom.com |
-| The Diamond Mine | Catan | Total conversion | scribd / meepleeater |
+| The Diamond Mine | Catan | Total conversion | scribd.com — meepleeater |
 | Shattered Ascension | Twilight Imperium 4e | Rebalance | boardgamegeek.com |
-| CivRisk | Risk | Rebalance | Chris Grey |
+| CivRisk | Risk | Rebalance | Chris Grey — self-published |
+| Custom World Risk | Risk | Reskin | Community / BGG |
 
 ---
 

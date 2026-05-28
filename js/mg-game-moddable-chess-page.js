@@ -59,7 +59,7 @@ playLink.setAttribute('target','_blank'); playLink.setAttribute('rel','noopener'
 document.getElementById('hero-btns').appendChild(playLink);
 document.getElementById('hero-btns').appendChild(linkBtn('Browse variants','/tools/chess/','outline-dark'));
 
-const STATS = [['Variants','39'],['Players','2–6'],['Status','Open alpha'],['Engine','v0.4.2'],['Board types','Square · 7×7 to 12×8'],['Updated','May 2026']];
+const STATS = [['Variants','64'],['Players','2–6'],['Status','Open alpha'],['Engine','v0.6.8'],['Board types','Square · 4×8 to 12×8'],['Updated','May 2026']];
 const sb = document.getElementById('stats-bar');
 STATS.forEach(([k,v],i) => {
   if(i>0) sb.appendChild(el('span',{class:'stats-row__divider'}));

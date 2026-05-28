@@ -31,7 +31,7 @@ const MOD_TOOLS = [
   { title:'Nukes',             sub:'Hex map generator · Combat calculator · Hostage tracker · Unit reference', color:'#d11a1a', href:url('/tools/nukes/') },
   { title:'Dice Lab',           sub:'Dice roller · Battle simulator · Risk · TI4 · Axis & Allies · X-Wing · Blood Bowl · Memoir \'44', color:'#d11a1a', href:url('/tools/dice/') },
   { title:'Card Deck Builder', sub:'Design · Shuffle · Deal — custom decks for any game', color:'#3a9928', href:url('/tools/decks/') },
-  { title:'Chess Variants',    sub:'54 variants · Rules reference · Match setup', color:'#0c4f8d', href:url('/tools/chess/') },
+  { title:'Chess Variants',    sub:'64 variants · Rules reference · Match setup', color:'#0c4f8d', href:url('/tools/chess/') },
 ];
 const mtg = document.getElementById('mod-tools-grid');
 MOD_TOOLS.forEach(t => {

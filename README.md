@@ -122,6 +122,8 @@ Pages load `mg-loader.js` (shared modules) + their own page script. Data is fetc
 ### Changelog
 
 #### 2026-05-28
+- Synced chess engine stats from moddable-chess v0.6.8: variant count 39/54→64, engine version, board types
+- Updated all stale chess references across 9 files (engines page, tools page, news cards, data files)
 - Added Colony as 4th hexmaps-powered game across engines page, stats, and consumer listings (#71)
 - TI4 tools: added Discordant Stars + Thunder's Edge expansions (36 factions, 26 objectives, 20 agendas) (#68)
 - Galaxy map generator: replaced player count dropdown with 7 official TI4 layout variants (3p–8p + Hyper Imperium)

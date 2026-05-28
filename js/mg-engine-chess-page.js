@@ -24,10 +24,10 @@ ghLink.setAttribute('rel', 'noopener');
 document.getElementById('hero-btns').appendChild(ghLink);
 
 var STATS = [
-  ['Variants', '54'],
+  ['Variants', '64'],
   ['Players', '2–6'],
   ['Status', 'Open alpha'],
-  ['Engine', 'v0.4.2'],
+  ['Engine', 'v0.6.8'],
   ['Board types', 'Square · 4×8 to 12×8'],
   ['Updated', 'May 2026']
 ];
@@ -104,7 +104,7 @@ document.getElementById('comm-heading').textContent = 'Built on this engine';
 
 var CONSUMERS = [
   { title: 'Dungeon Chess', desc: 'Asymmetric fantasy strategy on modular dungeon boards. Four factions, 24 units, XP drafting.', href: '/games/dungeon-chess/', accent: T.green },
-  { title: 'Chess Variant Loader', desc: 'Pick, preview, and play any of 54 variants from the browser. Rules reference and match launcher.', href: '/tools/chess/', accent: T.blue },
+  { title: 'Chess Variant Loader', desc: 'Pick, preview, and play any of 64 variants from the browser. Rules reference and match launcher.', href: '/tools/chess/', accent: T.blue },
   { title: 'Fog of War Chess', desc: 'You only see squares your pieces can move to. No check warnings. Pure information warfare.', href: '/tools/chess/', accent: T.red }
 ];
 var cg = document.getElementById('comm-grid');

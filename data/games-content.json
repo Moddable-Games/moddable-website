@@ -523,7 +523,7 @@
     "stats": [
       [
         "Variants",
-        "20"
+        "64"
       ],
       [
         "Players",
@@ -535,11 +535,11 @@
       ],
       [
         "Engine",
-        "v0.4.2"
+        "v0.6.8"
       ],
       [
         "Board types",
-        "7\u00d77 to 12\u00d78"
+        "4\u00d78 to 12\u00d78"
       ],
       [
         "Updated",
