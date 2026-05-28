@@ -135,6 +135,11 @@ Pages load `mg-loader.js` (shared modules) + their own page script. Data is fetc
 - Footer column titles now clickable links to their respective index pages
 - Renamed "Mod-specific tools" → "Per-game tools" with consistent spacing and anchors
 - Tab selection persists in URL hash (`/tools/dice/#risk`) for sharing
+- Mod detail page TOC scroll-spy fixed (calls initTocSpy after dynamic render)
+- Mod buttons wired up with real URLs: rules.moddable.games, BGG, Wikipedia, itch.io (#25 Part 1)
+- Removed Nuke Catan mod (invented, no supporting material) — homepage section now links to Nukes game + nuking-catan article
+- Related mods auto-derived from category/baseGame (no more hardcoded arrays)
+- Fixed mod/game counts: 9 mods, 4 games across all references
 
 #### 2026-05-27
 - New tools: Resource Dashboard, Bag Tracker, Role Distributor (all fully configurable with game presets)
