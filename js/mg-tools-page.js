@@ -880,8 +880,8 @@ renderToolCards();
     const target = document.getElementById(id);
     if (target) {
       suppressObserver = true;
-      setTimeout(() => { target.scrollIntoView({ behavior:'smooth' }); }, 100);
-      setTimeout(() => { suppressObserver = false; }, 900);
+      setTimeout(() => { target.scrollIntoView({ behavior:'smooth', block:'start' }); }, 300);
+      setTimeout(() => { suppressObserver = false; }, 1100);
     }
   }
 })();
