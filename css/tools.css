@@ -66,7 +66,7 @@ body { background: #f5f4ef; }
 .tools-section__heading--blue { color: var(--mg-blue); }
 .tools-section__sub { font-family: var(--mg-font-body); font-size: 15px; color: var(--mg-mute); margin: 0 0 20px; text-align: center; }
 .tool-card--featured { scroll-margin-top: 120px; }
-.tools-section { scroll-margin-top: 120px; }
+.tools-section { scroll-margin-top: 120px; margin-top: 48px; padding-top: 48px; border-top: 1px solid var(--mg-hairline-light); }
 
 /* Tool card (unified wrapper) */
 .tool-card { background: #fff; border: 1px solid var(--mg-hairline-light); border-radius: 20px; padding: 32px; }
