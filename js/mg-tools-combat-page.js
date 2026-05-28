@@ -7,6 +7,7 @@ const ITERATIONS = 10000;
 const TABS = [
   { id: 'risk', label: 'Risk' },
   { id: 'ti4', label: 'TI4 Space' },
+  { id: 'aa', label: 'Axis & Allies' },
   { id: 'custom', label: 'Custom' }
 ];
 let activeTab = 'risk';
@@ -29,6 +30,7 @@ function renderPanel() {
   panel.innerHTML = '';
   if (activeTab === 'risk') renderRisk(panel);
   else if (activeTab === 'ti4') renderTI4(panel);
+  else if (activeTab === 'aa') renderAA(panel);
   else renderCustom(panel);
 }
 
@@ -289,6 +291,138 @@ function renderTI4(panel) {
 
     for (let i = 0; i < ITERATIONS; i++) {
       const r = simTI4Battle(atkFleet, defFleet);
+      totalAtkSurv += r.atkSurviving;
+      totalDefSurv += r.defSurviving;
+      if (r.defSurviving === 0 && r.atkSurviving > 0) atkWins++;
+      else if (r.atkSurviving === 0 && r.defSurviving > 0) defWins++;
+      else draws++;
+    }
+
+    resultsWrap.innerHTML = '';
+    showResults(resultsWrap, {
+      atkWin: (atkWins / ITERATIONS) * 100,
+      defWin: (defWins / ITERATIONS) * 100,
+      draw: (draws / ITERATIONS) * 100,
+      detail: 'Avg attacker survivors: ' + (totalAtkSurv / ITERATIONS).toFixed(1)
+        + ' · Avg defender survivors: ' + (totalDefSurv / ITERATIONS).toFixed(1)
+    });
+  }
+
+  runWrap.appendChild(btn('Run simulation', 'dark', runSim));
+  runWrap.appendChild(el('span', { class: 'combat-run__iters' }, ITERATIONS.toLocaleString() + ' iterations'));
+}
+
+/* ── AXIS & ALLIES ── */
+const AA_UNITS = {
+  atk: [
+    { name: 'Infantry', hit: 1, cost: 3 },
+    { name: 'Artillery', hit: 2, cost: 4 },
+    { name: 'Tank', hit: 3, cost: 6 },
+    { name: 'Fighter', hit: 3, cost: 10 },
+    { name: 'Bomber', hit: 4, cost: 12 },
+    { name: 'Battleship', hit: 4, cost: 20, hp: 2 },
+    { name: 'Cruiser', hit: 3, cost: 12 },
+    { name: 'Destroyer', hit: 2, cost: 8 },
+    { name: 'Submarine', hit: 2, cost: 6 }
+  ],
+  def: [
+    { name: 'Infantry', hit: 2, cost: 3 },
+    { name: 'Artillery', hit: 2, cost: 4 },
+    { name: 'Tank', hit: 3, cost: 6 },
+    { name: 'Fighter', hit: 4, cost: 10 },
+    { name: 'Bomber', hit: 1, cost: 12 },
+    { name: 'Battleship', hit: 4, cost: 20, hp: 2 },
+    { name: 'Cruiser', hit: 3, cost: 12 },
+    { name: 'Destroyer', hit: 2, cost: 8 },
+    { name: 'Submarine', hit: 1, cost: 6 }
+  ]
+};
+
+function simAARound(atkForce, defForce) {
+  let atkHits = 0, defHits = 0;
+  atkForce.forEach(u => {
+    if (Math.ceil(Math.random() * 6) <= u.hit) atkHits++;
+  });
+  defForce.forEach(u => {
+    if (Math.ceil(Math.random() * 6) <= u.hit) defHits++;
+  });
+  const newAtk = [...atkForce].sort((a,b) => a.cost - b.cost);
+  const newDef = [...defForce].sort((a,b) => a.cost - b.cost);
+  let atkRemoved = 0;
+  while (atkRemoved < defHits && newAtk.length > 0) {
+    newAtk.shift();
+    atkRemoved++;
+  }
+  let defRemoved = 0;
+  while (defRemoved < atkHits && newDef.length > 0) {
+    newDef.shift();
+    defRemoved++;
+  }
+  return { atk: newAtk, def: newDef };
+}
+
+function simAABattle(atkForce, defForce) {
+  let atk = [...atkForce], def = [...defForce];
+  let rounds = 0;
+  while (atk.length > 0 && def.length > 0 && rounds < 30) {
+    const r = simAARound(atk, def);
+    atk = r.atk;
+    def = r.def;
+    rounds++;
+  }
+  return { atkSurviving: atk.length, defSurviving: def.length };
+}
+
+function renderAA(panel) {
+  let atkCounts = AA_UNITS.atk.map(() => 0);
+  let defCounts = AA_UNITS.def.map(() => 0);
+  atkCounts[0] = 4; atkCounts[2] = 2; atkCounts[3] = 1;
+  defCounts[0] = 6; defCounts[2] = 1;
+
+  const sides = el('div', { class: 'combat-sides' });
+
+  function buildSide(label, units, counts) {
+    const side = el('div', { class: 'combat-side' });
+    side.appendChild(el('div', { class: 'combat-side__header' }, label));
+    units.forEach((unit, i) => {
+      const row = el('div', { class: 'combat-unit' });
+      row.appendChild(el('span', { class: 'combat-unit__name' }, unit.name));
+      row.appendChild(el('span', { class: 'combat-unit__stat' }, unit.hit + ' or less'));
+      const input = document.createElement('input');
+      input.type = 'number'; input.min = '0'; input.max = '20'; input.value = counts[i];
+      input.className = 'combat-input combat-unit__count';
+      input.addEventListener('input', () => { counts[i] = parseInt(input.value) || 0; });
+      row.appendChild(input);
+      side.appendChild(row);
+    });
+    return side;
+  }
+
+  sides.appendChild(buildSide('Attacker', AA_UNITS.atk, atkCounts));
+  sides.appendChild(el('div', { class: 'combat-vs' }, 'vs'));
+  sides.appendChild(buildSide('Defender', AA_UNITS.def, defCounts));
+  panel.appendChild(sides);
+
+  const runWrap = el('div', { class: 'combat-run' });
+  const resultsWrap = el('div');
+  panel.appendChild(runWrap);
+  panel.appendChild(resultsWrap);
+
+  function runSim() {
+    let atkWins = 0, defWins = 0, draws = 0;
+    let totalAtkSurv = 0, totalDefSurv = 0;
+
+    for (let i = 0; i < ITERATIONS; i++) {
+      const atkForce = [];
+      const defForce = [];
+      AA_UNITS.atk.forEach((u, j) => {
+        for (let n = 0; n < atkCounts[j]; n++) atkForce.push(u);
+      });
+      AA_UNITS.def.forEach((u, j) => {
+        for (let n = 0; n < defCounts[j]; n++) defForce.push(u);
+      });
+      if (atkForce.length === 0 || defForce.length === 0) return;
+      const r = simAABattle(atkForce, defForce);
       totalAtkSurv += r.atkSurviving;
       totalDefSurv += r.defSurviving;
       if (r.defSurviving === 0 && r.atkSurviving > 0) atkWins++;
