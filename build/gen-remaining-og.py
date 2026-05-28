@@ -169,11 +169,11 @@ def gen_news():
 
 def gen_games():
     img = base_image()
-    # 3 game logos — centred in right half with equal margins
-    logos = ['img/nukes-logo.png', 'img/endless-skies-logo.png', 'img/mongo-logo.png']
-    logo_size = 140
-    gap = 20
-    total_w = logo_size * 3 + gap * 2
+    # 4 game logos — centred in right half with equal margins
+    logos = ['img/nukes-logo.png', 'img/endless-skies-logo.png', 'img/mongo-logo.png', 'img/dungeon-chess/03_logo_all_white.png']
+    logo_size = 120
+    gap = 16
+    total_w = logo_size * len(logos) + gap * (len(logos) - 1)
     # Right zone: from 560 to 1120 (equal 80px margin on right as left text has)
     zone_left = 560
     zone_right = WIDTH - 80
@@ -191,7 +191,7 @@ def gen_games():
         ly = (HEIGHT - lh) // 2
         layer.paste(logo, (lx, ly), logo)
         img = Image.alpha_composite(img, layer)
-    add_text(img, 'ORIGINALS', 'Our Games', '3 games designed to be modded')
+    add_text(img, 'ORIGINALS', 'Our Games', '4 games designed to be modded')
     save(img, 'img/og/games.png')
 
 
