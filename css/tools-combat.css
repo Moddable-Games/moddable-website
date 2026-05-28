@@ -33,18 +33,21 @@ body { background:#f5f4ef; }
 .combat-select:focus { outline:none; border-color:#0c4f8d; }
 
 /* ── Sides grid ───────────────────────────────────────────────────── */
-.combat-sides { display:grid; grid-template-columns:1fr auto 1fr; gap:20px; align-items:start; margin-bottom:24px; }
-.combat-side { display:flex; flex-direction:column; gap:10px; }
-.combat-side__header { font-family:var(--mg-font-display); font-weight:600; font-size:16px; color:#14161c; padding-bottom:8px; border-bottom:1px solid #e6e3d8; }
-.combat-vs { font-family:var(--mg-font-display); font-weight:700; font-size:20px; color:#636b78; align-self:center; text-align:center; padding-top:28px; }
+.combat-sides { display:grid; grid-template-columns:1fr auto 1fr; gap:24px; align-items:start; margin-bottom:24px; }
+.combat-side { display:flex; flex-direction:column; gap:8px; background:#f5f4ef; border-radius:14px; padding:20px; border:1px solid #e6e3d8; }
+.combat-side__header { font-family:var(--mg-font-display); font-weight:600; font-size:16px; color:#14161c; padding-bottom:10px; border-bottom:1px solid #e6e3d8; margin-bottom:4px; }
+.combat-vs { font-family:var(--mg-font-display); font-weight:700; font-size:18px; color:#636b78; align-self:center; text-align:center; padding-top:40px; }
 
 /* ── Unit rows (TI4 / Custom) ─────────────────────────────────────── */
-.combat-unit { display:flex; align-items:center; gap:8px; padding:6px 10px; background:#f5f4ef; border-radius:10px; }
-.combat-unit__name { font-family:var(--mg-font-body); font-size:13px; color:#14161c; flex:1; }
-.combat-unit__stat { font-family:var(--mg-font-mono); font-size:12px; color:#636b78; }
+.combat-unit { display:flex; align-items:center; gap:6px; padding:8px 12px; background:#fff; border-radius:10px; border:1px solid #e6e3d8; }
+.combat-unit__name { font-family:var(--mg-font-body); font-size:13px; color:#14161c; flex:1; min-width:0; }
+.combat-unit__stat { font-family:var(--mg-font-mono); font-size:11px; color:#636b78; flex-shrink:0; }
 .combat-unit__count { width:48px; }
-.combat-unit__remove { width:24px; height:24px; border:none; background:transparent; color:#d11a1a; font-size:16px; cursor:pointer; border-radius:4px; }
+.combat-unit__remove { width:24px; height:24px; border:none; background:transparent; color:#d11a1a; font-size:16px; cursor:pointer; border-radius:4px; flex-shrink:0; }
 .combat-unit__remove:hover { background:rgba(209,26,26,0.1); }
+
+/* Add unit button inside side panel */
+.combat-side .mg-btn { font-size:12px; padding:6px 14px; margin-top:4px; align-self:flex-start; }
 
 /* ── Results ──────────────────────────────────────────────────────── */
 .combat-results { margin-top:24px; padding-top:24px; border-top:1px solid #e6e3d8; }
@@ -64,10 +67,11 @@ body { background:#f5f4ef; }
 .combat-run__iters { font-family:var(--mg-font-mono); font-size:12px; color:#636b78; }
 
 /* ── Responsive ───────────────────────────────────────────────────── */
-@media (max-width: 640px) {
+@media (max-width: 720px) {
   .combat-body { padding:36px 20px 64px; }
   .combat-panel { padding:20px; }
-  .combat-sides { grid-template-columns:1fr; gap:20px; }
+  .combat-sides { grid-template-columns:1fr; gap:16px; }
   .combat-vs { padding-top:0; }
   .combat-row__label { min-width:80px; }
+  .combat-unit { flex-wrap:wrap; }
 }
