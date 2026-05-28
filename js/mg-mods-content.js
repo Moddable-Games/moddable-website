@@ -24,7 +24,6 @@
         { kind:'Printable', list:['61 × hexagonal tiles (PDF, included)','Tile inventory + assembly diagram','River movement tokens'] },
         { kind:'House', list:['1d6 standard die','A large flat surface — 4ft × 3ft minimum','Patience for tile shuffling'] }
       ],
-      related: ['Hyper Imperium', 'Econopoly']
     },
 
     'hyper-imperium': {
@@ -45,7 +44,6 @@
         { kind:'Printable', list:['Hyper Imperium rules reference (PDF, included)','Faction balance cheat sheet','Updated strategy card reference'] },
         { kind:'House', list:['Large table (6ft minimum recommended)','VP tracker going to 12','Timer for strategy phases (optional)'] }
       ],
-      related: ['Talisman: Hexed', 'Shattered Ascension']
     },
 
 
@@ -68,7 +66,6 @@
         { kind:'Printable', list:['Team selection cards (PDF, included)','Monopolist vs Competitor rules summary','Antitrust trigger reference sheet'] },
         { kind:'House', list:['Secret role tokens (coins in envelopes work)','Separate rent charts for each team','Notepad for tracking team affiliations once revealed'] }
       ],
-      related: ['Econopoly', 'CivRisk']
     },
 
     'econopoly': {
@@ -89,7 +86,6 @@
         { kind:'Printable', list:['Dynamic pricing tracker sheet (PDF, included)','Tax band reference card','Debt mode reminder tokens'] },
         { kind:'House', list:['90-minute timer (phone or kitchen timer)','Pencil for price tracking each round','Calculator for tax band percentages'] }
       ],
-      related: ['Anti-Monopoly', 'Talisman: Hexed']
     },
 
     'flooded-catan': {
@@ -110,7 +106,6 @@
         { kind:'Printable', list:['Flood tracker sheet (PDF, included)','Seawall tokens (cut-out sheet)','Turn counter strip'] },
         { kind:'House', list:['Blue tokens or coins to mark flooded hexes','Numbered list of coastal hexes for flood order','Timer or turn counter (app recommended)'] }
       ],
-      related: ['The Diamond Mine', 'Hyper Imperium']
     },
 
     'the-diamond-mine': {
@@ -131,7 +126,6 @@
         { kind:'Printable', list:['Diamond mine hex tile (PDF, included)','Diamond resource tokens (cut-out sheet)','Quick-reference rules card'] },
         { kind:'House', list:['Small gems or glass beads as diamond tokens','Number token for the mine hex (your choice)','Pencil and paper for diamond tracking (optional)'] }
       ],
-      related: ['Flooded Catan', 'Econopoly']
     },
 
     'shattered-ascension': {
@@ -152,7 +146,6 @@
         { kind:'Printable', list:['Shattered Ascension rulebook (PDF, 80+ pages)','Custom objective cards (print-and-cut)','Rebalanced strategy card overlays'] },
         { kind:'House', list:['Tabletop Simulator (digital alternative available)','Large table for 8-player games','Full day blocked out (6–12 hours minimum)'] }
       ],
-      related: ['Hyper Imperium', 'Talisman: Hexed', 'CivRisk']
     },
 
     'civrisk': {
@@ -173,7 +166,6 @@
         { kind:'Printable', list:['Civilisation cards (20 unique, PDF included)','Tech tree reference board','Discovery tokens (cut-out sheet)'] },
         { kind:'House', list:['Gold tokens (coins, beads, or paper chits)','Hidden discovery tokens (face-down on map)','Growth tier tracker (one per player)'] }
       ],
-      related: ['Custom World Risk', 'Shattered Ascension', 'Hyper Imperium']
     },
 
     'custom-world-risk': {
@@ -194,7 +186,6 @@
         { kind:'Printable', list:['Blank map template (PDF, included)','Territory planning worksheet','Continent bonus calculator sheet'] },
         { kind:'House', list:['Large paper or poster board for your map','Coloured markers for territory borders','Clear ruler for sea route markings'] }
       ],
-      related: ['CivRisk', 'Hyper Imperium', 'Talisman: Hexed']
     }
 
   };

@@ -150,12 +150,24 @@
 
   function renderRelated(mods) {
     var rg = document.getElementById('related-grid');
-    if (!rg || !page.related) return;
+    if (!rg) return;
 
-    page.related.forEach(function(title) {
-      var m = mods.find(function(x) { return x.title === title; });
-      if (m) rg.appendChild(modCard(m));
+    var currentTitle = page.heroTitle ? page.heroTitle.replace(/<[^>]+>/g, '').replace(/\.$/, '') : '';
+    var listing = mods.find(function(m) { return m.path === '/mods/' + slug + '/'; });
+    var others = mods.filter(function(m) { return m.title !== (listing ? listing.title : currentTitle); });
+
+    others.sort(function(a, b) {
+      var aScore = 0, bScore = 0;
+      if (listing) {
+        if (a.category === listing.category) aScore += 2;
+        if (b.category === listing.category) bScore += 2;
+        if (a.baseGame === listing.baseGame) aScore += 1;
+        if (b.baseGame === listing.baseGame) bScore += 1;
+      }
+      return bScore - aScore || Math.random() - 0.5;
     });
+
+    others.slice(0, 3).forEach(function(m) { rg.appendChild(modCard(m)); });
     if (MG.initReveal) MG.initReveal();
   }
 })();
