@@ -449,7 +449,7 @@ function renderCustom(panel) {
   let atkUnits = [{ name: 'Infantry', dice: 1, sides: 6, hit: 4 }];
   let defUnits = [{ name: 'Infantry', dice: 1, sides: 6, hit: 4 }];
 
-  const sides = el('div', { class: 'combat-sides' });
+  const sides = el('div', { class: 'combat-sides combat-sides--stacked' });
 
   function buildSide(label, units, redraw) {
     const side = el('div', { class: 'combat-side' });
