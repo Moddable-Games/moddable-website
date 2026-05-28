@@ -3,11 +3,11 @@
 
   function footer() {
     const COLS = [
-      { title:'Mods',      links:[['Total conversions',url('/mods/#Total conversion')],['Rebalances',url('/mods/#Rebalance')],['Reskins',url('/mods/#Reskin')],['Submit a mod',url('/submit/')]] },
-      { title:'Games',     links:[['Endless Skies',url('/games/endless-skies/')],['Mongo',url('/games/mongo/')],['Nukes',url('/games/nukes/')],['Dungeon Chess',url('/games/dungeon-chess/')]] },
-      { title:'Engines',   links:[['Moddable Chess',url('/engines/moddable-chess/')],['Moddable Hexmaps',url('/engines/moddable-hexmaps/')]] },
-      { title:'Tools',     links:[['Workbench',url('/tools/')],['TI4 tools',url('/tools/ti/')],['Talisman tools',url('/tools/talisman/')],['Nukes tools',url('/tools/nukes/')],['Deck builder',url('/tools/decks/')],['Chess variants',url('/tools/chess/')]] },
-      { title:'Community', links:[['Discord',url('/community/')],['News',url('/news/')],['About',url('/about/')],['Team',url('/team/')],['Press',url('/press/')],['Subscribe',url('/subscribe/')]] },
+      { title:'Mods',      href:url('/mods/'),      links:[['Total conversions',url('/mods/#Total conversion')],['Rebalances',url('/mods/#Rebalance')],['Reskins',url('/mods/#Reskin')],['Submit a mod',url('/submit/')]] },
+      { title:'Games',     href:url('/games/'),     links:[['Endless Skies',url('/games/endless-skies/')],['Mongo',url('/games/mongo/')],['Nukes',url('/games/nukes/')],['Dungeon Chess',url('/games/dungeon-chess/')]] },
+      { title:'Engines',   href:url('/engines/'),   links:[['Moddable Chess',url('/engines/moddable-chess/')],['Moddable Hexmaps',url('/engines/moddable-hexmaps/')]] },
+      { title:'Tools',     href:url('/tools/'),     links:[['TI4 tools',url('/tools/ti/')],['Talisman tools',url('/tools/talisman/')],['Nukes tools',url('/tools/nukes/')],['Combat odds',url('/tools/combat/')],['Deck builder',url('/tools/decks/')],['Chess variants',url('/tools/chess/')]] },
+      { title:'Community', href:url('/community/'), links:[['Discord',url('/community/')],['News',url('/news/')],['About',url('/about/')],['Team',url('/team/')],['Press',url('/press/')],['Subscribe',url('/subscribe/')]] },
     ];
 
     const f = el('footer', { role:'contentinfo', 'aria-label':'Site footer', class:'mg-footer' });
@@ -25,7 +25,10 @@
 
     for (const col of COLS) {
       const c = el('div');
-      c.appendChild(el('h4', { class:'mg-footer__col-title' }, col.title));
+      const titleEl = el('h4', { class:'mg-footer__col-title' });
+      const titleLink = el('a', { href:col.href, class:'mg-footer__col-title-link' }, col.title);
+      titleEl.appendChild(titleLink);
+      c.appendChild(titleEl);
       const ul = el('ul', { class:'mg-footer__col-list' });
       for (const [text, href] of col.links) {
         ul.appendChild(el('li', {}, el('a', { href, class:'mg-footer__col-link' }, text)));
