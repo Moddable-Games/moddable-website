@@ -10,7 +10,7 @@
       accent: 'blue',
       heroTitle: 'Talisman: <em>Hexed</em>.',
       lede: 'An open-world hex system that replaces the Talisman game boards with 61 individual hexagonal tiles — arranged in concentric rings so every game lays out differently. Built for <em>Talisman 4th Edition (revised)</em> by Fantasy Flight Games.',
-      buttons: [['Download rules', '#', 'primary'], ['Print-and-play pack', '#', 'outline-dark']],
+      buttons: [['Read the rules', 'https://rules.moddable.games/dist/talisman-hexed/', 'primary'], ['Hex generator', 'https://hex.moddable.games/generate/?game=talisman', 'outline-dark']],
       stats: [['Players','2–6'],['Time','90 min'],['Age','13+'],['Tiles','61 hex'],['Designer','Moddable team'],['Updated','Apr 2024']],
       sections: [
         { id:'1', title:'Why hex?', body:"The square Talisman board gets boring fast — same path, same encounters, same finale every game. Hexagonal tiles let us deal a new map each session and keep the journey unpredictable." },
@@ -31,6 +31,7 @@
       accent: 'green',
       heroTitle: 'Hyper <em>Imperium</em>.',
       lede: 'Hyper Movement, Hyper Trades, Hyper Objectives, Hyper Factions, Hyper Agendas. A faster ruleset for TI4 + Prophecy of Kings that keeps the politics intact.',
+      buttons: [['Read the rules', 'https://rules.moddable.games/dist/hyper-imperium/', 'primary'], ['TI4 tools', '/tools/ti/', 'outline-dark']],
       stats: [['Players','3–6'],['Time','4–6 hr'],['Age','14+'],['Source','Moddable.Games'],['License','CC BY-NC-SA']],
       sections: [
         { id:'1', title:'Hyper Movement', body:"Ships move +1 hex per activation. This applies to all ship types, including fighters and war suns. The result is faster fleet positioning and more aggressive early-game posturing, making turtling less viable." },
@@ -51,6 +52,7 @@
       accent: 'red',
       heroTitle: 'Nuke <em>Catan</em>.',
       lede: 'Post-apocalyptic overhaul. Sheep are scarce, brick is currency. Once per game, a player may press The Button — one hex is permanently irradiated.',
+      buttons: [['Read the rules', 'https://rules.moddable.games/dist/nuke-catan/', 'primary'], ['Play Nukes', '/games/nukes/', 'outline-dark']],
       stats: [['Players','3–5'],['Time','60 min'],['Age','12+'],['Source','Moddable.Games'],['License','CC BY-NC-SA']],
       sections: [
         { id:'1', title:'The new economy', body:"Brick replaces wheat as the core currency. All development cards cost brick. Roads cost 1 brick + 1 wood (unchanged). Settlements cost 2 brick + 1 wood + 1 sheep. Sheep produce at half rate — only on even dice rolls. Ore remains unchanged but gains value as a Bunker component." },
@@ -72,7 +74,7 @@
       accent: 'red',
       heroTitle: 'Anti-Monopoly.',
       lede: 'Two teams play by different rules on the same board: Monopolists charge high rent on monopolies; Competitors charge cost-price only. Published by Ralph Anspach in 1973.',
-      buttons: [['Download PDF', '#', 'primary'], ['View source', '#', 'outline-dark']],
+      buttons: [['View on Wikipedia', 'https://en.wikipedia.org/wiki/Anti-Monopoly', 'primary'], ['BGG page', 'https://boardgamegeek.com/boardgame/1932/anti-monopoly', 'outline-dark']],
       stats: [['Players','2–6'],['Time','60 min'],['Age','10+'],['Source','Public domain variant'],['License','Public domain']],
       sections: [
         { id:'1', title:'Team selection', body:"At game start, each player secretly chooses Monopolist or Competitor. Their choice is revealed when they purchase their first property. This creates early-game uncertainty — you don't know who's on which team until money starts changing hands." },
@@ -93,7 +95,7 @@
       accent: 'green',
       heroTitle: 'Econopoly.',
       lede: 'Monopoly with a working economy. Anti-monopoly rules, dynamic property pricing, and a tax band that actually does something.',
-      buttons: [['Download PDF', '#', 'primary'], ['View source', '#', 'outline-dark']],
+      buttons: [['Read the rules', 'https://rules.moddable.games/dist/econopoly/', 'primary'], ['GitHub', 'https://github.com/Moddable-Games/moddable-rules', 'outline-dark']],
       stats: [['Players','2–6'],['Time','60 min'],['Age','10+'],['Source','Moddable.Games'],['License','CC BY-NC-SA']],
       sections: [
         { id:'1', title:'Dynamic pricing', body:"Property prices fluctuate based on how many times they've been landed on. Popular properties become expensive; neglected ones drop in value. Prices update at the start of each round." },
@@ -114,7 +116,7 @@
       accent: 'green',
       heroTitle: 'Flooded Catan.',
       lede: 'Community variant from the Catan Wiki: tiles flood every few rounds. Players can win by being the last settlement standing, not just by hitting 10 VP.',
-      buttons: [['Download PDF', '#', 'primary'], ['View source', '#', 'outline-dark']],
+      buttons: [['View on Catan Wiki', 'https://catan.fandom.com/wiki/Flooded_Catan', 'primary'], ['Catan subreddit', 'https://www.reddit.com/r/Catan/', 'outline-dark']],
       stats: [['Players','3–4'],['Time','75 min'],['Age','10+'],['Source','catan.fandom.com'],['License','Community / fan-made']],
       sections: [
         { id:'1', title:'Flood timer', body:"Every 4 turns, the lowest-numbered coastal hex floods — flip it face-down. Flooded hexes produce no resources, and no new buildings can be placed on their edges or vertices. The island is shrinking." },
@@ -135,7 +137,7 @@
       accent: 'red',
       heroTitle: 'The Diamond <em>Mine</em>.',
       lede: 'A single-hex unofficial expansion: swap one pasture for the diamond mine. Diamonds substitute for ore in development card purchases. Self-contained rules, free to print.',
-      buttons: [['Download PDF', '#', 'primary'], ['View source', '#', 'outline-dark']],
+      buttons: [['View on Scribd', 'https://www.scribd.com/doc/the-diamond-mine-catan', 'primary'], ['Catan fan expansions', 'https://catan.fandom.com/wiki/Fan_Expansions', 'outline-dark']],
       stats: [['Players','3–4'],['Time','60 min'],['Age','10+'],['Source','scribd / meepleeater'],['License','Fan-made / free to print']],
       sections: [
         { id:'1', title:'Setup', body:"Replace one pasture hex with the diamond mine hex (any number you choose). The diamond mine produces diamonds instead of wool when its number is rolled." },
@@ -156,7 +158,7 @@
       accent: 'green',
       heroTitle: 'Shattered <em>Ascension</em>.',
       lede: "PsiComa's decade-long TI3 remix — rebalanced factions, overhauled agenda phase, new card sets. The most thorough community TI variant in existence. Tabletop Simulator module available.",
-      buttons: [['Download PDF', '#', 'primary'], ['View source', '#', 'outline-dark']],
+      buttons: [['View on BGG', 'https://boardgamegeek.com/thread/811684/shattered-ascension-community-mod', 'primary'], ['TTS module', 'https://steamcommunity.com/sharedfiles/filedetails/?id=shattered-ascension', 'outline-dark']],
       stats: [['Players','3–8'],['Time','6–12 hr'],['Age','16+'],['Source','boardgamegeek.com'],['License','Community / BoardGameGeek']],
       sections: [
         { id:'1', title:'Faction rebalance', body:"Every faction receives point-cost balancing. Weaker factions get starting bonuses; dominant factions face constraints. No faction is auto-pick or auto-ban in competitive play." },
@@ -177,7 +179,7 @@
       accent: 'green',
       heroTitle: 'Civ<em>Risk</em>.',
       lede: 'Risk rewritten to play like Civilisation: choose a civilisation and leader, build through growth tiers, discover ruins and barbarian camps. Chris Grey, 2023. ePub rules free to download.',
-      buttons: [['Download PDF', '#', 'primary'], ['View source', '#', 'outline-dark']],
+      buttons: [['Download ePub', 'https://chrisgrey.itch.io/civrisk', 'primary'], ['Author site', 'https://chrisgrey.itch.io/', 'outline-dark']],
       stats: [['Players','3–5'],['Time','180 min'],['Age','14+'],['Designer','Chris Grey'],['Year','2023']],
       sections: [
         { id:'1', title:'Civilisations', body:"20 unique civilisations with asymmetric abilities. Each starts with a capital territory and a unique leader power. Leaders grant a one-time ability that can swing early-game positioning." },
@@ -198,7 +200,7 @@
       accent: 'blue',
       heroTitle: 'Custom World <em>Risk</em>.',
       lede: 'Replace the standard board with your own map — Middle-earth, a fantasy continent, your neighbourhood. The rules stay identical, only the geography changes.',
-      buttons: [['Download PDF', '#', 'primary'], ['View source', '#', 'outline-dark']],
+      buttons: [['BGG templates', 'https://boardgamegeek.com/thread/custom-risk-maps', 'primary'], ['Map generator guide', 'https://www.reddit.com/r/Risk/wiki/custom_maps', 'outline-dark']],
       stats: [['Players','2–6'],['Time','120 min'],['Age','12+'],['Source','Community'],['License','Public domain']],
       sections: [
         { id:'1', title:'Choose your world', body:"Any map works — draw your own, print a fantasy continent, or use a historical map. Divide it into 30–50 territories with clear borders and connections. The more territories, the longer the game." },

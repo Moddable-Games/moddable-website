@@ -66,20 +66,7 @@ function initHexmapEmbed(game) {
   }
 
   function regenerate() {
-    if (iframe && iframe.contentWindow) {
-      var msg = { type: 'hexmap:regenerate', seed: String(currentSeed), style: currentStyle };
-      if (useLayouts) {
-        msg.layout = currentLayout;
-      } else {
-        msg.players = currentPlayers;
-        msg.size = currentSize;
-      }
-      iframe.contentWindow.postMessage(msg, '*');
-    } else {
-      renderFrame();
-    }
-    var seedSpan = controlsEl.querySelector('.hexmap-embed__seed');
-    if (seedSpan) seedSpan.textContent = 'seed: ' + String(currentSeed).padStart(4, '0');
+    renderFrame();
   }
 
   function renderControls() {
