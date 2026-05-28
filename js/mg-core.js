@@ -4,7 +4,7 @@
    ========================================================================= */
 
 window.MG = (() => {
-  const VERSION = '1.0.43';
+  const VERSION = '1.0.44';
   const META_BASE = (document.querySelector('meta[name="mg-base"]') || {}).content;
   const BASE = META_BASE != null ? META_BASE
     : location.pathname.includes('/MODDABLE/moddable-website')
