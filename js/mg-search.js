@@ -9,7 +9,6 @@
   const SEARCH_INDEX = [
     {type:'mod', title:'Talisman: Hexed', desc:'Open-world hex system replacing the Talisman board with 61 tiles', href:url('/mods/talisman-hexed/')},
     {type:'mod', title:'Hyper Imperium', desc:'Faster ruleset for TI4 + Prophecy of Kings', href:url('/mods/hyper-imperium/')},
-    {type:'mod', title:'Nuke Catan', desc:'Post-apocalyptic total conversion of Catan', href:url('/mods/nuke-catan/')},
     {type:'mod', title:'Econopoly', desc:'Monopoly with a working economy and dynamic pricing', href:url('/mods/econopoly/')},
     {type:'mod', title:'Anti-Monopoly', desc:'Public domain competitive variant of Monopoly', href:url('/mods/anti-monopoly/')},
     {type:'mod', title:'Flooded Catan', desc:'Rising sea levels slowly reduce the board', href:url('/mods/flooded-catan/')},

@@ -24,7 +24,7 @@
         { kind:'Printable', list:['61 × hexagonal tiles (PDF, included)','Tile inventory + assembly diagram','River movement tokens'] },
         { kind:'House', list:['1d6 standard die','A large flat surface — 4ft × 3ft minimum','Patience for tile shuffling'] }
       ],
-      related: ['Hyper Imperium', 'Econopoly', 'Nuke Catan']
+      related: ['Hyper Imperium', 'Econopoly']
     },
 
     'hyper-imperium': {
@@ -45,29 +45,9 @@
         { kind:'Printable', list:['Hyper Imperium rules reference (PDF, included)','Faction balance cheat sheet','Updated strategy card reference'] },
         { kind:'House', list:['Large table (6ft minimum recommended)','VP tracker going to 12','Timer for strategy phases (optional)'] }
       ],
-      related: ['Talisman: Hexed', 'Nuke Catan', 'Shattered Ascension']
+      related: ['Talisman: Hexed', 'Shattered Ascension']
     },
 
-    'nuke-catan': {
-      accent: 'red',
-      heroTitle: 'Nuke <em>Catan</em>.',
-      lede: 'Post-apocalyptic overhaul. Sheep are scarce, brick is currency. Once per game, a player may press The Button — one hex is permanently irradiated.',
-      buttons: [['Read the rules', 'https://rules.moddable.games/dist/nuke-catan/', 'primary'], ['Play Nukes', '/games/nukes/', 'outline-dark']],
-      stats: [['Players','3–5'],['Time','60 min'],['Age','12+'],['Source','Moddable.Games'],['License','CC BY-NC-SA']],
-      sections: [
-        { id:'1', title:'The new economy', body:"Brick replaces wheat as the core currency. All development cards cost brick. Roads cost 1 brick + 1 wood (unchanged). Settlements cost 2 brick + 1 wood + 1 sheep. Sheep produce at half rate — only on even dice rolls. Ore remains unchanged but gains value as a Bunker component." },
-        { id:'2', title:'Radiation tokens', body:"When The Button is pressed, the target hex and all adjacent hexes become irradiated. Place radiation tokens on each affected hex. Irradiated hexes produce nothing regardless of dice rolls. No new roads or settlements may be built on irradiated edges or intersections. Existing structures on irradiated hexes still count for VP but produce nothing." },
-        { id:'3', title:'Bunkers', body:"A new structure type. Costs 3 brick + 1 ore to build. May be placed on any settlement or city you own. A Bunker protects the settlement from radiation — the settlement continues producing from adjacent non-irradiated hexes, and the intersection remains buildable. Bunkers do not protect roads." },
-        { id:'4', title:'Victory conditions', body:"The game ends when a player reaches 8 VP (reduced from 10) OR when only one player has at least one non-irradiated settlement remaining. In the latter case, that player wins regardless of VP count. Longest Road and Largest Army still award 2 VP each." },
-        { id:'5', title:'The Button', body:"Once per game, each player may press The Button on their turn (before or after rolling). Choose any hex on the board — it and all adjacent hexes are irradiated. Pressing The Button immediately awards 2 VP but all other players refuse to trade with you for 2 full turns. You cannot use ports during this embargo period." }
-      ],
-      components: [
-        { kind:'Required', list:['Catan base game (any edition)','Standard resource cards and tokens','Development card deck'] },
-        { kind:'Printable', list:['Radiation tokens (PDF, included)','Bunker tokens (PDF, included)','Updated resource reference card'] },
-        { kind:'House', list:['1 large red button (or any dramatic prop)','Radiation zone markers (coins work)','Embargo tracker (paper or tokens)'] }
-      ],
-      related: ['Flooded Catan', 'The Diamond Mine', 'Hyper Imperium']
-    },
 
 
     'anti-monopoly': {
@@ -88,7 +68,7 @@
         { kind:'Printable', list:['Team selection cards (PDF, included)','Monopolist vs Competitor rules summary','Antitrust trigger reference sheet'] },
         { kind:'House', list:['Secret role tokens (coins in envelopes work)','Separate rent charts for each team','Notepad for tracking team affiliations once revealed'] }
       ],
-      related: ['Econopoly', 'Nuke Catan', 'CivRisk']
+      related: ['Econopoly', 'CivRisk']
     },
 
     'econopoly': {
@@ -109,7 +89,7 @@
         { kind:'Printable', list:['Dynamic pricing tracker sheet (PDF, included)','Tax band reference card','Debt mode reminder tokens'] },
         { kind:'House', list:['90-minute timer (phone or kitchen timer)','Pencil for price tracking each round','Calculator for tax band percentages'] }
       ],
-      related: ['Anti-Monopoly', 'Nuke Catan', 'Talisman: Hexed']
+      related: ['Anti-Monopoly', 'Talisman: Hexed']
     },
 
     'flooded-catan': {
@@ -130,7 +110,7 @@
         { kind:'Printable', list:['Flood tracker sheet (PDF, included)','Seawall tokens (cut-out sheet)','Turn counter strip'] },
         { kind:'House', list:['Blue tokens or coins to mark flooded hexes','Numbered list of coastal hexes for flood order','Timer or turn counter (app recommended)'] }
       ],
-      related: ['Nuke Catan', 'The Diamond Mine', 'Hyper Imperium']
+      related: ['The Diamond Mine', 'Hyper Imperium']
     },
 
     'the-diamond-mine': {
@@ -151,7 +131,7 @@
         { kind:'Printable', list:['Diamond mine hex tile (PDF, included)','Diamond resource tokens (cut-out sheet)','Quick-reference rules card'] },
         { kind:'House', list:['Small gems or glass beads as diamond tokens','Number token for the mine hex (your choice)','Pencil and paper for diamond tracking (optional)'] }
       ],
-      related: ['Nuke Catan', 'Flooded Catan', 'Econopoly']
+      related: ['Flooded Catan', 'Econopoly']
     },
 
     'shattered-ascension': {

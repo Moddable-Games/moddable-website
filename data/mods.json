@@ -20,15 +20,6 @@
     "logo": "img/hyper-imperium-logo.png"
   },
   {
-    "category": "Total conversion",
-    "baseGame": "Catan",
-    "title": "Nuke Catan",
-    "body": "Post-apocalyptic overhaul. Sheep are scarce, brick is currency. Once per game, a player may press The Button — one hex is permanently irradiated.",
-    "stats": "3–5 players · 60 min · 12+",
-    "path": "/mods/nuke-catan/",
-    "source": "Moddable.Games"
-  },
-  {
     "category": "Rebalance",
     "baseGame": "Monopoly",
     "title": "Econopoly",

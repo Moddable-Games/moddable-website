@@ -114,7 +114,7 @@ hb.appendChild(linkBtn('Browse the mods', '/mods/', 'primary'));
 hb.appendChild(linkBtn('Read the manifesto', '/about/', 'outline-dark'));
 
 // Mod gallery — featured subset from shared data
-const HOME_MOD_TITLES = ['Talisman: Hexed','Hyper Imperium','Nuke Catan','Econopoly','Flooded Catan','CivRisk'];
+const HOME_MOD_TITLES = ['Talisman: Hexed','Hyper Imperium','Econopoly','Flooded Catan','CivRisk','Anti-Monopoly'];
 const filters = ['All','Total conversion','Rebalance','Reskin'];
 let activeFilter = 'All';
 const filtersEl = document.getElementById('gallery-filters');
@@ -159,8 +159,8 @@ MG.data.load(['mods','news']).then(store => {
 });
 
 const nb2 = document.getElementById('nuke-btns');
-nb2.appendChild(linkBtn('Download the rules', '#', 'red'));
-nb2.appendChild(linkBtn('Read the brief', '/mods/nuke-catan/', 'outline-dark'));
+nb2.appendChild(linkBtn('Play Nukes', '/games/nukes/', 'red'));
+nb2.appendChild(linkBtn('Read the article', '/news/nuking-catan/', 'outline-dark'));
 
 // Nuke smoke wisps
 (function() {

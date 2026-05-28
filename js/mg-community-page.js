@@ -25,7 +25,7 @@
     { name:'mod-pitches',   desc:'Share a mod idea. Get feedback.',       members:88,  accent:'#0c4f8d' },
     { name:'rules-debates', desc:'Rules arguments. Refereed by Tess.',    members:57,  accent:'#d11a1a' },
     { name:'playtesting',   desc:'Looking for testers, finding testers.', members:44,  accent:'#e89a1a' },
-    { name:'nuke-catan',    desc:"It's its own channel. It needs it.",    members:210, accent:'#d11a1a' }
+    { name:'nukes',         desc:'Nukes strategy, maps, and modding.',    members:210, accent:'#d11a1a' }
   ];
   var cl = document.getElementById('channels-list');
   CHANNELS.forEach(function(ch) {
@@ -44,7 +44,7 @@
   var JAMS = [
     { n:'#1', title:'Carcassonne',  date:'Oct 2025', entries:8,  winner:'Infinite Meeple (by @hexbear)', color:'#3a9928' },
     { n:'#2', title:'Risk',         date:'Jan 2026', entries:22, winner:'Geo-political Risk (by @tessellate)', color:'#0c4f8d' },
-    { n:'#3', title:'Catan',        date:'Apr 2026', entries:12, winner:'Nuke Catan v0.9 (by @ascelot)', color:'#d11a1a' }
+    { n:'#3', title:'Catan',        date:'Apr 2026', entries:12, winner:'Flooded Catan Deluxe (by @ascelot)', color:'#d11a1a' }
   ];
   var jg = document.getElementById('jams-grid');
   JAMS.forEach(function(j) {
