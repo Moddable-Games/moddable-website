@@ -5,6 +5,7 @@ document.getElementById('footer-root').appendChild(footer());
 
 const ITERATIONS = 10000;
 const TABS = [
+  { id: 'roller', label: 'Dice Roller' },
   { id: 'risk', label: 'Risk' },
   { id: 'ti4', label: 'TI4 Space' },
   { id: 'aa', label: 'Axis & Allies' },
@@ -13,7 +14,7 @@ const TABS = [
   { id: 'memoir', label: 'Memoir \'44' },
   { id: 'custom', label: 'Custom' }
 ];
-let activeTab = 'risk';
+let activeTab = 'roller';
 
 /* ── Tab bar ── */
 function renderTabs() {
@@ -31,13 +32,78 @@ function renderTabs() {
 function renderPanel() {
   const panel = document.getElementById('combat-panel');
   panel.innerHTML = '';
-  if (activeTab === 'risk') renderRisk(panel);
+  if (activeTab === 'roller') renderRoller(panel);
+  else if (activeTab === 'risk') renderRisk(panel);
   else if (activeTab === 'ti4') renderTI4(panel);
   else if (activeTab === 'aa') renderAA(panel);
   else if (activeTab === 'xwing') renderXWing(panel);
   else if (activeTab === 'bloodbowl') renderBloodBowl(panel);
   else if (activeTab === 'memoir') renderMemoir(panel);
   else renderCustom(panel);
+}
+
+/* ── DICE ROLLER ── */
+function renderRoller(panel) {
+  const DICE = [4,6,8,10,12,20,100];
+  let selectedDie = 6, diceCount = 1, modifier = 0;
+
+  const diceRow = el('div', { class: 'dice-row' });
+  DICE.forEach(d => {
+    const b = document.createElement('button');
+    b.className = 'die-face'; b.setAttribute('data-d', d);
+    b.innerHTML = '<span class="die-face__label' + (d===100?' die-face__label--sm':'') + '">d' + d + '</span>';
+    b.addEventListener('click', () => { selectedDie = d; updateSel(); });
+    diceRow.appendChild(b);
+  });
+  panel.appendChild(diceRow);
+
+  function updateSel() {
+    diceRow.querySelectorAll('.die-face').forEach(b => {
+      const d = parseInt(b.getAttribute('data-d'));
+      b.style.borderColor = d === selectedDie ? '#6fb5ff' : '';
+      b.style.background = d === selectedDie ? '#e8f4ff' : '';
+    });
+  }
+  updateSel();
+
+  const controls = el('div', { class: 'dice-controls' });
+  controls.appendChild(el('label', { class: 'dice-controls__label' }, 'Count:'));
+  const countSlider = document.createElement('input');
+  countSlider.type='range'; countSlider.min='1'; countSlider.max='10'; countSlider.value='1';
+  countSlider.className='dice-controls__range';
+  const countLabel = el('span', { class: 'dice-controls__value' }, '1');
+  countSlider.addEventListener('input', e => { diceCount = parseInt(e.target.value); countLabel.textContent = diceCount; });
+  controls.appendChild(countSlider);
+  controls.appendChild(countLabel);
+
+  const modDiv = el('div', { class: 'dice-controls__modifier' });
+  modDiv.appendChild(el('label', { class: 'dice-controls__label' }, 'Modifier:'));
+  const modMinus = el('button', { class: 'dice-controls__btn' }, '−');
+  const modVal = el('span', { class: 'dice-controls__value dice-controls__value--wide' }, '0');
+  const modPlus = el('button', { class: 'dice-controls__btn' }, '+');
+  modMinus.addEventListener('click', () => { modifier--; modVal.textContent = modifier >= 0 ? '+'+modifier : modifier; });
+  modPlus.addEventListener('click', () => { modifier++; modVal.textContent = modifier >= 0 ? '+'+modifier : modifier; });
+  modDiv.appendChild(modMinus); modDiv.appendChild(modVal); modDiv.appendChild(modPlus);
+  controls.appendChild(modDiv);
+  panel.appendChild(controls);
+
+  const rollResult = el('div', { class: 'dice-result' }, '—');
+  const rollBreak = el('div', { class: 'dice-breakdown' });
+  panel.appendChild(rollResult);
+  panel.appendChild(rollBreak);
+
+  function rollDice() {
+    const rolls = Array.from({length: diceCount}, () => Math.floor(Math.random() * selectedDie) + 1);
+    const total = rolls.reduce((a,b)=>a+b,0) + modifier;
+    rollResult.textContent = total;
+    rollBreak.textContent = '[' + rolls.join(', ') + ']' + (modifier !== 0 ? (modifier>0?'+':'')+modifier : '') + ' = ' + total;
+    diceRow.querySelectorAll('.die-face').forEach(b => {
+      if (parseInt(b.getAttribute('data-d')) === selectedDie) {
+        b.classList.add('rolling'); setTimeout(() => b.classList.remove('rolling'), 400);
+      }
+    });
+  }
+  panel.appendChild(btn('Roll the dice', 'dark', rollDice));
 }
 
 /* ── Results renderer ── */

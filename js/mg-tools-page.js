@@ -14,7 +14,6 @@ const SECTION_ACCENT = { 'game-night':'blue', planning:'green' };
 const FEATURED_TOOL = { id:'rules', title:'Look it up.', eyebrow:'RULES LOOKUP', desc:'Search across all published rulebooks. Find the exact rule mid-game, no page-flipping.' };
 
 const TOOLS = [
-  { id:'dice',       title:'Roll anything.',        eyebrow:'DICE ROLLER',         category:'game-night', desc:'Standard RPG dice from d4 to d100, with modifiers.' },
   { id:'timer',      title:"Time's up.",            eyebrow:'TURN TIMER',          category:'game-night', desc:'Per-player countdown timer with cumulative stats.' },
   { id:'initiative', title:'Who goes next.',        eyebrow:'INITIATIVE TRACKER',  category:'game-night', desc:'Turn order tracker with initiative rolls.' },
   { id:'roles',      title:'Who are you, really?',  eyebrow:'ROLE DISTRIBUTOR',    category:'game-night', desc:'Assign hidden roles for social deduction games. Tap-to-reveal, no app needed.' },
@@ -30,7 +29,7 @@ const MOD_TOOLS = [
   { title:'Twilight Imperium', sub:'Galaxy generator · Faction picker · Objective tracker · Agenda voter', color:'#0c4f8d', href:url('/tools/ti/') },
   { title:'Talisman: Hexed',   sub:'Hex board generator · Character lottery · Encounter draw', color:'#5d2a8a', href:url('/tools/talisman/') },
   { title:'Nukes',             sub:'Hex map generator · Combat calculator · Hostage tracker · Unit reference', color:'#d11a1a', href:url('/tools/nukes/') },
-  { title:'Battle Simulator',  sub:'Monte Carlo odds · Risk · TI4 · Axis & Allies · X-Wing · Blood Bowl · Memoir \'44', color:'#d11a1a', href:url('/tools/combat/') },
+  { title:'Dice Lab',           sub:'Dice roller · Battle simulator · Risk · TI4 · Axis & Allies · X-Wing · Blood Bowl · Memoir \'44', color:'#d11a1a', href:url('/tools/dice/') },
   { title:'Card Deck Builder', sub:'Design · Shuffle · Deal — custom decks for any game', color:'#3a9928', href:url('/tools/decks/') },
   { title:'Chess Variants',    sub:'54 variants · Rules reference · Match setup', color:'#0c4f8d', href:url('/tools/chess/') },
 ];
@@ -104,69 +103,6 @@ function renderToolCards() {
 
 renderToolCards();
 
-/* ── DICE ROLLER ── */
-(function() {
-  const body = document.getElementById('dice-body');
-  const DICE = [4,6,8,10,12,20,100];
-  let selectedDie = 6, diceCount = 1, modifier = 0;
-
-  const diceRow = el('div',{class:'dice-row'});
-  body.appendChild(diceRow);
-  DICE.forEach(d => {
-    const b = document.createElement('button');
-    b.className = 'die-face'; b.setAttribute('data-d', d);
-    b.innerHTML = '<span class="die-face__label' + (d===100?' die-face__label--sm':'') + '">d' + d + '</span>';
-    b.addEventListener('click', () => { selectedDie = d; updateDiceButtons(); });
-    diceRow.appendChild(b);
-  });
-
-  function updateDiceButtons() {
-    diceRow.querySelectorAll('.die-face').forEach(b => {
-      const d = parseInt(b.getAttribute('data-d'));
-      b.style.borderColor = d === selectedDie ? '#6fb5ff' : '';
-      b.style.background = d === selectedDie ? '#e8f4ff' : '';
-    });
-  }
-  updateDiceButtons();
-
-  const controls = el('div',{class:'dice-controls'});
-  controls.innerHTML = '<label class="dice-controls__label">Count:</label>';
-  const countSlider = document.createElement('input');
-  countSlider.type='range'; countSlider.min='1'; countSlider.max='10'; countSlider.value='1'; countSlider.className='dice-controls__range';
-  const countLabel = el('span',{class:'dice-controls__value'},'1');
-  countSlider.addEventListener('input', e => { diceCount = parseInt(e.target.value); countLabel.textContent = diceCount; });
-  controls.appendChild(countSlider);
-  controls.appendChild(countLabel);
-
-  const modDiv = el('div',{class:'dice-controls__modifier'});
-  modDiv.innerHTML = '<label class="dice-controls__label">Modifier:</label>';
-  const modMinus = el('button',{class:'dice-controls__btn'},'−');
-  const modVal = el('span',{class:'dice-controls__value dice-controls__value--wide'},'0');
-  const modPlus = el('button',{class:'dice-controls__btn'},'+');
-  modMinus.addEventListener('click', () => { modifier--; modVal.textContent = modifier >= 0 ? '+'+modifier : modifier; });
-  modPlus.addEventListener('click', () => { modifier++; modVal.textContent = modifier >= 0 ? '+'+modifier : modifier; });
-  modDiv.appendChild(modMinus); modDiv.appendChild(modVal); modDiv.appendChild(modPlus);
-  controls.appendChild(modDiv);
-  body.appendChild(controls);
-
-  const rollResult = el('div',{class:'dice-result'},'—');
-  const rollBreak = el('div',{class:'dice-breakdown'});
-  body.appendChild(rollResult);
-  body.appendChild(rollBreak);
-
-  function rollDice() {
-    const rolls = Array.from({length: diceCount}, () => Math.floor(Math.random() * selectedDie) + 1);
-    const total = rolls.reduce((a,b)=>a+b,0) + modifier;
-    rollResult.textContent = total;
-    rollBreak.textContent = '[' + rolls.join(', ') + ']' + (modifier !== 0 ? (modifier>0?'+':'')+modifier : '') + ' = ' + total;
-    diceRow.querySelectorAll('.die-face').forEach(b => {
-      if (parseInt(b.getAttribute('data-d')) === selectedDie) {
-        b.classList.add('rolling'); setTimeout(() => b.classList.remove('rolling'), 400);
-      }
-    });
-  }
-  body.appendChild(btn('Roll the dice', 'dark', rollDice));
-})();
 
 /* ── NAME GENERATOR ── */
 (function() {
