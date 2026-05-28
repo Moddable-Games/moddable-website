@@ -127,16 +127,18 @@ Pages load `mg-loader.js` (shared modules) + their own page script. Data is fetc
 - Galaxy map generator: replaced player count dropdown with 7 official TI4 layout variants (3p–8p + Hyper Imperium)
 - Hexmap embed: added style selector (Artistic/Classic/Kenney/Realistic per game) with consistent URL params
 - Hexmap embed: postMessage bridge for "New map" regeneration without iframe reload
-- New Combat Odds Calculator at `/tools/combat/` — Risk, TI4 Space, Custom tabs with 10k Monte Carlo sims (#67)
+- New Dice Lab at `/tools/dice/` — dice roller + battle simulators for Risk, TI4, Axis & Allies, X-Wing, Blood Bowl, Memoir '44, Custom (#67)
+- Merged dice roller from tools index into Dice Lab as first tab
 - Removed strike planner widget from Nukes tools (redundant with full hexmaps embed)
 - Removed Hex Map Generator card from tools index (belongs under Engines, not Tools)
 - Updated "Games supported" count 3→4 on all hexmaps engine bands
 - Footer column titles now clickable links to their respective index pages
 - Renamed "Mod-specific tools" → "Per-game tools" with consistent spacing and anchors
+- Tab selection persists in URL hash (`/tools/dice/#risk`) for sharing
 
 #### 2026-05-27
 - New tools: Resource Dashboard, Bag Tracker, Role Distributor (all fully configurable with game presets)
-- Removed: Map Grid Generator (redundant), Voting Booth (needs server), Combat Odds (parked for redesign #67)
+- Removed: Map Grid Generator (redundant), Voting Booth (needs server), Combat Odds (rebuilt as Dice Lab #67)
 - Fixed invisible buttons on tools page (wrong variants for light backgrounds)
 - Tools index: added Hex Map Generator card, updated mod-specific card descriptions
 - Hexmaps tools card links to engine page (not external generator)

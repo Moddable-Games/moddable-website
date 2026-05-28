@@ -19,11 +19,11 @@ let activeTab = TABS.some(t => t.id === hashTab) ? hashTab : 'roller';
 
 /* ── Tab bar ── */
 function renderTabs() {
-  const wrap = document.getElementById('combat-tabs');
+  const wrap = document.getElementById('dice-tabs');
   wrap.innerHTML = '';
   TABS.forEach(t => {
     const b = document.createElement('button');
-    b.className = 'combat-tabs__btn' + (t.id === activeTab ? ' combat-tabs__btn--active' : '');
+    b.className = 'dice-tabs__btn' + (t.id === activeTab ? ' dice-tabs__btn--active' : '');
     b.textContent = t.label;
     b.addEventListener('click', () => {
       activeTab = t.id;
@@ -36,7 +36,7 @@ function renderTabs() {
 }
 
 function renderPanel() {
-  const panel = document.getElementById('combat-panel');
+  const panel = document.getElementById('dice-panel');
   panel.innerHTML = '';
   if (activeTab === 'roller') renderRoller(panel);
   else if (activeTab === 'risk') renderRisk(panel);
@@ -114,8 +114,8 @@ function renderRoller(panel) {
 
 /* ── Results renderer ── */
 function showResults(panel, results) {
-  const wrap = el('div', { class: 'combat-results' });
-  wrap.appendChild(el('div', { class: 'combat-results__title' }, 'Results (' + ITERATIONS.toLocaleString() + ' simulations)'));
+  const wrap = el('div', { class: 'dice-results' });
+  wrap.appendChild(el('div', { class: 'dice-results__title' }, 'Results (' + ITERATIONS.toLocaleString() + ' simulations)'));
 
   const rows = [
     ['Attacker wins', results.atkWin, 'atk'],
@@ -124,19 +124,19 @@ function showResults(panel, results) {
   ];
   rows.forEach(([label, pct, cls]) => {
     if (pct === undefined) return;
-    const row = el('div', { class: 'combat-results__row' });
-    row.appendChild(el('span', { class: 'combat-results__label' }, label));
-    const bar = el('div', { class: 'combat-results__bar' });
-    const fill = el('div', { class: 'combat-results__fill combat-results__fill--' + cls });
+    const row = el('div', { class: 'dice-results__row' });
+    row.appendChild(el('span', { class: 'dice-results__label' }, label));
+    const bar = el('div', { class: 'dice-results__bar' });
+    const fill = el('div', { class: 'dice-results__fill dice-results__fill--' + cls });
     fill.style.width = pct + '%';
     bar.appendChild(fill);
     row.appendChild(bar);
-    row.appendChild(el('span', { class: 'combat-results__pct' }, pct.toFixed(1) + '%'));
+    row.appendChild(el('span', { class: 'dice-results__pct' }, pct.toFixed(1) + '%'));
     wrap.appendChild(row);
   });
 
   if (results.detail) {
-    wrap.appendChild(el('div', { class: 'combat-results__detail' }, results.detail));
+    wrap.appendChild(el('div', { class: 'dice-results__detail' }, results.detail));
   }
   panel.appendChild(wrap);
 }
@@ -170,13 +170,13 @@ function renderRisk(panel) {
   let atkDice = 3, defDice = 2, mode = 'single';
   let atkTroops = 10, defTroops = 5;
 
-  const section = el('div', { class: 'combat-section' });
-  section.appendChild(el('h3', { class: 'combat-section__title' }, 'Risk Combat'));
+  const section = el('div', { class: 'dice-section' });
+  section.appendChild(el('h3', { class: 'dice-section__title' }, 'Risk Combat'));
 
-  const modeRow = el('div', { class: 'combat-row' });
-  modeRow.appendChild(el('span', { class: 'combat-row__label' }, 'Mode:'));
+  const modeRow = el('div', { class: 'dice-row' });
+  modeRow.appendChild(el('span', { class: 'dice-row__label' }, 'Mode:'));
   const modeSel = document.createElement('select');
-  modeSel.className = 'combat-select';
+  modeSel.className = 'dice-select';
   [['single','Single round'],['war','Fight to the death']].forEach(([v,l]) => {
     const opt = document.createElement('option');
     opt.value = v; opt.textContent = l;
@@ -190,7 +190,7 @@ function renderRisk(panel) {
   section.appendChild(configWrap);
   panel.appendChild(section);
 
-  const runWrap = el('div', { class: 'combat-run' });
+  const runWrap = el('div', { class: 'dice-run' });
   const resultsWrap = el('div');
   panel.appendChild(runWrap);
   panel.appendChild(resultsWrap);
@@ -198,38 +198,38 @@ function renderRisk(panel) {
   function renderConfig() {
     configWrap.innerHTML = '';
     if (mode === 'single') {
-      const r1 = el('div', { class: 'combat-row' });
-      r1.appendChild(el('span', { class: 'combat-row__label' }, 'Attacker dice:'));
+      const r1 = el('div', { class: 'dice-row' });
+      r1.appendChild(el('span', { class: 'dice-row__label' }, 'Attacker dice:'));
       const aSel = document.createElement('select');
-      aSel.className = 'combat-select';
+      aSel.className = 'dice-select';
       [1,2,3].forEach(n => { const o = document.createElement('option'); o.value=n; o.textContent=n; if(n===atkDice) o.selected=true; aSel.appendChild(o); });
       aSel.addEventListener('change', () => { atkDice = parseInt(aSel.value); });
       r1.appendChild(aSel);
       configWrap.appendChild(r1);
 
-      const r2 = el('div', { class: 'combat-row' });
-      r2.appendChild(el('span', { class: 'combat-row__label' }, 'Defender dice:'));
+      const r2 = el('div', { class: 'dice-row' });
+      r2.appendChild(el('span', { class: 'dice-row__label' }, 'Defender dice:'));
       const dSel = document.createElement('select');
-      dSel.className = 'combat-select';
+      dSel.className = 'dice-select';
       [1,2].forEach(n => { const o = document.createElement('option'); o.value=n; o.textContent=n; if(n===defDice) o.selected=true; dSel.appendChild(o); });
       dSel.addEventListener('change', () => { defDice = parseInt(dSel.value); });
       r2.appendChild(dSel);
       configWrap.appendChild(r2);
     } else {
-      const r1 = el('div', { class: 'combat-row' });
-      r1.appendChild(el('span', { class: 'combat-row__label' }, 'Attacker troops:'));
+      const r1 = el('div', { class: 'dice-row' });
+      r1.appendChild(el('span', { class: 'dice-row__label' }, 'Attacker troops:'));
       const aIn = document.createElement('input');
       aIn.type='number'; aIn.min='1'; aIn.max='50'; aIn.value=atkTroops;
-      aIn.className='combat-input'; aIn.style.width='72px';
+      aIn.className='dice-input'; aIn.style.width='72px';
       aIn.addEventListener('input', () => { atkTroops = parseInt(aIn.value)||1; });
       r1.appendChild(aIn);
       configWrap.appendChild(r1);
 
-      const r2 = el('div', { class: 'combat-row' });
-      r2.appendChild(el('span', { class: 'combat-row__label' }, 'Defender troops:'));
+      const r2 = el('div', { class: 'dice-row' });
+      r2.appendChild(el('span', { class: 'dice-row__label' }, 'Defender troops:'));
       const dIn = document.createElement('input');
       dIn.type='number'; dIn.min='1'; dIn.max='50'; dIn.value=defTroops;
-      dIn.className='combat-input'; dIn.style.width='72px';
+      dIn.className='dice-input'; dIn.style.width='72px';
       dIn.addEventListener('input', () => { defTroops = parseInt(dIn.value)||1; });
       r2.appendChild(dIn);
       configWrap.appendChild(r2);
@@ -273,7 +273,7 @@ function renderRisk(panel) {
 
   runWrap.innerHTML = '';
   runWrap.appendChild(btn('Run simulation', 'dark', runSim));
-  runWrap.appendChild(el('span', { class: 'combat-run__iters' }, ITERATIONS.toLocaleString() + ' iterations'));
+  runWrap.appendChild(el('span', { class: 'dice-run__iters' }, ITERATIONS.toLocaleString() + ' iterations'));
 }
 
 /* ── TI4 SPACE COMBAT ── */
@@ -325,18 +325,18 @@ function renderTI4(panel) {
   atkCounts[1] = 2; atkCounts[4] = 1; atkCounts[6] = 3; // 2 dread, 1 carrier, 3 fighters
   defCounts[1] = 1; defCounts[3] = 2; defCounts[6] = 2; // 1 dread, 2 cruisers, 2 fighters
 
-  const sides = el('div', { class: 'combat-sides' });
+  const sides = el('div', { class: 'dice-sides' });
 
   function buildSide(label, counts) {
-    const side = el('div', { class: 'combat-side' });
-    side.appendChild(el('div', { class: 'combat-side__header' }, label));
+    const side = el('div', { class: 'dice-side' });
+    side.appendChild(el('div', { class: 'dice-side__header' }, label));
     TI4_SHIPS.forEach((ship, i) => {
-      const row = el('div', { class: 'combat-unit' });
-      row.appendChild(el('span', { class: 'combat-unit__name' }, ship.name));
-      row.appendChild(el('span', { class: 'combat-unit__stat' }, ship.hit + '+'));
+      const row = el('div', { class: 'dice-unit' });
+      row.appendChild(el('span', { class: 'dice-unit__name' }, ship.name));
+      row.appendChild(el('span', { class: 'dice-unit__stat' }, ship.hit + '+'));
       const input = document.createElement('input');
       input.type = 'number'; input.min = '0'; input.max = '12'; input.value = counts[i];
-      input.className = 'combat-input combat-unit__count';
+      input.className = 'dice-input dice-unit__count';
       input.addEventListener('input', () => { counts[i] = parseInt(input.value) || 0; });
       row.appendChild(input);
       side.appendChild(row);
@@ -345,11 +345,11 @@ function renderTI4(panel) {
   }
 
   sides.appendChild(buildSide('Attacker', atkCounts));
-  sides.appendChild(el('div', { class: 'combat-vs' }, 'vs'));
+  sides.appendChild(el('div', { class: 'dice-vs' }, 'vs'));
   sides.appendChild(buildSide('Defender', defCounts));
   panel.appendChild(sides);
 
-  const runWrap = el('div', { class: 'combat-run' });
+  const runWrap = el('div', { class: 'dice-run' });
   const resultsWrap = el('div');
   panel.appendChild(runWrap);
   panel.appendChild(resultsWrap);
@@ -387,7 +387,7 @@ function renderTI4(panel) {
   }
 
   runWrap.appendChild(btn('Run simulation', 'dark', runSim));
-  runWrap.appendChild(el('span', { class: 'combat-run__iters' }, ITERATIONS.toLocaleString() + ' iterations'));
+  runWrap.appendChild(el('span', { class: 'dice-run__iters' }, ITERATIONS.toLocaleString() + ' iterations'));
 }
 
 /* ── AXIS & ALLIES ── */
@@ -457,18 +457,18 @@ function renderAA(panel) {
   atkCounts[0] = 4; atkCounts[2] = 2; atkCounts[3] = 1;
   defCounts[0] = 6; defCounts[2] = 1;
 
-  const sides = el('div', { class: 'combat-sides' });
+  const sides = el('div', { class: 'dice-sides' });
 
   function buildSide(label, units, counts) {
-    const side = el('div', { class: 'combat-side' });
-    side.appendChild(el('div', { class: 'combat-side__header' }, label));
+    const side = el('div', { class: 'dice-side' });
+    side.appendChild(el('div', { class: 'dice-side__header' }, label));
     units.forEach((unit, i) => {
-      const row = el('div', { class: 'combat-unit' });
-      row.appendChild(el('span', { class: 'combat-unit__name' }, unit.name));
-      row.appendChild(el('span', { class: 'combat-unit__stat' }, unit.hit + ' or less'));
+      const row = el('div', { class: 'dice-unit' });
+      row.appendChild(el('span', { class: 'dice-unit__name' }, unit.name));
+      row.appendChild(el('span', { class: 'dice-unit__stat' }, unit.hit + ' or less'));
       const input = document.createElement('input');
       input.type = 'number'; input.min = '0'; input.max = '20'; input.value = counts[i];
-      input.className = 'combat-input combat-unit__count';
+      input.className = 'dice-input dice-unit__count';
       input.addEventListener('input', () => { counts[i] = parseInt(input.value) || 0; });
       row.appendChild(input);
       side.appendChild(row);
@@ -477,11 +477,11 @@ function renderAA(panel) {
   }
 
   sides.appendChild(buildSide('Attacker', AA_UNITS.atk, atkCounts));
-  sides.appendChild(el('div', { class: 'combat-vs' }, 'vs'));
+  sides.appendChild(el('div', { class: 'dice-vs' }, 'vs'));
   sides.appendChild(buildSide('Defender', AA_UNITS.def, defCounts));
   panel.appendChild(sides);
 
-  const runWrap = el('div', { class: 'combat-run' });
+  const runWrap = el('div', { class: 'dice-run' });
   const resultsWrap = el('div');
   panel.appendChild(runWrap);
   panel.appendChild(resultsWrap);
@@ -519,7 +519,7 @@ function renderAA(panel) {
   }
 
   runWrap.appendChild(btn('Run simulation', 'dark', runSim));
-  runWrap.appendChild(el('span', { class: 'combat-run__iters' }, ITERATIONS.toLocaleString() + ' iterations'));
+  runWrap.appendChild(el('span', { class: 'dice-run__iters' }, ITERATIONS.toLocaleString() + ' iterations'));
 }
 
 /* ── X-WING ── */
@@ -549,48 +549,48 @@ function simXWing(atkDice, defDice, atkFocus, defFocus) {
 function renderXWing(panel) {
   let atkDice = 3, defDice = 2, atkFocus = true, defFocus = false;
 
-  const section = el('div', { class: 'combat-section' });
-  section.appendChild(el('h3', { class: 'combat-section__title' }, 'X-Wing Attack'));
+  const section = el('div', { class: 'dice-section' });
+  section.appendChild(el('h3', { class: 'dice-section__title' }, 'X-Wing Attack'));
 
-  const r1 = el('div', { class: 'combat-row' });
-  r1.appendChild(el('span', { class: 'combat-row__label' }, 'Attack dice:'));
+  const r1 = el('div', { class: 'dice-row' });
+  r1.appendChild(el('span', { class: 'dice-row__label' }, 'Attack dice:'));
   const aSel = document.createElement('select');
-  aSel.className = 'combat-select';
+  aSel.className = 'dice-select';
   [1,2,3,4,5,6].forEach(n => { const o = document.createElement('option'); o.value=n; o.textContent=n; if(n===atkDice) o.selected=true; aSel.appendChild(o); });
   aSel.addEventListener('change', () => { atkDice = parseInt(aSel.value); });
   r1.appendChild(aSel);
   section.appendChild(r1);
 
-  const r2 = el('div', { class: 'combat-row' });
-  r2.appendChild(el('span', { class: 'combat-row__label' }, 'Defence dice:'));
+  const r2 = el('div', { class: 'dice-row' });
+  r2.appendChild(el('span', { class: 'dice-row__label' }, 'Defence dice:'));
   const dSel = document.createElement('select');
-  dSel.className = 'combat-select';
+  dSel.className = 'dice-select';
   [0,1,2,3,4,5,6].forEach(n => { const o = document.createElement('option'); o.value=n; o.textContent=n; if(n===defDice) o.selected=true; dSel.appendChild(o); });
   dSel.addEventListener('change', () => { defDice = parseInt(dSel.value); });
   r2.appendChild(dSel);
   section.appendChild(r2);
 
-  const r3 = el('div', { class: 'combat-row' });
-  r3.appendChild(el('span', { class: 'combat-row__label' }, 'Attacker focus:'));
+  const r3 = el('div', { class: 'dice-row' });
+  r3.appendChild(el('span', { class: 'dice-row__label' }, 'Attacker focus:'));
   const afChk = document.createElement('input');
   afChk.type = 'checkbox'; afChk.checked = atkFocus;
   afChk.addEventListener('change', () => { atkFocus = afChk.checked; });
   r3.appendChild(afChk);
-  r3.appendChild(el('span', { class: 'combat-unit__stat' }, 'converts focus → hits'));
+  r3.appendChild(el('span', { class: 'dice-unit__stat' }, 'converts focus → hits'));
   section.appendChild(r3);
 
-  const r4 = el('div', { class: 'combat-row' });
-  r4.appendChild(el('span', { class: 'combat-row__label' }, 'Defender focus:'));
+  const r4 = el('div', { class: 'dice-row' });
+  r4.appendChild(el('span', { class: 'dice-row__label' }, 'Defender focus:'));
   const dfChk = document.createElement('input');
   dfChk.type = 'checkbox'; dfChk.checked = defFocus;
   dfChk.addEventListener('change', () => { defFocus = dfChk.checked; });
   r4.appendChild(dfChk);
-  r4.appendChild(el('span', { class: 'combat-unit__stat' }, 'converts focus → evades'));
+  r4.appendChild(el('span', { class: 'dice-unit__stat' }, 'converts focus → evades'));
   section.appendChild(r4);
 
   panel.appendChild(section);
 
-  const runWrap = el('div', { class: 'combat-run' });
+  const runWrap = el('div', { class: 'dice-run' });
   const resultsWrap = el('div');
   panel.appendChild(runWrap);
   panel.appendChild(resultsWrap);
@@ -616,7 +616,7 @@ function renderXWing(panel) {
   }
 
   runWrap.appendChild(btn('Run simulation', 'dark', runSim));
-  runWrap.appendChild(el('span', { class: 'combat-run__iters' }, ITERATIONS.toLocaleString() + ' iterations'));
+  runWrap.appendChild(el('span', { class: 'dice-run__iters' }, ITERATIONS.toLocaleString() + ' iterations'));
 }
 
 /* ── BLOOD BOWL ── */
@@ -637,13 +637,13 @@ function rollBlockDice(count, chooseBest) {
 function renderBloodBowl(panel) {
   let diceCount = 1, hasDodge = false, hasBlock = true;
 
-  const section = el('div', { class: 'combat-section' });
-  section.appendChild(el('h3', { class: 'combat-section__title' }, 'Blood Bowl Block'));
+  const section = el('div', { class: 'dice-section' });
+  section.appendChild(el('h3', { class: 'dice-section__title' }, 'Blood Bowl Block'));
 
-  const r1 = el('div', { class: 'combat-row' });
-  r1.appendChild(el('span', { class: 'combat-row__label' }, 'Block dice:'));
+  const r1 = el('div', { class: 'dice-row' });
+  r1.appendChild(el('span', { class: 'dice-row__label' }, 'Block dice:'));
   const dSel = document.createElement('select');
-  dSel.className = 'combat-select';
+  dSel.className = 'dice-select';
   [[-2,'2 (defender chooses)'],[-1,'1 (defender chooses)'],[1,'1'],[2,'2 (attacker chooses)'],[3,'3 (attacker chooses)']].forEach(([v,l]) => {
     const o = document.createElement('option'); o.value=v; o.textContent=l;
     if(v===diceCount) o.selected=true; dSel.appendChild(o);
@@ -652,27 +652,27 @@ function renderBloodBowl(panel) {
   r1.appendChild(dSel);
   section.appendChild(r1);
 
-  const r2 = el('div', { class: 'combat-row' });
-  r2.appendChild(el('span', { class: 'combat-row__label' }, 'Attacker has Block:'));
+  const r2 = el('div', { class: 'dice-row' });
+  r2.appendChild(el('span', { class: 'dice-row__label' }, 'Attacker has Block:'));
   const blkChk = document.createElement('input');
   blkChk.type = 'checkbox'; blkChk.checked = hasBlock;
   blkChk.addEventListener('change', () => { hasBlock = blkChk.checked; });
   r2.appendChild(blkChk);
-  r2.appendChild(el('span', { class: 'combat-unit__stat' }, 'both_down = safe'));
+  r2.appendChild(el('span', { class: 'dice-unit__stat' }, 'both_down = safe'));
   section.appendChild(r2);
 
-  const r3 = el('div', { class: 'combat-row' });
-  r3.appendChild(el('span', { class: 'combat-row__label' }, 'Defender has Dodge:'));
+  const r3 = el('div', { class: 'dice-row' });
+  r3.appendChild(el('span', { class: 'dice-row__label' }, 'Defender has Dodge:'));
   const dodChk = document.createElement('input');
   dodChk.type = 'checkbox'; dodChk.checked = hasDodge;
   dodChk.addEventListener('change', () => { hasDodge = dodChk.checked; });
   r3.appendChild(dodChk);
-  r3.appendChild(el('span', { class: 'combat-unit__stat' }, 'stumbles = push'));
+  r3.appendChild(el('span', { class: 'dice-unit__stat' }, 'stumbles = push'));
   section.appendChild(r3);
 
   panel.appendChild(section);
 
-  const runWrap = el('div', { class: 'combat-run' });
+  const runWrap = el('div', { class: 'dice-run' });
   const resultsWrap = el('div');
   panel.appendChild(runWrap);
   panel.appendChild(resultsWrap);
@@ -705,7 +705,7 @@ function renderBloodBowl(panel) {
   }
 
   runWrap.appendChild(btn('Run simulation', 'dark', runSim));
-  runWrap.appendChild(el('span', { class: 'combat-run__iters' }, ITERATIONS.toLocaleString() + ' iterations'));
+  runWrap.appendChild(el('span', { class: 'dice-run__iters' }, ITERATIONS.toLocaleString() + ' iterations'));
 }
 
 /* ── MEMOIR '44 ── */
@@ -714,22 +714,22 @@ const MEMOIR_FACES = ['infantry','infantry','armor','grenade','star','flag'];
 function renderMemoir(panel) {
   let atkDice = 3, targetType = 'infantry', inCover = false;
 
-  const section = el('div', { class: 'combat-section' });
-  section.appendChild(el('h3', { class: 'combat-section__title' }, 'Memoir \'44 Combat'));
+  const section = el('div', { class: 'dice-section' });
+  section.appendChild(el('h3', { class: 'dice-section__title' }, 'Memoir \'44 Combat'));
 
-  const r1 = el('div', { class: 'combat-row' });
-  r1.appendChild(el('span', { class: 'combat-row__label' }, 'Combat dice:'));
+  const r1 = el('div', { class: 'dice-row' });
+  r1.appendChild(el('span', { class: 'dice-row__label' }, 'Combat dice:'));
   const dSel = document.createElement('select');
-  dSel.className = 'combat-select';
+  dSel.className = 'dice-select';
   [1,2,3,4,5,6].forEach(n => { const o = document.createElement('option'); o.value=n; o.textContent=n; if(n===atkDice) o.selected=true; dSel.appendChild(o); });
   dSel.addEventListener('change', () => { atkDice = parseInt(dSel.value); });
   r1.appendChild(dSel);
   section.appendChild(r1);
 
-  const r2 = el('div', { class: 'combat-row' });
-  r2.appendChild(el('span', { class: 'combat-row__label' }, 'Target type:'));
+  const r2 = el('div', { class: 'dice-row' });
+  r2.appendChild(el('span', { class: 'dice-row__label' }, 'Target type:'));
   const tSel = document.createElement('select');
-  tSel.className = 'combat-select';
+  tSel.className = 'dice-select';
   [['infantry','Infantry'],['armor','Armor']].forEach(([v,l]) => {
     const o = document.createElement('option'); o.value=v; o.textContent=l;
     if(v===targetType) o.selected=true; tSel.appendChild(o);
@@ -738,18 +738,18 @@ function renderMemoir(panel) {
   r2.appendChild(tSel);
   section.appendChild(r2);
 
-  const r3 = el('div', { class: 'combat-row' });
-  r3.appendChild(el('span', { class: 'combat-row__label' }, 'Target in cover:'));
+  const r3 = el('div', { class: 'dice-row' });
+  r3.appendChild(el('span', { class: 'dice-row__label' }, 'Target in cover:'));
   const covChk = document.createElement('input');
   covChk.type = 'checkbox'; covChk.checked = inCover;
   covChk.addEventListener('change', () => { inCover = covChk.checked; });
   r3.appendChild(covChk);
-  r3.appendChild(el('span', { class: 'combat-unit__stat' }, 'flags don\'t force retreat'));
+  r3.appendChild(el('span', { class: 'dice-unit__stat' }, 'flags don\'t force retreat'));
   section.appendChild(r3);
 
   panel.appendChild(section);
 
-  const runWrap = el('div', { class: 'combat-run' });
+  const runWrap = el('div', { class: 'dice-run' });
   const resultsWrap = el('div');
   panel.appendChild(runWrap);
   panel.appendChild(resultsWrap);
@@ -783,7 +783,7 @@ function renderMemoir(panel) {
   }
 
   runWrap.appendChild(btn('Run simulation', 'dark', runSim));
-  runWrap.appendChild(el('span', { class: 'combat-run__iters' }, ITERATIONS.toLocaleString() + ' iterations'));
+  runWrap.appendChild(el('span', { class: 'dice-run__iters' }, ITERATIONS.toLocaleString() + ' iterations'));
 }
 
 /* ── CUSTOM ── */
@@ -791,38 +791,38 @@ function renderCustom(panel) {
   let atkUnits = [{ name: 'Infantry', dice: 1, sides: 6, hit: 4 }];
   let defUnits = [{ name: 'Infantry', dice: 1, sides: 6, hit: 4 }];
 
-  const sides = el('div', { class: 'combat-sides combat-sides--stacked' });
+  const sides = el('div', { class: 'dice-sides dice-sides--stacked' });
 
   function buildSide(label, units, redraw) {
-    const side = el('div', { class: 'combat-side' });
-    side.appendChild(el('div', { class: 'combat-side__header' }, label));
+    const side = el('div', { class: 'dice-side' });
+    side.appendChild(el('div', { class: 'dice-side__header' }, label));
     units.forEach((u, i) => {
-      const row = el('div', { class: 'combat-unit' });
+      const row = el('div', { class: 'dice-unit' });
       const nameIn = document.createElement('input');
       nameIn.type = 'text'; nameIn.value = u.name;
-      nameIn.className = 'combat-input combat-unit__name-input';
+      nameIn.className = 'dice-input dice-unit__name-input';
       nameIn.addEventListener('input', () => { u.name = nameIn.value; });
       row.appendChild(nameIn);
       const diceIn = document.createElement('input');
       diceIn.type = 'number'; diceIn.min = '1'; diceIn.max = '10'; diceIn.value = u.dice;
-      diceIn.className = 'combat-input'; diceIn.title = 'Dice count';
+      diceIn.className = 'dice-input'; diceIn.title = 'Dice count';
       diceIn.addEventListener('input', () => { u.dice = parseInt(diceIn.value) || 1; });
       row.appendChild(diceIn);
-      row.appendChild(el('span', { class: 'combat-unit__stat' }, 'd'));
+      row.appendChild(el('span', { class: 'dice-unit__stat' }, 'd'));
       const sidesIn = document.createElement('input');
       sidesIn.type = 'number'; sidesIn.min = '2'; sidesIn.max = '20'; sidesIn.value = u.sides;
-      sidesIn.className = 'combat-input'; sidesIn.title = 'Dice sides';
+      sidesIn.className = 'dice-input'; sidesIn.title = 'Dice sides';
       sidesIn.addEventListener('input', () => { u.sides = parseInt(sidesIn.value) || 6; });
       row.appendChild(sidesIn);
-      row.appendChild(el('span', { class: 'combat-unit__stat' }, 'hit'));
+      row.appendChild(el('span', { class: 'dice-unit__stat' }, 'hit'));
       const hitIn = document.createElement('input');
       hitIn.type = 'number'; hitIn.min = '1'; hitIn.max = '20'; hitIn.value = u.hit;
-      hitIn.className = 'combat-input'; hitIn.title = 'Hit on X+';
+      hitIn.className = 'dice-input'; hitIn.title = 'Hit on X+';
       hitIn.addEventListener('input', () => { u.hit = parseInt(hitIn.value) || 1; });
       row.appendChild(hitIn);
-      row.appendChild(el('span', { class: 'combat-unit__stat' }, '+'));
+      row.appendChild(el('span', { class: 'dice-unit__stat' }, '+'));
       const rm = document.createElement('button');
-      rm.className = 'combat-unit__remove'; rm.textContent = '×';
+      rm.className = 'dice-unit__remove'; rm.textContent = '×';
       rm.addEventListener('click', () => { units.splice(i, 1); redraw(); });
       row.appendChild(rm);
       side.appendChild(row);
@@ -837,13 +837,13 @@ function renderCustom(panel) {
   function redraw() {
     sides.innerHTML = '';
     sides.appendChild(buildSide('Attacker', atkUnits, redraw));
-    sides.appendChild(el('div', { class: 'combat-vs' }, 'vs'));
+    sides.appendChild(el('div', { class: 'dice-vs' }, 'vs'));
     sides.appendChild(buildSide('Defender', defUnits, redraw));
   }
   redraw();
   panel.appendChild(sides);
 
-  const runWrap = el('div', { class: 'combat-run' });
+  const runWrap = el('div', { class: 'dice-run' });
   const resultsWrap = el('div');
   panel.appendChild(runWrap);
   panel.appendChild(resultsWrap);
@@ -876,7 +876,7 @@ function renderCustom(panel) {
   }
 
   runWrap.appendChild(btn('Run simulation', 'dark', runSim));
-  runWrap.appendChild(el('span', { class: 'combat-run__iters' }, ITERATIONS.toLocaleString() + ' iterations'));
+  runWrap.appendChild(el('span', { class: 'dice-run__iters' }, ITERATIONS.toLocaleString() + ' iterations'));
 }
 
 /* ── Init ── */
