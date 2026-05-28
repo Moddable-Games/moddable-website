@@ -121,6 +121,15 @@ Pages load `mg-loader.js` (shared modules) + their own page script. Data is fetc
 
 ### Changelog
 
+#### 2026-05-28
+- Added Colony as 4th hexmaps-powered game across engines page, stats, and consumer listings (#71)
+- TI4 tools: added Discordant Stars + Thunder's Edge expansions (36 factions, 26 objectives, 20 agendas) (#68)
+- Galaxy map generator: replaced player count dropdown with 7 official TI4 layout variants (3p–8p + Hyper Imperium)
+- Hexmap embed: added style selector (Artistic/Classic/Kenney/Realistic per game) with consistent URL params
+- Hexmap embed: postMessage bridge for "New map" regeneration without iframe reload
+- Removed strike planner widget from Nukes tools (redundant with full hexmaps embed)
+- Updated "Games supported" count 3→4 on all hexmaps engine bands
+
 #### 2026-05-27
 - New tools: Resource Dashboard, Bag Tracker, Role Distributor (all fully configurable with game presets)
 - Removed: Map Grid Generator (redundant), Voting Booth (needs server), Combat Odds (parked for redesign #67)

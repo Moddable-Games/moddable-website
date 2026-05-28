@@ -1,6 +1,4 @@
 body { background:#f5f4ef; }
-#hex-map { background:#0a0d2a; border-radius:14px; padding:24px; position:relative; overflow:hidden; margin-bottom:14px; cursor:pointer; }
-#hex-map-inner { position:absolute; inset:0; background:radial-gradient(circle at 50% 50%,rgba(209,26,26,0.18) 0%,transparent 70%); pointer-events:none; }
 
 /* ── Nukes hero ────────────────────────────────────────────────────── */
 .nukes-hero { background:#000; color:#fff; padding:56px 32px 72px; position:relative; overflow:hidden; }
@@ -30,10 +28,6 @@ body { background:#f5f4ef; }
 .nukes-card__eyebrow--green { color:#3a9928; }
 .nukes-card__title { font-family:var(--mg-font-display); font-weight:600; font-size:24px; color:#14161c; margin:0; letter-spacing:-0.3px; }
 .nukes-card__desc { font-family:var(--mg-font-body); font-size:14px; color:#4f5764; margin:4px 0 0; }
-
-/* ── Target picker footer ──────────────────────────────────────────── */
-.target-picker__footer { display:flex; justify-content:space-between; align-items:center; flex-wrap:wrap; gap:8px; }
-#strike-count { font-family:var(--mg-font-mono); font-size:13px; color:#4f5764; }
 
 /* ── Combat calculator ─────────────────────────────────────────────── */
 .combat-grid { display:grid; grid-template-columns:1fr auto 1fr; gap:16px; align-items:start; margin-bottom:16px; }

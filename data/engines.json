@@ -27,13 +27,14 @@
     "repo": "https://github.com/Moddable-Games/moddable-hexmaps",
     "logo": "/img/moddable-hexmaps-cube.svg",
     "stats": [
-      { "value": "3", "label": "supported games" },
+      { "value": "4", "label": "supported games" },
       { "value": "∞", "label": "seeded maps" },
       { "value": "3", "label": "render styles" }
     ],
     "features": ["Canvas renderer", "Seeded RNG", "Import/export JSON", "Style selector", "Editor mode"],
     "consumers": [
       { "title": "Nukes", "href": "/games/nukes/" },
+      { "title": "Colony", "href": "https://hex.moddable.games/colony/" },
       { "title": "Talisman: Hexed", "href": "/mods/talisman-hexed/" },
       { "title": "Hyper Imperium", "href": "/mods/hyper-imperium/" }
     ]

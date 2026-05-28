@@ -26,7 +26,7 @@ ghLink.setAttribute('rel', 'noopener');
 document.getElementById('hero-btns').appendChild(ghLink);
 
 var STATS = [
-  ['Games', '3'],
+  ['Games', '4'],
   ['Renderer', 'Canvas'],
   ['Styles', '3'],
   ['Seeds', '∞'],
@@ -57,6 +57,13 @@ var GAMES = [
   },
   {
     n: '03',
+    title: 'Colony',
+    body: 'Resource extraction on alien worlds. Procedural hex terrain with biomes, hazards, and contested mining sites.',
+    href: 'https://hex.moddable.games/colony/',
+    external: true
+  },
+  {
+    n: '04',
     title: 'Twilight Imperium',
     body: 'Galactic hex maps from the TI4 tile pool. Balanced placement for competitive play.',
     href: '/tools/ti/'
@@ -69,7 +76,9 @@ GAMES.forEach(function(g) {
   a.appendChild(el('h3', { class: 'mg-card__title' }, g.title));
   a.appendChild(el('p', { class: 'mg-card__body' }, g.body));
   if (g.href) {
-    var link = el('a', { href: url(g.href), class: 'mg-card__link' });
+    var attrs = { href: g.external ? g.href : url(g.href), class: 'mg-card__link' };
+    if (g.external) { attrs.target = '_blank'; attrs.rel = 'noopener'; }
+    var link = el('a', attrs);
     link.textContent = 'View game →';
     a.appendChild(link);
   }
@@ -106,12 +115,15 @@ STYLES.forEach(function(s) {
 
 var CONSUMERS = [
   { title: 'Nukes', desc: 'Cold-war territory control on a hex map. Three superpowers, fifteen turns, one button that ends everything.', href: '/games/nukes/', accent: T.red },
+  { title: 'Colony', desc: 'Resource extraction on alien worlds. Procedural terrain with biomes, hazards, and contested mining sites.', href: 'https://hex.moddable.games/colony/', accent: T.green, external: true },
   { title: 'TI4 Map Generator', desc: 'Balanced galactic hex maps from the full Twilight Imperium tile pool.', href: '/tools/ti/', accent: T.blue },
   { title: 'Talisman Tools', desc: 'Fantasy hex board generator with inner, middle, and outer ring terrain.', href: '/tools/talisman/', accent: T.green }
 ];
 var cg = document.getElementById('consumers-grid');
 CONSUMERS.forEach(function(c) {
-  var card = el('a', { href: url(c.href), class: 'mg-card mg-lift', 'data-reveal': 'up' });
+  var attrs = { href: c.external ? c.href : url(c.href), class: 'mg-card mg-lift', 'data-reveal': 'up' };
+  if (c.external) { attrs.target = '_blank'; attrs.rel = 'noopener'; }
+  var card = el('a', attrs);
   card.style.borderTop = '3px solid ' + c.accent;
   card.style.textDecoration = 'none';
   card.appendChild(el('h3', { class: 'mg-card__title' }, c.title));

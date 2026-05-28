@@ -149,6 +149,222 @@
       "color": "#f0e68c",
       "flag": "CK",
       "expansion": "codex"
+    },
+    {
+      "name": "Augurs of Ilyxum",
+      "color": "#b8860b",
+      "flag": "AI",
+      "expansion": "ds"
+    },
+    {
+      "name": "Bentor Conglomerate",
+      "color": "#4682b4",
+      "flag": "BC",
+      "expansion": "ds"
+    },
+    {
+      "name": "Berserkers of Kjalengard",
+      "color": "#8b2500",
+      "flag": "BK",
+      "expansion": "ds"
+    },
+    {
+      "name": "Celdauri Trade Confederation",
+      "color": "#daa520",
+      "flag": "CT",
+      "expansion": "ds"
+    },
+    {
+      "name": "Cheiran Hordes",
+      "color": "#556b2f",
+      "flag": "CH",
+      "expansion": "ds"
+    },
+    {
+      "name": "Dih-Mohn Flotilla",
+      "color": "#708090",
+      "flag": "DM",
+      "expansion": "ds"
+    },
+    {
+      "name": "Edyn Mandate",
+      "color": "#c0c0c0",
+      "flag": "ED",
+      "expansion": "ds"
+    },
+    {
+      "name": "Florzen",
+      "color": "#ff6eb4",
+      "flag": "FL",
+      "expansion": "ds"
+    },
+    {
+      "name": "Free Systems Compact",
+      "color": "#20b2aa",
+      "flag": "FS",
+      "expansion": "ds"
+    },
+    {
+      "name": "Ghemina Raiders",
+      "color": "#8b0000",
+      "flag": "GR",
+      "expansion": "ds"
+    },
+    {
+      "name": "Ghoti Wayfarers",
+      "color": "#48d1cc",
+      "flag": "GW",
+      "expansion": "ds"
+    },
+    {
+      "name": "Gledge Union",
+      "color": "#b0c4de",
+      "flag": "GU",
+      "expansion": "ds"
+    },
+    {
+      "name": "Glimmer of Mortheus",
+      "color": "#9370db",
+      "flag": "GM",
+      "expansion": "ds"
+    },
+    {
+      "name": "Kollecc Society",
+      "color": "#6b8e23",
+      "flag": "KS",
+      "expansion": "ds"
+    },
+    {
+      "name": "Kortali Tribunal",
+      "color": "#cd5c5c",
+      "flag": "KT",
+      "expansion": "ds"
+    },
+    {
+      "name": "Kyro Sodality",
+      "color": "#191970",
+      "flag": "KY",
+      "expansion": "ds"
+    },
+    {
+      "name": "Lanka",
+      "color": "#ff8c00",
+      "flag": "LA",
+      "expansion": "ds"
+    },
+    {
+      "name": "Lizho Collective",
+      "color": "#2e8b57",
+      "flag": "LC",
+      "expansion": "ds"
+    },
+    {
+      "name": "Mirveda Protectorate",
+      "color": "#4169e1",
+      "flag": "MP",
+      "expansion": "ds"
+    },
+    {
+      "name": "Monks of Kolume",
+      "color": "#ffd700",
+      "flag": "MK",
+      "expansion": "ds"
+    },
+    {
+      "name": "Myko-Mentori",
+      "color": "#8fbc8f",
+      "flag": "MM",
+      "expansion": "ds"
+    },
+    {
+      "name": "Nivyn Star Kings",
+      "color": "#00008b",
+      "flag": "NK",
+      "expansion": "ds"
+    },
+    {
+      "name": "Nokar Sellships",
+      "color": "#a0522d",
+      "flag": "NS",
+      "expansion": "ds"
+    },
+    {
+      "name": "Olradin League",
+      "color": "#2f4f4f",
+      "flag": "OL",
+      "expansion": "ds"
+    },
+    {
+      "name": "Rhodun Mechatronics",
+      "color": "#b22222",
+      "flag": "RM",
+      "expansion": "ds"
+    },
+    {
+      "name": "Savages of Cymiae",
+      "color": "#8b4513",
+      "flag": "SC",
+      "expansion": "ds"
+    },
+    {
+      "name": "Shipwrights of Axis",
+      "color": "#4682b4",
+      "flag": "SA",
+      "expansion": "ds"
+    },
+    {
+      "name": "Tnelis Syndicate",
+      "color": "#483d8b",
+      "flag": "TS",
+      "expansion": "ds"
+    },
+    {
+      "name": "Vaden Banking Clans",
+      "color": "#daa520",
+      "flag": "VB",
+      "expansion": "ds"
+    },
+    {
+      "name": "Vaylerian Scourge",
+      "color": "#800080",
+      "flag": "VS",
+      "expansion": "ds"
+    },
+    {
+      "name": "Zealots of Demir",
+      "color": "#dc143c",
+      "flag": "ZD",
+      "expansion": "ds"
+    },
+    {
+      "name": "Zelian Purifier",
+      "color": "#696969",
+      "flag": "ZP",
+      "expansion": "ds"
+    },
+    {
+      "name": "Drahn Consortium",
+      "color": "#7b68ee",
+      "flag": "DC",
+      "expansion": "te"
+    },
+    {
+      "name": "Khrask Wave Riders",
+      "color": "#00ced1",
+      "flag": "KW",
+      "expansion": "te"
+    },
+    {
+      "name": "Roh'Vhin Mechanical",
+      "color": "#cd853f",
+      "flag": "RV",
+      "expansion": "te"
+    },
+    {
+      "name": "Sylas Union",
+      "color": "#9acd32",
+      "flag": "SU",
+      "expansion": "te"
     }
   ],
   "objectives": {
@@ -232,6 +448,58 @@
       {
         "text": "Raise a Fleet",
         "expansion": "pok"
+      },
+      {
+        "text": "Become the Gatekeeper",
+        "expansion": "ds"
+      },
+      {
+        "text": "Brave the Void",
+        "expansion": "ds"
+      },
+      {
+        "text": "Darken the Skies",
+        "expansion": "ds"
+      },
+      {
+        "text": "Demonstrate Your Power",
+        "expansion": "ds"
+      },
+      {
+        "text": "Establish Hegemony",
+        "expansion": "ds"
+      },
+      {
+        "text": "Forge Alliances",
+        "expansion": "ds"
+      },
+      {
+        "text": "Master the Sciences",
+        "expansion": "ds"
+      },
+      {
+        "text": "Stake Your Claim",
+        "expansion": "ds"
+      },
+      {
+        "text": "Breach the Frontier",
+        "expansion": "te"
+      },
+      {
+        "text": "Commission an Armada",
+        "expansion": "te"
+      },
+      {
+        "text": "Exploit the Periphery",
+        "expansion": "te"
+      },
+      {
+        "text": "Fortify the Core",
+        "expansion": "te"
+      },
+      {
+        "text": "Ignite the Frontier",
+        "expansion": "te"
       }
     ],
     "stage2": [
@@ -314,6 +582,58 @@
       {
         "text": "Rule Distant Lands",
         "expansion": "pok"
+      },
+      {
+        "text": "Claim the Eyes of the Galaxy",
+        "expansion": "ds"
+      },
+      {
+        "text": "Command the Tides",
+        "expansion": "ds"
+      },
+      {
+        "text": "Destroy Their Sanctuaries",
+        "expansion": "ds"
+      },
+      {
+        "text": "Dominate the Fringe",
+        "expansion": "ds"
+      },
+      {
+        "text": "Establish a Blockade",
+        "expansion": "ds"
+      },
+      {
+        "text": "Impose Your Will",
+        "expansion": "ds"
+      },
+      {
+        "text": "Seize the Unknown",
+        "expansion": "ds"
+      },
+      {
+        "text": "Unify the Frontier",
+        "expansion": "ds"
+      },
+      {
+        "text": "Annex the Thunder Reach",
+        "expansion": "te"
+      },
+      {
+        "text": "Conquer the Contested",
+        "expansion": "te"
+      },
+      {
+        "text": "Forge an Empire",
+        "expansion": "te"
+      },
+      {
+        "text": "Shatter the Silence",
+        "expansion": "te"
+      },
+      {
+        "text": "Storm the Edge",
+        "expansion": "te"
       }
     ]
   },
@@ -329,6 +649,14 @@
     {
       "key": "codex",
       "label": "Codex III"
+    },
+    {
+      "key": "ds",
+      "label": "Discordant Stars"
+    },
+    {
+      "key": "te",
+      "label": "Thunder's Edge"
     }
   ],
   "agendas": [
@@ -653,6 +981,146 @@
       "for": "Players that have ships in systems containing wormholes gain 1 trade good at the start of the status phase",
       "against": "Each player who voted for this outcome gains 2 trade goods",
       "expansion": "base"
+    },
+    {
+      "title": "Articles of Confederation",
+      "type": "Law",
+      "for": "Each player may not have more than 1 scored secret objective at a time",
+      "against": "Each player draws 1 secret objective",
+      "expansion": "ds"
+    },
+    {
+      "title": "Clandestine Operations",
+      "type": "Directive",
+      "for": "Each player that has an agent on another player's planet gains 2 trade goods",
+      "against": "Each player reveals all action cards in their hand",
+      "expansion": "ds"
+    },
+    {
+      "title": "Colonial Tariffs",
+      "type": "Law",
+      "for": "When a player gains trade goods from another player's ability, they gain 1 fewer trade good",
+      "against": "Each player gains 1 trade good for each planet they control outside their home system",
+      "expansion": "ds"
+    },
+    {
+      "title": "Debt Forgiveness",
+      "type": "Directive",
+      "for": "Each player returns all promissory notes to their owners",
+      "against": "Each player who has another player's promissory note gains 2 trade goods",
+      "expansion": "ds"
+    },
+    {
+      "title": "Demilitarised Corridors",
+      "type": "Law",
+      "for": "Players cannot move ships through systems that contain another player's structures",
+      "against": "Each player may place 1 PDS from reinforcements on a planet they control that contains a structure",
+      "expansion": "ds"
+    },
+    {
+      "title": "Expeditionary Mandate",
+      "type": "Directive",
+      "for": "Each player may explore 1 planet they control",
+      "against": "The speaker draws 2 action cards",
+      "expansion": "ds"
+    },
+    {
+      "title": "Frontier Conscription",
+      "type": "Directive",
+      "for": "Each player places 2 infantry from reinforcements on a planet they control in or adjacent to a frontier token",
+      "against": "Each player removes 1 infantry from a planet they control",
+      "expansion": "ds"
+    },
+    {
+      "title": "Guild Monopolies",
+      "type": "Law",
+      "for": "During the strategy phase, players cannot choose a strategy card that shares a number with one they chose last round",
+      "against": "Each player gains 1 commodity",
+      "expansion": "ds"
+    },
+    {
+      "title": "Interstellar Tariffs",
+      "type": "Law",
+      "for": "When a player would gain trade goods from a transaction, they gain 1 fewer",
+      "against": "Each player gains trade goods equal to their commodities value",
+      "expansion": "ds"
+    },
+    {
+      "title": "Salvage Operations",
+      "type": "Directive",
+      "for": "Each player may produce up to 2 units in a system where they destroyed an opponent's ship this round",
+      "against": "Each player gains 1 trade good for each ship they lost in combat this round",
+      "expansion": "ds"
+    },
+    {
+      "title": "Artefact Requisition",
+      "type": "Directive",
+      "for": "The elected player gains 1 relic",
+      "against": "The elected player purges 1 relic they have",
+      "expansion": "te"
+    },
+    {
+      "title": "Border Fortification",
+      "type": "Law",
+      "for": "Each player may place 1 PDS from reinforcements on a planet adjacent to an anomaly",
+      "against": "Destroy all PDS on planets adjacent to anomalies",
+      "expansion": "te"
+    },
+    {
+      "title": "Contested Frontier",
+      "type": "Directive",
+      "for": "Each player may move up to 2 ships to an adjacent system containing a frontier token",
+      "against": "Remove all frontier tokens from the game board",
+      "expansion": "te"
+    },
+    {
+      "title": "Emergency Mobilisation",
+      "type": "Directive",
+      "for": "Each player may place 2 fighters and 1 infantry from reinforcements in their home system",
+      "against": "Each player destroys 1 non-fighter ship in their home system",
+      "expansion": "te"
+    },
+    {
+      "title": "Expeditionary Arms Race",
+      "type": "Law",
+      "for": "Units on planets adjacent to anomalies gain +1 to combat rolls",
+      "against": "Units on planets adjacent to anomalies cost 1 more resource to produce",
+      "expansion": "te"
+    },
+    {
+      "title": "Frontier Mining Rights",
+      "type": "Law",
+      "for": "At the start of the status phase, each player gains 1 trade good for each frontier system they control",
+      "against": "Attach this card to a hazardous planet; its resource value is increased by 3",
+      "expansion": "te"
+    },
+    {
+      "title": "Galactic Redistribution",
+      "type": "Directive",
+      "for": "Each player gives 2 trade goods to the player on their left",
+      "against": "Each player gives 1 commodity to the player on their right",
+      "expansion": "te"
+    },
+    {
+      "title": "Isolationist Decree",
+      "type": "Law",
+      "for": "Players cannot use the secondary ability of other players' strategy cards",
+      "against": "Each player may use the secondary of an unchosen strategy card",
+      "expansion": "te"
+    },
+    {
+      "title": "Thunder Accords",
+      "type": "Law",
+      "for": "When a player wins a space combat, they gain 1 trade good",
+      "against": "When a player retreats from combat, they lose 1 trade good",
+      "expansion": "te"
+    },
+    {
+      "title": "Warden Protocols",
+      "type": "Law",
+      "for": "Players cannot activate systems containing another player's space dock unless they have more non-fighter ships in or adjacent to that system",
+      "against": "Each player places 1 destroyer from reinforcements in a system containing their space dock",
+      "expansion": "te"
     }
   ]
 }
