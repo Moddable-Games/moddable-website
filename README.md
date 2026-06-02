@@ -2,7 +2,7 @@
 
 **Creating games you already own.**
 
-A multi-page marketing site and tools platform for an open-source board game modding workshop. Nine mods. Four original games. Two open-source engines. One Discord.
+A multi-page marketing site and tools platform for an open-source board game modding workshop. Ten mods. Three original games. Two open-source engines. One Discord.
 
 ---
 
@@ -119,6 +119,19 @@ Pages load `mg-loader.js` (shared modules) + their own page script. Data is fetc
 ---
 
 ### Changelog
+
+#### 2026-06-02
+- Synced MCE to v0.7.1 / 70 variants (from v0.6.8 / 64): stats, features, consumer APIs, developer guides
+- Moved Dungeon Chess from /games/ to /mods/ — it's a total conversion of chess, not an original game
+- Added news article: "Building Games on Chess" (MCE v0.7.1 consumer APIs + DC v1.2.0 renderer migration)
+- Rewrote Nukes game page from actual moddable-rules rulebook (removed all hallucinated content)
+- Added game logos to games index cards (410x410 normalized PNGs)
+- Updated all counts site-wide: 10 mods, 3 games, 13 news articles
+- Regenerated OG images for games page and new article
+- Added `.game-card__logo` CSS for logo thumbnails in game/mod cards
+- Fixed body text centering in games engines callout section
+- Created issues #78 (Mongo sync) and #79 (Endless Skies sync) for future rulebook rewrites
+- Bumped to v1.0.60
 
 #### 2026-05-28
 - Synced chess engine stats from moddable-chess v0.6.8: variant count 39/54→64, engine version, board types
