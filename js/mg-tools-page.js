@@ -705,7 +705,7 @@ renderToolCards();
     hits.forEach(entry => {
       const link = document.createElement('a');
       link.className = 'rules-lookup__hit';
-      link.href = 'https://rules.moddable.games/dist/' + entry.game + '/#' + entry.anchor;
+      link.href = 'https://rules.moddable.games/' + (entry.variantUrl || ('dist/' + entry.game + '/')) + '#' + entry.anchor;
       link.target = '_blank';
       link.rel = 'noopener';
       const meta = el('div',{class:'rules-lookup__hit-meta'});

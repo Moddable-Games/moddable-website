@@ -15,7 +15,8 @@
     {type:'mod', title:'The Diamond Mine', desc:'Total conversion turning Catan into a mining game', href:url('/mods/the-diamond-mine/')},
     {type:'mod', title:'Shattered Ascension', desc:'Community overhaul of TI4 with rebalanced factions', href:url('/mods/shattered-ascension/')},
     {type:'mod', title:'CivRisk', desc:'Risk rewritten to play like Civilisation', href:url('/mods/civrisk/')},
-    {type:'game', title:'Nukes', desc:'Our original nuclear strategy game', href:url('/games/nukes/')},
+    {type:'mod', title:'Dungeon Chess', desc:'Total conversion — chess reimagined as asymmetric dungeon skirmish', href:url('/mods/dungeon-chess/')},
+    {type:'game', title:'Nukes', desc:'Cold-war territory control on a hex map', href:url('/games/nukes/')},
     {type:'game', title:'Mongo', desc:'Fast-paced card battler', href:url('/games/mongo/')},
     {type:'game', title:'Endless Skies', desc:'Cooperative airship exploration', href:url('/games/endless-skies/')},
     {type:'engine', title:'Moddable Chess', desc:'2000+ variants, one moddable engine', href:url('/engines/moddable-chess/')},
@@ -48,7 +49,7 @@
           type: 'rule',
           title: entry.heading,
           desc: entry.gameTitle + ' — ' + entry.section,
-          href: 'https://rules.moddable.games/dist/' + entry.game + '/#' + entry.anchor
+          href: 'https://rules.moddable.games/' + (entry.variantUrl || ('dist/' + entry.game + '/')) + '#' + entry.anchor
         }));
       })
       .catch(() => {});
