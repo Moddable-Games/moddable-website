@@ -66,7 +66,21 @@ function initHexmapEmbed(game) {
   }
 
   function regenerate() {
-    renderFrame();
+    if (iframe && iframe.contentWindow) {
+      var msg = { type: 'hexmap:regenerate', random: true, style: currentStyle };
+      if (useLayouts) {
+        msg.layout = currentLayout;
+      } else {
+        msg.size = currentSize;
+        msg.players = currentPlayers;
+      }
+      iframe.contentWindow.postMessage(msg, '*');
+      currentSeed = '…';
+      var seedSpan = controlsEl.querySelector('.hexmap-embed__seed');
+      if (seedSpan) seedSpan.textContent = 'seed: ····';
+    } else {
+      renderFrame();
+    }
   }
 
   function renderControls() {
@@ -86,7 +100,9 @@ function initHexmapEmbed(game) {
       });
       layoutSel.addEventListener('change', function() {
         currentLayout = layoutSel.value;
-        renderFrame();
+        if (iframe && iframe.contentWindow) {
+          iframe.contentWindow.postMessage({ type: 'hexmap:regenerate', layout: currentLayout, style: currentStyle, random: true }, '*');
+        } else { renderFrame(); }
       });
       layoutGroup.appendChild(layoutSel);
       controlsEl.appendChild(layoutGroup);
@@ -104,7 +120,9 @@ function initHexmapEmbed(game) {
         });
         sizeSel.addEventListener('change', function() {
           currentSize = parseInt(sizeSel.value);
-          renderFrame();
+          if (iframe && iframe.contentWindow) {
+            iframe.contentWindow.postMessage({ type: 'hexmap:regenerate', size: currentSize, players: currentPlayers, style: currentStyle, random: true }, '*');
+          } else { renderFrame(); }
         });
         sizeGroup.appendChild(sizeSel);
         controlsEl.appendChild(sizeGroup);
@@ -123,7 +141,9 @@ function initHexmapEmbed(game) {
         });
         playerSel.addEventListener('change', function() {
           currentPlayers = parseInt(playerSel.value);
-          renderFrame();
+          if (iframe && iframe.contentWindow) {
+            iframe.contentWindow.postMessage({ type: 'hexmap:regenerate', size: currentSize, players: currentPlayers, style: currentStyle, random: true }, '*');
+          } else { renderFrame(); }
         });
         playerGroup.appendChild(playerSel);
         controlsEl.appendChild(playerGroup);
@@ -144,7 +164,9 @@ function initHexmapEmbed(game) {
       });
       styleSel.addEventListener('change', function() {
         currentStyle = styleSel.value;
-        renderFrame();
+        if (iframe && iframe.contentWindow) {
+          iframe.contentWindow.postMessage({ type: 'hexmap:setStyle', style: currentStyle }, '*');
+        } else { renderFrame(); }
       });
       styleGroup.appendChild(styleSel);
       controlsEl.appendChild(styleGroup);
