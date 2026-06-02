@@ -24,12 +24,12 @@ ghLink.setAttribute('rel', 'noopener');
 document.getElementById('hero-btns').appendChild(ghLink);
 
 var STATS = [
-  ['Variants', '64'],
+  ['Variants', '70'],
   ['Players', '2–6'],
-  ['Status', 'Open alpha'],
-  ['Engine', 'v0.6.8'],
+  ['Status', 'Live'],
+  ['Engine', 'v0.7.1'],
   ['Board types', 'Square · 4×8 to 12×8'],
-  ['Updated', 'May 2026']
+  ['Updated', 'Jun 2026']
 ];
 var sb = document.getElementById('stats-bar');
 STATS.forEach(function(pair, i) {
@@ -46,7 +46,7 @@ var VARIANTS = [
   { n: '03', title: 'Chaos Variants', body: 'Atomic, Duck Chess, Fog of War, Horde, Rifle — explosive mechanics that shatter standard strategy.' },
   { n: '04', title: 'Big Boards', body: 'Capablanca (10×8), Grand (10×10), Courier (12×8) — wider boards with fairy pieces. Plus Breakthrough on 7×7.' },
   { n: '05', title: 'Asymmetric', body: 'Maharaja & Sepoys, Antichess, Marseillais — unequal forces or unequal turns. Mind-bending.' },
-  { n: '06', title: 'Dungeon Chess', body: 'Our original variant — four asymmetric species, XP drafting, cannon mechanics, and modular dungeon boards. Now its own standalone game.', href: '/games/dungeon-chess/' }
+  { n: '06', title: 'Dungeon Chess', body: 'Our most ambitious variant — four asymmetric factions, XP drafting, cannon mechanics, and modular dungeon boards. A total conversion of chess.', href: '/mods/dungeon-chess/' }
 ];
 var vg = document.getElementById('variants-grid');
 VARIANTS.forEach(function(s) {
@@ -62,7 +62,7 @@ VARIANTS.forEach(function(s) {
   vg.appendChild(a);
 });
 
-var FEATURES = ['Embed API', 'Extension API', 'AI opponent', 'Touch/mobile', 'Theme-aware'];
+var FEATURES = ['Embed API', 'Consumer APIs', 'AI + Opening books', 'Game controller', 'Developer guides', 'Touch/mobile'];
 var ef = document.getElementById('engine-features');
 FEATURES.forEach(function(f) {
   ef.appendChild(el('span', { class: 'mg-dark-center__pill' }, f));
@@ -78,10 +78,10 @@ docsBtn.setAttribute('rel', 'noopener');
 document.getElementById('engine-cta').appendChild(docsBtn);
 
 var HOOKS = [
-  { name: 'Embed API', desc: 'One iframe, full game board. Pass variant, theme, and board-only params. Responsive and touch-ready.' },
-  { name: 'Extension API', desc: 'Register custom pieces, terrain types, multi-player turns, and pluggable legality/win conditions.' },
-  { name: 'Variant registry', desc: 'YAML-defined variants combine a board geometry, piece set, and win condition into a playable game.' },
-  { name: 'AI hooks', desc: 'Minimax engine with configurable depth. Solo mode, Pass & Play, or bot-vs-bot for testing.' }
+  { name: 'Embed API', desc: 'One iframe, full game board. Pass variant, theme, difficulty, and board-only params. Responsive and touch-ready.' },
+  { name: 'Consumer APIs', desc: 'createGameController, createReplay, renderBoard hooks, positionKey — build full games on MCE as a subsystem.' },
+  { name: 'Unit templates', desc: 'Declarative piece registration with buildUnitHandler. Define movement, attacks, and abilities in config.' },
+  { name: 'AI + Opening books', desc: 'Negamax with alpha-beta pruning, quiescence search, transposition tables, and JSON opening books.' }
 ];
 var hg = document.getElementById('hooks-grid');
 HOOKS.forEach(function(h) {
@@ -103,8 +103,8 @@ HOOKS.forEach(function(h) {
 document.getElementById('comm-heading').textContent = 'Built on this engine';
 
 var CONSUMERS = [
-  { title: 'Dungeon Chess', desc: 'Asymmetric fantasy strategy on modular dungeon boards. Four factions, 24 units, XP drafting.', href: '/games/dungeon-chess/', accent: T.green },
-  { title: 'Chess Variant Loader', desc: 'Pick, preview, and play any of 64 variants from the browser. Rules reference and match launcher.', href: '/tools/chess/', accent: T.blue },
+  { title: 'Dungeon Chess', desc: 'Asymmetric fantasy strategy on modular dungeon boards. Four factions, 24 units, XP drafting.', href: '/mods/dungeon-chess/', accent: T.green },
+  { title: 'Chess Variant Loader', desc: 'Pick, preview, and play any of 70 variants from the browser. Rules reference and match launcher.', href: '/tools/chess/', accent: T.blue },
   { title: 'Fog of War Chess', desc: 'You only see squares your pieces can move to. No check warnings. Pure information warfare.', href: '/tools/chess/', accent: T.red }
 ];
 var cg = document.getElementById('comm-grid');

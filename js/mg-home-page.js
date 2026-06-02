@@ -114,7 +114,7 @@ hb.appendChild(linkBtn('Browse the mods', '/mods/', 'primary'));
 hb.appendChild(linkBtn('Read the manifesto', '/about/', 'outline-dark'));
 
 // Mod gallery — featured subset from shared data
-const HOME_MOD_TITLES = ['Talisman: Hexed','Hyper Imperium','Econopoly','Flooded Catan','CivRisk','Anti-Monopoly'];
+const HOME_MOD_TITLES = ['Dungeon Chess','Talisman: Hexed','Hyper Imperium','Econopoly','Anti-Monopoly','CivRisk'];
 const filters = ['All','Total conversion','Rebalance','Reskin'];
 let activeFilter = 'All';
 const filtersEl = document.getElementById('gallery-filters');

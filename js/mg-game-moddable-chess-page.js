@@ -59,7 +59,7 @@ playLink.setAttribute('target','_blank'); playLink.setAttribute('rel','noopener'
 document.getElementById('hero-btns').appendChild(playLink);
 document.getElementById('hero-btns').appendChild(linkBtn('Browse variants','/tools/chess/','outline-dark'));
 
-const STATS = [['Variants','64'],['Players','2–6'],['Status','Open alpha'],['Engine','v0.6.8'],['Board types','Square · 4×8 to 12×8'],['Updated','May 2026']];
+const STATS = [['Variants','70'],['Players','2–6'],['Status','Live'],['Engine','v0.7.1'],['Board types','Square · 4×8 to 12×8'],['Updated','Jun 2026']];
 const sb = document.getElementById('stats-bar');
 STATS.forEach(([k,v],i) => {
   if(i>0) sb.appendChild(el('span',{class:'stats-row__divider'}));
@@ -75,7 +75,7 @@ const VARIANTS = [
   {n:'03', title:'Chaos Variants',        body:'Atomic, Duck Chess, Fog of War, Horde, Rifle — explosive mechanics that shatter standard strategy.'},
   {n:'04', title:'Big Boards',            body:'Capablanca (10×8), Grand (10×10), Courier (12×8) — wider boards with fairy pieces. Plus Breakthrough on 7×7.'},
   {n:'05', title:'Asymmetric',            body:'Maharaja & Sepoys, Antichess, Marseillais — unequal forces or unequal turns. Mind-bending.'},
-  {n:'06', title:'Dungeon Chess',         body:'Our original variant — four asymmetric species, XP drafting, cannon mechanics, and modular dungeon boards. Now its own standalone game.', href:'/games/dungeon-chess/'},
+  {n:'06', title:'Dungeon Chess',         body:'Our most ambitious variant — four asymmetric factions, XP drafting, cannon mechanics, and modular dungeon boards. A total conversion of chess.', href:'/mods/dungeon-chess/'},
 ];
 const vg = document.getElementById('variants-grid');
 VARIANTS.forEach(s => {

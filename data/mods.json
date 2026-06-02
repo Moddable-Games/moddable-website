@@ -1,5 +1,15 @@
 [
   {
+    "category": "Total conversion",
+    "baseGame": "Chess",
+    "title": "Dungeon Chess",
+    "body": "Chess reimagined as an asymmetric dungeon skirmish. Four factions on modular boards with unique abilities, XP drafting, and environmental hazards. Powered by the Moddable Chess Engine.",
+    "stats": "2–4 players · 30–120 min · 12+",
+    "path": "/mods/dungeon-chess/",
+    "source": "Moddable.Games",
+    "logo": "img/dungeon-chess-logo.png"
+  },
+  {
     "category": "Reskin",
     "baseGame": "Talisman 4e",
     "title": "Talisman: Hexed",

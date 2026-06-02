@@ -37,7 +37,7 @@ function render(game) {
     }
   }
 
-  document.getElementById('nav-root').appendChild(navbar('Games'));
+  document.getElementById('nav-root').appendChild(navbar(document.body.dataset.nav || 'Games'));
   document.getElementById('footer-root').appendChild(footer());
 
   const gradientEl = document.querySelector('[data-gradient]');

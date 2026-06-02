@@ -1,0 +1,34 @@
+<p class="lede">Moddable Chess Engine v0.7.1 ships with a new developer guide that documents something we actually did &mdash; take a chess variant so ambitious it became its own standalone experience, and bring it home to the engine it was always meant to run on. Dungeon Chess v1.2.0 is the proof.</p>
+<p>Dungeon Chess started as a chess mod &mdash; what happens when you replace the 8&times;8 grid with modular dungeon tiles, swap the 6 standard pieces for 24 fantasy units across four asymmetric factions, and add terrain hazards, special abilities, and XP drafting? The answer outgrew a single variant definition. It needed its own renderer, its own AI, its own move generation. Every piece type was hand-coded. Every terrain check was a hardcoded conditional. It worked, but it was a parallel universe &mdash; disconnected from the engine powering our other 70 variants.</p>
+<h2 id="the-migration">The migration.</h2>
+<p>Over two weeks, we migrated Dungeon Chess from a standalone codebase onto MCE's consumer APIs. The game loop was replaced by <code>createGameController</code>. Fourteen unit handlers were rewritten as declarative templates using <code>buildUnitHandler</code>. The bespoke heuristic AI was replaced by MCE's negamax with alpha-beta pruning, quiescence search, and transposition tables.</p>
+<p>The renderer &mdash; stone textures, flickering torchlight, floating embers, water caustics &mdash; now flows through MCE's <code>tilePainter</code> and <code>pieceProvider</code> hooks. The replay system uses <code>createReplay</code>. Capture animations use <code>onAnimateMove</code>.</p>
+<p>The result: Dungeon Chess deleted over 500 lines of infrastructure code and came back to where it belongs &mdash; as the most complex variant in the MCE ecosystem, running on the same engine as Fischer Random and Atomic Chess, gaining every future improvement for free.</p>
+<h2 id="what-v07-adds">What v0.7 adds.</h2>
+<p>The consumer APIs that made this migration possible are now public and documented. MCE v0.7.1 exposes:</p>
+<ul>
+  <li><strong>createGameController</strong> &mdash; full interaction loop with turn cycling, AI scheduling, and undo</li>
+  <li><strong>createReplay</strong> &mdash; step-through replay with move annotations</li>
+  <li><strong>renderBoard hooks</strong> &mdash; tilePainter, pieceProvider, legalMoveRenderer, afterRender, surroundRenderer</li>
+  <li><strong>buildUnitHandler</strong> &mdash; declarative piece registration (movement, attacks, abilities in config)</li>
+  <li><strong>Terrain predicates</strong> &mdash; global movement constraints without per-piece conditionals</li>
+  <li><strong>Effect lifecycle</strong> &mdash; timed square effects with automatic expiry</li>
+  <li><strong>Opening books</strong> &mdash; JSON-based book loading for AI opening play</li>
+  <li><strong>positionKey</strong> &mdash; custom hash functions for non-standard piece ownership</li>
+</ul>
+<h2 id="four-guides">Four guides.</h2>
+<p>The new Guides section on <a href="https://chess.moddable.games/docs/guide.html" target="_blank" rel="noopener">chess.moddable.games</a> walks through every extension point with real implementations:</p>
+<ol>
+  <li><strong>Orda Chess</strong> &mdash; custom pieces with divergent movement and attack patterns</li>
+  <li><strong>Crazyhouse</strong> &mdash; action moves, hand management, non-standard move generation</li>
+  <li><strong>Poison Chess</strong> &mdash; the effects system, timed square states, conditional legality</li>
+  <li><strong>Dungeon Chess</strong> &mdash; building a complete game with terrain, capture interception, multi-step turns, and custom rendering</li>
+</ol>
+<p>The Dungeon Chess guide isn't theoretical. It documents the exact migration path we took &mdash; every hook, every adapter, every decision point. If you're building a variant ambitious enough to need its own renderer and AI configuration, this is the blueprint.</p>
+<h2 id="the-numbers">The numbers.</h2>
+<p>MCE now supports 70 playable variants across six categories: classics, alternate win conditions, chaos variants, big boards, asymmetric, and multi-player. The AI handles all of them with variant-specific evaluation functions and configurable difficulty.</p>
+<p>Dungeon Chess v1.2.0 &mdash; four factions, 24 units, terrain hazards, special abilities, and AI opponents &mdash; is a chess variant running on the same engine as Fischer Random. The most extreme mod in the library, proving the engine's ceiling.</p>
+<blockquote>"The best engine is one you can build things on that it was never designed for."</blockquote>
+<h2 id="whats-next">What's next.</h2>
+<p>MCE's consumer APIs are stable and versioned. We're building more variants on them &mdash; some will stay simple, others will push the engine as far as Dungeon Chess does. The guide pattern &mdash; documenting real migrations, not hypothetical tutorials &mdash; will continue as more ambitious mods ship.</p>
+<p>Play Dungeon Chess at <a href="https://chess.moddable.games/play/" target="_blank" rel="noopener">chess.moddable.games</a>. Read the guides. Build something we didn't expect.</p>

@@ -22,17 +22,16 @@ Modular JS architecture: one loader (`js/mg-loader.js`) loads 12 shared modules 
 |-----|------|
 | `/` | Home |
 | `/mods/` | Filterable mod library |
-| `/mods/[slug]/` | 12 mod detail pages |
+| `/mods/[slug]/` | 10 mod detail pages (incl. Dungeon Chess) |
 | `/games/` | Games hub |
 | `/games/nukes/` | Nukes |
 | `/games/mongo/` | Mongo |
 | `/games/endless-skies/` | Endless Skies |
-| `/games/dungeon-chess/` | Dungeon Chess |
 | `/engines/` | Engines hub |
 | `/engines/moddable-chess/` | Moddable Chess engine |
 | `/engines/moddable-hexmaps/` | Moddable Hexmaps engine |
 | `/news/` | News index |
-| `/news/[slug]/` | 12 article pages |
+| `/news/[slug]/` | 13 article pages |
 | `/tools/` | Tools hub (dice, names, scores) |
 | `/tools/ti/` | Twilight Imperium tools |
 | `/tools/talisman/` | Talisman tools |

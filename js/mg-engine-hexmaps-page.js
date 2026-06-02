@@ -114,7 +114,7 @@ STYLES.forEach(function(s) {
 });
 
 var CONSUMERS = [
-  { title: 'Nukes', desc: 'Cold-war territory control on a hex map. Three superpowers, fifteen turns, one button that ends everything.', href: '/games/nukes/', accent: T.red },
+  { title: 'Nukes', desc: 'Cold-war territory control on a hex map. Hostages fuel your moves but reinforce your enemy. Build bases, convert isotopes, threaten nuclear strikes.', href: '/games/nukes/', accent: T.red },
   { title: 'Colony', desc: 'Resource extraction on alien worlds. Procedural terrain with biomes, hazards, and contested mining sites.', href: 'https://hex.moddable.games/colony/', accent: T.green, external: true },
   { title: 'TI4 Map Generator', desc: 'Balanced galactic hex maps from the full Twilight Imperium tile pool.', href: '/tools/ti/', accent: T.blue },
   { title: 'Talisman Tools', desc: 'Fantasy hex board generator with inner, middle, and outer ring terrain.', href: '/tools/talisman/', accent: T.green }

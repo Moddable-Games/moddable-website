@@ -8,13 +8,13 @@
     "repo": "https://github.com/Moddable-Games/moddable-chess",
     "logo": "/img/moddable-chess-cube.svg",
     "stats": [
-      { "value": "64", "label": "playable variants" },
+      { "value": "70", "label": "playable variants" },
       { "value": "2000+", "label": "documented variants" },
       { "value": "1", "label": "AI opponent" }
     ],
-    "features": ["SVG board renderer", "AI opponent (minimax)", "Embed API", "Extension API", "Touch/mobile support"],
+    "features": ["SVG board renderer", "AI opponent (minimax)", "Embed API", "Consumer APIs", "Game controller", "Opening books", "Developer guides", "Touch/mobile support"],
     "consumers": [
-      { "title": "Dungeon Chess", "href": "/games/dungeon-chess/" },
+      { "title": "Dungeon Chess", "href": "/mods/dungeon-chess/" },
       { "title": "Chess Variant Loader", "href": "/tools/chess/" }
     ]
   },

@@ -32,6 +32,10 @@
       var hexOverlay = el('div', {class:'game-card__thumb-hex'});
       hexOverlay.style.backgroundImage = 'url("' + url('/img/hex-grid-white.svg') + '")';
       thumb.appendChild(hexOverlay);
+      if (g.logo) {
+        var logo = el('img', {src: url(g.logo), alt: g.title, class:'game-card__logo'});
+        thumb.appendChild(logo);
+      }
       card.appendChild(thumb);
 
       var body = el('div', {class:'game-card__body'});

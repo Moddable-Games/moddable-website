@@ -16,3 +16,4 @@
   .games-horizon__btns { display: flex; gap: 12px; justify-content: center; flex-wrap: wrap; }
 
   .games-engines-callout { text-align: center; }
+  .games-engines-callout .mg-body-sub { margin-left: auto; margin-right: auto; }

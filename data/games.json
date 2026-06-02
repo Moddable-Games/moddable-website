@@ -3,11 +3,12 @@
     "title": "Nukes",
     "accent": "red",
     "status": "Open alpha · Live",
-    "desc": "Cold-war territory control on a hex map. Three superpowers, fifteen turns, one button that ends everything.",
+    "desc": "Cold-war territory control on a hex map. Hostages fuel your moves but reinforce your enemy. Build bases, convert isotopes, and threaten nuclear strikes.",
     "players": "2–3",
     "time": "45+ min",
     "path": "/games/nukes/",
-    "rulebook": "nukes"
+    "rulebook": "nukes",
+    "logo": "/img/nukes-logo.png"
   },
   {
     "title": "Mongo",
@@ -17,7 +18,8 @@
     "players": "3–6",
     "time": "90 min",
     "path": "/games/mongo/",
-    "rulebook": "mongo"
+    "rulebook": "mongo",
+    "logo": "/img/mongo-logo.png"
   },
   {
     "title": "Endless Skies",
@@ -27,17 +29,7 @@
     "players": "1–4",
     "time": "60 min",
     "path": "/games/endless-skies/",
-    "rulebook": "endless-skies"
-  },
-  {
-    "title": "Dungeon Chess",
-    "accent": "green",
-    "status": "Live",
-    "desc": "Asymmetric fantasy strategy on modular dungeon boards. Four factions, 24 units, XP drafting.",
-    "players": "2–4",
-    "time": "30–120 min",
-    "path": "/games/dungeon-chess/",
-    "rulebook": "dungeon-chess",
-    "type": "game"
+    "rulebook": "endless-skies",
+    "logo": "/img/endless-skies-logo.png"
   }
 ]

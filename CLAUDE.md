@@ -28,15 +28,15 @@ One shared component library (`_mg.js` + `_mg.css`), one page per HTML file.
 ├── js/
 │   └── mg-loader.js        ← entry point; loads shared modules
 ├── data/
-│   ├── mods.json           ← mod library (9 entries)
-│   ├── games.json          ← games (4 entries)
+│   ├── mods.json           ← mod library (10 entries)
+│   ├── games.json          ← games (3 entries)
 │   ├── engines.json        ← engine/SDK listings (2 entries)
-│   ├── news.json           ← news posts (12 entries)
+│   ├── news.json           ← news posts (13 entries)
 │   └── team.json           ← team members (4 entries)
 │
 ├── mods/
 │   ├── index.html          ← mods library (filterable, searchable)
-│   └── <slug>/index.html   ← detail page per mod (9 total)
+│   └── <slug>/index.html   ← detail page per mod (10 total, incl. Dungeon Chess)
 ├── engines/
 │   ├── index.html          ← engines index (Chess, Hexmaps)
 │   ├── moddable-chess/index.html    ← Chess engine page
@@ -45,11 +45,10 @@ One shared component library (`_mg.js` + `_mg.css`), one page per HTML file.
 │   ├── index.html                ← games index
 │   ├── endless-skies/index.html  ← Endless Skies game page
 │   ├── mongo/index.html          ← Mongo game page
-│   ├── dungeon-chess/index.html  ← Dungeon Chess game page
 │   └── nukes/index.html          ← Nukes game page
 ├── news/
 │   ├── index.html          ← news index
-│   └── <slug>/index.html   ← article pages (12 total)
+│   └── <slug>/index.html   ← article pages (13 total)
 ├── tools/
 │   ├── index.html          ← tools hub
 │   ├── ti/index.html       ← TI4 tools (faction picker, objectives, agenda voter)
@@ -208,11 +207,12 @@ hand-rolled sections — so they stay visually consistent.
 
 ## Mods library data (source of truth: `data/mods.json`)
 
-9 entries across 5 base games. Three are Moddable originals; six are real
+10 entries across 6 base games. Four are Moddable originals; six are real
 publicly available community variants with attributions.
 
 | Title | Base game | Category | Source |
 |---|---|---|---|
+| Dungeon Chess | Chess | Total conversion | Moddable.Games |
 | Talisman: Hexed | Talisman 4e | Reskin | Moddable.Games |
 | Hyper Imperium | Twilight Imperium 4e | Rebalance | Moddable.Games |
 | Econopoly | Monopoly | Rebalance | Moddable.Games |
