@@ -29,7 +29,7 @@
     "stats": [
       { "value": "4", "label": "supported games" },
       { "value": "∞", "label": "seeded maps" },
-      { "value": "3", "label": "render styles" }
+      { "value": "4", "label": "render styles" }
     ],
     "features": ["Canvas renderer", "Seeded RNG", "Import/export JSON", "Style selector", "Editor mode"],
     "consumers": [

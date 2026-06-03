@@ -102,8 +102,9 @@ document.getElementById('engine-cta').appendChild(docsBtn);
 
 var STYLES = [
   { title: 'Classic', body: 'Flat-colour hexes with clean borders. Fast to render, easy to read at any zoom level.' },
-  { title: 'Artistic', body: 'Hand-painted tile images for each terrain type. Immersive but heavier on assets.' },
-  { title: 'ASCII', body: 'Monospace character rendering. Lightweight, printable, and nostalgic.' }
+  { title: 'Kenney', body: 'Tile sprites from the Kenney asset pack. Crisp pixel art with consistent proportions.' },
+  { title: 'Artistic', body: 'Hand-painted tile textures for each terrain type. Immersive and richly detailed.' },
+  { title: 'Realistic', body: 'Photo-based terrain tiles. High-fidelity rendering for presentation and export.' }
 ];
 var sg = document.getElementById('styles-grid');
 STYLES.forEach(function(s) {
