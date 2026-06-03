@@ -28,9 +28,9 @@ document.getElementById('hero-btns').appendChild(ghLink);
 var STATS = [
   ['Games', '4'],
   ['Renderer', 'Canvas'],
-  ['Styles', '3'],
+  ['Styles', '4'],
   ['Seeds', '∞'],
-  ['Export', 'JSON'],
+  ['Engine', 'v0.5.1'],
   ['Status', 'Live']
 ];
 var sb = document.getElementById('stats-bar');
