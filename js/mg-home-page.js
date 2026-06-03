@@ -2,7 +2,7 @@
 const { T, el, btn, linkBtn, navbar, footer, modCard, cubeSVG, url } = MG;
 
 // Nav + Footer
-document.getElementById('nav-root').appendChild(navbar('Mods'));
+document.getElementById('nav-root').appendChild(navbar(''));
 document.getElementById('footer-root').appendChild(footer());
 
 // Hero parallax + colour tint cycle + cube + mouse tracking
