@@ -14,10 +14,10 @@ var heroLogo = document.querySelector('.game-hero__logo');
 heroLogo.src = url('/img/moddable-chess-cube.svg');
 heroLogo.alt = 'Moddable Chess';
 
-var playLink = linkBtn('Play now', 'https://chess.moddable.games/play/', 'blue');
-playLink.setAttribute('target', '_blank');
-playLink.setAttribute('rel', 'noopener');
-document.getElementById('hero-btns').appendChild(playLink);
+var siteLink = linkBtn('chess.moddable.games', 'https://chess.moddable.games/', 'blue');
+siteLink.setAttribute('target', '_blank');
+siteLink.setAttribute('rel', 'noopener');
+document.getElementById('hero-btns').appendChild(siteLink);
 var ghLink = linkBtn('GitHub', 'https://github.com/Moddable-Games/moddable-chess', 'outline-dark');
 ghLink.setAttribute('target', '_blank');
 ghLink.setAttribute('rel', 'noopener');
@@ -78,10 +78,8 @@ docsBtn.setAttribute('rel', 'noopener');
 document.getElementById('engine-cta').appendChild(docsBtn);
 
 var HOOKS = [
-  { name: 'Embed API', desc: 'One iframe, full game board. Pass variant, theme, difficulty, and board-only params. Responsive and touch-ready.' },
-  { name: 'Consumer APIs', desc: 'createGameController, createReplay, renderBoard hooks, positionKey — build full games on MCE as a subsystem.' },
-  { name: 'Unit templates', desc: 'Declarative piece registration with buildUnitHandler. Define movement, attacks, and abilities in config.' },
-  { name: 'AI + Opening books', desc: 'Negamax with alpha-beta pruning, quiescence search, transposition tables, and JSON opening books.' }
+  { name: 'Embed via iframe', desc: 'Drop a single iframe into any page. Control variant, theme, difficulty, and layout via URL params. Responsive and touch-ready.' },
+  { name: 'postMessage control', desc: 'Switch variants, change themes, and reset games without reloading the iframe. Send typed messages to the embed window.' }
 ];
 var hg = document.getElementById('hooks-grid');
 HOOKS.forEach(function(h) {
@@ -104,8 +102,7 @@ document.getElementById('comm-heading').textContent = 'Built on this engine';
 
 var CONSUMERS = [
   { title: 'Dungeon Chess', desc: 'Asymmetric fantasy strategy on modular dungeon boards. Four factions, 24 units, XP drafting.', href: '/mods/dungeon-chess/', accent: T.green },
-  { title: 'Chess Variant Loader', desc: 'Pick, preview, and play any of 70 variants from the browser. Rules reference and match launcher.', href: '/tools/chess/', accent: T.blue },
-  { title: 'Fog of War Chess', desc: 'You only see squares your pieces can move to. No check warnings. Pure information warfare.', href: '/tools/chess/', accent: T.red }
+  { title: 'Chess Variant Loader', desc: 'Pick, preview, and play any of 70 variants from the browser. Rules reference and match launcher.', href: '/tools/chess/', accent: T.blue }
 ];
 var cg = document.getElementById('comm-grid');
 CONSUMERS.forEach(function(c) {
