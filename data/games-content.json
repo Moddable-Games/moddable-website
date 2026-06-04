@@ -149,128 +149,83 @@
       "bloom": "radial-gradient(ellipse,rgba(58,153,40,0.25) 0%,transparent 65%)"
     },
     "stats": [
-      [
-        "Players",
-        "3–6"
-      ],
-      [
-        "Time",
-        "90 min"
-      ],
-      [
-        "Age",
-        "14+"
-      ],
-      [
-        "Mechanism",
-        "Trick-taking"
-      ],
-      [
-        "Status",
-        "Open beta"
-      ],
-      [
-        "Spots left",
-        "143 / 200"
-      ],
-      [
-        "Updated",
-        "May 2026"
-      ]
+      ["Players", "2–8"],
+      ["Time", "120+ min"],
+      ["Age", "14+"],
+      ["Components", "127 hex tiles · 800 units"],
+      ["Factions", "8"],
+      ["Status", "In development"],
+      ["Version", "v0.9.0"]
     ],
     "buttons": {
       "hero": [
-        [
-          "Sign up for playtest",
-          "#",
-          "green"
-        ],
-        [
-          "Read the Rules",
-          "rules:mongo",
-          "outline-dark"
-        ]
+        ["Read the Rules", "rules:mongo", "green"],
+        ["View on GitHub", "https://github.com/Moddable-Games/moddable-rules/blob/main/games/mongo/content/rulebook.md", "outline-dark"]
       ],
       "cta": [],
       "extra": {
         "playtest-btns": [
-          [
-            "Sign up for playtest",
-            "#",
-            "green"
-          ],
-          [
-            "Download the beta rules",
-            "#",
-            "outline-dark"
-          ]
+          ["Read the Rules", "rules:mongo", "green"],
+          ["View on GitHub", "https://github.com/Moddable-Games/moddable-rules/blob/main/games/mongo/content/rulebook.md", "outline-dark"]
         ]
       }
     },
     "steps": [
       {
         "n": "01",
-        "title": "Deal the deck",
-        "body": "54 cards, shuffled. Each player gets 7. The remaining stack is the Mongo pile — it changes shape every round."
+        "title": "Pick your initiative",
+        "body": "Pay to place council members on the initiative matrix. Choose Attack, Build, Trade, or Defend priorities for the round. Higher slots cost more but let you act first."
       },
       {
         "n": "02",
-        "title": "Name the rule",
-        "body": "The winner of the previous trick names one new rule for the next trick only. Anything within the Rule Book bounds."
+        "title": "Place orders secretly",
+        "body": "Give each tile with units a face-down order token: Defend, Disrupt, Move, or Bolster. All orders are revealed simultaneously."
       },
       {
         "n": "03",
-        "title": "Play a trick",
-        "body": "Standard trick-taking: lead a card, follow suit if you can, highest card wins. Except the rule from step 2 overrides."
+        "title": "Resolve by initiative",
+        "body": "Take turns resolving one order at a time. Move units, harvest commodities, build structures, or disrupt neighbours. Pass early to earn bonus income."
       },
       {
         "n": "04",
-        "title": "Stack the Mongo",
-        "body": "Tricks are worth points based on cards played, not cards won. After 7 tricks, score. First to 50 wins."
+        "title": "Fight for contested tiles",
+        "body": "Any tile with multiple factions resolves combat on the fight board. Hidden stacks, supporter alignment, blind and revealed retreats, morale stakes."
       }
     ],
     "hooks": [
       {
-        "name": "rules.md",
-        "desc": "The Rule Book: the constraints a rule-namer must stay within. Fork it to expand or restrict what rules are legal."
+        "name": "Hidden orders",
+        "desc": "All movement is planned secretly, then revealed at once. Defend counters Disrupt, Disrupt counters Bolster. Every round is a mind game."
       },
       {
-        "name": "deck.yaml",
-        "desc": "Card definitions — suits, values, special behaviours. Add a fifth suit, remove the Jokers, invent wildcards."
+        "name": "Initiative matrix",
+        "desc": "A 4x4 grid of priorities and slot costs. Higher initiative picks first but pays more. Trade rows earn coins instead of spending them."
       },
       {
-        "name": "scoring.lua",
-        "desc": "The points formula. Default is pip-based. Override it to make tricks matter more, or turns, or anything else."
+        "name": "Central market",
+        "desc": "Eight commodities (Ice, Water, Food, Wood, Stone, Metal, Energy, Gems) with dynamic pricing. Sell during the Action phase or spend to build."
+      },
+      {
+        "name": "Fight board",
+        "desc": "Multi-faction combat with combat zones, supporter alignment, and dice-based resolution. Retreats cost morale. Losing all units pays morale to survivors."
       }
     ],
-    "community": [
-      {
-        "category": "Rebalance",
-        "baseGame": "Planet Mongo",
-        "title": "Mongo: Quick Draw",
-        "body": "5-card hands instead of 7. Faster rounds, more volatile rule changes. Lunch-break mode.",
-        "stats": "3–5 players · 15 min · 10+"
-      },
-      {
-        "category": "Total conversion",
-        "baseGame": "Planet Mongo",
-        "title": "Mongo: Spell Deck",
-        "body": "Fantasy theme. Rules become spells — \"all cards played face-down\" becomes \"Fog of War\", etc.",
-        "stats": "3–5 players · 45 min · 12+"
-      },
-      {
-        "category": "Reskin",
-        "baseGame": "Planet Mongo",
-        "title": "Mongo: Neon",
-        "body": "Cyberpunk card art. Same rules, UV-reactive card backs for night sessions.",
-        "stats": "3–5 players · 30 min · 12+"
-      }
-    ]
+    "factions": [
+      {"name": "Magneticans", "accent": "#8b5cf6", "icon": "⚡", "desc": "Ming the Merciless rules the Magnetic Mountains. Highest science, lowest defense. Starts with 6 innovation cards and a 10-card limit."},
+      {"name": "Arborians", "accent": "#22c55e", "icon": "🌲", "desc": "Prince Barin leads the Forest Kingdom. Highest population and defense, lowest science. Must build every available structure to win."},
+      {"name": "Coralians", "accent": "#06b6d4", "icon": "🌊", "desc": "Queen Undina commands the Undersea Kingdom. Wealthiest faction with the most biome diversity. Starts with 175 coins and 8 submerged tiles."},
+      {"name": "Frigians", "accent": "#a5b4fc", "icon": "❄", "desc": "Queen Fria controls the Ice Kingdom. 22 glacial tiles to place. Must reach highest influence to score. VP from sheer territorial coverage."},
+      {"name": "Volcanians", "accent": "#ef4444", "icon": "🌋", "desc": "Desert Hawk rules the Firelands. Strong military, low culture. Starts wealthy but must hoard 100 ice to trigger their objective."},
+      {"name": "Tropicans", "accent": "#f59e0b", "icon": "🌴", "desc": "Queen Desira leads the Jungle Kingdom. Highest wealth rank, jungle tiles worth 5 VP each. Must collect 50 gems to win."},
+      {"name": "Hawkmen", "accent": "#60a5fa", "icon": "🦅", "desc": "Prince Vultan soars from Sky City. Lowest innovation limit (2 cards) but 36 oceanic tiles. Must control two tiles of each major biome."},
+      {"name": "Lionmen", "accent": "#d97706", "icon": "🦁", "desc": "King Jugrid leads the Land of Lionmen. Lowest starting resources (50 coins) but desert tiles worth 4 VP. Must control tiles producing 20 energy."}
+    ],
+    "community": []
   },
   "endless-skies": {
     "slug": "endless-skies",
     "title": "Endless Skies",
-    "accent": "green",
+    "accent": "blue",
     "heroImage": "/img/endless-skies-logo.png",
     "colors": {
       "gradient": "linear-gradient(180deg,#0a0d2a 0%,#1a3680 45%,#000 100%)",
@@ -280,109 +235,72 @@
       "bloom": null
     },
     "stats": [
-      [
-        "Players",
-        "1–4"
-      ],
-      [
-        "Time",
-        "60 min"
-      ],
-      [
-        "Age",
-        "10+"
-      ],
-      [
-        "Designer",
-        "Moddable team"
-      ],
-      [
-        "Released",
-        "Mar 2025"
-      ],
-      [
-        "Updated",
-        "May 2026"
-      ]
+      ["Players", "2–8"],
+      ["Time", "TBD"],
+      ["Age", "14+"],
+      ["Components", "113 hex tiles · 128 ships"],
+      ["Factions", "8"],
+      ["Status", "In development"],
+      ["Version", "v0.2.0"]
     ],
     "buttons": {
       "hero": [
-        [
-          "Read the Rules",
-          "rules:endless-skies",
-          "primary"
-        ],
-        [
-          "Browse community mods",
-          "/mods/",
-          "outline-dark"
-        ]
+        ["Read the Rules", "rules:endless-skies", "blue"],
+        ["View on GitHub", "https://github.com/Moddable-Games/moddable-rules/blob/main/games/endless-skies/content/rulebook.md", "outline-dark"]
       ],
       "cta": []
     },
     "steps": [
       {
         "n": "01",
-        "title": "Lay the world",
-        "body": "19 hex tiles dealt face-down into a 3-ring spiral. No two games start the same."
+        "title": "Place diplomats",
+        "body": "In initiative order, place diplomat meeples in space port rooms to gain resources, buy ships, trade commodities, or trigger special actions."
       },
       {
         "n": "02",
-        "title": "Pick a faction",
-        "body": "Twelve faction decks: Cartographers, Storm-callers, Salvagers, Iron Banks… each breaks one rule."
+        "title": "Activate crew",
+        "body": "Move rookie and legend meeples to ship rooms: Bridge, Engine Room, Battlestations, or Storage Bay. Each room activates different abilities for the round."
       },
       {
         "n": "03",
-        "title": "Trade and tile",
-        "body": "Flip a tile to reveal a biome (sky, sea, surface). Trade resources — the speaker can veto one deal per round."
+        "title": "Resolve events",
+        "body": "Move asteroids and wormholes, resolve conflicts between factions, check for destroyed ships, and refresh for the next round."
       },
       {
         "n": "04",
-        "title": "End in the void",
-        "body": "Whoever reaches the Void first triggers endgame. Two more full rounds, then count points."
+        "title": "Complete contracts",
+        "body": "Score victory points by fulfilling public contracts (visible to all) and private missions (secret). First to trigger the endgame forces a final scoring round."
       }
     ],
     "hooks": [
       {
-        "name": "factions.yaml",
-        "desc": "Add a faction deck with one rule-breaker line. Validates against the base ruleset."
+        "name": "Worker placement",
+        "desc": "Crew in ship rooms (Bridge, Engine Room, Battlestations, Storage Bay) activate movement, combat, repair, and upgrade abilities. Legends have enhanced versions."
       },
       {
-        "name": "biomes.yaml",
-        "desc": "Define new tile biomes — terrain, resources, victory contribution."
+        "name": "Wormhole network",
+        "desc": "Four wormhole types (C, M, Y, K) connect distant systems at varying range costs. Semi-random placement means every game has a different galactic topology."
       },
       {
-        "name": "endgame.lua",
-        "desc": "Override how the endgame is triggered. Useful for short-game variants."
+        "name": "Dynamic asteroids",
+        "desc": "112 asteroid tokens shift each event phase based on event cards. They block movement, can be mined for discoveries, and may destroy ships that fail to evade."
       },
       {
-        "name": "rules.md",
-        "desc": "Your version of the rulebook. Diffs are reviewed by the maintainers."
+        "name": "5 tech trees",
+        "desc": "Human, Core, Coalition, Remnant, and Wanderer technology. Each faction starts with access to specific trees. Trade and diplomacy unlock cross-faction tech."
       }
     ],
-    "community": [
-      {
-        "category": "Reskin",
-        "baseGame": "Endless Skies",
-        "title": "Endless Skies: Inkwell",
-        "body": "All-monochrome tile set. Every faction recoloured into Edo-period woodblock palette.",
-        "stats": "2–4 players · 90 min · 12+"
-      },
-      {
-        "category": "Rebalance",
-        "baseGame": "Endless Skies",
-        "title": "Solo Skies",
-        "body": "A solo-mode bot using a 32-card AI deck. Three difficulty tiers.",
-        "stats": "1 player · 60 min · 14+"
-      },
-      {
-        "category": "Total conversion",
-        "baseGame": "Endless Skies",
-        "title": "Subterranean",
-        "body": "Same engine, underground theme. The Void becomes the Magma Heart. Hex tiles flipped sides.",
-        "stats": "2–4 players · 90 min · 12+"
-      }
-    ]
+    "factions": [
+      {"name": "Republic", "accent": "#60a5fa", "icon": "🌍", "desc": "Near Earth faction based in Sol. Balanced starting credits (500K fixed). Access to Human technology. The generalist choice."},
+      {"name": "Alphas", "accent": "#a5b4fc", "icon": "⭐", "desc": "Far North faction from Prime. Credits scale by player count (300K/player). Human + Core tech access. Stronger in larger games."},
+      {"name": "Syndicate", "accent": "#f59e0b", "icon": "💰", "desc": "The Core faction from Markab. Richest start (2M fixed) with Human + Core tech. Economic powerhouse with expensive ships."},
+      {"name": "Free Worlds", "accent": "#22c55e", "icon": "🌾", "desc": "Dirt Belt faction from Alkaid. Credits scale modestly (200K/player). Human + Coalition tech. The underdog coalition."},
+      {"name": "Pirates", "accent": "#ef4444", "icon": "☠", "desc": "Rim dwellers with no fixed home. Lowest start (100K/player) but access to ANY technology currently in play. Scavengers and opportunists."},
+      {"name": "Remnant", "accent": "#8b5cf6", "icon": "🔮", "desc": "Ember Wastes faction from Arculus. Strong start (1M) with exclusive Remnant + Wanderer ancient tech. Isolated but powerful."},
+      {"name": "Coalition", "accent": "#06b6d4", "icon": "🕊", "desc": "Paradise faction from Talita. Wealthy (1.5M) with defensive specialisation. Coalition + Human tech. Diplomatic strength."},
+      {"name": "Wanderers", "accent": "#10b981", "icon": "🧬", "desc": "Organic-tech faction from Ka'ch'chrai. Solid start (1M) with biological ship systems. Remnant + Wanderer tech. Alien and strange."}
+    ],
+    "community": []
   },
   "dungeon-chess": {
     "slug": "dungeon-chess",

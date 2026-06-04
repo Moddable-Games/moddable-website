@@ -120,6 +120,14 @@ Pages load `mg-loader.js` (shared modules) + their own page script. Data is fetc
 
 ### Changelog
 
+#### 2026-06-04
+- Rewrote Planet Mongo game page from real rulebook (v0.9.0): 4X hex territory control, 8 factions, hidden orders, central market
+- Rewrote Endless Skies game page from real rulebook (v0.2.0): 4X worker placement, 8 factions, ship rooms, wormhole network
+- Both pages now honestly marked "In development" with no fabricated content
+- Removed fake community mods from both pages (no real mods exist yet)
+- Deleted dead per-game JS files and custom CSS (pages use shared data-driven renderer)
+- Updated meta tags and OG descriptions for both games
+
 #### 2026-06-02
 - Synced MCE to v0.7.1 / 70 variants (from v0.6.8 / 64): stats, features, consumer APIs, developer guides
 - Moved Dungeon Chess from /games/ to /mods/ — it's a total conversion of chess, not an original game
