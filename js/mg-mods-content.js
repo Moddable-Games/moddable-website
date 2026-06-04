@@ -8,16 +8,16 @@
 
     'talisman-worlds': {
       accent: 'blue',
-      heroTitle: 'Talisman: <em>Hexed</em>.',
+      heroTitle: 'Talisman <em>Worlds</em>.',
       lede: 'An open-world hex system that replaces the Talisman game boards with 61 individual hexagonal tiles — arranged in concentric rings so every game lays out differently. Built for <em>Talisman 4th Edition (revised)</em> by Fantasy Flight Games.',
       buttons: [['Read the rules', 'https://rules.moddable.games/dist/talisman-worlds/', 'primary'], ['Hex generator', 'https://hex.moddable.games/generate/?game=talisman', 'outline-dark']],
-      stats: [['Players','2–6'],['Time','90 min'],['Age','13+'],['Tiles','61 hex'],['Designer','Moddable team'],['Updated','Apr 2024']],
+      stats: [['Players','2–6'],['Time','90 min'],['Age','13+'],['Tiles','61 hex'],['Version','v0.3.0'],['Status','In development']],
       sections: [
         { id:'1', title:'Why hex?', body:"The square Talisman board gets boring fast — same path, same encounters, same finale every game. Hexagonal tiles let us deal a new map each session and keep the journey unpredictable." },
         { id:'2', title:'The four rings', body:"61 tiles arranged in concentric rings: 24 outer (the world), 18 river, 12 middle (the highlands), 6 inner (the dungeon approach), plus one central tile (the Crown of Command)." },
         { id:'3', title:'Special tiles', body:"10 water tiles connect across rings via the river. 4 desert tiles act as Talisman’s traditional ‘Desert’ region. The rest map onto the original board’s encounter spaces, redistributed each game." },
         { id:'4', title:'Movement', body:"Roll 1d6 and move that many tiles in any direction along legal edges. You may cross river tiles only with a boat token, raft, or relevant character ability." },
-        { id:'5', title:"What hasn't changed", body:"All Talisman 4e (revised) cards, characters, spell decks, and adventure cards work as-is. Hexed only replaces the board — your encounter library is untouched." }
+        { id:'5', title:"What hasn't changed", body:"All Talisman 4e (revised) cards, characters, spell decks, and adventure cards work as-is. Talisman Worlds only replaces the board — your encounter library is untouched." }
       ],
       components: [
         { kind:'Required', list:['Talisman 4e (revised) base game','Card decks (Adventure, Spell, Purchase, Stranger, Warlock Quest)','Character cards + miniatures'] },
@@ -29,20 +29,20 @@
     'hyper-imperium': {
       accent: 'green',
       heroTitle: 'Hyper <em>Imperium</em>.',
-      lede: 'Hyper Movement, Hyper Trades, Hyper Objectives, Hyper Factions, Hyper Agendas. A faster ruleset for TI4 + Prophecy of Kings that keeps the politics intact.',
+      lede: 'Hyper Movement, Hyper Trades, Hyper Objectives, Hyper Factions, Hyper Agendas. Five modular rule changes for TI4 + Prophecy of Kings: 3D exploration via hyperlanes, a mercenary faction builder, and blind voting with influence cards.',
       buttons: [['Read the rules', 'https://rules.moddable.games/dist/hyper-imperium/', 'primary'], ['TI4 tools', '/tools/ti/', 'outline-dark']],
-      stats: [['Players','3–6'],['Time','4–6 hr'],['Age','14+'],['Source','Moddable.Games'],['License','CC BY-NC-SA']],
+      stats: [['Players','4–6'],['Time','4–6 hr'],['Age','14+'],['Version','v0.6.0'],['Status','In development']],
       sections: [
-        { id:'1', title:'Hyper Movement', body:"Ships move +1 hex per activation. This applies to all ship types, including fighters and war suns. The result is faster fleet positioning and more aggressive early-game posturing, making turtling less viable." },
-        { id:'2', title:'Hyper Trades', body:"The trade window opens every strategy phase, not just when the Trade strategy card is picked. Any player may negotiate trades freely during the strategy phase. Trade agreements still require mutual consent and can be broken at any time." },
-        { id:'3', title:'Hyper Objectives', body:"Two public objectives are revealed per round instead of one. The victory point target is raised to 12 VP (up from 10). This creates more paths to victory and rewards flexible strategy over single-minded rushing." },
-        { id:'4', title:'Hyper Factions', body:"Rebalanced faction abilities across all 25 factions. Weaker factions (Arborec, Winnu, Yin) receive meaningful buffs. Dominant factions (Saar, Jol-Nar, Nekro) are toned down without losing their identity. Full balance notes included in the PDF." },
-        { id:'5', title:'Hyper Agendas', body:"The agenda phase triggers every round, not just after Mecatol Rex is taken. Two agendas are voted on per agenda phase as normal. This keeps politics relevant from round one and gives the Speaker role consistent value throughout the game." }
+        { id:'1', title:'Hyper Movement', body:"Home systems leave the outer ring. An extra ring of systems is added. Units can cross between opposite outer rings, simulating 3D space. Optional exploration variant: systems start hidden and must be revealed before entering." },
+        { id:'2', title:'Hyper Trades', body:"Trade anything freely, but only if both parties hold each other's promissory notes. No more waiting for the Trade strategy card. The exception: the Space Lions faction only needs one party to hold a note." },
+        { id:'3', title:'Hyper Objectives', body:"Secret objectives become shared secrets. When scored (worth 2 VP), the secret is revealed as a public objective any player can then score. This adds at least one extra VP opportunity per round." },
+        { id:'4', title:'Hyper Factions', body:"Two new factions (The Remnant, The Wanderers) plus a 100-point mercenary faction builder. Design your own faction from a menu of abilities, ships, and starting conditions." },
+        { id:'5', title:'Hyper Agendas', body:"Blind voting via influence cards. A personal Agenda deck for the Speaker. A Discussion Deck controls how many agendas fire per round, keeping politics relevant from the start." }
       ],
       components: [
-        { kind:'Required', list:['Twilight Imperium 4th Edition base game','Prophecy of Kings expansion (recommended)','All faction sheets and tokens'] },
-        { kind:'Printable', list:['Hyper Imperium rules reference (PDF, included)','Faction balance cheat sheet','Updated strategy card reference'] },
-        { kind:'House', list:['Large table (6ft minimum recommended)','VP tracker going to 12','Timer for strategy phases (optional)'] }
+        { kind:'Required', list:['Twilight Imperium 4th Edition base game','Prophecy of Kings expansion (required)','All faction sheets and tokens'] },
+        { kind:'Printable', list:['Hyper Imperium rules reference (PDF, included)','Mercenary faction builder sheet','Exploration variant tiles'] },
+        { kind:'House', list:['Large table (6ft minimum recommended)','Extra ring tile placement area','Influence card tracking'] }
       ],
     },
 
@@ -71,20 +71,20 @@
     'econopoly': {
       accent: 'green',
       heroTitle: 'Econopoly.',
-      lede: 'Monopoly with a working economy. Anti-monopoly rules, dynamic property pricing, and a tax band that actually does something.',
+      lede: 'Transforms Monopoly into a euro-game with resource collection, blind auctions, and victory point scoring. Choose to move, trade, or build each turn. No more player elimination marathons.',
       buttons: [['Read the rules', 'https://rules.moddable.games/dist/econopoly/', 'primary'], ['GitHub', 'https://github.com/Moddable-Games/moddable-rules', 'outline-dark']],
-      stats: [['Players','2–6'],['Time','60 min'],['Age','10+'],['Source','Moddable.Games'],['License','CC BY-NC-SA']],
+      stats: [['Players','2–6'],['Time','60 min'],['Age','10+'],['Version','v0.1.0'],['Status','In development']],
       sections: [
-        { id:'1', title:'Dynamic pricing', body:"Property prices fluctuate based on how many times they've been landed on. Popular properties become expensive; neglected ones drop in value. Prices update at the start of each round." },
-        { id:'2', title:'Tax bands', body:"Income tax scales with net worth. The richest player pays the highest rate each time they pass Go. Three bands: 10% (under $1000), 20% ($1000–$3000), 35% (over $3000). This keeps runaway leaders in check." },
-        { id:'3', title:'Anti-monopoly clause', body:"Owning all properties of one colour triggers a government intervention — one property from that set is forcibly auctioned to the other players. Monopolies are powerful but temporary." },
-        { id:'4', title:'Bankruptcy reform', body:"Bankrupt players enter \"debt mode\" for 3 turns before elimination. During debt mode, they can still trade, sell, and negotiate their way back to solvency. This prevents early-game knockouts from ruining the experience." },
-        { id:'5', title:'Game timer', body:"The game ends after 90 minutes or when 2 players are eliminated, whichever comes first. The richest player wins. No more 4-hour Monopoly marathons that end in family arguments." }
+        { id:'1', title:'Choose your action', body:"On your turn you may either move, trade, or build. Not all three. Every turn becomes a meaningful decision instead of a passive dice-roll loop." },
+        { id:'2', title:'Resources replace luck', body:"Community Chest becomes a Resource Deck. Chance becomes an Event Deck. Collecting and combining resources is how you score victory points, not accumulating cash." },
+        { id:'3', title:'Victory points win', body:"The game ends when a player goes bankrupt or a deck empties. Most VP wins. Everyone stays in until the end, so no one sits out for two hours watching others play." },
+        { id:'4', title:'Unique objectives', body:"Each session introduces different scoring conditions. The combination of resource cards and objectives changes every game, bringing variety that standard Monopoly completely lacks." },
+        { id:'5', title:'Same board, new game', body:"Uses the standard Monopoly board, tokens, and property cards. Only the economy changes. Your existing copy of Monopoly is all you need." }
       ],
       components: [
         { kind:'Required', list:['Monopoly base game (any edition)','Standard property cards and money','All player tokens and dice'] },
-        { kind:'Printable', list:['Dynamic pricing tracker sheet (PDF, included)','Tax band reference card','Debt mode reminder tokens'] },
-        { kind:'House', list:['90-minute timer (phone or kitchen timer)','Pencil for price tracking each round','Calculator for tax band percentages'] }
+        { kind:'Printable', list:['Resource deck (PDF, included)','Event deck (PDF, included)','Victory point reference card'] },
+        { kind:'House', list:['Pen and paper for VP tracking','Standard 2d6','Patience for learning a better Monopoly'] }
       ],
     },
 
