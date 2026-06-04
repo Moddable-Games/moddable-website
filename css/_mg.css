@@ -250,7 +250,7 @@ button:focus-visible, a:focus-visible, input:focus-visible, textarea:focus-visib
 }
 
 /* Prose styles for article pages */
-.prose { font-family: var(--mg-font-body); font-size: 19px; line-height: 1.65; color: var(--mg-body-color); }
+.prose { font-family: var(--mg-font-body); font-size: 19px; line-height: 1.65; color: var(--mg-body-color); text-align: justify; }
 .prose p { margin: 0 0 24px; }
 .prose p.lede { font-size: 23px; line-height: 1.5; color: var(--mg-ink); font-style: italic; }
 .prose h2 { font-family: var(--mg-font-display); font-weight: 600; font-size: 32px; line-height: 1.15; letter-spacing: -0.4px; margin: 40px 0 16px; color: var(--mg-ink); }
@@ -376,7 +376,7 @@ button:focus-visible, a:focus-visible, input:focus-visible, textarea:focus-visib
 /* Dungeon Chess section */
 .dc-header { display: flex; gap: 48px; align-items: center; margin-bottom: 48px; }
 .dc-logo-img { width: clamp(160px, 20vw, 260px); height: auto; flex: none; filter: drop-shadow(0 8px 24px rgba(58,153,40,0.3)); animation: floatBadge 5s ease-in-out infinite; }
-@media (max-width: 768px) { .dc-header { flex-direction: column; align-items: flex-start; } }
+@media (max-width: 768px) { .dc-header { flex-direction: column; align-items: center; text-align: center; } }
 
 /* ── Game index cards ────────────────────────────────────────────────── */
 .game-card { display: flex; flex-direction: column; background: #fff; border: 1px solid var(--mg-hairline-light); border-radius: 20px; overflow: hidden; text-decoration: none; color: inherit; transition: border-color 180ms, transform 180ms; }
@@ -811,6 +811,37 @@ button:focus-visible, a:focus-visible, input:focus-visible, textarea:focus-visib
   .home-engine { padding: 64px 20px; }
   .mg-section { padding: 80px 20px; }
   .stats-row__divider { margin: 0 10px; }
+
+  /* Mobile centering: cards, tags, pills */
+  .mod-card__inner { text-align: center; }
+  .mod-card__meta { justify-content: center; }
+  .mod-card__stats { align-items: center; }
+  .game-card__body { text-align: center; }
+  .game-card__stats { text-align: center; }
+  .news-card { text-align: center; }
+  .news-card__header { justify-content: center; gap: 12px; }
+  .mg-card { text-align: center; }
+  .mg-card--row { flex-direction: column; align-items: center; }
+
+  /* Flex pill/tag containers */
+  .mod-hero__tags { justify-content: center; }
+  .mod-hero__btns { justify-content: center; }
+  .game-hero__tags { justify-content: center; }
+  .game-hero__btns { justify-content: center; }
+  .home-hex__pills { justify-content: center; }
+  .home-engine__pills { justify-content: center; }
+  .home-gallery__filters { justify-content: center; }
+  .home-nuke__btns { justify-content: center; }
+  .home-community__btns { justify-content: center; }
+  .compact-hero__stats { justify-content: center; }
+  .post-share-btns { justify-content: center; }
+
+  /* Body sub / lede centering */
+  .mg-body-sub { margin-left: auto; margin-right: auto; }
+  .mg-heading-xl { text-align: center; }
+
+  /* Eyebrows center */
+  .mg-eyebrow { justify-content: center; }
 }
 @media (max-width: 540px) {
   .mg-grid-4 { grid-template-columns: 1fr !important; }

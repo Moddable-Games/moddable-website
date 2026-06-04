@@ -64,5 +64,10 @@ body { background: #f5f4ef; }
   .news-layout { grid-template-columns: 1fr; }
   .news-sidebar { display: none; }
   .news-mobile-search { display: block; }
-  .news-featured-card { grid-template-columns: 1fr; }
+  .news-featured-card { grid-template-columns: 1fr; text-align: center; }
+  .news-featured-card__meta { justify-content: center; }
+}
+@media (max-width: 768px) {
+  .news-grid-card { text-align: center; }
+  .news-grid-card__meta { justify-content: center; }
 }
