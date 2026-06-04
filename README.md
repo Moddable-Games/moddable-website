@@ -127,6 +127,14 @@ Pages load `mg-loader.js` (shared modules) + their own page script. Data is fetc
 - Removed fake community mods from both pages (no real mods exist yet)
 - Deleted dead per-game JS files and custom CSS (pages use shared data-driven renderer)
 - Updated meta tags and OG descriptions for both games
+- Synced all mod metadata from moddable-rules: versions, taglines, stats, development status
+- Replaced Talisman Worlds logo (new circular emblem from moddable-rules, properly on 410x410 canvas)
+- Fixed Talisman Worlds hero title (was still "Talisman: Hexed")
+- Replaced fabricated Econopoly content with real rulebook mechanics (resources, VP, choose-your-action)
+- Replaced fabricated Hyper Imperium content with real mechanics (3D exploration, promissory trades, mercenary builder)
+- Rewrote games-sync.json from actual rulebook front matter (all entries were stale)
+- Added RGB cube placeholder logo for all 6 community mods (#61 partial)
+- Closed #25 (mod download links complete on website side), #78, #79
 
 #### 2026-06-02
 - Synced MCE to v0.7.1 / 70 variants (from v0.6.8 / 64): stats, features, consumer APIs, developer guides
