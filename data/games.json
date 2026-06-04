@@ -11,23 +11,23 @@
     "logo": "/img/nukes-logo.png"
   },
   {
-    "title": "Mongo",
+    "title": "Planet Mongo",
     "accent": "green",
-    "status": "Playtest · Q3 2026",
-    "desc": "Global conquest in the Flash Gordon universe — Risk × Catan in a public-domain setting.",
-    "players": "3–6",
-    "time": "90 min",
-    "path": "/games/mongo/",
+    "status": "In development · V0.9.0",
+    "desc": "Hex-based territory control in the Flash Gordon universe. Eight factions fight for dominance across 127 hexagonal tiles with hidden orders, bluffing, and a dynamic central market.",
+    "players": "2–8",
+    "time": "120+ min",
+    "path": "/games/planet-mongo/",
     "rulebook": "mongo",
     "logo": "/img/mongo-logo.png"
   },
   {
     "title": "Endless Skies",
     "accent": "green",
-    "status": "In development",
-    "desc": "Cooperative survival in procedurally generated skies. Tile-laying meets resource management.",
-    "players": "1–4",
-    "time": "60 min",
+    "status": "In development · V0.2.0",
+    "desc": "4X space exploration with worker placement and fleet management. Eight asymmetric factions compete across a hex-tile galaxy, placing crew in ship rooms and diplomats in space ports to complete contracts for victory points.",
+    "players": "2–8",
+    "time": "TBD",
     "path": "/games/endless-skies/",
     "rulebook": "endless-skies",
     "logo": "/img/endless-skies-logo.png"

@@ -137,8 +137,8 @@
     ]
   },
   "mongo": {
-    "slug": "mongo",
-    "title": "Mongo",
+    "slug": "planet-mongo",
+    "title": "Planet Mongo",
     "accent": "green",
     "heroImage": "/img/mongo-logo.png",
     "colors": {
@@ -246,21 +246,21 @@
     "community": [
       {
         "category": "Rebalance",
-        "baseGame": "Mongo",
+        "baseGame": "Planet Mongo",
         "title": "Mongo: Quick Draw",
         "body": "5-card hands instead of 7. Faster rounds, more volatile rule changes. Lunch-break mode.",
         "stats": "3–5 players · 15 min · 10+"
       },
       {
         "category": "Total conversion",
-        "baseGame": "Mongo",
+        "baseGame": "Planet Mongo",
         "title": "Mongo: Spell Deck",
         "body": "Fantasy theme. Rules become spells — \"all cards played face-down\" becomes \"Fog of War\", etc.",
         "stats": "3–5 players · 45 min · 12+"
       },
       {
         "category": "Reskin",
-        "baseGame": "Mongo",
+        "baseGame": "Planet Mongo",
         "title": "Mongo: Neon",
         "body": "Cyberpunk card art. Same rules, UV-reactive card backs for night sessions.",
         "stats": "3–5 players · 30 min · 12+"

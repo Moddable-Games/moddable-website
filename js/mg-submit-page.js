@@ -34,7 +34,7 @@ function textArea(id, placeholder, key) {
 }
 
 // Build step 1
-document.getElementById('field-title').appendChild(field('mod-title','Mod title',"What's it called?",true,textInput('mod-title','e.g. Talisman: Hexed','title')));
+document.getElementById('field-title').appendChild(field('mod-title','Mod title',"What's it called?",true,textInput('mod-title','e.g. Talisman Worlds','title')));
 document.getElementById('field-game').appendChild(field('base-game','Base game','Which published game does your mod use?',true,textInput('base-game','e.g. Talisman 4e (revised)','baseGame')));
 
 // Category picker

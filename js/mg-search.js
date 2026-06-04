@@ -7,7 +7,7 @@
   const { el, url } = window.MG;
 
   const SEARCH_INDEX = [
-    {type:'mod', title:'Talisman: Hexed', desc:'Open-world hex system replacing the Talisman board with 61 tiles', href:url('/mods/talisman-hexed/')},
+    {type:'mod', title:'Talisman Worlds', desc:'Open-world hex system replacing the Talisman board with 61 tiles', href:url('/mods/talisman-worlds/')},
     {type:'mod', title:'Hyper Imperium', desc:'Faster ruleset for TI4 + Prophecy of Kings', href:url('/mods/hyper-imperium/')},
     {type:'mod', title:'Econopoly', desc:'Monopoly with a working economy and dynamic pricing', href:url('/mods/econopoly/')},
     {type:'mod', title:'Anti-Monopoly', desc:'Public domain competitive variant of Monopoly', href:url('/mods/anti-monopoly/')},
@@ -17,7 +17,7 @@
     {type:'mod', title:'CivRisk', desc:'Risk rewritten to play like Civilisation', href:url('/mods/civrisk/')},
     {type:'mod', title:'Dungeon Chess', desc:'Total conversion — chess reimagined as asymmetric dungeon skirmish', href:url('/mods/dungeon-chess/')},
     {type:'game', title:'Nukes', desc:'Cold-war territory control on a hex map', href:url('/games/nukes/')},
-    {type:'game', title:'Mongo', desc:'Fast-paced card battler', href:url('/games/mongo/')},
+    {type:'game', title:'Mongo', desc:'Fast-paced card battler', href:url('/games/planet-mongo/')},
     {type:'game', title:'Endless Skies', desc:'Cooperative airship exploration', href:url('/games/endless-skies/')},
     {type:'engine', title:'Moddable Chess', desc:'2000+ variants, one moddable engine', href:url('/engines/moddable-chess/')},
     {type:'engine', title:'Moddable Hexmaps', desc:'Hex map generation for any game', href:url('/engines/moddable-hexmaps/')},

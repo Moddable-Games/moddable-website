@@ -12,19 +12,19 @@
   {
     "category": "Reskin",
     "baseGame": "Talisman 4e",
-    "title": "Talisman: Hexed",
-    "body": "Replaces the Talisman boards with 61 hexagonal tiles arranged in concentric rings — open-world hex system, every game lays out differently.",
+    "title": "Talisman Worlds",
+    "body": "Replaces the Talisman board with 61 hexagonal tiles across four concentric rings plus a hidden ending. Every game generates a different board layout. Includes Dungeon expansion support.",
     "stats": "2–6 players · 90 min · 13+",
-    "path": "/mods/talisman-hexed/",
+    "path": "/mods/talisman-worlds/",
     "source": "Moddable.Games",
-    "logo": "img/talisman-hexed-logo.png"
+    "logo": "img/talisman-worlds-logo.png"
   },
   {
     "category": "Rebalance",
     "baseGame": "Twilight Imperium 4e",
     "title": "Hyper Imperium",
-    "body": "Hyper Movement, Hyper Trades, Hyper Objectives. A faster ruleset for TI4 + Prophecy of Kings that keeps the politics intact.",
-    "stats": "3–6 players · 4–6 hr · 14+",
+    "body": "3D exploration via hyperlanes, blind voting with influence cards, shared secret objectives, and a 100-point mercenary faction builder. Five modular rule changes for TI4 + Prophecy of Kings.",
+    "stats": "4–6 players · 4–6 hr · 14+",
     "path": "/mods/hyper-imperium/",
     "source": "Moddable.Games",
     "logo": "img/hyper-imperium-logo.png"
@@ -33,7 +33,7 @@
     "category": "Rebalance",
     "baseGame": "Monopoly",
     "title": "Econopoly",
-    "body": "Monopoly with a working economy. Anti-monopoly rules, dynamic property pricing, and a tax band that actually does something. 95% complete — launch ready.",
+    "body": "Transforms Monopoly into a euro-game with resource collection, blind auctions, and victory point scoring via linked card combinations. Choose to move, trade, or build each turn.",
     "stats": "2–6 players · 60 min · 10+",
     "path": "/mods/econopoly/",
     "source": "Moddable.Games",

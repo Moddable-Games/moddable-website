@@ -52,7 +52,7 @@
     "published": false
   },
   "mongo": {
-    "title": "Mongo",
+    "title": "Planet Mongo",
     "version": "0.8.2",
     "players": "3–6",
     "duration": "90 min",
@@ -77,8 +77,8 @@
     "updated": "2026-05-22",
     "published": true
   },
-  "talisman-hexed": {
-    "title": "Talisman: Hexed",
+  "talisman-worlds": {
+    "title": "Talisman Worlds",
     "version": "1.0.0",
     "players": "2–6",
     "duration": "90 min",

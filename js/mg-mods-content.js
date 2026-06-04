@@ -6,11 +6,11 @@
 (function() {
   window.MG.MOD_PAGES = {
 
-    'talisman-hexed': {
+    'talisman-worlds': {
       accent: 'blue',
       heroTitle: 'Talisman: <em>Hexed</em>.',
       lede: 'An open-world hex system that replaces the Talisman game boards with 61 individual hexagonal tiles — arranged in concentric rings so every game lays out differently. Built for <em>Talisman 4th Edition (revised)</em> by Fantasy Flight Games.',
-      buttons: [['Read the rules', 'https://rules.moddable.games/dist/talisman-hexed/', 'primary'], ['Hex generator', 'https://hex.moddable.games/generate/?game=talisman', 'outline-dark']],
+      buttons: [['Read the rules', 'https://rules.moddable.games/dist/talisman-worlds/', 'primary'], ['Hex generator', 'https://hex.moddable.games/generate/?game=talisman', 'outline-dark']],
       stats: [['Players','2–6'],['Time','90 min'],['Age','13+'],['Tiles','61 hex'],['Designer','Moddable team'],['Updated','Apr 2024']],
       sections: [
         { id:'1', title:'Why hex?', body:"The square Talisman board gets boring fast — same path, same encounters, same finale every game. Hexagonal tiles let us deal a new map each session and keep the journey unpredictable." },

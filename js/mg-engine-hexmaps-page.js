@@ -51,9 +51,9 @@ var GAMES = [
   },
   {
     n: '02',
-    title: 'Talisman: Hexed',
+    title: 'Talisman Worlds',
     body: 'Fantasy adventure on hex terrain. Inner, middle, and outer rings with terrain-specific encounters.',
-    href: '/mods/talisman-hexed/'
+    href: '/mods/talisman-worlds/'
   },
   {
     n: '03',

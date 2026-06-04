@@ -15,7 +15,7 @@ const milestones = [
   { quarter:'Q3 2026', text:'Moddable Chess: 4 variants playable online', color:'#3a9928' },
   { quarter:'Q4 2026', text:'Dungeon Chess: crowdfunding campaign live', color:'#14161c' },
   { quarter:'Q1 2027', text:'Marketplace beta: creators upload + sell mods', color:'#0c4f8d' },
-  { quarter:'Q2 2027', text:'Mongo: multiplayer playtest online', color:'#0c4f8d' },
+  { quarter:'Q2 2027', text:'Planet Mongo: multiplayer playtest online', color:'#0c4f8d' },
   { quarter:'Q3 2027', text:'Print-on-demand pipeline live', color:'#0c4f8d' },
 ];
 
