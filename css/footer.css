@@ -95,6 +95,10 @@
   font-size: 14px;
   color: rgba(255,255,255,0.65);
   text-decoration: none;
+  transition: color 150ms;
+}
+.mg-footer__col-link:hover {
+  color: #fff;
 }
 
 .mg-footer__bottom {
