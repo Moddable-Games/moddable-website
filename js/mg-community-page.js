@@ -127,18 +127,12 @@
     al.appendChild(row);
   });
 
-  // Members — sorted by most recently active, top 10
+  // Members — top 4 most recently active
   var MEMBERS = [
-    { display: 'Darktalon', avatar: 'https://cdn.discordapp.com/avatars/433932623941730304/fbd8e6a47ac0580e0af2cf3b7d896dd9.png?size=128', role: 'management', msgs: 31, lastActive: 'Jun 5', lastMsg: 'New expansion from Stonemaier' },
+    { display: 'Darktalon', avatar: 'https://cdn.discordapp.com/avatars/433932623941730304/fbd8e6a47ac0580e0af2cf3b7d896dd9.png?size=128', role: 'management', msgs: 31, lastActive: 'Jun 5', lastMsg: 'New expansion from Stonemaier. Looking forward to this one.' },
     { display: 'Arjit', avatar: 'https://cdn.discordapp.com/avatars/190300566046507018/4eb2498fe54b8bb8c23f7948b183ec5b.png?size=128', role: 'member', msgs: 1, lastActive: 'Jun 3', lastMsg: 'Thanks Kevin for the invite.' },
-    { display: 'djkaspa', avatar: 'https://cdn.discordapp.com/avatars/1059998798027444304/41d74062e4ad48206877b2aaba7a640e.png?size=128', role: 'management', msgs: 16, lastActive: 'May 22', lastMsg: 'Nice BTS video on card game production' },
-    { display: 'GunslingerSteve', avatar: 'https://cdn.discordapp.com/avatars/797065987677618196/f2b88a6fd4a448ab2ec98cdeecba9aef.png?size=128', role: 'member', msgs: 0, lastActive: 'May 22', lastMsg: '' },
-    { display: 'akmalfikri', avatar: 'https://cdn.discordapp.com/avatars/316810906619346946/a26197f40c12e5cca4c0104413374181.png?size=128', role: 'management', msgs: 1, lastActive: 'Oct 22', lastMsg: 'welcome Joe' },
-    { display: 'Wunder', avatar: 'https://cdn.discordapp.com/avatars/113239562452541440/135bed57657861016f475a42771de44f.png?size=128', role: 'member', msgs: 1, lastActive: 'Oct 19', lastMsg: 'Hi from the ara group' },
-    { display: 'KimLime', avatar: 'https://cdn.discordapp.com/avatars/157827693553909760/0ba5735ab85051fce0f0456fda7dc468.png?size=128', role: 'member', msgs: 0, lastActive: 'Nov 2025', lastMsg: '' },
-    { display: 'Resh', avatar: 'https://cdn.discordapp.com/avatars/243395223898554368/14332d7f98baf422e6c2bc3d67bdedfc.png?size=128', role: 'member', msgs: 0, lastActive: 'Apr 2026', lastMsg: '' },
-    { display: 'Ms. Terri', avatar: 'https://cdn.discordapp.com/avatars/553968271687417856/3c4b1ce7fe0514ec7246b14b46e50c7c.png?size=128', role: 'member', msgs: 0, lastActive: 'Apr 2026', lastMsg: '' },
-    { display: 'Arzyy', avatar: 'https://cdn.discordapp.com/avatars/157625204317749259/7779d338200515f7a75de88fd9ffa272.png?size=128', role: 'member', msgs: 0, lastActive: 'Feb 2026', lastMsg: '' }
+    { display: 'djkaspa', avatar: 'https://cdn.discordapp.com/avatars/1059998798027444304/41d74062e4ad48206877b2aaba7a640e.png?size=128', role: 'management', msgs: 16, lastActive: 'May 22', lastMsg: 'Nice BTS video on card game production workflows.' },
+    { display: 'Wunder', avatar: 'https://cdn.discordapp.com/avatars/113239562452541440/135bed57657861016f475a42771de44f.png?size=128', role: 'member', msgs: 1, lastActive: 'Oct 19', lastMsg: 'Hi from the ara group.' }
   ];
 
   var mr = document.getElementById('members-grid');
