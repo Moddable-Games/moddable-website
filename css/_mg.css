@@ -567,7 +567,7 @@ button:focus-visible, a:focus-visible, input:focus-visible, textarea:focus-visib
 .home-community__fade { position: absolute; inset: 0; background: linear-gradient(180deg, #000 0%, transparent 20%, transparent 80%, #000 100%); pointer-events: none; }
 .home-community__inner { position: relative; z-index: 2; padding: 120px 24px; max-width: 760px; margin: 0 auto; text-align: center; }
 .home-community__heading { font-family: var(--mg-font-display); font-weight: 600; font-size: clamp(36px, 5.5vw, 72px); line-height: 1.05; letter-spacing: -0.025em; margin: 0 0 24px; text-shadow: 0 4px 24px rgba(0,0,0,0.6); }
-.home-community__body { font-family: var(--mg-font-body); font-size: 18px; line-height: 1.65; color: rgba(255,255,255,0.86); margin: 0 0 36px; text-shadow: 0 2px 14px rgba(0,0,0,0.6); }
+.home-community__body { font-family: var(--mg-font-body); font-size: 18px; line-height: 1.65; color: rgba(255,255,255,0.86); margin: 0 0 36px; text-shadow: 0 2px 14px rgba(0,0,0,0.6); text-wrap: balance; }
 .home-community__btns { display: flex; gap: 12px; justify-content: center; flex-wrap: wrap; }
 
 /* ── Global Search ──────────────────────────────────────────────────── */
