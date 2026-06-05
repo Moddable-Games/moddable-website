@@ -13,7 +13,7 @@
     tier: 1,
     hexColor: 'red',
     eyebrow: 'THE LIBRARY',
-    title: 'Ten <em>mods</em> for games you already own.',
+    title: 'Ten <em>mods</em> for the boxes on your shelf.',
     lede: 'Rulebook patches for the games gathering dust on your shelves. Filter by type, search by title, or browse them all.',
     feature: MG.buildHeroFeature('mods')
   }));

@@ -13,7 +13,7 @@
     tier: 1,
     hexColor: 'blue',
     eyebrow: 'ABOUT MODDABLE',
-    title: 'Creating games you <em>already</em> own.',
+    title: 'The <em>workshop</em> behind the rulebooks.',
     lede: 'A workshop of designers, modders, and rule-tinkerers reshaping the boards already on your shelf.',
     feature: MG.buildHeroFeature('about')
   }));
