@@ -194,6 +194,12 @@
       .then(function(r) { return r.text(); })
       .then(function(html) {
         article.innerHTML = html;
+        article.querySelectorAll('img[src^="/img"]').forEach(function(img) {
+          img.src = url(img.getAttribute('src'));
+        });
+        article.querySelectorAll('a[href^="/"]').forEach(function(a) {
+          a.href = url(a.getAttribute('href'));
+        });
         initTocSpy(post);
       });
   }
@@ -262,7 +268,12 @@
     var header = document.querySelector('.post-header');
     var img = document.querySelector('.post-header__img');
     var inner = document.querySelector('.post-header__inner');
+    var bloom = document.querySelector('.post-header__bloom');
     if (!header || !img || !inner) return;
+
+    var wash = document.createElement('div');
+    wash.className = 'post-header__wash';
+    header.appendChild(wash);
 
     var ticking = false;
     window.addEventListener('scroll', function() {
@@ -271,12 +282,14 @@
       requestAnimationFrame(function() {
         var rect = header.getBoundingClientRect();
         var h = header.offsetHeight;
-        var progress = Math.max(0, Math.min(1, -rect.top / h));
-        var scale = 1.08 + progress * 0.12;
+        var ratio = Math.max(0, Math.min(1, -rect.top / (h * 0.7)));
+        var scale = 1.05 + ratio * 0.15;
         img.style.transform = 'scale(' + scale + ')';
-        img.style.opacity = 0.5 - progress * 0.35;
-        inner.style.transform = 'translateY(' + (progress * -40) + 'px)';
-        inner.style.opacity = 1 - progress * 0.9;
+        img.style.opacity = Math.max(0, 0.5 - ratio * 0.5);
+        inner.style.transform = 'translateY(' + (ratio * -120) + 'px)';
+        inner.style.opacity = Math.max(0, 1 - ratio * 2.5);
+        if (bloom) { bloom.style.opacity = Math.max(0, 1 - ratio * 1.8); }
+        wash.style.opacity = ratio;
         ticking = false;
       });
     });

@@ -17,7 +17,7 @@
     {type:'mod', title:'CivRisk', desc:'Risk rewritten to play like Civilisation', href:url('/mods/civrisk/')},
     {type:'mod', title:'Dungeon Chess', desc:'Total conversion — chess reimagined as asymmetric dungeon skirmish', href:url('/mods/dungeon-chess/')},
     {type:'game', title:'Nukes', desc:'Cold-war territory control on a hex map', href:url('/games/nukes/')},
-    {type:'game', title:'Mongo', desc:'Fast-paced card battler', href:url('/games/planet-mongo/')},
+    {type:'game', title:'Planet Mongo', desc:'Fast-paced card battler', href:url('/games/planet-mongo/')},
     {type:'game', title:'Endless Skies', desc:'Cooperative airship exploration', href:url('/games/endless-skies/')},
     {type:'engine', title:'Moddable Chess', desc:'2000+ variants, one moddable engine', href:url('/engines/moddable-chess/')},
     {type:'engine', title:'Moddable Hexmaps', desc:'Hex map generation for any game', href:url('/engines/moddable-hexmaps/')},

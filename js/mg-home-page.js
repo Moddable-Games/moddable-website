@@ -1,5 +1,5 @@
 (function() {
-const { T, el, btn, linkBtn, navbar, footer, modCard, cubeSVG, url } = MG;
+const { T, el, btn, linkBtn, navbar, footer, modCard, url } = MG;
 
 // Nav + Footer
 document.getElementById('nav-root').appendChild(navbar(''));
@@ -9,19 +9,22 @@ document.getElementById('footer-root').appendChild(footer());
 const heroBgInner = document.getElementById('hero-bg__inner');
 const heroSection = document.getElementById('hero');
 const heroTint = document.getElementById('hero-tint');
-const heroCubeWrap = document.getElementById('hero-cube-wrap');
 
 const heroContent = document.getElementById('hero-content');
 const heroHex = document.getElementById('hero-hex');
 const heroGlow = document.getElementById('hero-glow');
+const heroBotFade = document.getElementById('hero-bot-fade');
+const heroWash = document.getElementById('hero-wash');
 window.addEventListener('scroll', () => {
   const rect = heroSection.getBoundingClientRect();
   const scrolled = Math.max(0, -rect.top);
-  const ratio = Math.min(1, scrolled / (rect.height * 0.4));
-  heroBgInner.style.transform = `translateY(${scrolled * -0.3}px)`;
-  if (heroContent) { heroContent.style.transform = `translateY(${ratio * -100}px)`; heroContent.style.opacity = Math.max(0, 1 - ratio * 2.5); }
-  if (heroHex) { heroHex.style.transform = `translateY(${ratio * 200}px) scale(${1 + ratio * 0.15}) rotate(${ratio * 3}deg)`; }
-  if (heroGlow) { heroGlow.style.transform = `translateX(-50%) scale(${1 + ratio * 2})`; heroGlow.style.opacity = Math.max(0, 1.3 - ratio * 2); }
+  const ratio = Math.min(1, scrolled / (rect.height * 0.7));
+  heroBgInner.style.transform = `translateY(${scrolled * -0.15}px)`;
+  if (heroContent) { heroContent.style.transform = `translateY(${ratio * -120}px)`; heroContent.style.opacity = Math.max(0, 1 - ratio * 2.5); }
+  if (heroHex) { heroHex.style.opacity = Math.max(0, 1 - ratio * 1.8); heroHex.style.transform = `translateY(${ratio * -40}px) scale(${1 + ratio * 0.15}) rotate(${ratio * 3}deg)`; }
+  if (heroTint) { heroTint.style.opacity = Math.max(0, 1 - ratio * 1.5); }
+  if (heroBotFade) { heroBotFade.style.opacity = Math.max(0, 1 - ratio * 2.5); }
+  if (heroWash) { heroWash.style.opacity = ratio; }
 }, { passive:true });
 
 // Colour tint cycling on hex-land background (crossfade layers)
@@ -64,79 +67,74 @@ window.addEventListener('scroll', () => {
     cx += (mx - cx) * 0.04;
     cy += (my - cy) * 0.04;
     heroTint.style.transform = `translate(${cx * 30}px, ${cy * 20}px)`;
-    heroCubeWrap.style.transform = `translate(${cx * 10}px, ${cy * 8}px)`;
-    if (window._heroCubeInfluence) window._heroCubeInfluence(cx * 0.4, cy * 0.4);
     requestAnimationFrame(tick);
   }
   tick();
 })();
 
-// 3D Hero cube
-(function(){
-  const container = heroCubeWrap;
-  const w = 320, h = 320;
-  const scene = new THREE.Scene();
-  const camera = new THREE.PerspectiveCamera(36, 1, 0.1, 100);
-  camera.position.set(0, 0, 5.2);
-  const renderer = new THREE.WebGLRenderer({ alpha:true, antialias:true });
-  renderer.setSize(w, h);
-  renderer.setPixelRatio(Math.min(window.devicePixelRatio, 2));
-  container.appendChild(renderer.domElement);
 
-  const geo = new THREE.BoxGeometry(1.6, 1.6, 1.6);
-  const mats = [
-    new THREE.MeshStandardMaterial({color:0x0c4f8d, metalness:0.3, roughness:0.4}),
-    new THREE.MeshStandardMaterial({color:0x0c4f8d, metalness:0.3, roughness:0.4}),
-    new THREE.MeshStandardMaterial({color:0xd11a1a, metalness:0.3, roughness:0.4}),
-    new THREE.MeshStandardMaterial({color:0xd11a1a, metalness:0.3, roughness:0.4}),
-    new THREE.MeshStandardMaterial({color:0x3a9928, metalness:0.3, roughness:0.4}),
-    new THREE.MeshStandardMaterial({color:0x3a9928, metalness:0.3, roughness:0.4}),
-  ];
-  const cube = new THREE.Mesh(geo, mats);
-  scene.add(cube);
-  const edges = new THREE.LineSegments(
-    new THREE.EdgesGeometry(geo),
-    new THREE.LineBasicMaterial({color:0xffffff, transparent:true, opacity:0.25})
-  );
-  cube.add(edges);
-  scene.add(new THREE.AmbientLight(0xffffff, 0.6));
-  const dir = new THREE.DirectionalLight(0x6fb5ff, 1.2);
-  dir.position.set(2, 3, 4);
-  scene.add(dir);
+// Typewriter cycle on hero title
+(function() {
+  var WORDS = ['games','mods','rules','engines','tools','variants','worlds'];
+  var COLORS = ['#6fb5ff','#3a9928','#d11a1a'];
+  var tw = document.getElementById('hero-typewriter');
+  if (!tw) return;
+  var wordIdx = 0;
+  var colorIdx = 0;
+  var charIdx = WORDS[0].length;
+  var deleting = true;
 
-  let mouseInfluenceX = 0, mouseInfluenceY = 0;
-  function animate(){
-    requestAnimationFrame(animate);
-    cube.rotation.y += 0.006;
-    cube.rotation.x += 0.003;
-    cube.rotation.y += mouseInfluenceX * 0.02;
-    cube.rotation.x += mouseInfluenceY * 0.02;
-    mouseInfluenceX *= 0.94;
-    mouseInfluenceY *= 0.94;
-    renderer.render(scene, camera);
+  function showCursor() { tw.classList.add('typing'); }
+  function hideCursor() { tw.classList.remove('typing'); }
+
+  function tick() {
+    var word = WORDS[wordIdx];
+    if (deleting) {
+      charIdx--;
+      tw.textContent = word.slice(0, charIdx);
+      if (charIdx === 0) {
+        deleting = false;
+        wordIdx = (wordIdx + 1) % WORDS.length;
+        colorIdx = (colorIdx + 1) % COLORS.length;
+        tw.style.color = COLORS[colorIdx];
+        setTimeout(tick, 400);
+        return;
+      }
+      setTimeout(tick, 60 + Math.random() * 40);
+    } else {
+      var target = WORDS[wordIdx];
+      charIdx++;
+      tw.textContent = target.slice(0, charIdx);
+      if (charIdx === target.length) {
+        deleting = true;
+        hideCursor();
+        setTimeout(function() { showCursor(); setTimeout(tick, 600); }, 2000);
+        return;
+      }
+      setTimeout(tick, 90 + Math.random() * 50);
+    }
   }
-  animate();
-  window._heroCubeInfluence = function(x, y) { mouseInfluenceX = x; mouseInfluenceY = y; };
+  setTimeout(function() { showCursor(); setTimeout(tick, 600); }, 3000);
 })();
 
 // Hero buttons
 const hb = document.getElementById('hero-btns');
-hb.appendChild(linkBtn('Browse the mods', '/mods/', 'primary'));
-hb.appendChild(linkBtn('Read the manifesto', '/about/', 'outline-dark'));
+hb.appendChild(linkBtn('Browse Mods', '/mods/', 'primary'));
+hb.appendChild(linkBtn('Learn More', '/about/', 'outline-dark'));
 
-// Mod gallery — featured subset from shared data
-const HOME_MOD_TITLES = ['Dungeon Chess','Talisman Worlds','Hyper Imperium','Econopoly','Anti-Monopoly','CivRisk'];
-const filters = ['All','Total conversion','Rebalance','Reskin'];
+// Mod gallery — all mods loaded, show max 6
+const MAX_SHOWN = 6;
 let activeFilter = 'All';
 const filtersEl = document.getElementById('gallery-filters');
 const gridEl = document.getElementById('gallery-grid');
 
 MG.data.load(['mods','news']).then(store => {
-  const MODS = HOME_MOD_TITLES.map(t => store.mods.find(m => m.title === t));
+  const MODS = store.mods;
+  const baseGames = ['All'].concat([...new Set(MODS.map(m => m.baseGame))].sort());
 
   function renderFilter() {
     filtersEl.innerHTML = '';
-    filters.forEach(f => {
+    baseGames.forEach(f => {
       const isActive = f === activeFilter;
       const b = el('button', { class: isActive ? 'filter-btn filter-btn--active' : 'filter-btn' }, f);
       b.addEventListener('click', () => { activeFilter = f; renderFilter(); renderGrid(); });
@@ -146,8 +144,8 @@ MG.data.load(['mods','news']).then(store => {
 
   function renderGrid() {
     gridEl.innerHTML = '';
-    const visible = activeFilter === 'All' ? MODS : MODS.filter(m => m.category === activeFilter);
-    visible.forEach(m => gridEl.appendChild(modCard(m)));
+    const filtered = activeFilter === 'All' ? MODS : MODS.filter(m => m.baseGame === activeFilter);
+    filtered.slice(0, MAX_SHOWN).forEach(m => gridEl.appendChild(modCard(m)));
     MG.initReveal();
   }
 
@@ -171,7 +169,7 @@ MG.data.load(['mods','news']).then(store => {
 
 const nb2 = document.getElementById('nuke-btns');
 nb2.appendChild(linkBtn('Play Nukes', '/games/nukes/', 'red'));
-nb2.appendChild(linkBtn('Read the article', '/news/nuking-catan/', 'outline-dark'));
+nb2.appendChild(linkBtn('Read Article', '/news/nuking-catan/', 'outline-dark'));
 
 // Nuke smoke wisps
 (function() {
@@ -196,8 +194,8 @@ nb2.appendChild(linkBtn('Read the article', '/news/nuking-catan/', 'outline-dark
 
 // Featured mod buttons
 const fb = document.getElementById('featured-btns');
-fb.appendChild(linkBtn('Download the rules', '#', 'primary'));
-fb.appendChild(linkBtn('View the components', '/mods/hyper-imperium/', 'outline-dark'));
+fb.appendChild(linkBtn('Download Rules', '#', 'primary'));
+fb.appendChild(linkBtn('View Components', '/mods/hyper-imperium/', 'outline-dark'));
 
 // Featured stats
 const stats = [['Players','3–6'],['Time','4–6 hr'],['Age','14+'],['Version','v2.0.1']];
@@ -211,96 +209,10 @@ stats.forEach(([k,v], i) => {
 });
 
 
-// Platform tabs
-(function() {
-  const TABS = [
-    {
-      id: 'hexagons',
-      label: 'Why Hexagons',
-      heading: 'Replacing squares with <em>hexagons.</em>',
-      body: 'Six neighbours instead of four. No diagonal exceptions. No edge-case rules. The math of strategy gets cleaner the moment the grid does.',
-      pills: ['6 adjacencies','0 diagonals','∞ variants'],
-      visual: `<svg width="240" height="240" viewBox="0 0 280 280" fill="none" opacity="0.85"><path d="M140 20 240 60v80l-100 40L40 140V60z" stroke="#0c4f8d" stroke-width="1.5" fill="none" stroke-opacity="0.3"/><path d="M140 60 200 85v50l-60 25-60-25V85z" stroke="#0c4f8d" stroke-width="2" fill="rgba(12,79,141,0.08)"/><path d="M140 100 170 112v28l-30 13-30-13v-28z" stroke="#0c4f8d" stroke-width="2.5" fill="rgba(12,79,141,0.15)"/><path d="M80 160 140 185v50l-60-25z" stroke="#3a9928" stroke-width="1" fill="rgba(58,153,40,0.06)" stroke-opacity="0.6"/><path d="M200 160 140 185v50l60-25z" stroke="#d11a1a" stroke-width="1" fill="rgba(209,26,26,0.06)" stroke-opacity="0.6"/><circle cx="140" cy="100" r="4" fill="#6fb5ff"/><text x="140" y="270" text-anchor="middle" font-family="var(--mg-font-mono)" font-size="11" fill="rgba(255,255,255,0.5)">6 adjacencies · 0 diagonals</text></svg>`
-    },
-    {
-      id: 'engine',
-      label: 'Online Engine',
-      heading: 'Play anywhere. Continue <em>everywhere.</em>',
-      body: 'Create private sessions. Hand off mid-game between phone, tablet, and laptop. Pause a session in May, finish it in October. The board waits.',
-      pills: ['Open alpha','Private sessions','Cross-device','Async play'],
-      cards: [['Private sessions','Create a room, share a link. No accounts required.'],['Cross-device','Start on desktop, continue on phone. State syncs.'],['Async play','Take your turn whenever. The board waits days, weeks, months.']]
-    },
-    {
-      id: 'bots',
-      label: 'Practice Partners',
-      heading: 'Play with friends — or <em>instructive bots.</em>',
-      body: 'Every game played online — human-vs-human or human-vs-bot — improves the next bot you\'ll face. The engine is a teaching engine first, an opponent second.',
-      pills: ['Adaptive','Replays','Solo + Multi'],
-      buttons: [['Play Nukes online','#','blue'],['Try Moddable Chess','/engines/moddable-chess/','outline-dark']]
-    }
-  ];
-
-  const nav = document.getElementById('tabs-nav');
-  const panels = document.getElementById('tabs-panels');
-
-  TABS.forEach((tab, i) => {
-    const button = el('button', {class:'home-tabs__btn' + (i===0?' home-tabs__btn--active':'')}, tab.label);
-    button.dataset.tab = tab.id;
-    nav.appendChild(button);
-
-    const panel = el('div', {class:'home-tabs__panel' + (i===0?' home-tabs__panel--active':'')});
-    panel.dataset.panel = tab.id;
-
-    const content = el('div', {class:'home-tabs__content'});
-    const h = el('h3'); h.innerHTML = tab.heading; content.appendChild(h);
-    content.appendChild(el('p', {}, tab.body));
-
-    const pills = el('div', {class:'home-tabs__pills'});
-    tab.pills.forEach(p => pills.appendChild(el('span', {class:'home-tabs__pill'}, p)));
-    content.appendChild(pills);
-
-    if (tab.buttons) {
-      const btns = el('div', {class:'home-tabs__btns'});
-      tab.buttons.forEach(([label, href, variant]) => btns.appendChild(linkBtn(label, href, variant)));
-      content.appendChild(btns);
-    }
-
-    panel.appendChild(content);
-
-    const visual = el('div', {class:'home-tabs__visual'});
-    if (tab.visual) {
-      visual.innerHTML = tab.visual;
-    } else if (tab.cards) {
-      const grid = el('div', {class:'home-tabs__cards'});
-      tab.cards.forEach(([title, body]) => {
-        const card = el('div', {class:'home-engine__card'});
-        card.appendChild(el('div', {class:'home-engine__card-title'}, title));
-        card.appendChild(el('div', {class:'home-engine__card-body'}, body));
-        grid.appendChild(card);
-      });
-      visual.appendChild(grid);
-    } else {
-      visual.innerHTML = `<svg width="220" height="220" viewBox="0 0 220 220" fill="none" opacity="0.85"><circle cx="110" cy="110" r="80" stroke="#0c4f8d" stroke-width="1.5" fill="rgba(12,79,141,0.06)"/><circle cx="110" cy="110" r="50" stroke="#6fb5ff" stroke-width="1" fill="rgba(111,181,255,0.05)" stroke-dasharray="4 4"/><circle cx="110" cy="110" r="20" fill="rgba(111,181,255,0.15)"/><circle cx="110" cy="110" r="6" fill="#6fb5ff"/><line x1="110" y1="60" x2="110" y2="30" stroke="#3a9928" stroke-width="1.5"/><circle cx="110" cy="26" r="4" fill="#3a9928"/><line x1="150" y1="80" x2="175" y2="60" stroke="#d11a1a" stroke-width="1.5"/><circle cx="178" cy="57" r="4" fill="#d11a1a"/><line x1="70" y1="80" x2="45" y2="60" stroke="#0c4f8d" stroke-width="1.5"/><circle cx="42" cy="57" r="4" fill="#0c4f8d"/><line x1="150" y1="140" x2="175" y2="160" stroke="#6fb5ff" stroke-width="1.5"/><circle cx="178" cy="163" r="4" fill="#6fb5ff"/><line x1="70" y1="140" x2="45" y2="160" stroke="#3a9928" stroke-width="1.5"/><circle cx="42" cy="163" r="4" fill="#3a9928"/><text x="110" y="210" text-anchor="middle" font-family="var(--mg-font-mono)" font-size="11" fill="rgba(255,255,255,0.5)">adaptive · learning · evolving</text></svg>`;
-    }
-    panel.appendChild(visual);
-    panels.appendChild(panel);
-  });
-
-  nav.addEventListener('click', function(e) {
-    const btn = e.target.closest('.home-tabs__btn');
-    if (!btn) return;
-    nav.querySelectorAll('.home-tabs__btn').forEach(b => b.classList.remove('home-tabs__btn--active'));
-    btn.classList.add('home-tabs__btn--active');
-    panels.querySelectorAll('.home-tabs__panel').forEach(p => {
-      p.classList.remove('home-tabs__panel--active');
-      if (p.dataset.panel === btn.dataset.tab) p.classList.add('home-tabs__panel--active');
-    });
-  });
-})();
 
 // Community band
 document.getElementById('community-hex').style.backgroundImage = "url('img/hex-grid-blue.svg')";
 const cb = document.getElementById('community-btns');
-cb.appendChild(linkBtn('Open the Discord', '/community/', 'primary'));
-cb.appendChild(linkBtn('Submit a mod', '/submit/', 'outline-dark'));
+cb.appendChild(linkBtn('Join Community', '/community/', 'primary'));
+cb.appendChild(linkBtn('Submit Mod', '/submit/', 'outline-dark'));
 })();

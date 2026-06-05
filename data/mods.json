@@ -11,7 +11,7 @@
   },
   {
     "category": "Reskin",
-    "baseGame": "Talisman 4e",
+    "baseGame": "Talisman",
     "title": "Talisman Worlds",
     "body": "Replaces the Talisman board with 61 hexagonal tiles across four concentric rings plus a hidden ending. Every game generates a different board layout. Includes Dungeon expansion support.",
     "stats": "2–6 players · 90 min · 13+",
@@ -21,7 +21,7 @@
   },
   {
     "category": "Rebalance",
-    "baseGame": "Twilight Imperium 4e",
+    "baseGame": "Twilight Imperium",
     "title": "Hyper Imperium",
     "body": "3D exploration via hyperlanes, blind voting with influence cards, shared secret objectives, and a 100-point mercenary faction builder. Five modular rule changes for TI4 + Prophecy of Kings.",
     "stats": "4–6 players · 4–6 hr · 14+",
@@ -71,7 +71,7 @@
   },
   {
     "category": "Rebalance",
-    "baseGame": "Twilight Imperium 4e",
+    "baseGame": "Twilight Imperium",
     "title": "Shattered Ascension",
     "body": "PsiComa's decade-long TI3 remix — rebalanced factions, overhauled agenda phase, new card sets. The most thorough community TI variant in existence. Tabletop Simulator module available.",
     "stats": "3–8 players · 6–12 hr · 16+",

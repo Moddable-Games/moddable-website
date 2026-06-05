@@ -5,7 +5,7 @@
     const NAV_ITEMS = [
       { id:'Mods', href:url('/mods/'), accent:'#e63232', children:[['Total conversions',url('/mods/#Total conversion')],['Rebalances',url('/mods/#Rebalance')],['Reskins',url('/mods/#Reskin')],['Submit a mod',url('/submit/')]] },
       { id:'Engines', href:url('/engines/'), accent:'#06b6d4', children:[['Moddable Chess',url('/engines/moddable-chess/')],['Moddable Hexmaps',url('/engines/moddable-hexmaps/')]] },
-      { id:'Games', href:url('/games/'), accent:'#e8a91a', children:[['Nukes',url('/games/nukes/')],['Mongo',url('/games/planet-mongo/')],['Endless Skies',url('/games/endless-skies/')]] },
+      { id:'Games', href:url('/games/'), accent:'#e8a91a', children:[['Nukes',url('/games/nukes/')],['Planet Mongo',url('/games/planet-mongo/')],['Endless Skies',url('/games/endless-skies/')]] },
       { id:'Tools', href:url('/tools/'), accent:'#3a9928', children:[['TI tools',url('/tools/ti/')],['Talisman tools',url('/tools/talisman/')],['Nukes tools',url('/tools/nukes/')],['Dice lab',url('/tools/dice/')],['Deck builder',url('/tools/decks/')],['Chess variants',url('/tools/chess/')]] },
       { id:'News', href:url('/news/'), accent:'#e11d89' },
       { id:'About', href:url('/about/'), accent:'#6fb5ff', children:[['Team',url('/team/')],['Roadmap',url('/about/roadmap/')],['Community',url('/community/')],['Press',url('/press/')]] },

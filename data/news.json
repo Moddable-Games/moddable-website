@@ -1,45 +1,54 @@
 [
   {
-    "slug": "building-games-on-chess",
+    "slug": "the-infrastructure-behind-the-games",
     "tags": [
       "Chess",
-      "Dungeon Chess",
+      "Hexmaps",
       "Moddable Chess Engine",
-      "SDK"
+      "Open Source",
+      "Architecture"
     ],
     "date": "Jun 2026",
     "cover": "#0c4f8d",
-    "img": "building-games-on-chess.jpg",
-    "title": "Building Games on Chess",
-    "heroTitle": "Building Games on <em>Chess</em>.",
-    "lede": "MCE v0.7.1 ships consumer APIs. Dungeon Chess v1.2.0 proves them.",
-    "excerpt": "How we migrated a standalone dungeon skirmish game onto an engine designed for chess variants — and published the blueprint.",
+    "img": "the-infrastructure-behind-the-games.jpg",
+    "title": "The Infrastructure Behind the Games",
+    "heroTitle": "The <em>Infrastructure</em> Behind the Games.",
+    "lede": "Three open-source foundations. Every game we ship is a consumer.",
+    "excerpt": "How Moddable Chess Engine, Hexmaps, and Rules work together as shared infrastructure for everything we build.",
     "theme": "blue",
     "category": "ENGINEERING",
-    "readTime": "5 min read",
+    "readTime": "6 min read",
     "author": "Mark Smalley",
     "authorHandle": "Lead Engineer · moddable team",
     "teamSlug": "mark",
     "toc": [
       {
-        "label": "The migration",
-        "id": "the-migration"
+        "label": "Engines first",
+        "id": "engines-first"
       },
       {
-        "label": "What v0.7 adds",
-        "id": "what-v07-adds"
+        "label": "Moddable Chess Engine",
+        "id": "moddable-chess-engine"
       },
       {
-        "label": "Four guides",
-        "id": "four-guides"
+        "label": "Moddable Hexmaps",
+        "id": "moddable-hexmaps"
       },
       {
-        "label": "The numbers",
-        "id": "the-numbers"
+        "label": "Moddable Rules",
+        "id": "moddable-rules"
       },
       {
-        "label": "What's next",
-        "id": "whats-next"
+        "label": "Plugin architecture",
+        "id": "plugin-architecture"
+      },
+      {
+        "label": "Open-source everything",
+        "id": "open-source"
+      },
+      {
+        "label": "How they connect",
+        "id": "how-they-connect"
       }
     ],
     "modCard": {
@@ -297,8 +306,8 @@
     "slug": "tis-the-season-for-traditions",
     "tags": [
       "Blood Bowl",
-      "Blood on The Clocktower",
       "Codenames",
+      "Blood on The Clocktower",
       "Exploding Kittens",
       "Mafia",
       "Monopoly",
@@ -432,41 +441,50 @@
   {
     "slug": "nuking-catan",
     "tags": [
+      "Nukes",
       "Catan",
-      "Talisman"
+      "Open Source"
     ],
     "date": "Sep 2025",
     "cover": "#d11a1a",
     "img": "nuking-catan.jpg",
     "title": "Nuking Catan",
     "heroTitle": "Nuking <em>Catan</em>.",
-    "lede": "A meditation on the gateway game, 45 million boxes deep — and what we did to it.",
-    "excerpt": "A meditation on the gateway game, 45 million boxes deep — and what we did to it.",
+    "lede": "Deterministic wartime strategy you may already own.",
+    "excerpt": "45 million Catan owners already have the hex tiles and generic pieces to play Nukes. They just don't know it yet.",
     "theme": "red",
-    "category": "CATAN",
-    "readTime": "6 min read",
+    "category": "GAME DESIGN",
+    "readTime": "7 min read",
     "author": "Mark Smalley",
     "authorHandle": "Founder",
     "teamSlug": "mark",
     "toc": [
       {
-        "label": "So we set it on fire",
-        "id": "so-we-set-it-on-fire"
+        "label": "Deterministic wartime strategy",
+        "id": "deterministic-wartime-strategy"
       },
       {
-        "label": "What we left intact",
-        "id": "what-we-left-intact"
+        "label": "What Nukes actually is",
+        "id": "what-nukes-actually-is"
       },
       {
-        "label": "What you'll need",
-        "id": "what-youll-need"
+        "label": "The Catan conversion",
+        "id": "the-catan-conversion"
+      },
+      {
+        "label": "How it compares",
+        "id": "how-it-compares"
+      },
+      {
+        "label": "Play it online",
+        "id": "play-it-online"
       }
     ],
     "modCard": {
       "title": "Nukes",
-      "version": "Live · Hex strategy game",
+      "version": "Live · nukes.moddable.games",
       "href": "/games/nukes/",
-      "btnLabel": "Play Nukes"
+      "btnLabel": "Play Online"
     }
   },
   {
@@ -559,22 +577,23 @@
   {
     "slug": "conquering-the-constrains-of-chess",
     "tags": [
-      "Checkers",
       "Chess",
-      "Go"
+      "Go",
+      "Nukes",
+      "Game Design"
     ],
     "date": "Jun 2025",
     "cover": "#d11a1a",
     "img": "conquering-the-constrains-of-chess.jpg",
     "title": "Conquering the Constraints of Chess",
-    "heroTitle": "Conquering the Constrains of <em>Chess</em>.",
-    "lede": "Going beyond the game — if chess was designed today, how would it differ?",
-    "excerpt": "1500 years of constraints. 2000+ variants. Zero unified compendiums — until now.",
+    "heroTitle": "Conquering the Constraints of <em>Chess</em>.",
+    "lede": "Going beyond the game. If chess was designed today, how would it differ?",
+    "excerpt": "A decade of studying Chess, Checkers, and Go produced three design constraints. The game we built from them is Nukes.",
     "theme": "red",
-    "category": "CHESS",
-    "readTime": "8 min read",
+    "category": "GAME DESIGN",
+    "readTime": "6 min read",
     "author": "Mark Smalley",
-    "authorHandle": "CEO & Founder",
+    "authorHandle": "Founder",
     "teamSlug": "mark",
     "toc": [
       {
@@ -590,7 +609,7 @@
         "id": "accessibility-as-a-design-principle"
       },
       {
-        "label": "What Moddable.Games is building",
+        "label": "The game we built",
         "id": "what-moddablegames-is-building"
       }
     ],

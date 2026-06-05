@@ -1,17 +1,84 @@
-<p class="lede"><em>Catan</em> is popular. By some accounts, it's the most popular game of the modern era — a gateway game that's sold over 45 million copies and introduced countless families to a life of board-games beyond Monopoly.</p>
-<p>It's a game that enforces interaction between players. No silent solo turns. No retreating to a corner with a deck of cards. Every roll is a negotiation, every settlement a quiet provocation. You can't win <em>Catan</em> without talking to the people you're trying to beat — which is, when you think about it, both its genius and its source of all known dining-table arguments.</p>
-<h2 id="so-we-set-it-on-fire">So we set it on fire.</h2>
-<p><em>Nuke Catan</em> is a total conversion of the base game. Same tiles, same dice, same little wooden settlers. Brand new economy.</p>
-<p>The premise: it's 2049. The island is now a contested post-nuclear wasteland. Sheep are extinct. Brick is currency. Wheat has been replaced by Rations. Wool by Scrap. And once per game, on your turn, you may — and probably should — play the Nuke card.</p>
-<blockquote>"You may play the Nuke card. Pick any hex. It produces no resources for the rest of the game."</blockquote>
-<p>The rule is short. The effect is permanent. And the ripple it sends through a four-player negotiation is, to put it mildly, instructive.</p>
-<h2 id="what-we-left-intact">What we left intact.</h2>
+<p class="lede"><strong>Catan</strong> is the most popular board game of the modern era. Over 45 million copies sold. It introduced a generation to hex tiles, resource negotiation, and the idea that board games could be genuinely social. It also happens to contain everything you need to play a completely different game.</p>
+
+<p>In <a href="/news/conquering-the-constrains-of-chess/">Conquering the Constraints of Chess</a>, we explained how a decade of studying deterministic strategy games produced a set of design constraints: modular hex boards, generic components, any number of players, infinite configurations. The game we built from those constraints is <a href="/games/nukes/">Nukes</a>.</p>
+
+<p>What we did not realize until much later: Catan owners already have the board.</p>
+
+<h2 id="deterministic-wartime-strategy">Deterministic wartime strategy you may already own.</h2>
+
+<p>Nukes uses hex tiles as its board. Catan uses hex tiles as its board. Nukes uses generic tokens (no unique pieces). Catan ships with generic wooden settlements and roads you never use all of.</p>
+
+<div class="prose-callout">
+  <strong>The overlap</strong>
+  The standard Catan base game contains 19 hex tiles across 5 terrain types and a pile of uniform wooden pieces. Nukes needs hex tiles across multiple biomes and two sets of generic tokens. The components overlap almost perfectly.
+</div>
+
+<p>Moddable.Games does not have a piracy problem. In fact, we encourage it. We are designing <a href="/news/open-sourcing-tabletop-games/">open-source games</a>, freely available for others to modify and redistribute under their own brands. And our first standalone game can be played tonight with a box you already own.</p>
+
+<figure>
+  <img src="/img/news/nuking-catan.jpg" alt="Hex tiles arranged for a game of Nukes" loading="lazy">
+  <figcaption>Same hex geometry, completely different game. 44 tiles, 75 tokens, zero dice.</figcaption>
+</figure>
+
+<h2 id="what-nukes-actually-is">What Nukes actually is.</h2>
+
+<p>Nukes is a cold-war territory control game on a modular hex map. No dice. No cards. No luck. Every outcome is the direct result of a decision you made.</p>
+
+<p>The core mechanic: units are fluid. A single token is Infantry. Two tokens stacked together become Artillery. Three become Airborne. Four or more become a Base. The same physical pieces change behaviour based purely on how you group them:</p>
+
 <ul>
-  <li>The hex board. Same 19 tiles, same number tokens, same robber.</li>
-  <li>The card decks. Resource cards are reskinned (Sheep → Scrap), but the development cards are untouched.</li>
-  <li>The longest road and largest army awards. Both still grant 2 VP.</li>
-  <li>The trading mechanic. You can still bank-trade 4:1, port-trade 3:1, and player-trade however you want.</li>
+  <li><strong>Infantry</strong> floods through same-biome regions like water filling a container</li>
+  <li><strong>Artillery</strong> jumps in straight lines over occupied hexes</li>
+  <li><strong>Airborne</strong> slingshots exactly two regions, skipping what is between</li>
+  <li><strong>Bases</strong> do not move, but convert isotopes and boost passing platoons</li>
 </ul>
-<h2 id="what-youll-need">What you'll need.</h2>
-<p>Your standard <em>Catan</em> base game and four printable cards (PDF in the download). That's it. No new tiles, no replacement components, no expansions required. It's a pure rules patch — which is, frankly, the whole point of what we do.</p>
-<p><em>Nuke Catan v2.1.0 is in open playtest. Download the rules, run it at your next table, and tell us how badly we've broken something on Discord.</em></p>
+
+<p>Win by destroying an opponent's city via nuclear strike, establishing a Base on their city, or being the last player with units on the board.</p>
+
+<h2 id="the-hostage-engine">The hostage engine.</h2>
+
+<p>The second core mechanic: <strong>hostages are your engine</strong>. When you capture enemy units in combat, you hold them. Each turn, you must return 1-3 hostages to earn your moves. Every aggressive action fuels your next turn but simultaneously reinforces your opponent.</p>
+
+<blockquote>"What if every aggressive move also strengthened your opponent?"</blockquote>
+
+<p>Capture aggressively and you fuel your next few turns. But those returned hostages land back on the board as enemy reinforcements. Starve your opponent of hostages and they cannot move. But neither can you, because you have nothing to return. The equilibrium shifts constantly.</p>
+
+<p>It is simple enough to explain in two sentences. It generates decisions that chess players and poker players both recognise as meaningful. The same design philosophy of emergent complexity from minimal rules that we explored in <a href="/news/conquering-the-constrains-of-chess/">Conquering the Constraints of Chess</a>.</p>
+
+<h2 id="the-catan-conversion">The Catan conversion.</h2>
+
+<p>To play Nukes with your Catan set:</p>
+
+<ol>
+  <li>Use the 19 hex tiles as your board (arrange in any configuration, not the standard Catan layout)</li>
+  <li>Assign biome types to Catan terrain: Fields, Forest, Mountains, Desert, Clay Pits as Cities</li>
+  <li>Use settlements or roads as your tokens (one colour per player, all pieces identical)</li>
+  <li>Download the 4-page rulebook from the <a href="/games/nukes/">game page</a></li>
+</ol>
+
+<p>No new components. No expansions. No purchases. The game you already own contains a second game inside it.</p>
+
+<h2 id="how-it-compares">How it compares.</h2>
+
+<p>Where Nukes sits in the lineage of deterministic strategy:</p>
+
+<ul>
+  <li><strong>Checkers:</strong> 2 players, 2 components, 2 biomes, 5x10^20 possibilities</li>
+  <li><strong>Go:</strong> 2 players, 2 components, 1 biome, 10^800 possibilities</li>
+  <li><strong>Chess:</strong> 2 players, 7 components, 2 biomes, 10^40 possibilities</li>
+  <li><strong>Catan:</strong> 2-6 players, many components, 8 biomes, ~7 billion possibilities</li>
+  <li><strong>Nukes:</strong> any players, 2 components, 5 biomes, infinite possibilities</li>
+</ul>
+
+<h2 id="play-it-online">Play it online.</h2>
+
+<p>You do not need a Catan set. Nukes is live at <a href="https://nukes.moddable.games" target="_blank" rel="noopener">nukes.moddable.games</a> with the full 44-tile board, online multiplayer, and async play. Built on our open-source <a href="/engines/moddable-hexmaps/">Hexmaps engine</a>.</p>
+
+<figure>
+  <img src="/img/news/nukes-online.png" alt="Nukes online game interface showing hex board with units" loading="lazy">
+  <figcaption>The online engine at nukes.moddable.games. No account required. Create a room, share the link, play.</figcaption>
+</figure>
+
+<p>But for the 45 million people who already own a copy of Catan: you also own Nukes. You just did not know it yet.</p>
+
+<p>All we need to do now is let the other forty-four million, nine hundred and ninety-nine thousand, nine hundred and ninety-nine people know.</p>
