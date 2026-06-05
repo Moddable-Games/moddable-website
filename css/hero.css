@@ -132,13 +132,14 @@
   line-height: 1.65;
   color: rgba(255,255,255,0.86);
   max-width: 800px;
-  margin: 0;
+  margin: 0 auto;
   text-shadow: 0 2px 16px rgba(0,0,0,0.7);
   text-wrap: balance;
 }
 .mg-hero--tier2 .mg-hero__lede {
   font-size: 17px;
   max-width: 560px;
+  margin: 0 auto;
 }
 
 /* ── Feature element layout (hero with side graphic) ────────────────── */
