@@ -22,7 +22,7 @@ document.getElementById('page-hero').appendChild(MG.sectionHero({
   hexColor: 'green',
   eyebrow: 'FREE TOOLS',
   title: 'The <em>toys</em> we built to help at your table.',
-  lede: 'Dice rollers, name generators, scoreboards, and combat calculators. All free, no account needed.',
+  lede: 'Dice rollers, name generators, scoreboards, and combat calculators. No account needed.',
   feature: diceEl
 }));
 
