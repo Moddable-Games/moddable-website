@@ -28,14 +28,12 @@
   padding-bottom: 56px;
   border-bottom: 1px solid rgba(255,255,255,0.12);
 }
-.mg-footer__grid > :last-child { text-align: right; }
 
 @media (max-width: 900px) {
   .mg-footer__grid {
     grid-template-columns: repeat(3, 1fr);
     gap: 32px 24px;
   }
-  .mg-footer__grid > :last-child { text-align: left; }
 }
 
 @media (max-width: 560px) {
