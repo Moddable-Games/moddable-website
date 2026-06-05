@@ -1,14 +1,11 @@
 (function() {
-  var navRoot = document.getElementById('nav-root');
-  var heroRoot = document.getElementById('page-hero');
-  if (!navRoot || !heroRoot) return;
-
   var el = MG.el;
   var url = MG.url;
+  var linkBtn = MG.linkBtn;
 
-  navRoot.appendChild(MG.navbar('About'));
+  document.getElementById('nav-root').appendChild(MG.navbar('About'));
   document.getElementById('footer-root').appendChild(MG.footer());
-  heroRoot.appendChild(MG.sectionHero({
+  document.getElementById('page-hero').appendChild(MG.sectionHero({
     section: 'about',
     tier: 1,
     hexColor: 'blue',
@@ -18,23 +15,46 @@
     feature: MG.buildHeroFeature('about')
   }));
 
-  var links = [
-    { label:'Discord', sub:'Open community', color:'#5865f2', href:url('/community/') },
-    { label:'Team',    sub:'Six humans, no AI', color:'#0c4f8d', href:url('/team/') },
-    { label:'Roadmap', sub:'18-month public plan', color:'#3a9928', href:url('/about/roadmap/') },
-    { label:'Mods',    sub:'12 open-source mods', color:'#d11a1a', href:url('/mods/') }
+  var sidebar = document.getElementById('about-sidebar');
+
+  var statsCard = el('div', { class: 'about-sidebar__card' });
+  statsCard.appendChild(el('div', { class: 'about-sidebar__card-title' }, 'Quick facts'));
+  var facts = [
+    ['Founded', '2024'],
+    ['Location', 'Kuala Lumpur'],
+    ['Team', '4 people'],
+    ['Games', '3 original'],
+    ['Mods', '10 published'],
+    ['License', 'MIT + CC BY-SA'],
   ];
-  var lg = document.getElementById('links-grid');
-  if (!lg) return;
+  facts.forEach(function(f) {
+    var row = el('div', { class: 'about-stat' });
+    row.appendChild(el('span', { class: 'about-stat__label' }, f[0]));
+    row.appendChild(el('span', { class: 'about-stat__value' }, f[1]));
+    statsCard.appendChild(row);
+  });
+  sidebar.appendChild(statsCard);
+
+  var linksCard = el('div', { class: 'about-sidebar__card' });
+  linksCard.appendChild(el('div', { class: 'about-sidebar__card-title' }, 'Explore'));
+  var linksWrap = el('div', { class: 'about-sidebar__links' });
+  var links = [
+    { label: 'Discord', sub: 'Join the community', color: '#5865f2', href: url('/community/') },
+    { label: 'Team', sub: 'Meet the workshop', color: '#0c4f8d', href: url('/team/') },
+    { label: 'Roadmap', sub: '18-month plan', color: '#3a9928', href: url('/about/roadmap/') },
+    { label: 'Press Kit', sub: 'Logos and assets', color: '#14161c', href: url('/press/') },
+  ];
   links.forEach(function(l) {
-    var a = el('a', {href:l.href, class:'about-link'});
-    var icon = el('div', {class:'about-link__icon'});
+    var a = el('a', { href: l.href, class: 'about-link' });
+    var icon = el('div', { class: 'about-link__icon' });
     icon.style.background = l.color;
     a.appendChild(icon);
     var t = el('div');
-    t.appendChild(el('div', {class:'about-link__label'}, l.label));
-    t.appendChild(el('div', {class:'about-link__sub'}, l.sub));
+    t.appendChild(el('div', { class: 'about-link__label' }, l.label));
+    t.appendChild(el('div', { class: 'about-link__sub' }, l.sub));
     a.appendChild(t);
-    lg.appendChild(a);
+    linksWrap.appendChild(a);
   });
+  linksCard.appendChild(linksWrap);
+  sidebar.appendChild(linksCard);
 })();
