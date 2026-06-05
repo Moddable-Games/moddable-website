@@ -179,6 +179,7 @@
   max-width: 1200px;
   margin: 0 auto;
   box-sizing: border-box;
+  text-align: center;
 }
 
 .page-hero__eyebrow {
@@ -203,6 +204,6 @@
   font-size: 20px;
   line-height: 1.5;
   color: rgba(255,255,255,0.82);
-  margin: 0;
+  margin: 0 auto;
   max-width: 680px;
 }
