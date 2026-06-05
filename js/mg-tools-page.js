@@ -20,7 +20,7 @@ document.getElementById('page-hero').appendChild(MG.sectionHero({
   section: 'tools',
   tier: 1,
   hexColor: 'green',
-  eyebrow: 'THE WORKBENCH',
+  eyebrow: 'FREE TOOLS',
   title: 'The <em>toys</em> we built to help at your table.',
   lede: 'Dice rollers, name generators, scoreboards, and combat calculators. All free, no account needed.',
   feature: diceEl
