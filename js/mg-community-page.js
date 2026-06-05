@@ -143,9 +143,9 @@
 
   // Mod Jams
   var JAMS = [
-    { number: 'JAM #1', title: 'Monopoly', date: 'Internal · 2025', color: '#3a9928', result: 'Produced <a href="/mods/econopoly/">Econopoly</a> — victory points replace bankruptcy', upcoming: false },
-    { number: 'JAM #2', title: 'Talisman', date: 'Internal · 2025', color: '#0c4f8d', result: 'Produced <a href="/mods/talisman-worlds/">Talisman Worlds</a> — hex grid replaces the spiral', upcoming: false },
-    { number: 'JAM #3', title: 'Twilight Imperium', date: 'Internal · 2025', color: '#d11a1a', result: 'Produced <a href="/mods/hyper-imperium/">Hyper Imperium</a> — 12 hours down to 8', upcoming: false },
+    { number: 'JAM #1', title: 'Monopoly', date: 'March 2024', color: '#3a9928', result: 'Produced <a href="/mods/econopoly/">Econopoly</a> — victory points replace bankruptcy', upcoming: false },
+    { number: 'JAM #2', title: 'Talisman', date: 'August 2024', color: '#0c4f8d', result: 'Produced <a href="/mods/talisman-worlds/">Talisman Worlds</a> — hex grid replaces the spiral', upcoming: false },
+    { number: 'JAM #3', title: 'Twilight Imperium', date: 'January 2025', color: '#d11a1a', result: 'Produced <a href="/mods/hyper-imperium/">Hyper Imperium</a> — 12 hours down to 8', upcoming: false },
     { number: 'JAM #4', title: '???', date: 'Coming soon', color: '', result: '', upcoming: true }
   ];
 
