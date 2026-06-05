@@ -12,7 +12,7 @@
     hexColor: 'amber',
     eyebrow: 'ORIGINAL GAMES',
     title: 'Three <em>games</em>. All moddable.',
-    lede: 'Original tabletop games designed to be forked and rewritten. Every rulebook lives in a git repo.',
+    lede: 'Original tabletop games designed to be forked and rewritten.',
     feature: MG.buildHeroFeature('games')
   }));
 
