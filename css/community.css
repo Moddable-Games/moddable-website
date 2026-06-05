@@ -20,7 +20,7 @@ body { background: #f5f4ef; }
 .channel-link__desc { font-family: var(--mg-font-body); font-size: 13px; color: var(--mg-mute); margin-top: 1px; }
 
 /* Activity feed — chat-style bubbles */
-.activity-feed { margin-top: 24px; display: flex; flex-direction: column; gap: 12px; max-width: 700px; }
+.activity-feed { margin-top: 24px; display: grid; grid-template-columns: repeat(2, 1fr); gap: 12px; }
 .activity-item { display: flex; gap: 14px; padding: 16px 20px; background: #fff; border: 1px solid var(--mg-hairline-light); border-radius: 14px; transition: border-color 150ms; }
 .activity-item:hover { border-color: var(--mg-blue); }
 .activity-item__avatar { width: 36px; height: 36px; border-radius: 50%; background: linear-gradient(135deg, var(--mg-blue), var(--mg-green)); flex-shrink: 0; display: flex; align-items: center; justify-content: center; font-family: var(--mg-font-mono); font-size: 13px; font-weight: 700; color: #fff; }
