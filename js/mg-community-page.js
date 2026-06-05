@@ -13,49 +13,48 @@
     lede: 'Designers, playtesters, and rule-tinkerers building open-source board games together.'
   }));
 
+  // Channels as pill groups
   var CHANNELS = [
-    { category: 'Boardgames', slug: 'boardgames', channels: [
-      { name: 'viticulture', desc: 'Strategy wine-making and worker placement' },
-      { name: 'twilight', desc: 'Twilight Imperium strategy and sessions' },
-      { name: 'catan', desc: 'Catan mods, variants, and hex experiments' },
-      { name: 'monopoly', desc: 'Econopoly playtesting and Monopoly fixes' },
-      { name: 'print-n-play', desc: 'PnP builds, card stock, and DIY production' }
-    ]},
-    { category: 'Community', slug: 'community', channels: [
-      { name: 'design', desc: 'Game design discussion and prototyping' },
-      { name: 'showcase', desc: 'Share artwork, designs, or ideas' },
-      { name: 'playtesting', desc: 'Looking for testers, finding testers' },
-      { name: 'online', desc: 'Online games: ours and open-source titles' }
-    ]},
-    { category: 'Events', slug: 'events', channels: [
-      { name: 'events-uk', desc: 'UK meetups and conventions' },
-      { name: 'events-usa', desc: 'US meetups and conventions' },
-      { name: 'events-malaysia', desc: 'Malaysia meetups and game nights' }
-    ]}
+    { label: 'Boardgames', slug: 'boardgames', names: ['viticulture','twilight','catan','monopoly','print-n-play'] },
+    { label: 'Community', slug: 'community', names: ['design','showcase','playtesting','online'] },
+    { label: 'Events', slug: 'events', names: ['events-uk','events-usa','events-malaysia'] }
   ];
 
   var cl = document.getElementById('channels-list');
-  cl.className = 'channels-grid';
+  cl.className = 'channels-wrap';
   CHANNELS.forEach(function(cat) {
-    var card = el('div', {class: 'channel-category channel-category--' + cat.slug});
-    var header = el('div', {class: 'channel-category__header'});
-    header.appendChild(el('div', {class: 'channel-category__name'}, cat.category));
-    header.appendChild(el('div', {class: 'channel-category__count'}, cat.channels.length + ' channels'));
-    card.appendChild(header);
-    var list = el('div', {class: 'channel-category__list'});
-    cat.channels.forEach(function(ch) {
-      var row = el('div', {class: 'channel-link'});
-      row.appendChild(el('span', {class: 'channel-link__hash'}, '#'));
-      var txt = el('div', {class: 'channel-link__text'});
-      txt.appendChild(el('div', {class: 'channel-link__name'}, ch.name));
-      txt.appendChild(el('div', {class: 'channel-link__desc'}, ch.desc));
-      row.appendChild(txt);
-      list.appendChild(row);
+    var group = el('div', {class: 'channel-group'});
+    group.appendChild(el('span', {class: 'channel-group__label channel-group__label--' + cat.slug}, cat.label));
+    cat.names.forEach(function(name) {
+      group.appendChild(el('span', {class: 'channel-pill'}, '#' + name));
     });
-    card.appendChild(list);
-    cl.appendChild(card);
+    cl.appendChild(group);
   });
 
+  // Featured resources shared in channels
+  var FEATURED = [
+    { type: 'video', title: 'Behind the scenes: card game production', user: 'djkaspa', source: 'YouTube', url: 'https://www.youtube.com/watch?v=joMpOOZAz9c' },
+    { type: 'link', title: 'Deciding card stock for your games', user: 'darktalon8', source: 'Article', url: 'https://www.qpmarketnetwork.com/card-design' },
+    { type: 'link', title: 'Simple card maker with free tier', user: 'darktalon8', source: 'Tool', url: 'https://www.dextrous.com.au/' }
+  ];
+
+  var fg = document.getElementById('featured-grid');
+  FEATURED.forEach(function(f) {
+    var a = el('a', {class: 'featured-card', href: f.url, target: '_blank', rel: 'noopener'});
+    var thumb = el('div', {class: 'featured-card__thumb'});
+    if (f.type === 'video') {
+      thumb.appendChild(el('div', {class: 'featured-card__play'}));
+    }
+    a.appendChild(thumb);
+    var body = el('div', {class: 'featured-card__body'});
+    body.appendChild(el('div', {class: 'featured-card__source'}, f.source));
+    body.appendChild(el('div', {class: 'featured-card__title'}, f.title));
+    body.appendChild(el('div', {class: 'featured-card__user'}, 'Shared by ' + f.user));
+    a.appendChild(body);
+    fg.appendChild(a);
+  });
+
+  // Activity feed
   var ACTIVITY = [
     { channel: '#design', user: 'djkaspa', initial: 'DJ', msg: 'Nice BTS video on card game production workflows', date: 'May 22' },
     { channel: '#design', user: 'darktalon8', initial: 'DT', msg: 'Great article on deciding card stock for your games', date: 'May 20' },
@@ -79,6 +78,30 @@
     content.appendChild(el('div', {class: 'activity-item__body'}, a.msg));
     row.appendChild(content);
     al.appendChild(row);
+  });
+
+  // Members
+  var MEMBERS = [
+    { name: 'djkaspa', initial: 'DK', date: 'Oct 2025' },
+    { name: 'darktalon8', initial: 'DT', date: 'Oct 2025' },
+    { name: 'akmalfikri', initial: 'AF', date: 'Oct 2025' },
+    { name: 'kimlime', initial: 'KL', date: 'Nov 2025' },
+    { name: 'wundercover', initial: 'WC', date: 'Oct 2025' },
+    { name: 'reshwindblade', initial: 'RB', date: 'Apr 2026' },
+    { name: 'arzyyyy', initial: 'AZ', date: 'Feb 2026' },
+    { name: 'gunslingersteve', initial: 'GS', date: 'May 2026' },
+    { name: 'arjitraj_', initial: 'AR', date: 'Jun 2026' }
+  ];
+
+  var mr = document.getElementById('members-row');
+  MEMBERS.forEach(function(m) {
+    var badge = el('div', {class: 'member-badge'});
+    badge.appendChild(el('div', {class: 'member-badge__avatar'}, m.initial));
+    var info = el('div');
+    info.appendChild(el('div', {class: 'member-badge__name'}, m.name));
+    info.appendChild(el('div', {class: 'member-badge__date'}, 'Joined ' + m.date));
+    badge.appendChild(info);
+    mr.appendChild(badge);
   });
 
   var cb = document.getElementById('cta-btns');
