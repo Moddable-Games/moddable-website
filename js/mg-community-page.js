@@ -61,7 +61,8 @@
     { channel: '#design', user: 'darktalon8', initial: 'DT', msg: 'Great article on deciding card stock for your games', date: 'May 20' },
     { channel: '#design', user: 'darktalon8', initial: 'DT', msg: 'Simple card maker with a free layer to test it out', date: 'May 11' },
     { channel: '#general', user: 'arjitraj_', initial: 'AR', msg: 'Thanks Kevin for the invite.', date: 'Jun 3' },
-    { channel: '#print-n-play', user: 'reshwindblade', initial: 'RB', msg: 'First prototype printed — card alignment is tricky', date: 'Jun 1' }
+    { channel: '#print-n-play', user: 'reshwindblade', initial: 'RB', msg: 'First prototype printed — card alignment is tricky', date: 'Jun 1' },
+    { channel: '#monopoly', user: 'wundercover', initial: 'WC', msg: 'Econopoly v1.4 playtest report — variable objectives feel great', date: 'May 8' }
   ];
 
   var al = document.getElementById('activity-list');
