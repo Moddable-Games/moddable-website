@@ -18,7 +18,7 @@
     { number: '15', label: 'Members' },
     { number: '12', label: 'Channels' },
     { number: '3', label: 'Countries' },
-    { number: 'Oct 2025', label: 'Founded' }
+    { number: '50+', label: 'Posts' }
   ];
   var sg = document.getElementById('stats-grid');
   STATS.forEach(function(s) {

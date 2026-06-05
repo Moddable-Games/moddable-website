@@ -4,7 +4,11 @@ body { background: #f5f4ef; }
 
 /* Stats row */
 .stats-grid { display: grid; grid-template-columns: repeat(4, 1fr); gap: 16px; }
-.stat-card { background: #fff; border: 1px solid var(--mg-hairline-light); border-radius: 16px; padding: 28px 20px; text-align: center; }
+.stat-card { background: #fff; border: 1px solid var(--mg-hairline-light); border-radius: 16px; padding: 28px 20px; text-align: center; border-top: 3px solid var(--mg-hairline-light); }
+.stat-card:nth-child(1) { border-top-color: var(--mg-blue); }
+.stat-card:nth-child(2) { border-top-color: var(--mg-green); }
+.stat-card:nth-child(3) { border-top-color: var(--mg-red); }
+.stat-card:nth-child(4) { border-top-color: var(--mg-cosmic-glow); }
 .stat-card__number { font-family: var(--mg-font-display); font-weight: 600; font-size: 40px; line-height: 1; color: var(--mg-ink); letter-spacing: -1px; }
 .stat-card__label { font-family: var(--mg-font-mono); font-size: 11px; color: var(--mg-stone); text-transform: uppercase; letter-spacing: 0.8px; margin-top: 8px; }
 
