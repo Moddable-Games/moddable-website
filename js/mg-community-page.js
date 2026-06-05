@@ -141,6 +141,34 @@
     mr.appendChild(card);
   });
 
+  // Mod Jams
+  var JAMS = [
+    { number: 'JAM #1', title: 'Monopoly', date: 'Internal · 2025', color: '#3a9928', result: 'Produced <a href="/mods/econopoly/">Econopoly</a> — victory points replace bankruptcy', upcoming: false },
+    { number: 'JAM #2', title: 'Talisman', date: 'Internal · 2025', color: '#0c4f8d', result: 'Produced <a href="/mods/talisman-worlds/">Talisman Worlds</a> — hex grid replaces the spiral', upcoming: false },
+    { number: 'JAM #3', title: 'Twilight Imperium', date: 'Internal · 2025', color: '#d11a1a', result: 'Produced <a href="/mods/hyper-imperium/">Hyper Imperium</a> — 12 hours down to 8', upcoming: false },
+    { number: 'JAM #4', title: '???', date: 'Coming soon', color: '', result: '', upcoming: true }
+  ];
+
+  var jg = document.getElementById('jams-grid');
+  JAMS.forEach(function(j) {
+    var card = el('div', {class: 'jam-card' + (j.upcoming ? ' jam-card--upcoming' : ' jam-card--complete')});
+    if (!j.upcoming) card.style.borderTopColor = j.color;
+    var num = el('div', {class: 'jam-card__number'});
+    num.style.color = j.upcoming ? 'var(--mg-cosmic-glow)' : j.color;
+    num.textContent = j.number;
+    card.appendChild(num);
+    card.appendChild(el('div', {class: 'jam-card__title'}, j.title));
+    card.appendChild(el('div', {class: 'jam-card__meta'}, j.date));
+    if (j.upcoming) {
+      card.appendChild(el('div', {class: 'jam-card__upcoming-msg'}, 'Community votes on the base game. You decide what gets modded next.'));
+    } else {
+      var result = el('div', {class: 'jam-card__result'});
+      result.innerHTML = j.result;
+      card.appendChild(result);
+    }
+    jg.appendChild(card);
+  });
+
   var cb = document.getElementById('cta-btns');
   cb.appendChild(linkBtn('Join Discord', 'https://discord.gg/moddable', 'primary'));
   cb.appendChild(linkBtn('Submit Mod', '/submit/', 'outline-dark'));

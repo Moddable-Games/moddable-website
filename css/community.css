@@ -70,6 +70,20 @@ body { background: #f5f4ef; }
 .member-card__stat { font-family: var(--mg-font-mono); font-size: 11px; color: var(--mg-mute); }
 .member-card__msg { font-family: var(--mg-font-body); font-size: 13px; font-style: italic; color: var(--mg-mute); margin-top: 12px; line-height: 1.45; }
 
+/* Mod Jams */
+.jams-grid { margin-top: 24px; display: grid; grid-template-columns: repeat(4, 1fr); gap: 16px; }
+.jam-card { background: #fff; border: 1px solid var(--mg-hairline-light); border-radius: 16px; padding: 24px; display: flex; flex-direction: column; border-top: 3px solid var(--mg-hairline-light); transition: border-color 150ms; }
+.jam-card:hover { border-color: var(--mg-blue); }
+.jam-card--complete { opacity: 1; }
+.jam-card--upcoming { border-top-style: dashed; border-top-color: var(--mg-cosmic-glow); }
+.jam-card__number { font-family: var(--mg-font-pixel); font-size: 9px; letter-spacing: 1px; margin-bottom: 10px; }
+.jam-card__title { font-family: var(--mg-font-display); font-weight: 600; font-size: 22px; line-height: 1.2; color: var(--mg-ink); margin: 0 0 8px; }
+.jam-card__meta { font-family: var(--mg-font-mono); font-size: 11px; color: var(--mg-stone); margin-bottom: 12px; }
+.jam-card__result { font-family: var(--mg-font-body); font-size: 13px; color: var(--mg-body-color); line-height: 1.45; margin-top: auto; }
+.jam-card__result a { color: var(--mg-blue); text-decoration: underline; text-decoration-color: rgba(12,79,141,0.3); text-underline-offset: 2px; }
+.jam-card__result a:hover { text-decoration-color: var(--mg-blue); }
+.jam-card__upcoming-msg { font-family: var(--mg-font-body); font-size: 13px; font-style: italic; color: var(--mg-mute); margin-top: auto; }
+
 /* CTA band */
 .community-cta { background: #000; color: #fff; border-radius: 20px; padding: 56px 40px; text-align: center; position: relative; overflow: hidden; }
 .community-cta__hex { position: absolute; inset: 0; background-image: url('../img/hex-grid-blue.svg'); background-size: 56px 64px; animation: hexFloat 30s linear infinite; opacity: 0.5; }
@@ -83,6 +97,7 @@ body { background: #f5f4ef; }
   .featured-grid { grid-template-columns: 1fr 1fr; }
   .activity-feed { grid-template-columns: 1fr; }
   .members-grid { grid-template-columns: repeat(2, 1fr); }
+  .jams-grid { grid-template-columns: repeat(2, 1fr); }
 }
 @media (max-width: 640px) {
   .community-section { padding: 48px 20px 64px; }
