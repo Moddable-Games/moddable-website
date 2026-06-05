@@ -76,27 +76,6 @@
       content.appendChild(postsSection);
     }
 
-    // Teammates
-    const tmSection = el('div', {class: 'td-teammates'});
-    tmSection.appendChild(el('h2', {class: 'td-teammates__heading'}, 'The rest of the team'));
-    const grid = el('div', {class: 'td-teammates__grid'});
-    teammates.forEach(function(t) {
-      const card = el('a', {href: url('/team/' + t.handle + '/'), class: 'td-teammate'});
-      const av = el('div', {class: 'td-teammate__avatar'});
-      av.appendChild(el('img', {
-        src: url('/assets/team/' + t.img),
-        alt: t.name,
-        loading: 'lazy'
-      }));
-      card.appendChild(av);
-      const info = el('div');
-      info.appendChild(el('div', {class: 'td-teammate__name'}, t.name));
-      info.appendChild(el('div', {class: 'td-teammate__role'}, t.role));
-      card.appendChild(info);
-      grid.appendChild(card);
-    });
-    tmSection.appendChild(grid);
-    content.appendChild(tmSection);
 
     // Sidebar — social links
     if (member.socials) {
@@ -114,20 +93,23 @@
       sidebar.appendChild(socialCard);
     }
 
-    // Sidebar — quick facts
-    const factsCard = el('div', {class: 'td-sidebar__card'});
-    factsCard.appendChild(el('div', {class: 'td-sidebar__card-title'}, member.name.split(' ')[0]));
-    const facts = [
-      ['Role', member.role],
-      ['Posts', posts.length.toString()],
-    ];
-    facts.forEach(function(f) {
-      const row = el('div', {class: 'td-sidebar__stat'});
-      row.appendChild(el('span', {class: 'td-sidebar__stat-label'}, f[0]));
-      row.appendChild(el('span', {class: 'td-sidebar__stat-value'}, f[1]));
-      factsCard.appendChild(row);
+    // Sidebar — other team members
+    const tmCard = el('div', {class: 'td-sidebar__card'});
+    tmCard.appendChild(el('div', {class: 'td-sidebar__card-title'}, 'Team'));
+    const tmWrap = el('div', {class: 'td-sidebar__teammates'});
+    teammates.forEach(function(t) {
+      const a = el('a', {href: url('/team/' + t.handle + '/'), class: 'td-sidebar__teammate'});
+      const av = el('div', {class: 'td-sidebar__teammate-avatar'});
+      av.appendChild(el('img', {src: url('/assets/team/' + t.img), alt: t.name, loading: 'lazy'}));
+      a.appendChild(av);
+      const info = el('div');
+      info.appendChild(el('div', {class: 'td-sidebar__teammate-name'}, t.name));
+      info.appendChild(el('div', {class: 'td-sidebar__teammate-role'}, t.role));
+      a.appendChild(info);
+      tmWrap.appendChild(a);
     });
-    sidebar.appendChild(factsCard);
+    tmCard.appendChild(tmWrap);
+    sidebar.appendChild(tmCard);
 
     bodyInner.appendChild(content);
     bodyInner.appendChild(sidebar);

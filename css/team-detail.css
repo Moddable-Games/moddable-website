@@ -3,7 +3,7 @@ body { background: #f5f4ef; }
 .td-hero { background: #000; color: #fff; padding: 100px 32px 0; position: relative; overflow: visible; min-height: 420px; }
 .td-hero__glow-clip { position: absolute; inset: 0; overflow: hidden; pointer-events: none; }
 .td-hero__glow { position: absolute; right: 10%; top: 30%; width: 600px; height: 600px; border-radius: 50%; pointer-events: none; filter: blur(80px); opacity: 0.25; }
-.td-hero__inner { max-width: 1000px; margin: 0 auto; position: relative; display: grid; grid-template-columns: 1fr auto; gap: 48px; align-items: end; }
+.td-hero__inner { max-width: 1200px; margin: 0 auto; position: relative; display: grid; grid-template-columns: 1fr auto; gap: 48px; align-items: end; }
 .td-hero__back { font-family: var(--mg-font-mono); font-size: 12px; color: rgba(255,255,255,0.6); text-decoration: none; position: absolute; top: -56px; left: 0; }
 .td-hero__back:hover { color: #fff; }
 
@@ -44,10 +44,13 @@ body { background: #f5f4ef; }
 .td-sidebar__socials { display: flex; gap: 10px; }
 .td-sidebar__social { display: flex; align-items: center; justify-content: center; width: 38px; height: 38px; border-radius: 9999px; background: var(--mg-canvas-light); border: 1px solid var(--mg-hairline-light); color: var(--mg-mute); text-decoration: none; transition: color 150ms, border-color 150ms; }
 .td-sidebar__social:hover { color: var(--mg-ink); border-color: var(--mg-ink); }
-.td-sidebar__stat { display: flex; justify-content: space-between; align-items: baseline; padding: 8px 0; border-bottom: 1px solid var(--mg-hairline-light); }
-.td-sidebar__stat:last-child { border-bottom: none; }
-.td-sidebar__stat-label { font-family: var(--mg-font-body); font-size: 13px; color: var(--mg-mute); }
-.td-sidebar__stat-value { font-family: var(--mg-font-mono); font-size: 13px; font-weight: 600; color: var(--mg-ink); }
+.td-sidebar__teammates { display: flex; flex-direction: column; gap: 10px; }
+.td-sidebar__teammate { display: flex; align-items: center; gap: 12px; padding: 10px 12px; background: var(--mg-canvas-light); border: 1px solid var(--mg-hairline-light); border-radius: 12px; text-decoration: none; color: inherit; transition: border-color 150ms; }
+.td-sidebar__teammate:hover { border-color: var(--mg-ink); }
+.td-sidebar__teammate-avatar { width: 32px; height: 32px; border-radius: 50%; overflow: hidden; flex: none; }
+.td-sidebar__teammate-avatar img { width: 100%; height: 100%; object-fit: cover; }
+.td-sidebar__teammate-name { font-family: var(--mg-font-body); font-weight: 600; font-size: 13px; color: var(--mg-ink); }
+.td-sidebar__teammate-role { font-family: var(--mg-font-mono); font-size: 10px; color: var(--mg-mute); }
 
 .td-bio { font-family: var(--mg-font-body); font-size: 18px; line-height: 1.7; color: var(--mg-body-color); }
 
