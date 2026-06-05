@@ -7,7 +7,15 @@
   document.getElementById('nav-root').appendChild(MG.navbar('Engines'));
   document.getElementById('footer-root').appendChild(MG.footer());
 
-  document.getElementById('engines-hero-hex').style.backgroundImage = MG.HEX_BG;
+  document.getElementById('page-hero').appendChild(MG.sectionHero({
+    section: 'engines',
+    tier: 1,
+    hexColor: 'cyan',
+    eyebrow: 'OPEN SOURCE',
+    title: 'The <em>foundations</em> games are built on.',
+    lede: 'Modular opensource engines that anyone can embed, extend, or fork. Each one powering games and tools across our ecosystem.',
+    feature: MG.buildHeroFeature('engines')
+  }));
 
   var ctaBtns = document.getElementById('engines-cta-btns');
   ctaBtns.appendChild(linkBtn('View on GitHub', 'https://github.com/Moddable-Games', 'primary'));

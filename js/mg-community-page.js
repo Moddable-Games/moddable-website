@@ -4,11 +4,13 @@
 
   document.getElementById('nav-root').appendChild(MG.navbar('About'));
   document.getElementById('footer-root').appendChild(MG.footer());
-  document.getElementById('page-hero').appendChild(MG.pageHero({
+  document.getElementById('page-hero').appendChild(MG.sectionHero({
+    section: 'community',
+    tier: 2,
+    hexColor: 'blue',
     eyebrow: 'COMMUNITY',
-    title: '2,400 moddables<br>and counting.',
-    lede: 'The Discord, the mod jams, the never-ending argument about whether Catan needs the Seafarers expansion.',
-    withHorizon: true
+    title: '2,400 and counting.',
+    lede: 'The Discord, the mod jams, and the never-ending Catan argument.'
   }));
 
   var STATS = [['2,400+','Discord members'],['12','published mods'],['3','mod jams run'],['4','team humans']];

@@ -3,6 +3,15 @@ const { T, el, btn, navbar, footer } = MG;
 document.getElementById('nav-root').appendChild(navbar('Tools'));
 document.getElementById('footer-root').appendChild(footer());
 
+document.getElementById('page-hero').appendChild(MG.sectionHero({
+  section: 'tool-talisman',
+  tier: 2,
+  hexColor: 'green',
+  eyebrow: 'TALISMAN: HEXED',
+  title: 'Talisman tools.',
+  lede: 'Character lottery, hex board generator, and encounter quick-draw.'
+}));
+
 /* ── CHARACTER LOTTERY ── */
 const CHARS = [
   { name:'Warrior',   str:4, cft:2, lives:4 },

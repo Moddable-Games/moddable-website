@@ -3,6 +3,15 @@ const { T, el, btn, navbar, footer } = MG;
 document.getElementById('nav-root').appendChild(navbar('Tools'));
 document.getElementById('footer-root').appendChild(footer());
 
+document.getElementById('page-hero').appendChild(MG.sectionHero({
+  section: 'tool-nukes',
+  tier: 2,
+  hexColor: 'green',
+  eyebrow: 'NUKES',
+  title: 'Nukes tools.',
+  lede: 'Hex map generator, combat calculator, and hostage tracker.'
+}));
+
 /* ── COMBAT STRENGTH CALCULATOR ── */
 function renderCombat() {
   const wrap = document.getElementById('combat-calc');

@@ -8,11 +8,14 @@
 
   navRoot.appendChild(MG.navbar('About'));
   document.getElementById('footer-root').appendChild(MG.footer());
-  heroRoot.appendChild(MG.pageHero({
+  heroRoot.appendChild(MG.sectionHero({
+    section: 'about',
+    tier: 1,
+    hexColor: 'blue',
     eyebrow: 'ABOUT MODDABLE',
-    title: 'Creating games you already own.',
-    lede: 'A workshop of designers, modders and rule-tinkerers reshaping the boards already on your shelf.',
-    withHorizon: true
+    title: 'Creating games you <em>already</em> own.',
+    lede: 'A workshop of designers, modders, and rule-tinkerers reshaping the boards already on your shelf.',
+    feature: MG.buildHeroFeature('about')
   }));
 
   var links = [

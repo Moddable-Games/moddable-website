@@ -2,10 +2,14 @@
 const { T, el, linkBtn, navbar, footer, pageHero, url } = MG;
 document.getElementById('nav-root').appendChild(navbar('News'));
 document.getElementById('footer-root').appendChild(footer());
-document.getElementById('page-hero').appendChild(pageHero({
+document.getElementById('page-hero').appendChild(MG.sectionHero({
+  section: 'news',
+  tier: 1,
+  hexColor: 'magenta',
   eyebrow: 'NEWS & UPDATES',
-  title: 'News &amp; updates.',
-  lede: 'Strictly written by humans.',
+  title: 'Dispatches from the <em>workshop</em> floor.',
+  lede: 'Essays, announcements, and build logs from the team. No AI, no guest posts, no filler.',
+  feature: MG.buildHeroFeature('news')
 }));
 
 MG.data.load(['news']).then(function(store) {

@@ -3,6 +3,15 @@ const { T, el, btn, navbar, footer } = MG;
 document.getElementById('nav-root').appendChild(navbar('Tools'));
 document.getElementById('footer-root').appendChild(footer());
 
+document.getElementById('page-hero').appendChild(MG.sectionHero({
+  section: 'tool-dice',
+  tier: 2,
+  hexColor: 'green',
+  eyebrow: 'DICE LAB',
+  title: 'Dice lab.',
+  lede: 'Roll anything from d4 to d100, or simulate full battles.'
+}));
+
 const ITERATIONS = 10000;
 const TABS = [
   { id: 'roller', label: 'Dice Roller' },

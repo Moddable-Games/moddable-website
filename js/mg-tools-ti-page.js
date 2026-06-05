@@ -3,6 +3,15 @@ const { T, el, btn, navbar, footer, data } = MG;
 document.getElementById('nav-root').appendChild(navbar('Tools'));
 document.getElementById('footer-root').appendChild(footer());
 
+document.getElementById('page-hero').appendChild(MG.sectionHero({
+  section: 'tool-ti',
+  tier: 2,
+  hexColor: 'green',
+  eyebrow: 'HYPER IMPERIUM',
+  title: 'TI4 tools.',
+  lede: 'Faction picker, objective tracker, and agenda voter for Hyper Imperium.'
+}));
+
 let ti4Data = null;
 let enabledExpansions = { base: true, pok: true, codex: true };
 let playerCount = 4, handSize = 3;

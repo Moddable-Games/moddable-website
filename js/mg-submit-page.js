@@ -3,6 +3,15 @@ const { T, el, btn, linkBtn, navbar, footer } = MG;
 document.getElementById('nav-root').appendChild(navbar('Mods'));
 document.getElementById('footer-root').appendChild(footer());
 
+document.getElementById('page-hero').appendChild(MG.sectionHero({
+  section: 'submit',
+  tier: 2,
+  hexColor: 'red',
+  eyebrow: 'SUBMIT A MOD',
+  title: 'Ship your rules.',
+  lede: 'Tell us about your mod. If it works at the table, we publish it.'
+}));
+
 const formData = { title:'', baseGame:'', category:'', stats:'', desc:'', rulesPdf:null, pnp:null, version:'', designer:'' };
 let currentStep = 1;
 

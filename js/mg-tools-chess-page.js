@@ -3,6 +3,15 @@ const { T, el, btn, navbar, footer, data } = MG;
 document.getElementById('nav-root').appendChild(navbar('Tools'));
 document.getElementById('footer-root').appendChild(footer());
 
+document.getElementById('page-hero').appendChild(MG.sectionHero({
+  section: 'tool-chess',
+  tier: 2,
+  hexColor: 'green',
+  eyebrow: 'CHESS VARIANTS',
+  title: 'Chess variants.',
+  lede: 'Load and play from 2000+ documented variants. One engine, infinite rulesets.'
+}));
+
 function slugToKey(slug) {
   return slug.replace(/-([a-z0-9])/g, (_, c) => c.toUpperCase());
 }

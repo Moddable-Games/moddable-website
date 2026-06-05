@@ -3,6 +3,15 @@ const { T, el, btn, navbar, footer } = MG;
 document.getElementById('nav-root').appendChild(navbar('About'));
 document.getElementById('footer-root').appendChild(footer());
 
+document.getElementById('page-hero').appendChild(MG.sectionHero({
+  section: 'press',
+  tier: 2,
+  hexColor: 'blue',
+  eyebrow: 'PRESS & MEDIA',
+  title: 'Press kit.',
+  lede: 'Pre-cleared assets for editorial use. Just credit Moddable.Games.'
+}));
+
 /* ── FACT SHEET ── */
 const stats = [
   { value: '2024', label: 'Founded' },

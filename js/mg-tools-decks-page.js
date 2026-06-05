@@ -3,6 +3,15 @@ const { T, el, btn, navbar, footer } = MG;
 document.getElementById('nav-root').appendChild(navbar('Tools'));
 document.getElementById('footer-root').appendChild(footer());
 
+document.getElementById('page-hero').appendChild(MG.sectionHero({
+  section: 'tool-decks',
+  tier: 2,
+  hexColor: 'green',
+  eyebrow: 'DECK BUILDER',
+  title: 'Deck builder.',
+  lede: 'Design, shuffle, and deal custom card decks for any game.'
+}));
+
 /* ── STATE ── */
 let deck = [];
 let playerCount = 4;

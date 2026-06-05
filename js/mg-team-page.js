@@ -9,10 +9,13 @@
 
   document.getElementById('nav-root').appendChild(navbar('About'));
   document.getElementById('footer-root').appendChild(footer());
-  document.getElementById('page-hero').appendChild(pageHero({
+  document.getElementById('page-hero').appendChild(MG.sectionHero({
+    section: 'team',
+    tier: 2,
+    hexColor: 'blue',
     eyebrow: 'THE TEAM',
     title: "Who's making this happen.",
-    lede: 'A modder-founder, a systems-thinker playtester, a board-game evangelist who builds the engine, and a game artist with TV credits.'
+    lede: 'Four humans building games, engines, and community tools.'
   }));
 
   MG.data.load(['team']).then(function(store) {

@@ -3,6 +3,29 @@ const { el, btn, linkBtn, navbar, footer, url, T } = MG;
 document.getElementById('nav-root').appendChild(navbar('Tools'));
 document.getElementById('footer-root').appendChild(footer());
 
+var diceEl = el('div', { class: 'tools-hero__dice' });
+diceEl.style.perspective = '600px';
+var cube = el('div', { class: 'dice3d' });
+var faces = [
+  ['front', 1], ['back', 6], ['top', 3], ['bottom', 4], ['right', 5], ['left', 2]
+];
+faces.forEach(function(f) {
+  var face = el('div', { class: 'dice3d__face dice3d__face--' + f[0] });
+  for (var p = 0; p < f[1]; p++) face.appendChild(el('span', { class: 'pip' }));
+  cube.appendChild(face);
+});
+diceEl.appendChild(cube);
+
+document.getElementById('page-hero').appendChild(MG.sectionHero({
+  section: 'tools',
+  tier: 1,
+  hexColor: 'green',
+  eyebrow: 'THE WORKBENCH',
+  title: 'The <em>toys</em> we built to help at your table.',
+  lede: 'Dice rollers, name generators, scoreboards, and combat calculators. All free, no account needed.',
+  feature: diceEl
+}));
+
 /* ── TOOL DEFINITIONS ── */
 const SECTIONS = [
   { key:'game-night', heading:'Game Night',  sub:'Tools you reach for at the table.' },
@@ -661,7 +684,7 @@ renderToolCards();
     results.id = 'rules-results';
     body.appendChild(results);
     renderResults();
-    setTimeout(() => search.focus(), 50);
+    if (window.location.hash === '#section-rules') setTimeout(() => search.focus({ preventScroll: true }), 50);
   }
 
   function renderResults() {

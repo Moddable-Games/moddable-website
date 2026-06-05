@@ -6,7 +6,15 @@
   document.getElementById('nav-root').appendChild(MG.navbar('Games'));
   document.getElementById('footer-root').appendChild(MG.footer());
 
-  document.getElementById('games-hero-hex').style.backgroundImage = "url('" + url('/img/hex-grid-blue.svg') + "')";
+  document.getElementById('page-hero').appendChild(MG.sectionHero({
+    section: 'games',
+    tier: 1,
+    hexColor: 'amber',
+    eyebrow: 'ORIGINAL GAMES',
+    title: 'Three <em>games</em>. All moddable.',
+    lede: 'Original tabletop games designed to be forked and rewritten. Every rulebook lives in a git repo.',
+    feature: MG.buildHeroFeature('games')
+  }));
 
   var eb = document.getElementById('engines-link-btns');
   eb.appendChild(linkBtn('Explore engines', '/engines/', 'blue'));

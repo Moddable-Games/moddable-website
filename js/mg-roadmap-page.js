@@ -2,12 +2,13 @@
 const { el, navbar, footer, pageHero } = MG;
 document.getElementById('nav-root').appendChild(navbar('About'));
 document.getElementById('footer-root').appendChild(footer());
-document.getElementById('page-hero').appendChild(pageHero({
-  eyebrow:'18-MONTH ROADMAP',
-  title:'What ships and when.',
-  lede:'Our public roadmap — from print runs to platform launches. Updated as milestones hit.',
-  accent:'#0c4f8d',
-  withHorizon:true,
+document.getElementById('page-hero').appendChild(MG.sectionHero({
+  section: 'roadmap',
+  tier: 2,
+  hexColor: 'blue',
+  eyebrow: '18-MONTH ROADMAP',
+  title: 'What ships when.',
+  lede: 'Our public roadmap, updated as milestones land.'
 }));
 
 const milestones = [

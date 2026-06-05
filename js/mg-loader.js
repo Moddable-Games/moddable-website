@@ -9,7 +9,7 @@
   const src = scripts[scripts.length - 1].getAttribute('src');
   const base = src.replace(/mg-loader\.js.*$/, '');
   var cssBase = base.replace(/js\/$/, 'css/');
-  var styles = ['navbar.css', 'footer.css', 'cards.css'];
+  var styles = ['navbar.css', 'footer.css', 'cards.css', 'hero.css', 'hero-features.css'];
   for (var s = 0; s < styles.length; s++) {
     document.write('<link rel="stylesheet" href="' + cssBase + styles[s] + '?v=' + V + '">');
   }
@@ -18,6 +18,7 @@
     'mg-mods-content.js',
     'mg-buttons.js',
     'mg-cards.js',
+    'mg-hero.js',
     'mg-navbar.js',
     'mg-footer.js',
     'mg-search.js',

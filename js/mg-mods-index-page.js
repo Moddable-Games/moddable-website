@@ -8,13 +8,22 @@
   document.getElementById('nav-root').appendChild(navbar('Mods'));
   document.getElementById('footer-root').appendChild(footer());
 
+  document.getElementById('page-hero').appendChild(MG.sectionHero({
+    section: 'mods',
+    tier: 1,
+    hexColor: 'red',
+    eyebrow: 'THE LIBRARY',
+    title: 'Ten <em>mods</em> for games you already own.',
+    lede: 'Rulebook patches for the games gathering dust on your shelves. Filter by type, search by title, or browse them all.',
+    feature: MG.buildHeroFeature('mods')
+  }));
+
   MG.data.load(['mods']).then(function(store) {
     var ALL_MODS = store.mods;
     var filters = ['All','Total conversion','Rebalance','Reskin'];
     var activeCat = 'All';
     var searchVal = '';
 
-    document.getElementById('hero-sub').textContent = ALL_MODS.length + ' rulebook mods across ' + new Set(ALL_MODS.map(function(m) { return m.baseGame; })).size + ' base games. Filter by mod-type, or search for the one you already own.';
 
     function renderFilters() {
       var el2 = document.getElementById('cat-filters');
@@ -50,5 +59,15 @@
     if (hashCat && filters.indexOf(hashCat) !== -1) activeCat = hashCat;
     renderFilters();
     renderGrid();
+
+    window.addEventListener('hashchange', function() {
+      var h = decodeURIComponent(location.hash.slice(1));
+      if (h && filters.indexOf(h) !== -1 && h !== activeCat) {
+        activeCat = h;
+        renderFilters();
+        renderGrid();
+        grid.scrollIntoView({ behavior:'smooth', block:'start' });
+      }
+    });
   });
 })();
