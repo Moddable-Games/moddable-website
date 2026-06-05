@@ -38,6 +38,28 @@
       });
     }
 
+    function getGridColumns() {
+      var style = window.getComputedStyle(grid);
+      var cols = style.getPropertyValue('grid-template-columns').split(' ').length;
+      return cols || 1;
+    }
+
+    function buildSubmitCard(span) {
+      var card = document.createElement('a');
+      card.href = MG.url('/submit/');
+      card.className = 'mods-submit-cta mg-lift';
+      card.setAttribute('data-reveal', 'up');
+      if (span > 1) card.style.gridColumn = 'span ' + span;
+      card.innerHTML =
+        '<div class="mods-submit-cta__inner">' +
+          '<div class="mg-eyebrow mg-eyebrow--green">CONTRIBUTE</div>' +
+          '<h3 class="mods-submit-cta__title">Submit your own mod</h3>' +
+          '<p class="mods-submit-cta__body">Got a house rule that changes everything? Share it with the community.</p>' +
+          '<span class="mods-submit-cta__btn">Submit Mod →</span>' +
+        '</div>';
+      return card;
+    }
+
     function renderGrid() {
       var q = searchVal.toLowerCase();
       var visible = ALL_MODS.filter(function(m) {
@@ -50,8 +72,18 @@
       if (visible.length === 0) { empty.style.display = 'block'; return; }
       empty.style.display = 'none';
       visible.forEach(function(m) { grid.appendChild(MG.modCard(m)); });
+      var cols = getGridColumns();
+      var remainder = visible.length % cols;
+      var span = remainder === 0 ? cols : cols - remainder;
+      grid.appendChild(buildSubmitCard(span));
       MG.initReveal();
     }
+
+    var resizeTimer;
+    window.addEventListener('resize', function() {
+      clearTimeout(resizeTimer);
+      resizeTimer = setTimeout(renderGrid, 150);
+    });
 
     document.getElementById('search-input').addEventListener('input', function(e) { searchVal = e.target.value; renderGrid(); grid.scrollIntoView({ behavior:'smooth', block:'start' }); });
 

@@ -37,13 +37,16 @@
       bar.style.background = accent;
       card.appendChild(bar);
 
+      if (eng.image) {
+        var img = el('img', {
+          src: url(eng.image),
+          alt: eng.title + ' screenshot',
+          class: 'engine-card__image'
+        });
+        card.appendChild(img);
+      }
+
       var header = el('div', { class: 'engine-card__header' });
-      var logo = el('img', {
-        src: url(eng.logo),
-        alt: eng.title + ' logo',
-        class: 'engine-card__logo'
-      });
-      header.appendChild(logo);
       var titleWrap = el('div', { class: 'engine-card__title-wrap' });
       var status = el('div', { class: 'engine-card__status' });
       status.style.color = accent;

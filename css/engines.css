@@ -76,19 +76,23 @@
   height: 4px;
   width: 100%;
 }
+.engine-card__image {
+  width: 100%;
+  height: 320px;
+  object-fit: cover;
+  object-position: top left;
+  display: block;
+}
 .engine-card__header {
   display: flex;
+  flex-direction: column;
   align-items: center;
-  gap: 16px;
+  gap: 12px;
   padding: 28px 28px 0;
-}
-.engine-card__logo {
-  width: 56px;
-  height: 56px;
-  flex-shrink: 0;
+  text-align: center;
 }
 .engine-card__title-wrap {
-  flex: 1;
+  text-align: center;
 }
 .engine-card__status {
   font-family: var(--mg-font-mono);
@@ -112,9 +116,11 @@
   color: var(--mg-body);
   padding: 16px 28px 0;
   margin: 0;
+  text-align: center;
 }
 .engine-card__stats {
   display: flex;
+  justify-content: center;
   gap: 24px;
   padding: 20px 28px 0;
 }
@@ -136,6 +142,7 @@
 .engine-card__features {
   display: flex;
   flex-wrap: wrap;
+  justify-content: center;
   gap: 8px;
   padding: 20px 28px 28px;
 }

@@ -2,15 +2,16 @@
   {
     "slug": "moddable-chess",
     "title": "Moddable Chess",
-    "tagline": "2000+ chess variants. One modular engine.",
+    "tagline": "70 chess variants. One modular engine.",
     "accent": "blue",
     "url": "https://chess.moddable.games/",
     "repo": "https://github.com/Moddable-Games/moddable-chess",
     "logo": "/img/moddable-chess-cube.svg",
+    "image": "/img/engine-chess-screenshot.png",
     "stats": [
       { "value": "70", "label": "playable variants" },
-      { "value": "2000+", "label": "documented variants" },
-      { "value": "1", "label": "AI opponent" }
+      { "value": "5", "label": "AI difficulties" },
+      { "value": "3", "label": "consumer apps" }
     ],
     "features": ["SVG board renderer", "AI opponent (minimax)", "Embed API", "Consumer APIs", "Game controller", "Opening books", "Developer guides", "Touch/mobile support"],
     "consumers": [
@@ -26,10 +27,11 @@
     "url": "https://hex.moddable.games/",
     "repo": "https://github.com/Moddable-Games/moddable-hexmaps",
     "logo": "/img/moddable-hexmaps-cube.svg",
+    "image": "/img/engine-hexmaps-screenshot.png",
     "stats": [
-      { "value": "4", "label": "supported games" },
-      { "value": "∞", "label": "seeded maps" },
-      { "value": "4", "label": "render styles" }
+      { "value": "6", "label": "supported games" },
+      { "value": "4", "label": "render styles" },
+      { "value": "4", "label": "consumer apps" }
     ],
     "features": ["Canvas renderer", "Seeded RNG", "Import/export JSON", "Style selector", "Editor mode"],
     "consumers": [

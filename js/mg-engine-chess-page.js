@@ -25,11 +25,11 @@ document.getElementById('hero-btns').appendChild(ghLink);
 
 var STATS = [
   ['Variants', '70'],
-  ['Players', '2–6'],
-  ['Status', 'Live'],
+  ['AI Difficulties', '5'],
+  ['Consumers', '3'],
   ['Engine', 'v0.7.1'],
   ['Board types', 'Square · 4×8 to 12×8'],
-  ['Updated', 'Jun 2026']
+  ['Status', 'Live']
 ];
 var sb = document.getElementById('stats-bar');
 STATS.forEach(function(pair, i) {

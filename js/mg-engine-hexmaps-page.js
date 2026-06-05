@@ -26,10 +26,10 @@ ghLink.setAttribute('rel', 'noopener');
 document.getElementById('hero-btns').appendChild(ghLink);
 
 var STATS = [
-  ['Games', '4'],
+  ['Games', '6'],
   ['Renderer', 'Canvas'],
   ['Styles', '4'],
-  ['Seeds', '∞'],
+  ['Consumers', '4'],
   ['Engine', 'v0.5.1'],
   ['Status', 'Live']
 ];

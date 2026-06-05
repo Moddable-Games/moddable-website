@@ -9,7 +9,7 @@ document.getElementById('page-hero').appendChild(MG.sectionHero({
   hexColor: 'green',
   eyebrow: 'CHESS VARIANTS',
   title: 'Chess variants.',
-  lede: 'Load and play from 2000+ documented variants. One engine, infinite rulesets.'
+  lede: 'Load and play from 70 variants across 5 difficulty levels. One engine, infinite rulesets.'
 }));
 
 function slugToKey(slug) {

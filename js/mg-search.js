@@ -19,7 +19,7 @@
     {type:'game', title:'Nukes', desc:'Cold-war territory control on a hex map', href:url('/games/nukes/')},
     {type:'game', title:'Planet Mongo', desc:'Fast-paced card battler', href:url('/games/planet-mongo/')},
     {type:'game', title:'Endless Skies', desc:'Cooperative airship exploration', href:url('/games/endless-skies/')},
-    {type:'engine', title:'Moddable Chess', desc:'2000+ variants, one moddable engine', href:url('/engines/moddable-chess/')},
+    {type:'engine', title:'Moddable Chess', desc:'70 variants, one moddable engine', href:url('/engines/moddable-chess/')},
     {type:'engine', title:'Moddable Hexmaps', desc:'Hex map generation for any game', href:url('/engines/moddable-hexmaps/')},
     {type:'tool', title:'Dice Roller', desc:'Roll any combination of dice', href:url('/tools/')},
     {type:'tool', title:'Turn Timer', desc:'Configurable player timer with presets', href:url('/tools/')},
