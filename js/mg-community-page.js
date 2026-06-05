@@ -71,8 +71,9 @@
         thumb.appendChild(iframe);
       });
     } else {
-      thumb.style.background = 'linear-gradient(135deg, #0a0d2a 0%, #1a3680 100%)';
-      thumb.innerHTML = MG.cubeSVG(64);
+      var gradients = { 'Article': 'linear-gradient(135deg, #0c4f8d 0%, #0a0d2a 100%)', 'Tool': 'linear-gradient(135deg, #3a9928 0%, #0a0d2a 100%)' };
+      thumb.style.background = gradients[f.source] || 'linear-gradient(135deg, #0a0d2a 0%, #1a3680 100%)';
+      thumb.appendChild(MG.cubeSVG(64));
     }
     card.appendChild(thumb);
     var body = el('div', {class: 'featured-card__body'});
@@ -111,20 +112,18 @@
     al.appendChild(row);
   });
 
-  // Members
+  // Members — sorted by most recently active, top 10
   var MEMBERS = [
-    { display: 'djkaspa', name: 'djkaspa', avatar: 'https://cdn.discordapp.com/avatars/1059998798027444304/41d74062e4ad48206877b2aaba7a640e.png?size=128', role: 'management', date: 'Oct 2025' },
-    { display: 'Darktalon', name: 'darktalon8', avatar: 'https://cdn.discordapp.com/avatars/433932623941730304/fbd8e6a47ac0580e0af2cf3b7d896dd9.png?size=128', role: 'management', date: 'Oct 2025' },
-    { display: 'akmalfikri', name: 'akmalfikri', avatar: 'https://cdn.discordapp.com/avatars/316810906619346946/a26197f40c12e5cca4c0104413374181.png?size=128', role: 'management', date: 'Oct 2025' },
-    { display: 'Wunder', name: 'wundercover', avatar: 'https://cdn.discordapp.com/avatars/113239562452541440/135bed57657861016f475a42771de44f.png?size=128', role: 'member', date: 'Oct 2025' },
-    { display: 'KimLime', name: 'kimlime', avatar: 'https://cdn.discordapp.com/avatars/157827693553909760/0ba5735ab85051fce0f0456fda7dc468.png?size=128', role: 'member', date: 'Nov 2025' },
-    { display: 'Arzyy', name: 'arzyyyy', avatar: 'https://cdn.discordapp.com/avatars/157625204317749259/7779d338200515f7a75de88fd9ffa272.png?size=128', role: 'member', date: 'Feb 2026' },
-    { display: 'Resh', name: 'reshwindblade', avatar: 'https://cdn.discordapp.com/avatars/243395223898554368/14332d7f98baf422e6c2bc3d67bdedfc.png?size=128', role: 'member', date: 'Apr 2026' },
-    { display: 'Ms. Terri', name: 'ms.terri', avatar: 'https://cdn.discordapp.com/avatars/553968271687417856/3c4b1ce7fe0514ec7246b14b46e50c7c.png?size=128', role: 'member', date: 'Apr 2026' },
-    { display: 'GunslingerSteve', name: '.gunslingersteve', avatar: 'https://cdn.discordapp.com/avatars/797065987677618196/f2b88a6fd4a448ab2ec98cdeecba9aef.png?size=128', role: 'member', date: 'May 2026' },
-    { display: 'Ashutosh', name: 'ashukuttu', avatar: 'https://cdn.discordapp.com/avatars/1059512052760182884/4e38826de3126031226f5c30688bf83c.png?size=128', role: 'member', date: 'Jun 2026' },
-    { display: 'Arjit', name: 'arjitraj_', avatar: 'https://cdn.discordapp.com/avatars/190300566046507018/4eb2498fe54b8bb8c23f7948b183ec5b.png?size=128', role: 'member', date: 'Jun 2026' },
-    { display: 'seburba', name: 'seburba', avatar: 'https://cdn.discordapp.com/avatars/394103094117531648/9adf92c2b73476292941432f61877ee5.png?size=128', role: 'member', date: 'Nov 2025' }
+    { display: 'Darktalon', avatar: 'https://cdn.discordapp.com/avatars/433932623941730304/fbd8e6a47ac0580e0af2cf3b7d896dd9.png?size=128', role: 'management', msgs: 31, lastActive: 'Jun 5', lastMsg: 'New expansion from Stonemaier' },
+    { display: 'Arjit', avatar: 'https://cdn.discordapp.com/avatars/190300566046507018/4eb2498fe54b8bb8c23f7948b183ec5b.png?size=128', role: 'member', msgs: 1, lastActive: 'Jun 3', lastMsg: 'Thanks Kevin for the invite.' },
+    { display: 'djkaspa', avatar: 'https://cdn.discordapp.com/avatars/1059998798027444304/41d74062e4ad48206877b2aaba7a640e.png?size=128', role: 'management', msgs: 16, lastActive: 'May 22', lastMsg: 'Nice BTS video on card game production' },
+    { display: 'GunslingerSteve', avatar: 'https://cdn.discordapp.com/avatars/797065987677618196/f2b88a6fd4a448ab2ec98cdeecba9aef.png?size=128', role: 'member', msgs: 0, lastActive: 'May 22', lastMsg: '' },
+    { display: 'akmalfikri', avatar: 'https://cdn.discordapp.com/avatars/316810906619346946/a26197f40c12e5cca4c0104413374181.png?size=128', role: 'management', msgs: 1, lastActive: 'Oct 22', lastMsg: 'welcome Joe' },
+    { display: 'Wunder', avatar: 'https://cdn.discordapp.com/avatars/113239562452541440/135bed57657861016f475a42771de44f.png?size=128', role: 'member', msgs: 1, lastActive: 'Oct 19', lastMsg: 'Hi from the ara group' },
+    { display: 'KimLime', avatar: 'https://cdn.discordapp.com/avatars/157827693553909760/0ba5735ab85051fce0f0456fda7dc468.png?size=128', role: 'member', msgs: 0, lastActive: 'Nov 2025', lastMsg: '' },
+    { display: 'Resh', avatar: 'https://cdn.discordapp.com/avatars/243395223898554368/14332d7f98baf422e6c2bc3d67bdedfc.png?size=128', role: 'member', msgs: 0, lastActive: 'Apr 2026', lastMsg: '' },
+    { display: 'Ms. Terri', avatar: 'https://cdn.discordapp.com/avatars/553968271687417856/3c4b1ce7fe0514ec7246b14b46e50c7c.png?size=128', role: 'member', msgs: 0, lastActive: 'Apr 2026', lastMsg: '' },
+    { display: 'Arzyy', avatar: 'https://cdn.discordapp.com/avatars/157625204317749259/7779d338200515f7a75de88fd9ffa272.png?size=128', role: 'member', msgs: 0, lastActive: 'Feb 2026', lastMsg: '' }
   ];
 
   var mr = document.getElementById('members-grid');
@@ -133,10 +132,14 @@
     card.appendChild(el('img', {class: 'member-card__avatar', src: m.avatar, alt: m.display}));
     var info = el('div', {class: 'member-card__info'});
     info.appendChild(el('div', {class: 'member-card__name'}, m.display));
-    var roleEl = el('div', {class: 'member-card__role member-card__role--' + m.role});
+    var meta = el('div', {class: 'member-card__meta'});
+    var roleEl = el('span', {class: 'member-card__role member-card__role--' + m.role});
     roleEl.textContent = m.role === 'management' ? 'Management' : 'Member';
-    info.appendChild(roleEl);
-    info.appendChild(el('div', {class: 'member-card__date'}, 'Joined ' + m.date));
+    meta.appendChild(roleEl);
+    if (m.msgs > 0) meta.appendChild(el('span', {class: 'member-card__stat'}, m.msgs + ' posts'));
+    meta.appendChild(el('span', {class: 'member-card__stat'}, 'Active ' + m.lastActive));
+    info.appendChild(meta);
+    if (m.lastMsg) info.appendChild(el('div', {class: 'member-card__msg'}, '"' + m.lastMsg + '"'));
     card.appendChild(info);
     mr.appendChild(card);
   });

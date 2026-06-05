@@ -49,10 +49,12 @@ body { background: #f5f4ef; }
 .member-card__avatar { width: 44px; height: 44px; border-radius: 50%; object-fit: cover; flex-shrink: 0; }
 .member-card__info { flex: 1; min-width: 0; }
 .member-card__name { font-family: var(--mg-font-display); font-weight: 600; font-size: 14px; color: var(--mg-ink); }
-.member-card__role { font-family: var(--mg-font-mono); font-size: 11px; margin-top: 2px; }
-.member-card__role--management { color: #e74c3c; }
-.member-card__role--member { color: var(--mg-stone); }
-.member-card__date { font-family: var(--mg-font-mono); font-size: 10px; color: var(--mg-mute); margin-top: 2px; }
+.member-card__meta { display: flex; gap: 8px; align-items: center; margin-top: 3px; flex-wrap: wrap; }
+.member-card__role { font-family: var(--mg-font-mono); font-size: 10px; font-weight: 600; padding: 1px 6px; border-radius: 4px; }
+.member-card__role--management { color: #e74c3c; background: rgba(231,76,60,0.08); }
+.member-card__role--member { color: var(--mg-stone); background: rgba(99,107,120,0.08); }
+.member-card__stat { font-family: var(--mg-font-mono); font-size: 10px; color: var(--mg-mute); }
+.member-card__msg { font-family: var(--mg-font-body); font-size: 12px; font-style: italic; color: var(--mg-mute); margin-top: 6px; white-space: nowrap; overflow: hidden; text-overflow: ellipsis; }
 
 /* CTA band */
 .community-cta { background: #000; color: #fff; border-radius: 20px; padding: 56px 40px; text-align: center; position: relative; overflow: hidden; }
