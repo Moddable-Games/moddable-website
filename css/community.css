@@ -2,6 +2,12 @@ body { background: #f5f4ef; }
 .community-section { padding: 72px 32px 96px; }
 .community-section__inner { max-width: 1200px; margin: 0 auto; display: flex; flex-direction: column; gap: 72px; }
 
+/* Stats row */
+.stats-grid { display: grid; grid-template-columns: repeat(4, 1fr); gap: 16px; }
+.stat-card { background: #fff; border: 1px solid var(--mg-hairline-light); border-radius: 16px; padding: 28px 20px; text-align: center; }
+.stat-card__number { font-family: var(--mg-font-display); font-weight: 600; font-size: 40px; line-height: 1; color: var(--mg-ink); letter-spacing: -1px; }
+.stat-card__label { font-family: var(--mg-font-mono); font-size: 11px; color: var(--mg-stone); text-transform: uppercase; letter-spacing: 0.8px; margin-top: 8px; }
+
 /* Channel cards — 2-column grid */
 .channels-grid { margin-top: 24px; display: grid; grid-template-columns: repeat(2, 1fr); gap: 14px; }
 .channel-card { display: flex; align-items: flex-start; gap: 14px; padding: 18px 20px; background: #fff; border: 1px solid var(--mg-hairline-light); border-radius: 14px; border-left: 4px solid var(--mg-hairline-light); transition: border-color 150ms; }
@@ -71,6 +77,7 @@ body { background: #f5f4ef; }
 }
 @media (max-width: 640px) {
   .community-section { padding: 48px 20px 64px; }
+  .stats-grid { grid-template-columns: repeat(2, 1fr); }
   .featured-grid { grid-template-columns: 1fr; }
   .community-cta { padding: 36px 24px; }
 }

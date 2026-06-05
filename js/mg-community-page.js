@@ -13,6 +13,21 @@
     lede: 'Designers, playtesters, and rule-tinkerers building open-source board games together.'
   }));
 
+  // Stats row
+  var STATS = [
+    { number: '15', label: 'Members' },
+    { number: '12', label: 'Channels' },
+    { number: '3', label: 'Countries' },
+    { number: 'Oct 2025', label: 'Founded' }
+  ];
+  var sg = document.getElementById('stats-grid');
+  STATS.forEach(function(s) {
+    var card = el('div', {class: 'stat-card'});
+    card.appendChild(el('div', {class: 'stat-card__number'}, s.number));
+    card.appendChild(el('div', {class: 'stat-card__label'}, s.label));
+    sg.appendChild(card);
+  });
+
   // Channels as cards in 2-col grid
   var CHANNELS = [
     { name: 'viticulture', desc: 'Strategy wine-making and worker placement discussion', cat: 'boardgames' },
