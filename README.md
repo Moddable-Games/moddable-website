@@ -120,6 +120,20 @@ Pages load `mg-loader.js` (shared modules) + their own page script. Data is fetc
 
 ### Changelog
 
+#### 2026-06-05
+- Unified hero system across all 17 pages with new shared sectionHero() component
+- Two-tier design: full cosmic heroes (tier-1 indexes) and reduced sub-page heroes (tier-2)
+- Colour system: RGB accents for consistent-sub-page sections, CMYK for divergent ones
+- Added parallax scroll with dramatic text fade-out, hex grid zoom, and gradient darkening
+- Added animated 3D feature elements: spinning cubes (Tools, Engines, About) and animated SVGs (Mods, Games, News)
+- Reordered nav to alternate cube/SVG features: Mods, Engines, Games, Tools, News, About
+- Fixed Endless Skies accent (green→blue to match detail page)
+- Fixed mods page hash-change filtering from navbar dropdown
+- Fixed tools page auto-scrolling to search on load
+- Normalised all hero copy: tier-1 gets 2-line titles with single highlighted keyword + 2-line balanced ledes
+- Created GitHub issue #81 for static site build system migration
+- New assets: hex-grid-purple.svg, hex-grid-cyan.svg, hex-grid-magenta.svg, hex-grid-amber.svg
+
 #### 2026-06-04
 - Rewrote Planet Mongo game page from real rulebook (v0.9.0): 4X hex territory control, 8 factions, hidden orders, central market
 - Rewrote Endless Skies game page from real rulebook (v0.2.0): 4X worker placement, 8 factions, ship rooms, wormhole network
