@@ -45,25 +45,40 @@
 
   // Featured resources shared in channels
   var FEATURED = [
-    { type: 'video', title: 'Behind the scenes: card game production', user: 'djkaspa', source: 'YouTube', url: 'https://www.youtube.com/watch?v=joMpOOZAz9c' },
-    { type: 'link', title: 'Deciding card stock for your games', user: 'darktalon8', source: 'Article', url: 'https://www.qpmarketnetwork.com/card-design' },
-    { type: 'link', title: 'Simple card maker with free tier', user: 'darktalon8', source: 'Tool', url: 'https://www.dextrous.com.au/' }
+    { type: 'video', title: 'Behind the scenes: card game production', user: 'djkaspa', source: 'YouTube', url: 'https://www.youtube.com/watch?v=joMpOOZAz9c', videoId: 'joMpOOZAz9c' },
+    { type: 'link', title: 'Deciding card stock for your games', user: 'darktalon8', source: 'Article', url: 'https://www.qpmarketnetwork.com/card-design', thumb: null },
+    { type: 'link', title: 'Simple card maker with free tier', user: 'darktalon8', source: 'Tool', url: 'https://www.dextrous.com.au/', thumb: null }
   ];
 
   var fg = document.getElementById('featured-grid');
   FEATURED.forEach(function(f) {
-    var a = el('a', {class: 'featured-card', href: f.url, target: '_blank', rel: 'noopener'});
+    var card = el('div', {class: 'featured-card'});
     var thumb = el('div', {class: 'featured-card__thumb'});
     if (f.type === 'video') {
-      thumb.appendChild(el('div', {class: 'featured-card__play'}));
+      thumb.style.backgroundImage = 'url(https://img.youtube.com/vi/' + f.videoId + '/hqdefault.jpg)';
+      thumb.style.backgroundSize = 'cover';
+      thumb.style.backgroundPosition = 'center';
+      var playBtn = el('div', {class: 'featured-card__play'});
+      thumb.appendChild(playBtn);
+      thumb.addEventListener('click', function() {
+        var iframe = document.createElement('iframe');
+        iframe.src = 'https://www.youtube-nocookie.com/embed/' + f.videoId + '?autoplay=1&rel=0';
+        iframe.setAttribute('allow', 'autoplay; encrypted-media');
+        iframe.setAttribute('allowfullscreen', '');
+        iframe.style.cssText = 'position:absolute;inset:0;width:100%;height:100%;border:none;';
+        thumb.innerHTML = '';
+        thumb.style.position = 'relative';
+        thumb.appendChild(iframe);
+      });
     }
-    a.appendChild(thumb);
+    card.appendChild(thumb);
     var body = el('div', {class: 'featured-card__body'});
     body.appendChild(el('div', {class: 'featured-card__source'}, f.source));
-    body.appendChild(el('div', {class: 'featured-card__title'}, f.title));
+    var titleLink = el('a', {class: 'featured-card__title', href: f.url, target: '_blank', rel: 'noopener'}, f.title);
+    body.appendChild(titleLink);
     body.appendChild(el('div', {class: 'featured-card__user'}, 'Shared by ' + f.user));
-    a.appendChild(body);
-    fg.appendChild(a);
+    card.appendChild(body);
+    fg.appendChild(card);
   });
 
   // Activity feed

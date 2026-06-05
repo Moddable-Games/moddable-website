@@ -22,7 +22,7 @@ body { background: #f5f4ef; }
 .featured-grid { margin-top: 24px; display: grid; grid-template-columns: repeat(3, 1fr); gap: 20px; }
 .featured-card { background: #fff; border: 1px solid var(--mg-hairline-light); border-radius: 14px; overflow: hidden; transition: border-color 150ms; text-decoration: none; color: inherit; display: flex; flex-direction: column; }
 .featured-card:hover { border-color: var(--mg-blue); }
-.featured-card__thumb { width: 100%; aspect-ratio: 16/9; background: var(--mg-cosmic-deep); display: flex; align-items: center; justify-content: center; position: relative; }
+.featured-card__thumb { width: 100%; aspect-ratio: 16/9; background: var(--mg-cosmic-deep); display: flex; align-items: center; justify-content: center; position: relative; cursor: pointer; }
 .featured-card__play { width: 48px; height: 48px; border-radius: 50%; background: rgba(255,255,255,0.9); display: flex; align-items: center; justify-content: center; }
 .featured-card__play::after { content: ''; width: 0; height: 0; border-style: solid; border-width: 8px 0 8px 14px; border-color: transparent transparent transparent var(--mg-ink); margin-left: 3px; }
 .featured-card__body { padding: 14px 16px; }
@@ -43,7 +43,7 @@ body { background: #f5f4ef; }
 .activity-item__body { font-family: var(--mg-font-body); font-size: 13px; color: var(--mg-body-color); line-height: 1.45; white-space: nowrap; overflow: hidden; text-overflow: ellipsis; }
 
 /* Members row */
-.members-row { margin-top: 24px; display: flex; gap: 16px; flex-wrap: wrap; align-items: center; }
+.members-row { margin-top: 24px; display: flex; gap: 12px; flex-wrap: wrap; align-items: center; justify-content: center; }
 .member-badge { display: flex; align-items: center; gap: 8px; padding: 6px 14px 6px 6px; background: #fff; border: 1px solid var(--mg-hairline-light); border-radius: 9999px; }
 .member-badge__avatar { width: 28px; height: 28px; border-radius: 50%; object-fit: cover; }
 .member-badge__name { font-family: var(--mg-font-body); font-size: 13px; color: var(--mg-ink); }
