@@ -9,7 +9,7 @@
     tier: 2,
     hexColor: 'blue',
     eyebrow: 'COMMUNITY',
-    title: 'Ground floor.',
+    title: 'Join the table.',
     lede: 'Designers, playtesters, and rule-tinkerers building open-source board games together.'
   }));
 
