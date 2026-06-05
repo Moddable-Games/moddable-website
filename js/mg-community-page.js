@@ -70,6 +70,9 @@
         thumb.style.position = 'relative';
         thumb.appendChild(iframe);
       });
+    } else {
+      thumb.style.background = 'linear-gradient(135deg, #0a0d2a 0%, #1a3680 100%)';
+      thumb.innerHTML = MG.cubeSVG(64);
     }
     card.appendChild(thumb);
     var body = el('div', {class: 'featured-card__body'});
@@ -110,26 +113,32 @@
 
   // Members
   var MEMBERS = [
-    { name: 'djkaspa', avatar: 'https://cdn.discordapp.com/avatars/1059998798027444304/41d74062e4ad48206877b2aaba7a640e.png?size=64', date: 'Oct 2025' },
-    { name: 'darktalon8', avatar: 'https://cdn.discordapp.com/avatars/433932623941730304/fbd8e6a47ac0580e0af2cf3b7d896dd9.png?size=64', date: 'Oct 2025' },
-    { name: 'akmalfikri', avatar: 'https://cdn.discordapp.com/avatars/316810906619346946/a26197f40c12e5cca4c0104413374181.png?size=64', date: 'Oct 2025' },
-    { name: 'kimlime', avatar: 'https://cdn.discordapp.com/avatars/157827693553909760/0ba5735ab85051fce0f0456fda7dc468.png?size=64', date: 'Nov 2025' },
-    { name: 'wundercover', avatar: 'https://cdn.discordapp.com/avatars/113239562452541440/135bed57657861016f475a42771de44f.png?size=64', date: 'Oct 2025' },
-    { name: 'reshwindblade', avatar: 'https://cdn.discordapp.com/avatars/243395223898554368/14332d7f98baf422e6c2bc3d67bdedfc.png?size=64', date: 'Apr 2026' },
-    { name: 'arzyyyy', avatar: 'https://cdn.discordapp.com/avatars/157625204317749259/7779d338200515f7a75de88fd9ffa272.png?size=64', date: 'Feb 2026' },
-    { name: 'gunslingersteve', avatar: 'https://cdn.discordapp.com/avatars/797065987677618196/f2b88a6fd4a448ab2ec98cdeecba9aef.png?size=64', date: 'May 2026' },
-    { name: 'arjitraj_', avatar: 'https://cdn.discordapp.com/avatars/190300566046507018/4eb2498fe54b8bb8c23f7948b183ec5b.png?size=64', date: 'Jun 2026' }
+    { display: 'djkaspa', name: 'djkaspa', avatar: 'https://cdn.discordapp.com/avatars/1059998798027444304/41d74062e4ad48206877b2aaba7a640e.png?size=128', role: 'management', date: 'Oct 2025' },
+    { display: 'Darktalon', name: 'darktalon8', avatar: 'https://cdn.discordapp.com/avatars/433932623941730304/fbd8e6a47ac0580e0af2cf3b7d896dd9.png?size=128', role: 'management', date: 'Oct 2025' },
+    { display: 'akmalfikri', name: 'akmalfikri', avatar: 'https://cdn.discordapp.com/avatars/316810906619346946/a26197f40c12e5cca4c0104413374181.png?size=128', role: 'management', date: 'Oct 2025' },
+    { display: 'Wunder', name: 'wundercover', avatar: 'https://cdn.discordapp.com/avatars/113239562452541440/135bed57657861016f475a42771de44f.png?size=128', role: 'member', date: 'Oct 2025' },
+    { display: 'KimLime', name: 'kimlime', avatar: 'https://cdn.discordapp.com/avatars/157827693553909760/0ba5735ab85051fce0f0456fda7dc468.png?size=128', role: 'member', date: 'Nov 2025' },
+    { display: 'Arzyy', name: 'arzyyyy', avatar: 'https://cdn.discordapp.com/avatars/157625204317749259/7779d338200515f7a75de88fd9ffa272.png?size=128', role: 'member', date: 'Feb 2026' },
+    { display: 'Resh', name: 'reshwindblade', avatar: 'https://cdn.discordapp.com/avatars/243395223898554368/14332d7f98baf422e6c2bc3d67bdedfc.png?size=128', role: 'member', date: 'Apr 2026' },
+    { display: 'Ms. Terri', name: 'ms.terri', avatar: 'https://cdn.discordapp.com/avatars/553968271687417856/3c4b1ce7fe0514ec7246b14b46e50c7c.png?size=128', role: 'member', date: 'Apr 2026' },
+    { display: 'GunslingerSteve', name: '.gunslingersteve', avatar: 'https://cdn.discordapp.com/avatars/797065987677618196/f2b88a6fd4a448ab2ec98cdeecba9aef.png?size=128', role: 'member', date: 'May 2026' },
+    { display: 'Ashutosh', name: 'ashukuttu', avatar: 'https://cdn.discordapp.com/avatars/1059512052760182884/4e38826de3126031226f5c30688bf83c.png?size=128', role: 'member', date: 'Jun 2026' },
+    { display: 'Arjit', name: 'arjitraj_', avatar: 'https://cdn.discordapp.com/avatars/190300566046507018/4eb2498fe54b8bb8c23f7948b183ec5b.png?size=128', role: 'member', date: 'Jun 2026' },
+    { display: 'seburba', name: 'seburba', avatar: 'https://cdn.discordapp.com/avatars/394103094117531648/9adf92c2b73476292941432f61877ee5.png?size=128', role: 'member', date: 'Nov 2025' }
   ];
 
-  var mr = document.getElementById('members-row');
+  var mr = document.getElementById('members-grid');
   MEMBERS.forEach(function(m) {
-    var badge = el('div', {class: 'member-badge'});
-    badge.appendChild(el('img', {class: 'member-badge__avatar', src: m.avatar, alt: m.name}));
-    var info = el('div');
-    info.appendChild(el('div', {class: 'member-badge__name'}, m.name));
-    info.appendChild(el('div', {class: 'member-badge__date'}, 'Joined ' + m.date));
-    badge.appendChild(info);
-    mr.appendChild(badge);
+    var card = el('div', {class: 'member-card'});
+    card.appendChild(el('img', {class: 'member-card__avatar', src: m.avatar, alt: m.display}));
+    var info = el('div', {class: 'member-card__info'});
+    info.appendChild(el('div', {class: 'member-card__name'}, m.display));
+    var roleEl = el('div', {class: 'member-card__role member-card__role--' + m.role});
+    roleEl.textContent = m.role === 'management' ? 'Management' : 'Member';
+    info.appendChild(roleEl);
+    info.appendChild(el('div', {class: 'member-card__date'}, 'Joined ' + m.date));
+    card.appendChild(info);
+    mr.appendChild(card);
   });
 
   var cb = document.getElementById('cta-btns');

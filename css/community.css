@@ -42,12 +42,17 @@ body { background: #f5f4ef; }
 .activity-item__date { font-family: var(--mg-font-mono); font-size: 10px; color: var(--mg-stone); margin-left: auto; }
 .activity-item__body { font-family: var(--mg-font-body); font-size: 13px; color: var(--mg-body-color); line-height: 1.45; white-space: nowrap; overflow: hidden; text-overflow: ellipsis; }
 
-/* Members row */
-.members-row { margin-top: 24px; display: flex; gap: 12px; flex-wrap: wrap; align-items: center; justify-content: center; }
-.member-badge { display: flex; align-items: center; gap: 8px; padding: 6px 14px 6px 6px; background: #fff; border: 1px solid var(--mg-hairline-light); border-radius: 9999px; }
-.member-badge__avatar { width: 28px; height: 28px; border-radius: 50%; object-fit: cover; }
-.member-badge__name { font-family: var(--mg-font-body); font-size: 13px; color: var(--mg-ink); }
-.member-badge__date { font-family: var(--mg-font-mono); font-size: 10px; color: var(--mg-stone); }
+/* Members grid */
+.members-grid { margin-top: 24px; display: grid; grid-template-columns: repeat(auto-fill, minmax(200px, 1fr)); gap: 14px; }
+.member-card { display: flex; align-items: center; gap: 12px; padding: 14px 16px; background: #fff; border: 1px solid var(--mg-hairline-light); border-radius: 14px; transition: border-color 150ms; }
+.member-card:hover { border-color: var(--mg-blue); }
+.member-card__avatar { width: 44px; height: 44px; border-radius: 50%; object-fit: cover; flex-shrink: 0; }
+.member-card__info { flex: 1; min-width: 0; }
+.member-card__name { font-family: var(--mg-font-display); font-weight: 600; font-size: 14px; color: var(--mg-ink); }
+.member-card__role { font-family: var(--mg-font-mono); font-size: 11px; margin-top: 2px; }
+.member-card__role--management { color: #e74c3c; }
+.member-card__role--member { color: var(--mg-stone); }
+.member-card__date { font-family: var(--mg-font-mono); font-size: 10px; color: var(--mg-mute); margin-top: 2px; }
 
 /* CTA band */
 .community-cta { background: #000; color: #fff; border-radius: 20px; padding: 56px 40px; text-align: center; position: relative; overflow: hidden; }
