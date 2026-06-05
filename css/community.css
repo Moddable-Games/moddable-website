@@ -11,6 +11,11 @@ body { background: #f5f4ef; }
 .stat-card:nth-child(4) { border-top-color: var(--mg-cosmic-glow); }
 .stat-card__number { font-family: var(--mg-font-display); font-weight: 600; font-size: 40px; line-height: 1; color: var(--mg-ink); letter-spacing: -1px; }
 .stat-card__label { font-family: var(--mg-font-mono); font-size: 11px; color: var(--mg-stone); text-transform: uppercase; letter-spacing: 0.8px; margin-top: 8px; }
+.stat-card__accent { font-family: var(--mg-font-body); font-size: 12px; font-style: italic; margin-top: 6px; }
+.stat-card__accent--1 { color: var(--mg-blue); }
+.stat-card__accent--2 { color: var(--mg-green); }
+.stat-card__accent--3 { color: var(--mg-red); }
+.stat-card__accent--4 { color: var(--mg-cosmic-glow); }
 
 /* Channel cards — 2-column grid */
 .channels-grid { margin-top: 24px; display: grid; grid-template-columns: repeat(2, 1fr); gap: 14px; }

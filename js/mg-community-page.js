@@ -15,16 +15,17 @@
 
   // Stats row
   var STATS = [
-    { number: '15', label: 'Members' },
-    { number: '12', label: 'Channels' },
-    { number: '3', label: 'Countries' },
-    { number: '50+', label: 'Posts' }
+    { number: '15', label: 'Members', accent: 'and growing' },
+    { number: '12', label: 'Channels', accent: 'active' },
+    { number: '3', label: 'Countries', accent: 'represented' },
+    { number: '50+', label: 'Posts', accent: 'and counting' }
   ];
   var sg = document.getElementById('stats-grid');
-  STATS.forEach(function(s) {
+  STATS.forEach(function(s, i) {
     var card = el('div', {class: 'stat-card'});
     card.appendChild(el('div', {class: 'stat-card__number'}, s.number));
     card.appendChild(el('div', {class: 'stat-card__label'}, s.label));
+    card.appendChild(el('div', {class: 'stat-card__accent stat-card__accent--' + (i + 1)}, s.accent));
     sg.appendChild(card);
   });
 
