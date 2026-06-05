@@ -636,7 +636,7 @@ button:focus-visible, a:focus-visible, input:focus-visible, textarea:focus-visib
   display: flex;
   align-items: center;
   gap: 12px;
-  padding: 16px 20px;
+  padding: 20px 24px;
   border-bottom: 1px solid rgba(255,255,255,0.08);
 }
 .mg-search-panel__icon {
@@ -658,6 +658,7 @@ button:focus-visible, a:focus-visible, input:focus-visible, textarea:focus-visib
   font-size: 16px;
   color: #fff;
   caret-color: var(--mg-cosmic-glow);
+  padding: 8px 12px;
 }
 .mg-search-panel__input::placeholder {
   color: rgba(255,255,255,0.4);

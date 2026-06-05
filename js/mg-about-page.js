@@ -20,8 +20,8 @@
   var statsCard = el('div', { class: 'about-sidebar__card' });
   statsCard.appendChild(el('div', { class: 'about-sidebar__card-title' }, 'Quick facts'));
   var facts = [
-    ['Founded', '2024'],
-    ['Location', 'Kuala Lumpur'],
+    ['Founded', '2024, Kuala Lumpur'],
+    ['Incorporated', '2025, UK'],
     ['Team', '4 people'],
     ['Games', '3 original'],
     ['Mods', '10 published'],
@@ -39,10 +39,10 @@
   linksCard.appendChild(el('div', { class: 'about-sidebar__card-title' }, 'Explore'));
   var linksWrap = el('div', { class: 'about-sidebar__links' });
   var links = [
-    { label: 'Discord', sub: 'Join the community', color: '#5865f2', href: url('/community/') },
-    { label: 'Team', sub: 'Meet the workshop', color: '#0c4f8d', href: url('/team/') },
-    { label: 'Roadmap', sub: '18-month plan', color: '#3a9928', href: url('/about/roadmap/') },
-    { label: 'Press Kit', sub: 'Logos and assets', color: '#14161c', href: url('/press/') },
+    { label: 'Discord', sub: 'Join the community', color: MG.T.red, href: url('/community/') },
+    { label: 'Team', sub: 'Meet the workshop', color: MG.T.green, href: url('/team/') },
+    { label: 'Roadmap', sub: '18-month plan', color: MG.T.blue, href: url('/about/roadmap/') },
+    { label: 'Press Kit', sub: 'Logos and assets', color: MG.T.ink, href: url('/press/') },
   ];
   links.forEach(function(l) {
     var a = el('a', { href: l.href, class: 'about-link' });

@@ -88,6 +88,9 @@ body { background: #f5f4ef; }
   color: #3a3d44;
   margin: 0;
 }
+.team-card__socials { display: flex; gap: 10px; margin-top: 16px; }
+.team-card__social { display: flex; align-items: center; justify-content: center; width: 32px; height: 32px; border-radius: 9999px; background: var(--mg-canvas-light); border: 1px solid var(--mg-hairline-light); color: var(--mg-mute); transition: color 150ms, border-color 150ms; }
+.team-card__social:hover { color: var(--mg-ink); border-color: var(--mg-ink); }
 
 @media (max-width: 1100px) {
   .team-grid { grid-template-columns: repeat(2, 1fr); gap: 24px; row-gap: 180px; }

@@ -20,15 +20,13 @@ var sidebar = document.getElementById('press-sidebar');
 
 /* ── LOGOS SECTION ── */
 var logosSection = el('div');
-logosSection.appendChild(el('h2', { class: 'press-section__title' }, 'Logos'));
+logosSection.appendChild(el('h2', { class: 'press-section__title' }, 'Moddable logos'));
 var logoGrid = el('div', { class: 'press-logo-grid' });
 var logos = [
   { src: '/press/logos/moddable-logo.png', label: 'Full logo (colour)', bg: '#fff' },
   { src: '/press/logos/moddable-logo-white.png', label: 'Full logo (white)', bg: '#0a0d2a' },
   { src: '/press/logos/moddable-logo-black.png', label: 'Full logo (black)', bg: '#f5f4ef' },
   { src: '/press/logos/moddable-chess-cube.svg', label: 'Chess engine mark', bg: '#fff' },
-  { src: '/press/logos/nukes-logo.png', label: 'Nukes', bg: '#fff' },
-  { src: '/press/logos/mongo-logo.png', label: 'Planet Mongo', bg: '#fff' },
 ];
 logos.forEach(function(l) {
   var a = el('a', { href: url(l.src), target: '_blank', rel: 'noopener', class: 'press-logo-card' });
@@ -110,12 +108,36 @@ colours.forEach(function(c) {
 colourSection.appendChild(swatches);
 content.appendChild(colourSection);
 
+/* ── GAME LOGOS SECTION ── */
+var gameLogosSection = el('div');
+gameLogosSection.appendChild(el('h2', { class: 'press-section__title' }, 'Game logos'));
+var gameLogoGrid = el('div', { class: 'press-logo-grid' });
+var gameLogos = [
+  { src: '/press/logos/nukes-logo.png', label: 'Nukes', bg: '#fff' },
+  { src: '/press/logos/mongo-logo.png', label: 'Planet Mongo', bg: '#fff' },
+  { src: '/press/logos/endless-skies-logo.png', label: 'Endless Skies', bg: '#fff' },
+  { src: '/press/logos/dungeon-chess-black.png', label: 'Dungeon Chess (black)', bg: '#fff' },
+  { src: '/press/logos/dungeon-chess-white.png', label: 'Dungeon Chess (white)', bg: '#0a0d2a' },
+  { src: '/press/logos/hyper-imperium-logo.png', label: 'Hyper Imperium', bg: '#fff' },
+  { src: '/press/logos/econopoly-logo.png', label: 'Econopoly', bg: '#fff' },
+  { src: '/press/logos/talisman-worlds-logo.png', label: 'Talisman Worlds', bg: '#fff' },
+];
+gameLogos.forEach(function(l) {
+  var a = el('a', { href: url(l.src), target: '_blank', rel: 'noopener', class: 'press-logo-card' });
+  a.style.background = l.bg;
+  var img = el('img', { src: url(l.src), alt: l.label, class: 'press-logo-card__img' });
+  a.appendChild(img);
+  a.appendChild(el('div', { class: 'press-logo-card__label' }, l.label));
+  gameLogoGrid.appendChild(a);
+});
+gameLogosSection.appendChild(gameLogoGrid);
+content.appendChild(gameLogosSection);
+
 /* ── SIDEBAR ── */
 var contactCard = el('div', { class: 'press-sidebar__card' });
-contactCard.appendChild(el('div', { class: 'press-sidebar__card-title' }, 'Contact'));
 var contactInner = el('div', { class: 'press-contact' });
 contactInner.appendChild(el('div', { class: 'press-contact__email' }, 'press@moddable.games'));
-var copyBtn = btn('Copy email', 'outline-dark', function() {
+var copyBtn = btn('Copy email', 'dark', function() {
   navigator.clipboard.writeText('press@moddable.games').then(function() {
     var msg = document.getElementById('press-copied');
     msg.classList.add('press-copied--show');
@@ -130,8 +152,8 @@ sidebar.appendChild(contactCard);
 var factsCard = el('div', { class: 'press-sidebar__card' });
 factsCard.appendChild(el('div', { class: 'press-sidebar__card-title' }, 'Quick facts'));
 var facts = [
-  ['Founded', '2024'],
-  ['Location', 'Kuala Lumpur'],
+  ['Founded', '2024, Kuala Lumpur'],
+  ['Incorporated', '2025, UK'],
   ['Team', '4 people'],
   ['Games', '3 original'],
   ['Mods', '10 published'],
@@ -146,20 +168,4 @@ facts.forEach(function(f) {
 });
 sidebar.appendChild(factsCard);
 
-var guidelinesCard = el('div', { class: 'press-sidebar__card' });
-guidelinesCard.appendChild(el('div', { class: 'press-sidebar__card-title' }, 'Usage guidelines'));
-var rules = [
-  'Use the full-colour logo on light backgrounds.',
-  'Use the white logo on dark backgrounds.',
-  'Do not stretch, rotate, or recolour logos.',
-  'Credit "Moddable.Games" in all publications.',
-  'Screenshots may be cropped but not altered.',
-];
-var rulesList = el('div', { style: 'display:flex;flex-direction:column;gap:8px' });
-rules.forEach(function(r) {
-  var item = el('div', { style: 'font-family:var(--mg-font-body);font-size:13px;line-height:1.5;color:var(--mg-body-color);padding-left:12px;border-left:2px solid var(--mg-hairline-light)' }, r);
-  rulesList.appendChild(item);
-});
-guidelinesCard.appendChild(rulesList);
-sidebar.appendChild(guidelinesCard);
 })();

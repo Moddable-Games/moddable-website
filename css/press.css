@@ -13,14 +13,14 @@ body { background: #f5f4ef; }
 .press-stat__value { font-family: var(--mg-font-mono); font-size: 20px; font-weight: 600; color: var(--mg-ink); }
 .press-stat__label { font-family: var(--mg-font-body); font-size: 11px; color: var(--mg-mute); margin-top: 4px; }
 
-.press-swatches { display: flex; flex-wrap: wrap; gap: 10px; }
-.press-swatch { text-align: center; width: 64px; }
-.press-swatch__color { width: 64px; height: 40px; border-radius: 8px; margin-bottom: 4px; border: 1px solid var(--mg-hairline-light); }
-.press-swatch__hex { font-family: var(--mg-font-mono); font-size: 9px; color: var(--mg-mute); }
-.press-swatch__name { font-family: var(--mg-font-body); font-size: 10px; color: var(--mg-stone); }
+.press-swatches { display: grid; grid-template-columns: repeat(8, 1fr); gap: 10px; }
+.press-swatch { text-align: center; background: #fff; border: 1px solid var(--mg-hairline-light); border-radius: 12px; overflow: hidden; }
+.press-swatch__color { width: 100%; height: 48px; }
+.press-swatch__hex { font-family: var(--mg-font-mono); font-size: 9px; color: var(--mg-mute); padding: 8px 4px 2px; }
+.press-swatch__name { font-family: var(--mg-font-body); font-size: 10px; color: var(--mg-stone); padding: 0 4px 8px; }
 
 .press-downloads { display: flex; flex-direction: column; gap: 10px; }
-.press-dl { display: flex; align-items: center; gap: 12px; padding: 14px 16px; background: var(--mg-canvas-light); border: 1px solid var(--mg-hairline-light); border-radius: 12px; text-decoration: none; color: inherit; transition: border-color 150ms; }
+.press-dl { display: flex; align-items: center; gap: 12px; padding: 14px 16px; background: #fff; border: 1px solid var(--mg-hairline-light); border-radius: 12px; text-decoration: none; color: inherit; transition: border-color 150ms; }
 .press-dl:hover { border-color: var(--mg-ink); }
 .press-dl__icon { width: 36px; height: 36px; border-radius: 8px; flex: none; display: flex; align-items: center; justify-content: center; font-family: var(--mg-font-mono); font-size: 10px; font-weight: 600; color: #fff; }
 .press-dl__text { flex: 1; }
@@ -36,17 +36,18 @@ body { background: #f5f4ef; }
 
 .press-screenshot-grid { display: grid; grid-template-columns: repeat(2, 1fr); gap: 12px; }
 .press-screenshot { border-radius: 12px; overflow: hidden; border: 1px solid var(--mg-hairline-light); }
-.press-screenshot__img { width: 100%; height: 140px; object-fit: cover; display: block; }
+.press-screenshot__img { width: 100%; aspect-ratio: 16/9; object-fit: cover; object-position: top left; display: block; }
 .press-screenshot__label { font-family: var(--mg-font-body); font-size: 12px; color: var(--mg-mute); padding: 10px 12px; background: #fff; }
 
 .press-sidebar { position: sticky; top: 88px; display: flex; flex-direction: column; gap: 24px; }
 .press-sidebar__card { background: #fff; border: 1px solid var(--mg-hairline-light); border-radius: 16px; padding: 20px; }
 .press-sidebar__card-title { font-family: var(--mg-font-display); font-weight: 600; font-size: 15px; color: var(--mg-ink); margin: 0 0 12px; }
 
-.press-contact { display: flex; flex-direction: column; gap: 8px; }
+.press-contact { display: flex; flex-direction: column; align-items: center; gap: 12px; text-align: center; padding: 8px 0; }
 .press-contact__email { font-family: var(--mg-font-mono); font-size: 14px; color: var(--mg-blue); }
-.press-contact__btn { margin-top: 8px; }
-.press-copied { font-family: var(--mg-font-mono); font-size: 12px; color: var(--mg-green); opacity: 0; transition: opacity 0.3s; }
+.press-contact__btn { }
+.press-copied { font-family: var(--mg-font-mono); font-size: 12px; color: var(--mg-green); opacity: 0; transition: opacity 0.3s; height: 0; overflow: hidden; }
+.press-copied--show { opacity: 1; height: auto; }
 .press-copied--show { opacity: 1; }
 
 .press-sidebar-stat { display: flex; justify-content: space-between; align-items: baseline; padding: 7px 0; border-bottom: 1px solid var(--mg-hairline-light); }
@@ -59,6 +60,7 @@ body { background: #f5f4ef; }
   .press-sidebar { position: static; }
   .press-main { padding: 48px 20px 64px; }
   .press-stats { grid-template-columns: 1fr 1fr; }
+  .press-swatches { grid-template-columns: repeat(4, 1fr); }
   .press-logo-grid { grid-template-columns: 1fr; }
   .press-screenshot-grid { grid-template-columns: 1fr; }
 }
