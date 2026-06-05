@@ -111,8 +111,8 @@
 }
 
 .mg-navbar__dropdown-link:hover {
-  background: rgba(111,181,255,0.08);
-  border-left-color: var(--mg-cosmic-glow);
+  background: color-mix(in srgb, var(--nav-accent, var(--mg-cosmic-glow)) 8%, transparent);
+  border-left-color: var(--nav-accent, var(--mg-cosmic-glow));
   color: #fff;
   padding-left: 20px;
 }

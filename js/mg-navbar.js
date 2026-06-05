@@ -40,6 +40,7 @@
       if (item.children) {
         const dd = el('div', { class:'mg-navbar__dropdown' });
         const menu = el('div', { class:'mg-navbar__dropdown-menu' });
+        if (item.accent) menu.style.setProperty('--nav-accent', item.accent);
         item.children.forEach(([label, href]) => {
           menu.appendChild(el('a', { href, class:'mg-navbar__dropdown-link' }, label));
         });
