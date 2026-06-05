@@ -19,7 +19,7 @@
   }));
 
   var links = [
-    { label:'Discord', sub:'2,400+ members', color:'#5865f2', href:url('/community/') },
+    { label:'Discord', sub:'Open community', color:'#5865f2', href:url('/community/') },
     { label:'Team',    sub:'Six humans, no AI', color:'#0c4f8d', href:url('/team/') },
     { label:'Roadmap', sub:'18-month public plan', color:'#3a9928', href:url('/about/roadmap/') },
     { label:'Mods',    sub:'12 open-source mods', color:'#d11a1a', href:url('/mods/') }

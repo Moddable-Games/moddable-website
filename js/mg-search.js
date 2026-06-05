@@ -26,7 +26,7 @@
     {type:'tool', title:'TI4 Faction Picker', desc:'Random faction draft for Twilight Imperium', href:url('/tools/ti/')},
     {type:'tool', title:'Talisman Character Lottery', desc:'Random character selection for Talisman', href:url('/tools/talisman/')},
     {type:'page', title:'About', desc:'Our story and what we believe', href:url('/about/')},
-    {type:'page', title:'Community', desc:'Join the Discord — 2400+ members', href:url('/community/')},
+    {type:'page', title:'Community', desc:'Join the Discord — designers, playtesters, rule-tinkerers', href:url('/community/')},
     {type:'page', title:'Submit a Mod', desc:'Share your homebrew with the community', href:url('/submit/')},
   ];
 
