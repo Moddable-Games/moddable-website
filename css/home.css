@@ -11,7 +11,7 @@
   #hero-glow { display:none; }
   #hero-top-fade { position:absolute; inset:0; background:linear-gradient(180deg,rgba(8,10,30,0.5) 0%,transparent 40%); z-index:3; pointer-events:none; }
   #hero-bot-fade { position:absolute; inset:0; background:linear-gradient(180deg,transparent 65%,rgba(0,0,0,0.5) 85%,#000 100%); z-index:3; pointer-events:none; }
-  #hero-content { position:relative; z-index:4; padding:120px 24px 200px; max-width:1200px; margin:0 auto; text-align:center; animation:fadeRise 0.8s cubic-bezier(.2,.8,.2,1) both; }
+  #hero-content { position:relative; z-index:4; padding:120px 24px 200px; max-width:1200px; margin:0 auto; text-align:center; animation:fadeRise 0.8s cubic-bezier(.2,.8,.2,1) both; will-change:transform,opacity; }
   #hero-lower { display:flex; align-items:center; justify-content:center; gap:clamp(24px, 4vw, 56px); margin-top:32px; }
   #hero-lower__text { text-align:left; }
   #hero-cube-wrap { width:clamp(120px, 14vw, 180px); height:clamp(120px, 14vw, 180px); flex-shrink:0; position:relative; transition: transform 0.15s ease-out; }

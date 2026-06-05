@@ -11,7 +11,18 @@ const heroSection = document.getElementById('hero');
 const heroTint = document.getElementById('hero-tint');
 const heroCubeWrap = document.getElementById('hero-cube-wrap');
 
-window.addEventListener('scroll', () => { heroBgInner.style.transform = `translateY(${window.scrollY * -0.3}px)`; }, { passive:true });
+const heroContent = document.getElementById('hero-content');
+const heroHex = document.getElementById('hero-hex');
+const heroGlow = document.getElementById('hero-glow');
+window.addEventListener('scroll', () => {
+  const rect = heroSection.getBoundingClientRect();
+  const scrolled = Math.max(0, -rect.top);
+  const ratio = Math.min(1, scrolled / (rect.height * 0.4));
+  heroBgInner.style.transform = `translateY(${scrolled * -0.3}px)`;
+  if (heroContent) { heroContent.style.transform = `translateY(${ratio * -100}px)`; heroContent.style.opacity = Math.max(0, 1 - ratio * 2.5); }
+  if (heroHex) { heroHex.style.transform = `translateY(${ratio * 200}px) scale(${1 + ratio * 0.15}) rotate(${ratio * 3}deg)`; }
+  if (heroGlow) { heroGlow.style.transform = `translateX(-50%) scale(${1 + ratio * 2})`; heroGlow.style.opacity = Math.max(0, 1.3 - ratio * 2); }
+}, { passive:true });
 
 // Colour tint cycling on hex-land background (crossfade layers)
 (function() {
