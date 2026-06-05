@@ -15,17 +15,16 @@
 
   // Stats row
   var STATS = [
-    { number: '15', label: 'Members', accent: 'and growing' },
-    { number: '12', label: 'Channels', accent: 'active' },
-    { number: '3', label: 'Countries', accent: 'represented' },
-    { number: '50+', label: 'Posts', accent: 'and counting' }
+    { number: '15', label: 'Members' },
+    { number: '12', label: 'Channels' },
+    { number: '3', label: 'Countries' },
+    { number: '50+', label: 'Posts' }
   ];
   var sg = document.getElementById('stats-grid');
   STATS.forEach(function(s, i) {
     var card = el('div', {class: 'stat-card'});
     card.appendChild(el('div', {class: 'stat-card__number'}, s.number));
-    card.appendChild(el('div', {class: 'stat-card__label'}, s.label));
-    card.appendChild(el('div', {class: 'stat-card__accent stat-card__accent--' + (i + 1)}, s.accent));
+    card.appendChild(el('div', {class: 'stat-card__label stat-card__label--' + (i + 1)}, s.label));
     sg.appendChild(card);
   });
 
@@ -68,24 +67,13 @@
 
   var fg = document.getElementById('featured-grid');
   FEATURED.forEach(function(f) {
-    var card = el('div', {class: 'featured-card'});
+    var card = el('a', {class: 'featured-card', href: f.url, target: '_blank', rel: 'noopener'});
     var thumb = el('div', {class: 'featured-card__thumb'});
     if (f.type === 'video') {
       thumb.style.backgroundImage = 'url(https://img.youtube.com/vi/' + f.videoId + '/hqdefault.jpg)';
       thumb.style.backgroundSize = 'cover';
       thumb.style.backgroundPosition = 'center';
-      var playBtn = el('div', {class: 'featured-card__play'});
-      thumb.appendChild(playBtn);
-      thumb.addEventListener('click', function() {
-        var iframe = document.createElement('iframe');
-        iframe.src = 'https://www.youtube-nocookie.com/embed/' + f.videoId + '?autoplay=1&rel=0';
-        iframe.setAttribute('allow', 'autoplay; encrypted-media');
-        iframe.setAttribute('allowfullscreen', '');
-        iframe.style.cssText = 'position:absolute;inset:0;width:100%;height:100%;border:none;';
-        thumb.innerHTML = '';
-        thumb.style.position = 'relative';
-        thumb.appendChild(iframe);
-      });
+      thumb.appendChild(el('div', {class: 'featured-card__play'}));
     } else {
       var gradients = { 'Article': 'linear-gradient(135deg, #0c4f8d 0%, #0a0d2a 100%)', 'Tool': 'linear-gradient(135deg, #3a9928 0%, #0a0d2a 100%)' };
       thumb.style.background = gradients[f.source] || 'linear-gradient(135deg, #0a0d2a 0%, #1a3680 100%)';
@@ -94,8 +82,7 @@
     card.appendChild(thumb);
     var body = el('div', {class: 'featured-card__body'});
     body.appendChild(el('div', {class: 'featured-card__source'}, f.source));
-    var titleLink = el('a', {class: 'featured-card__title', href: f.url, target: '_blank', rel: 'noopener'}, f.title);
-    body.appendChild(titleLink);
+    body.appendChild(el('div', {class: 'featured-card__title'}, f.title));
     body.appendChild(el('div', {class: 'featured-card__user'}, 'Shared by ' + f.user));
     card.appendChild(body);
     fg.appendChild(card);
