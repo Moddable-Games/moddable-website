@@ -52,35 +52,44 @@ var submitBtn = btn('Subscribe', 'green', function() {
 submitBtn.classList.add('sub-form__submit');
 formWrap.appendChild(submitBtn);
 
+/* ── BENEFITS (full-width section) ── */
+var benefitsGrid = document.getElementById('benefits-grid');
+var benefits = [
+  { title: 'One per milestone', body: 'We only send when something actually ships. A game, a playtest, a crowdfund launch.', color: T.green },
+  { title: 'Playtest priority', body: 'Subscribers get early access to closed playtests before Discord announcements.', color: T.blue },
+  { title: 'Crowdfund alerts', body: 'First to know when a Kickstarter or Gamefound goes live. Early-bird pricing links.', color: T.red },
+  { title: 'Unsubscribe any time', body: 'One click, no questions. We don\'t sell data or share lists.', color: T.ink },
+];
+benefits.forEach(function(b) {
+  var card = el('div', { class: 'sub-benefit-card' });
+  var dot = el('div', { class: 'sub-benefit-card__dot' });
+  dot.style.background = b.color;
+  card.appendChild(dot);
+  card.appendChild(el('div', { class: 'sub-benefit-card__title' }, b.title));
+  card.appendChild(el('div', { class: 'sub-benefit-card__body' }, b.body));
+  benefitsGrid.appendChild(card);
+});
+
 /* ── SIDEBAR ── */
 var sidebar = document.getElementById('sub-sidebar');
 
-var whatCard = el('div', { class: 'sub-sidebar__card' });
-whatCard.appendChild(el('div', { class: 'sub-sidebar__card-title' }, "What you'll get"));
-var items = [
-  'One email per milestone. We only send when something ships.',
-  'Early access to closed playtests before Discord announcements.',
-  'First to know when a crowdfund goes live, with early-bird links.',
-  'Unsubscribe any time. One click, no questions.',
-];
-items.forEach(function(text) {
-  var item = el('div', { class: 'sub-sidebar__item' });
-  item.appendChild(el('span', { class: 'sub-sidebar__item-dot' }));
-  item.appendChild(el('span', { class: 'sub-sidebar__item-text' }, text));
-  whatCard.appendChild(item);
-});
-sidebar.appendChild(whatCard);
-
 var linksCard = el('div', { class: 'sub-sidebar__card' });
 linksCard.appendChild(el('div', { class: 'sub-sidebar__card-title' }, 'Elsewhere'));
-var linksWrap = el('div', { style: 'display:flex;flex-direction:column;gap:8px' });
+var linksWrap = el('div', { class: 'sub-sidebar__links' });
 var links = [
-  { label: 'Discord', href: url('/community/') },
-  { label: 'News', href: url('/news/') },
-  { label: 'About', href: url('/about/') },
+  { label: 'Discord', sub: 'Join the community', href: url('/community/'), color: T.red },
+  { label: 'News', sub: 'Read the latest', href: url('/news/'), color: T.green },
+  { label: 'About', sub: 'Our story', href: url('/about/'), color: T.blue },
 ];
 links.forEach(function(l) {
-  var a = el('a', { href: l.href, style: 'font-family:var(--mg-font-body);font-size:14px;font-weight:600;color:var(--mg-green);text-decoration:none' }, l.label + ' →');
+  var a = el('a', { href: l.href, class: 'sub-sidebar__link' });
+  var dot = el('span', { class: 'sub-sidebar__link-dot' });
+  dot.style.background = l.color;
+  a.appendChild(dot);
+  var text = el('div');
+  text.appendChild(el('div', { class: 'sub-sidebar__link-label' }, l.label));
+  text.appendChild(el('div', { class: 'sub-sidebar__link-sub' }, l.sub));
+  a.appendChild(text);
   linksWrap.appendChild(a);
 });
 linksCard.appendChild(linksWrap);

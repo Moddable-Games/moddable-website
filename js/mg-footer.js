@@ -7,7 +7,7 @@
       { title:'Games',     href:url('/games/'),     links:[['Endless Skies',url('/games/endless-skies/')],['Planet Mongo',url('/games/planet-mongo/')],['Nukes',url('/games/nukes/')]] },
       { title:'Engines',   href:url('/engines/'),   links:[['Moddable Chess',url('/engines/moddable-chess/')],['Moddable Hexmaps',url('/engines/moddable-hexmaps/')]] },
       { title:'Tools',     href:url('/tools/'),     links:[['TI4 tools',url('/tools/ti/')],['Talisman tools',url('/tools/talisman/')],['Nukes tools',url('/tools/nukes/')],['Dice lab',url('/tools/dice/')],['Deck builder',url('/tools/decks/')],['Chess variants',url('/tools/chess/')]] },
-      { title:'Community', href:url('/community/'), links:[['Discord',url('/community/')],['News',url('/news/')],['About',url('/about/')],['Team',url('/team/')],['Press',url('/press/')],['Subscribe',url('/subscribe/')]] },
+      { title:'Community', href:url('/community/'), links:[['News',url('/news/')],['About',url('/about/')],['Roadmap',url('/about/roadmap/')],['Team',url('/team/')],['Press',url('/press/')],['Subscribe',url('/subscribe/')]] },
     ];
 
     const f = el('footer', { role:'contentinfo', 'aria-label':'Site footer', class:'mg-footer' });
