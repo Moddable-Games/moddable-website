@@ -7,7 +7,7 @@ document.getElementById('page-hero').appendChild(MG.sectionHero({
   tier: 1,
   hexColor: 'magenta',
   eyebrow: 'NEWS & UPDATES',
-  title: 'Dispatches from the <em>workshop</em> floor.',
+  title: 'Signals from the <em>forge</em>. No noise.',
   lede: 'Essays, announcements, and build logs from the team. No AI, no guest posts, no filler.',
   feature: MG.buildHeroFeature('news')
 }));
