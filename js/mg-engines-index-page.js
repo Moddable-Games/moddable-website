@@ -13,7 +13,7 @@
     hexColor: 'cyan',
     eyebrow: 'OPEN SOURCE',
     title: 'The <em>foundations</em> games are built on.',
-    lede: 'Modular opensource engines that anyone can embed, extend, or fork. Each one powering games and tools across our ecosystem.',
+    lede: 'Modular opensource engines anyone can embed, extend, or fork. Powering games and tools across our ecosystem.',
     feature: MG.buildHeroFeature('engines')
   }));
 
