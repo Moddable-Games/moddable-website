@@ -9,68 +9,67 @@
     tier: 2,
     hexColor: 'blue',
     eyebrow: 'COMMUNITY',
-    title: '2,400 and counting.',
-    lede: 'The Discord, the mod jams, and the never-ending Catan argument.'
+    title: 'Ground floor.',
+    lede: 'Designers, playtesters, and rule-tinkerers building open-source board games together.'
   }));
 
-  var STATS = [['2,400+','Discord members'],['12','published mods'],['3','mod jams run'],['4','team humans']];
-  var sg = document.getElementById('stats-grid');
-  STATS.forEach(function(pair) {
-    var c = el('div', {class:'stat-card'});
-    c.appendChild(el('div', {class:'stat-card__number'}, pair[0]));
-    c.appendChild(el('div', {class:'stat-card__label'}, pair[1]));
-    sg.appendChild(c);
-  });
-
   var CHANNELS = [
-    { name:'general',       desc:'The main table. Everything welcome.', members:342, accent:'#3a9928' },
-    { name:'mod-pitches',   desc:'Share a mod idea. Get feedback.',       members:88,  accent:'#0c4f8d' },
-    { name:'rules-debates', desc:'Rules arguments. Refereed by Tess.',    members:57,  accent:'#d11a1a' },
-    { name:'playtesting',   desc:'Looking for testers, finding testers.', members:44,  accent:'#e89a1a' },
-    { name:'nukes',         desc:'Nukes strategy, maps, and modding.',    members:210, accent:'#d11a1a' }
+    { category: 'Boardgames', channels: [
+      { name: 'viticulture', desc: 'Strategy wine-making and worker placement' },
+      { name: 'twilight', desc: 'Twilight Imperium strategy and session reports' },
+      { name: 'catan', desc: 'Catan mods, variants, and hex experiments' },
+      { name: 'monopoly', desc: 'Econopoly playtesting and Monopoly fixes' },
+      { name: 'print-n-play', desc: 'PnP builds, card stock tips, and DIY production' }
+    ]},
+    { category: 'Community', channels: [
+      { name: 'design', desc: 'Game design discussion and prototyping', topic: true },
+      { name: 'showcase', desc: 'Share your artwork, designs, or ideas', topic: true },
+      { name: 'playtesting', desc: 'Looking for testers, finding testers' },
+      { name: 'online', desc: 'Online games: ours and other open-source titles' }
+    ]},
+    { category: 'Events', channels: [
+      { name: 'events-uk', desc: 'UK meetups and conventions' },
+      { name: 'events-usa', desc: 'US meetups and conventions' },
+      { name: 'events-malaysia', desc: 'Malaysia meetups and game nights' }
+    ]}
   ];
+
   var cl = document.getElementById('channels-list');
-  CHANNELS.forEach(function(ch) {
-    var a = el('div', {class:'channel-link'});
-    var bar = el('div', {class:'channel-link__bar'});
-    bar.style.background = ch.accent;
-    a.appendChild(bar);
-    var txt = el('div');
-    txt.appendChild(el('div', {class:'channel-link__name'}, '#' + ch.name));
-    txt.appendChild(el('div', {class:'channel-link__desc'}, ch.desc));
-    a.appendChild(txt);
-    a.appendChild(el('div', {class:'channel-link__count'}, ch.members + ' online'));
-    cl.appendChild(a);
+  CHANNELS.forEach(function(cat) {
+    var catEl = el('div', {class: 'channel-category'});
+    catEl.appendChild(el('div', {class: 'channel-category__name'}, cat.category));
+    cat.channels.forEach(function(ch) {
+      var row = el('div', {class: 'channel-link'});
+      row.appendChild(el('div', {class: 'channel-link__name'}, '#' + ch.name));
+      row.appendChild(el('div', {class: 'channel-link__desc'}, ch.desc));
+      catEl.appendChild(row);
+    });
+    cl.appendChild(catEl);
   });
 
-  var JAMS = [
-    { n:'#1', title:'Carcassonne',  date:'Oct 2025', entries:8,  winner:'Infinite Meeple (by @hexbear)', color:'#3a9928' },
-    { n:'#2', title:'Risk',         date:'Jan 2026', entries:22, winner:'Geo-political Risk (by @tessellate)', color:'#0c4f8d' },
-    { n:'#3', title:'Catan',        date:'Apr 2026', entries:12, winner:'Flooded Catan Deluxe (by @ascelot)', color:'#d11a1a' }
+  var ACTIVITY = [
+    { channel: '#design', user: 'djkaspa', msg: 'Nice BTS video on card game production workflows', date: 'May 22' },
+    { channel: '#design', user: 'darktalon8', msg: 'Great article on deciding card stock for your games', date: 'May 20' },
+    { channel: '#design', user: 'darktalon8', msg: 'Simple card maker with a free layer to test it out', date: 'May 11' },
+    { channel: '#general', user: 'arjitraj_', msg: 'Thanks Kevin for the invite.', date: 'Jun 3' },
+    { channel: '#print-n-play', user: 'reshwindblade', msg: 'First prototype printed — card alignment is tricky', date: 'Jun 1' }
   ];
-  var jg = document.getElementById('jams-grid');
-  JAMS.forEach(function(j) {
-    var c = el('div', {class:'jam-card'});
-    var eye = el('div', {class:'mg-card__eyebrow'});
-    eye.style.color = j.color;
-    eye.textContent = 'JAM ' + j.n;
-    c.appendChild(eye);
-    c.appendChild(el('h3', {class:'jam-card__title'}, j.title));
-    var meta = el('div', {class:'jam-card__meta'});
-    meta.textContent = j.date + ' · ' + j.entries + ' entries';
-    c.appendChild(meta);
-    var winner = el('div', {class:'jam-card__winner'});
-    var winLabel = document.createElement('span');
-    winLabel.className = 'jam-card__winner-label';
-    winLabel.style.color = j.color;
-    winLabel.textContent = 'Winner:';
-    winner.appendChild(winLabel);
-    winner.appendChild(document.createTextNode(' ' + j.winner));
-    c.appendChild(winner);
-    jg.appendChild(c);
+
+  var al = document.getElementById('activity-list');
+  ACTIVITY.forEach(function(a) {
+    var row = el('div', {class: 'activity-item'});
+    var meta = el('div', {class: 'activity-item__meta'});
+    meta.appendChild(el('span', {class: 'activity-item__channel'}, a.channel));
+    meta.appendChild(el('span', {class: 'activity-item__date'}, a.date));
+    row.appendChild(meta);
+    var body = el('div', {class: 'activity-item__body'});
+    body.appendChild(el('strong', {}, a.user + ': '));
+    body.appendChild(document.createTextNode(a.msg));
+    row.appendChild(body);
+    al.appendChild(row);
   });
 
   var cb = document.getElementById('cta-btns');
-  cb.appendChild(linkBtn('Open the Discord', '#', 'primary'));
-  cb.appendChild(linkBtn('Submit a mod', '/submit/', 'outline-dark'));
+  cb.appendChild(linkBtn('Join Discord', 'https://discord.gg/moddable', 'primary'));
+  cb.appendChild(linkBtn('Submit Mod', '/submit/', 'outline-dark'));
 })();
