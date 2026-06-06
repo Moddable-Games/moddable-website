@@ -140,7 +140,7 @@ fetch(MG.url('/data/ti4.json')).then(r => r.json()).then(d => {
   document.querySelectorAll('.ti-expansion-toggles').forEach(t => renderExpansionTogglesInto(t));
   renderPlayerBtns(); renderHandBtns(); deal();
   renderObjectives();
-  drawAgenda();
+  renderAgenda();
 });
 
 /* ── HEXMAP EMBED ── */
@@ -193,7 +193,7 @@ function renderAgenda() {
     const c = side==='for'?'#3a9928':'#d11a1a';
     const group = el('div',{class:'ti-tally__group'});
     group.appendChild(el('span',{class:'ti-tally__side'},side));
-    const count = el('span',{class:'ti-tally__count'},votes[side]);
+    const count = el('span',{class:'ti-tally__count'},String(votes[side]));
     count.style.color = c;
     group.appendChild(count);
     const minus = document.createElement('button');
