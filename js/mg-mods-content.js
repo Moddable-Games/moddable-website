@@ -51,9 +51,9 @@
     'the-diamond-mine': {
       accent: 'red',
       heroTitle: 'The Diamond <em>Mine</em>.',
-      lede: 'A single-hex unofficial expansion: swap one pasture for the diamond mine. Diamonds substitute for ore in development card purchases. Self-contained rules, free to print.',
-      buttons: [['View on Scribd', 'https://www.scribd.com/doc/the-diamond-mine-catan', 'primary'], ['Catan fan expansions', 'https://catan.fandom.com/wiki/Fan_Expansions', 'outline-dark']],
-      stats: [['Players','3–4'],['Time','60 min'],['Age','10+'],['Source','scribd / meepleeater'],['License','Fan-made / free to print']],
+      lede: 'A single-hex unofficial expansion: swap one pasture for the diamond mine. Diamonds substitute for ore in development card purchases. Complete rules below.',
+      buttons: [['Catan fan expansions', 'https://catan.fandom.com/wiki/Fan_Expansions', 'primary'], ['Catan subreddit', 'https://www.reddit.com/r/Catan/', 'outline-dark']],
+      stats: [['Players','3–4'],['Time','60 min'],['Age','10+'],['Source','meepleeater'],['License','Fan-made']],
       sections: [
         { id:'1', title:'Setup', body:"Replace one pasture hex with the diamond mine hex (any number you choose). The diamond mine produces diamonds instead of wool when its number is rolled." },
         { id:'2', title:'Diamond production', body:"When the diamond mine's number is rolled, adjacent settlements receive 1 diamond token. Cities receive 2 diamond tokens, as with any other resource." },
@@ -72,7 +72,7 @@
       accent: 'green',
       heroTitle: 'Shattered <em>Ascension</em>.',
       lede: "PsiComa's decade-long TI3 remix — rebalanced factions, overhauled agenda phase, new card sets. The most thorough community TI variant in existence. Tabletop Simulator module available.",
-      buttons: [['View on BGG', 'https://boardgamegeek.com/thread/811684/shattered-ascension-community-mod', 'primary'], ['TTS module', 'https://steamcommunity.com/sharedfiles/filedetails/?id=shattered-ascension', 'outline-dark']],
+      buttons: [['Full rulebook (GitHub)', 'https://github.com/Astral-Cyrusa/TwilightImperium3-ShatteredAscension4.2-CompactRulebook', 'primary'], ['Discord community', 'https://discord.gg/pYYQQCz', 'outline-dark']],
       stats: [['Players','3–8'],['Time','6–12 hr'],['Age','16+'],['Source','boardgamegeek.com'],['License','Community / BoardGameGeek']],
       sections: [
         { id:'1', title:'Faction rebalance', body:"Every faction receives point-cost balancing. Weaker factions get starting bonuses; dominant factions face constraints. No faction is auto-pick or auto-ban in competitive play." },
@@ -91,8 +91,8 @@
     'civrisk': {
       accent: 'green',
       heroTitle: 'Civ<em>Risk</em>.',
-      lede: 'Risk rewritten to play like Civilisation: choose a civilisation and leader, build through growth tiers, discover ruins and barbarian camps. Chris Grey, 2023. ePub rules free to download.',
-      buttons: [['Download ePub', 'https://chrisgrey.itch.io/civrisk', 'primary'], ['Author site', 'https://chrisgrey.itch.io/', 'outline-dark']],
+      lede: 'Risk rewritten to play like Civilisation: choose a civilisation and leader, build through growth tiers, discover ruins and barbarian camps. Chris Grey, 2023.',
+      buttons: [['BGG Risk community', 'https://boardgamegeek.com/boardgame/181/risk', 'primary'], ['Risk subreddit', 'https://www.reddit.com/r/Risk/', 'outline-dark']],
       stats: [['Players','3–5'],['Time','180 min'],['Age','14+'],['Designer','Chris Grey'],['Year','2023']],
       sections: [
         { id:'1', title:'Civilisations', body:"20 unique civilisations with asymmetric abilities. Each starts with a capital territory and a unique leader power. Leaders grant a one-time ability that can swing early-game positioning." },
