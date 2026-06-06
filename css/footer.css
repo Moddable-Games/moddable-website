@@ -101,6 +101,8 @@
   color: #fff;
 }
 
+.mg-footer__grid > :nth-child(n+2):not(:last-child) { text-align: center; }
+.mg-footer__grid > :nth-child(n+2):not(:last-child) .mg-footer__col-list { align-items: center; }
 .mg-footer__grid > :last-child { text-align: right; }
 .mg-footer__grid > :last-child .mg-footer__col-list { align-items: flex-end; }
 
