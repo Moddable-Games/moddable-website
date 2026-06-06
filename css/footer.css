@@ -101,6 +101,9 @@
   color: #fff;
 }
 
+.mg-footer__grid > :last-child { text-align: right; }
+.mg-footer__grid > :last-child .mg-footer__col-list { align-items: flex-end; }
+
 .mg-footer__bottom {
   padding-top: 40px;
   display: flex;
