@@ -194,7 +194,7 @@ nb2.appendChild(linkBtn('Read Article', '/news/nuking-catan/', 'outline-dark'));
 
 // Featured mod buttons
 const fb = document.getElementById('featured-btns');
-fb.appendChild(linkBtn('Download Rules', '#', 'primary'));
+fb.appendChild(linkBtn('Read Rules', 'https://rules.moddable.games/dist/hyper-imperium/', 'primary'));
 fb.appendChild(linkBtn('View Components', '/mods/hyper-imperium/', 'outline-dark'));
 
 // Featured stats
