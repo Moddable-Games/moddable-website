@@ -1,14 +1,14 @@
-<p class="lede">If chess was invented today, how would it differ? It is a question that has occupied a decade of research, three prototype games condensed into a 200-page rulebook, and eventually a single game with four pages of rules. The answer starts with understanding where deterministic strategy games came from.</p>
+<p class="lede">If chess was designed today, how would it differ? It's a question that's occupied a decade of research, several prototypes and can only be answered after first understanding where deterministic strategy games come from.</p>
 
 <p>Three classical games define the space:</p>
 
 <ul>
   <li><strong>Checkers</strong> (5,000 years ago) established simplicity as the standard. Minimal components, minimal rules, maximum accessibility.</li>
-  <li><strong>Go</strong> (4,000 years ago) introduced epic scope whilst remaining teachable in minutes. Two piece types, one rule, more possible positions than atoms in the universe.</li>
+  <li><strong>Go</strong> (4,000 years ago) introduced epic scope whilst remaining teachable in minutes. Two piece types with more possibilities than atoms in the universe.</li>
   <li><strong>Chess</strong> (1,500 years ago) pioneered unique pieces with individual movement rules. Miniature components. Character and narrative baked into the mechanics.</li>
 </ul>
 
-<p>All three share a constraint: two players, static board, fixed starting position. For 5,000 years, that was the template.</p>
+<p>All three share constraints. They only support two players, have static boards, and fixed starting positions. For 5,000 years, that was the template.</p>
 
 <h2 id="the-problem-with-predictability">The problem with predictability.</h2>
 
@@ -17,8 +17,8 @@
 <p>The game has become, in large part, a game of memorization rather than strategy. That is not a criticism of chess. It is an observation about what happens to any game played on the same board a billion times.</p>
 
 <figure>
-  <img src="/img/news/conquering-the-constrains-of-chess.jpg" alt="Chess pieces on a board, representing 1500 years of deterministic strategy" loading="lazy">
-  <figcaption>1,500 years of fixed positions. The same 64 squares, the same 32 pieces, the same opening moves.</figcaption>
+  <img src="/img/engine-chess-screenshot.png" alt="Moddable Chess Engine showing Grand Chess variant on a 10x10 board" loading="lazy">
+  <figcaption>70+ variants on one engine. What if you kept the pieces but changed everything else?</figcaption>
 </figure>
 
 <h2 id="hexagons-and-infinite-setups">Hexagons and infinite setups.</h2>
@@ -35,24 +35,26 @@
 
 <p>Modern board games have trended toward increasing complexity and cost. Hundreds of miniatures, 60-page rulebooks, four-figure investments. Chess's genius was always its accessibility: 32 pieces, 64 squares, rules you can teach in ten minutes.</p>
 
-<p>Go proved the same point differently: two piece types, one placement rule, infinite depth. Any modern reimagining must honour that accessibility while expanding the strategic canvas. Fewer unique components. More emergent complexity. Simple rules, infinite expression.</p>
+<p>Go proved the same point differently: two piece types, one placement rule, infinite depth. Any modern reimagining must honour that accessibility while expanding the strategic canvas. Fewer unique components with more emergent complexity. Simple rules, yet infinite expression. This defined our scope:</p>
 
 <div class="prose-callout">
   <strong>Design constraints</strong>
-  The three rules we set ourselves: (1) a simple system that allows for any number of players, (2) a modular board with endless possibilities, and (3) as few unique components as possible.
+  <ul>
+    <li>A simple system that allows for any number of players</li>
+    <li>A modular board with endless possibilities</li>
+    <li>As few unique components as possible</li>
+  </ul>
 </div>
-
-<p>The <a href="/engines/moddable-chess/">Moddable Chess Engine</a> explores this from the other direction: what if you kept chess's pieces but gave them infinite boards? Over 70 variants, from <a href="/mods/dungeon-chess/">Dungeon Chess</a> (asymmetric 4-player skirmish) to Fog of War and Hexagonal Chess.</p>
 
 <h2 id="what-moddablegames-is-building">The game we built.</h2>
 
 <p>The result of that decade of thinking is <a href="/games/nukes/">Nukes</a>: a deterministic hex strategy game with 2 component types, 5 biomes, and infinite board configurations. No dice. No cards. No hidden information. Any number of players.</p>
 
-<p>Where chess has 7 distinct piece types and 10^40 possible games, Nukes has 2 component types and effectively infinite possibility space. Where Go achieves 10^800 positions with elegant simplicity, Nukes matches that scope with just 44 modular hex tiles.</p>
+<p>Where chess has 7 distinct piece types and 10^40 possible games, Nukes has 2 component types and effectively infinite possibilities. Go achieves 10^800 positions with a 19x19 grid, whereas Nukes matches that scope with just 44 modular hex tiles.</p>
 
 <figure>
-  <img src="/img/news/nuking-catan.jpg" alt="Nukes game board showing hex tiles and token positions" loading="lazy">
-  <figcaption>The game that emerged: 44 hex tiles, 75 tokens, zero dice. Playable online at nukes.moddable.games.</figcaption>
+  <img src="/img/news/nukes-online.png" alt="Nukes game board showing hex tiles and token positions" loading="lazy">
+  <figcaption>The game that emerged: 44 hex tiles &amp; zero dice. Playable online at nukes.moddable.games.</figcaption>
 </figure>
 
-<p>The philosophy behind it — modular boards, emergent strategy, <a href="/news/open-sourcing-tabletop-games/">open-source rules</a> — is the foundation of everything we publish. Read the full story in <a href="/news/nuking-catan/">Nuking Catan</a>, where we explain how 45 million people already own the board.</p>
+<p>The philosophy behind it: modular boards, emergent strategy and <a href="/news/open-sourcing-tabletop-games/">open-source rules</a>. It has become the foundation of everything we publish. Read the full story in <a href="/news/nuking-catan/">Nuking Catan</a>, where we explain how 45 million people already own the board.</p>
