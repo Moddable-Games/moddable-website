@@ -48,6 +48,7 @@ data.get('chess-variants').then(function(raw) {
       currentIdx = (currentIdx + 1) % VARIANTS.length;
       renderPicker();
       renderRules();
+      renderMatch();
     }));
   }
 

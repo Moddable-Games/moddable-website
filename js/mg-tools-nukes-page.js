@@ -19,24 +19,24 @@ function renderCombat() {
 
   const grid = el('div', { class: 'combat-grid' });
 
-  function buildSide(label, prefix) {
+  function buildAttacker() {
     const side = el('div', { class: 'combat-side' });
-    side.appendChild(el('div', { class: 'combat-side__label' }, label));
+    side.appendChild(el('div', { class: 'combat-side__label' }, 'Attacker'));
 
     const unitRow = el('div', { class: 'combat-row' });
-    unitRow.appendChild(el('span', { class: 'combat-row__key' }, 'Unit tokens'));
+    unitRow.appendChild(el('span', { class: 'combat-row__key' }, 'Tokens in platoon'));
     const unitInput = document.createElement('input');
     unitInput.type = 'number'; unitInput.min = '1'; unitInput.max = '9'; unitInput.value = '3';
-    unitInput.className = 'combat-input'; unitInput.id = prefix + '-units';
+    unitInput.className = 'combat-input'; unitInput.id = 'atk-units';
     unitInput.addEventListener('input', calculate);
     unitRow.appendChild(unitInput);
     side.appendChild(unitRow);
 
     const adjRow = el('div', { class: 'combat-row' });
-    adjRow.appendChild(el('span', { class: 'combat-row__key' }, 'Adjacent friendly units'));
+    adjRow.appendChild(el('span', { class: 'combat-row__key' }, 'Adjacent friendly regions'));
     const adjInput = document.createElement('input');
-    adjInput.type = 'number'; adjInput.min = '0'; adjInput.max = '18'; adjInput.value = '0';
-    adjInput.className = 'combat-input'; adjInput.id = prefix + '-adj';
+    adjInput.type = 'number'; adjInput.min = '0'; adjInput.max = '6'; adjInput.value = '0';
+    adjInput.className = 'combat-input'; adjInput.id = 'atk-adj';
     adjInput.addEventListener('input', calculate);
     adjRow.appendChild(adjInput);
     side.appendChild(adjRow);
@@ -45,18 +45,44 @@ function renderCombat() {
     baseRow.appendChild(el('span', { class: 'combat-row__key' }, 'Bases passed through'));
     const baseInput = document.createElement('input');
     baseInput.type = 'number'; baseInput.min = '0'; baseInput.max = '6'; baseInput.value = '0';
-    baseInput.className = 'combat-input'; baseInput.id = prefix + '-bases';
+    baseInput.className = 'combat-input'; baseInput.id = 'atk-bases';
     baseInput.addEventListener('input', calculate);
     baseRow.appendChild(baseInput);
     side.appendChild(baseRow);
 
-    side.appendChild(el('div', { class: 'combat-total', id: prefix + '-total' }, 'Strength: 0'));
+    side.appendChild(el('div', { class: 'combat-total', id: 'atk-total' }, 'Strength: 0'));
     return side;
   }
 
-  grid.appendChild(buildSide('Attacker', 'atk'));
+  function buildDefender() {
+    const side = el('div', { class: 'combat-side' });
+    side.appendChild(el('div', { class: 'combat-side__label' }, 'Defender'));
+
+    const unitRow = el('div', { class: 'combat-row' });
+    unitRow.appendChild(el('span', { class: 'combat-row__key' }, 'Tokens in region'));
+    const unitInput = document.createElement('input');
+    unitInput.type = 'number'; unitInput.min = '1'; unitInput.max = '9'; unitInput.value = '3';
+    unitInput.className = 'combat-input'; unitInput.id = 'def-units';
+    unitInput.addEventListener('input', calculate);
+    unitRow.appendChild(unitInput);
+    side.appendChild(unitRow);
+
+    const adjRow = el('div', { class: 'combat-row' });
+    adjRow.appendChild(el('span', { class: 'combat-row__key' }, 'Adjacent friendly Bases'));
+    const adjInput = document.createElement('input');
+    adjInput.type = 'number'; adjInput.min = '0'; adjInput.max = '6'; adjInput.value = '0';
+    adjInput.className = 'combat-input'; adjInput.id = 'def-bases';
+    adjInput.addEventListener('input', calculate);
+    adjRow.appendChild(adjInput);
+    side.appendChild(adjRow);
+
+    side.appendChild(el('div', { class: 'combat-total', id: 'def-total' }, 'Strength: 0'));
+    return side;
+  }
+
+  grid.appendChild(buildAttacker());
   grid.appendChild(el('div', { class: 'combat-vs' }, 'vs'));
-  grid.appendChild(buildSide('Defender', 'def'));
+  grid.appendChild(buildDefender());
   wrap.appendChild(grid);
 
   const result = el('div', { class: 'combat-result', id: 'combat-result' });
@@ -70,11 +96,10 @@ function calculate() {
   const atkAdj = parseInt(document.getElementById('atk-adj').value) || 0;
   const atkBases = parseInt(document.getElementById('atk-bases').value) || 0;
   const defUnits = parseInt(document.getElementById('def-units').value) || 0;
-  const defAdj = parseInt(document.getElementById('def-adj').value) || 0;
   const defBases = parseInt(document.getElementById('def-bases').value) || 0;
 
   const atkTotal = atkUnits + atkAdj + atkBases;
-  const defTotal = defUnits + defAdj + defBases;
+  const defTotal = defUnits + defBases;
 
   document.getElementById('atk-total').textContent = 'Strength: ' + atkTotal;
   document.getElementById('def-total').textContent = 'Strength: ' + defTotal;
