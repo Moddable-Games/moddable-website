@@ -192,11 +192,11 @@ function initHexmapEmbed(game) {
     if (!actionsEl) return;
     actionsEl.innerHTML = '';
     var { btn } = MG;
-    actionsEl.appendChild(btn('New map', 'dark', function() {
+    actionsEl.appendChild(btn('New Map', 'dark', function() {
       currentSeed = Math.floor(Math.random() * 9999);
       regenerate();
     }));
-    actionsEl.appendChild(btn('Copy seed link', 'outline-dark', function() {
+    actionsEl.appendChild(btn('Copy Seed', 'outline-light', function() {
       var shareUrl = 'https://hex.moddable.games/generate/?game=' + game
         + '&seed=' + currentSeed + '&style=' + currentStyle;
       if (useLayouts) {
@@ -206,9 +206,9 @@ function initHexmapEmbed(game) {
       }
       navigator.clipboard.writeText(shareUrl);
     }));
-    var fullLink = MG.linkBtn('Open in Hexmaps',
+    var fullLink = MG.linkBtn('Full Screen',
       HEX_BASE + '?game=' + game + '&seed=' + currentSeed + '&style=' + currentStyle,
-      'outline-dark');
+      'outline-light');
     fullLink.setAttribute('target', '_blank');
     fullLink.setAttribute('rel', 'noopener');
     actionsEl.appendChild(fullLink);

@@ -836,7 +836,7 @@ function renderCustom(panel) {
       row.appendChild(rm);
       side.appendChild(row);
     });
-    side.appendChild(btn('+ Add unit type', 'outline-dark', () => {
+    side.appendChild(btn('+ Add unit type', 'outline-light', () => {
       units.push({ name: 'Unit', dice: 1, sides: 6, hit: 4 });
       redraw();
     }));

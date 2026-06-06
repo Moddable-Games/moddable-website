@@ -13,7 +13,7 @@
     green:          { bg:T.green, fg:'#fff', border:'none', hover:T.greenBright },
     red:            { bg:T.red, fg:'#fff', border:'none', hover:T.redBright },
     'outline-dark': { bg:'transparent', fg:'#fff', border:'1px solid rgba(255,255,255,0.35)', hover:'rgba(255,255,255,0.1)' },
-    'outline-light':{ bg:'transparent', fg:T.ink, border:'1px solid ' + T.hairlineLight, hover:'rgba(0,0,0,0.04)' },
+    'outline-light':{ bg:'transparent', fg:T.ink, border:'1px solid #c3c5cc', hover:'rgba(0,0,0,0.04)' },
   };
 
   function applyVariant(node, variant) {

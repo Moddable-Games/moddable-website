@@ -91,7 +91,7 @@ document.getElementById('field-version').appendChild(field('version','Version','
 document.getElementById('field-designer').appendChild(field('designer','Your handle','How should we credit you?',false,textInput('designer','@yourhandle','designer')));
 
 const s2n = document.getElementById('step2-nav');
-s2n.appendChild(btn('← Back','outline-dark',()=>goStep(1)));
+s2n.appendChild(btn('← Back','outline-light',()=>goStep(1)));
 s2n.appendChild(btn('Next: submit →','primary',()=>goStep(3)));
 
 // Step 3 preview
@@ -112,7 +112,7 @@ function buildPreview() {
 }
 
 const s3n = document.getElementById('step3-nav');
-s3n.appendChild(btn('← Back','outline-dark',()=>goStep(2)));
+s3n.appendChild(btn('← Back','outline-light',()=>goStep(2)));
 const submitBtn = btn('Submit mod','green',()=>{
   if (!document.getElementById('agree-check').checked) { alert('Please confirm the agreement first.'); return; }
   goStep('success');
@@ -122,7 +122,7 @@ s3n.appendChild(submitBtn);
 // Success
 const sbw = document.getElementById('success-btns');
 sbw.appendChild(linkBtn('Back to the library','/mods/','dark'));
-sbw.appendChild(linkBtn('Join Discord','/community/','outline-dark'));
+sbw.appendChild(linkBtn('Join Discord','/community/','outline-light'));
 
 function goStep(n) {
   currentStep = n;

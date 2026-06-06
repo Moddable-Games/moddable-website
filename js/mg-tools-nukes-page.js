@@ -170,11 +170,11 @@ function renderHostages() {
         renderHostages();
       }));
     });
-    btns.appendChild(btn('+Isotope', 'outline-dark', () => {
+    btns.appendChild(btn('+Isotope', 'outline-light', () => {
       p.isotopes++;
       renderHostages();
     }));
-    btns.appendChild(btn('−Isotope', 'outline-dark', () => {
+    btns.appendChild(btn('−Isotope', 'outline-light', () => {
       p.isotopes = Math.max(0, p.isotopes - 1);
       renderHostages();
     }));
