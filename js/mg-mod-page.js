@@ -158,6 +158,8 @@
 
     others.sort(function(a, b) {
       var aScore = 0, bScore = 0;
+      if (a.source === 'Moddable.Games') aScore += 4;
+      if (b.source === 'Moddable.Games') bScore += 4;
       if (listing) {
         if (a.category === listing.category) aScore += 2;
         if (b.category === listing.category) bScore += 2;
