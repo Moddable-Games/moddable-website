@@ -68,11 +68,11 @@ FEATURES.forEach(function(f) {
   ef.appendChild(el('span', { class: 'mg-dark-center__pill' }, f));
 });
 
-var tryBtn = linkBtn('Try the engine', 'https://chess.moddable.games/play/', 'blue');
+var tryBtn = linkBtn('Try Engine', 'https://chess.moddable.games/play/', 'blue');
 tryBtn.setAttribute('target', '_blank');
 tryBtn.setAttribute('rel', 'noopener');
 document.getElementById('engine-cta').appendChild(tryBtn);
-var docsBtn = linkBtn('Read the docs', 'https://chess.moddable.games/docs/', 'outline-dark');
+var docsBtn = linkBtn('Read Docs', 'https://chess.moddable.games/docs/', 'outline-dark');
 docsBtn.setAttribute('target', '_blank');
 docsBtn.setAttribute('rel', 'noopener');
 document.getElementById('engine-cta').appendChild(docsBtn);

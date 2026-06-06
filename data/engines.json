@@ -36,7 +36,7 @@
     "features": ["Canvas renderer", "Seeded RNG", "Import/export JSON", "Style selector", "Editor mode"],
     "consumers": [
       { "title": "Nukes", "href": "/games/nukes/" },
-      { "title": "Colony", "href": "https://hex.moddable.games/colony/" },
+      { "title": "Colony", "href": "https://hex.moddable.games/generate/?game=colony" },
       { "title": "Talisman Worlds", "href": "/mods/talisman-worlds/" },
       { "title": "Hyper Imperium", "href": "/mods/hyper-imperium/" }
     ]

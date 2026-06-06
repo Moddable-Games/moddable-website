@@ -350,7 +350,7 @@ button:focus-visible, a:focus-visible, input:focus-visible, textarea:focus-visib
 .game-hero__version { font-family: var(--mg-font-pixel); font-size: 9px; padding: 5px 10px; letter-spacing: 1px; }
 .game-hero__logo { width: clamp(180px, 22vw, 300px); height: auto; object-fit: contain; filter: drop-shadow(0 16px 40px rgba(0,0,0,0.6)); animation: floatBadge 5s ease-in-out infinite; display: block; position: relative; z-index: 1; justify-self: end; align-self: center; }
 .game-hero__title { font-family: var(--mg-font-display); font-weight: 600; font-size: clamp(56px, 8vw, 128px); line-height: 0.92; letter-spacing: -0.03em; margin: 24px 0; text-shadow: 0 4px 30px rgba(0,0,0,0.6); }
-.game-hero__lede { font-family: var(--mg-font-body); font-size: 19px; line-height: 1.55; color: rgba(255,255,255,0.86); max-width: 640px; margin: 0 0 36px; text-shadow: 0 2px 16px rgba(0,0,0,0.7); }
+.game-hero__lede { font-family: var(--mg-font-body); font-size: 19px; line-height: 1.55; color: rgba(255,255,255,0.86); max-width: 640px; margin: 0 0 36px; text-shadow: 0 2px 16px rgba(0,0,0,0.7); text-wrap: balance; }
 .game-hero__btns { display: flex; gap: 12px; flex-wrap: wrap; }
 
 /* ── Stats bar (game pages) ──────────────────────────────────────────── */
@@ -368,7 +368,7 @@ button:focus-visible, a:focus-visible, input:focus-visible, textarea:focus-visib
 .mg-heading-xl--light { color: #fff; }
 .mg-heading-lg { font-family: var(--mg-font-display); font-weight: 600; font-size: clamp(32px, 4vw, 48px); line-height: 1.05; letter-spacing: -0.025em; color: var(--mg-ink); margin: 0 0 12px; }
 .mg-heading-md { font-family: var(--mg-font-display); font-weight: 600; font-size: 32px; line-height: 1.15; letter-spacing: -0.4px; color: var(--mg-ink); margin: 0 0 16px; }
-.mg-body-sub { font-family: var(--mg-font-body); font-size: 16px; line-height: 1.55; color: var(--mg-mute); margin: 0 0 32px; max-width: 600px; }
+.mg-body-sub { font-family: var(--mg-font-body); font-size: 16px; line-height: 1.55; color: var(--mg-mute); margin: 0 0 32px; max-width: 720px; }
 .mg-body-sub--light { color: rgba(255,255,255,0.78); }
 
 /* ── Cards (generic) ─────────────────────────────────────────────────── */
@@ -381,7 +381,7 @@ button:focus-visible, a:focus-visible, input:focus-visible, textarea:focus-visib
 .mg-card--row { display: flex; gap: 16px; align-items: flex-start; border-radius: 14px; }
 .mg-card__eyebrow { font-family: var(--mg-font-pixel); font-size: 9px; letter-spacing: 1.5px; margin-bottom: 14px; }
 .mg-card__title { font-family: var(--mg-font-display); font-weight: 600; font-size: 22px; line-height: 1.2; letter-spacing: -0.25px; color: var(--mg-ink); margin: 0 0 10px; }
-.mg-card__body { font-family: var(--mg-font-body); font-size: 14px; line-height: 1.55; color: #3a3d44; margin: 0; }
+.mg-card__body { font-family: var(--mg-font-body); font-size: 14px; line-height: 1.55; color: #3a3d44; margin: 0; text-wrap: balance; }
 .mg-card__icon { width: 36px; height: 36px; border-radius: 8px; display: flex; align-items: center; justify-content: center; color: #fff; font-size: 16px; flex: none; }
 .mg-card__mono-title { font-family: var(--mg-font-mono); font-weight: 600; font-size: 14px; }
 .mg-card__desc { font-family: var(--mg-font-body); font-size: 13px; color: #3a3d44; line-height: 1.5; margin-top: 6px; }
@@ -438,7 +438,7 @@ button:focus-visible, a:focus-visible, input:focus-visible, textarea:focus-visib
 .mg-dark-center__bloom { position: absolute; left: 50%; top: 50%; transform: translate(-50%, -50%); width: 800px; height: 400px; pointer-events: none; filter: blur(24px); }
 .mg-dark-center__inner { position: relative; }
 .mg-dark-center__heading { font-family: var(--mg-font-display); font-weight: 600; font-size: clamp(36px, 5vw, 64px); line-height: 1.05; letter-spacing: -0.025em; margin: 0 0 18px; }
-.mg-dark-center__body { font-family: var(--mg-font-body); font-size: 17px; line-height: 1.6; color: rgba(255,255,255,0.78); margin: 0 auto 32px; max-width: 540px; }
+.mg-dark-center__body { font-family: var(--mg-font-body); font-size: 17px; line-height: 1.6; color: rgba(255,255,255,0.78); margin: 0 auto 32px; max-width: 540px; text-wrap: balance; }
 .mg-dark-center__pills { display: flex; gap: 32px; justify-content: center; flex-wrap: wrap; margin-bottom: 32px; }
 .mg-dark-center__pill { font-family: var(--mg-font-mono); font-size: 12px; color: rgba(255,255,255,0.7); padding: 6px 14px; border: 1px solid rgba(255,255,255,0.2); border-radius: 9999px; }
 .mg-dark-center__cta { display: flex; gap: 12px; justify-content: center; flex-wrap: wrap; }

@@ -16,10 +16,10 @@ var heroLogo = document.querySelector('.game-hero__logo');
 heroLogo.src = url('/img/moddable-hexmaps-cube.svg');
 heroLogo.alt = 'Moddable Hexmaps';
 
-var genLink = linkBtn('Generate maps', 'https://hex.moddable.games/generate/', 'green');
-genLink.setAttribute('target', '_blank');
-genLink.setAttribute('rel', 'noopener');
-document.getElementById('hero-btns').appendChild(genLink);
+var siteLink = linkBtn('hex.moddable.games', 'https://hex.moddable.games/', 'green');
+siteLink.setAttribute('target', '_blank');
+siteLink.setAttribute('rel', 'noopener');
+document.getElementById('hero-btns').appendChild(siteLink);
 var ghLink = linkBtn('GitHub', 'https://github.com/Moddable-Games/moddable-hexmaps', 'outline-dark');
 ghLink.setAttribute('target', '_blank');
 ghLink.setAttribute('rel', 'noopener');
@@ -59,7 +59,7 @@ var GAMES = [
     n: '03',
     title: 'Colony',
     body: 'Resource extraction on alien worlds. Procedural hex terrain with biomes, hazards, and contested mining sites.',
-    href: 'https://hex.moddable.games/colony/',
+    href: 'https://hex.moddable.games/generate/?game=colony',
     external: true
   },
   {
@@ -67,6 +67,18 @@ var GAMES = [
     title: 'Twilight Imperium',
     body: 'Galactic hex maps from the TI4 tile pool. Balanced placement for competitive play.',
     href: '/tools/ti/'
+  },
+  {
+    n: '05',
+    title: 'Endless Skies',
+    body: 'Cooperative airship exploration across procedurally generated sky islands and floating territories.',
+    href: '/games/endless-skies/'
+  },
+  {
+    n: '06',
+    title: 'Planet Mongo',
+    body: 'Fast-paced faction battles on a shared hex world. Seeded terrain with resource nodes and contested borders.',
+    href: '/games/planet-mongo/'
   }
 ];
 var gg = document.getElementById('games-grid');
@@ -91,11 +103,11 @@ FEATURES.forEach(function(f) {
   ef.appendChild(el('span', { class: 'mg-dark-center__pill' }, f));
 });
 
-var tryBtn = linkBtn('Try the generator', 'https://hex.moddable.games/generate/', 'green');
+var tryBtn = linkBtn('Try Engine', 'https://hex.moddable.games/generate/', 'green');
 tryBtn.setAttribute('target', '_blank');
 tryBtn.setAttribute('rel', 'noopener');
 document.getElementById('engine-cta').appendChild(tryBtn);
-var docsBtn = linkBtn('Read the docs', 'https://hex.moddable.games/docs/', 'outline-dark');
+var docsBtn = linkBtn('Read Docs', 'https://hex.moddable.games/docs/', 'outline-dark');
 docsBtn.setAttribute('target', '_blank');
 docsBtn.setAttribute('rel', 'noopener');
 document.getElementById('engine-cta').appendChild(docsBtn);
@@ -116,7 +128,7 @@ STYLES.forEach(function(s) {
 
 var CONSUMERS = [
   { title: 'Nukes', desc: 'Cold-war territory control on a hex map. Hostages fuel your moves but reinforce your enemy. Build bases, convert isotopes, threaten nuclear strikes.', href: '/games/nukes/', accent: T.red },
-  { title: 'Colony', desc: 'Resource extraction on alien worlds. Procedural terrain with biomes, hazards, and contested mining sites.', href: 'https://hex.moddable.games/colony/', accent: T.green, external: true },
+  { title: 'Colony', desc: 'Resource extraction on alien worlds. Procedural terrain with biomes, hazards, and contested mining sites.', href: 'https://hex.moddable.games/generate/?game=colony', accent: T.green, external: true },
   { title: 'TI4 Map Generator', desc: 'Balanced galactic hex maps from the full Twilight Imperium tile pool.', href: '/tools/ti/', accent: T.blue },
   { title: 'Talisman Tools', desc: 'Fantasy hex board generator with inner, middle, and outer ring terrain.', href: '/tools/talisman/', accent: T.green }
 ];
