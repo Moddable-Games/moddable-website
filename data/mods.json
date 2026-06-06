@@ -4,7 +4,7 @@
     "baseGame": "Chess",
     "title": "Dungeon Chess",
     "body": "Chess reimagined as an asymmetric dungeon skirmish. Four factions on modular boards with unique abilities, XP drafting, and environmental hazards. Powered by the Moddable Chess Engine.",
-    "stats": "2–4 players · 30–120 min · 12+",
+    "stats": "2\u20134 players \u00b7 30\u2013120 min \u00b7 12+",
     "path": "/mods/dungeon-chess/",
     "source": "Moddable.Games",
     "logo": "img/dungeon-chess-logo.png"
@@ -14,7 +14,7 @@
     "baseGame": "Talisman",
     "title": "Talisman Worlds",
     "body": "Replaces the Talisman board with 61 hexagonal tiles across four concentric rings plus a hidden ending. Every game generates a different board layout. Includes Dungeon expansion support.",
-    "stats": "2–6 players · 90 min · 13+",
+    "stats": "2\u20136 players \u00b7 90 min \u00b7 13+",
     "path": "/mods/talisman-worlds/",
     "source": "Moddable.Games",
     "logo": "img/talisman-worlds-logo.png"
@@ -24,7 +24,7 @@
     "baseGame": "Twilight Imperium",
     "title": "Hyper Imperium",
     "body": "3D exploration via hyperlanes, blind voting with influence cards, shared secret objectives, and a 100-point mercenary faction builder. Five modular rule changes for TI4 + Prophecy of Kings.",
-    "stats": "4–6 players · 4–6 hr · 14+",
+    "stats": "4\u20136 players \u00b7 4\u20136 hr \u00b7 14+",
     "path": "/mods/hyper-imperium/",
     "source": "Moddable.Games",
     "logo": "img/hyper-imperium-logo.png"
@@ -34,27 +34,17 @@
     "baseGame": "Monopoly",
     "title": "Econopoly",
     "body": "Transforms Monopoly into a euro-game with resource collection, blind auctions, and victory point scoring via linked card combinations. Choose to move, trade, or build each turn.",
-    "stats": "2–6 players · 60 min · 10+",
+    "stats": "2\u20136 players \u00b7 60 min \u00b7 10+",
     "path": "/mods/econopoly/",
     "source": "Moddable.Games",
     "logo": "img/econopoly-logo.png"
-  },
-  {
-    "category": "Total conversion",
-    "baseGame": "Monopoly",
-    "title": "Anti-Monopoly",
-    "body": "Two teams play by different rules on the same board: Monopolists charge high rent on monopolies; Competitors charge cost-price only. Published by Ralph Anspach in 1973.",
-    "stats": "2–6 players · 60 min · 10+",
-    "path": "/mods/anti-monopoly/",
-    "source": "Public domain variant",
-    "logo": "img/moddable-cube-logo.png"
   },
   {
     "category": "Rebalance",
     "baseGame": "Catan",
     "title": "Flooded Catan",
     "body": "Community variant from the Catan Wiki: tiles flood every few rounds. Players can win by being the last settlement standing, not just by hitting 10 VP.",
-    "stats": "3–4 players · 75 min · 10+",
+    "stats": "3\u20134 players \u00b7 75 min \u00b7 10+",
     "path": "/mods/flooded-catan/",
     "source": "catan.fandom.com",
     "logo": "img/moddable-cube-logo.png"
@@ -64,39 +54,19 @@
     "baseGame": "Catan",
     "title": "The Diamond Mine",
     "body": "A single-hex unofficial expansion: swap one pasture for the diamond mine. Diamonds substitute for ore in development card purchases. Self-contained rules, free to print.",
-    "stats": "3–4 players · 60 min · 10+",
+    "stats": "3\u20134 players \u00b7 60 min \u00b7 10+",
     "path": "/mods/the-diamond-mine/",
-    "source": "scribd.com — meepleeater",
+    "source": "scribd.com \u2014 meepleeater",
     "logo": "img/moddable-cube-logo.png"
   },
   {
     "category": "Rebalance",
     "baseGame": "Twilight Imperium",
     "title": "Shattered Ascension",
-    "body": "PsiComa's decade-long TI3 remix — rebalanced factions, overhauled agenda phase, new card sets. The most thorough community TI variant in existence. Tabletop Simulator module available.",
-    "stats": "3–8 players · 6–12 hr · 16+",
+    "body": "PsiComa's decade-long TI3 remix \u2014 rebalanced factions, overhauled agenda phase, new card sets. The most thorough community TI variant in existence. Tabletop Simulator module available.",
+    "stats": "3\u20138 players \u00b7 6\u201312 hr \u00b7 16+",
     "path": "/mods/shattered-ascension/",
     "source": "boardgamegeek.com",
-    "logo": "img/moddable-cube-logo.png"
-  },
-  {
-    "category": "Rebalance",
-    "baseGame": "Risk",
-    "title": "CivRisk",
-    "body": "Risk rewritten to play like Civilisation: choose a civilisation and leader, build through growth tiers, discover ruins and barbarian camps. Chris Grey, 2023. ePub rules free to download.",
-    "stats": "3–5 players · 180 min · 14+",
-    "path": "/mods/civrisk/",
-    "source": "Chris Grey — self-published",
-    "logo": "img/moddable-cube-logo.png"
-  },
-  {
-    "category": "Reskin",
-    "baseGame": "Risk",
-    "title": "Custom World Risk",
-    "body": "Replace the standard board with your own map — Middle-earth, a fantasy continent, your neighbourhood. The rules stay identical, only the geography changes.",
-    "stats": "2–6 players · 120 min · 12+",
-    "path": "/mods/custom-world-risk/",
-    "source": "Community / BGG",
     "logo": "img/moddable-cube-logo.png"
   }
 ]
