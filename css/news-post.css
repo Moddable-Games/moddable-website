@@ -41,7 +41,7 @@ body { background: #f5f4ef; }
 .post-header__tags { display: flex; gap: 8px; justify-content: center; margin-top: 16px; flex-wrap: wrap; }
 .post-header__cat { font-family: var(--mg-font-body); font-weight: 600; font-size: 11px; background: var(--post-cat-bg); color: #fff; padding: 4px 10px; border-radius: 9999px; }
 .post-header__meta { font-family: var(--mg-font-mono); font-size: 11px; color: rgba(255,255,255,0.7); padding: 4px 10px; border: 1px solid rgba(255,255,255,0.18); border-radius: 9999px; }
-.post-header__title { font-family: var(--mg-font-display); font-weight: 600; font-size: clamp(48px, 7vw, 96px); line-height: 0.95; letter-spacing: -0.025em; margin: 24px 0; text-shadow: 0 4px 30px rgba(0,0,0,0.6); }
+.post-header__title { font-family: var(--mg-font-display); font-weight: 600; font-size: clamp(48px, 7vw, 96px); line-height: 0.95; letter-spacing: -0.025em; margin: 24px 0; text-shadow: 0 4px 30px rgba(0,0,0,0.6); text-wrap: balance; }
 .post-header__title em { color: var(--post-title-em); }
 .post-header__lede { font-family: var(--mg-font-body); font-style: italic; font-size: 18px; color: rgba(255,255,255,0.78); margin: 0; }
 
