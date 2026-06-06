@@ -4,7 +4,7 @@
   function navbar(activeId) {
     const NAV_ITEMS = [
       { id:'Mods', href:url('/mods/'), accent:'#e63232', children:[['Total conversions',url('/mods/#Total conversion')],['Rebalances',url('/mods/#Rebalance')],['Reskins',url('/mods/#Reskin')],['Submit a mod',url('/submit/')]] },
-      { id:'Engines', href:url('/engines/'), accent:'#06b6d4', children:[['Moddable Chess',url('/engines/moddable-chess/')],['Moddable Hexmaps',url('/engines/moddable-hexmaps/')]] },
+      { id:'Engines', href:url('/engines/'), accent:'#06b6d4', children:[['Chess',url('/engines/moddable-chess/')],['Hexmaps',url('/engines/moddable-hexmaps/')]] },
       { id:'Games', href:url('/games/'), accent:'#e8a91a', children:[['Nukes',url('/games/nukes/')],['Planet Mongo',url('/games/planet-mongo/')],['Endless Skies',url('/games/endless-skies/')]] },
       { id:'Tools', href:url('/tools/'), accent:'#3a9928', children:[['Twilight',url('/tools/ti/')],['Talisman',url('/tools/talisman/')],['Nukes',url('/tools/nukes/')],['Dice',url('/tools/dice/')],['Decks',url('/tools/decks/')],['Chess',url('/tools/chess/')]] },
       { id:'News', href:url('/news/'), accent:'#e11d89' },

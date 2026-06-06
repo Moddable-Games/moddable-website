@@ -5,7 +5,7 @@
     const COLS = [
       { title:'Mods',      href:url('/mods/'),      links:[['Total conversions',url('/mods/#Total conversion')],['Rebalances',url('/mods/#Rebalance')],['Reskins',url('/mods/#Reskin')],['Submit a mod',url('/submit/')]] },
       { title:'Games',     href:url('/games/'),     links:[['Endless Skies',url('/games/endless-skies/')],['Planet Mongo',url('/games/planet-mongo/')],['Nukes',url('/games/nukes/')]] },
-      { title:'Engines',   href:url('/engines/'),   links:[['Moddable Chess',url('/engines/moddable-chess/')],['Moddable Hexmaps',url('/engines/moddable-hexmaps/')]] },
+      { title:'Engines',   href:url('/engines/'),   links:[['Chess',url('/engines/moddable-chess/')],['Hexmaps',url('/engines/moddable-hexmaps/')]] },
       { title:'Tools',     href:url('/tools/'),     links:[['Twilight',url('/tools/ti/')],['Talisman',url('/tools/talisman/')],['Nukes',url('/tools/nukes/')],['Dice',url('/tools/dice/')],['Decks',url('/tools/decks/')],['Chess',url('/tools/chess/')]] },
       { title:'Community', href:url('/community/'), links:[['News',url('/news/')],['About',url('/about/')],['Roadmap',url('/about/roadmap/')],['Team',url('/team/')],['Press',url('/press/')],['Subscribe',url('/subscribe/')]] },
     ];
