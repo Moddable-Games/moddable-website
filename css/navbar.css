@@ -116,6 +116,12 @@
   color: #fff;
   padding-left: 20px;
 }
+.mg-navbar__dropdown-link--active {
+  color: #fff;
+  font-weight: 600;
+  border-left-color: var(--nav-accent, var(--mg-cosmic-glow));
+  background: color-mix(in srgb, var(--nav-accent, var(--mg-cosmic-glow)) 6%, transparent);
+}
 
 /* Right section */
 .mg-navbar__right {

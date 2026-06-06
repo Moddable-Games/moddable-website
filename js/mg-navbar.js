@@ -41,8 +41,11 @@
         const dd = el('div', { class:'mg-navbar__dropdown' });
         const menu = el('div', { class:'mg-navbar__dropdown-menu' });
         if (item.accent) menu.style.setProperty('--nav-accent', item.accent);
+        const currentPath = window.location.pathname;
         item.children.forEach(([label, href]) => {
-          menu.appendChild(el('a', { href, class:'mg-navbar__dropdown-link' }, label));
+          const isChildActive = currentPath === href || currentPath === href.replace(/\/$/, '') || currentPath.startsWith(href);
+          const linkClass = 'mg-navbar__dropdown-link' + (isChildActive ? ' mg-navbar__dropdown-link--active' : '');
+          menu.appendChild(el('a', { href, class: linkClass }, label));
         });
         dd.appendChild(menu);
         wrap.appendChild(dd);

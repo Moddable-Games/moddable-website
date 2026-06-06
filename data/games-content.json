@@ -30,7 +30,7 @@
       ],
       [
         "Designer",
-        "Moddable team"
+        "Team Moddable"
       ],
       [
         "Status",
@@ -44,13 +44,13 @@
     "buttons": {
       "hero": [
         [
-          "Read the Rules",
-          "rules:nukes",
+          "Play Online",
+          "https://nukes.moddable.games/",
           "red"
         ],
         [
-          "Browse on GitHub",
-          "https://github.com/Moddable-Games/Nukes-Rulebook/blob/main/games/nukes/content/rulebook.md",
+          "Read Rules",
+          "rules:nukes",
           "outline-dark"
         ],
         [
@@ -61,12 +61,12 @@
       ],
       "cta": [
         [
-          "Read the Rules",
+          "Read Rules",
           "rules:nukes",
           "red"
         ],
         [
-          "See the tools",
+          "See Tools",
           "/tools/nukes/",
           "outline-dark"
         ]
@@ -152,13 +152,13 @@
     ],
     "buttons": {
       "hero": [
-        ["Read the Rules", "rules:mongo", "green"],
+        ["Read Rules", "rules:mongo", "green"],
         ["View on GitHub", "https://github.com/Moddable-Games/moddable-rules/blob/main/games/mongo/content/rulebook.md", "outline-dark"]
       ],
       "cta": [],
       "extra": {
         "playtest-btns": [
-          ["Read the Rules", "rules:mongo", "green"],
+          ["Read Rules", "rules:mongo", "green"],
           ["View on GitHub", "https://github.com/Moddable-Games/moddable-rules/blob/main/games/mongo/content/rulebook.md", "outline-dark"]
         ]
       }
@@ -238,7 +238,7 @@
     ],
     "buttons": {
       "hero": [
-        ["Read the Rules", "rules:endless-skies", "blue"],
+        ["Read Rules", "rules:endless-skies", "blue"],
         ["View on GitHub", "https://github.com/Moddable-Games/moddable-rules/blob/main/games/endless-skies/content/rulebook.md", "outline-dark"]
       ],
       "cta": []
@@ -340,7 +340,7 @@
     "buttons": {
       "hero": [
         [
-          "Read the Rules",
+          "Read Rules",
           "rules:dungeon-chess",
           "green"
         ],

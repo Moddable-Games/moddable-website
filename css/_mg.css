@@ -368,12 +368,13 @@ button:focus-visible, a:focus-visible, input:focus-visible, textarea:focus-visib
 .mg-heading-xl--light { color: #fff; }
 .mg-heading-lg { font-family: var(--mg-font-display); font-weight: 600; font-size: clamp(32px, 4vw, 48px); line-height: 1.05; letter-spacing: -0.025em; color: var(--mg-ink); margin: 0 0 12px; }
 .mg-heading-md { font-family: var(--mg-font-display); font-weight: 600; font-size: 32px; line-height: 1.15; letter-spacing: -0.4px; color: var(--mg-ink); margin: 0 0 16px; }
-.mg-body-sub { font-family: var(--mg-font-body); font-size: 16px; line-height: 1.55; color: var(--mg-mute); margin: 0 0 32px; max-width: 720px; }
+.mg-body-sub { font-family: var(--mg-font-body); font-size: 16px; line-height: 1.55; color: var(--mg-mute); margin: 0 0 32px; max-width: 720px; text-wrap: balance; }
 .mg-body-sub--light { color: rgba(255,255,255,0.78); }
 
 /* ── Cards (generic) ─────────────────────────────────────────────────── */
 .mg-card { background: #fff; border: 1px solid var(--mg-hairline-light); border-radius: 16px; padding: 24px; }
-.mg-card--light { background: var(--mg-canvas-light); }
+.mg-card--light { background: #fff; }
+.mg-section--white .mg-card--light { background: var(--mg-canvas-light); }
 .mg-card--featured { background: var(--mg-ink); border-color: var(--mg-ink); }
 .mg-card--featured .mg-card__title { color: #fff; }
 .mg-card--featured .mg-card__body { color: rgba(255,255,255,0.7); }
@@ -406,7 +407,7 @@ button:focus-visible, a:focus-visible, input:focus-visible, textarea:focus-visib
 .game-card__stats { font-family: var(--mg-font-mono); font-size: 12px; color: var(--mg-stone); padding-top: 12px; border-top: 1px solid var(--mg-hairline-light); }
 
 /* ── Submit CTA card (reusable across pages) ──────────── */
-.mods-submit-cta { display: flex; align-items: center; justify-content: center; text-decoration: none; color: var(--mg-ink); background: #fff; border: 2px dashed var(--mg-hairline-light); border-radius: 16px; padding: 40px 32px; text-align: center; transition: border-color 200ms, background 200ms; min-height: 200px; }
+.mods-submit-cta { display: flex; align-items: center; justify-content: center; text-decoration: none; color: var(--mg-ink); background: var(--mg-canvas-light); border: 2px dashed var(--mg-hairline-light); border-radius: 16px; padding: 40px 32px; text-align: center; transition: border-color 200ms, background 200ms; min-height: 200px; }
 .mods-submit-cta:hover { border-color: var(--mg-green); background: rgba(58,153,40,0.04); }
 .mods-submit-cta__inner { max-width: 400px; }
 .mods-submit-cta__title { font-family: var(--mg-font-display); font-weight: 600; font-size: 22px; margin: 12px 0 8px; color: var(--mg-ink); }
