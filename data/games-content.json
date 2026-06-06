@@ -121,7 +121,7 @@
         "stats": "2–3 players · 60 min · 12+"
       },
       {
-        "category": "Total conversion",
+        "category": "Conversion",
         "baseGame": "Nukes",
         "title": "Nukes: Siege",
         "body": "Flip the hostage mechanic. You start with your own tokens off-board and must spend moves to recruit them. Opponents capture your units mid-game instead. Slower buildup, longer endgame.",
@@ -841,7 +841,7 @@
     "communityLabel": "Supported variants.",
     "community": [
       {
-        "category": "Total conversion",
+        "category": "Conversion",
         "baseGame": "Chess",
         "title": "Fog of War Chess",
         "body": "Players see only squares their pieces can move to. No checks, no checkmates — capture the king to win. Invented 1989.",
@@ -855,49 +855,49 @@
         "stats": "4 players · 30 min · 10+"
       },
       {
-        "category": "Total conversion",
+        "category": "Conversion",
         "baseGame": "Chess",
         "title": "Hexagonal Chess (Glinski)",
         "body": "91 hexagonal cells, 9 pawns per side, bishops on three cell colours. Władysław Gliński, 1936.",
         "stats": "2 players · 30–60 min · 12+"
       },
       {
-        "category": "Total conversion",
+        "category": "Conversion",
         "baseGame": "Chess",
         "title": "Alice Chess",
         "body": "Two boards, one army. Pieces transfer to the other board after each move. Conceived by V.R. Parton, 1953.",
         "stats": "2 players · 30–45 min · 12+"
       },
       {
-        "category": "Total conversion",
+        "category": "Conversion",
         "baseGame": "Chess",
         "title": "Capablanca Chess",
         "body": "10×8 board with two new pieces: Archbishop (bishop+knight) and Chancellor (rook+knight). José Capablanca, 1920s.",
         "stats": "2 players · 45–90 min · 12+"
       },
       {
-        "category": "Total conversion",
+        "category": "Conversion",
         "baseGame": "Chess",
         "title": "Courier Chess",
         "body": "Medieval 12×8 variant with 24 pieces per side including couriers and sages. Documented since 1202.",
         "stats": "2 players · 60–90 min · 14+"
       },
       {
-        "category": "Total conversion",
+        "category": "Conversion",
         "baseGame": "Chess",
         "title": "Omega Chess",
         "body": "10×10 board plus corner squares. Adds Champion (knight+king area) and Wizard (camel+ferz). Daniel MacDonald, 1992.",
         "stats": "2 players · 45–90 min · 12+"
       },
       {
-        "category": "Total conversion",
+        "category": "Conversion",
         "baseGame": "Chess",
         "title": "Grand Chess",
         "body": "10×10 board with Archbishop and Chancellor. No castling, pawns promote on rank 8 or 9. Christian Freeling, 1984.",
         "stats": "2 players · 45–75 min · 12+"
       },
       {
-        "category": "Total conversion",
+        "category": "Conversion",
         "baseGame": "Chess",
         "title": "XiangQi (Chinese Chess)",
         "body": "9×10 board with river and palace. Cannons capture by jumping, generals face off across the board. Over 1000 years old.",

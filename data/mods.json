@@ -1,6 +1,6 @@
 [
   {
-    "category": "Total conversion",
+    "category": "Conversion",
     "baseGame": "Chess",
     "title": "Dungeon Chess",
     "body": "Chess reimagined as an asymmetric dungeon skirmish. Four factions on modular boards with unique abilities, XP drafting, and environmental hazards. Powered by the Moddable Chess Engine.",
@@ -50,7 +50,7 @@
     "logo": "img/moddable-cube-logo.png"
   },
   {
-    "category": "Total conversion",
+    "category": "Conversion",
     "baseGame": "Draughts",
     "title": "Lasca",
     "body": "Emanuel Lasker's 1911 column checkers. Captured pieces stack beneath the captor instead of leaving the board. All 22 pieces stay in play for the entire game. Ownership shifts as columns change hands.",
@@ -70,7 +70,7 @@
     "logo": "img/moddable-cube-logo.png"
   },
   {
-    "category": "Total conversion",
+    "category": "Conversion",
     "baseGame": "Go",
     "title": "Phantom Go",
     "body": "Fog-of-war Go. Players cannot see opponent stones. A referee mediates all moves and announces captures. Deduction replaces reading. Played on 9x9 or 13x13 boards.",

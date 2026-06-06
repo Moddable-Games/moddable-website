@@ -10,7 +10,7 @@
     {type:'mod', title:'Talisman Worlds', desc:'Open-world hex system replacing the Talisman board with 61 tiles', href:url('/mods/talisman-worlds/')},
     {type:'mod', title:'Hyper Imperium', desc:'Faster ruleset for TI4 + Prophecy of Kings', href:url('/mods/hyper-imperium/')},
     {type:'mod', title:'Econopoly', desc:'Monopoly with a working economy and dynamic pricing', href:url('/mods/econopoly/')},
-    {type:'mod', title:'Dungeon Chess', desc:'Total conversion — chess reimagined as asymmetric dungeon skirmish', href:url('/mods/dungeon-chess/')},
+    {type:'mod', title:'Dungeon Chess', desc:'Conversion — chess reimagined as asymmetric dungeon skirmish', href:url('/mods/dungeon-chess/')},
     {type:'mod', title:'Turkish Draughts', desc:'Orthogonal draughts with mandatory captures and flying kings', href:url('/mods/turkish-draughts/')},
     {type:'mod', title:'Lasca', desc:'Column checkers — captured pieces stack, all 22 stay in play', href:url('/mods/lasca/')},
     {type:'mod', title:'Toroidal Go', desc:'Go on a wraparound board — no corners, no edges, all groups float', href:url('/mods/toroidal-go/')},

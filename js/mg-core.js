@@ -25,7 +25,7 @@ window.MG = (() => {
   };
 
   const CATEGORY_COLORS = {
-    "Total conversion": T.red,
+    "Conversion": T.red,
     "Rebalance": T.green,
     "Reskin": T.blue,
   };

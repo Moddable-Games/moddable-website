@@ -3,7 +3,7 @@
 
   function footer() {
     const COLS = [
-      { title:'Mods',      href:url('/mods/'),      links:[['Total conversions',url('/mods/#Total conversion')],['Rebalances',url('/mods/#Rebalance')],['Reskins',url('/mods/#Reskin')],['Submit a mod',url('/submit/')]] },
+      { title:'Mods',      href:url('/mods/'),      links:[['Conversions',url('/mods/#Conversion')],['Rebalances',url('/mods/#Rebalance')],['Reskins',url('/mods/#Reskin')],['Submit Mod',url('/submit/')]] },
       { title:'Games',     href:url('/games/'),     links:[['Endless Skies',url('/games/endless-skies/')],['Planet Mongo',url('/games/planet-mongo/')],['Nukes',url('/games/nukes/')]] },
       { title:'Engines',   href:url('/engines/'),   links:[['Chess',url('/engines/moddable-chess/')],['Hexmaps',url('/engines/moddable-hexmaps/')]] },
       { title:'Tools',     href:url('/tools/'),     links:[['Twilight',url('/tools/ti/')],['Talisman',url('/tools/talisman/')],['Nukes',url('/tools/nukes/')],['Dice',url('/tools/dice/')],['Decks',url('/tools/decks/')],['Chess',url('/tools/chess/')]] },

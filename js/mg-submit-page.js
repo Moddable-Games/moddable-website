@@ -53,7 +53,7 @@ catLbl.innerHTML = 'Mod category <span class="field-label__required">*</span>';
 catWrap.appendChild(catLbl);
 catWrap.appendChild(el('span',{class:'field-hint'},'Pick the one that fits best.'));
 const catGrid = el('div',{class:'cat-grid'});
-const CATS = [{v:'Reskin',c:T.blue,desc:'Same rules, new theme or board layout.'},{v:'Rebalance',c:T.green,desc:'Same theme, tuned rules — pacing, fairness, length.'},{v:'Total conversion',c:T.red,desc:'New rules, new theme, components only.'}];
+const CATS = [{v:'Reskin',c:T.blue,desc:'Same rules, new theme or board layout.'},{v:'Rebalance',c:T.green,desc:'Same theme, tuned rules — pacing, fairness, length.'},{v:'Conversion',c:T.red,desc:'New rules, new theme, components only.'}];
 CATS.forEach(o => {
   const b = document.createElement('button');
   b.type = 'button';

@@ -20,7 +20,7 @@
 
   MG.data.load(['mods']).then(function(store) {
     var ALL_MODS = store.mods;
-    var filters = ['All','Total conversion','Rebalance','Reskin'];
+    var filters = ['All','Conversion','Rebalance','Reskin'];
     var activeCat = 'All';
     var searchVal = '';
 

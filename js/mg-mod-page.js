@@ -20,7 +20,7 @@
   var footer = MG.footer;
 
   var accent = page.accent || 'blue';
-  var CATEGORY_MAP = { red: 'Total conversion', green: 'Rebalance', blue: 'Reskin' };
+  var CATEGORY_MAP = { red: 'Conversion', green: 'Rebalance', blue: 'Reskin' };
 
   function init() {
     document.body.setAttribute('data-accent', accent);
