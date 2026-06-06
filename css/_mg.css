@@ -370,6 +370,8 @@ button:focus-visible, a:focus-visible, input:focus-visible, textarea:focus-visib
 .mg-heading-md { font-family: var(--mg-font-display); font-weight: 600; font-size: 32px; line-height: 1.15; letter-spacing: -0.4px; color: var(--mg-ink); margin: 0 0 16px; }
 .mg-body-sub { font-family: var(--mg-font-body); font-size: 16px; line-height: 1.55; color: var(--mg-mute); margin: 0 0 32px; max-width: 720px; text-wrap: balance; }
 .mg-body-sub--light { color: rgba(255,255,255,0.78); }
+.mg-text-center { text-align: center; margin-left: auto; margin-right: auto; }
+.mg-eyebrow.mg-text-center { display: flex; justify-content: center; }
 
 /* ── Cards (generic) ─────────────────────────────────────────────────── */
 .mg-card { background: #fff; border: 1px solid var(--mg-hairline-light); border-radius: 16px; padding: 24px; }

@@ -103,6 +103,17 @@
   gap: 8px;
   margin-top: 14px;
   flex-wrap: wrap;
+  justify-content: center;
+}
+
+.hexmap-embed--flush {
+  background: var(--mg-canvas-light);
+  border: none;
+  padding: 0;
+}
+.hexmap-embed--flush .hexmap-embed__iframe {
+  background: var(--mg-canvas-light);
+  border-radius: 12px;
 }
 
 /* ── Powered by Moddable Hexmaps engine band ─────────────────────── */

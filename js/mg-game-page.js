@@ -133,11 +133,29 @@ function render(game) {
     });
   }
 
+  // Components grid
+  const compGrid = document.getElementById('components-grid');
+  if (compGrid && game.components) {
+    game.components.forEach(comp => {
+      const c = el('div', {class: 'mg-card'});
+      c.appendChild(el('div', {class: `mg-card__eyebrow mg-eyebrow--${game.accent}`}, comp.kind.toUpperCase()));
+      const ul = el('ul', {class: 'component-list'});
+      comp.list.forEach(x => {
+        const li = el('li', {class: 'component-list__item'});
+        li.appendChild(el('span', {class: 'component-list__bullet'}));
+        li.appendChild(document.createTextNode(x));
+        ul.appendChild(li);
+      });
+      c.appendChild(ul);
+      compGrid.appendChild(c);
+    });
+  }
+
   // Hooks grid
   const hg = document.getElementById('hooks-grid');
   if (hg && game.hooks) {
     game.hooks.forEach(h => {
-      const d = el('div', {class: 'mg-card mg-card--row'});
+      const d = el('div', {class: 'mg-card mg-card--light mg-card--row'});
       const icon = el('div', {class: 'mg-card__icon'});
       icon.style.background = accent;
       icon.textContent = '◈';

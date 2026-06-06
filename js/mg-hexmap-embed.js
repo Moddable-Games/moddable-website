@@ -34,15 +34,17 @@ var GAME_CONFIG = {
   }
 };
 
-function initHexmapEmbed(game) {
+function initHexmapEmbed(game, opts) {
   var config = GAME_CONFIG[game];
   if (!config) return;
+  opts = opts || {};
+  var bgColor = opts.bg || 'ffffff';
 
   var params = new URLSearchParams(location.search);
   var currentSeed = parseInt(params.get('seed')) || Math.floor(Math.random() * 9999);
   var currentSize = parseInt(params.get('size')) || (config.defaultSize || 3);
   var currentPlayers = parseInt(params.get('players')) || (config.defaultPlayers || 4);
-  var currentLayout = params.get('layout') || (config.defaultLayout || null);
+  var currentLayout = params.get('layout') || opts.layout || (config.defaultLayout || null);
   var currentStyle = params.get('style') || config.defaultStyle;
   var useLayouts = !!config.layouts;
 
@@ -55,7 +57,7 @@ function initHexmapEmbed(game) {
 
   function buildUrl() {
     var url = HEX_BASE + '?game=' + game + '&seed=' + currentSeed
-      + '&style=' + currentStyle + '&boardonly=1&bg=ffffff';
+      + '&style=' + currentStyle + '&boardonly=1&bg=' + bgColor;
     if (useLayouts) {
       url += '&layout=' + currentLayout;
     } else {
