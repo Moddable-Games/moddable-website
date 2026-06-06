@@ -23,7 +23,7 @@
 
 .mg-footer__grid {
   display: grid;
-  grid-template-columns: 1.2fr repeat(5, 1fr);
+  grid-template-columns: repeat(6, 1fr);
   gap: 48px;
   padding-bottom: 56px;
   border-bottom: 1px solid rgba(255,255,255,0.12);
