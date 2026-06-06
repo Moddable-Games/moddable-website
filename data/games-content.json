@@ -126,13 +126,6 @@
         "title": "Nukes: Siege",
         "body": "Flip the hostage mechanic. You start with your own tokens off-board and must spend moves to recruit them. Opponents capture your units mid-game instead. Slower buildup, longer endgame.",
         "stats": "2 players · 90 min · 14+"
-      },
-      {
-        "category": "Rebalance",
-        "baseGame": "Nukes",
-        "title": "Nukes: Meltdown Protocol",
-        "body": "Bases cap at 6 instead of 9 — Meltdowns trigger more often and earlier. Isotope conversion requires sacrificing 2 units instead of 1. Nuclear strikes become rarer but Base positioning becomes critical.",
-        "stats": "2–3 players · 45 min · 12+"
       }
     ]
   },

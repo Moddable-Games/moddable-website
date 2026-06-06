@@ -22,12 +22,7 @@ body { background: #f5f4ef; }
 .mods-empty__body { font-family: var(--mg-font-body); font-size: 15px; color: var(--mg-mute); margin: 0 0 20px; }
 .mods-empty__link { display: inline-flex; align-items: center; height: 48px; padding: 0 22px; background: var(--mg-ink); color: #fff; border-radius: 9999px; font-family: var(--mg-font-body); font-weight: 600; font-size: 15px; text-decoration: none; }
 
-.mods-submit-cta { display: flex; align-items: center; justify-content: center; text-decoration: none; color: var(--mg-ink); background: #fff; border: 2px dashed var(--mg-hairline-light); border-radius: 16px; padding: 40px 32px; text-align: center; transition: border-color 200ms, background 200ms; min-height: 200px; }
-.mods-submit-cta:hover { border-color: var(--mg-green); background: rgba(58,153,40,0.04); }
-.mods-submit-cta__inner { max-width: 400px; }
-.mods-submit-cta__title { font-family: var(--mg-font-display); font-weight: 600; font-size: 22px; margin: 12px 0 8px; color: var(--mg-ink); }
-.mods-submit-cta__body { font-family: var(--mg-font-body); font-size: 15px; line-height: 1.5; color: var(--mg-mute); margin: 0 0 20px; text-wrap: balance; }
-.mods-submit-cta__btn { display: inline-flex; align-items: center; height: 40px; padding: 0 20px; background: var(--mg-green); color: #fff; border-radius: 9999px; font-family: var(--mg-font-body); font-weight: 600; font-size: 14px; }
+
 
 @media (max-width: 768px) {
   .mods-hero { padding: 48px 20px 64px; text-align: center; }

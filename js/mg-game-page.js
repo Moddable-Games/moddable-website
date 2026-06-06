@@ -166,6 +166,18 @@ function render(game) {
       card.style.opacity = '1';
       cg.appendChild(card);
     });
+
+    var submitCard = document.createElement('a');
+    submitCard.href = url('/submit/');
+    submitCard.className = 'mods-submit-cta mg-lift';
+    submitCard.innerHTML =
+      '<div class="mods-submit-cta__inner">' +
+        '<div class="mg-eyebrow mg-eyebrow--green">CONTRIBUTE</div>' +
+        '<h3 class="mods-submit-cta__title">Submit your own mod</h3>' +
+        '<p class="mods-submit-cta__body">Got a variant for ' + (game.title || 'this game') + '? Share it with the community.</p>' +
+        '<span class="mods-submit-cta__btn">Submit Mod →</span>' +
+      '</div>';
+    cg.appendChild(submitCard);
   }
 
   // Factions/races grid
