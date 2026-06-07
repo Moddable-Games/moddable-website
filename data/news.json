@@ -23,7 +23,7 @@
     "teamSlug": "akmal",
     "toc": [
       {
-        "label": "Infinite hex worlds",
+        "label": "A platform designed for infinite hex worlds",
         "id": "a-platform-for-infinite-hex-worlds"
       },
       {
@@ -39,7 +39,7 @@
         "id": "moddable-rules"
       },
       {
-        "label": "Plugin architecture",
+        "label": "Why plugin architecture matters",
         "id": "why-plugin-architecture"
       },
       {
@@ -238,7 +238,7 @@
         "id": "rules-that-rewrote-themselves"
       },
       {
-        "label": "Why does this matter",
+        "label": "Why does this matter?",
         "id": "why-does-this-matter"
       },
       {
@@ -275,7 +275,7 @@
     "teamSlug": "mark",
     "toc": [
       {
-        "label": "So what does \"open-source\" even mean?",
+        "label": "So what does \"open-source\" even mean for tabletop games?",
         "id": "so-what-does-open-source-even-mean"
       },
       {
@@ -374,8 +374,8 @@
         "id": "europe-and-the-modern-game"
       },
       {
-        "label": "Historical variants",
-        "id": "historical-variants"
+        "label": "The people who played",
+        "id": "the-people-who-played"
       },
       {
         "label": "The modern modding era",
@@ -415,12 +415,20 @@
     "teamSlug": "mark",
     "toc": [
       {
+        "label": "Prophecy of Kings",
+        "id": "prophecy-of-kings"
+      },
+      {
         "label": "Thunder's Edge arrives",
         "id": "thunders-edge-arrives"
       },
       {
         "label": "The modding community",
         "id": "the-modding-community"
+      },
+      {
+        "label": "Why it works",
+        "id": "why-it-works"
       },
       {
         "label": "Hyper Imperium",
@@ -456,12 +464,16 @@
     "teamSlug": "mark",
     "toc": [
       {
-        "label": "Deterministic wartime strategy",
+        "label": "Deterministic wartime strategy you may already own",
         "id": "deterministic-wartime-strategy"
       },
       {
         "label": "What Nukes actually is",
         "id": "what-nukes-actually-is"
+      },
+      {
+        "label": "The hostage engine",
+        "id": "the-hostage-engine"
       },
       {
         "label": "The Catan conversion",
@@ -547,16 +559,16 @@
     "teamSlug": "kevin",
     "toc": [
       {
-        "label": "Mods vs. variants",
-        "id": "mods-vs-variants"
+        "label": "Who changed what?",
+        "id": "who-changed-what"
       },
       {
-        "label": "Common modification approaches",
-        "id": "common-modification-approaches"
+        "label": "The official editions",
+        "id": "the-official-editions"
       },
       {
-        "label": "The official editions problem",
-        "id": "the-official-editions-problem"
+        "label": "The Stock Markets expansion",
+        "id": "the-stock-markets-expansion"
       },
       {
         "label": "Econopoly: our take",
