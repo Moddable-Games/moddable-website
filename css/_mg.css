@@ -12,7 +12,7 @@
 @font-face { font-family: 'Press Start 2P'; font-weight: 400; font-style: normal; font-display: swap; src: url('../fonts/press-start-2p.woff2') format('woff2'); }
 
 *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
-html { scroll-behavior: smooth; overflow-x: clip; }
+html { scroll-behavior: smooth; overflow-x: clip; scroll-padding-top: 80px; }
 body { font-family: "Barlow", system-ui, sans-serif; -webkit-font-smoothing: antialiased; padding-top: 64px; overflow-x: clip; }
 em { font-style: italic; }
 h1, h2, h3, h4, h5, h6, p, li { text-wrap: pretty; }
