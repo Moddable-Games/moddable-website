@@ -13,26 +13,26 @@
     "img": "the-infrastructure-behind-the-games.jpg",
     "title": "The Infrastructure Behind the Games",
     "heroTitle": "The <em>Infrastructure</em> Behind the Games.",
-    "lede": "Three open-source foundations. Every game we ship is a consumer.",
-    "excerpt": "How Moddable Chess Engine, Hexmaps, and Rules work together as shared infrastructure for everything we build.",
+    "lede": "The future of tabletop gaming is not bound by cardboard and plastic.",
+    "excerpt": "Building moddable engines: how Hexmaps, Chess Engine, and Rules work together as shared infrastructure for infinite hex worlds.",
     "theme": "blue",
     "category": "ENGINEERING",
-    "readTime": "6 min read",
-    "author": "Mark Smalley",
-    "authorHandle": "Lead Engineer · moddable team",
-    "teamSlug": "mark",
+    "readTime": "7 min read",
+    "author": "Akmal Zin",
+    "authorHandle": "Chief Engine Builder",
+    "teamSlug": "akmal",
     "toc": [
       {
-        "label": "Engines first",
-        "id": "engines-first"
-      },
-      {
-        "label": "Moddable Chess Engine",
-        "id": "moddable-chess-engine"
+        "label": "Infinite hex worlds",
+        "id": "a-platform-for-infinite-hex-worlds"
       },
       {
         "label": "Moddable Hexmaps",
         "id": "moddable-hexmaps"
+      },
+      {
+        "label": "Moddable Chess Engine",
+        "id": "moddable-chess-engine"
       },
       {
         "label": "Moddable Rules",
@@ -40,15 +40,11 @@
       },
       {
         "label": "Plugin architecture",
-        "id": "plugin-architecture"
+        "id": "why-plugin-architecture"
       },
       {
         "label": "Open-source everything",
-        "id": "open-source"
-      },
-      {
-        "label": "How they connect",
-        "id": "how-they-connect"
+        "id": "open-source-everything"
       }
     ],
     "modCard": {

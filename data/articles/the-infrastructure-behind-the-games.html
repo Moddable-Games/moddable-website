@@ -1,39 +1,21 @@
-<p class="lede">Most game studios build a game, then maybe extract reusable parts later. We went the other way. Before writing a single line of Dungeon Chess, we asked: what would a chess engine need to support 70 variants, custom pieces, terrain, and AI difficulty tiers? Before drawing a hex for Nukes, we asked: what would a hex framework need to host any tile-based game from Catan to Twilight Imperium?</p>
+<p class="lede">The future of tabletop gaming is not bound by cardboard and plastic. We believe that board gaming will never reach its full potential if held back by physical boards. The modern tabletop community is growing faster than ever, yet the tools that power creativity, collaboration and global play remain limited in their scope or overflowing with complexities. Physical board games are beautiful, tactile and social, but they are also constrained by their components and environment, which can often limit the creativity that goes into games.</p>
 
-<p>The answers became two standalone projects. Then three. Now everything we ship runs on shared engines: Moddable Chess, Moddable Hexmaps, and the upcoming Moddable Rules system. Open-source foundations designed once, reused everywhere. Every game, mod, and tool in our catalogue is a consumer of these engines.</p>
+<p>So, we are building a bridge.</p>
 
-<h2 id="engines-first">Engines first, games second.</h2>
+<p>Behind the scenes, we have been developing moddable online engines that launched alongside our first game, <a href="/games/nukes/">Nukes</a>. They serve as digital companions to our games, but they also act as a foundation for a new ecosystem where physical and digital coexist, where creators thrive and where the boundaries of what a "board game" can be are rewritten.</p>
 
-<p>The conventional path is to build a game, then extract reusable parts later. We went the other way deliberately. It is slower upfront. Frustrating when you want to ship something playable. But it means every new game we build starts from a position of strength rather than technical debt. And it means anyone else can build on the same foundation.</p>
+<h2 id="a-platform-for-infinite-hex-worlds">A platform designed for infinite hex worlds.</h2>
 
-<p>Two standalone projects, MIT-licensed, zero dependencies, zero build step. They ship independently, version independently, and work for anyone who wants to build on them. Our games are just the most demanding consumers.</p>
+<p>Our core engine is built specifically for hex-based systems, the backbone of many of the world's most loved strategy games. From Settlers of Catan and Suburbia to Twilight Imperium and Memoir 44, every imaginable genre is covered, including all three of our own titles. However, we are not doing this simply to recreate familiar experiences.</p>
 
-<h2 id="moddable-chess-engine">Moddable Chess Engine.</h2>
+<p>We are pushing towards infinite maps and truly open worlds. Imagine thousands of players interacting on a single, continuous world, where exploration never ends and where every action ripples across a shared universe. We want to build games that have the capability to work with any number of players, and the only way to prove that they can is by building a platform to enable a board to be any size and for any number of players.</p>
 
-<p>MCE is a modular chess engine with 70 playable variants across boards from 4x8 to 12x8. Its architecture is plugin-based: each variant is a self-contained file that registers custom pieces, rules, win conditions, and board layouts through a declarative API.</p>
-
-<p>The consumer APIs expose everything a game builder needs:</p>
-<ul>
-  <li><strong>createGameController</strong> for full interaction loops with turn cycling, AI scheduling, and undo</li>
-  <li><strong>createReplay</strong> for step-through move playback with annotations</li>
-  <li><strong>renderBoard hooks</strong> including tilePainter, pieceProvider, legalMoveRenderer, and afterRender</li>
-  <li><strong>buildUnitHandler</strong> for declarative piece registration (movement, attacks, abilities in config)</li>
-  <li><strong>Terrain predicates</strong> for global movement constraints without per-piece conditionals</li>
-  <li><strong>Effect lifecycle</strong> for timed square effects with automatic expiry</li>
-</ul>
-
-<p><a href="/mods/dungeon-chess/">Dungeon Chess</a> is the most extreme consumer. Four factions, 24 units, terrain hazards, special abilities, and AI opponents, all running on the same engine as Fischer Random and Atomic Chess. It needed everything: custom rendering, terrain, capture interception, multi-step turns. The engine had to become a platform, not a library.</p>
-
-<figure>
-  <a href="https://chess.moddable.games" target="_blank" rel="noopener"><img src="/img/news/the-infrastructure-behind-the-games.jpg" alt="Dungeon Chess board running on the Moddable Chess Engine" loading="lazy"></a>
-  <figcaption>Dungeon Chess: four factions, 24 units, terrain, and AI. All on one shared engine.</figcaption>
-</figure>
+<p>We want to be able to build moddable games, and for those games to be easily moddable by its users. You.</p>
 
 <h2 id="moddable-hexmaps">Moddable Hexmaps.</h2>
 
-<p>Hexmaps is a shared hexagonal map framework. It generates, renders, and edits hex-based game boards via Canvas. Flat-top or pointy-top, any ring count, seeded RNG for reproducible generation, click-to-edit, JSON export/import, and a full URL param API for embedding.</p>
+<p><a href="/engines/moddable-hexmaps/">Hexmaps</a> is that platform made real. It generates, renders, and edits hex-based game boards via Canvas. Flat-top or pointy-top, any ring count, seeded RNG for reproducible generation, click-to-edit, JSON export/import, and a full URL param API for embedding. Six games already consume it:</p>
 
-<p>Six games already consume it:</p>
 <ul>
   <li><strong>Nukes</strong> uses it for territory maps with terrain generation across 2-6 rings</li>
   <li><strong>Talisman Worlds</strong> uses it for ring-based adventure boards with encounter pools</li>
@@ -43,44 +25,51 @@
   <li><strong>Endless Skies</strong> uses it for frontier exploration with wormhole and nebula tiles</li>
 </ul>
 
-<p>The plugin architecture mirrors MCE. Each game registers through <code>HexApp.registerGame</code> with its own terrain palette, generation rules, and editor controls. The engine handles coordinate math, rendering, sidebar UI, and embed bridging. The game plugin handles flavour.</p>
+<p>Each game registers through <code>HexApp.registerGame</code> with its own terrain palette, generation rules, and editor controls. The engine handles coordinate math, rendering, sidebar UI, and embed bridging. The game plugin handles flavour.</p>
 
 <figure>
   <a href="https://hex.moddable.games" target="_blank" rel="noopener"><img src="/img/news/nukes-online.png" alt="Hexmaps engine rendering a Nukes game board" loading="lazy"></a>
   <figcaption>Hexmaps renders the Nukes board online, in the rulebook PDF, and embedded on this site.</figcaption>
 </figure>
 
+<h2 id="moddable-chess-engine">Moddable Chess Engine.</h2>
+
+<p>While Hexmaps powers our spatial games, <a href="/engines/moddable-chess/">MCE</a> powers everything with pieces that move. A modular chess engine with 70 playable variants across boards from 4x8 to 12x8. Its architecture is plugin-based: each variant is a self-contained file that registers custom pieces, rules, win conditions, and board layouts through a declarative API.</p>
+
+<p><a href="/mods/dungeon-chess/">Dungeon Chess</a> is the most extreme consumer. Four factions, 24 units, terrain hazards, special abilities, and AI opponents, all running on the same engine as Fischer Random and Atomic Chess. It needed everything: custom rendering, terrain, capture interception, multi-step turns. The engine had to become a platform, not a library.</p>
+
+<figure>
+  <a href="https://chess.moddable.games" target="_blank" rel="noopener"><img src="/img/news/the-infrastructure-behind-the-games.jpg" alt="Dungeon Chess board running on the Moddable Chess Engine" loading="lazy"></a>
+  <figcaption>Dungeon Chess: four factions, 24 units, terrain, and AI. All on one shared engine.</figcaption>
+</figure>
+
 <h2 id="moddable-rules">Moddable Rules.</h2>
 
 <p>The third pillar is still in development. Moddable Rules is a shared rulebook system that builds themed, paginated rulebooks from structured content. Every game and mod gets a versioned rulebook built from the same design tokens, fonts, and layout components.</p>
 
-<p>It already ships rulebooks for Nukes, Hyper Imperium, Econopoly, Dungeon Chess, and Talisman Worlds, with Planet Mongo and Endless Skies in development. The build system generates OG images, search indices, and print-ready PDFs from the same source files.</p>
+<p>It already ships rulebooks for Nukes, Hyper Imperium, Econopoly, Dungeon Chess, and Talisman Worlds. The build system generates OG images, search indices, and print-ready PDFs from the same source files. When it stabilises, it becomes the content layer. The engines handle play. The rules handle publishing. One game definition, multiple outputs.</p>
 
-<p>When Moddable Rules stabilises, it becomes the content layer. The engines handle play. The rules handle publishing. One game definition, multiple outputs.</p>
+<h2 id="why-plugin-architecture">Why plugin architecture matters.</h2>
 
-<h2 id="plugin-architecture">Why plugin architecture matters.</h2>
-
-<p>The four MCE guides demonstrate different reasons for needing extensible engines:</p>
+<p>The four MCE developer guides demonstrate different categories of extensibility:</p>
 <ol>
-  <li><strong><a href="https://chess.moddable.games/docs/guide-orda.html" target="_blank" rel="noopener">Orda Chess</a></strong> needed custom pieces with divergent movement and attack patterns. The engine had to separate "how a piece moves" from "how a piece captures."</li>
-  <li><strong><a href="https://chess.moddable.games/docs/guide-crazyhouse.html" target="_blank" rel="noopener">Crazyhouse</a></strong> needed action moves, hand management, and non-standard move generation. The engine had to support moves that are not board-to-board.</li>
-  <li><strong><a href="https://chess.moddable.games/docs/guide-poison.html" target="_blank" rel="noopener">Poison Chess</a></strong> needed timed square effects and conditional legality. The engine had to model state that lives on tiles, not pieces.</li>
-  <li><strong><a href="https://chess.moddable.games/docs/guide-dungeon-chess.html" target="_blank" rel="noopener">Dungeon Chess</a></strong> needed all of the above plus custom rendering, terrain, capture interception, and multi-step turns. The engine had to be a platform, not a library.</li>
+  <li><strong><a href="https://chess.moddable.games/docs/guide-orda.html" target="_blank" rel="noopener">Orda Chess</a></strong> needed to separate "how a piece moves" from "how a piece captures"</li>
+  <li><strong><a href="https://chess.moddable.games/docs/guide-crazyhouse.html" target="_blank" rel="noopener">Crazyhouse</a></strong> needed moves that are not board-to-board (hand management)</li>
+  <li><strong><a href="https://chess.moddable.games/docs/guide-poison.html" target="_blank" rel="noopener">Poison Chess</a></strong> needed state that lives on tiles, not pieces (timed effects)</li>
+  <li><strong><a href="https://chess.moddable.games/docs/guide-dungeon-chess.html" target="_blank" rel="noopener">Dungeon Chess</a></strong> needed all of the above plus terrain and capture interception</li>
 </ol>
 
-<p>Each guide solved a different category of extensibility problem. Together they proved that one engine can host everything from a five-line rule tweak to a complete standalone game. The same principle drives Hexmaps: Nukes needs combat mechanics on hexes while Talisman needs encounter draws, but both share coordinate math, rendering, and generation.</p>
+<p>Together they proved that one engine can host everything from a five-line rule tweak to a complete standalone game. The same principle drives Hexmaps: Nukes needs combat mechanics on hexes while Talisman needs encounter draws, but both share coordinate math, rendering, and generation.</p>
 
-<h2 id="open-source">Open-source everything.</h2>
+<h2 id="open-source-everything">Open-source everything.</h2>
 
-<p>All three engines are MIT-licensed. The game content (rules, art, brand) is CC BY-SA. The infrastructure is open. The creative layer is protected but shareable. Anyone can fork the chess engine to build their own variant. Anyone can use Hexmaps to prototype a hex game. Anyone can extend the rules system to publish their own rulebook.</p>
+<p>This means designing something new and open, whilst also building a business around it. For designers, this means rapid prototyping on hex-based games of any scale. For players, it means completely new types of shared experiences. For the games themselves, it means a platform and community, not just a product.</p>
 
 <div class="prose-callout">
   <strong>Licensing model</strong>
-  Engines are MIT-licensed. Game content is CC BY-SA. Anyone can fork an engine. No one can claim our games. The competitive advantage is not the code. It is the games, the community, and the <a href="/news/open-sourcing-tabletop-games/">ecosystem</a> that ties them together.
+  Engines are MIT-licensed. Game content is CC BY-SA. Anyone can fork an engine. Anyone can build on our games with attribution. The infrastructure is open. The creative layer is protected but shareable.
 </div>
 
-<h2 id="how-they-connect">How they work as one.</h2>
+<p>The circular economy: MCE powers the chess tools and Dungeon Chess. Hexmaps powers Nukes, Talisman tools, and TI4 tools. Rules publishes the rulebooks that document both. This site embeds live instances of all three. A change to Hexmaps propagates to six games simultaneously. A new MCE variant is immediately playable at <a href="https://chess.moddable.games" target="_blank" rel="noopener">chess.moddable.games</a>.</p>
 
-<p>The circular economy: MCE powers the chess tools and Dungeon Chess. Hexmaps powers Nukes, Talisman tools, and TI4 tools. Rules publishes the rulebooks that document both. The website (this site) embeds live instances of all three. A change to Hexmaps propagates to six games simultaneously. A new MCE variant is immediately playable at <a href="https://chess.moddable.games" target="_blank" rel="noopener">chess.moddable.games</a>.</p>
-
-<p>This is the infrastructure behind the games. Built to be forked, not just played.</p>
+<p>We want to build a place for games to sustain. <a href="/community/">Join our community</a> to be amongst those shaping what comes next.</p>
