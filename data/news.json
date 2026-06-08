@@ -23,8 +23,8 @@
     "teamSlug": "akmal",
     "toc": [
       {
-        "label": "A platform designed for infinite hex worlds",
-        "id": "a-platform-for-infinite-hex-worlds"
+        "label": "Infinite hex worlds",
+        "id": "infinite-hex-worlds"
       },
       {
         "label": "Moddable Hexmaps",
@@ -39,8 +39,8 @@
         "id": "moddable-rules"
       },
       {
-        "label": "Why plugin architecture matters",
-        "id": "why-plugin-architecture"
+        "label": "Plugin architecture",
+        "id": "plugin-architecture"
       },
       {
         "label": "Open-source everything",
@@ -135,8 +135,8 @@
         "id": "games-older-than-history"
       },
       {
-        "label": "Modern mechanics, ancient origins",
-        "id": "modern-mechanics-ancient-origins"
+        "label": "Ancient origins",
+        "id": "ancient-origins"
       },
       {
         "label": "Games as cultural fabric",
@@ -151,8 +151,8 @@
         "id": "evolution-over-replacement"
       },
       {
-        "label": "Building for a thousand years",
-        "id": "building-for-a-thousand-years"
+        "label": "Building to last",
+        "id": "building-to-last"
       }
     ],
     "modCard": {
@@ -192,8 +192,8 @@
         "id": "systems-thinking"
       },
       {
-        "label": "Standing on centuries of play",
-        "id": "standing-on-centuries-of-play"
+        "label": "Centuries of play",
+        "id": "centuries-of-play"
       },
       {
         "label": "Players as collaborators",
@@ -234,8 +234,8 @@
     "teamSlug": "kevin",
     "toc": [
       {
-        "label": "Rules that rewrote themselves",
-        "id": "rules-that-rewrote-themselves"
+        "label": "Rules that stuck",
+        "id": "rules-that-stuck"
       },
       {
         "label": "Why does this matter?",
@@ -275,16 +275,16 @@
     "teamSlug": "mark",
     "toc": [
       {
-        "label": "So what does \"open-source\" even mean for tabletop games?",
-        "id": "so-what-does-open-source-even-mean"
+        "label": "What does open-source mean?",
+        "id": "what-does-open-source-mean"
       },
       {
         "label": "The fear and the opportunity",
         "id": "the-fear-and-the-opportunity"
       },
       {
-        "label": "Enduring ecosystems over isolated hits",
-        "id": "enduring-ecosystems-over-isolated-hits"
+        "label": "Ecosystems over hits",
+        "id": "ecosystems-over-hits"
       },
       {
         "label": "What we believe",
@@ -464,8 +464,8 @@
     "teamSlug": "mark",
     "toc": [
       {
-        "label": "Deterministic wartime strategy you may already own",
-        "id": "deterministic-wartime-strategy"
+        "label": "A game you already own",
+        "id": "a-game-you-already-own"
       },
       {
         "label": "What Nukes actually is",
@@ -516,8 +516,8 @@
     "teamSlug": "kevin",
     "toc": [
       {
-        "label": "From Necromancer to Games Workshop",
-        "id": "from-necromancer-to-games-workshop"
+        "label": "Origin story",
+        "id": "origin-story"
       },
       {
         "label": "Five editions, five eras",
@@ -605,16 +605,16 @@
     "teamSlug": "mark",
     "toc": [
       {
-        "label": "The problem with predictability",
-        "id": "the-problem-with-predictability"
+        "label": "The predictability problem",
+        "id": "the-predictability-problem"
       },
       {
         "label": "Hexagons and infinite setups",
         "id": "hexagons-and-infinite-setups"
       },
       {
-        "label": "Accessibility as a design principle",
-        "id": "accessibility-as-a-design-principle"
+        "label": "Accessibility first",
+        "id": "accessibility-first"
       },
       {
         "label": "The game we built",
