@@ -311,8 +311,22 @@ def gen_chess():
     save(img, 'img/og/games-moddable-chess.png')
 
 
+def gen_mods():
+    img = base_image(accent_color=(209, 26, 26))
+    add_text(img, 'MODDABLE.GAMES', 'The Mod Library', 'Open-source rulebook mods for the games on your shelf')
+    save(img, 'img/og/mods.png')
+
+
+def gen_engines():
+    img = base_image(accent_color=(6, 182, 212))
+    add_text(img, 'FOUNDATIONS', 'Engines', 'Moddable Chess and Moddable Hexmaps', accent=(6, 182, 212))
+    save(img, 'img/og/engines.png')
+
+
 # Generate all
 print('Generating remaining OG images...')
+gen_mods()
+gen_engines()
 gen_about()
 gen_roadmap()
 gen_community()
