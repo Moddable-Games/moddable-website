@@ -225,7 +225,7 @@ function renderHexEngineBtns() {
   var btnsEl = document.getElementById('hex-engine-btns');
   if (!btnsEl) return;
   var engineLink = MG.linkBtn('Moddable Hexmaps', '/engines/moddable-hexmaps/', 'primary');
-  var srcLink = MG.linkBtn('View source on GitHub', 'https://github.com/Moddable-Games/moddable-hexmaps', 'dark');
+  var srcLink = MG.linkBtn('View Source', 'https://github.com/Moddable-Games/moddable-hexmaps', 'dark');
   srcLink.setAttribute('target', '_blank');
   srcLink.setAttribute('rel', 'noopener');
   btnsEl.appendChild(engineLink);

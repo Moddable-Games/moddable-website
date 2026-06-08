@@ -18,7 +18,7 @@
   }));
 
   var ctaBtns = document.getElementById('engines-cta-btns');
-  ctaBtns.appendChild(linkBtn('View on GitHub', 'https://github.com/Moddable-Games', 'primary'));
+  ctaBtns.appendChild(linkBtn('View GitHub', 'https://github.com/Moddable-Games', 'primary'));
   ctaBtns.appendChild(linkBtn('See Roadmap', '/about/roadmap/', 'outline-dark'));
 
   var grid = document.getElementById('engines-grid');

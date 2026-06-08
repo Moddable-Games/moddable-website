@@ -121,7 +121,7 @@ s3n.appendChild(submitBtn);
 
 // Success
 const sbw = document.getElementById('success-btns');
-sbw.appendChild(linkBtn('Back to the library','/mods/','dark'));
+sbw.appendChild(linkBtn('Back to Library','/mods/','dark'));
 sbw.appendChild(linkBtn('Join Discord','/community/','outline-light'));
 
 function goStep(n) {

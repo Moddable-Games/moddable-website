@@ -39,8 +39,8 @@
   linksCard.appendChild(el('div', { class: 'about-sidebar__card-title' }, 'Explore'));
   var linksWrap = el('div', { class: 'about-sidebar__links' });
   var links = [
-    { label: 'Discord', sub: 'Join the community', color: MG.T.red, href: url('/community/') },
-    { label: 'Team', sub: 'Meet the workshop', color: MG.T.green, href: url('/team/') },
+    { label: 'Discord', sub: 'Join Community', color: MG.T.red, href: url('/community/') },
+    { label: 'Team', sub: 'Meet Workshop', color: MG.T.green, href: url('/team/') },
     { label: 'Roadmap', sub: '18-month plan', color: MG.T.blue, href: url('/about/roadmap/') },
     { label: 'Press Kit', sub: 'Logos and assets', color: MG.T.ink, href: url('/press/') },
   ];

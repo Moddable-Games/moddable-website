@@ -51,7 +51,7 @@
       "title": "Moddable Chess",
       "version": "v0.7.1 · 70 variants",
       "href": "/engines/moddable-chess/",
-      "btnLabel": "Explore the engine"
+      "btnLabel": "Explore Engine"
     }
   },
   {
@@ -101,7 +101,7 @@
       "title": "Our Games",
       "version": "3 originals · Built to be modded",
       "href": "/games/",
-      "btnLabel": "Explore games"
+      "btnLabel": "Explore Games"
     }
   },
   {
@@ -159,7 +159,7 @@
       "title": "Moddable Community",
       "version": "Discord · Open to all",
       "href": "/community/",
-      "btnLabel": "Join the Discord"
+      "btnLabel": "Join Discord"
     }
   },
   {
@@ -208,7 +208,7 @@
       "title": "Moddable Community",
       "version": "Discord · Open to all",
       "href": "/community/",
-      "btnLabel": "Join the Discord"
+      "btnLabel": "Join Discord"
     }
   },
   {
@@ -250,7 +250,7 @@
       "title": "Submit a Mod",
       "version": "Share your house rules",
       "href": "/submit/",
-      "btnLabel": "Submit yours"
+      "btnLabel": "Submit Yours"
     }
   },
   {
@@ -295,7 +295,7 @@
       "title": "Moddable.Games",
       "version": "7 mods · 3 games · open source",
       "href": "/mods/",
-      "btnLabel": "Browse the library"
+      "btnLabel": "Browse Library"
     }
   },
   {
@@ -341,7 +341,7 @@
       "title": "Moddable Community",
       "version": "Discord · Open to all",
       "href": "/community/",
-      "btnLabel": "Join the Discord"
+      "btnLabel": "Join Discord"
     }
   },
   {
@@ -390,7 +390,7 @@
       "title": "Moddable Chess",
       "version": "70 variants · Play online",
       "href": "/engines/moddable-chess/",
-      "btnLabel": "Play now"
+      "btnLabel": "Play Now"
     }
   },
   {
@@ -439,7 +439,7 @@
       "title": "Hyper Imperium",
       "version": "v1.0.0 · Rebalance",
       "href": "/mods/hyper-imperium/",
-      "btnLabel": "View the mod"
+      "btnLabel": "View Mod"
     }
   },
   {
@@ -536,7 +536,7 @@
       "title": "Talisman Worlds",
       "version": "v1.0.0 · Reskin",
       "href": "/mods/talisman-worlds/",
-      "btnLabel": "View the mod"
+      "btnLabel": "View Mod"
     }
   },
   {
@@ -579,7 +579,7 @@
       "title": "Econopoly",
       "version": "v1.4.0 · Rebalance",
       "href": "/mods/econopoly/",
-      "btnLabel": "View the mod"
+      "btnLabel": "View Mod"
     }
   },
   {
@@ -625,7 +625,7 @@
       "title": "Moddable Chess",
       "version": "70 variants · Play online",
       "href": "/engines/moddable-chess/",
-      "btnLabel": "Play now"
+      "btnLabel": "Play Now"
     }
   }
 ]

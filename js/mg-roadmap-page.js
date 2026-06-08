@@ -60,7 +60,7 @@ linksCard.appendChild(el('div', { class: 'roadmap-sidebar__card-title' }, 'Relat
 var relLinks = [
   { label: 'About Moddable', sub: 'Our story and philosophy', href: url('/about/'), color: MG.T.blue },
   { label: 'Team', sub: 'The people behind it', href: url('/team/'), color: MG.T.green },
-  { label: 'Community', sub: 'Join the Discord', href: url('/community/'), color: MG.T.red },
+  { label: 'Community', sub: 'Join Discord', href: url('/community/'), color: MG.T.red },
   { label: 'Engines', sub: 'Chess + Hexmaps SDKs', href: url('/engines/'), color: MG.T.ink },
   { label: 'Press Kit', sub: 'Logos and assets', href: url('/press/'), color: MG.T.blue },
 ];

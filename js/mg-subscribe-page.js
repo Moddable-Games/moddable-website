@@ -77,8 +77,8 @@ var linksCard = el('div', { class: 'sub-sidebar__card' });
 linksCard.appendChild(el('div', { class: 'sub-sidebar__card-title' }, 'Elsewhere'));
 var linksWrap = el('div', { class: 'sub-sidebar__links' });
 var links = [
-  { label: 'Discord', sub: 'Join the community', href: url('/community/'), color: T.red },
-  { label: 'News', sub: 'Read the latest', href: url('/news/'), color: T.green },
+  { label: 'Discord', sub: 'Join Community', href: url('/community/'), color: T.red },
+  { label: 'News', sub: 'Read Latest', href: url('/news/'), color: T.green },
   { label: 'About', sub: 'Our story', href: url('/about/'), color: T.blue },
 ];
 links.forEach(function(l) {
