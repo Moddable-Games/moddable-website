@@ -92,20 +92,30 @@ def draw_icon(draw, icon, cx, cy, color, size=120):
             draw.ellipse([cx+dot[0]-6, cy+dot[1]-6, cx+dot[0]+6, cy+dot[1]+6],
                         fill=(r, g, b, 200))
     elif icon == 'chess':
-        # Crown shape
+        # Knight piece silhouette
         s = size // 2
-        points = [(cx-s, cy+s//2), (cx-s//2, cy-s//2), (cx-s//4, cy),
-                  (cx, cy-s), (cx+s//4, cy), (cx+s//2, cy-s//2), (cx+s, cy+s//2)]
-        draw.line(points, fill=(r, g, b, 200), width=3)
-        draw.line([(cx-s, cy+s//2), (cx+s, cy+s//2)], fill=(r, g, b, 200), width=3)
+        # Base
+        draw.rounded_rectangle([cx-s//2, cy+s//2-8, cx+s//2, cy+s//2+8], radius=4, fill=(r, g, b, 180))
+        # Stem
+        draw.rounded_rectangle([cx-s//4, cy, cx+s//4, cy+s//2-8], radius=4, fill=(r, g, b, 150))
+        # Head (knight shape - angled rectangle)
+        head_pts = [(cx-s//3, cy), (cx+s//4, cy), (cx+s//3, cy-s//2), (cx-s//6, cy-s//2)]
+        draw.polygon(head_pts, fill=(r, g, b, 160))
+        # Ear/mane
+        draw.polygon([(cx-s//6, cy-s//2), (cx, cy-s//2-s//4), (cx+s//6, cy-s//2)], fill=(r, g, b, 180))
+        # Eye
+        draw.ellipse([cx, cy-s//3-4, cx+8, cy-s//3+4], fill=(10, 13, 42, 255))
     elif icon == 'cards':
-        # Fanned cards
-        s = size // 3
-        for i, offset in enumerate([-20, 0, 20]):
-            x1, y1 = cx + offset - s//2, cy - s
-            x2, y2 = cx + offset + s//2, cy + s
-            draw.rounded_rectangle([x1, y1, x2, y2], radius=8,
-                                   outline=(r, g, b, 150 + i*30), width=2)
+        # Single playing card with suit symbol
+        cw, ch = 70, 100
+        x1, y1 = cx - cw//2, cy - ch//2
+        x2, y2 = cx + cw//2, cy + ch//2
+        draw.rounded_rectangle([x1, y1, x2, y2], radius=8, outline=(r, g, b, 200), width=3)
+        # Spade symbol in centre
+        draw.polygon([(cx, cy-20), (cx-16, cy+4), (cx+16, cy+4)], fill=(r, g, b, 180))
+        draw.ellipse([cx-16, cy-8, cx, cy+8], fill=(r, g, b, 180))
+        draw.ellipse([cx, cy-8, cx+16, cy+8], fill=(r, g, b, 180))
+        draw.line([(cx, cy+4), (cx, cy+20)], fill=(r, g, b, 180), width=3)
     elif icon == 'nuke':
         # Mushroom cloud — circle on top of a stem
         draw.ellipse([cx-50, cy-60, cx+50, cy+10], outline=(r, g, b, 200), width=3)
