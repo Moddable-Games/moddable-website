@@ -105,6 +105,7 @@ body { background: #f5f4ef; }
 @media (max-width: 900px) {
   .post-layout { grid-template-columns: 1fr !important; }
   .post-rail { display: none !important; }
+  .post-more__heading { text-align: center; }
   .post-more__grid { grid-template-columns: 1fr; }
 }
 
