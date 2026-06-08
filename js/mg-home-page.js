@@ -21,7 +21,7 @@ window.addEventListener('scroll', () => {
   const ratio = Math.min(1, scrolled / (rect.height * 0.7));
   heroBgInner.style.transform = `translateY(${scrolled * -0.15}px)`;
   if (heroContent) { heroContent.style.transform = `translateY(${ratio * -120}px)`; heroContent.style.opacity = Math.max(0, 1 - ratio * 2.5); }
-  if (heroHex) { heroHex.style.opacity = Math.max(0, 1 - ratio * 1.8); heroHex.style.transform = `translateY(${ratio * -40}px) scale(${1 + ratio * 0.15}) rotate(${ratio * 3}deg)`; }
+  if (heroHex) { heroHex.style.opacity = Math.max(0, 1 - ratio * 1.8); heroHex.style.transform = `translateY(${ratio * -40}px)`; }
   if (heroTint) { heroTint.style.opacity = Math.max(0, 1 - ratio * 1.5); }
   if (heroBotFade) { heroBotFade.style.opacity = Math.max(0, 1 - ratio * 2.5); }
   if (heroWash) { heroWash.style.opacity = ratio; }

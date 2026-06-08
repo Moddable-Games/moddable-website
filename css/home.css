@@ -30,7 +30,7 @@
   #hero-lower__text .home-hero__btns { justify-content:center; }
   @media (max-width: 768px) {
     #hero { min-height: auto; }
-    #hero-content { padding: 80px 20px 120px; overflow: hidden; }
+    #hero-content { padding: 80px 20px 120px; }
     #hero-bg { height: 100%; }
     .home-hero__title { min-height: 3.2em; }
     .home-gallery { padding: 80px 20px; }
