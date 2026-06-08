@@ -52,7 +52,7 @@ body { background: #f5f4ef; }
 .td-sidebar__teammate-name { font-family: var(--mg-font-body); font-weight: 600; font-size: 13px; color: var(--mg-ink); }
 .td-sidebar__teammate-role { font-family: var(--mg-font-mono); font-size: 10px; color: var(--mg-mute); }
 
-.td-bio { font-family: var(--mg-font-body); font-size: 18px; line-height: 1.7; color: var(--mg-body-color); }
+.td-bio { font-family: var(--mg-font-body); font-size: 18px; line-height: 1.7; color: var(--mg-body-color); text-align: justify; }
 
 .td-posts__heading { font-family: var(--mg-font-display); font-weight: 600; font-size: 24px; color: var(--mg-ink); margin: 0 0 20px; letter-spacing: -0.3px; }
 .td-posts__list { display: flex; flex-direction: column; gap: 12px; }
@@ -83,9 +83,14 @@ body { background: #f5f4ef; }
   .td-hero__avatar img { width: 380px; bottom: calc(-480px * 0.35); }
   .td-hero__back { position: static; margin-bottom: 12px; display: inline-block; }
   .td-body { padding: 40px 20px 64px; }
+  .td-posts__heading { text-align: center; }
+  .td-teammates__heading { text-align: center; }
   .td-teammates__grid { grid-template-columns: 1fr; }
-  .td-post-card { flex-direction: column; align-items: flex-start; gap: 6px; }
+  .td-post-card { flex-direction: column; align-items: center; text-align: center; gap: 6px; }
   .td-post-card__date { min-width: unset; }
+  .td-sidebar__card-title { text-align: center; }
+  .td-sidebar__socials { justify-content: center; }
+  .td-sidebar__teammates { align-items: center; }
 }
 
 @media (max-width: 480px) {
