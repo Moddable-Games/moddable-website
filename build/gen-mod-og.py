@@ -81,6 +81,19 @@ for mod in mods:
         zone_cy = HEIGHT // 2
         logo_layer.paste(mod_logo, (zone_cx - lw // 2, zone_cy - lh // 2), mod_logo)
         img = Image.alpha_composite(img, logo_layer)
+    elif os.path.exists('img/moddable-cube-logo.png'):
+        # Render cube logo centred in right zone
+        cube = Image.open('img/moddable-cube-logo.png').convert('RGBA')
+        cube_size = 200
+        ratio = min(cube_size / cube.width, cube_size / cube.height)
+        cw = int(cube.width * ratio)
+        ch = int(cube.height * ratio)
+        cube = cube.resize((cw, ch), Image.LANCZOS)
+        cube_layer = Image.new('RGBA', (WIDTH, HEIGHT), (0, 0, 0, 0))
+        zone_cx = (680 + WIDTH - 80) // 2
+        zone_cy = HEIGHT // 2
+        cube_layer.paste(cube, (zone_cx - cw // 2, zone_cy - ch // 2), cube)
+        img = Image.alpha_composite(img, cube_layer)
     else:
         # Hex-grid card on right side
         card_w, card_h = 380, 380
