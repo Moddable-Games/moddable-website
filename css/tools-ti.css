@@ -90,4 +90,12 @@ body { background:#f5f4ef; }
 @media (max-width: 768px) {
   .ti-objectives { grid-template-columns:1fr; }
   .ti-agenda-opts { grid-template-columns:1fr; }
+  .ti-body { padding: 32px 20px 64px; }
+  .ti-card { padding: 24px 20px; }
+  .ti-controls { flex-direction:column; align-items:stretch; }
+  .ti-controls__group { justify-content:center; }
+  #deal-btn { margin-left:0; width:100%; }
+  .ti-card__header { flex-direction:column; align-items:center; text-align:center; }
+  .ti-card__accent { display:none; }
+  .ti-agenda-btns { justify-content:center; }
 }
