@@ -43,8 +43,13 @@ body { background: #f5f4ef; }
   .sub-sidebar { position: static; }
   .sub-main { padding: 48px 20px 64px; }
   .sub-form__email-row { flex-direction: column; }
+  .sub-form__email { font-size: 16px; }
   .sub-benefits { padding: 48px 20px 64px; }
+  .sub-benefits__title { text-align: center; }
   .sub-benefits__grid { grid-template-columns: 1fr 1fr; }
+  .sub-benefit-card { text-align: center; align-items: center; }
+  .sub-sidebar__card-title { text-align: center; }
+  .sub-sidebar__links { align-items: stretch; }
 }
 @media (max-width: 480px) {
   .sub-benefits__grid { grid-template-columns: 1fr; }
