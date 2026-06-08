@@ -193,6 +193,29 @@
   color: #fff;
 }
 
+.mg-navbar__drawer-sub {
+  display: flex;
+  flex-direction: column;
+  gap: 2px;
+  padding: 4px 0 8px 16px;
+  border-left: 1px solid rgba(255,255,255,0.1);
+  margin-left: 8px;
+}
+
+.mg-navbar__drawer-sub-link {
+  font-family: var(--mg-font-body);
+  font-weight: 400;
+  font-size: 15px;
+  color: rgba(255,255,255,0.5);
+  text-decoration: none;
+  padding: 8px 0;
+  display: block;
+}
+
+.mg-navbar__drawer-sub-link:hover {
+  color: #fff;
+}
+
 /* Responsive */
 @media (max-width: 900px) {
   .mg-navbar__nav,

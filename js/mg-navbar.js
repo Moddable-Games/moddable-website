@@ -77,6 +77,13 @@
     for (const item of NAV_ITEMS) {
       const cls = 'mg-navbar__drawer-link' + (activeId === item.id ? ' mg-navbar__drawer-link--active' : '');
       drawerNav.appendChild(el('a', { href:item.href, class:cls }, item.id));
+      if (item.children) {
+        const sub = el('div', { class:'mg-navbar__drawer-sub' });
+        item.children.forEach(([label, href]) => {
+          sub.appendChild(el('a', { href, class:'mg-navbar__drawer-sub-link' }, label));
+        });
+        drawerNav.appendChild(sub);
+      }
     }
     drawer.appendChild(drawerNav);
 

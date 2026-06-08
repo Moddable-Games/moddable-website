@@ -32,6 +32,25 @@
     #hero { min-height: auto; }
     #hero-content { padding: 80px 20px 120px; }
     #hero-bg { height: 100%; }
+    .home-gallery { padding: 80px 20px; }
+    .home-gallery__header { flex-direction: column; align-items: center; text-align: center; }
+    .home-gallery__filters { justify-content: center; }
+    .home-nuke { padding: 80px 20px 120px; }
+    .home-featured__inner { gap: 32px; }
+    .home-hex__inner { text-align: center; }
+    .home-hex__pills { justify-content: center; }
+    .home-hex__body { margin-left: auto; margin-right: auto; }
+    .home-bots { padding: 64px 20px; }
+    .home-bots__inner { text-align: center; }
+    .home-bots__body { margin-left: auto; margin-right: auto; }
+    .home-bots__btns { justify-content: center; }
+    .home-engine__heading { text-align: center; }
+    .home-engine__body { text-align: center; margin-left: auto; margin-right: auto; }
+    .home-engine__grid { justify-content: center; }
+    .home-engine__pills { justify-content: center; }
+    .home-news { padding: 80px 20px; }
+    .home-news__header { flex-direction: column; align-items: center; text-align: center; }
+    .home-community__inner { padding: 80px 20px; }
   }
 
   .home-nuke__media { position:relative; display:flex; justify-content:center; }

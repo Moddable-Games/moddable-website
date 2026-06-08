@@ -188,12 +188,16 @@
   text-wrap: balance;
 }
 
-@media (max-width: 480px) {
+@media (max-width: 768px) {
+  .engines-hero__content { padding: 80px 20px 72px; }
   .engines-grid {
     grid-template-columns: 1fr;
     gap: 24px;
     padding: 32px 0 48px;
   }
+  .engines-cta { margin: 0 0 48px; padding: 40px 24px; border-radius: 16px; }
+}
+@media (max-width: 480px) {
   .engine-card__header {
     padding: 20px 20px 0;
   }

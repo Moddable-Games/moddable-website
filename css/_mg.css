@@ -526,7 +526,7 @@ button:focus-visible, a:focus-visible, input:focus-visible, textarea:focus-visib
 @keyframes floatBadge { 0%, 100% { transform: translateY(0); } 50% { transform: translateY(-8px); } }
 
 /* ── Fancy section divider (glowing HR) ──────────────────────────────── */
-.mg-divider-glow { position: relative; height: 48px; display: flex; align-items: center; justify-content: center; background: #000; overflow: visible; }
+.mg-divider-glow { position: relative; height: 48px; display: flex; align-items: center; justify-content: center; background: #000; overflow: hidden; }
 .mg-divider-glow::before { content: ''; position: absolute; left: 10%; right: 10%; height: 1px; background: linear-gradient(90deg, transparent, rgba(111,181,255,0.6), rgba(58,123,232,0.9), rgba(111,181,255,0.6), transparent); }
 .mg-divider-glow::after { content: ''; position: absolute; left: 20%; right: 20%; height: 12px; top: 50%; transform: translateY(-50%); background: radial-gradient(ellipse 50% 100% at 50% 50%, rgba(111,181,255,0.2) 0%, transparent 100%); filter: blur(4px); }
 
@@ -873,8 +873,15 @@ button:focus-visible, a:focus-visible, input:focus-visible, textarea:focus-visib
 
   /* Eyebrows center */
   .mg-eyebrow { justify-content: center; }
+
+  /* Section padding */
+  .mg-section--tight { padding: 56px 20px; }
 }
 @media (max-width: 540px) {
   .mg-grid-4 { grid-template-columns: 1fr !important; }
   section, .section-pad { padding-left: 16px !important; padding-right: 16px !important; }
+  .prose blockquote { margin-left: 0; margin-right: 0; padding: 16px 18px; border-radius: 0 12px 12px 0; }
+  .prose-callout { margin-left: 0; margin-right: 0; padding: 16px 18px; border-radius: 0 12px 12px 0; }
+  .prose p.lede { padding: 20px 20px; border-radius: 12px; }
+  .prose p.lede::before { display: none; }
 }

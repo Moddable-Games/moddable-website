@@ -365,9 +365,20 @@ input[type=range] { width: 100%; accent-color: #0c4f8d; }
 
 @media (max-width: 768px) {
   .tools-hero__inner { flex-direction: column; text-align: center; }
-  .tools-hero__dice { display: none; }
+  .tools-hero__dice { width: 120px; height: 120px; margin: 0 auto; order: -1; }
+  .tools-hero__dice .dice3d { width: 80px; height: 80px; margin: 20px auto; }
+  .tools-hero__dice .dice3d__face { width: 80px; height: 80px; border-radius: 10px; padding: 14px; }
+  .tools-hero__dice .dice3d__face--front { transform: translateZ(40px); }
+  .tools-hero__dice .dice3d__face--back { transform: rotateY(180deg) translateZ(40px); }
+  .tools-hero__dice .dice3d__face--top { transform: rotateX(90deg) translateZ(40px); }
+  .tools-hero__dice .dice3d__face--bottom { transform: rotateX(-90deg) translateZ(40px); }
+  .tools-hero__dice .dice3d__face--right { transform: rotateY(90deg) translateZ(40px); }
+  .tools-hero__dice .dice3d__face--left { transform: rotateY(-90deg) translateZ(40px); }
+  .tools-hero__dice .pip { width: 10px; height: 10px; }
   .tools-hero { padding: 48px 20px 64px; }
   .tools-body { padding: 32px 20px 64px; }
+  .tools-jumpnav { padding: 10px 16px; }
+  .tools-jumpnav__link { font-size: 12px; height: 28px; padding: 0 10px; }
   .tools-filter { padding: 12px 20px; justify-content: center; }
   .tool-card { padding: 24px 20px; text-align: center; }
   .tool-card__tags { justify-content: center; }
