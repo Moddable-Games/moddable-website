@@ -93,6 +93,10 @@ body { background: #f5f4ef; }
 .post-more-card__meta { font-family: var(--mg-font-mono); font-size: 11px; color: #636b78; letter-spacing: 0.3px; }
 .post-more-card__title { font-family: var(--mg-font-display); font-weight: 600; font-size: 20px; line-height: 1.2; letter-spacing: -0.2px; color: #14161c; margin: 0; }
 
+/* Compact figure — centred, constrained width */
+.figure-compact { margin: 24px auto; text-align: center; }
+.figure-compact img { max-width: 280px; display: block; margin: 0 auto; border-radius: 8px; }
+
 /* Video embeds */
 .video-embed { margin: 32px 0; }
 .video-container { position: relative; padding-bottom: 56.25%; height: 0; overflow: hidden; border-radius: 12px; }
