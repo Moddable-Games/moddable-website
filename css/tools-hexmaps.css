@@ -199,11 +199,15 @@
 }
 
 /* ── Responsive ───────────────────────────────────────────────────── */
-@media (max-width: 640px) {
+@media (max-width: 768px) {
   .hexmap-embed { padding: 20px; }
   .hexmap-embed__iframe { aspect-ratio: 4 / 3; }
-  .hexmap-embed__controls { gap: 8px; }
-  .hexmap-embed__seed { margin-left: 0; width: 100%; }
+  .hexmap-embed__controls { flex-direction: column; align-items: stretch; gap: 10px; }
+  .hexmap-embed__control-group { justify-content: center; }
+  .hexmap-embed__select { width: 100%; text-align: center; }
+  .hexmap-embed__seed { margin-left: 0; width: 100%; text-align: center; }
+  .hexmap-embed__header { flex-direction: column; align-items: center; text-align: center; }
+  .hexmap-embed__accent { display: none; }
   .hex-engine-band { padding: 56px 20px; }
   .hex-engine-band__grid { grid-template-columns: 1fr 1fr; }
 }
