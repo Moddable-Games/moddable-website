@@ -3,10 +3,9 @@
     "slug": "the-infrastructure-behind-the-games",
     "tags": [
       "Chess",
-      "Hexmaps",
-      "Moddable Chess Engine",
-      "Open Source",
-      "Architecture"
+      "Nukes",
+      "Talisman",
+      "Open Source"
     ],
     "date": "Jun 2026",
     "cover": "#0c4f8d",
@@ -58,8 +57,8 @@
   {
     "slug": "beyond-the-box",
     "tags": [
-      "Carcassonne",
       "Catan",
+      "Carcassonne",
       "Gloomhaven",
       "Twilight Imperium"
     ],
@@ -109,14 +108,9 @@
   {
     "slug": "the-ancients",
     "tags": [
-      "Ashtapada",
-      "Backgammon",
       "Chess",
       "Go",
-      "Mancala",
-      "Mehen",
-      "Senet",
-      "The Royal Game of Ur"
+      "Game Design"
     ],
     "date": "Apr 2026",
     "cover": "#1a3680",
@@ -219,9 +213,9 @@
     "slug": "the-house-always-wins",
     "tags": [
       "Chess",
-      "Dungeons & Dragons",
+      "Monopoly",
       "Go",
-      "Monopoly"
+      "Game Design"
     ],
     "date": "Feb 2026",
     "cover": "#3a9928",
@@ -261,9 +255,10 @@
   {
     "slug": "open-sourcing-tabletop-games",
     "tags": [
+      "Nukes",
       "Catan",
-      "Moddable Games",
-      "Nukes"
+      "Open Source",
+      "Game Design"
     ],
     "date": "Jan 2026",
     "cover": "#0c4f8d",
@@ -307,14 +302,9 @@
   {
     "slug": "tis-the-season-for-traditions",
     "tags": [
-      "Blood Bowl",
-      "Codenames",
-      "Blood on The Clocktower",
-      "Exploding Kittens",
-      "Mafia",
       "Monopoly",
-      "Scrabble",
-      "Taco Cat Goat Cheese Pizza"
+      "Blood Bowl",
+      "Carcassonne"
     ],
     "date": "Dec 2025",
     "cover": "#d11a1a",
@@ -354,9 +344,9 @@
   {
     "slug": "making-a-masterpiece-by-modification",
     "tags": [
-      "Ashtapada",
       "Chess",
-      "XiangQi"
+      "Go",
+      "Game Design"
     ],
     "date": "Nov 2025",
     "cover": "#d11a1a",
@@ -404,9 +394,8 @@
   {
     "slug": "twilights-prophecies-thunder-on",
     "tags": [
-      "Gloomhaven",
-      "Nukes",
-      "Twilight Imperium"
+      "Twilight Imperium",
+      "Nukes"
     ],
     "date": "Oct 2025",
     "cover": "#0c4f8d",
@@ -455,6 +444,7 @@
     "tags": [
       "Nukes",
       "Catan",
+      "Chess",
       "Open Source"
     ],
     "date": "Sep 2025",
@@ -507,8 +497,8 @@
   {
     "slug": "spiralling-paths-of-power-and-peril",
     "tags": [
-      "Monopoly",
-      "Talisman"
+      "Talisman",
+      "Monopoly"
     ],
     "date": "Aug 2025",
     "cover": "#0c4f8d",
@@ -551,7 +541,8 @@
   {
     "slug": "monopolising-modified-variations",
     "tags": [
-      "Monopoly"
+      "Monopoly",
+      "Catan"
     ],
     "date": "Jul 2025",
     "cover": "#3a9928",

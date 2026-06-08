@@ -258,7 +258,7 @@
         cover.appendChild(el('img', {src: url('/img/news/' + p.img), alt: '', class: 'post-more-card__img', loading:'lazy'}));
       }
       a.appendChild(cover);
-      a.appendChild(el('div', {class: 'post-more-card__meta'}, p.tags.slice(0,2).join(' · ').toUpperCase() + ' · ' + p.date));
+      a.appendChild(el('div', {class: 'post-more-card__meta'}, p.tags[0].toUpperCase() + ' · ' + p.date));
       a.appendChild(el('h3', {class: 'post-more-card__title'}, p.title));
       mp.appendChild(a);
     });

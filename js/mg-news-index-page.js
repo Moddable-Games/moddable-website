@@ -44,7 +44,7 @@ fa.appendChild(postCover(feat, true));
 const fd = el('div');
 const fm = el('div',{class:'news-featured-card__meta'});
 fm.appendChild(el('span',{class:'news-featured-card__badge'}, 'FEATURED'));
-fm.appendChild(el('span',{class:'news-featured-card__date'},`${feat.tags.slice(0,2).join(' · ')} · ${feat.date}`));
+fm.appendChild(el('span',{class:'news-featured-card__date'},`${feat.tags[0]} · ${feat.date}`));
 fd.appendChild(fm);
 fd.appendChild(el('h2',{class:'news-featured-card__title'},feat.title));
 fd.appendChild(el('p',{class:'news-featured-card__excerpt'},feat.excerpt));
@@ -87,7 +87,7 @@ function renderPosts(scroll) {
       const a = el('a',{href:url(`/news/${p.slug}/`),class:'news-grid-card'});
       a.appendChild(postCover(p));
       const meta = el('div',{class:'news-grid-card__meta'});
-      meta.appendChild(el('span',{class:'news-grid-card__cat'},p.tags.slice(0,2).join(' · ').toUpperCase()));
+      meta.appendChild(el('span',{class:'news-grid-card__cat'},p.tags[0].toUpperCase()));
       meta.appendChild(el('span',{class:'news-grid-card__dot'}));
       meta.appendChild(el('span',{class:'news-grid-card__date'},p.date));
       a.appendChild(meta);
@@ -103,7 +103,7 @@ function renderPosts(scroll) {
     const fd = el('div');
     const fm = el('div',{class:'news-featured-card__meta'});
     fm.appendChild(el('span',{class:'news-featured-card__badge'}, feat.tags[0].toUpperCase()));
-    fm.appendChild(el('span',{class:'news-featured-card__date'}, feat.tags.slice(0,2).join(' · ') + ' · ' + feat.date));
+    fm.appendChild(el('span',{class:'news-featured-card__date'}, feat.tags[0] + ' · ' + feat.date));
     fd.appendChild(fm);
     fd.appendChild(el('h2',{class:'news-featured-card__title'},feat.title));
     fd.appendChild(el('p',{class:'news-featured-card__excerpt'},feat.excerpt));
@@ -120,7 +120,7 @@ function renderPosts(scroll) {
       const a = el('a',{href:url(`/news/${p.slug}/`),class:'news-grid-card'});
       a.appendChild(postCover(p));
       const meta = el('div',{class:'news-grid-card__meta'});
-      meta.appendChild(el('span',{class:'news-grid-card__cat'},p.tags.slice(0,2).join(' · ').toUpperCase()));
+      meta.appendChild(el('span',{class:'news-grid-card__cat'},p.tags[0].toUpperCase()));
       meta.appendChild(el('span',{class:'news-grid-card__dot'}));
       meta.appendChild(el('span',{class:'news-grid-card__date'},p.date));
       a.appendChild(meta);
