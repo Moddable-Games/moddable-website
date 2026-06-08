@@ -17,12 +17,12 @@
 <p><a href="/engines/moddable-hexmaps/">Hexmaps</a> is that platform made real. It generates, renders, and edits hex-based game boards via Canvas. Flat-top or pointy-top, any ring count, seeded RNG for reproducible generation, click-to-edit, JSON export/import, and a full URL param API for embedding. Six games already consume it:</p>
 
 <ul>
-  <li><strong>Nukes</strong> uses it for territory maps with terrain generation across 2-6 rings</li>
-  <li><strong>Talisman Worlds</strong> uses it for ring-based adventure boards with encounter pools</li>
-  <li><strong>Twilight Imperium</strong> uses it for galaxy layouts from 3 to 8 players</li>
-  <li><strong>Colony</strong> uses it for Seafarers-style terrain with number token constraints</li>
-  <li><strong>Planet Mongo</strong> uses it for 127-hex planetary conquest maps</li>
-  <li><strong>Endless Skies</strong> uses it for frontier exploration with wormhole and nebula tiles</li>
+  <li><strong>Nukes</strong> — territory maps with terrain generation across 2-6 rings</li>
+  <li><strong>Talisman Worlds</strong> — ring-based adventure boards with encounter pools</li>
+  <li><strong>Twilight Imperium</strong> — galaxy layouts from 3 to 8 players</li>
+  <li><strong>Colony</strong> — Seafarers-style terrain with number token constraints</li>
+  <li><strong>Planet Mongo</strong> — 127-hex planetary conquest maps</li>
+  <li><strong>Endless Skies</strong> — frontier exploration with wormhole and nebula tiles</li>
 </ul>
 
 <p>Each game registers through <code>HexApp.registerGame</code> with its own terrain palette, generation rules, and editor controls. The engine handles coordinate math, rendering, sidebar UI, and embed bridging. The game plugin handles flavour.</p>
@@ -53,10 +53,10 @@
 
 <p>The four MCE developer guides demonstrate different categories of extensibility:</p>
 <ol>
-  <li><strong><a href="https://chess.moddable.games/docs/guide-orda.html" target="_blank" rel="noopener">Orda Chess</a></strong> needed to separate "how a piece moves" from "how a piece captures"</li>
-  <li><strong><a href="https://chess.moddable.games/docs/guide-crazyhouse.html" target="_blank" rel="noopener">Crazyhouse</a></strong> needed moves that are not board-to-board (hand management)</li>
-  <li><strong><a href="https://chess.moddable.games/docs/guide-poison.html" target="_blank" rel="noopener">Poison Chess</a></strong> needed state that lives on tiles, not pieces (timed effects)</li>
-  <li><strong><a href="https://chess.moddable.games/docs/guide-dungeon-chess.html" target="_blank" rel="noopener">Dungeon Chess</a></strong> needed all of the above plus terrain and capture interception</li>
+  <li><strong><a href="https://chess.moddable.games/docs/guide-orda.html" target="_blank" rel="noopener">Orda</a></strong> — separate move logic from capture logic</li>
+  <li><strong><a href="https://chess.moddable.games/docs/guide-crazyhouse.html" target="_blank" rel="noopener">Crazyhouse</a></strong> — moves from hand, not board (hand management)</li>
+  <li><strong><a href="https://chess.moddable.games/docs/guide-poison.html" target="_blank" rel="noopener">Poison</a></strong> — state on tiles, not pieces (timed effects)</li>
+  <li><strong><a href="https://chess.moddable.games/docs/guide-dungeon-chess.html" target="_blank" rel="noopener">Dungeon Chess</a></strong> — all of the above plus terrain and interception</li>
 </ol>
 
 <p>Together they proved that one engine can host everything from a five-line rule tweak to a complete standalone game. The same principle drives Hexmaps: Nukes needs combat mechanics on hexes while Talisman needs encounter draws, but both share coordinate math, rendering, and generation.</p>
