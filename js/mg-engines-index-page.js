@@ -12,7 +12,7 @@
     tier: 1,
     hexColor: 'cyan',
     eyebrow: 'OPEN SOURCE',
-    title: 'The <em>foundations</em> games are built on.',
+    title: 'The <em>foundations</em> games are built on',
     lede: 'Engines anyone can embed, extend, or fork. Powering games and tools across our ecosystem.',
     feature: MG.buildHeroFeature('engines')
   }));

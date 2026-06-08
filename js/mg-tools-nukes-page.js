@@ -8,7 +8,7 @@ document.getElementById('page-hero').appendChild(MG.sectionHero({
   tier: 2,
   hexColor: 'green',
   eyebrow: 'NUKES',
-  title: 'Nukes tools.',
+  title: 'Nukes tools',
   lede: 'Hex map generator, combat calculator, and hostage tracker.'
 }));
 

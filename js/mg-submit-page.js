@@ -8,7 +8,7 @@ document.getElementById('page-hero').appendChild(MG.sectionHero({
   tier: 2,
   hexColor: 'red',
   eyebrow: 'SUBMIT A MOD',
-  title: 'Ship your rules.',
+  title: 'Ship your rules',
   lede: 'Tell us about your mod. If it works at the table, we publish it.'
 }));
 

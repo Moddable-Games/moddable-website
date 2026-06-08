@@ -21,7 +21,7 @@ document.getElementById('page-hero').appendChild(MG.sectionHero({
   tier: 1,
   hexColor: 'green',
   eyebrow: 'FREE TOOLS',
-  title: 'The <em>toys</em> we built to help at your table.',
+  title: 'The <em>toys</em> we built to help at your table',
   lede: 'Dice rollers, name generators, scoreboards, and combat calculators. No account needed.',
   feature: diceEl
 }));
@@ -34,16 +34,16 @@ const SECTIONS = [
 
 const SECTION_ACCENT = { 'game-night':'blue', planning:'green' };
 
-const FEATURED_TOOL = { id:'rules', title:'Look it up.', eyebrow:'RULES LOOKUP', desc:'Search across all published rulebooks. Find the exact rule mid-game, no page-flipping.' };
+const FEATURED_TOOL = { id:'rules', title:'Look it up', eyebrow:'RULES LOOKUP', desc:'Search across all published rulebooks. Find the exact rule mid-game, no page-flipping.' };
 
 const TOOLS = [
-  { id:'timer',      title:"Time's up.",            eyebrow:'TURN TIMER',          category:'game-night', desc:'Per-player countdown timer with cumulative stats.' },
-  { id:'initiative', title:'Who goes next.',        eyebrow:'INITIATIVE TRACKER',  category:'game-night', desc:'Turn order tracker with initiative rolls.' },
+  { id:'timer',      title:"Time's up",             eyebrow:'TURN TIMER',          category:'game-night', desc:'Per-player countdown timer with cumulative stats.' },
+  { id:'initiative', title:'Who goes next',         eyebrow:'INITIATIVE TRACKER',  category:'game-night', desc:'Turn order tracker with initiative rolls.' },
   { id:'roles',      title:'Who are you, really?',  eyebrow:'ROLE DISTRIBUTOR',    category:'game-night', desc:'Assign hidden roles for social deduction games. Tap-to-reveal, no app needed.' },
-  { id:'seating',    title:'Take your seats.',      eyebrow:'SEATING RANDOMIZER',  category:'game-night', desc:'Random player seating around the table.' },
-  { id:'name-gen',   title:'Name your character.',  eyebrow:'NAME GENERATOR',      category:'game-night', desc:'Works for any hex-tile explorer, faction leader, or rule-bending rogue.' },
-  { id:'score',      title:'Keep the count.',       eyebrow:'SCORE TRACKER',       category:'planning',   desc:'Tracks up to 6 players. Good for Catan VP, TI4 objectives, anything with points.' },
-  { id:'resources',  title:'Track the economy.',    eyebrow:'RESOURCE DASHBOARD',  category:'planning',   desc:'Multi-resource bank per player with trade logging. Built for Econopoly, Nukes, TI4.' },
+  { id:'seating',    title:'Take your seats',       eyebrow:'SEATING RANDOMIZER',  category:'game-night', desc:'Random player seating around the table.' },
+  { id:'name-gen',   title:'Name your character',   eyebrow:'NAME GENERATOR',      category:'game-night', desc:'Works for any hex-tile explorer, faction leader, or rule-bending rogue.' },
+  { id:'score',      title:'Keep the count',        eyebrow:'SCORE TRACKER',       category:'planning',   desc:'Tracks up to 6 players. Good for Catan VP, TI4 objectives, anything with points.' },
+  { id:'resources',  title:'Track the economy',     eyebrow:'RESOURCE DASHBOARD',  category:'planning',   desc:'Multi-resource bank per player with trade logging. Built for Econopoly, Nukes, TI4.' },
   { id:'bag-tracker',title:"What's left?",           eyebrow:'BAG TRACKER',         category:'planning',   desc:'Track drawn tiles/cards. See remaining odds. Presets for Catan, Carcassonne, Scrabble.' },
 ];
 

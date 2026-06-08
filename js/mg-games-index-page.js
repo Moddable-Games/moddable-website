@@ -11,7 +11,7 @@
     tier: 1,
     hexColor: 'amber',
     eyebrow: 'ORIGINAL GAMES',
-    title: 'Three <em>games</em>. All moddable.',
+    title: 'Three <em>games</em>, all moddable',
     lede: 'Original tabletop games designed to be forked and rewritten.',
     feature: MG.buildHeroFeature('games')
   }));

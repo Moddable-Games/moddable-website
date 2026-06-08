@@ -10,7 +10,7 @@
     tier: 1,
     hexColor: 'blue',
     eyebrow: 'ABOUT MODDABLE',
-    title: 'The <em>workshop</em> behind the rules.',
+    title: 'The <em>workshop</em> behind the rules',
     lede: 'Designers, modders, and rule-tinkerers reshaping the boards already on your shelf.',
     feature: MG.buildHeroFeature('about')
   }));
