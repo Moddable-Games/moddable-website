@@ -41,6 +41,28 @@
     grid-template-columns: 1fr 1fr;
     gap: 28px 20px;
   }
+  .mg-footer__grid > :first-child {
+    grid-column: 1 / -1;
+    text-align: center;
+  }
+  .mg-footer__grid > :first-child .mg-footer__tagline {
+    margin-left: auto;
+    margin-right: auto;
+  }
+  .mg-footer__grid > :first-child .mg-footer__logo-wrap {
+    justify-content: center;
+  }
+  .mg-footer__grid > :not(:first-child) {
+    text-align: center !important;
+  }
+  .mg-footer__grid > :not(:first-child) .mg-footer__col-list {
+    align-items: center !important;
+  }
+  .mg-footer__bottom {
+    flex-direction: column;
+    align-items: center;
+    text-align: center;
+  }
 }
 
 .mg-footer__logo-wrap {
