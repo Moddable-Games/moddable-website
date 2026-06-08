@@ -844,15 +844,18 @@ button:focus-visible, a:focus-visible, input:focus-visible, textarea:focus-visib
   .stats-row__divider { margin: 0 10px; }
 
   /* Mobile centering: cards, tags, pills */
-  .mod-card__inner { text-align: center; }
+  .mod-card__inner { text-align: center; align-items: center; }
   .mod-card__meta { justify-content: center; }
-  .mod-card__stats { align-items: center; }
-  .game-card__body { text-align: center; }
+  .mod-card__stats { align-items: center; text-align: center; }
+  .mod-card__link { align-self: center; }
+  .game-card__body { text-align: center; align-items: center; }
   .game-card__stats { text-align: center; }
   .news-card { text-align: center; }
   .news-card__header { justify-content: center; gap: 12px; }
+  .news-card__more { align-self: center; }
   .mg-card { text-align: center; }
   .mg-card--row { flex-direction: column; align-items: center; }
+  .mg-card__link { align-self: center; }
 
   /* Flex pill/tag containers */
   .mod-hero__tags { justify-content: center; }
