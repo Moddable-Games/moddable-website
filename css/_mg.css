@@ -878,6 +878,49 @@ button:focus-visible, a:focus-visible, input:focus-visible, textarea:focus-visib
   /* Eyebrows center */
   .mg-eyebrow { justify-content: center; }
 
+  /* Game/mod hero mobile centering */
+  .game-hero__inner { grid-template-columns: 1fr; text-align: center; padding: 64px 20px 80px; }
+  .game-hero__text { align-items: center; }
+  .game-hero__lede { margin-left: auto; margin-right: auto; }
+  .game-hero__tags { justify-content: center; }
+  .game-hero__btns { justify-content: center; }
+  .game-hero__logo { justify-self: center; }
+
+  /* Mod hero mobile centering */
+  .mod-hero__inner { text-align: center; padding: 40px 20px 72px; }
+  .mod-hero__lede { margin-left: auto; margin-right: auto; }
+  .mod-hero__btns { justify-content: center; }
+  .mod-hero__tags { justify-content: center; }
+
+  /* Compact hero (community mods) */
+  .compact-hero__inner { text-align: center; padding: 48px 20px 64px; }
+  .compact-hero__lede { margin-left: auto; margin-right: auto; }
+  .compact-hero__stats { justify-content: center; }
+
+  /* Stats bar */
+  .stats-bar__inner { justify-content: center; flex-wrap: wrap; }
+
+  /* Related heading */
+  .related-heading { text-align: center; }
+
+  /* Rules layout */
+  .rules-layout { grid-template-columns: 1fr !important; gap: 32px !important; }
+  .rules-sidebar { position: static !important; text-align: center; }
+  .rules-sidebar .toc-list { align-items: center; }
+  .rules-sidebar .mg-eyebrow { justify-content: center; }
+
+  /* Rules sections */
+  .rules-section__title { text-align: center; }
+  .rules-section__body { margin-left: auto; margin-right: auto; text-align: center; }
+
+  /* Rules list (community mods) */
+  .rules-list__item { text-align: center; }
+  .rules-list__title { text-align: center; }
+  .rules-list__body { text-align: center; }
+
+  /* Source/license footer */
+  .mod-source { justify-content: center; text-align: center; }
+
   /* Section padding */
   .mg-section--tight { padding: 56px 20px; }
 }
