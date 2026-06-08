@@ -235,14 +235,14 @@ def gen_submit():
 
 
 def gen_subscribe():
-    img = base_image(accent_color=GREEN)
+    img = base_image(accent_color=GLOW_BLUE)
     draw = ImageDraw.Draw(img)
     ex, ey = 920, 310
     draw.rounded_rectangle([ex - 60, ey - 35, ex + 60, ey + 35],
-                           radius=6, outline=(*GREEN, 180), width=2)
+                           radius=6, outline=(*GLOW_BLUE, 180), width=2)
     draw.line([(ex - 60, ey - 35), (ex, ey + 5), (ex + 60, ey - 35)],
-              fill=(*GREEN, 150), width=2)
-    add_text(img, 'SUBSCRIBE', 'Stay in the Loop', 'Updates on mods, tools and releases', accent=GREEN)
+              fill=(*GLOW_BLUE, 150), width=2)
+    add_text(img, 'NEWSLETTER', 'Stay in the Loop', 'Updates on mods, tools and releases', accent=GLOW_BLUE)
     save(img, 'img/og/subscribe.png')
 
 
