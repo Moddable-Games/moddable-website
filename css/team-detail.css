@@ -90,7 +90,8 @@ body { background: #f5f4ef; }
   .td-post-card__date { min-width: unset; }
   .td-sidebar__card-title { text-align: center; }
   .td-sidebar__socials { justify-content: center; }
-  .td-sidebar__teammates { align-items: center; }
+  .td-sidebar__teammates { align-items: stretch; }
+  .td-sidebar__teammate { justify-content: center; }
 }
 
 @media (max-width: 480px) {

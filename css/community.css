@@ -99,9 +99,13 @@ body { background: #f5f4ef; }
   .members-grid { grid-template-columns: repeat(2, 1fr); }
   .jams-grid { grid-template-columns: 1fr; }
 }
-@media (max-width: 640px) {
+@media (max-width: 768px) {
   .community-section { padding: 48px 20px 64px; }
   .stats-grid { grid-template-columns: repeat(2, 1fr); }
   .featured-grid { grid-template-columns: 1fr; }
   .community-cta { padding: 36px 24px; }
+  .jam-card { text-align: center; }
+  .jam-card__number { text-align: center; }
+  .channel-card { text-align: center; flex-direction: column; align-items: center; }
+  .member-card { text-align: center; }
 }

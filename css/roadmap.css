@@ -34,10 +34,14 @@ body { background: #f5f4ef; }
   .roadmap-layout { grid-template-columns: 1fr; }
   .roadmap-sidebar { position: static; }
   .roadmap-main { padding: 48px 20px 64px; }
-  .roadmap-timeline::before { left: 24px; }
+  .roadmap-timeline::before { display: none; }
+  .milestone-row { flex-direction: column; align-items: center; text-align: center; gap: 10px; }
   .milestone-badge { width: auto; min-width: 80px; font-size: 11px; padding: 6px 10px; }
-  .milestone-row { gap: 14px; }
-  .milestone-text { padding: 12px 16px; font-size: 15px; }
+  .milestone-text { padding: 12px 16px; font-size: 15px; text-align: center; }
   .roadmap-vision { padding: 48px 20px 64px; }
+  .roadmap-vision__title { text-align: center; }
+  .roadmap-vision__lede { text-align: center; }
   .roadmap-vision__grid { grid-template-columns: 1fr; }
+  .vision-card { text-align: center; align-items: center; }
+  .roadmap-sidebar__card-title { text-align: center; }
 }

@@ -59,8 +59,11 @@ body { background: #f5f4ef; }
   .press-layout { grid-template-columns: 1fr; }
   .press-sidebar { position: static; }
   .press-main { padding: 48px 20px 64px; }
+  .press-section__title { text-align: center; }
+  .press-card__title { text-align: center; }
   .press-stats { grid-template-columns: 1fr 1fr; }
   .press-swatches { grid-template-columns: repeat(4, 1fr); }
   .press-logo-grid { grid-template-columns: 1fr; }
   .press-screenshot-grid { grid-template-columns: 1fr; }
+  .press-sidebar__card-title { text-align: center; }
 }
