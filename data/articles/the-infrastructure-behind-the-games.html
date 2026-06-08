@@ -2,13 +2,13 @@
 
 <p>So, we are building a bridge.</p>
 
-<p>Behind the scenes, we have been developing moddable online engines that launched alongside our first game, <a href="/games/nukes/">Nukes</a>. They serve as digital companions to our games, but they also act as a foundation for a new ecosystem where physical and digital coexist, where creators thrive and where the boundaries of what a "board game" can be are rewritten.</p>
+<p>Behind the scenes, we have been developing moddable online engines that launched alongside our first game, <a href="/games/nukes/">Nukes</a>. They serve as digital companions to our games, but they also act as a foundation for a new ecosystem where physical and digital coexist, where creators thrive and where the boundaries of what a "board game" can be are rewritten by the people actually playing them.</p>
 
 <h2 id="infinite-hex-worlds">Infinite hex worlds</h2>
 
-<p>Our core engine is built specifically for hex-based systems, the backbone of many of the world's most loved strategy games. From Settlers of Catan and Suburbia to Twilight Imperium and Memoir 44, every imaginable genre is covered, including all three of our own titles. However, we are not doing this simply to recreate familiar experiences.</p>
+<p>Our core engine is built specifically for hex-based systems. Hexagonal grids are the backbone of many of the world's most loved strategy games: Catan, Twilight Imperium, Suburbia, Memoir 44. The format spans every genre from resource trading to wargaming. Our engine currently powers six of our own games and mods, but the architecture is designed to support any hex-based system.</p>
 
-<p>We are pushing towards infinite maps and truly open worlds. Imagine thousands of players interacting on a single, continuous world, where exploration never ends and where every action ripples across a shared universe. We want to build games that have the capability to work with any number of players, and the only way to prove that they can is by building a platform to enable a board to be any size and for any number of players.</p>
+<p>The reason we are building our own is to push the limits towards infinite maps and truly open worlds. Imagine thousands of players interacting on a single, continuous world, where exploration never ends and where every action ripples across a shared universe. We want to build games that have the capability to work with any number of players, and the only way to prove that they can is by building a platform to enable a board to be any size with support for any number of players.</p>
 
 <p>We want to be able to build moddable games, and for those games to be easily moddable by its users. You.</p>
 
@@ -45,9 +45,9 @@
 
 <h2 id="moddable-rules">Moddable Rules</h2>
 
-<p>The third pillar is still in development. Moddable Rules is a shared rulebook system that builds themed, paginated rulebooks from structured content. Every game and mod gets a versioned rulebook built from the same design tokens, fonts, and layout components.</p>
+<p>The third pillar in our open engine architecture is still in development. Moddable Rules is a shared rulebook system that builds themed, paginated rulebooks from structured content. Every game and mod gets a versioned rulebook built from the same design tokens, fonts, and layout components.</p>
 
-<p>It already ships rulebooks for Nukes, Hyper Imperium, Econopoly, Dungeon Chess, and Talisman Worlds. The build system generates OG images, search indices, and print-ready PDFs from the same source files. When it stabilises, it becomes the content layer. The engines handle play. The rules handle publishing. One game definition, multiple outputs.</p>
+<p>It already ships rulebooks for Nukes, Hyper Imperium, Econopoly, Dungeon Chess, and Talisman Worlds. The build system generates OG images, search indices, and print-ready PDFs from the same source files. When it stabilises, it becomes the content layer that feeds into everything else. The engines handle play. The rules handle publishing. One game definition, multiple outputs.</p>
 
 <h2 id="plugin-architecture">Plugin architecture</h2>
 
@@ -66,10 +66,8 @@
 <p>This means designing something new and open, whilst also building a business around it. For designers, this means rapid prototyping on hex-based games of any scale. For players, it means completely new types of shared experiences. For the games themselves, it means a platform and community, not just a product.</p>
 
 <div class="prose-callout">
-  <strong>Licensing model</strong>
-  Engines are MIT-licensed. Game content is CC BY-SA. Anyone can fork an engine. Anyone can build on our games with attribution. The infrastructure is open. The creative layer is protected but shareable.
+  <strong>Build on our engines</strong>
+  Both engines are MIT-licensed. Fork them, embed them, build your own game on top. No permission needed. Game rules are CC BY-SA, so you can remix any of our published content and release your own version. If you can write a JSON config and a few lines of JavaScript, you can ship a playable variant today.
 </div>
 
-<p>The circular economy: MCE powers the chess tools and Dungeon Chess. Hexmaps powers Nukes, Talisman tools, and TI4 tools. Rules publishes the rulebooks that document both. This site embeds live instances of all three. A change to Hexmaps propagates to six games simultaneously. A new MCE variant is immediately playable at <a href="https://chess.moddable.games" target="_blank" rel="noopener">chess.moddable.games</a>.</p>
-
-<p>We want to build a place for games to sustain. <a href="/community/">Join our community</a> to be amongst those shaping what comes next.</p>
+<p>Three engines. One philosophy. The rules define the game. The engines make it playable. The platform makes it shareable. Everything is open, everything connects, and everything is designed to be taken apart by someone with a better idea. If you're building a hex game, a chess variant, or something we've not imagined yet, the infrastructure is here and waiting. <a href="/community/">Come build with us.</a></p>
