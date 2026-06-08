@@ -91,9 +91,9 @@ for mod in mods:
     ImageDraw.Draw(mask).rounded_rectangle([0, 0, card_w-1, card_h-1], radius=24, fill=255)
     card.putalpha(mask)
 
-    # Overlay mod logo on card if available (from mods.json "logo" field)
+    # Overlay mod logo on card if available (skip generic cube logo)
     logo_path = mod.get('logo')
-    if logo_path and os.path.exists(logo_path):
+    if logo_path and os.path.exists(logo_path) and 'moddable-cube' not in logo_path:
         mod_logo = Image.open(logo_path).convert('RGBA')
         # Scale to fit within card with padding
         max_logo_size = int(card_w * 0.65)
