@@ -841,6 +841,7 @@ button:focus-visible, a:focus-visible, input:focus-visible, textarea:focus-visib
   .home-hex { padding: 64px 20px; }
   .home-engine { padding: 64px 20px; }
   .mg-section { padding: 80px 20px; }
+  .stats-row { justify-content: center; }
   .stats-row__divider { margin: 0 10px; }
 
   /* Mobile centering: cards, tags, pills */
