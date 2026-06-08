@@ -145,25 +145,24 @@ def gen_community():
 
 def gen_news():
     img = base_image()
-    # 3 news covers as stacked cards, vertically centred on right
+    # 3 news covers as fanned cards, centred in right zone
     covers = ['img/news/beyond-the-box.jpg', 'img/news/the-ancients.jpg',
               'img/news/making-mods-matter.jpg']
-    positions = [(700, 220, -4), (800, 260, 0), (900, 240, 4)]
+    positions = [(640, 180, -6), (760, 220, 0), (880, 190, 5)]
     for i, (cx, cy, angle) in enumerate(positions):
         path = covers[i]
         if not os.path.exists(path):
             continue
         cover = Image.open(path).convert('RGBA')
-        cw, ch = 240, 160
+        cw, ch = 200, 130
         cover = cover.resize((cw, ch), Image.LANCZOS)
-        # Add rounded border
         bordered = Image.new('RGBA', (cw + 12, ch + 12), (255, 255, 255, 50))
         bordered.paste(cover, (6, 6), cover)
         bordered = bordered.rotate(angle, expand=True, fillcolor=(0, 0, 0, 0))
         layer = Image.new('RGBA', (WIDTH, HEIGHT), (0, 0, 0, 0))
         layer.paste(bordered, (cx, cy), bordered)
         img = Image.alpha_composite(img, layer)
-    add_text(img, 'NEWS', 'From the Table', '12 articles on modding, design and play')
+    add_text(img, 'NEWS', 'From the Table', '13 articles on modding, design and play')
     save(img, 'img/og/news.png')
 
 
