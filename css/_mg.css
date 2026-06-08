@@ -872,8 +872,10 @@ button:focus-visible, a:focus-visible, input:focus-visible, textarea:focus-visib
   .post-share-btns { justify-content: center; }
 
   /* Body sub / lede centering */
-  .mg-body-sub { margin-left: auto; margin-right: auto; }
+  .mg-body-sub { margin-left: auto; margin-right: auto; text-align: center; }
   .mg-heading-xl { text-align: center; }
+  .mg-heading-lg { text-align: center; }
+  .mg-heading-md { text-align: center; }
 
   /* Eyebrows center */
   .mg-eyebrow { justify-content: center; }
