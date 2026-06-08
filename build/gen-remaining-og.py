@@ -288,10 +288,9 @@ def gen_team():
     save(img, 'img/og/team.png')
 
 
-def gen_chess():
-    img = base_image(accent_color=BLUE)
+def gen_chess_engine():
+    img = base_image(accent_color=ENGINES)
     draw = ImageDraw.Draw(img)
-    # 8x8 chess board on right
     board_x, board_y = 750, 160
     sq = 40
     light = (45, 55, 90, 200)
@@ -304,7 +303,6 @@ def gen_chess():
             y1 = board_y + row * sq
             color = light if (row + col) % 2 == 0 else dark
             bd.rectangle([x1, y1, x1 + sq, y1 + sq], fill=color)
-    # Round the board with mask
     mask = Image.new('L', (WIDTH, HEIGHT), 0)
     ImageDraw.Draw(mask).rounded_rectangle(
         [board_x, board_y, board_x + 8*sq, board_y + 8*sq],
@@ -312,8 +310,28 @@ def gen_chess():
     )
     board_layer.putalpha(mask)
     img = Image.alpha_composite(img, board_layer)
-    add_text(img, 'PLAY ONLINE', 'Moddable Chess', '70 playable variants', accent=ENGINES)
-    save(img, 'img/og/games-moddable-chess.png')
+    add_text(img, 'ENGINE', 'Moddable Chess', '70 playable variants', accent=ENGINES)
+    save(img, 'img/og/engines-moddable-chess.png')
+
+
+def gen_hexmaps_engine():
+    import math
+    img = base_image(accent_color=ENGINES)
+    # Hex grid on right side
+    hex_layer = Image.new('RGBA', (WIDTH, HEIGHT), (0, 0, 0, 0))
+    hd = ImageDraw.Draw(hex_layer)
+    hex_size = 28
+    cx_start, cy_start = 780, 140
+    for row in range(10):
+        for col in range(8):
+            hx = cx_start + col * int(hex_size * 1.75) + (int(hex_size * 0.875) if row % 2 else 0)
+            hy = cy_start + row * int(hex_size * 1.5)
+            hd.regular_polygon((hx, hy, hex_size), 6,
+                               fill=(6, 182, 212, 25),
+                               outline=(6, 182, 212, 80))
+    img = Image.alpha_composite(img, hex_layer)
+    add_text(img, 'ENGINE', 'Moddable Hexmaps', 'Shared hex map engine for 6 games', accent=ENGINES)
+    save(img, 'img/og/engines-moddable-hexmaps.png')
 
 
 def gen_mods():
@@ -341,5 +359,6 @@ gen_press()
 gen_submit()
 gen_subscribe()
 gen_team()
-gen_chess()
+gen_chess_engine()
+gen_hexmaps_engine()
 print('Done.')
