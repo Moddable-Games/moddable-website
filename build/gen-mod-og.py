@@ -64,51 +64,49 @@ for mod in mods:
     glow_layer = glow_layer.filter(ImageFilter.GaussianBlur(radius=100))
     img = Image.alpha_composite(img, glow_layer)
 
-    # Hex-grid card on right side (mimics mod card thumbnail from the site)
-    card_w, card_h = 380, 380
-    card_x, card_y = 740, 125
-    # Build gradient image (cosmic dark → category colour, top to bottom)
-    card = Image.new('RGBA', (card_w, card_h), (0, 0, 0, 0))
-    cd = ImageDraw.Draw(card)
-    for y in range(card_h):
-        t = (y / card_h) ** 0.7
-        cr = int(BG[0] * (1-t) + r * t)
-        cg = int(BG[1] * (1-t) + g * t)
-        cb = int(BG[2] * (1-t) + b * t)
-        cd.line([(0, y), (card_w, y)], fill=(cr, cg, cb, 255))
-    # Hex grid overlay
-    hd = ImageDraw.Draw(card)
-    hex_size = 32
-    for row in range(card_h // hex_size + 2):
-        for col in range(card_w // hex_size + 2):
-            hx = col * hex_size + (hex_size//2 if row % 2 else 0)
-            hy = row * hex_size
-            hd.regular_polygon((hx, hy, hex_size//3), 6,
-                               fill=None,
-                               outline=(255, 255, 255, 20))
-    # Apply rounded mask
-    mask = Image.new('L', (card_w, card_h), 0)
-    ImageDraw.Draw(mask).rounded_rectangle([0, 0, card_w-1, card_h-1], radius=24, fill=255)
-    card.putalpha(mask)
-
-    # Overlay mod logo on card if available (skip generic cube logo)
+    # Right-side visual: logo only (no hex card) if unique logo exists, else hex card
     logo_path = mod.get('logo')
-    if logo_path and os.path.exists(logo_path) and 'moddable-cube' not in logo_path:
+    has_unique_logo = logo_path and os.path.exists(logo_path) and 'moddable-cube' not in logo_path
+
+    if has_unique_logo:
+        # Render logo large and centred in right zone
         mod_logo = Image.open(logo_path).convert('RGBA')
-        # Scale to fit within card with padding
-        max_logo_size = int(card_w * 0.65)
+        max_logo_size = 280
         ratio = min(max_logo_size / mod_logo.width, max_logo_size / mod_logo.height)
         lw = int(mod_logo.width * ratio)
         lh = int(mod_logo.height * ratio)
         mod_logo = mod_logo.resize((lw, lh), Image.LANCZOS)
-        # Center on card
-        lx = (card_w - lw) // 2
-        ly = (card_h - lh) // 2
-        card.paste(mod_logo, (lx, ly), mod_logo)
-
-    card_layer = Image.new('RGBA', (WIDTH, HEIGHT), (0, 0, 0, 0))
-    card_layer.paste(card, (card_x, card_y), card)
-    img = Image.alpha_composite(img, card_layer)
+        logo_layer = Image.new('RGBA', (WIDTH, HEIGHT), (0, 0, 0, 0))
+        zone_cx = (680 + WIDTH - 80) // 2
+        zone_cy = HEIGHT // 2
+        logo_layer.paste(mod_logo, (zone_cx - lw // 2, zone_cy - lh // 2), mod_logo)
+        img = Image.alpha_composite(img, logo_layer)
+    else:
+        # Hex-grid card on right side
+        card_w, card_h = 380, 380
+        card_x, card_y = 740, 125
+        card = Image.new('RGBA', (card_w, card_h), (0, 0, 0, 0))
+        cd = ImageDraw.Draw(card)
+        for y in range(card_h):
+            t = (y / card_h) ** 0.7
+            cr = int(BG[0] * (1-t) + r * t)
+            cg = int(BG[1] * (1-t) + g * t)
+            cb = int(BG[2] * (1-t) + b * t)
+            cd.line([(0, y), (card_w, y)], fill=(cr, cg, cb, 255))
+        hd = ImageDraw.Draw(card)
+        hex_size = 32
+        for row in range(card_h // hex_size + 2):
+            for col in range(card_w // hex_size + 2):
+                hx = col * hex_size + (hex_size//2 if row % 2 else 0)
+                hy = row * hex_size
+                hd.regular_polygon((hx, hy, hex_size//3), 6,
+                                   fill=None, outline=(255, 255, 255, 20))
+        mask = Image.new('L', (card_w, card_h), 0)
+        ImageDraw.Draw(mask).rounded_rectangle([0, 0, card_w-1, card_h-1], radius=24, fill=255)
+        card.putalpha(mask)
+        card_layer = Image.new('RGBA', (WIDTH, HEIGHT), (0, 0, 0, 0))
+        card_layer.paste(card, (card_x, card_y), card)
+        img = Image.alpha_composite(img, card_layer)
 
     # Text content — left side
     draw = ImageDraw.Draw(img)
