@@ -27,7 +27,7 @@ var GAME_CONFIG = {
       { value: '6p', label: '6 Players (Standard)' },
       { value: '7p', label: '7 Players (PoK)' },
       { value: '8p', label: '8 Players (PoK)' },
-      { value: 'hyper8', label: '8 Players (Hyper Imperium)' }
+      { value: 'hyper', label: 'Hyper Imperium' }
     ],
     defaultLayout: '6p',
     styles: ['artistic', 'classic'], defaultStyle: 'artistic'
