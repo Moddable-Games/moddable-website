@@ -907,6 +907,8 @@ button:focus-visible, a:focus-visible, input:focus-visible, textarea:focus-visib
 
   /* Related heading */
   .related-heading { text-align: center; }
+  .community-header { flex-direction: column; align-items: center; text-align: center; }
+  .community-header__link { align-self: center; }
 
   /* Rules layout */
   .rules-layout { grid-template-columns: 1fr !important; gap: 32px !important; }
