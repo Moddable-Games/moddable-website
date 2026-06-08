@@ -162,7 +162,7 @@
     var cardData = post.modCard || deriveModCard(post, mods);
     if (cardData) {
       var mc = el('div', {class: 'post-mod-card'});
-      mc.appendChild(el('div', {class: 'post-mod-card__eyebrow'}, 'THE MOD'));
+      mc.appendChild(el('div', {class: 'post-mod-card__eyebrow'}, cardData.eyebrow || 'THE MOD'));
       mc.appendChild(el('div', {class: 'post-mod-card__title'}, cardData.title));
       mc.appendChild(el('div', {class: 'post-mod-card__version'}, cardData.version));
       var dlWrap = el('div');
@@ -175,7 +175,7 @@
   }
 
   function deriveModCard(post, mods) {
-    if (!post.tags || !mods) return {title: 'Moddable Community', version: 'Discord · Open to all', href: '/community/', btnLabel: 'Join Discord'};
+    if (!post.tags || !mods) return {eyebrow: 'COMMUNITY', title: 'Moddable Community', version: 'Discord · Open to all', href: '/community/', btnLabel: 'Join Discord'};
     var match = null;
     for (var i = 0; i < mods.length; i++) {
       if (post.tags.indexOf(mods[i].baseGame) !== -1) { match = mods[i]; break; }
@@ -183,7 +183,7 @@
     if (match) {
       return {title: match.title, version: match.category, href: match.path, btnLabel: 'View Mod'};
     }
-    return {title: 'Moddable Community', version: 'Discord · Open to all', href: '/community/', btnLabel: 'Join Discord'};
+    return {eyebrow: 'COMMUNITY', title: 'Moddable Community', version: 'Discord · Open to all', href: '/community/', btnLabel: 'Join Discord'};
   }
 
   function renderArticleBody(post) {

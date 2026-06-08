@@ -1,6 +1,6 @@
-<p class="lede"><strong>Should board games be open source?</strong> It's a slightly uncomfortable question. Board games are traditionally built on tightly protected intellectual property. Rules are copyrighted. Artwork is owned. Trademarks are guarded, and for good reason. Publishing is risky. The margins are thin. Creative labour deserves protection.</p>
+<p class="lede"><strong>Should board games be open source?</strong> It's a slightly uncomfortable question. Board games are traditionally built on tightly protected intellectual property. Rules are copyrighted. Artwork is owned. Trademarks are guarded, and for good reason. Publishing is risky. The margins are incredibly thin and creative labour deserves protection.</p>
 
-<p>But herein lies the paradox: the best games are those that players mod anyway. They rebalance factions. They create essential expansions and rewrite rulebooks for extra clarity. They build their own digital implementations, and almost always, they improve the system. The question is not whether games evolve. It is whether the industry should acknowledge it.</p>
+<p>But herein lies the paradox: the best of games are those that players mod anyway. They rebalance factions. They create essential expansions and rewrite rulebooks for extra clarity. They sometimes even build digital implementations, and almost always, they improve the system. The question is not whether games evolve. It is whether the industry should acknowledge it.</p>
 
 <h2 id="what-does-open-source-mean">What does open-source mean?</h2>
 <p>In software, open-source means access to the code that makes a product work. For tabletop games, the equivalent involves a different set of layers:</p>
@@ -14,37 +14,43 @@
 
 <p>Not a free-for-all. Structured openness. The distinction matters and is often missed. A publisher might open their rules but keep artwork proprietary. They might release digital assets but retain manufacturing exclusivity. It is a spectrum, not a switch.</p>
 
-<figure>
-  <img src="/img/news/open-sourcing-tabletop-games.jpg" alt="Open-source board game components available for modification" loading="lazy">
-  <figcaption>Structured openness: rules free, engines MIT, game content CC BY-SA.</figcaption>
+<figure class="breakout">
+  <a href="https://rules.moddable.games/dist/dungeon-chess/" target="_blank" rel="noopener">
+    <img src="/img/news/open-source-rulebook.png" alt="Dungeon Chess open-source rulebook showing structured sections and faction data" loading="lazy">
+  </a>
+  <figcaption>Every rulebook is forkable. Dungeon Chess rules, free to read, remix, and redistribute.</figcaption>
 </figure>
 
-<h2 id="the-fear-and-the-opportunity">The fear and the opportunity</h2>
-<p>Designers worry about dilution. Publishers worry about lost revenue. Artists worry about unlicensed use. These are legitimate concerns. But open-source models in other industries have not eliminated value. They have shifted where value lives:</p>
+<p>This is not a static PDF. The <a href="/mods/dungeon-chess/">Dungeon Chess</a> rulebook is written in markdown, version-controlled in Git, and compiled into both the formatted web page above and the data that powers the <a href="https://chess.moddable.games" target="_blank" rel="noopener">online game itself</a>. When a rule changes in the source file, the website updates, the game engine synchronises, and every player sees the same version. One source of truth, multiple outputs. The rulebook is not documentation about the game. It is the game.</p>
+
+<h2 id="the-fear-and-the-opportunity">It already happened</h2>
+<p>Designers worry about dilution. Publishers worry about lost revenue. Artists worry about unlicensed use. These are legitimate concerns. But open-source gaming is not a hypothetical future. It already happened, and the results speak for themselves.</p>
+
+<p>In 2000, Wizards of the Coast released the <strong>Open Gaming License</strong> alongside Dungeons &amp; Dragons 3rd Edition. The OGL allowed anyone to publish compatible content using the core d20 system. The result was not the collapse of D&amp;D. It was an explosion of creativity. Thousands of third-party supplements, adventures, and entire game systems built on the same foundation. Pathfinder, D&amp;D's much successful competitor of the 2010s, was born directly from the OGL. The license did not weaken D&amp;D. It made D&amp;D the centre of an ecosystem so large that it became culturally unavoidable.</p>
+
+<p>Games Workshop took a different approach with <strong>Chapter Approved</strong>: publishing community-submitted rules, army lists and scenarios in official volumes. Players who created content saw it validated by the publisher. The community grew because contribution was rewarded, not punished.</p>
+
+<p>And then there is chess. No trademark. No copyright. No publisher. It survived 1,500 years because anyone could teach it, modify it, and pass it on. <a href="/news/making-a-masterpiece-by-modification/">The version we play today is simply the mod that won.</a></p>
+
+<h2 id="ecosystems-over-hits">The three-layer model</h2>
+<p>The question isn't whether to open everything or lock it all down. It is which layers to open, and why. We arrived at a three-layer licensing model designed to give creators as much freedom as possible while keeping the shared commons healthy:</p>
 
 <ol>
-  <li><strong>Red Hat</strong> built a multi-billion-dollar business on free software</li>
-  <li><strong>WordPress</strong> powers 40% of the web while remaining open-source</li>
-  <li><strong>Linux</strong> runs nearly every server on Earth, maintained globally</li>
+  <li><strong>Rules and mechanics: CC-BY-SA 4.0.</strong> Anyone can fork, remix, and sell. Derivatives must stay open so no one can take community creations private. You build on ours, others build on yours. The commons only grows.</li>
+  <li><strong>Engines and tools: MIT License.</strong> Embed, fork, extend freely. Build your own game on our chess engine or hexmap generator. No permission needed, no strings attached.</li>
+  <li><strong>Art and templates: Mostly open.</strong> Core brand assets (logo, identity) remain ours, but game artwork, component templates, and design systems will be openly licensed. We want creators to reskin, retheme, and build mods that look as polished as our own.</li>
 </ol>
 
-<p>The value moved from controlling the artifact to cultivating the ecosystem.</p>
-
-<blockquote>"Open-source models haven't eliminated value. They've shifted where value lives."</blockquote>
-
-<h2 id="ecosystems-over-hits">Ecosystems over hits</h2>
-<p>The next generation of players has grown up with modded video games, remix culture, and collaborative platforms. They expect participation, not just consumption. The publishers who thrive over the next decade may not be the ones who defend their walls most aggressively, but the ones who build new gates in the right places.</p>
+<p>The ShareAlike clause is what holds it together. Modders can sell their work, build entire businesses on top of our rules, and create whatever they imagine. The only requirement is that derivatives stay open too. Every modification flows back into the ecosystem. The more people build, the more everyone benefits.</p>
 
 <div class="prose-callout">
-  <strong>Our licensing model</strong>
-  Engines (MCE, Hexmaps, Rules) are MIT-licensed. Game content is CC BY-SA. Anyone can fork an engine. Anyone can build on our games with attribution. The infrastructure is open. The creative layer is protected but shareable.
+  <strong>What this means for creators</strong>
+  Take our rules. Use our engines. Download our templates. Make something new. Sell it if you want. The only thing you cannot do is close the door behind you. Everything you create remains available for the next person to build on, just as ours was available to you.
 </div>
 
-<p>This doesn't mean every game should be fully open on day one. But it does mean the industry needs new models: selective openness, tiered access, community governance, and revenue sharing.</p>
-
 <h2 id="what-we-believe">What we believe</h2>
-<p>At Moddable.Games, every mod we publish is freely available. Every ruleset is designed to be forked. Our <a href="/news/the-infrastructure-behind-the-games/">engines are open-source</a>. Our <a href="/games/nukes/">games</a> are designed to be <a href="/news/making-mods-matter/">taken apart</a>.</p>
+<p>The games that endure are the ones that communities invest in. Communities invest in things they can shape. The ancients proved this: the games that lasted <a href="/news/the-ancients/">5,000 years</a> had no IP protection. They survived because they were worth passing on, worth teaching, worth modifying for the next generation.</p>
 
-<p>We don't believe this undermines the value of game design. We believe it amplifies it. The games that endure are the ones that communities invest in, and communities invest in things they can shape. As <a href="/news/the-ancients/">the ancients proved</a>: the games that lasted 5,000 years had no IP protection. They survived because they were worth passing on.</p>
+<p>Every ruleset we publish is designed to be forked. Our <a href="/news/the-infrastructure-behind-the-games/">engines are open-source</a>. Our <a href="/games/nukes/">games</a> are designed to be <a href="/news/making-mods-matter/">taken apart</a>. Not because we are naive about the economics of publishing, but because we have seen what happens when players are invited to build rather than merely consume. They build things we never imagined. They find audiences we never reached. They carry the game further than any marketing budget ever could.</p>
 
-<p><em>The question is not whether players will shape games. It is whether we acknowledge that they already do.</em></p>
+<p>Open-source has not eliminated value in software. It has shifted where value lives. We believe the same shift is coming to the tabletop, and we intend to be standing in the right place when it arrives.</p>
