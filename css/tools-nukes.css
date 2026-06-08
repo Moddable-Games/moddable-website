@@ -72,9 +72,11 @@ body { background:#f5f4ef; }
 .resource-cell--nuke-name { font-family:var(--mg-font-display); font-weight:600; font-size:14px; color:#d11a1a; }
 
 /* ── Responsive ────────────────────────────────────────────────────── */
-@media (max-width: 640px) {
+@media (max-width: 768px) {
   .nukes-content { padding:36px 20px 64px; }
-  .nukes-card { padding:20px; }
+  .nukes-card { padding:20px; text-align:center; }
+  .nukes-card__header { flex-direction:column; align-items:center; text-align:center; }
+  .nukes-card__accent { display:none; }
   .combat-grid { grid-template-columns:1fr; gap:20px; }
   .combat-vs { padding-top:0; }
   #unit-table { grid-template-columns:1fr; }

@@ -72,4 +72,7 @@ body { background:#f5f4ef; }
   .char-controls__draw { margin-left:0; width:100%; }
   .board-controls { flex-direction:column; align-items:stretch; gap:12px; }
   .board-controls .mg-btn { width:100%; }
+  .tool-card { text-align:center; }
+  .tool-card__header { flex-direction:column; align-items:center; text-align:center; }
+  .tool-card__accent { display:none; }
 }
