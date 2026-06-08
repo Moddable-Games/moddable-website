@@ -258,7 +258,7 @@ button:focus-visible, a:focus-visible, input:focus-visible, textarea:focus-visib
 .prose blockquote { margin: 32px 0; padding: 20px 24px; border-left: 4px solid var(--mg-red); background: #fff; font-style: italic; color: var(--mg-ink); font-size: 20px; line-height: 1.5; }
 .prose a { color: var(--mg-blue); text-decoration: underline; text-decoration-color: rgba(12,79,141,0.3); text-underline-offset: 3px; transition: text-decoration-color 150ms; }
 .prose a:hover { text-decoration-color: var(--mg-blue); }
-.prose ul, .prose ol { padding-left: 24px; margin: 0 0 28px; }
+.prose ul, .prose ol { padding-left: 24px; margin: 0 0 28px; text-align: left; text-wrap: balance; }
 .prose ul { list-style: none; }
 .prose ul li { position: relative; padding-left: 18px; margin: 0 0 12px; }
 .prose ul li::before { content: ''; position: absolute; left: 0; top: 0.55em; width: 6px; height: 6px; border-radius: 1px; background: var(--mg-red); transform: rotate(45deg); }
