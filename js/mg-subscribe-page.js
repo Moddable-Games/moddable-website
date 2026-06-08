@@ -9,7 +9,7 @@ document.getElementById('footer-root').appendChild(MG.footer());
 document.getElementById('page-hero').appendChild(MG.sectionHero({
   section: 'subscribe',
   tier: 2,
-  hexColor: 'green',
+  hexColor: 'blue',
   eyebrow: 'NEWSLETTER',
   title: 'Stay in the loop.',
   lede: 'Crowdfunding updates, playtest invites, and new game announcements. No spam.'

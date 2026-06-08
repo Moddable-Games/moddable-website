@@ -6,8 +6,18 @@ from PIL import Image, ImageDraw, ImageFont, ImageFilter
 
 WIDTH, HEIGHT = 1200, 630
 BG = (10, 13, 42)
-GLOW_BLUE = (111, 181, 255)
-GREEN = (58, 153, 40)
+
+# Section colours — from navbar accents
+MODS = (230, 50, 50)         # #e63232
+ENGINES = (6, 182, 212)      # #06b6d4
+GAMES = (232, 169, 26)       # #e8a91a
+TOOLS = (58, 153, 40)        # #3a9928
+NEWS = (225, 29, 137)        # #e11d89
+ABOUT = (111, 181, 255)      # #6fb5ff
+
+# Legacy aliases
+GLOW_BLUE = ABOUT
+GREEN = TOOLS
 BLUE = (12, 79, 141)
 
 
@@ -79,7 +89,7 @@ def gen_about():
     ly = (HEIGHT - lh) // 2
     layer.paste(logo, (lx, ly), logo)
     img = Image.alpha_composite(img, layer)
-    add_text(img, 'MODDABLE.GAMES', 'About', 'The workshop behind the mods')
+    add_text(img, 'MODDABLE.GAMES', 'About', 'The workshop behind the mods', accent=ABOUT)
     save(img, 'img/og/about.png')
 
 
@@ -115,7 +125,7 @@ def gen_roadmap():
         # Label right of line
         draw.text((tx + 24, my - 8), label,
                   fill=(220, 225, 235, 220 if done else 120), font=load_font(15, done))
-    add_text(img, 'MODDABLE.GAMES', 'Roadmap', 'Where we are headed')
+    add_text(img, 'MODDABLE.GAMES', 'Roadmap', 'Where we are headed', accent=ABOUT)
     save(img, 'img/og/about-roadmap.png')
 
 
@@ -140,7 +150,7 @@ def gen_community():
     font_big = load_font(120, True)
     draw.text((zone_cx - 80, 240), '15', fill=(111, 181, 255, 70), font=font_big)
     draw.text((zone_cx - 60, 370), 'MEMBERS', fill=(111, 181, 255, 45), font=load_font(18, True))
-    add_text(img, 'DISCORD', 'Join the Table', 'Rule-tinkerers and designers building mods together')
+    add_text(img, 'DISCORD', 'Join the Table', 'Rule-tinkerers and designers building mods together', accent=ABOUT)
     save(img, 'img/og/community.png')
 
 
@@ -163,7 +173,7 @@ def gen_news():
         layer = Image.new('RGBA', (WIDTH, HEIGHT), (0, 0, 0, 0))
         layer.paste(bordered, (cx, cy), bordered)
         img = Image.alpha_composite(img, layer)
-    add_text(img, 'NEWS', 'From the Table', '13 articles on modding, design and play')
+    add_text(img, 'NEWS', 'From the Table', '13 articles on modding, design and play', accent=NEWS)
     save(img, 'img/og/news.png')
 
 
@@ -191,7 +201,7 @@ def gen_games():
         ly = (HEIGHT - lh) // 2
         layer.paste(logo, (lx, ly), logo)
         img = Image.alpha_composite(img, layer)
-    add_text(img, 'ORIGINALS', 'Our Games', '3 games designed to be modded')
+    add_text(img, 'ORIGINALS', 'Our Games', '3 games designed to be modded', accent=GAMES)
     save(img, 'img/og/games.png')
 
 
@@ -209,28 +219,27 @@ def gen_press():
     ly = (HEIGHT - lh) // 2
     layer.paste(logo, (lx, ly), logo)
     img = Image.alpha_composite(img, layer)
-    add_text(img, 'RESOURCES', 'Press Kit', 'Logos · Screenshots · Brand guidelines')
+    add_text(img, 'RESOURCES', 'Press Kit', 'Logos · Screenshots · Brand guidelines', accent=ABOUT)
     save(img, 'img/og/press.png')
 
 
 def gen_submit():
-    RED = (209, 26, 26)
-    img = base_image(accent_color=RED)
+    img = base_image(accent_color=MODS)
     draw = ImageDraw.Draw(img)
     tx = 900
     y_start = 180
     y_end = 480
     spacing = (y_end - y_start) // 2
-    draw.line([(tx, y_start), (tx, y_end)], fill=(*RED, 80), width=3)
+    draw.line([(tx, y_start), (tx, y_end)], fill=(*MODS, 80), width=3)
     steps = [('1', 'Describe your mod'), ('2', 'Upload the rules'), ('3', 'Publish & share')]
     for i, (num, label) in enumerate(steps):
         sy = y_start + i * spacing
         r = 18
-        draw.ellipse([tx - r, sy - r, tx + r, sy + r], fill=(*RED, 200))
+        draw.ellipse([tx - r, sy - r, tx + r, sy + r], fill=(*MODS, 200))
         draw.text((tx - 6, sy - 10), num, fill=(255, 255, 255, 255), font=load_font(18, True))
         draw.text((tx + 32, sy - 9), label,
                   fill=(220, 225, 235, 220), font=load_font(16))
-    add_text(img, 'SUBMIT A MOD', 'Ship Your Rules', 'Share your rules with the table', accent=RED)
+    add_text(img, 'SUBMIT A MOD', 'Ship Your Rules', 'Share your rules with the table', accent=MODS)
     save(img, 'img/og/submit.png')
 
 
@@ -275,7 +284,7 @@ def gen_team():
         layer = Image.new('RGBA', (WIDTH, HEIGHT), (0, 0, 0, 0))
         layer.paste(photo, (lx, ly), photo)
         img = Image.alpha_composite(img, layer)
-    add_text(img, 'MODDABLE.GAMES', 'The Team', '4 humans making games moddable')
+    add_text(img, 'MODDABLE.GAMES', 'The Team', '4 humans making games moddable', accent=ABOUT)
     save(img, 'img/og/team.png')
 
 
@@ -303,19 +312,19 @@ def gen_chess():
     )
     board_layer.putalpha(mask)
     img = Image.alpha_composite(img, board_layer)
-    add_text(img, 'PLAY ONLINE', 'Moddable Chess', '70 playable variants', accent=BLUE)
+    add_text(img, 'PLAY ONLINE', 'Moddable Chess', '70 playable variants', accent=ENGINES)
     save(img, 'img/og/games-moddable-chess.png')
 
 
 def gen_mods():
-    img = base_image(accent_color=(209, 26, 26))
-    add_text(img, 'MODDABLE.GAMES', 'The Mod Library', 'Open-source rulebook mods for the games on your shelf')
+    img = base_image(accent_color=MODS)
+    add_text(img, 'MODDABLE.GAMES', 'The Mod Library', 'Open-source rulebook mods for the games on your shelf', accent=MODS)
     save(img, 'img/og/mods.png')
 
 
 def gen_engines():
-    img = base_image(accent_color=(6, 182, 212))
-    add_text(img, 'FOUNDATIONS', 'Engines', 'Moddable Chess and Moddable Hexmaps', accent=(6, 182, 212))
+    img = base_image(accent_color=ENGINES)
+    add_text(img, 'FOUNDATIONS', 'Engines', 'Moddable Chess and Moddable Hexmaps', accent=ENGINES)
     save(img, 'img/og/engines.png')
 
 
