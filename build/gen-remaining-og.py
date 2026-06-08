@@ -317,18 +317,27 @@ def gen_chess_engine():
 def gen_hexmaps_engine():
     import math
     img = base_image(accent_color=ENGINES)
-    # Hex grid on right side
+    # Draw flat-top hexagons matching the site's hex-grid pattern (56x64 tile)
     hex_layer = Image.new('RGBA', (WIDTH, HEIGHT), (0, 0, 0, 0))
     hd = ImageDraw.Draw(hex_layer)
-    hex_size = 28
-    cx_start, cy_start = 780, 140
-    for row in range(10):
-        for col in range(8):
-            hx = cx_start + col * int(hex_size * 1.75) + (int(hex_size * 0.875) if row % 2 else 0)
-            hy = cy_start + row * int(hex_size * 1.5)
-            hd.regular_polygon((hx, hy, hex_size), 6,
-                               fill=(6, 182, 212, 25),
-                               outline=(6, 182, 212, 80))
+    size = 18  # radius
+    col_w = size * 1.5
+    row_h = size * math.sqrt(3)
+    for row in range(int(HEIGHT / row_h) + 2):
+        for col in range(int((WIDTH - 580) / col_w) + 2):
+            cx = 620 + col * col_w
+            cy = row * row_h + (row_h / 2 if col % 2 else 0)
+            # Flat-top hex vertices
+            pts = []
+            for i in range(6):
+                angle = math.radians(60 * i)
+                px = cx + size * math.cos(angle)
+                py = cy + size * math.sin(angle)
+                pts.append((px, py))
+            # Fade opacity based on x position
+            t = min(1.0, (cx - 620) / 400)
+            alpha = int(30 + 70 * t)
+            hd.polygon(pts, fill=None, outline=(6, 182, 212, alpha))
     img = Image.alpha_composite(img, hex_layer)
     add_text(img, 'ENGINE', 'Moddable Hexmaps', 'Shared hex map engine for 6 games', accent=ENGINES)
     save(img, 'img/og/engines-moddable-hexmaps.png')
