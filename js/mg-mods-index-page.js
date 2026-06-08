@@ -79,11 +79,6 @@
       MG.initReveal();
     }
 
-    var resizeTimer;
-    window.addEventListener('resize', function() {
-      clearTimeout(resizeTimer);
-      resizeTimer = setTimeout(renderGrid, 150);
-    });
 
     document.getElementById('search-input').addEventListener('input', function(e) { searchVal = e.target.value; renderGrid(); grid.scrollIntoView({ behavior:'smooth', block:'start' }); });
 
