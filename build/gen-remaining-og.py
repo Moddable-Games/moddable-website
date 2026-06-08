@@ -129,17 +129,18 @@ def gen_community():
         for col in range(20):
             hx = 500 + col * hex_size + (hex_size // 2 if row % 2 else 0)
             hy = row * hex_size
-            # Fade opacity from left to right
             t = min(1.0, (hx - 500) / 500)
             alpha = int(20 + 50 * t)
             hd.regular_polygon((hx, hy, hex_size // 3), 6,
                                fill=None, outline=(111, 181, 255, alpha))
     img = Image.alpha_composite(img, hex_layer)
-    # Large "2.4K" stat on right
+    # Centred stat in right zone
     draw = ImageDraw.Draw(img)
-    draw.text((820, 260), '2.4K', fill=(111, 181, 255, 60), font=load_font(140, True))
-    draw.text((820, 410), 'MEMBERS', fill=(111, 181, 255, 40), font=load_font(20, True))
-    add_text(img, 'DISCORD', 'Join the Table', '2,400+ rule-tinkerers and designers')
+    zone_cx = (560 + WIDTH - 80) // 2
+    font_big = load_font(120, True)
+    draw.text((zone_cx - 80, 240), '15', fill=(111, 181, 255, 70), font=font_big)
+    draw.text((zone_cx - 60, 370), 'MEMBERS', fill=(111, 181, 255, 45), font=load_font(18, True))
+    add_text(img, 'DISCORD', 'Join the Table', 'Rule-tinkerers and designers building mods together')
     save(img, 'img/og/community.png')
 
 
@@ -213,7 +214,7 @@ def gen_press():
 
 
 def gen_submit():
-    img = base_image(accent_color=GREEN)
+    img = base_image(accent_color=BLUE)
     draw = ImageDraw.Draw(img)
     # 3 bold vertical steps on right side
     tx = 900
@@ -221,16 +222,16 @@ def gen_submit():
     y_end = 480
     spacing = (y_end - y_start) // 2
     # Vertical line
-    draw.line([(tx, y_start), (tx, y_end)], fill=(*GREEN, 80), width=3)
+    draw.line([(tx, y_start), (tx, y_end)], fill=(*BLUE, 80), width=3)
     steps = [('1', 'Describe your mod'), ('2', 'Upload the rules'), ('3', 'Publish & share')]
     for i, (num, label) in enumerate(steps):
         sy = y_start + i * spacing
         r = 18
-        draw.ellipse([tx - r, sy - r, tx + r, sy + r], fill=(*GREEN, 200))
+        draw.ellipse([tx - r, sy - r, tx + r, sy + r], fill=(*BLUE, 200))
         draw.text((tx - 6, sy - 10), num, fill=(255, 255, 255, 255), font=load_font(18, True))
         draw.text((tx + 32, sy - 9), label,
                   fill=(220, 225, 235, 220), font=load_font(16))
-    add_text(img, 'COMMUNITY', 'Submit a Mod', 'Share your rules with the table', accent=GREEN)
+    add_text(img, 'SUBMIT', 'Submit a Mod', 'Share your rules with the table', accent=BLUE)
     save(img, 'img/og/submit.png')
 
 
