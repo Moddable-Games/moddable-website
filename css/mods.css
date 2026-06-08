@@ -30,6 +30,8 @@ body { background: #f5f4ef; }
   .mods-filter { padding: 20px 20px 72px; }
   .mods-filter__bar { flex-direction: column; align-items: center; gap: 12px; padding: 12px 0; margin-bottom: 20px; }
   .mods-filter__search-wrap { max-width: none; width: 100%; flex: none; }
+  .mods-filter__search-icon { display: none; }
+  .mods-filter__search { padding-left: 16px; }
   .mods-filter__cats { margin-left: 0; justify-content: center; }
   .mods-filter__meta { justify-content: center; }
 }
