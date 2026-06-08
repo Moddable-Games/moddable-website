@@ -28,4 +28,6 @@ body { background: #f5f4ef; }
   .about-sidebar { position: static; }
   .about-main { padding: 48px 20px 64px; }
   .about-lede { font-size: 18px; }
+  .about-sidebar__eyebrow { text-align: center; }
+  .about-sidebar__card-title { text-align: center; }
 }

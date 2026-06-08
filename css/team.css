@@ -96,7 +96,8 @@ body { background: #f5f4ef; }
   .team-grid { grid-template-columns: repeat(2, 1fr); gap: 24px; row-gap: 180px; }
 }
 
-@media (max-width: 600px) {
+@media (max-width: 768px) {
+  .team-section { padding: 0 20px 64px; }
   .team-grid { grid-template-columns: 1fr; max-width: 360px; margin-top: 180px; row-gap: 160px; }
   .card-avatar { height: 160px; }
   .card-avatar .img-breakout {

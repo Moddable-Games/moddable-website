@@ -90,12 +90,22 @@ body { background:#f5f4ef; }
 .dice-breakdown { font-family:var(--mg-font-mono); font-size:13px; color:#636b78; margin-bottom:20px; min-height:20px; }
 
 /* ── Responsive ───────────────────────────────────────────────────── */
-@media (max-width: 720px) {
+@media (max-width: 768px) {
+  .dice-hero { padding:40px 20px 56px; text-align:center; }
+  .dice-hero__lede { margin-left:auto; margin-right:auto; }
   .dice-body { padding:36px 20px 64px; }
-  .dice-panel { padding:20px; }
+  .dice-panel { padding:20px; text-align:center; }
+  .dice-tabs { justify-content:center; }
   .dice-sides { grid-template-columns:1fr; }
   .dice-vs { padding-top:0; }
   .dice-side { padding:14px; }
+  .dice-row { justify-content:center; }
   .dice-row__label { min-width:80px; }
+  .dice-run { justify-content:center; }
   .dice-result { font-size:56px; }
+  .dice-controls { justify-content:center; }
+  .dice-controls__modifier { margin-left:0; }
+  .dice-results__row { flex-direction:column; align-items:stretch; gap:6px; }
+  .dice-results__label { min-width:unset; text-align:center; }
+  .dice-results__pct { text-align:center; }
 }
