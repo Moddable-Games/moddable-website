@@ -27,9 +27,9 @@ body { background: #f5f4ef; }
 @media (max-width: 768px) {
   .mods-hero { padding: 48px 20px 64px; text-align: center; }
   .mods-hero__lede { margin-left: auto; margin-right: auto; }
-  .mods-filter { padding: 32px 20px 72px; }
-  .mods-filter__bar { flex-direction: column; align-items: center; }
-  .mods-filter__search-wrap { max-width: none; }
+  .mods-filter { padding: 20px 20px 72px; }
+  .mods-filter__bar { flex-direction: column; align-items: center; gap: 12px; padding: 12px 0; margin-bottom: 20px; }
+  .mods-filter__search-wrap { max-width: none; width: 100%; flex: none; }
   .mods-filter__cats { margin-left: 0; justify-content: center; }
   .mods-filter__meta { justify-content: center; }
 }
