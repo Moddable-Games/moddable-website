@@ -388,6 +388,35 @@ input[type=range] { width: 100%; accent-color: #0c4f8d; }
   .role-chips { justify-content: center; }
   .role-btns { justify-content: center; }
   .role-add { justify-content: center; }
+
+  /* Centre all button groups */
+  .name-gen__btns { justify-content: center; }
+  .score-board__btns { justify-content: center; }
+  .timer-buttons { justify-content: center; }
+  .init-buttons { justify-content: center; }
+  .vote-buttons { justify-content: center; }
+  .vote-results__btns { justify-content: center; }
+  .seating-buttons { justify-content: center; }
+  .res-btns { justify-content: center; }
+  .bag-btns { justify-content: center; }
+  .grid-control__btns { justify-content: center; }
+  .map-grid__btns { justify-content: center; }
+  .odds-presets { justify-content: center; }
+  .bag-presets { justify-content: center; }
+  .role-presets { justify-content: center; }
+  .res-presets { justify-content: center; }
+
+  /* Full-width inputs */
+  .timer-players__input { width: 100%; }
+  .init-add { flex-direction: column; align-items: stretch; }
+  .init-add__input--name { width: 100%; }
+  .init-add__input--number { width: 100%; }
+  .res-add { flex-direction: column; align-items: stretch; }
+  .res-add__input { width: 100%; }
+  .bag-add { flex-direction: column; align-items: stretch; }
+  .bag-add__input { width: 100%; }
+  .seating-add { flex-direction: column; align-items: stretch; }
+  .seating-add__input { width: 100%; }
   .dice-result { font-size: 56px; }
   .name-gen__result { font-size: 36px; }
   .timer-display { font-size: 48px; }
