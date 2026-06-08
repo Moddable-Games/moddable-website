@@ -89,11 +89,20 @@
 
     let drawerOpen = false;
     hamburger.setAttribute('aria-expanded', 'false');
+    function closeDrawer() {
+      drawerOpen = false;
+      drawer.classList.remove('mg-navbar__drawer--open');
+      hamburger.textContent = '☰';
+      hamburger.setAttribute('aria-expanded', 'false');
+    }
     hamburger.addEventListener('click', () => {
       drawerOpen = !drawerOpen;
       drawer.classList.toggle('mg-navbar__drawer--open', drawerOpen);
       hamburger.textContent = drawerOpen ? '✕' : '☰';
       hamburger.setAttribute('aria-expanded', String(drawerOpen));
+    });
+    drawer.addEventListener('click', (e) => {
+      if (e.target.tagName === 'A') closeDrawer();
     });
 
     document.addEventListener('DOMContentLoaded', () => {
