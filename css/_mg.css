@@ -364,10 +364,10 @@ button:focus-visible, a:focus-visible, input:focus-visible, textarea:focus-visib
 .mg-eyebrow--blue { color: var(--mg-blue); }
 .mg-eyebrow--red { color: var(--mg-red); }
 .mg-eyebrow--glow { color: var(--mg-cosmic-glow); text-shadow: 0 0 12px rgba(111,181,255,0.5); }
-.mg-heading-xl { font-family: var(--mg-font-display); font-weight: 600; font-size: clamp(36px, 4.5vw, 56px); line-height: 1.05; letter-spacing: -0.025em; color: var(--mg-ink); margin: 0 0 48px; }
+.mg-heading-xl { font-family: var(--mg-font-display); font-weight: 600; font-size: clamp(36px, 4.5vw, 56px); line-height: 1.05; letter-spacing: -0.025em; color: var(--mg-ink); margin: 0 0 48px; text-wrap: balance; }
 .mg-heading-xl--light { color: #fff; }
-.mg-heading-lg { font-family: var(--mg-font-display); font-weight: 600; font-size: clamp(32px, 4vw, 48px); line-height: 1.05; letter-spacing: -0.025em; color: var(--mg-ink); margin: 0 0 12px; }
-.mg-heading-md { font-family: var(--mg-font-display); font-weight: 600; font-size: 32px; line-height: 1.15; letter-spacing: -0.4px; color: var(--mg-ink); margin: 0 0 16px; }
+.mg-heading-lg { font-family: var(--mg-font-display); font-weight: 600; font-size: clamp(32px, 4vw, 48px); line-height: 1.05; letter-spacing: -0.025em; color: var(--mg-ink); margin: 0 0 12px; text-wrap: balance; }
+.mg-heading-md { font-family: var(--mg-font-display); font-weight: 600; font-size: 32px; line-height: 1.15; letter-spacing: -0.4px; color: var(--mg-ink); margin: 0 0 16px; text-wrap: balance; }
 .mg-body-sub { font-family: var(--mg-font-body); font-size: 16px; line-height: 1.55; color: var(--mg-mute); margin: 0 0 32px; max-width: 720px; text-wrap: balance; }
 .mg-body-sub--light { color: rgba(255,255,255,0.78); }
 .mg-text-center { text-align: center; margin-left: auto; margin-right: auto; }
