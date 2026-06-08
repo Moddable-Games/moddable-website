@@ -12,6 +12,7 @@ WIDTH, HEIGHT = 1200, 630
 BG = (10, 13, 42)
 
 COLORS = {
+    'Conversion': (209, 26, 26),
     'Total conversion': (209, 26, 26),
     'Rebalance': (58, 153, 40),
     'Reskin': (12, 79, 141),
