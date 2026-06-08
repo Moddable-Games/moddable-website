@@ -381,7 +381,7 @@ input[type=range] { width: 100%; accent-color: #0c4f8d; }
   .tools-jumpnav__link { font-size: 12px; height: 28px; padding: 0 10px; }
   .tools-filter { padding: 12px 20px; justify-content: center; }
   .tool-card { padding: 24px 20px; text-align: center; }
-  .tool-card__header { flex-direction: column; align-items: center; }
+  .tool-card__accent { display: none; }
   .tool-card__tags { justify-content: center; }
   .mod-tool-card { text-align: center; align-items: center; }
   .mod-tool-card__cta { align-self: center; }
