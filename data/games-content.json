@@ -298,7 +298,7 @@
   "dungeon-chess": {
     "slug": "dungeon-chess",
     "title": "Dungeon Chess",
-    "accent": "green",
+    "accent": "red",
     "heroImage": "/img/dungeon-chess/03_logo_all_white.png",
     "colors": {
       "gradient": "linear-gradient(180deg,#0a1f0a 0%,#0d2a0d 40%,#000 100%)",
