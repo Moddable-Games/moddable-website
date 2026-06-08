@@ -307,7 +307,7 @@ def gen_chess():
     )
     board_layer.putalpha(mask)
     img = Image.alpha_composite(img, board_layer)
-    add_text(img, 'PLAY ONLINE', 'Moddable Chess', '39 playable variants', accent=BLUE)
+    add_text(img, 'PLAY ONLINE', 'Moddable Chess', '70 playable variants', accent=BLUE)
     save(img, 'img/og/games-moddable-chess.png')
 
 

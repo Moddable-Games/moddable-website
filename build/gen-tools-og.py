@@ -18,9 +18,16 @@ TOOLS = [
         'icon': 'dice',
     },
     {
+        'slug': 'tools-dice',
+        'title': 'Dice Lab',
+        'subtitle': 'Roll any dice · Simulate combat for 7 systems',
+        'color': (209, 26, 26),
+        'icon': 'dice',
+    },
+    {
         'slug': 'tools-chess',
         'title': 'Chess Tools',
-        'subtitle': '39 playable variants',
+        'subtitle': '70 playable variants',
         'color': (12, 79, 141),
         'icon': 'chess',
     },
