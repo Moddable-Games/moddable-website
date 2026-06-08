@@ -907,16 +907,16 @@ button:focus-visible, a:focus-visible, input:focus-visible, textarea:focus-visib
 
   /* Rules layout */
   .rules-layout { grid-template-columns: 1fr !important; gap: 32px !important; }
-  .rules-sidebar { position: static !important; text-align: center; }
-  .rules-sidebar .toc-list { align-items: center; }
-  .rules-sidebar .mg-eyebrow { justify-content: center; }
+  .rules-sidebar { display: none !important; }
 
   /* Rules sections */
+  .rules-section__num { text-align: center; }
   .rules-section__title { text-align: center; }
   .rules-section__body { margin-left: auto; margin-right: auto; text-align: center; }
 
   /* Rules list (community mods) */
   .rules-list__item { text-align: center; }
+  .rules-list__num { text-align: center; }
   .rules-list__title { text-align: center; }
   .rules-list__body { text-align: center; }
 
