@@ -377,6 +377,7 @@ button:focus-visible, a:focus-visible, input:focus-visible, textarea:focus-visib
 .mg-card { background: #fff; border: 1px solid var(--mg-hairline-light); border-radius: 16px; padding: 24px; }
 .mg-card--light { background: #fff; }
 .mg-section--white .mg-card--light { background: var(--mg-canvas-light); }
+.mg-section--white .mg-card { background: var(--mg-canvas-light); }
 .mg-card--featured { background: var(--mg-ink); border-color: var(--mg-ink); }
 .mg-card--featured .mg-card__title { color: #fff; }
 .mg-card--featured .mg-card__body { color: rgba(255,255,255,0.7); }
