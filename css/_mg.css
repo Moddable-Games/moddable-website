@@ -286,31 +286,6 @@ button:focus-visible, a:focus-visible, input:focus-visible, textarea:focus-visib
 .mg-section--dark { background: #000; color: #fff; }
 .mg-section--border-top { border-top: 1px solid var(--mg-hairline-light); }
 
-/* ── Mod detail hero ─────────────────────────────────────────────────── */
-.mod-hero { position: relative; color: #fff; overflow: hidden; isolation: isolate; background: #000; }
-.mod-hero__hex { position: absolute; inset: 0; width: 100%; height: 100%; object-fit: cover; opacity: 0.18; pointer-events: none; }
-.mod-hero__glow { position: absolute; right: -200px; top: 40%; width: 700px; height: 700px; pointer-events: none; border-radius: 50%; }
-.mod-hero__glow--red { background: radial-gradient(circle, rgba(209,26,26,0.5) 0%, transparent 60%); }
-.mod-hero__glow--green { background: radial-gradient(circle, rgba(58,153,40,0.5) 0%, transparent 60%); }
-.mod-hero__glow--blue { background: radial-gradient(circle, rgba(12,79,141,0.5) 0%, transparent 60%); }
-.mod-hero__inner { position: relative; z-index: 2; padding: 56px 32px 100px; max-width: 1200px; margin: 0 auto; box-sizing: border-box; }
-.mod-hero__back { font-family: var(--mg-font-mono); font-size: 12px; color: rgba(255,255,255,0.7); text-decoration: none; }
-.mod-hero__tags { display: flex; gap: 10px; margin-top: 24px; flex-wrap: wrap; align-items: center; }
-.mod-hero__cat { font-family: var(--mg-font-body); font-weight: 600; font-size: 11px; color: #fff; padding: 4px 10px; border-radius: 9999px; }
-.mod-hero__cat--red { background: var(--mg-red); }
-.mod-hero__cat--green { background: var(--mg-green); }
-.mod-hero__cat--blue { background: var(--mg-blue); }
-.mod-hero__base { font-family: var(--mg-font-mono); font-size: 11px; color: rgba(255,255,255,0.7); padding: 4px 10px; border: 1px solid rgba(255,255,255,0.2); border-radius: 9999px; }
-.mod-hero__version { font-family: var(--mg-font-pixel); font-size: 9px; color: var(--mg-cosmic-glow); padding: 5px 10px; letter-spacing: 1px; }
-.mod-hero__title { font-family: var(--mg-font-display); font-weight: 600; font-size: clamp(48px, 7vw, 96px); line-height: 1.0; letter-spacing: -0.025em; margin: 20px 0 24px; max-width: 1000px; }
-.mod-hero__title em { color: var(--mg-cosmic-glow); }
-.mod-hero__title--red em { color: #ff4444; }
-.mod-hero__title--green em { color: #4db83a; }
-.mod-hero__lede { font-family: var(--mg-font-body); font-size: 19px; line-height: 1.55; color: rgba(255,255,255,0.78); max-width: 720px; margin: 0 0 36px; text-wrap: balance; }
-.mod-hero__btns { display: flex; gap: 12px; flex-wrap: wrap; margin-bottom: 40px; }
-.mod-hero__logo { position: absolute; right: 32px; top: 56px; bottom: 180px; width: clamp(160px, 20vw, 280px); height: auto; margin: auto 0; opacity: 0.85; pointer-events: none; }
-@media (max-width: 900px) { .mod-hero__logo { display: none; } }
-
 /* ── Stats row (dark bg) ─────────────────────────────────────────────── */
 .stats-row { display: flex; gap: 0; align-items: center; flex-wrap: wrap; padding-top: 28px; border-top: 1px solid rgba(255,255,255,0.12); }
 .stats-row__divider { width: 1px; height: 24px; background: rgba(255,255,255,0.12); margin: 0 20px; }
@@ -420,10 +395,6 @@ button:focus-visible, a:focus-visible, input:focus-visible, textarea:focus-visib
 .mods-submit-cta__title { font-family: var(--mg-font-display); font-weight: 600; font-size: 22px; margin: 12px 0 8px; color: var(--mg-ink); }
 .mods-submit-cta__body { font-family: var(--mg-font-body); font-size: 15px; line-height: 1.5; color: var(--mg-mute); margin: 0 0 20px; text-wrap: balance; }
 .mods-submit-cta__btn { display: inline-flex; align-items: center; height: 40px; padding: 0 20px; background: var(--mg-green); color: #fff; border-radius: 9999px; font-family: var(--mg-font-body); font-weight: 600; font-size: 14px; }
-
-/* ── Mod hero hex variant (animated tiled bg instead of img) ──────────── */
-.mod-hero__hex-bg { position: absolute; inset: 0; opacity: 0.18; background-repeat: repeat; background-size: 340px; animation: hexFloat 18s linear infinite; pointer-events: none; }
-.mod-hero__hex-bg--slow { animation-duration: 20s; opacity: 0.12; }
 
 /* ── Source / license footer ─────────────────────────────────────────── */
 .mod-source { display: flex; gap: 32px; flex-wrap: wrap; }
@@ -547,7 +518,6 @@ button:focus-visible, a:focus-visible, input:focus-visible, textarea:focus-visib
 .home-engine__heading em { color: var(--mg-cosmic-glow); font-style: italic; }
 .home-engine__body { font-family: var(--mg-font-body); font-size: 18px; line-height: 1.65; color: rgba(255,255,255,0.82); max-width: 600px; margin: 0 0 40px; }
 .home-engine__grid { display: grid; grid-template-columns: repeat(auto-fit, minmax(220px, 1fr)); gap: 16px; max-width: 800px; }
-.home-tabs__cards { display: flex; flex-direction: column; gap: 12px; width: 100%; }
 .home-engine__card { padding: 20px; background: rgba(255,255,255,0.06); border: 1px solid rgba(255,255,255,0.1); border-radius: 14px; }
 .home-engine__card-title { font-family: var(--mg-font-display); font-weight: 600; font-size: 15px; color: #fff; margin-bottom: 6px; }
 .home-engine__card-body { font-family: var(--mg-font-body); font-size: 13px; line-height: 1.5; color: rgba(255,255,255,0.65); }
@@ -862,8 +832,6 @@ button:focus-visible, a:focus-visible, input:focus-visible, textarea:focus-visib
   .mg-card__link { align-self: center; }
 
   /* Flex pill/tag containers */
-  .mod-hero__tags { justify-content: center; }
-  .mod-hero__btns { justify-content: center; }
   .game-hero__tags { justify-content: center; }
   .game-hero__btns { justify-content: center; }
   .home-hex__pills { justify-content: center; }
@@ -890,12 +858,6 @@ button:focus-visible, a:focus-visible, input:focus-visible, textarea:focus-visib
   .game-hero__tags { justify-content: center; }
   .game-hero__btns { justify-content: center; }
   .game-hero__logo { justify-self: center; }
-
-  /* Mod hero mobile centering */
-  .mod-hero__inner { text-align: center; padding: 40px 20px 72px; }
-  .mod-hero__lede { margin-left: auto; margin-right: auto; }
-  .mod-hero__btns { justify-content: center; }
-  .mod-hero__tags { justify-content: center; }
 
   /* Compact hero (community mods) */
   .compact-hero__inner { text-align: center; padding: 48px 20px 64px; }
