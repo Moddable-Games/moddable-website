@@ -1,6 +1,6 @@
 (function() {
 var HEX_BASE = location.hostname === 'localhost'
-  ? '/MODDABLE/moddable-hexmaps/generate/'
+  ? location.origin + '/MODDABLE/moddable-hexmaps/generate/'
   : 'https://hex.moddable.games/generate/';
 
 var GAME_CONFIG = {
@@ -185,6 +185,8 @@ function initHexmapEmbed(game, opts) {
     iframe.className = 'hexmap-embed__iframe';
     iframe.setAttribute('title', 'Hex map generator — ' + game);
     iframe.setAttribute('scrolling', 'no');
+    iframe.setAttribute('allow', 'fullscreen');
+    iframe.setAttribute('allowfullscreen', '');
     frameWrap.appendChild(iframe);
     var seedSpan = controlsEl.querySelector('.hexmap-embed__seed');
     if (seedSpan) seedSpan.textContent = 'seed: ' + String(currentSeed).padStart(4, '0');
@@ -208,11 +210,13 @@ function initHexmapEmbed(game, opts) {
       }
       navigator.clipboard.writeText(shareUrl);
     }));
-    var fullLink = MG.linkBtn('Full Screen',
-      HEX_BASE + '?game=' + game + '&seed=' + currentSeed + '&style=' + currentStyle + '&mode=fullscreen',
-      'outline-light');
-    fullLink.setAttribute('target', '_blank');
-    fullLink.setAttribute('rel', 'noopener');
+    var fullLink = MG.btn('Full Screen', 'outline-light', function() {
+      if (iframe && iframe.requestFullscreen) {
+        iframe.requestFullscreen();
+      } else if (iframe && iframe.webkitRequestFullscreen) {
+        iframe.webkitRequestFullscreen();
+      }
+    });
     actionsEl.appendChild(fullLink);
   }
 

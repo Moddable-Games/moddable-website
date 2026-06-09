@@ -14,18 +14,20 @@ document.getElementById('page-hero').appendChild(MG.sectionHero({
 
 /* ── CHARACTER LOTTERY ── */
 const CHARS = [
-  { name:'Warrior',   str:4, cft:2, lives:4 },
-  { name:'Wizard',    str:2, cft:4, lives:4 },
-  { name:'Druid',     str:3, cft:3, lives:4 },
-  { name:'Priest',    str:2, cft:4, lives:4 },
-  { name:'Sorceress', str:2, cft:4, lives:3 },
-  { name:'Thief',     str:2, cft:3, lives:4 },
-  { name:'Troll',     str:5, cft:1, lives:5 },
-  { name:'Ghoul',     str:3, cft:3, lives:4 },
-  { name:'Assassin',  str:3, cft:2, lives:4 },
-  { name:'Minstrel',  str:2, cft:3, lives:4 },
-  { name:'Monk',      str:3, cft:3, lives:4 },
-  { name:'Dwarf',     str:4, cft:2, lives:5 },
+  { name:'Assassin',   str:3, cft:3, lives:4, fate:3, align:'Evil',    ability:'May choose to attack with Craft instead of Strength in battle' },
+  { name:'Druid',      str:2, cft:4, lives:4, fate:4, align:'Neutral', ability:'May force any character who lands on his space to miss a turn' },
+  { name:'Dwarf',      str:3, cft:3, lives:5, fate:5, align:'Neutral', ability:'May carry any amount of gold; adds 1 to his Craft when using an axe' },
+  { name:'Elf',        str:3, cft:4, lives:4, fate:3, align:'Good',    ability:'Does not have to roll the die for movement; may move 1 to 6 spaces' },
+  { name:'Ghoul',      str:2, cft:4, lives:4, fate:4, align:'Evil',    ability:'Does not lose a life in the Graveyard; may take Followers from the discard pile' },
+  { name:'Minstrel',   str:2, cft:4, lives:4, fate:5, align:'Good',    ability:'May use his Craft instead of Strength when encountering animals' },
+  { name:'Monk',       str:2, cft:3, lives:4, fate:5, align:'Good',    ability:'May add 2 to his attack roll in battle or psychic combat against Evil characters' },
+  { name:'Priest',     str:2, cft:4, lives:4, fate:5, align:'Good',    ability:'May heal himself or another character on the same space for 1 life' },
+  { name:'Prophetess', str:2, cft:4, lives:4, fate:2, align:'Good',    ability:'May draw 2 Adventure cards whenever instructed to draw 1, keeping one and discarding the other' },
+  { name:'Sorceress',  str:2, cft:4, lives:4, fate:3, align:'Evil',    ability:'May cast a Random Spell at the start of each turn without using a Spell slot' },
+  { name:'Thief',      str:3, cft:3, lives:4, fate:2, align:'Neutral', ability:'May steal gold or an Object from any character he lands on' },
+  { name:'Troll',      str:6, cft:1, lives:6, fate:1, align:'Neutral', ability:'Regenerates up to full life at the start of each turn' },
+  { name:'Warrior',    str:4, cft:2, lives:5, fate:1, align:'Neutral', ability:'May roll 2 dice in battle and use either result for his attack roll' },
+  { name:'Wizard',     str:2, cft:5, lives:4, fate:3, align:'Evil',    ability:'May take one Spell whenever he kills an Enemy in psychic combat' },
 ];
 let charCount = 4;
 
