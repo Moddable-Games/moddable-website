@@ -149,7 +149,7 @@ MG.data.load(['mods','news']).then(store => {
     baseGames.forEach(f => {
       const isActive = f === activeFilter;
       const b = el('button', { class: isActive ? 'filter-btn filter-btn--active' : 'filter-btn' }, f);
-      b.addEventListener('click', () => { activeFilter = f; renderFilter(); renderGrid(); });
+      b.addEventListener('click', () => { activeFilter = f; renderFilter(); renderGrid(); if (MG.track) MG.track('filter_select', { filter_type: 'base_game', filter_value: f, page: 'home' }); });
       filtersEl.appendChild(b);
     });
   }
@@ -167,6 +167,7 @@ MG.data.load(['mods','news']).then(store => {
   const ng = document.getElementById('news-grid');
   store.news.slice(0, 3).forEach(n => {
     const a = el('a', { href:url(`/news/${n.slug}/`), class:'news-card mg-lift', 'data-reveal':'up' });
+    a.addEventListener('click', function() { if (MG.track) MG.track('select_content', { content_type: 'news', item_id: n.slug }); });
     const row = el('div', { class:'news-card__header' });
     row.appendChild(el('span', { class:'news-card__tag' }, n.tags[0]));
     row.appendChild(el('span', { class:'news-card__date' }, n.date));

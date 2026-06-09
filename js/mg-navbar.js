@@ -30,6 +30,7 @@
       };
       if (isActive) aAttrs['aria-current'] = 'page';
       const a = el('a', aAttrs, item.id);
+      a.addEventListener('click', function() { if (MG.track) MG.track('nav_click', { nav_item: item.id, nav_source: 'desktop' }); });
       if (isActive) {
         var bar = el('span', { class:'mg-navbar__active-bar' });
         if (item.accent) bar.style.background = item.accent;
@@ -100,9 +101,13 @@
       drawer.classList.toggle('mg-navbar__drawer--open', drawerOpen);
       hamburger.textContent = drawerOpen ? '✕' : '☰';
       hamburger.setAttribute('aria-expanded', String(drawerOpen));
+      if (drawerOpen && MG.track) MG.track('nav_drawer_open');
     });
     drawer.addEventListener('click', (e) => {
-      if (e.target.tagName === 'A') closeDrawer();
+      if (e.target.tagName === 'A') {
+        if (MG.track) MG.track('nav_click', { nav_item: e.target.textContent, nav_source: 'drawer' });
+        closeDrawer();
+      }
     });
 
     document.addEventListener('DOMContentLoaded', () => {

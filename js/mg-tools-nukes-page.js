@@ -91,6 +91,7 @@ function renderCombat() {
   calculate();
 }
 
+var combatCalcDebounce = null;
 function calculate() {
   const atkUnits = parseInt(document.getElementById('atk-units').value) || 0;
   const atkAdj = parseInt(document.getElementById('atk-adj').value) || 0;
@@ -100,6 +101,9 @@ function calculate() {
 
   const atkTotal = atkUnits + atkAdj + atkBases;
   const defTotal = defUnits + defBases;
+
+  clearTimeout(combatCalcDebounce);
+  combatCalcDebounce = setTimeout(function() { if (MG.track) MG.track('combat_calculate', { atk_strength: atkTotal, def_strength: defTotal, tool: 'nukes' }); }, 1000);
 
   document.getElementById('atk-total').textContent = 'Strength: ' + atkTotal;
   document.getElementById('def-total').textContent = 'Strength: ' + defTotal;

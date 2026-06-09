@@ -25,6 +25,7 @@ function setFilter(cat, month) {
   renderPosts(true);
   renderTopics();
   renderArchive();
+  if (MG.track) MG.track('filter_select', { filter_type: cat !== 'All' ? 'topic' : 'month', filter_value: cat !== 'All' ? cat : month || 'all', page: 'news' });
 }
 
 function postCover(post, big=false) {
@@ -139,7 +140,14 @@ const searchWrap = el('div');
 searchWrap.appendChild(el('div',{class:'mg-eyebrow mg-eyebrow--blue'},'SEARCH'));
 const si = el('div',{class:'news-search-wrap'});
 const inp = el('input',{type:'search',placeholder:'Search the archive…',class:'news-search-wrap__input'});
-inp.addEventListener('input',e=>{searchVal=e.target.value;renderPosts();});
+var newsSearchDebounce = null;
+inp.addEventListener('input',e=>{
+  searchVal=e.target.value;renderPosts();
+  clearTimeout(newsSearchDebounce);
+  if (searchVal.length >= 3) {
+    newsSearchDebounce = setTimeout(function() { if (MG.track) MG.track('search', { search_term: searchVal, page: 'news' }); }, 800);
+  }
+});
 si.appendChild(el('span',{class:'news-search-wrap__icon'},'⌕'));
 si.appendChild(inp); searchWrap.appendChild(si); sidebar.appendChild(searchWrap);
 

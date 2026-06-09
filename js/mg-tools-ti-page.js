@@ -50,6 +50,7 @@ function renderHandBtns() {
 }
 
 function deal() {
+  if (MG.track) MG.track('faction_pick', { player_count: playerCount, hand_size: handSize });
   const factions = getFactions();
   const shuffled = [...factions].sort(() => Math.random()-0.5);
   const hands = document.getElementById('faction-hands'); hands.innerHTML = '';
@@ -161,6 +162,7 @@ function drawAgenda() {
   currentAgenda = pool[Math.floor(Math.random()*pool.length)];
   votes = {for:0, against:0};
   renderAgenda();
+  if (MG.track) MG.track('agenda_draw', { agenda_title: currentAgenda.title });
 }
 
 function renderAgenda() {

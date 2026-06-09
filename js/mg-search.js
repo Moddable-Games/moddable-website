@@ -102,6 +102,7 @@
       }
       matches.slice(0, 8).forEach((item, i) => {
         const a = el('a', {href:item.href, class:'mg-search-result' + (i===0?' mg-search-result--active':'')});
+        a.addEventListener('click', function() { if (MG.track) MG.track('select_content', { content_type: item.type, item_id: item.title }); });
         const badge = el('span', {class:'mg-search-result__type mg-search-result__type--'+item.type}, item.type);
         const content = el('div', {class:'mg-search-result__content'});
         content.appendChild(el('div', {class:'mg-search-result__title'}, item.title));
@@ -113,7 +114,15 @@
     }
 
     renderResults('');
-    input.addEventListener('input', () => renderResults(input.value.trim()));
+    let searchDebounce = null;
+    input.addEventListener('input', () => {
+      const val = input.value.trim();
+      renderResults(val);
+      clearTimeout(searchDebounce);
+      if (val.length >= 3) {
+        searchDebounce = setTimeout(() => { if (MG.track) MG.track('search', { search_term: val }); }, 800);
+      }
+    });
 
     let activeIdx = 0;
     input.addEventListener('keydown', (e) => {

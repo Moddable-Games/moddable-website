@@ -28,7 +28,10 @@
     const b = el('button', { class: 'mg-btn' });
     applyVariant(b, variant);
     b.innerHTML = label;
-    if (onClick) b.addEventListener('click', onClick);
+    if (onClick) b.addEventListener('click', function(e) {
+      if (window.MG.track) window.MG.track('cta_click', { cta_label: label, cta_variant: variant });
+      onClick(e);
+    });
     return b;
   }
 
@@ -41,6 +44,15 @@
     });
     applyVariant(a, variant);
     a.innerHTML = label;
+    a.addEventListener('click', function() {
+      if (window.MG.track) {
+        if (isExternal) {
+          window.MG.track('outbound_click', { link_url: href, link_label: label });
+        } else {
+          window.MG.track('cta_click', { cta_label: label, cta_url: href, cta_variant: variant });
+        }
+      }
+    });
     return a;
   }
 

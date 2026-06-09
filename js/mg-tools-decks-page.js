@@ -157,6 +157,7 @@ function deal() {
   const all = [];
   deck.forEach(c => { for (let i = 0; i < c.qty; i++) all.push(c.name); });
   if (all.length === 0) return;
+  if (MG.track) MG.track('deck_deal', { player_count: playerCount, cards_per_hand: cardsPerHand, total_cards: all.length });
 
   const shuffled = shuffle(all);
   const handSize = cardsPerHand === 'All' ? Math.floor(shuffled.length / playerCount) : cardsPerHand;
@@ -184,6 +185,7 @@ function renderPresets() {
       deck = JSON.parse(JSON.stringify(PRESETS[name]));
       renderDesigner();
       renderDealer();
+      if (MG.track) MG.track('deck_preset_select', { preset: name });
     }));
   });
   wrap.appendChild(grid);

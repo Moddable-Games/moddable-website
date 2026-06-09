@@ -33,7 +33,7 @@
         var b = document.createElement('button');
         b.className = 'mods-filter__btn' + (a ? ' mods-filter__btn--active' : '');
         b.textContent = f;
-        b.addEventListener('click', function() { activeCat = f; renderFilters(); renderGrid(); grid.scrollIntoView({ behavior:'smooth', block:'start' }); });
+        b.addEventListener('click', function() { activeCat = f; renderFilters(); renderGrid(); grid.scrollIntoView({ behavior:'smooth', block:'start' }); if (MG.track) MG.track('filter_select', { filter_type: 'category', filter_value: f, page: 'mods' }); });
         el2.appendChild(b);
       });
     }
@@ -80,7 +80,14 @@
     }
 
 
-    document.getElementById('search-input').addEventListener('input', function(e) { searchVal = e.target.value; renderGrid(); grid.scrollIntoView({ behavior:'smooth', block:'start' }); });
+    var modsSearchDebounce = null;
+    document.getElementById('search-input').addEventListener('input', function(e) {
+      searchVal = e.target.value; renderGrid(); grid.scrollIntoView({ behavior:'smooth', block:'start' });
+      clearTimeout(modsSearchDebounce);
+      if (searchVal.length >= 3) {
+        modsSearchDebounce = setTimeout(function() { if (MG.track) MG.track('search', { search_term: searchVal, page: 'mods' }); }, 800);
+      }
+    });
 
     var hashCat = decodeURIComponent(location.hash.slice(1));
     if (hashCat && filters.indexOf(hashCat) !== -1) activeCat = hashCat;

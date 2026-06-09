@@ -42,6 +42,7 @@ function renderCharBtns() {
 }
 
 function drawChars() {
+  if (MG.track) MG.track('character_draw', { player_count: charCount, tool: 'talisman' });
   const picks = [...CHARS].sort(()=>Math.random()-0.5).slice(0,charCount);
   const grid = document.getElementById('char-grid'); grid.innerHTML = '';
   picks.forEach((c,i) => {
@@ -105,6 +106,7 @@ function renderRingFilters() {
 function drawEncounter() {
   const pool = ENCOUNTERS[activeRing];
   const enc = pool[Math.floor(Math.random()*pool.length)];
+  if (MG.track) MG.track('encounter_draw', { ring: activeRing, encounter_title: enc.title });
   const card = document.getElementById('encounter-card');
   card.innerHTML = '';
   const c = el('div',{class:'encounter-card__inner'});

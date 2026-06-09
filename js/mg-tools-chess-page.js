@@ -49,6 +49,7 @@ data.get('chess-variants').then(function(raw) {
       renderPicker();
       renderRules();
       renderMatch();
+      if (MG.track) MG.track('chess_variant_select', { variant: VARIANTS[currentIdx].name });
     }));
   }
 
@@ -92,6 +93,7 @@ data.get('chess-variants').then(function(raw) {
       currentIdx = parseInt(sel.value);
       renderPicker();
       renderRules();
+      if (MG.track) MG.track('chess_variant_select', { variant: VARIANTS[currentIdx].name, source: 'dropdown' });
     });
     variantRow.appendChild(sel);
     form.appendChild(variantRow);
@@ -129,6 +131,7 @@ data.get('chess-variants').then(function(raw) {
       const v = VARIANTS[currentIdx];
       if (!v.key) return;
       const mode = document.getElementById('mode-select').value;
+      if (MG.track) MG.track('chess_match_start', { variant: v.name, mode: mode });
       const p1Name = (document.getElementById('p1-name').value.trim()) || 'White';
       const p2Name = mode === 'solo' ? 'AI' : ((document.getElementById('p2-name').value.trim()) || 'Black');
       const boardSection = document.getElementById('chess-embed-wrap');

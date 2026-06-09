@@ -37,7 +37,10 @@
     inner.appendChild(link);
 
     card.appendChild(inner);
-    card.addEventListener('click', (e) => { if (e.target.tagName !== 'A') window.location.href = href; });
+    card.addEventListener('click', (e) => {
+      if (e.target.tagName !== 'A') window.location.href = href;
+      if (window.MG.track) window.MG.track('select_content', { content_type: 'mod', item_id: title, category: category });
+    });
     return card;
   }
 

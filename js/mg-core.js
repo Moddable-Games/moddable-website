@@ -4,7 +4,7 @@
    ========================================================================= */
 
 window.MG = (() => {
-  const VERSION = '1.0.148';
+  const VERSION = '1.0.149';
   const META_BASE = (document.querySelector('meta[name="mg-base"]') || {}).content;
   const BASE = META_BASE != null ? META_BASE
     : location.pathname.includes('/MODDABLE/moddable-website')
@@ -161,5 +161,8 @@ window.MG = (() => {
     return `${RULES_BASE}/${slug}/`;
   }
 
-  return { VERSION, T, F, HEX_BG, HEX_BG_RED, HEX_BG_GREEN, CATEGORY_COLORS, el, css, cubeSVG, url, rulesUrl, data };
+  var exports = { VERSION, T, F, HEX_BG, HEX_BG_RED, HEX_BG_GREEN, CATEGORY_COLORS, el, css, cubeSVG, url, rulesUrl, data };
+  // Preserve properties set by earlier modules (e.g. mg-analytics.js track)
+  if (window.MG) { for (var k in window.MG) { if (!exports[k]) exports[k] = window.MG[k]; } }
+  return exports;
 })();

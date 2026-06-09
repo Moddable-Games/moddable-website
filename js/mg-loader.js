@@ -4,7 +4,7 @@
    ========================================================================= */
 
 (function() {
-  var V = '1.0.148';
+  var V = '1.0.149';
   const scripts = document.querySelectorAll('script[src*="mg-loader.js"]');
   const src = scripts[scripts.length - 1].getAttribute('src');
   const base = src.replace(/mg-loader\.js.*$/, '');
@@ -15,6 +15,7 @@
   }
   var modules = [
     'mg-analytics.js',
+    'mg-schema.js',
     'mg-core.js',
     'mg-mods-content.js',
     'mg-buttons.js',

@@ -126,6 +126,13 @@ sbw.appendChild(linkBtn('Join Discord','/community/','outline-light'));
 
 function goStep(n) {
   currentStep = n;
+  if (MG.track) {
+    if (n === 'success') {
+      MG.track('sign_up', { method: 'mod_submission', mod_title: formData.title, mod_category: formData.category });
+    } else {
+      MG.track('form_step', { form: 'submit_mod', step: n });
+    }
+  }
   ['step-1','step-2','step-3','step-success'].forEach(id => {
     const el2 = document.getElementById(id);
     if (el2) el2.hidden = true;

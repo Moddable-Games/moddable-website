@@ -39,6 +39,7 @@ function renderTabs() {
       history.replaceState(null, '', '#' + t.id);
       renderTabs();
       renderPanel();
+      if (MG.track) MG.track('dice_tab_select', { tab: t.id });
     });
     wrap.appendChild(b);
   });
@@ -108,6 +109,7 @@ function renderRoller(panel) {
   panel.appendChild(rollBreak);
 
   function rollDice() {
+    if (MG.track) MG.track('dice_roll', { die_type: 'd' + selectedDie, dice_count: diceCount, modifier: modifier });
     const rolls = Array.from({length: diceCount}, () => Math.floor(Math.random() * selectedDie) + 1);
     const total = rolls.reduce((a,b)=>a+b,0) + modifier;
     rollResult.textContent = total;
@@ -123,6 +125,7 @@ function renderRoller(panel) {
 
 /* ── Results renderer ── */
 function showResults(panel, results) {
+  if (MG.track) MG.track('dice_simulation', { tab: activeTab, iterations: ITERATIONS });
   const wrap = el('div', { class: 'dice-results' });
   wrap.appendChild(el('div', { class: 'dice-results__title' }, 'Results (' + ITERATIONS.toLocaleString() + ' simulations)'));
 
