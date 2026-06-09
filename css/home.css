@@ -32,7 +32,7 @@
   #hero-lower__text .home-hero__btns { justify-content:center; }
   @media (max-width: 768px) {
     body { background: var(--mg-canvas-light); }
-    #hero { min-height: 100svh; }
+    #hero { height: 100svh; }
     #hero-content { padding: calc(64px + env(safe-area-inset-top, 20px) + 32px) 20px 120px; }
     #hero-bg { height: 100%; }
     .home-hero__title { min-height: 220px; text-wrap: initial; }
