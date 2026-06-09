@@ -1,0 +1,12 @@
+name = "moddable-api"
+main = "index.js"
+compatibility_date = "2024-01-01"
+
+[vars]
+ALLOWED_ORIGIN = "https://web.moddable.games"
+
+[[kv_namespaces]]
+binding = "STORE"
+id = ""
+# After creating KV namespace, paste its ID above.
+# Run: wrangler kv namespace create STORE
