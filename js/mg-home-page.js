@@ -73,6 +73,15 @@ window.addEventListener('scroll', () => {
 })();
 
 
+// Force hero visibility after animations should have completed (iOS Safari fallback)
+setTimeout(function() {
+  document.querySelectorAll('.hero-word').forEach(function(el) { el.style.opacity = '1'; });
+  var lower = document.getElementById('hero-lower');
+  if (lower) lower.style.opacity = '1';
+  var eyebrow = document.querySelector('#hero-content > .mg-eyebrow');
+  if (eyebrow) eyebrow.style.opacity = '1';
+}, 2500);
+
 // Typewriter cycle on hero title
 (function() {
   var WORDS = ['games','mods','rules','engines','tools','variants','worlds'];
