@@ -37,7 +37,7 @@
     #hero-bg { height: 100%; }
     .home-hero__title { min-height: 220px; text-wrap: initial; }
     .home-hero__title br { display: none; }
-    .home-gallery { padding: 160px 20px 80px; position: relative; z-index: 1; }
+    .home-gallery { padding: 80px 20px; position: relative; z-index: 1; }
     .home-gallery__header { flex-direction: column; align-items: center; text-align: center; }
     .home-gallery__filters { justify-content: center; }
     .home-nuke { padding: 80px 20px 120px; }
