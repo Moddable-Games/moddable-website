@@ -15,6 +15,7 @@ document.getElementById('page-hero').appendChild(MG.sectionHero({
 const ITERATIONS = 10000;
 const TABS = [
   { id: 'roller', label: 'Dice Roller' },
+  { id: 'w40k', label: 'Warhammer 40K' },
   { id: 'risk', label: 'Risk' },
   { id: 'ti4', label: 'TI4 Space' },
   { id: 'aa', label: 'Axis & Allies' },
@@ -49,6 +50,7 @@ function renderPanel() {
   const panel = document.getElementById('dice-panel');
   panel.innerHTML = '';
   if (activeTab === 'roller') renderRoller(panel);
+  else if (activeTab === 'w40k') renderW40K(panel);
   else if (activeTab === 'risk') renderRisk(panel);
   else if (activeTab === 'ti4') renderTI4(panel);
   else if (activeTab === 'aa') renderAA(panel);
@@ -889,6 +891,111 @@ function renderCustom(panel) {
 
   runWrap.appendChild(btn('Run simulation', 'dark', runSim));
   runWrap.appendChild(el('span', { class: 'dice-run__iters' }, ITERATIONS.toLocaleString() + ' iterations'));
+}
+
+/* ── WARHAMMER 40K ── */
+function renderW40K(panel) {
+  let attacks = 10, hitThresh = 3, woundThresh = 4, saveThresh = 5, damage = 1;
+
+  const section = el('div', { class: 'dice-section' });
+  section.appendChild(el('h3', { class: 'dice-section__title' }, 'Warhammer 40K — Hit / Wound / Save'));
+  section.appendChild(el('p', { class: 'dice-section__desc' }, 'Simulate the attack pipeline: roll to hit, roll to wound, opponent rolls to save. Failed saves deal damage.'));
+
+  function makeRow(label, min, max, value, onChange) {
+    const row = el('div', { class: 'dice-row' });
+    row.appendChild(el('span', { class: 'dice-row__label' }, label));
+    const sel = document.createElement('select');
+    sel.className = 'dice-select';
+    for (var i = min; i <= max; i++) {
+      const opt = document.createElement('option');
+      opt.value = i; opt.textContent = i + (label.indexOf('Threshold') > -1 ? '+' : '');
+      if (i === value) opt.selected = true;
+      sel.appendChild(opt);
+    }
+    sel.addEventListener('change', function() { onChange(parseInt(sel.value)); });
+    row.appendChild(sel);
+    return row;
+  }
+
+  section.appendChild(makeRow('Attacks:', 1, 30, attacks, function(v) { attacks = v; }));
+  section.appendChild(makeRow('Hit Threshold (d6):', 2, 6, hitThresh, function(v) { hitThresh = v; }));
+  section.appendChild(makeRow('Wound Threshold (d6):', 2, 6, woundThresh, function(v) { woundThresh = v; }));
+  section.appendChild(makeRow('Save Threshold (d6):', 2, 7, saveThresh, function(v) { saveThresh = v; }));
+  section.appendChild(makeRow('Damage per wound:', 1, 6, damage, function(v) { damage = v; }));
+
+  panel.appendChild(section);
+
+  const rollResult = el('div', { class: 'dice-result' }, '—');
+  const rollBreak = el('div', { class: 'dice-breakdown' });
+  panel.appendChild(rollResult);
+  panel.appendChild(rollBreak);
+
+  function rollPipeline() {
+    var hits = 0, wounds = 0, failedSaves = 0;
+    var hitRolls = [], woundRolls = [], saveRolls = [];
+
+    for (var i = 0; i < attacks; i++) {
+      var r = Math.ceil(Math.random() * 6);
+      hitRolls.push(r);
+      if (r >= hitThresh) hits++;
+    }
+    for (var j = 0; j < hits; j++) {
+      var r = Math.ceil(Math.random() * 6);
+      woundRolls.push(r);
+      if (r >= woundThresh) wounds++;
+    }
+    for (var k = 0; k < wounds; k++) {
+      var r = Math.ceil(Math.random() * 6);
+      saveRolls.push(r);
+      if (saveThresh > 6 || r < saveThresh) failedSaves++;
+    }
+
+    var totalDamage = failedSaves * damage;
+    rollResult.textContent = totalDamage + ' damage';
+    rollBreak.innerHTML = attacks + ' attacks → ' + hits + ' hits → ' + wounds + ' wounds → ' + failedSaves + ' failed saves × ' + damage + ' = ' + totalDamage + ' damage';
+
+    if (MG.track) MG.track('dice_roll', { die_type: 'w40k', attacks: attacks });
+  }
+
+  panel.appendChild(btn('Roll attack', 'dark', rollPipeline));
+
+  const simWrap = el('div', { class: 'dice-run' });
+  const resultsWrap = el('div');
+  panel.appendChild(simWrap);
+  panel.appendChild(resultsWrap);
+
+  function runSim() {
+    var totalDmg = 0, results = [];
+    for (var n = 0; n < ITERATIONS; n++) {
+      var hits = 0, wounds = 0, failed = 0;
+      for (var i = 0; i < attacks; i++) { if (Math.ceil(Math.random() * 6) >= hitThresh) hits++; }
+      for (var j = 0; j < hits; j++) { if (Math.ceil(Math.random() * 6) >= woundThresh) wounds++; }
+      for (var k = 0; k < wounds; k++) { if (saveThresh > 6 || Math.ceil(Math.random() * 6) < saveThresh) failed++; }
+      results.push(failed * damage);
+      totalDmg += failed * damage;
+    }
+    var avg = totalDmg / ITERATIONS;
+    results.sort(function(a, b) { return a - b; });
+    var median = results[Math.floor(ITERATIONS / 2)];
+    var min = results[0];
+    var max = results[ITERATIONS - 1];
+
+    resultsWrap.innerHTML = '';
+    var wrap = el('div', { class: 'dice-results' });
+    wrap.appendChild(el('div', { class: 'dice-results__title' }, 'Simulation (' + ITERATIONS.toLocaleString() + ' iterations)'));
+    wrap.appendChild(el('div', { class: 'dice-results__detail' }, 'Average damage: ' + avg.toFixed(2) + ' · Median: ' + median + ' · Range: ' + min + '–' + max));
+
+    var hitPct = ((1 - (hitThresh - 1) / 6) * 100).toFixed(1);
+    var woundPct = ((1 - (woundThresh - 1) / 6) * 100).toFixed(1);
+    var savePct = saveThresh > 6 ? '0.0' : (((saveThresh - 1) / 6) * 100).toFixed(1);
+    wrap.appendChild(el('div', { class: 'dice-results__detail' }, 'Hit chance: ' + hitPct + '% · Wound chance: ' + woundPct + '% · Save chance: ' + savePct + '%'));
+    resultsWrap.appendChild(wrap);
+
+    if (MG.track) MG.track('dice_simulation', { tab: 'w40k', iterations: ITERATIONS });
+  }
+
+  simWrap.appendChild(btn('Run simulation', 'dark', runSim));
+  simWrap.appendChild(el('span', { class: 'dice-run__iters' }, ITERATIONS.toLocaleString() + ' iterations'));
 }
 
 /* ── Init ── */
