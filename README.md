@@ -120,6 +120,12 @@ Pages load `mg-loader.js` (shared modules) + their own page script. Data is fetc
 
 ### Changelog
 
+#### 2026-06-09
+- TI4 Objective Tracker: full game-session mode with player scoring, secret objectives, bonus VP tracking
+- Supports all expansions (base, Prophecy of Kings, Discordant Stars, Thunder's Edge)
+- Setup screen with player count, VP target, expansion toggles, and colour assignment
+- Scoreboard with progress bars, tabbed interface (public/secrets/bonus), winner detection
+
 #### 2026-06-05
 - Unified hero system across all 17 pages with new shared sectionHero() component
 - Two-tier design: full cosmic heroes (tier-1 indexes) and reduced sub-page heroes (tier-2)
