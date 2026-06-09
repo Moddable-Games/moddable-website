@@ -131,10 +131,14 @@ const submitBtn = btn('Submit mod','green',()=>{
       version: formData.version,
       designer: formData.designer
     })
-  }).then(r => r.json()).then(() => {
+  }).then(r => {
+    if (!r.ok) throw new Error('Failed');
+    return r.json();
+  }).then(() => {
     goStep('success');
   }).catch(() => {
-    goStep('success');
+    submitBtn.disabled = false;
+    alert('Submission failed. Please check your connection and try again.');
   });
 });
 s3n.appendChild(submitBtn);

@@ -51,14 +51,21 @@ var submitBtn = btn('Subscribe', 'green', function() {
     method: 'POST',
     headers: { 'Content-Type': 'application/json' },
     body: JSON.stringify({ email: email, source: 'subscribe-page' })
-  }).then(function(r) { return r.json(); }).then(function() {
+  }).then(function(r) {
+    if (!r.ok) throw new Error('Failed');
+    return r.json();
+  }).then(function() {
     formWrap.style.display = 'none';
     document.getElementById('sub-success').classList.add('sub-success--show');
     if (MG.track) MG.track('sign_up', { method: 'newsletter' });
   }).catch(function() {
-    formWrap.style.display = 'none';
-    document.getElementById('sub-success').classList.add('sub-success--show');
-    if (MG.track) MG.track('sign_up', { method: 'newsletter' });
+    submitBtn.disabled = false;
+    emailInput.style.borderColor = '#d11a1a';
+    var err = document.getElementById('sub-error');
+    if (!err) {
+      err = el('div', { id: 'sub-error', class: 'sub-form__error' }, 'Something went wrong. Please try again.');
+      formWrap.appendChild(err);
+    }
   });
 });
 submitBtn.classList.add('sub-form__submit');
