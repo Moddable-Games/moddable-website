@@ -46,9 +46,20 @@ var submitBtn = btn('Subscribe', 'green', function() {
     emailInput.focus();
     return;
   }
-  formWrap.style.display = 'none';
-  document.getElementById('sub-success').classList.add('sub-success--show');
-  if (MG.track) MG.track('sign_up', { method: 'newsletter' });
+  submitBtn.disabled = true;
+  fetch(url('/api/subscribe'), {
+    method: 'POST',
+    headers: { 'Content-Type': 'application/json' },
+    body: JSON.stringify({ email: email, source: 'subscribe-page' })
+  }).then(function(r) { return r.json(); }).then(function() {
+    formWrap.style.display = 'none';
+    document.getElementById('sub-success').classList.add('sub-success--show');
+    if (MG.track) MG.track('sign_up', { method: 'newsletter' });
+  }).catch(function() {
+    formWrap.style.display = 'none';
+    document.getElementById('sub-success').classList.add('sub-success--show');
+    if (MG.track) MG.track('sign_up', { method: 'newsletter' });
+  });
 });
 submitBtn.classList.add('sub-form__submit');
 formWrap.appendChild(submitBtn);

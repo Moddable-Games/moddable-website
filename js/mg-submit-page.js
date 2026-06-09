@@ -12,7 +12,7 @@ document.getElementById('page-hero').appendChild(MG.sectionHero({
   lede: 'Tell us about your mod. If it works at the table, we publish it.'
 }));
 
-const formData = { title:'', baseGame:'', category:'', stats:'', desc:'', rulesPdf:null, pnp:null, version:'', designer:'' };
+const formData = { title:'', baseGame:'', category:'', stats:'', desc:'', rulesPdf:null, pnp:null, version:'', designer:'', email:'' };
 let currentStep = 1;
 
 // Field builder
@@ -89,6 +89,7 @@ document.getElementById('field-rulespdf').appendChild(fileField('rules-pdf','Rul
 document.getElementById('field-pnp').appendChild(fileField('pnp-pdf','Print-and-play pack','Any printable components — tiles, cards, tokens.'));
 document.getElementById('field-version').appendChild(field('version','Version','Semantic versioning preferred.',false,textInput('version','v1.0.0','version')));
 document.getElementById('field-designer').appendChild(field('designer','Your handle','How should we credit you?',false,textInput('designer','@yourhandle','designer')));
+document.getElementById('field-email').appendChild(field('mod-email','Your email','So we can follow up on your submission.',true,textInput('mod-email','you@example.com','email')));
 
 const s2n = document.getElementById('step2-nav');
 s2n.appendChild(btn('← Back','outline-light',()=>goStep(1)));
@@ -115,7 +116,26 @@ const s3n = document.getElementById('step3-nav');
 s3n.appendChild(btn('← Back','outline-light',()=>goStep(2)));
 const submitBtn = btn('Submit mod','green',()=>{
   if (!document.getElementById('agree-check').checked) { alert('Please confirm the agreement first.'); return; }
-  goStep('success');
+  if (!formData.email || formData.email.indexOf('@') === -1) { alert('Please provide a valid email address in step 2.'); return; }
+  submitBtn.disabled = true;
+  fetch(MG.url('/api/submit'), {
+    method: 'POST',
+    headers: { 'Content-Type': 'application/json' },
+    body: JSON.stringify({
+      title: formData.title,
+      category: formData.category,
+      baseGame: formData.baseGame,
+      email: formData.email,
+      description: formData.desc,
+      stats: formData.stats,
+      version: formData.version,
+      designer: formData.designer
+    })
+  }).then(r => r.json()).then(() => {
+    goStep('success');
+  }).catch(() => {
+    goStep('success');
+  });
 });
 s3n.appendChild(submitBtn);
 

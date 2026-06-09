@@ -20,7 +20,7 @@ export default {
 
     const path = url.pathname.replace(/\/$/, '');
 
-    if (path === '/api/subscribe') {
+if (path === '/api/subscribe') {
       return handleSubscribe(request, env, corsHeaders);
     }
 
