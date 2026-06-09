@@ -209,7 +209,7 @@ function initHexmapEmbed(game, opts) {
       navigator.clipboard.writeText(shareUrl);
     }));
     var fullLink = MG.linkBtn('Full Screen',
-      HEX_BASE + '?game=' + game + '&seed=' + currentSeed + '&style=' + currentStyle,
+      HEX_BASE + '?game=' + game + '&seed=' + currentSeed + '&style=' + currentStyle + '&mode=fullscreen',
       'outline-light');
     fullLink.setAttribute('target', '_blank');
     fullLink.setAttribute('rel', 'noopener');
