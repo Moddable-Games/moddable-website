@@ -4,7 +4,7 @@
    ========================================================================= */
 
 (function() {
-  var V = '1.0.131';
+  var V = '1.0.132';
   const scripts = document.querySelectorAll('script[src*="mg-loader.js"]');
   const src = scripts[scripts.length - 1].getAttribute('src');
   const base = src.replace(/mg-loader\.js.*$/, '');
