@@ -1,6 +1,9 @@
 (function() {
 const { T, el, btn, linkBtn, navbar, footer, modCard, url } = MG;
 
+// Enable hero animations (content visible by default if this fails)
+document.getElementById('hero').classList.add('hero-anim-ready');
+
 // Nav + Footer
 document.getElementById('nav-root').appendChild(navbar(''));
 document.getElementById('footer-root').appendChild(footer());
@@ -76,15 +79,10 @@ window.addEventListener('scroll', () => {
 })();
 
 
-// Force hero visibility after animations should have completed (iOS Safari fallback)
+// After animations complete, remove animation class so elements revert to default visible state
 setTimeout(function() {
-  var hc = document.getElementById('hero-content');
-  if (hc && !window.scrollY) hc.style.opacity = '1';
-  document.querySelectorAll('.hero-word').forEach(function(el) { el.style.opacity = '1'; });
-  var lower = document.getElementById('hero-lower');
-  if (lower) lower.style.opacity = '1';
-  var eyebrow = document.querySelector('#hero-content > .mg-eyebrow');
-  if (eyebrow) eyebrow.style.opacity = '1';
+  var hero = document.getElementById('hero');
+  if (hero) hero.classList.remove('hero-anim-ready');
 }, 2500);
 
 // Typewriter cycle on hero title
