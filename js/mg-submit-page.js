@@ -118,6 +118,7 @@ const submitBtn = btn('Submit mod','green',()=>{
   if (!document.getElementById('agree-check').checked) { alert('Please confirm the agreement first.'); return; }
   if (!formData.email || formData.email.indexOf('@') === -1) { alert('Please provide a valid email address in step 2.'); return; }
   submitBtn.disabled = true;
+  submitBtn.textContent = 'Submitting...';
   fetch(MG.url('/api/submit'), {
     method: 'POST',
     headers: { 'Content-Type': 'application/json' },
@@ -138,6 +139,7 @@ const submitBtn = btn('Submit mod','green',()=>{
     goStep('success');
   }).catch(() => {
     submitBtn.disabled = false;
+    submitBtn.textContent = 'Submit mod';
     alert('Submission failed. Please check your connection and try again.');
   });
 });

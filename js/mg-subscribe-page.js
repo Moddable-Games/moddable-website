@@ -47,6 +47,7 @@ var submitBtn = btn('Subscribe', 'green', function() {
     return;
   }
   submitBtn.disabled = true;
+  submitBtn.textContent = 'Subscribing...';
   fetch(url('/api/subscribe'), {
     method: 'POST',
     headers: { 'Content-Type': 'application/json' },
@@ -60,6 +61,7 @@ var submitBtn = btn('Subscribe', 'green', function() {
     if (MG.track) MG.track('sign_up', { method: 'newsletter' });
   }).catch(function() {
     submitBtn.disabled = false;
+    submitBtn.textContent = 'Subscribe';
     emailInput.style.borderColor = '#d11a1a';
     var err = document.getElementById('sub-error');
     if (!err) {
