@@ -85,40 +85,7 @@ function deal() {
 }
 
 function renderObjectives() {
-  const og = document.getElementById('objectives-grid'); og.innerHTML = '';
-  const s1 = ti4Data.objectives.stage1.filter(o => enabledExpansions[o.expansion]).map(o => o.text);
-  const s2 = ti4Data.objectives.stage2.filter(o => enabledExpansions[o.expansion]).map(o => o.text);
-  og.appendChild(objectiveSection('STAGE I (' + s1.length + ')', s1, '#3a9928'));
-  og.appendChild(objectiveSection('STAGE II (' + s2.length + ')', s2, '#0c4f8d'));
-}
-
-function objectiveSection(title, objs, accent) {
-  const wrap = el('div');
-  const heading = el('div',{class:'ti-obj-title'},title);
-  heading.style.color = accent;
-  wrap.appendChild(heading);
-  const list = el('div',{class:'ti-obj-list'});
-  const state = objs.map(()=>false);
-  objs.forEach((obj, i) => {
-    const row = el('div',{class:'ti-obj-row'});
-    const check = el('div',{class:'ti-obj-check'});
-    check.style.border = `2px solid ${accent}`;
-    const label = el('span',{class:'ti-obj-label'},obj);
-    row.appendChild(check); row.appendChild(label);
-    row.addEventListener('click',()=>{
-      state[i] = !state[i];
-      check.style.background = state[i] ? accent : 'transparent';
-      check.style.borderColor = accent;
-      check.textContent = state[i] ? '✓' : '';
-      check.style.color = '#fff';
-      row.style.background = state[i] ? accent+'18' : '#f5f4ef';
-      label.style.textDecoration = state[i] ? 'line-through' : 'none';
-      label.style.color = state[i] ? '#636b78' : '#14161c';
-    });
-    list.appendChild(row);
-  });
-  wrap.appendChild(list);
-  return wrap;
+  // Objective tracker now handled by mg-tools-ti-objectives.js
 }
 
 function renderAll(scrollTo) {
