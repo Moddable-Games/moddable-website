@@ -30,9 +30,9 @@
   #hero-lower__text .home-hero__btns { justify-content:center; }
   @media (max-width: 768px) {
     #hero { min-height: auto; }
-    #hero-content { padding: 80px 20px 60px; }
+    #hero-content { padding: 80px 20px 100px; }
     #hero-bg { height: 100%; }
-    #hero-bot-fade { background: linear-gradient(180deg, transparent 40%, var(--mg-canvas-light) 100%); opacity: 1 !important; }
+    #hero-bot-fade { background: linear-gradient(180deg, transparent 85%, var(--mg-canvas-light) 100%); opacity: 1 !important; }
     .home-hero__title { min-height: 220px; text-wrap: initial; }
     .home-hero__title br { display: none; }
     .home-gallery { padding: 80px 20px; position: relative; margin-top: -4px; }
