@@ -15,9 +15,12 @@ const heroHex = document.getElementById('hero-hex');
 const heroGlow = document.getElementById('hero-glow');
 const heroBotFade = document.getElementById('hero-bot-fade');
 const heroWash = document.getElementById('hero-wash');
+var heroScrollActive = false;
 window.addEventListener('scroll', () => {
   const rect = heroSection.getBoundingClientRect();
   const scrolled = Math.max(0, -rect.top);
+  if (!heroScrollActive && scrolled < 5) return;
+  heroScrollActive = true;
   const ratio = Math.min(1, scrolled / (rect.height * 0.7));
   heroBgInner.style.transform = `translateY(${scrolled * -0.15}px)`;
   if (heroContent) { heroContent.style.transform = `translateY(${ratio * -120}px)`; heroContent.style.opacity = Math.max(0, 1 - ratio * 2.5); }
@@ -75,6 +78,8 @@ window.addEventListener('scroll', () => {
 
 // Force hero visibility after animations should have completed (iOS Safari fallback)
 setTimeout(function() {
+  var hc = document.getElementById('hero-content');
+  if (hc && !window.scrollY) hc.style.opacity = '1';
   document.querySelectorAll('.hero-word').forEach(function(el) { el.style.opacity = '1'; });
   var lower = document.getElementById('hero-lower');
   if (lower) lower.style.opacity = '1';
