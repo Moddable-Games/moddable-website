@@ -14,15 +14,15 @@ document.getElementById('page-hero').appendChild(MG.sectionHero({
 
 const ITERATIONS = 10000;
 const TABS = [
-  { id: 'roller', label: 'Dice Roller' },
-  { id: 'w40k', label: 'Warhammer 40K' },
-  { id: 'risk', label: 'Risk' },
-  { id: 'ti4', label: 'TI4 Space' },
-  { id: 'aa', label: 'Axis & Allies' },
-  { id: 'xwing', label: 'X-Wing' },
-  { id: 'bloodbowl', label: 'Blood Bowl' },
-  { id: 'memoir', label: 'Memoir \'44' },
-  { id: 'custom', label: 'Custom' }
+  { id: 'roller', label: 'Dice Roller', eyebrow: 'UNIVERSAL', title: 'Dice roller', desc: 'Roll any combination from d4 to d100.', color: T.blue },
+  { id: 'w40k', label: '40K', eyebrow: 'WARHAMMER', title: 'Hit / Wound / Save', desc: 'Simulate the attack pipeline. Failed saves deal damage.', color: T.red },
+  { id: 'risk', label: 'Risk', eyebrow: 'RISK', title: 'Territory combat', desc: 'Single rounds or fight-to-the-death simulations.', color: T.red },
+  { id: 'ti4', label: 'TI4', eyebrow: 'TWILIGHT IMPERIUM', title: 'Space combat', desc: 'Fleet battles with fighters, destroyers, cruisers, and war suns.', color: T.blue },
+  { id: 'aa', label: 'A&A', eyebrow: 'AXIS & ALLIES', title: 'Combined arms', desc: 'Infantry, armour, fighters, bombers, and naval units.', color: T.green },
+  { id: 'xwing', label: 'X-Wing', eyebrow: 'X-WING', title: 'Attack vs defence', desc: 'Custom dice: hits, crits, evades, and focus.', color: T.red },
+  { id: 'bloodbowl', label: 'Blood Bowl', eyebrow: 'BLOOD BOWL', title: 'Block dice', desc: 'Pushback, stumble, defender down, both down, skull.', color: T.green },
+  { id: 'memoir', label: "Memoir '44", eyebrow: 'MEMOIR 44', title: 'Combat dice', desc: 'Infantry, armour, grenade, star, flag outcomes.', color: T.blue },
+  { id: 'custom', label: 'Custom', eyebrow: 'CUSTOM', title: 'Build your own', desc: 'Define custom unit types and simulate battles.', color: T.green }
 ];
 const hashTab = window.location.hash.slice(1);
 let activeTab = TABS.some(t => t.id === hashTab) ? hashTab : 'roller';
@@ -40,15 +40,39 @@ function renderTabs() {
       history.replaceState(null, '', '#' + t.id);
       renderTabs();
       renderPanel();
+      var panel = document.getElementById('dice-panel');
+      if (panel) {
+        var tabsHeight = document.getElementById('dice-tabs').offsetHeight;
+        var top = panel.getBoundingClientRect().top + window.scrollY - 64 - tabsHeight - 16;
+        window.scrollTo({ top: top, behavior: 'smooth' });
+      }
       if (MG.track) MG.track('dice_tab_select', { tab: t.id });
     });
     wrap.appendChild(b);
   });
 }
 
+function sectionHeader(tab) {
+  const header = el('div', { class: 'dice-card-header' });
+  const accent = el('div', { class: 'dice-card-header__accent' });
+  accent.style.background = tab.color;
+  header.appendChild(accent);
+  const text = el('div');
+  const eyebrow = el('div', { class: 'dice-card-header__eyebrow' });
+  eyebrow.textContent = tab.eyebrow;
+  eyebrow.style.color = tab.color;
+  text.appendChild(eyebrow);
+  text.appendChild(el('h3', { class: 'dice-card-header__title' }, tab.title));
+  text.appendChild(el('p', { class: 'dice-card-header__desc' }, tab.desc));
+  header.appendChild(text);
+  return header;
+}
+
 function renderPanel() {
   const panel = document.getElementById('dice-panel');
   panel.innerHTML = '';
+  const tab = TABS.find(t => t.id === activeTab);
+  if (tab) panel.appendChild(sectionHeader(tab));
   if (activeTab === 'roller') renderRoller(panel);
   else if (activeTab === 'w40k') renderW40K(panel);
   else if (activeTab === 'risk') renderRisk(panel);
@@ -185,7 +209,6 @@ function renderRisk(panel) {
   let atkTroops = 10, defTroops = 5;
 
   const section = el('div', { class: 'dice-section' });
-  section.appendChild(el('h3', { class: 'dice-section__title' }, 'Risk Combat'));
 
   const modeRow = el('div', { class: 'dice-row' });
   modeRow.appendChild(el('span', { class: 'dice-row__label' }, 'Mode:'));
@@ -564,7 +587,6 @@ function renderXWing(panel) {
   let atkDice = 3, defDice = 2, atkFocus = true, defFocus = false;
 
   const section = el('div', { class: 'dice-section' });
-  section.appendChild(el('h3', { class: 'dice-section__title' }, 'X-Wing Attack'));
 
   const r1 = el('div', { class: 'dice-row' });
   r1.appendChild(el('span', { class: 'dice-row__label' }, 'Attack dice:'));
@@ -652,7 +674,6 @@ function renderBloodBowl(panel) {
   let diceCount = 1, hasDodge = false, hasBlock = true;
 
   const section = el('div', { class: 'dice-section' });
-  section.appendChild(el('h3', { class: 'dice-section__title' }, 'Blood Bowl Block'));
 
   const r1 = el('div', { class: 'dice-row' });
   r1.appendChild(el('span', { class: 'dice-row__label' }, 'Block dice:'));
@@ -729,7 +750,6 @@ function renderMemoir(panel) {
   let atkDice = 3, targetType = 'infantry', inCover = false;
 
   const section = el('div', { class: 'dice-section' });
-  section.appendChild(el('h3', { class: 'dice-section__title' }, 'Memoir \'44 Combat'));
 
   const r1 = el('div', { class: 'dice-row' });
   r1.appendChild(el('span', { class: 'dice-row__label' }, 'Combat dice:'));
@@ -898,8 +918,6 @@ function renderW40K(panel) {
   let attacks = 10, hitThresh = 3, woundThresh = 4, saveThresh = 5, damage = 1;
 
   const section = el('div', { class: 'dice-section' });
-  section.appendChild(el('h3', { class: 'dice-section__title' }, 'Warhammer 40K — Hit / Wound / Save'));
-  section.appendChild(el('p', { class: 'dice-section__desc' }, 'Simulate the attack pipeline: roll to hit, roll to wound, opponent rolls to save. Failed saves deal damage.'));
 
   function makeRow(label, min, max, value, onChange) {
     const row = el('div', { class: 'dice-row' });
