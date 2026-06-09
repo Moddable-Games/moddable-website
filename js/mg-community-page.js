@@ -4,14 +4,19 @@
 
   document.getElementById('nav-root').appendChild(MG.navbar('About'));
   document.getElementById('footer-root').appendChild(MG.footer());
-  document.getElementById('page-hero').appendChild(MG.sectionHero({
+  var hero = MG.sectionHero({
     section: 'community',
     tier: 2,
     hexColor: 'blue',
     eyebrow: 'COMMUNITY',
     title: 'Join the table.',
     lede: 'Designers, playtesters, and rule-tinkerers building open-source board games together.'
-  }));
+  });
+  var heroBtns = el('div', { class: 'mg-hero__btns' });
+  heroBtns.appendChild(linkBtn('Join Discord', 'https://discord.gg/VhsVGNq6Za', 'primary'));
+  heroBtns.appendChild(linkBtn('Submit Mod', '/submit/', 'outline-light'));
+  hero.querySelector('.mg-hero__text').appendChild(heroBtns);
+  document.getElementById('page-hero').appendChild(hero);
 
   // Stats row
   var STATS = [
@@ -170,6 +175,6 @@
   });
 
   var cb = document.getElementById('cta-btns');
-  cb.appendChild(linkBtn('Join Discord', 'https://discord.gg/moddable', 'primary'));
+  cb.appendChild(linkBtn('Join Discord', 'https://discord.gg/VhsVGNq6Za', 'primary'));
   cb.appendChild(linkBtn('Submit Mod', '/submit/', 'outline-dark'));
 })();
