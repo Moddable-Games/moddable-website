@@ -7,6 +7,4 @@ ALLOWED_ORIGIN = "https://web.moddable.games"
 
 [[kv_namespaces]]
 binding = "STORE"
-id = ""
-# After creating KV namespace, paste its ID above.
-# Run: wrangler kv namespace create STORE
+id = "01d09ee59d5a41e0a43cd60eedb9d345"

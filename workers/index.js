@@ -47,7 +47,11 @@ async function handleSubscribe(request, env, corsHeaders) {
     source: data.source || 'website',
   };
 
-  await env.STORE.put(`sub:${email}`, JSON.stringify(entry));
+  try {
+    await env.STORE.put(`sub:${email}`, JSON.stringify(entry));
+  } catch (err) {
+    return respond(500, { error: 'Storage failed: ' + err.message }, corsHeaders);
+  }
 
   return respond(200, { success: true, message: 'Subscribed' }, corsHeaders);
 }
