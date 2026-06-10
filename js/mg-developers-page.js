@@ -43,6 +43,11 @@
     }
   ];
 
+  // CTA buttons
+  var ctaBtns = document.getElementById('dev-cta-btns');
+  ctaBtns.appendChild(MG.linkBtn('Connect Now', '/developers/api/', 'blue'));
+  ctaBtns.appendChild(MG.linkBtn('View Live Server', 'https://tools.moddable.games/', 'outline-dark'));
+
   var grid = document.getElementById('landing-grid');
   destinations.forEach(function(d) {
     var attrs = { class: 'dev-dest-card dev-dest-card--' + d.accent, href: d.href };
