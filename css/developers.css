@@ -1,7 +1,8 @@
 /* Developers page */
 
+/* ── Connect section (light) ── */
 .dev-connect {
-  padding: 80px 0;
+  padding: 100px 0 80px;
   background: var(--mg-canvas-light);
 }
 .dev-connect__heading {
@@ -14,15 +15,16 @@
 .dev-connect__block {
   position: relative;
   background: #1a1a2e;
-  border-radius: 12px;
-  padding: 20px 24px;
+  border-left: 3px solid var(--mg-blue);
+  border-radius: 0 12px 12px 0;
+  padding: 20px 70px 20px 24px;
   margin-bottom: 20px;
   overflow-x: auto;
 }
 .dev-connect__block pre {
   margin: 0;
   font-family: var(--mg-font-mono);
-  font-size: 0.875rem;
+  font-size: 0.85rem;
   line-height: 1.7;
   color: #e0e0e0;
 }
@@ -32,14 +34,15 @@
 }
 .dev-connect__copy {
   position: absolute;
-  top: 12px;
-  right: 12px;
+  top: 50%;
+  right: 14px;
+  transform: translateY(-50%);
   background: var(--mg-blue);
   color: #fff;
   border: none;
   border-radius: 9999px;
   padding: 6px 14px;
-  font-size: 0.75rem;
+  font-size: 0.72rem;
   font-weight: 600;
   cursor: pointer;
   opacity: 0;
@@ -62,11 +65,23 @@
   font-size: 0.8rem;
 }
 
-/* Tools grid */
+/* ── Tools grid (dark) ── */
 .dev-tools {
-  padding: 80px 0;
+  padding: 100px 0;
   background: #0a0d2a;
+  position: relative;
+  overflow: hidden;
 }
+.dev-tools::before {
+  content: '';
+  position: absolute;
+  inset: 0;
+  background-image: url('../img/hex-grid-blue.svg');
+  background-size: 56px 64px;
+  opacity: 0.03;
+  pointer-events: none;
+}
+.dev-tools .mg-container { position: relative; }
 .dev-tools__heading {
   font-family: var(--mg-font-display);
   font-size: 2rem;
@@ -77,21 +92,24 @@
 .dev-tools__grid {
   display: grid;
   grid-template-columns: repeat(3, 1fr);
-  gap: 16px;
+  gap: 14px;
 }
 .dev-tool-card {
   background: #0f1235;
   border: 1px solid #1a3680;
-  border-radius: 12px;
-  padding: 20px;
-  transition: border-color 0.2s;
+  border-left: 3px solid #1a3680;
+  border-radius: 0 10px 10px 0;
+  padding: 18px 20px;
+  transition: border-color 0.2s, transform 0.2s;
 }
 .dev-tool-card:hover {
   border-color: #6fb5ff;
+  border-left-color: #6fb5ff;
+  transform: translateY(-2px);
 }
 .dev-tool-card__name {
   font-family: var(--mg-font-mono);
-  font-size: 0.8rem;
+  font-size: 0.75rem;
   font-weight: 600;
   color: #6fb5ff;
   margin-bottom: 8px;
@@ -103,20 +121,20 @@
   color: var(--mg-red);
 }
 .dev-tool-card__desc {
-  font-size: 0.875rem;
+  font-size: 0.84rem;
   line-height: 1.5;
-  color: #c0c0c0;
-  margin-bottom: 12px;
+  color: rgba(255,255,255,0.65);
+  margin-bottom: 10px;
 }
 .dev-tool-card__example {
-  font-size: 0.75rem;
-  color: #888;
+  font-size: 0.72rem;
+  color: rgba(255,255,255,0.35);
   font-style: italic;
 }
 
-/* REST section */
+/* ── REST section (light) ── */
 .dev-rest {
-  padding: 80px 0;
+  padding: 100px 0;
   background: var(--mg-canvas-light);
 }
 .dev-rest__heading {
@@ -128,15 +146,17 @@
 }
 .dev-rest__lede {
   color: var(--mg-ink);
-  opacity: 0.8;
+  opacity: 0.75;
   margin-bottom: 32px;
   max-width: 640px;
+  line-height: 1.6;
 }
 .dev-rest__example {
   background: #1a1a2e;
-  border-radius: 12px;
+  border-left: 3px solid #6fb5ff;
+  border-radius: 0 12px 12px 0;
   padding: 20px 24px;
-  margin-bottom: 32px;
+  margin-bottom: 40px;
   overflow-x: auto;
 }
 .dev-rest__example pre {
@@ -148,26 +168,31 @@
 }
 .dev-rest__endpoints {
   display: grid;
-  gap: 12px;
+  gap: 10px;
 }
 .dev-rest__endpoint {
   display: flex;
   align-items: center;
   gap: 16px;
-  padding: 12px 16px;
+  padding: 14px 20px;
   background: #fff;
   border: 1px solid var(--mg-hairline-light);
-  border-radius: 12px;
+  border-radius: 10px;
+  transition: border-color 0.2s;
+}
+.dev-rest__endpoint:hover {
+  border-color: var(--mg-blue);
 }
 .dev-rest__endpoint code {
   font-family: var(--mg-font-mono);
-  font-size: 0.8rem;
+  font-size: 0.78rem;
   font-weight: 600;
   color: var(--mg-blue);
   white-space: nowrap;
+  min-width: 160px;
 }
 .dev-rest__endpoint span {
-  font-size: 0.875rem;
+  font-size: 0.84rem;
   color: var(--mg-ink);
   opacity: 0.7;
 }
@@ -176,11 +201,23 @@
   color: var(--mg-ink);
 }
 
-/* Build ideas */
+/* ── Build ideas (dark) ── */
 .dev-build {
-  padding: 80px 0;
+  padding: 100px 0;
   background: #0a0d2a;
+  position: relative;
+  overflow: hidden;
 }
+.dev-build::before {
+  content: '';
+  position: absolute;
+  inset: 0;
+  background-image: url('../img/hex-grid-blue.svg');
+  background-size: 56px 64px;
+  opacity: 0.03;
+  pointer-events: none;
+}
+.dev-build .mg-container { position: relative; }
 .dev-build__heading {
   font-family: var(--mg-font-display);
   font-size: 2rem;
@@ -197,11 +234,23 @@
   background: #0f1235;
   border: 1px solid #1a3680;
   border-radius: 12px;
-  padding: 24px;
+  padding: 28px 24px;
+  transition: border-color 0.2s, transform 0.2s;
+}
+.dev-build-card:hover {
+  border-color: rgba(111,181,255,0.4);
+  transform: translateY(-2px);
 }
 .dev-build-card__icon {
+  width: 48px;
+  height: 48px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
   font-size: 1.5rem;
-  margin-bottom: 12px;
+  background: rgba(111,181,255,0.08);
+  border-radius: 12px;
+  margin-bottom: 16px;
 }
 .dev-build-card__title {
   font-family: var(--mg-font-display);
@@ -211,20 +260,21 @@
   margin-bottom: 8px;
 }
 .dev-build-card__body {
-  font-size: 0.875rem;
-  line-height: 1.5;
-  color: #a0a0a0;
-  margin-bottom: 12px;
+  font-size: 0.84rem;
+  line-height: 1.55;
+  color: rgba(255,255,255,0.6);
+  margin-bottom: 14px;
 }
 .dev-build-card__tools {
   font-family: var(--mg-font-mono);
-  font-size: 0.7rem;
+  font-size: 0.68rem;
   color: #6fb5ff;
+  opacity: 0.7;
 }
 
-/* Engines */
+/* ── Engines (light) ── */
 .dev-engines {
-  padding: 80px 0;
+  padding: 100px 0;
   background: var(--mg-canvas-light);
 }
 .dev-engines__heading {
@@ -244,31 +294,37 @@
   border: 1px solid var(--mg-hairline-light);
   border-radius: 12px;
   padding: 32px;
+  transition: border-color 0.2s;
+}
+.dev-engine-card:hover {
+  border-color: var(--mg-blue);
 }
 .dev-engine-card__title {
   font-family: var(--mg-font-display);
   font-size: 1.25rem;
   font-weight: 700;
   color: var(--mg-ink);
-  margin-bottom: 8px;
+  margin-bottom: 6px;
 }
 .dev-engine-card__tagline {
   font-size: 0.875rem;
   color: var(--mg-ink);
-  opacity: 0.7;
-  margin-bottom: 16px;
+  opacity: 0.65;
+  margin-bottom: 20px;
 }
 .dev-engine-card__stats {
   display: flex;
-  gap: 24px;
-  margin-bottom: 16px;
+  gap: 32px;
+  margin-bottom: 20px;
+  padding-bottom: 20px;
+  border-bottom: 1px solid var(--mg-hairline-light);
 }
 .dev-engine-card__stat {
   text-align: center;
 }
 .dev-engine-card__stat-value {
   font-family: var(--mg-font-mono);
-  font-size: 1.25rem;
+  font-size: 1.4rem;
   font-weight: 700;
   color: var(--mg-blue);
 }
@@ -278,11 +334,12 @@
 .dev-engine-card__stat-label {
   font-size: 0.7rem;
   color: var(--mg-ink);
-  opacity: 0.6;
+  opacity: 0.5;
+  margin-top: 2px;
 }
 .dev-engine-card__links {
   display: flex;
-  gap: 12px;
+  gap: 16px;
   flex-wrap: wrap;
 }
 .dev-engine-card__link {
@@ -295,14 +352,14 @@
   text-decoration: underline;
 }
 
-/* Mobile */
+/* ── Mobile ── */
 @media (max-width: 768px) {
   .dev-connect,
   .dev-tools,
   .dev-rest,
   .dev-build,
   .dev-engines {
-    padding: 48px 0;
+    padding: 56px 0;
   }
   .dev-connect__heading,
   .dev-tools__heading,
@@ -310,6 +367,7 @@
   .dev-build__heading,
   .dev-engines__heading {
     font-size: 1.5rem;
+    text-align: center;
   }
   .dev-tools__grid,
   .dev-build__grid,
@@ -318,27 +376,20 @@
   }
   .dev-rest__endpoint {
     flex-direction: column;
-    align-items: flex-start;
+    align-items: center;
+    text-align: center;
     gap: 4px;
   }
-  .dev-connect__copy {
-    opacity: 1;
-  }
-  .dev-connect__heading,
-  .dev-tools__heading,
-  .dev-rest__heading,
-  .dev-build__heading,
-  .dev-engines__heading {
-    text-align: center;
+  .dev-rest__endpoint code {
+    min-width: unset;
   }
   .dev-rest__lede {
     text-align: center;
     margin-left: auto;
     margin-right: auto;
   }
-  .dev-rest__endpoint {
-    align-items: center;
-    text-align: center;
+  .dev-connect__copy {
+    opacity: 1;
   }
   .dev-engine-card {
     text-align: center;
@@ -351,6 +402,10 @@
   }
   .dev-build-card {
     text-align: center;
+  }
+  .dev-build-card__icon {
+    margin-left: auto;
+    margin-right: auto;
   }
   .dev-connect__block code {
     word-break: break-all;
