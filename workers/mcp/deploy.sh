@@ -7,7 +7,7 @@
 #      wrangler domains add tools.moddable.games
 
 cd "$(dirname "$0")"
-wrangler deploy
+wrangler deploy -c wrangler.toml
 echo ""
 echo "Deployed to:"
 echo "  https://tools.moddable.games/"
