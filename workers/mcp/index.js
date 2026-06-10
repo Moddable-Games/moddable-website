@@ -110,11 +110,11 @@ export default {
       return new Response(null, { status: 204, headers: corsHeaders });
     }
 
-    if (path === '/mcp' || path === '/mcp/sse') {
+    if ((path === '/mcp' || path === '/mcp/sse') && request.method === 'GET') {
       return handleMcpSse(request, corsHeaders);
     }
 
-    if (path === '/mcp/message' && request.method === 'POST') {
+    if ((path === '/mcp' || path === '/mcp/message') && request.method === 'POST') {
       return handleMcpMessage(request, corsHeaders);
     }
 
@@ -146,6 +146,12 @@ export default {
         tools: ALL_TOOLS,
         prompts: PROMPTS,
         resources: RESOURCES,
+        configSchema: {
+          type: 'object',
+          properties: {},
+          additionalProperties: false,
+          description: 'No configuration required. All tools are free and open, no API keys needed.',
+        },
       }, null, 2), {
         headers: { 'Content-Type': 'application/json', ...corsHeaders },
       });
@@ -332,7 +338,11 @@ function handleMcpSse(request, corsHeaders) {
     id: 0,
     result: {
       protocolVersion: '2025-03-26',
-      capabilities: { tools: {}, prompts: {}, resources: {} },
+      capabilities: {
+        tools: { listChanged: false },
+        prompts: { listChanged: false },
+        resources: { listChanged: false },
+      },
       serverInfo: SERVER_INFO,
     },
   };
@@ -365,8 +375,18 @@ async function handleMcpMessage(request, corsHeaders) {
     case 'initialize':
       result = {
         protocolVersion: '2025-03-26',
-        capabilities: { tools: {}, prompts: {}, resources: {} },
+        capabilities: {
+          tools: { listChanged: false },
+          prompts: { listChanged: false },
+          resources: { listChanged: false },
+        },
         serverInfo: SERVER_INFO,
+        configSchema: {
+          type: 'object',
+          properties: {},
+          additionalProperties: false,
+          description: 'No configuration required. All tools are free and open, no API keys needed.',
+        },
       };
       break;
 
@@ -410,6 +430,14 @@ async function handleMcpMessage(request, corsHeaders) {
       result = { contents: [content] };
       break;
     }
+
+    case 'notifications/initialized':
+    case 'notifications/cancelled':
+      return new Response(null, { status: 204, headers: corsHeaders });
+
+    case 'ai.smithery/events/list':
+      result = { events: [] };
+      break;
 
     default:
       return json({
