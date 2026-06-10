@@ -259,6 +259,12 @@
   --hero-glow: rgba(6,182,212,0.35);
   --hero-mid: #0e4f5c;
 }
+.mg-hero--developers {
+  --hero-accent: #8b5cf6;
+  --hero-accent-alpha: rgba(139,92,246,0.55);
+  --hero-glow: rgba(139,92,246,0.35);
+  --hero-mid: #3b1a80;
+}
 .mg-hero--about {
   --hero-accent: #6fb5ff;
   --hero-accent-alpha: rgba(111,181,255,0.55);
