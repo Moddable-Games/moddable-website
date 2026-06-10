@@ -12,6 +12,7 @@ MODS = (230, 50, 50)         # #e63232
 ENGINES = (6, 182, 212)      # #06b6d4
 GAMES = (232, 169, 26)       # #e8a91a
 TOOLS = (58, 153, 40)        # #3a9928
+DEVELOPERS = (139, 92, 246)  # #8b5cf6
 NEWS = (225, 29, 137)        # #e11d89
 ABOUT = (111, 181, 255)      # #6fb5ff
 
@@ -355,6 +356,24 @@ def gen_engines():
     save(img, 'img/og/engines.png')
 
 
+def gen_developers():
+    img = base_image(accent_color=DEVELOPERS)
+    add_text(img, 'DEVELOPERS', 'Tools API', 'Board game engines as AI-callable tools', accent=DEVELOPERS)
+    save(img, 'img/og/developers.png')
+
+
+def gen_developers_api():
+    img = base_image(accent_color=DEVELOPERS)
+    add_text(img, 'TOOLS API', 'Connect and call', '15 tools via MCP protocol and REST', accent=DEVELOPERS)
+    save(img, 'img/og/developers-api.png')
+
+
+def gen_developers_examples():
+    img = base_image(accent_color=DEVELOPERS)
+    add_text(img, 'BUILD WITH IT', 'Examples', 'Bots, apps, and integrations', accent=DEVELOPERS)
+    save(img, 'img/og/developers-examples.png')
+
+
 # Generate all
 print('Generating remaining OG images...')
 gen_mods()
@@ -370,4 +389,7 @@ gen_subscribe()
 gen_team()
 gen_chess_engine()
 gen_hexmaps_engine()
+gen_developers()
+gen_developers_api()
+gen_developers_examples()
 print('Done.')
