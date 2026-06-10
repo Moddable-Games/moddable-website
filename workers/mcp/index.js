@@ -403,9 +403,9 @@ a:hover{text-decoration:underline}
 .hero__eyebrow{font-family:'Press Start 2P',monospace;font-size:9px;letter-spacing:0.1em;color:#6fb5ff;text-shadow:0 0 12px rgba(111,181,255,0.5);margin-bottom:16px}
 .hero__title{font-family:'Inter Tight',sans-serif;font-size:clamp(2rem,5vw,3rem);font-weight:700;color:#fff;margin-bottom:16px}
 .hero__lede{color:rgba(255,255,255,0.7);max-width:560px;margin:0 auto 32px}
-.hero__connect{background:#0f1235;border:1px solid #1a3680;border-radius:12px;padding:16px 20px;max-width:640px;margin:0 auto;text-align:left;position:relative;overflow-x:auto}
-.hero__connect code{font-family:'JetBrains Mono',monospace;font-size:0.8rem;color:#6fb5ff;word-break:break-all}
-.hero__connect-copy{position:absolute;top:12px;right:12px;background:#6fb5ff;color:#0a0d2a;border:none;border-radius:9999px;padding:5px 14px;font-size:0.7rem;font-weight:600;cursor:pointer}
+.hero__connect{background:#0f1235;border:1px solid #1a3680;border-radius:12px;padding:16px 80px 16px 20px;max-width:860px;margin:0 auto;text-align:left;position:relative;overflow-x:auto;white-space:nowrap}
+.hero__connect code{font-family:'JetBrains Mono',monospace;font-size:0.8rem;color:#6fb5ff}
+.hero__connect-copy{position:absolute;top:50%;right:14px;transform:translateY(-50%);background:#6fb5ff;color:#0a0d2a;border:none;border-radius:9999px;padding:6px 16px;font-size:0.7rem;font-weight:600;cursor:pointer}
 .hero__stats{display:flex;justify-content:center;gap:40px;margin-top:32px}
 .hero__stat-value{font-family:'JetBrains Mono',monospace;font-size:1.5rem;font-weight:700;color:#fff}
 .hero__stat-label{font-size:0.75rem;color:rgba(255,255,255,0.5);margin-top:2px}
