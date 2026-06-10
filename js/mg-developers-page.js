@@ -12,7 +12,7 @@
     tier: 1,
     hexColor: 'blue',
     eyebrow: 'DEVELOPERS',
-    title: 'Board game <em>engines</em> as AI tools',
+    title: 'Board game engines as <em>AI</em> tools',
     lede: '15 callable tools across two open-source engines. Connect from any MCP client, call via REST, or build bots for Telegram, Slack, and Discord.',
     feature: MG.buildHeroFeature('developers')
   }));
@@ -54,55 +54,5 @@
       el('span', { class: 'dev-dest-card__arrow' }, '→')
     );
     grid.appendChild(card);
-  });
-
-  // Engines
-  var engines = [
-    {
-      title: 'Moddable Chess',
-      tagline: '70 chess variants. One modular engine.',
-      stats: [
-        { value: '70+', label: 'variants' },
-        { value: '7', label: 'tools' },
-        { value: '67KB', label: 'bundled' }
-      ],
-      accent: 'blue',
-      url: 'https://chess.moddable.games/',
-      repo: 'https://github.com/Moddable-Games/moddable-chess'
-    },
-    {
-      title: 'Moddable Hexmaps',
-      tagline: 'Hex map generation for any game.',
-      stats: [
-        { value: '6', label: 'games' },
-        { value: '6', label: 'tools' },
-        { value: '0', label: 'dependencies' }
-      ],
-      accent: 'green',
-      url: 'https://hex.moddable.games/',
-      repo: 'https://github.com/Moddable-Games/moddable-hexmaps'
-    }
-  ];
-
-  var engGrid = document.getElementById('engines-grid');
-  engines.forEach(function(eng) {
-    var statsEl = el('div', { class: 'dev-engine-card__stats' });
-    eng.stats.forEach(function(s) {
-      statsEl.appendChild(el('div', { class: 'dev-engine-card__stat' },
-        el('div', { class: 'dev-engine-card__stat-value' + (eng.accent === 'green' ? ' green' : '') }, s.value),
-        el('div', { class: 'dev-engine-card__stat-label' }, s.label)
-      ));
-    });
-
-    var card = el('div', { class: 'dev-engine-card' },
-      el('div', { class: 'dev-engine-card__title' }, eng.title),
-      el('div', { class: 'dev-engine-card__tagline' }, eng.tagline),
-      statsEl,
-      el('div', { class: 'dev-engine-card__links' },
-        el('a', { class: 'dev-engine-card__link', href: eng.url, target: '_blank', rel: 'noopener' }, 'Live site →'),
-        el('a', { class: 'dev-engine-card__link', href: eng.repo, target: '_blank', rel: 'noopener' }, 'GitHub →')
-      )
-    );
-    engGrid.appendChild(card);
   });
 })();

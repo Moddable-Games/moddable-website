@@ -1,10 +1,6 @@
 /* Developers page */
 
 /* ── Landing grid ── */
-.dev-landing {
-  padding: 80px 0 100px;
-  background: var(--mg-canvas-light);
-}
 .dev-landing__grid {
   display: grid;
   grid-template-columns: repeat(3, 1fr);
@@ -275,85 +271,6 @@
   opacity: 0.7;
 }
 
-/* ── Engines (light) ── */
-.dev-engines {
-  padding: 100px 0;
-  background: var(--mg-canvas-light);
-}
-.dev-engines__heading {
-  font-family: var(--mg-font-display);
-  font-size: 2rem;
-  font-weight: 700;
-  margin: 12px 0 40px;
-  color: var(--mg-ink);
-}
-.dev-engines__grid {
-  display: grid;
-  grid-template-columns: repeat(2, 1fr);
-  gap: 24px;
-}
-.dev-engine-card {
-  background: #fff;
-  border: 1px solid var(--mg-hairline-light);
-  border-radius: 12px;
-  padding: 32px;
-  transition: border-color 0.2s;
-}
-.dev-engine-card:hover {
-  border-color: var(--mg-blue);
-}
-.dev-engine-card__title {
-  font-family: var(--mg-font-display);
-  font-size: 1.25rem;
-  font-weight: 700;
-  color: var(--mg-ink);
-  margin-bottom: 6px;
-}
-.dev-engine-card__tagline {
-  font-size: 0.875rem;
-  color: var(--mg-ink);
-  opacity: 0.65;
-  margin-bottom: 20px;
-}
-.dev-engine-card__stats {
-  display: flex;
-  gap: 32px;
-  margin-bottom: 20px;
-  padding-bottom: 20px;
-  border-bottom: 1px solid var(--mg-hairline-light);
-}
-.dev-engine-card__stat {
-  text-align: center;
-}
-.dev-engine-card__stat-value {
-  font-family: var(--mg-font-mono);
-  font-size: 1.4rem;
-  font-weight: 700;
-  color: var(--mg-blue);
-}
-.dev-engine-card__stat-value.green {
-  color: var(--mg-green);
-}
-.dev-engine-card__stat-label {
-  font-size: 0.7rem;
-  color: var(--mg-ink);
-  opacity: 0.5;
-  margin-top: 2px;
-}
-.dev-engine-card__links {
-  display: flex;
-  gap: 16px;
-  flex-wrap: wrap;
-}
-.dev-engine-card__link {
-  font-size: 0.8rem;
-  color: var(--mg-blue);
-  text-decoration: none;
-  font-weight: 600;
-}
-.dev-engine-card__link:hover {
-  text-decoration: underline;
-}
 
 /* ── Mobile ── */
 @media (max-width: 768px) {
@@ -365,33 +282,21 @@
   }
   .dev-connect,
   .dev-tools,
-  .dev-build,
-  .dev-engines {
+  .dev-build {
     padding: 56px 0;
   }
   .dev-connect__heading,
   .dev-tools__heading,
-  .dev-build__heading,
-  .dev-engines__heading {
+  .dev-build__heading {
     font-size: 1.5rem;
     text-align: center;
   }
   .dev-tools__grid,
-  .dev-build__grid,
-  .dev-engines__grid {
+  .dev-build__grid {
     grid-template-columns: 1fr;
   }
   .dev-connect__copy {
     opacity: 1;
-  }
-  .dev-engine-card {
-    text-align: center;
-  }
-  .dev-engine-card__stats {
-    justify-content: center;
-  }
-  .dev-engine-card__links {
-    justify-content: center;
   }
   .dev-build-card {
     text-align: center;
