@@ -1,5 +1,6 @@
 import { CHESS_TOOLS, handleChessToolCall } from './chess-tools.js';
 import { HEX_TOOLS, handleHexToolCall } from './hex-tools.js';
+import PUZZLE_POOL from './puzzle-pool.json';
 
 const ALL_TOOLS = [...CHESS_TOOLS, ...HEX_TOOLS];
 
@@ -79,9 +80,28 @@ export default {
 };
 
 function handleToolCall(name, args) {
+  if (name === 'chess_generate_puzzle') return servePuzzleFromPool(args);
   if (name.startsWith('chess_')) return handleChessToolCall(name, args);
   if (name.startsWith('hex_')) return handleHexToolCall(name, args);
   return { error: `Unknown tool: ${name}` };
+}
+
+function servePuzzleFromPool(args) {
+  const variant = (args && args.variant) || 'standard';
+  const type = (args && args.type) || 'mate-in-1';
+  const key = variant + ':' + type;
+  const pool = PUZZLE_POOL[key];
+
+  if (!pool || pool.length === 0) {
+    return {
+      type, variant,
+      error: `No pre-generated puzzles for ${variant} ${type}. Available: ${Object.keys(PUZZLE_POOL).join(', ')}`,
+    };
+  }
+
+  const idx = Math.floor(Math.random() * pool.length);
+  const puzzle = pool[idx];
+  return { type, variant, fen: puzzle.fen, turn: puzzle.turn, solution: puzzle.solution };
 }
 
 async function handleRestCall(request, corsHeaders) {
