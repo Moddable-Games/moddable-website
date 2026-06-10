@@ -1,0 +1,67 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<link rel="icon" href="/img/favicon.svg" type="image/svg+xml">
+<link rel="icon" href="/img/favicon-32x32.png" sizes="32x32" type="image/png">
+<link rel="apple-touch-icon" href="/img/apple-touch-icon.png">
+<link rel="manifest" href="/site.webmanifest">
+<meta name="theme-color" content="#0a0d2a">
+<title>Tools API — Moddable.Games Developers</title>
+<meta name="description" content="15 AI-callable tools. Connect via MCP protocol or call via REST. Full tool reference with schemas and examples.">
+<meta property="og:title" content="Tools API — Moddable.Games Developers">
+<meta property="og:description" content="15 AI-callable tools. Connect via MCP or REST. Full reference with schemas.">
+<meta property="og:url" content="https://web.moddable.games/developers/api/">
+<meta property="og:type" content="website">
+<meta property="og:site_name" content="Moddable.Games">
+<meta property="og:image" content="https://web.moddable.games/img/og/default.png?v=1.0.172">
+<meta name="twitter:card" content="summary_large_image">
+<meta name="twitter:title" content="Tools API — Moddable.Games Developers">
+<meta name="twitter:description" content="15 AI-callable tools. Connect via MCP or REST. Full reference with schemas.">
+<meta name="twitter:image" content="https://web.moddable.games/img/og/default.png?v=1.0.172">
+<link rel="stylesheet" href="../../css/_mg.css?v=1.0.172">
+<link rel="stylesheet" href="../../css/developers.css?v=1.0.172">
+</head>
+<body>
+<div id="nav-root"></div>
+
+<section id="dev-hero"></section>
+
+<section class="dev-connect">
+  <div class="mg-container">
+    <div class="mg-eyebrow mg-eyebrow--blue">CONNECT IN ONE COMMAND</div>
+    <h2 class="dev-connect__heading">Add to Claude, Cursor, or VS Code</h2>
+    <div class="dev-connect__block">
+      <pre><code>claude mcp add --transport http moddable-tools https://tools.moddable.games/mcp</code></pre>
+      <button class="dev-connect__copy" aria-label="Copy command">Copy</button>
+    </div>
+    <p class="dev-connect__alt">Or add to <code>.claude/settings.json</code>:</p>
+    <div class="dev-connect__block">
+      <pre><code>{
+  "mcpServers": {
+    "moddable-tools": {
+      "url": "https://tools.moddable.games/mcp"
+    }
+  }
+}</code></pre>
+      <button class="dev-connect__copy" aria-label="Copy JSON">Copy</button>
+    </div>
+  </div>
+</section>
+
+<section class="dev-tools">
+  <div class="mg-container">
+    <div class="mg-eyebrow mg-eyebrow--glow">15 TOOLS &middot; 3 ENGINES</div>
+    <h2 class="dev-tools__heading">Tool reference</h2>
+    <div id="tools-grid" class="dev-tools__grid"></div>
+    <div class="dev-tools__cta" id="tools-cta"></div>
+  </div>
+</section>
+
+<div id="footer-root"></div>
+
+<script src="../../js/mg-loader.js?v=1.0.172"></script>
+<script src="../../js/mg-developers-api-page.js?v=1.0.172"></script>
+</body>
+</html>

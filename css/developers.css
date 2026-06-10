@@ -1,5 +1,70 @@
 /* Developers page */
 
+/* ── Landing grid ── */
+.dev-landing {
+  padding: 80px 0 100px;
+  background: var(--mg-canvas-light);
+}
+.dev-landing__grid {
+  display: grid;
+  grid-template-columns: repeat(3, 1fr);
+  gap: 24px;
+}
+.dev-dest-card {
+  display: flex;
+  flex-direction: column;
+  background: #fff;
+  border: 1px solid var(--mg-hairline-light);
+  border-radius: 12px;
+  padding: 32px 28px;
+  text-decoration: none;
+  color: var(--mg-ink);
+  transition: border-color 0.2s, transform 0.2s;
+}
+.dev-dest-card:hover {
+  transform: translateY(-3px);
+  text-decoration: none;
+}
+.dev-dest-card--blue:hover { border-color: var(--mg-blue); }
+.dev-dest-card--green:hover { border-color: var(--mg-green); }
+.dev-dest-card--red:hover { border-color: var(--mg-red); }
+.dev-dest-card__stat {
+  font-family: var(--mg-font-mono);
+  font-size: 0.72rem;
+  font-weight: 600;
+  text-transform: uppercase;
+  letter-spacing: 0.5px;
+  margin-bottom: 12px;
+}
+.dev-dest-card--blue .dev-dest-card__stat { color: var(--mg-blue); }
+.dev-dest-card--green .dev-dest-card__stat { color: var(--mg-green); }
+.dev-dest-card--red .dev-dest-card__stat { color: var(--mg-red); }
+.dev-dest-card__title {
+  font-family: var(--mg-font-display);
+  font-size: 1.25rem;
+  font-weight: 700;
+  margin-bottom: 10px;
+  color: var(--mg-ink);
+}
+.dev-dest-card__body {
+  font-size: 0.875rem;
+  line-height: 1.55;
+  color: var(--mg-ink);
+  opacity: 0.7;
+  flex: 1;
+}
+.dev-dest-card__arrow {
+  margin-top: 16px;
+  font-size: 1.2rem;
+  font-weight: 700;
+  opacity: 0.3;
+  transition: opacity 0.2s;
+}
+.dev-dest-card:hover .dev-dest-card__arrow { opacity: 1; }
+.dev-dest-card--blue:hover .dev-dest-card__arrow { color: var(--mg-blue); }
+.dev-dest-card--green:hover .dev-dest-card__arrow { color: var(--mg-green); }
+.dev-dest-card--red:hover .dev-dest-card__arrow { color: var(--mg-red); }
+
 /* ── Connect section (light) ── */
 .dev-connect {
   padding: 100px 0 80px;
@@ -292,6 +357,12 @@
 
 /* ── Mobile ── */
 @media (max-width: 768px) {
+  .dev-landing__grid {
+    grid-template-columns: 1fr;
+  }
+  .dev-dest-card {
+    text-align: center;
+  }
   .dev-connect,
   .dev-tools,
   .dev-build,

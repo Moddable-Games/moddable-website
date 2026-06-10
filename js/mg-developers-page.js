@@ -1,101 +1,59 @@
 (function() {
   var MG = window.MG;
   var el = MG.el;
+  var url = MG.url;
 
   document.getElementById('nav-root').appendChild(MG.navbar('Developers'));
   document.getElementById('footer-root').appendChild(MG.footer());
 
-  // Tier-1 hero (same pattern as Engines, Tools, etc.)
+  // Tier-1 hero
   document.getElementById('page-hero').appendChild(MG.sectionHero({
     section: 'developers',
     tier: 1,
     hexColor: 'blue',
-    eyebrow: 'TOOLS API',
+    eyebrow: 'DEVELOPERS',
     title: 'Board game <em>engines</em> as AI tools',
-    lede: '15 callable tools for chess variant analysis, hex map generation, and board game utilities. Connect from any MCP client or call via REST.',
+    lede: '15 callable tools across two open-source engines. Connect from any MCP client, call via REST, or build bots for Telegram, Slack, and Discord.',
     feature: MG.buildHeroFeature('engines')
   }));
 
-  // Copy buttons
-  document.querySelectorAll('.dev-connect__copy').forEach(function(btn) {
-    btn.addEventListener('click', function() {
-      var code = btn.parentElement.querySelector('code');
-      navigator.clipboard.writeText(code.textContent.trim());
-      btn.textContent = 'Copied';
-      setTimeout(function() { btn.textContent = 'Copy'; }, 2000);
-    });
-  });
-
-  // Load tools data
-  MG.data.get('mcp-tools').then(function(namespaces) {
-    var grid = document.getElementById('tools-grid');
-    namespaces.forEach(function(ns) {
-      ns.tools.forEach(function(tool) {
-        var accentClass = ns.accent === 'green' ? ' green' : ns.accent === 'red' ? ' red' : '';
-        var card = el('div', { class: 'dev-tool-card' },
-          el('div', { class: 'dev-tool-card__name' + accentClass }, tool.name),
-          el('div', { class: 'dev-tool-card__desc' }, tool.description),
-          el('div', { class: 'dev-tool-card__example' }, '"' + tool.example + '"')
-        );
-        grid.appendChild(card);
-      });
-    });
-  });
-
-  // CTA below tools grid
-  var toolsCta = document.getElementById('tools-cta');
-  toolsCta.appendChild(MG.linkBtn('Full API Docs', 'https://tools.moddable.games/', 'blue'));
-  toolsCta.appendChild(MG.linkBtn('OpenAPI Spec', 'https://tools.moddable.games/openapi.json', 'outline-dark'));
-
-  // Build ideas
-  var buildIdeas = [
+  // Destination cards
+  var destinations = [
     {
-      icon: '\u{1F916}',
-      title: 'Telegram Chess Coach',
-      body: 'A bot that analyzes positions, generates daily puzzles in any variant, and explains why moves are legal or illegal.',
-      tools: 'chess_analyze_position, chess_generate_puzzle, chess_validate_move'
+      title: 'Tools API',
+      body: '15 tools for chess analysis, hex map generation, and board game utilities. Connect in one command via MCP or call via REST.',
+      href: url('/developers/api/'),
+      stat: '15 tools',
+      accent: 'blue'
     },
     {
-      icon: '\u{1F5FA}',
-      title: 'Discord Map Bot',
-      body: 'Generate and share hex maps for game night. "/map nukes 4p seed:volcano" posts an SVG map directly in chat.',
-      tools: 'hex_generate_map, hex_export_svg'
+      title: 'Build Examples',
+      body: 'Telegram chess coaches, Discord map bots, Slack puzzle-of-the-day, AI game assistants, and procedural world builders.',
+      href: url('/developers/examples/'),
+      stat: '6 ideas',
+      accent: 'green'
     },
     {
-      icon: '\u{1F9E9}',
-      title: 'Slack Puzzle of the Day',
-      body: 'A scheduled bot that posts a new chess puzzle every morning. Tracks who solves it first.',
-      tools: 'chess_generate_puzzle, chess_validate_move, chess_make_moves'
-    },
-    {
-      icon: '\u{1F4A1}',
-      title: 'AI Game Assistant',
-      body: 'Let Claude or GPT look up variant rules, suggest moves, and validate game states during a live session.',
-      tools: 'chess_list_variants, chess_get_legal_moves, chess_analyze_position'
-    },
-    {
-      icon: '\u{1F30D}',
-      title: 'Procedural World Builder',
-      body: 'Generate seeded hex worlds for tabletop RPGs. Query terrain, compute sight lines, and find paths for encounter planning.',
-      tools: 'hex_generate_map, hex_compute_fov, hex_pathfind, hex_get_info'
-    },
-    {
-      icon: '\u{1F3AF}',
-      title: 'Variant Explorer App',
-      body: 'A web app that lets users browse 70+ chess variants, play positions, and get engine analysis with explanations.',
-      tools: 'chess_list_variants, chess_make_moves, chess_analyze_position'
+      title: 'Live Server',
+      body: 'The MCP server running at tools.moddable.games. Interactive docs, OpenAPI spec, llms.txt discovery, and a live tool explorer.',
+      href: 'https://tools.moddable.games/',
+      stat: 'tools.moddable.games',
+      accent: 'red',
+      external: true
     }
   ];
 
-  var buildGrid = document.getElementById('build-grid');
-  buildIdeas.forEach(function(idea) {
-    var card = el('div', { class: 'dev-build-card' },
-      el('div', { class: 'dev-build-card__icon' }, idea.icon),
-      el('div', { class: 'dev-build-card__title' }, idea.title),
-      el('div', { class: 'dev-build-card__body' }, idea.body),
-      el('div', { class: 'dev-build-card__tools' }, idea.tools)
+  var grid = document.getElementById('landing-grid');
+  destinations.forEach(function(d) {
+    var attrs = { class: 'dev-dest-card dev-dest-card--' + d.accent, href: d.href };
+    if (d.external) { attrs.target = '_blank'; attrs.rel = 'noopener'; }
+    var card = el('a', attrs,
+      el('div', { class: 'dev-dest-card__stat' }, d.stat),
+      el('h3', { class: 'dev-dest-card__title' }, d.title),
+      el('p', { class: 'dev-dest-card__body' }, d.body),
+      el('span', { class: 'dev-dest-card__arrow' }, '→')
     );
-    buildGrid.appendChild(card);
+    grid.appendChild(card);
   });
 
   // Engines
