@@ -41,9 +41,56 @@ const ALL_TOOLS = [...CHESS_TOOLS, ...HEX_TOOLS, ...SITE_TOOLS];
 
 const SERVER_INFO = {
   name: 'moddable-tools',
-  version: '1.1.0',
+  version: '1.2.0',
   description: 'AI-callable tools for chess variant analysis, hex map generation, and board game utilities',
 };
+
+const PROMPTS = [
+  {
+    name: 'analyse_position',
+    description: 'Analyse a chess position given in FEN notation. Identifies threats, material balance, and suggests best moves for the side to play.',
+    arguments: [
+      { name: 'fen', description: 'FEN string of the position to analyse', required: true },
+      { name: 'variant', description: 'Chess variant name (default: standard)', required: false },
+    ],
+  },
+  {
+    name: 'build_variant',
+    description: 'Design a new chess variant step by step. Guides through board size, piece types, win conditions, and special rules.',
+    arguments: [
+      { name: 'theme', description: 'Theme or concept for the variant (e.g. "fast-paced", "asymmetric", "3-player")', required: true },
+    ],
+  },
+  {
+    name: 'plan_hex_map',
+    description: 'Plan a hex map layout for a board game. Determines grid size, terrain distribution, and resource placement based on player count and game type.',
+    arguments: [
+      { name: 'players', description: 'Number of players (2-8)', required: true },
+      { name: 'game', description: 'Game system (e.g. "nukes", "talisman", "ti4", "custom")', required: false },
+    ],
+  },
+];
+
+const RESOURCES = [
+  {
+    uri: 'tools://moddable-games/variants',
+    name: 'Chess Variants Catalog',
+    description: 'Complete list of all 70+ supported chess variants with group classifications',
+    mimeType: 'application/json',
+  },
+  {
+    uri: 'tools://moddable-games/tools',
+    name: 'Tool Catalog',
+    description: 'Full listing of all available tools with input schemas and descriptions',
+    mimeType: 'application/json',
+  },
+  {
+    uri: 'tools://moddable-games/ti4-factions',
+    name: 'TI4 Faction List',
+    description: 'All Twilight Imperium 4e factions (base + Prophecy of Kings expansion)',
+    mimeType: 'application/json',
+  },
+];
 
 export default {
   async fetch(request, env) {
@@ -97,6 +144,31 @@ export default {
         url: 'https://tools.moddable.games/mcp',
         transport: 'sse',
         tools: ALL_TOOLS,
+        prompts: PROMPTS,
+        resources: RESOURCES,
+      }, null, 2), {
+        headers: { 'Content-Type': 'application/json', ...corsHeaders },
+      });
+    }
+
+    if (path === '/.well-known/mcp/server-card.json') {
+      return new Response(JSON.stringify({
+        name: SERVER_INFO.name,
+        version: SERVER_INFO.version,
+        description: SERVER_INFO.description,
+        homepage: 'https://moddable.games/developers/',
+        repository: 'https://github.com/Moddable-Games',
+        icon: 'https://moddable.games/img/favicon.svg',
+        transport: { type: 'http', url: 'https://tools.moddable.games/mcp' },
+        capabilities: {
+          tools: { count: ALL_TOOLS.length },
+          prompts: { count: PROMPTS.length },
+          resources: { count: RESOURCES.length },
+        },
+        tools: ALL_TOOLS.map(t => ({ name: t.name, description: t.description })),
+        prompts: PROMPTS.map(p => ({ name: p.name, description: p.description })),
+        resources: RESOURCES.map(r => ({ uri: r.uri, name: r.name, description: r.description })),
+        config: { schema: { type: 'object', properties: {}, additionalProperties: false } },
       }, null, 2), {
         headers: { 'Content-Type': 'application/json', ...corsHeaders },
       });
@@ -260,7 +332,7 @@ function handleMcpSse(request, corsHeaders) {
     id: 0,
     result: {
       protocolVersion: '2025-03-26',
-      capabilities: { tools: {} },
+      capabilities: { tools: {}, prompts: {}, resources: {} },
       serverInfo: SERVER_INFO,
     },
   };
@@ -293,7 +365,7 @@ async function handleMcpMessage(request, corsHeaders) {
     case 'initialize':
       result = {
         protocolVersion: '2025-03-26',
-        capabilities: { tools: {} },
+        capabilities: { tools: {}, prompts: {}, resources: {} },
         serverInfo: SERVER_INFO,
       };
       break;
@@ -312,6 +384,33 @@ async function handleMcpMessage(request, corsHeaders) {
       break;
     }
 
+    case 'prompts/list':
+      result = { prompts: PROMPTS };
+      break;
+
+    case 'prompts/get': {
+      const prompt = PROMPTS.find(p => p.name === (params || {}).name);
+      if (!prompt) {
+        return json({ jsonrpc: '2.0', id, error: { code: -32602, message: `Unknown prompt: ${(params || {}).name}` } }, corsHeaders, 400);
+      }
+      const messages = generatePromptMessages(prompt.name, (params || {}).arguments || {});
+      result = { description: prompt.description, messages };
+      break;
+    }
+
+    case 'resources/list':
+      result = { resources: RESOURCES };
+      break;
+
+    case 'resources/read': {
+      const content = readResource((params || {}).uri);
+      if (content.error) {
+        return json({ jsonrpc: '2.0', id, error: { code: -32602, message: content.error } }, corsHeaders, 400);
+      }
+      result = { contents: [content] };
+      break;
+    }
+
     default:
       return json({
         jsonrpc: '2.0', id,
@@ -320,6 +419,70 @@ async function handleMcpMessage(request, corsHeaders) {
   }
 
   return json({ jsonrpc: '2.0', id, result }, corsHeaders);
+}
+
+function generatePromptMessages(name, args) {
+  switch (name) {
+    case 'analyse_position':
+      return [
+        {
+          role: 'user',
+          content: {
+            type: 'text',
+            text: `Analyse this chess position${args.variant && args.variant !== 'standard' ? ` (variant: ${args.variant})` : ''}:\n\nFEN: ${args.fen || '[no FEN provided]'}\n\nPlease:\n1. Identify the material balance\n2. Assess king safety for both sides\n3. List immediate threats and tactical motifs\n4. Suggest the best 2-3 candidate moves with reasoning\n\nUse the chess_validate_move and chess_get_variant tools to verify any moves you suggest.`,
+          },
+        },
+      ];
+    case 'build_variant':
+      return [
+        {
+          role: 'user',
+          content: {
+            type: 'text',
+            text: `Help me design a new chess variant with the theme: "${args.theme || 'creative'}"\n\nWalk me through:\n1. Board dimensions and shape\n2. Piece types (standard + custom)\n3. Win conditions\n4. Special rules or phase changes\n5. Balance considerations\n\nUse chess_list_variants to check for similar existing variants, and chess_get_variant to study their rules for inspiration.`,
+          },
+        },
+      ];
+    case 'plan_hex_map':
+      return [
+        {
+          role: 'user',
+          content: {
+            type: 'text',
+            text: `Plan a hex map layout for ${args.players || '4'} players${args.game ? ` playing ${args.game}` : ''}.\n\nConsider:\n1. Grid dimensions and total hex count\n2. Terrain type distribution (land, water, mountain, etc.)\n3. Resource placement and balance\n4. Starting positions and fairness\n5. Strategic chokepoints\n\nUse hex_generate_map to create the actual map once we agree on parameters, and hex_list_terrains to see available terrain types.`,
+          },
+        },
+      ];
+    default:
+      return [{ role: 'user', content: { type: 'text', text: 'Unknown prompt.' } }];
+  }
+}
+
+function readResource(uri) {
+  switch (uri) {
+    case 'tools://moddable-games/variants': {
+      const variantList = handleToolCall('chess_list_variants', {});
+      return {
+        uri,
+        mimeType: 'application/json',
+        text: JSON.stringify(variantList, null, 2),
+      };
+    }
+    case 'tools://moddable-games/tools':
+      return {
+        uri,
+        mimeType: 'application/json',
+        text: JSON.stringify(ALL_TOOLS.map(t => ({ name: t.name, description: t.description, inputSchema: t.inputSchema })), null, 2),
+      };
+    case 'tools://moddable-games/ti4-factions':
+      return {
+        uri,
+        mimeType: 'application/json',
+        text: JSON.stringify({ base: TI4_FACTIONS_BASE, pok: TI4_FACTIONS_POK, total: TI4_FACTIONS_BASE.length + TI4_FACTIONS_POK.length }, null, 2),
+      };
+    default:
+      return { error: `Unknown resource: ${uri}` };
+  }
 }
 
 function generateLlmsTxt() {
@@ -337,6 +500,17 @@ function generateLlmsTxt() {
 
   for (const tool of ALL_TOOLS) {
     txt += `### ${tool.name}\n${tool.description}\n\n`;
+  }
+
+  txt += `## Prompts\n\n`;
+  for (const p of PROMPTS) {
+    txt += `### ${p.name}\n${p.description}\n`;
+    txt += `Arguments: ${p.arguments.map(a => `${a.name}${a.required ? ' (required)' : ''}`).join(', ')}\n\n`;
+  }
+
+  txt += `## Resources\n\n`;
+  for (const r of RESOURCES) {
+    txt += `### ${r.name}\n${r.description}\nURI: ${r.uri}\n\n`;
   }
 
   return txt;
