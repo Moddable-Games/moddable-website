@@ -350,12 +350,12 @@
 }
 .dev-anim-svg .doc-body {
   fill: none;
-  stroke: #6fb5ff;
+  stroke: #8b5cf6;
   stroke-width: 1.2;
   opacity: 0.7;
 }
 .dev-anim-svg .doc-line {
-  stroke: #6fb5ff;
+  stroke: #8b5cf6;
   stroke-width: 1.5;
   stroke-linecap: round;
   opacity: 0;
@@ -366,13 +366,13 @@
 .dev-anim-svg .doc-line:nth-child(4) { animation-delay: 0.6s; }
 .dev-anim-svg .doc-line:nth-child(5) { animation-delay: 0.8s; }
 .dev-anim-svg .dev-bracket {
-  fill: #6fb5ff;
+  fill: #8b5cf6;
   font-family: var(--mg-font-mono);
   font-weight: 700;
   opacity: 0.9;
 }
 .dev-anim-svg .doc-cursor {
-  fill: #6fb5ff;
+  fill: #8b5cf6;
   animation: newsCursorBlink 1s step-end infinite;
 }
 .dev-anim-svg .doc-float {

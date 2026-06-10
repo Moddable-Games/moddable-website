@@ -10,7 +10,7 @@
   document.getElementById('page-hero').appendChild(MG.sectionHero({
     section: 'developers',
     tier: 1,
-    hexColor: 'blue',
+    hexColor: 'purple',
     eyebrow: 'DEVELOPERS',
     title: 'Board game engines as <em>AI</em> tools',
     lede: '15 callable tools across two open-source engines. Connect from any MCP client, call via REST, or build bots for Telegram, Slack, and Discord.',
