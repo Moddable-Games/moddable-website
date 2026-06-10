@@ -223,6 +223,11 @@ stats.forEach(([k,v], i) => {
 
 
 
+// Developer band buttons
+const db = document.getElementById('dev-btns');
+db.appendChild(linkBtn('Explore Tools', '/developers/', 'blue'));
+db.appendChild(linkBtn('View API', 'https://tools.moddable.games/', 'outline-dark'));
+
 // Community band
 document.getElementById('community-hex').style.backgroundImage = "url('img/hex-grid-blue.svg')";
 const cb = document.getElementById('community-btns');

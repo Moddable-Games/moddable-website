@@ -1,0 +1,324 @@
+/* Developers page */
+
+.dev-connect {
+  padding: 80px 0;
+  background: var(--mg-canvas-light);
+}
+.dev-connect__heading {
+  font-family: var(--mg-font-display);
+  font-size: 2rem;
+  font-weight: 700;
+  margin: 12px 0 32px;
+  color: var(--mg-ink);
+}
+.dev-connect__block {
+  position: relative;
+  background: #1a1a2e;
+  border-radius: 8px;
+  padding: 20px 24px;
+  margin-bottom: 20px;
+  overflow-x: auto;
+}
+.dev-connect__block pre {
+  margin: 0;
+  font-family: var(--mg-font-mono);
+  font-size: 0.875rem;
+  line-height: 1.7;
+  color: #e0e0e0;
+}
+.dev-connect__block code {
+  white-space: pre-wrap;
+  word-break: break-all;
+}
+.dev-connect__copy {
+  position: absolute;
+  top: 12px;
+  right: 12px;
+  background: var(--mg-blue);
+  color: #fff;
+  border: none;
+  border-radius: 9999px;
+  padding: 6px 14px;
+  font-size: 0.75rem;
+  font-weight: 600;
+  cursor: pointer;
+  opacity: 0;
+  transition: opacity 0.2s;
+}
+.dev-connect__block:hover .dev-connect__copy {
+  opacity: 1;
+}
+.dev-connect__alt {
+  color: var(--mg-ink);
+  opacity: 0.7;
+  font-size: 0.875rem;
+  margin-bottom: 12px;
+}
+.dev-connect__alt code {
+  background: #e6e3d8;
+  padding: 2px 6px;
+  border-radius: 3px;
+  font-family: var(--mg-font-mono);
+  font-size: 0.8rem;
+}
+
+/* Tools grid */
+.dev-tools {
+  padding: 80px 0;
+  background: #0a0d2a;
+}
+.dev-tools__heading {
+  font-family: var(--mg-font-display);
+  font-size: 2rem;
+  font-weight: 700;
+  margin: 12px 0 40px;
+  color: #fff;
+}
+.dev-tools__grid {
+  display: grid;
+  grid-template-columns: repeat(auto-fill, minmax(300px, 1fr));
+  gap: 16px;
+}
+.dev-tool-card {
+  background: #0f1235;
+  border: 1px solid #1a3680;
+  border-radius: 8px;
+  padding: 20px;
+  transition: border-color 0.2s;
+}
+.dev-tool-card:hover {
+  border-color: #6fb5ff;
+}
+.dev-tool-card__name {
+  font-family: var(--mg-font-mono);
+  font-size: 0.8rem;
+  font-weight: 600;
+  color: #6fb5ff;
+  margin-bottom: 8px;
+}
+.dev-tool-card__name.green {
+  color: var(--mg-green);
+}
+.dev-tool-card__desc {
+  font-size: 0.875rem;
+  line-height: 1.5;
+  color: #c0c0c0;
+  margin-bottom: 12px;
+}
+.dev-tool-card__example {
+  font-size: 0.75rem;
+  color: #888;
+  font-style: italic;
+}
+
+/* REST section */
+.dev-rest {
+  padding: 80px 0;
+  background: var(--mg-canvas-light);
+}
+.dev-rest__heading {
+  font-family: var(--mg-font-display);
+  font-size: 2rem;
+  font-weight: 700;
+  margin: 12px 0 16px;
+  color: var(--mg-ink);
+}
+.dev-rest__lede {
+  color: var(--mg-ink);
+  opacity: 0.8;
+  margin-bottom: 32px;
+  max-width: 640px;
+}
+.dev-rest__example {
+  background: #1a1a2e;
+  border-radius: 8px;
+  padding: 20px 24px;
+  margin-bottom: 32px;
+  overflow-x: auto;
+}
+.dev-rest__example pre {
+  margin: 0;
+  font-family: var(--mg-font-mono);
+  font-size: 0.8rem;
+  line-height: 1.7;
+  color: #e0e0e0;
+}
+.dev-rest__endpoints {
+  display: grid;
+  gap: 12px;
+}
+.dev-rest__endpoint {
+  display: flex;
+  align-items: center;
+  gap: 16px;
+  padding: 12px 16px;
+  background: #fff;
+  border: 1px solid var(--mg-hairline-light);
+  border-radius: 8px;
+}
+.dev-rest__endpoint code {
+  font-family: var(--mg-font-mono);
+  font-size: 0.8rem;
+  font-weight: 600;
+  color: var(--mg-blue);
+  white-space: nowrap;
+}
+.dev-rest__endpoint span {
+  font-size: 0.875rem;
+  color: var(--mg-ink);
+  opacity: 0.7;
+}
+.dev-rest__endpoint span code {
+  font-weight: 400;
+  color: var(--mg-ink);
+}
+
+/* Build ideas */
+.dev-build {
+  padding: 80px 0;
+  background: #0a0d2a;
+}
+.dev-build__heading {
+  font-family: var(--mg-font-display);
+  font-size: 2rem;
+  font-weight: 700;
+  margin: 12px 0 40px;
+  color: #fff;
+}
+.dev-build__grid {
+  display: grid;
+  grid-template-columns: repeat(auto-fill, minmax(280px, 1fr));
+  gap: 20px;
+}
+.dev-build-card {
+  background: #0f1235;
+  border: 1px solid #1a3680;
+  border-radius: 8px;
+  padding: 24px;
+}
+.dev-build-card__icon {
+  font-size: 1.5rem;
+  margin-bottom: 12px;
+}
+.dev-build-card__title {
+  font-family: var(--mg-font-display);
+  font-size: 1rem;
+  font-weight: 600;
+  color: #fff;
+  margin-bottom: 8px;
+}
+.dev-build-card__body {
+  font-size: 0.875rem;
+  line-height: 1.5;
+  color: #a0a0a0;
+  margin-bottom: 12px;
+}
+.dev-build-card__tools {
+  font-family: var(--mg-font-mono);
+  font-size: 0.7rem;
+  color: #6fb5ff;
+}
+
+/* Engines */
+.dev-engines {
+  padding: 80px 0;
+  background: var(--mg-canvas-light);
+}
+.dev-engines__heading {
+  font-family: var(--mg-font-display);
+  font-size: 2rem;
+  font-weight: 700;
+  margin: 12px 0 40px;
+  color: var(--mg-ink);
+}
+.dev-engines__grid {
+  display: grid;
+  grid-template-columns: repeat(auto-fill, minmax(300px, 1fr));
+  gap: 24px;
+}
+.dev-engine-card {
+  background: #fff;
+  border: 1px solid var(--mg-hairline-light);
+  border-radius: 8px;
+  padding: 32px;
+}
+.dev-engine-card__title {
+  font-family: var(--mg-font-display);
+  font-size: 1.25rem;
+  font-weight: 700;
+  color: var(--mg-ink);
+  margin-bottom: 8px;
+}
+.dev-engine-card__tagline {
+  font-size: 0.875rem;
+  color: var(--mg-ink);
+  opacity: 0.7;
+  margin-bottom: 16px;
+}
+.dev-engine-card__stats {
+  display: flex;
+  gap: 24px;
+  margin-bottom: 16px;
+}
+.dev-engine-card__stat {
+  text-align: center;
+}
+.dev-engine-card__stat-value {
+  font-family: var(--mg-font-mono);
+  font-size: 1.25rem;
+  font-weight: 700;
+  color: var(--mg-blue);
+}
+.dev-engine-card__stat-value.green {
+  color: var(--mg-green);
+}
+.dev-engine-card__stat-label {
+  font-size: 0.7rem;
+  color: var(--mg-ink);
+  opacity: 0.6;
+}
+.dev-engine-card__links {
+  display: flex;
+  gap: 12px;
+  flex-wrap: wrap;
+}
+.dev-engine-card__link {
+  font-size: 0.8rem;
+  color: var(--mg-blue);
+  text-decoration: none;
+  font-weight: 600;
+}
+.dev-engine-card__link:hover {
+  text-decoration: underline;
+}
+
+/* Mobile */
+@media (max-width: 768px) {
+  .dev-connect,
+  .dev-tools,
+  .dev-rest,
+  .dev-build,
+  .dev-engines {
+    padding: 48px 0;
+  }
+  .dev-connect__heading,
+  .dev-tools__heading,
+  .dev-rest__heading,
+  .dev-build__heading,
+  .dev-engines__heading {
+    font-size: 1.5rem;
+  }
+  .dev-tools__grid,
+  .dev-build__grid,
+  .dev-engines__grid {
+    grid-template-columns: 1fr;
+  }
+  .dev-rest__endpoint {
+    flex-direction: column;
+    align-items: flex-start;
+    gap: 4px;
+  }
+  .dev-connect__copy {
+    opacity: 1;
+  }
+}

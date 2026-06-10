@@ -1,0 +1,96 @@
+[
+  {
+    "namespace": "moddable-chess",
+    "engine": "Moddable Chess",
+    "engineUrl": "https://chess.moddable.games/",
+    "accent": "blue",
+    "tools": [
+      {
+        "name": "chess_list_variants",
+        "description": "List all available chess variants with descriptions, board sizes, and rules.",
+        "example": "List all tactical chess variants",
+        "returns": "Array of variant objects with key, label, group, board size"
+      },
+      {
+        "name": "chess_get_legal_moves",
+        "description": "Get all legal moves for a position in any of 70+ variants.",
+        "example": "What moves can white play in Atomic Chess after 1. e4 e5?",
+        "returns": "Array of moves with type annotations (capture, castle, promotion)"
+      },
+      {
+        "name": "chess_analyze_position",
+        "description": "Evaluate a position using the engine. Returns best move and principal variation.",
+        "example": "Analyze this position in Capablanca Chess: [FEN]",
+        "returns": "Best move, evaluation score, principal variation line"
+      },
+      {
+        "name": "chess_validate_move",
+        "description": "Check whether a specific move is legal with human-readable explanations.",
+        "example": "Can the knight on b1 move to d2 in this position?",
+        "returns": "Legal/illegal verdict with reason (pinned, blocked, wrong turn)"
+      },
+      {
+        "name": "chess_make_moves",
+        "description": "Play a sequence of moves and return the resulting game state.",
+        "example": "Play 1. e4 e5 2. Nf3 Nc6 3. Bb5 in standard chess",
+        "returns": "Resulting FEN, game status, and full move history"
+      },
+      {
+        "name": "chess_get_opening_book",
+        "description": "Look up opening book moves for a position in any variant.",
+        "example": "What are the book moves after 1. d4 in King of the Hill?",
+        "returns": "Known continuations from the variant opening book"
+      },
+      {
+        "name": "chess_generate_puzzle",
+        "description": "Generate a tactical puzzle (mate-in-N) for any variant.",
+        "example": "Generate a mate-in-2 puzzle for Atomic Chess",
+        "returns": "FEN position with solution moves"
+      }
+    ]
+  },
+  {
+    "namespace": "moddable-hexmaps",
+    "engine": "Moddable Hexmaps",
+    "engineUrl": "https://hex.moddable.games/",
+    "accent": "green",
+    "tools": [
+      {
+        "name": "hex_list_games",
+        "description": "List all hex map games with their map types, layouts, and style options.",
+        "example": "What hex map games are available?",
+        "returns": "Array of game configs with sizes, layouts, and render styles"
+      },
+      {
+        "name": "hex_generate_map",
+        "description": "Generate a seeded hex map for any supported game.",
+        "example": "Generate a 6-player Nukes map with seed 'volcano'",
+        "returns": "Full hex grid with terrain types, coordinates, and metadata"
+      },
+      {
+        "name": "hex_get_info",
+        "description": "Inspect a hex coordinate: terrain, neighbors, distances.",
+        "example": "What terrain is at position (2, -1) on this Talisman map?",
+        "returns": "Hex details, adjacent hexes, nearest points of interest"
+      },
+      {
+        "name": "hex_compute_fov",
+        "description": "Compute field-of-view from a position respecting line-of-sight.",
+        "example": "What can a unit at (0,0) see with range 4, mountains blocking?",
+        "returns": "Visible and blocked hexes within range"
+      },
+      {
+        "name": "hex_export_svg",
+        "description": "Export a generated map as an SVG string for rendering.",
+        "example": "Export the current Nukes map as SVG with labels",
+        "returns": "Complete SVG string ready for embedding or download"
+      },
+      {
+        "name": "hex_pathfind",
+        "description": "Find shortest path between two hexes avoiding terrain.",
+        "example": "Find path from (0,0) to (3,2) avoiding water and mountains",
+        "returns": "Path array with distance, or unreachable verdict"
+      }
+    ]
+  }
+]
