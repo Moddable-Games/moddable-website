@@ -2,7 +2,7 @@ User-agent: *
 Allow: /
 Disallow: /build/
 
-Sitemap: https://web.moddable.games/sitemap.xml
+Sitemap: https://moddable.games/sitemap.xml
 
 User-agent: GPTBot
 Allow: /

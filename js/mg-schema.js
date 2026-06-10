@@ -6,7 +6,7 @@
     document.head.appendChild(s);
   }
 
-  var BASE = 'https://web.moddable.games';
+  var BASE = 'https://moddable.games';
 
   inject({
     "@context": "https://schema.org",

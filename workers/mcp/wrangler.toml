@@ -4,7 +4,7 @@ compatibility_date = "2024-01-01"
 workers_dev = true
 
 [vars]
-ALLOWED_ORIGINS = "https://web.moddable.games,https://chess.moddable.games,https://hex.moddable.games,https://tools.moddable.games"
+ALLOWED_ORIGINS = "https://moddable.games,https://chess.moddable.games,https://hex.moddable.games,https://tools.moddable.games"
 
 [[routes]]
 pattern = "tools.moddable.games/*"

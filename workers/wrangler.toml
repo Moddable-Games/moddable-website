@@ -3,7 +3,7 @@ main = "index.js"
 compatibility_date = "2024-01-01"
 
 [vars]
-ALLOWED_ORIGIN = "https://web.moddable.games"
+ALLOWED_ORIGIN = "https://moddable.games"
 
 [[kv_namespaces]]
 binding = "STORE"

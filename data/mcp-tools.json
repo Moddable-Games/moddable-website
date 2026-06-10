@@ -96,7 +96,7 @@
   {
     "namespace": "moddable-tools",
     "engine": "Moddable Tools",
-    "engineUrl": "https://web.moddable.games/tools/",
+    "engineUrl": "https://moddable.games/tools/",
     "accent": "red",
     "tools": [
       {

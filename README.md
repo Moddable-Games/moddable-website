@@ -124,12 +124,16 @@ Pages load `mg-loader.js` (shared modules) + their own page script. Data is fetc
 ### Changelog
 
 #### 2026-06-10
-- Deployed MCP tools server at tools.moddable.games (13 AI-callable tools, 2 engines)
-- Serves MCP protocol (SSE), REST API, llms.txt, OpenAPI 3.1, and .well-known/mcp.json discovery
-- Added /developers/ page: tool showcase, REST docs, connection instructions, build examples
-- Added homepage "For Developers" band with tool chip display
-- Added "Developers" to navbar and footer
-- Added AI Integration sections to chess.moddable.games and hex.moddable.games homepages
+- Deployed MCP tools server at tools.moddable.games (15 AI-callable tools across 3 engines)
+- Serves MCP protocol (SSE), REST API, llms.txt, OpenAPI 3.1, .well-known/mcp.json discovery
+- New /developers/ section: landing page + /api/ sub-page + /examples/ sub-page
+- Purple section accent (#8b5cf6), SVG hero feature, unique OG images
+- Homepage "For Developers" band between Featured Mod and Nukes sections
+- Nav reordered: Mods, Engines, Games, Tools, Developers, About, News (SVG/cube alternation)
+- Added dice_roll and ti4_random_factions as site-native tools
+- Puzzle generation uses pre-computed pool (Cloudflare Workers free tier)
+- AI Integration sections added to chess.moddable.games and hex.moddable.games
+- Favicon and full OG/Twitter meta tags on tools.moddable.games Worker
 
 #### 2026-06-09
 - TI4 Objective Tracker: full game-session mode with player scoring, secret objectives, bonus VP tracking

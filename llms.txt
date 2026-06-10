@@ -8,22 +8,22 @@ Moddable.Games is a workshop that publishes open-source rulebook mods for existi
 
 These JSON files contain structured data about all our content:
 
-- [Mods Library](https://web.moddable.games/data/mods.json): 10 rulebook mods across 6 base games
-- [Games](https://web.moddable.games/data/games.json): 3 original games (Endless Skies, Planet Mongo, Nukes)
-- [Engines](https://web.moddable.games/data/engines.json): 2 shared engines (Moddable Chess, Moddable Hexmaps)
-- [News](https://web.moddable.games/data/news.json): 13 articles about game design and modding
-- [Team](https://web.moddable.games/data/team.json): 4 team members
+- [Mods Library](https://moddable.games/data/mods.json): 10 rulebook mods across 6 base games
+- [Games](https://moddable.games/data/games.json): 3 original games (Endless Skies, Planet Mongo, Nukes)
+- [Engines](https://moddable.games/data/engines.json): 2 shared engines (Moddable Chess, Moddable Hexmaps)
+- [News](https://moddable.games/data/news.json): 13 articles about game design and modding
+- [Team](https://moddable.games/data/team.json): 4 team members
 
 ## Key Pages
 
-- [Homepage](https://web.moddable.games/): Overview and featured content
-- [Mods Library](https://web.moddable.games/mods/): Filterable collection of all mods
-- [Games](https://web.moddable.games/games/): Original games catalogue
-- [Engines](https://web.moddable.games/engines/): Shared engine SDKs
-- [Tools](https://web.moddable.games/tools/): Interactive game tools (dice, drafters, trackers)
-- [News](https://web.moddable.games/news/): Articles on game design and modding philosophy
-- [About](https://web.moddable.games/about/): Mission and approach
-- [Community](https://web.moddable.games/community/): Discord and engagement
+- [Homepage](https://moddable.games/): Overview and featured content
+- [Mods Library](https://moddable.games/mods/): Filterable collection of all mods
+- [Games](https://moddable.games/games/): Original games catalogue
+- [Engines](https://moddable.games/engines/): Shared engine SDKs
+- [Tools](https://moddable.games/tools/): Interactive game tools (dice, drafters, trackers)
+- [News](https://moddable.games/news/): Articles on game design and modding philosophy
+- [About](https://moddable.games/about/): Mission and approach
+- [Community](https://moddable.games/community/): Discord and engagement
 
 ## Live Applications
 

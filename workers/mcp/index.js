@@ -388,8 +388,8 @@ function generateIndexHtml() {
 <head>
 <meta charset="utf-8">
 <meta name="viewport" content="width=device-width,initial-scale=1">
-<link rel="icon" href="https://web.moddable.games/img/favicon.svg" type="image/svg+xml">
-<link rel="icon" href="https://web.moddable.games/img/favicon-32x32.png" sizes="32x32" type="image/png">
+<link rel="icon" href="https://moddable.games/img/favicon.svg" type="image/svg+xml">
+<link rel="icon" href="https://moddable.games/img/favicon-32x32.png" sizes="32x32" type="image/png">
 <meta name="theme-color" content="#0a0d2a">
 <title>Moddable.Games — Tools API</title>
 <meta name="description" content="${ALL_TOOLS.length} AI-callable tools for chess variant analysis, hex map generation, and board game utilities.">
@@ -398,11 +398,11 @@ function generateIndexHtml() {
 <meta property="og:url" content="https://tools.moddable.games/">
 <meta property="og:type" content="website">
 <meta property="og:site_name" content="Moddable.Games">
-<meta property="og:image" content="https://web.moddable.games/img/og/developers-api.png?v=${SERVER_INFO.version}">
+<meta property="og:image" content="https://moddable.games/img/og/developers-api.png?v=${SERVER_INFO.version}">
 <meta name="twitter:card" content="summary_large_image">
 <meta name="twitter:title" content="Moddable.Games Tools API">
 <meta name="twitter:description" content="${ALL_TOOLS.length} AI-callable tools for chess variant analysis, hex map generation, and board game utilities.">
-<meta name="twitter:image" content="https://web.moddable.games/img/og/developers-api.png?v=${SERVER_INFO.version}">
+<meta name="twitter:image" content="https://moddable.games/img/og/developers-api.png?v=${SERVER_INFO.version}">
 <link rel="preconnect" href="https://fonts.googleapis.com">
 <link href="https://fonts.googleapis.com/css2?family=Inter+Tight:wght@600;700&family=Inter:wght@400;500&family=JetBrains+Mono:wght@400;500&family=Press+Start+2P&display=swap" rel="stylesheet">
 <style>
@@ -544,16 +544,16 @@ ${siteTools.length > 0 ? `<div class="section section--dark">
       <a href="/openapi.json">OpenAPI Spec</a>
       <a href="/llms.txt">llms.txt</a>
       <a href="/.well-known/mcp.json">MCP Discovery</a>
-      <a href="https://web.moddable.games/developers/">Developer Guide</a>
+      <a href="https://moddable.games/developers/">Developer Guide</a>
       <a href="https://github.com/Moddable-Games">GitHub</a>
     </div>
   </div>
 </div>
 
 <div class="footer">
-  <a href="https://web.moddable.games" class="footer__logo"><img src="https://web.moddable.games/img/moddable-logo-white.png" alt="Moddable.Games" height="24"></a>
+  <a href="https://moddable.games" class="footer__logo"><img src="https://moddable.games/img/moddable-logo-white.png" alt="Moddable.Games" height="24"></a>
   <p>Open-source board game engines, mods, and tools.</p>
-  <p><a href="https://web.moddable.games">Main site</a> &middot; <a href="https://web.moddable.games/developers/">Developer guide</a> &middot; <a href="https://github.com/Moddable-Games">GitHub</a> &middot; v${SERVER_INFO.version}</p>
+  <p><a href="https://moddable.games">Main site</a> &middot; <a href="https://moddable.games/developers/">Developer guide</a> &middot; <a href="https://github.com/Moddable-Games">GitHub</a> &middot; v${SERVER_INFO.version}</p>
 </div>
 
 </body>
