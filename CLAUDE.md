@@ -31,6 +31,7 @@ One shared component library (`_mg.js` + `_mg.css`), one page per HTML file.
 │   ├── mods.json           ← mod library (10 entries)
 │   ├── games.json          ← games (3 entries)
 │   ├── engines.json        ← engine/SDK listings (2 entries)
+│   ├── mcp-tools.json      ← MCP tool registry (13 tools, 2 namespaces)
 │   ├── news.json           ← news posts (13 entries)
 │   └── team.json           ← team members (4 entries)
 │
@@ -65,8 +66,18 @@ One shared component library (`_mg.js` + `_mg.css`), one page per HTML file.
 ├── team/
 │   ├── index.html          ← team page
 │   └── <name>/index.html   ← team member detail pages (4 total)
+├── developers/index.html   ← developers/API page (MCP tools showcase)
 ├── press/index.html        ← press/media page
-└── community/index.html    ← community / Discord page
+├── community/index.html    ← community / Discord page
+└── workers/
+    ├── index.js            ← forms API Worker (subscribe, submit)
+    ├── wrangler.toml       ← Cloudflare config for moddable-api
+    └── mcp/
+        ├── index.js        ← MCP tools Worker (13 tools, 2 engines)
+        ├── chess-tools.js  ← re-exports from moddable-chess/mcp/tools.js
+        ├── hex-tools.js    ← re-exports from moddable-hexmaps/mcp/tools.js
+        ├── wrangler.toml   ← Cloudflare config for moddable-tools
+        └── deploy.sh       ← deploy script
 ```
 
 ---
@@ -91,6 +102,35 @@ The script:
    / `#footer-root` (the preview shell owns those)
 3. Embeds `js/_mg.js` and `css/_mg.css` inline
 4. Writes `build/moddable-preview.html`
+
+---
+
+## MCP Tools Worker
+
+The repo contains a Cloudflare Worker at `workers/mcp/` that serves 13
+AI-callable tools from both engines (Moddable Chess + Moddable Hexmaps).
+
+**Live at:** `https://tools.moddable.games/`
+
+**Endpoints:**
+- `/mcp` — SSE transport for MCP protocol (Claude Desktop, Cursor, VS Code)
+- `/mcp/message` — POST endpoint for MCP JSON-RPC messages
+- `/api/call` — REST API (`POST {"tool": "name", "args": {...}}`)
+- `/api/tools` — GET tool listing with schemas
+- `/llms.txt` — AI-readable discovery file
+- `/openapi.json` — OpenAPI 3.1 spec
+- `/.well-known/mcp.json` — MCP server discovery manifest
+
+**Architecture:** The Worker imports tool handlers from sibling repos
+(`moddable-chess/mcp/tools.js`, `moddable-hexmaps/mcp/tools.js`) via relative
+paths. Wrangler's bundler resolves and inlines everything at deploy time (~67KB
+gzipped). No runtime filesystem access needed.
+
+**Deploy:** `cd workers/mcp && wrangler deploy`
+
+**Limitation:** The free Workers tier (10ms CPU) is insufficient for
+`chess_generate_puzzle` which does a random search. Upgrade to paid ($5/mo)
+for 50ms CPU if puzzle generation is needed.
 
 ---
 

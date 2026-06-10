@@ -30,6 +30,7 @@ Modular JS architecture: one loader (`js/mg-loader.js`) loads 12 shared modules 
 | `/engines/` | Engines hub |
 | `/engines/moddable-chess/` | Moddable Chess engine |
 | `/engines/moddable-hexmaps/` | Moddable Hexmaps engine |
+| `/developers/` | Developers / Tools API |
 | `/news/` | News index |
 | `/news/[slug]/` | 13 article pages |
 | `/tools/` | Tools hub (dice, names, scores) |
@@ -108,9 +109,11 @@ js/
 └── mg-*-page.js            ← page-specific scripts (home, tools, etc.)
 
 data/
-├── mods.json               ← mod library (13 entries)
-├── games.json              ← games (5 entries)
-├── news.json               ← news posts (12 entries)
+├── mods.json               ← mod library (10 entries)
+├── games.json              ← games (3 entries)
+├── engines.json            ← engine listings (2 entries)
+├── mcp-tools.json          ← MCP tool registry (13 tools)
+├── news.json               ← news posts (13 entries)
 └── team.json               ← team members (4 entries)
 ```
 
@@ -119,6 +122,14 @@ Pages load `mg-loader.js` (shared modules) + their own page script. Data is fetc
 ---
 
 ### Changelog
+
+#### 2026-06-10
+- Deployed MCP tools server at tools.moddable.games (13 AI-callable tools, 2 engines)
+- Serves MCP protocol (SSE), REST API, llms.txt, OpenAPI 3.1, and .well-known/mcp.json discovery
+- Added /developers/ page: tool showcase, REST docs, connection instructions, build examples
+- Added homepage "For Developers" band with tool chip display
+- Added "Developers" to navbar and footer
+- Added AI Integration sections to chess.moddable.games and hex.moddable.games homepages
 
 #### 2026-06-09
 - TI4 Objective Tracker: full game-session mode with player scoring, secret objectives, bonus VP tracking
