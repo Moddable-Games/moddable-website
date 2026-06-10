@@ -14,7 +14,7 @@
     eyebrow: 'DEVELOPERS',
     title: 'Board game <em>engines</em> as AI tools',
     lede: '15 callable tools across two open-source engines. Connect from any MCP client, call via REST, or build bots for Telegram, Slack, and Discord.',
-    feature: MG.buildHeroFeature('engines')
+    feature: MG.buildHeroFeature('developers')
   }));
 
   // Destination cards

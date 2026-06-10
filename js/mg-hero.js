@@ -339,6 +339,11 @@
       gWrap.innerHTML = buildGamesSVG();
       return gWrap;
 
+    } else if (section === 'developers') {
+      var dWrap = el('div', { class: 'dev-anim-wrap' });
+      dWrap.innerHTML = '<svg class="dev-anim-svg" viewBox="0 0 100 120"><g class="doc-float"><rect class="doc-body" x="12" y="12" width="76" height="56" rx="4"/><text class="dev-bracket" x="20" y="40" font-size="22">&lt;/&gt;</text><line class="doc-line" x1="48" y1="30" x2="78" y2="30" stroke-dasharray="30"/><line class="doc-line" x1="48" y1="38" x2="72" y2="38" stroke-dasharray="24"/><line class="doc-line" x1="48" y1="46" x2="76" y2="46" stroke-dasharray="28"/><line class="doc-line" x1="48" y1="54" x2="66" y2="54" stroke-dasharray="18"/><rect class="doc-cursor" x="66" y="52" width="2" height="5" rx="1"/></g><g class="doc-float" style="animation-delay:-2.5s"><rect class="doc-body" x="22" y="72" width="56" height="36" rx="3" opacity="0.25"/><line class="doc-line" x1="30" y1="82" x2="60" y2="82" stroke-dasharray="30" opacity="0.4"/><line class="doc-line" x1="30" y1="90" x2="52" y2="90" stroke-dasharray="22" opacity="0.4"/><line class="doc-line" x1="30" y1="98" x2="56" y2="98" stroke-dasharray="26" opacity="0.4"/></g></svg>';
+      return dWrap;
+
     } else if (section === 'news') {
       var wrap = el('div', { class: 'news-anim-wrap' });
       wrap.innerHTML = NEWS_SVG;
