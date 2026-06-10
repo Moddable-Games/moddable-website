@@ -3,3 +3,10 @@
 CLAUDE.md
 font-test.html
 **/.wrangler/
+
+# wrangler files
+.wrangler
+.dev.vars*
+!.dev.vars.example
+.env*
+!.env.example
