@@ -5,15 +5,15 @@
   document.getElementById('nav-root').appendChild(MG.navbar('Developers'));
   document.getElementById('footer-root').appendChild(MG.footer());
 
-  // Hero
-  var hero = document.getElementById('dev-hero');
-  hero.appendChild(MG.pageHero({
+  // Tier-1 hero (same pattern as Engines, Tools, etc.)
+  document.getElementById('page-hero').appendChild(MG.sectionHero({
+    section: 'developers',
+    tier: 1,
+    hexColor: 'blue',
     eyebrow: 'TOOLS API',
-    title: 'Board game engines as AI tools',
-    lede: '13 callable tools for chess variant analysis and hex map generation. Connect from Claude, Cursor, VS Code, or any HTTP client.',
-    accent: MG.T.cosmicGlow,
-    withHorizon: true,
-    minHeight: '340px'
+    title: 'Board game <em>engines</em> as AI tools',
+    lede: '15 callable tools for chess variant analysis, hex map generation, and board game utilities. Connect from any MCP client or call via REST.',
+    feature: MG.buildHeroFeature('engines')
   }));
 
   // Copy buttons
@@ -41,6 +41,11 @@
       });
     });
   });
+
+  // CTA below tools grid
+  var toolsCta = document.getElementById('tools-cta');
+  toolsCta.appendChild(MG.linkBtn('Full API Docs', 'https://tools.moddable.games/', 'blue'));
+  toolsCta.appendChild(MG.linkBtn('OpenAPI Spec', 'https://tools.moddable.games/openapi.json', 'outline-dark'));
 
   // Build ideas
   var buildIdeas = [
