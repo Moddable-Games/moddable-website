@@ -441,7 +441,10 @@ a:hover{text-decoration:underline}
 .links a{font-size:0.8rem;font-weight:500;padding:8px 20px;border:1px solid rgba(111,181,255,0.3);border-radius:9999px;transition:border-color 0.2s}
 .links a:hover{border-color:#6fb5ff;text-decoration:none}
 
-.footer{padding:40px 24px;text-align:center;opacity:0.5;font-size:0.8rem;border-top:1px solid rgba(111,181,255,0.08)}
+.footer{padding:48px 24px;text-align:center;font-size:0.8rem;border-top:1px solid rgba(111,181,255,0.08)}
+.footer__logo{display:inline-block;margin-bottom:12px;opacity:0.7;transition:opacity 0.2s}
+.footer__logo:hover{opacity:1}
+.footer p{color:rgba(255,255,255,0.45);margin-top:8px}
 
 @media(max-width:768px){
   .tools-grid{grid-template-columns:1fr}
@@ -524,7 +527,9 @@ ${siteTools.length > 0 ? `<div class="section section--dark">
 </div>
 
 <div class="footer">
-  Powered by <a href="https://web.moddable.games">Moddable.Games</a> &middot; ${SERVER_INFO.version}
+  <a href="https://web.moddable.games" class="footer__logo"><img src="https://web.moddable.games/img/moddable-logo-white.png" alt="Moddable.Games" height="24"></a>
+  <p>Open-source board game engines, mods, and tools.</p>
+  <p><a href="https://web.moddable.games">Main site</a> &middot; <a href="https://web.moddable.games/developers/">Developer guide</a> &middot; <a href="https://github.com/Moddable-Games">GitHub</a> &middot; v${SERVER_INFO.version}</p>
 </div>
 
 </body>
