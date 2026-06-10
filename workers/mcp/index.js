@@ -83,6 +83,12 @@ export default {
       });
     }
 
+    if (path === '/.well-known/mcp-registry-auth') {
+      return new Response('v=MCPv1; k=ed25519; p=aTEWAPx+rAD+1PCeA9tc0CWAj4yanBPkMM/SVEswhdA=', {
+        headers: { 'Content-Type': 'text/plain', ...corsHeaders },
+      });
+    }
+
     if (path === '/.well-known/mcp.json') {
       return new Response(JSON.stringify({
         schema_version: '1.0',
