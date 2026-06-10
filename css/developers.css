@@ -99,6 +99,9 @@
 .dev-tool-card__name.green {
   color: var(--mg-green);
 }
+.dev-tool-card__name.red {
+  color: var(--mg-red);
+}
 .dev-tool-card__desc {
   font-size: 0.875rem;
   line-height: 1.5;

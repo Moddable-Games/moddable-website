@@ -31,8 +31,9 @@
     var grid = document.getElementById('tools-grid');
     namespaces.forEach(function(ns) {
       ns.tools.forEach(function(tool) {
+        var accentClass = ns.accent === 'green' ? ' green' : ns.accent === 'red' ? ' red' : '';
         var card = el('div', { class: 'dev-tool-card' },
-          el('div', { class: 'dev-tool-card__name' + (ns.accent === 'green' ? ' green' : '') }, tool.name),
+          el('div', { class: 'dev-tool-card__name' + accentClass }, tool.name),
           el('div', { class: 'dev-tool-card__desc' }, tool.description),
           el('div', { class: 'dev-tool-card__example' }, '"' + tool.example + '"')
         );
