@@ -92,5 +92,25 @@
         "returns": "Path array with distance, or unreachable verdict"
       }
     ]
+  },
+  {
+    "namespace": "moddable-tools",
+    "engine": "Moddable Tools",
+    "engineUrl": "https://web.moddable.games/tools/",
+    "accent": "red",
+    "tools": [
+      {
+        "name": "dice_roll",
+        "description": "Roll dice using standard notation. Supports any combination of dice, modifiers, and multiple rolls.",
+        "example": "Roll 2d6+3 for a sword attack",
+        "returns": "Individual dice results, total, and breakdown"
+      },
+      {
+        "name": "ti4_random_factions",
+        "description": "Generate random faction assignments for a Twilight Imperium 4e game session.",
+        "example": "Pick factions for 6 players with Prophecy of Kings",
+        "returns": "Array of faction assignments with colours and home systems"
+      }
+    ]
   }
 ]

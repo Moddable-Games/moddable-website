@@ -76,7 +76,7 @@
 }
 .dev-tools__grid {
   display: grid;
-  grid-template-columns: repeat(auto-fill, minmax(300px, 1fr));
+  grid-template-columns: repeat(3, 1fr);
   gap: 16px;
 }
 .dev-tool-card {
@@ -187,7 +187,7 @@
 }
 .dev-build__grid {
   display: grid;
-  grid-template-columns: repeat(auto-fill, minmax(280px, 1fr));
+  grid-template-columns: repeat(3, 1fr);
   gap: 20px;
 }
 .dev-build-card {
@@ -233,7 +233,7 @@
 }
 .dev-engines__grid {
   display: grid;
-  grid-template-columns: repeat(auto-fill, minmax(300px, 1fr));
+  grid-template-columns: repeat(2, 1fr);
   gap: 24px;
 }
 .dev-engine-card {

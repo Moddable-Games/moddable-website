@@ -2,12 +2,47 @@ import { CHESS_TOOLS, handleChessToolCall } from './chess-tools.js';
 import { HEX_TOOLS, handleHexToolCall } from './hex-tools.js';
 import PUZZLE_POOL from './puzzle-pool.json';
 
-const ALL_TOOLS = [...CHESS_TOOLS, ...HEX_TOOLS];
+const SITE_TOOLS = [
+  {
+    name: 'dice_roll',
+    description: 'Roll dice using standard notation (e.g. "2d6+3", "4d8-1", "d20"). Supports any combination of dice, modifiers, and multiple pools.',
+    inputSchema: {
+      type: 'object',
+      properties: {
+        notation: {
+          type: 'string',
+          description: 'Dice notation (e.g. "2d6+3", "4d8", "d20+5", "3d6"). Multiple pools separated by commas.',
+        },
+      },
+      required: ['notation'],
+    },
+  },
+  {
+    name: 'ti4_random_factions',
+    description: 'Generate random faction assignments for a Twilight Imperium 4e game. Supports base game and Prophecy of Kings expansion.',
+    inputSchema: {
+      type: 'object',
+      properties: {
+        players: {
+          type: 'number',
+          description: 'Number of players (3-8). Defaults to 6.',
+        },
+        expansion: {
+          type: 'string',
+          enum: ['base', 'pok'],
+          description: 'Include Prophecy of Kings factions. Defaults to "pok".',
+        },
+      },
+    },
+  },
+];
+
+const ALL_TOOLS = [...CHESS_TOOLS, ...HEX_TOOLS, ...SITE_TOOLS];
 
 const SERVER_INFO = {
   name: 'moddable-tools',
-  version: '1.0.0',
-  description: 'AI-callable tools for chess variant analysis and hex map generation',
+  version: '1.1.0',
+  description: 'AI-callable tools for chess variant analysis, hex map generation, and board game utilities',
 };
 
 export default {
@@ -83,6 +118,8 @@ function handleToolCall(name, args) {
   if (name === 'chess_generate_puzzle') return servePuzzleFromPool(args);
   if (name.startsWith('chess_')) return handleChessToolCall(name, args);
   if (name.startsWith('hex_')) return handleHexToolCall(name, args);
+  if (name === 'dice_roll') return diceRoll(args);
+  if (name === 'ti4_random_factions') return ti4RandomFactions(args);
   return { error: `Unknown tool: ${name}` };
 }
 
@@ -102,6 +139,83 @@ function servePuzzleFromPool(args) {
   const idx = Math.floor(Math.random() * pool.length);
   const puzzle = pool[idx];
   return { type, variant, fen: puzzle.fen, turn: puzzle.turn, solution: puzzle.solution };
+}
+
+function diceRoll(args) {
+  if (!args || !args.notation) return { error: 'notation parameter is required (e.g. "2d6+3")' };
+
+  const pools = args.notation.split(',').map(s => s.trim());
+  const results = [];
+  let grandTotal = 0;
+
+  for (const pool of pools) {
+    const match = pool.match(/^(\d*)d(\d+)([+-]\d+)?$/i);
+    if (!match) {
+      results.push({ input: pool, error: 'Invalid notation. Use format: NdS+M (e.g. 2d6+3)' });
+      continue;
+    }
+    const count = parseInt(match[1] || '1');
+    const sides = parseInt(match[2]);
+    const modifier = parseInt(match[3] || '0');
+
+    if (count < 1 || count > 100) return { error: 'Dice count must be 1-100' };
+    if (sides < 2 || sides > 1000) return { error: 'Dice sides must be 2-1000' };
+
+    const rolls = [];
+    for (let i = 0; i < count; i++) {
+      rolls.push(1 + Math.floor(Math.random() * sides));
+    }
+    const subtotal = rolls.reduce((a, b) => a + b, 0);
+    const total = subtotal + modifier;
+    grandTotal += total;
+
+    results.push({
+      input: pool,
+      dice: `${count}d${sides}`,
+      rolls,
+      subtotal,
+      modifier,
+      total,
+    });
+  }
+
+  return { pools: results, total: grandTotal };
+}
+
+const TI4_FACTIONS_BASE = [
+  'Federation of Sol', 'Emirates of Hacan', 'Universities of Jol-Nar',
+  'Sardakk N\'orr', 'Barony of Letnev', 'Clan of Saar',
+  'Embers of Muaat', 'Ghosts of Creuss', 'L1Z1X Mindnet',
+  'Mentak Coalition', 'Naalu Collective', 'Nekro Virus',
+  'Winnu', 'Xxcha Kingdom', 'Yin Brotherhood', 'Yssaril Tribes',
+  'Arborec',
+];
+
+const TI4_FACTIONS_POK = [
+  'Argent Flight', 'Empyrean', 'Mahact Gene-Sorcerers',
+  'Naaz-Rokha Alliance', 'Nomad', 'Titans of Ul',
+  'Vuil\'raith Cabal',
+];
+
+function ti4RandomFactions(args) {
+  const players = Math.min(8, Math.max(3, (args && args.players) || 6));
+  const expansion = (args && args.expansion) || 'pok';
+
+  let pool = [...TI4_FACTIONS_BASE];
+  if (expansion === 'pok') pool = pool.concat(TI4_FACTIONS_POK);
+
+  const assigned = [];
+  for (let i = 0; i < players; i++) {
+    const idx = Math.floor(Math.random() * pool.length);
+    assigned.push(pool.splice(idx, 1)[0]);
+  }
+
+  return {
+    players,
+    expansion,
+    factions: assigned.map((f, i) => ({ player: i + 1, faction: f })),
+    poolSize: pool.length + players,
+  };
 }
 
 async function handleRestCall(request, corsHeaders) {
