@@ -11,7 +11,7 @@
     eyebrow: 'TOOLS API',
     title: 'Connect and call',
     lede: 'One endpoint, 15 tools. MCP protocol for AI agents, REST for everything else.',
-    accent: MG.T.cosmicGlow,
+    accent: '#8b5cf6',
     withHorizon: true,
     minHeight: '300px'
   }));

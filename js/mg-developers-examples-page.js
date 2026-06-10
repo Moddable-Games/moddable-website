@@ -10,7 +10,7 @@
     eyebrow: 'EXAMPLES',
     title: 'What you could build',
     lede: 'Bots, apps, and integrations powered by the Moddable Tools API.',
-    accent: MG.T.cosmicGlow,
+    accent: '#8b5cf6',
     withHorizon: true,
     minHeight: '300px'
   }));

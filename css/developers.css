@@ -112,7 +112,7 @@
 .dev-connect__block {
   position: relative;
   background: #1a1a2e;
-  border-left: 3px solid var(--mg-blue);
+  border-left: 3px solid #8b5cf6;
   border-radius: 0 12px 12px 0;
   padding: 20px 70px 20px 24px;
   margin-bottom: 20px;
@@ -134,7 +134,7 @@
   top: 50%;
   right: 14px;
   transform: translateY(-50%);
-  background: var(--mg-blue);
+  background: #8b5cf6;
   color: #fff;
   border: none;
   border-radius: 9999px;
@@ -173,7 +173,7 @@
   content: '';
   position: absolute;
   inset: 0;
-  background-image: url('../img/hex-grid-blue.svg');
+  background-image: url('../img/hex-grid-purple.svg');
   background-size: 56px 64px;
   opacity: 0.03;
   pointer-events: none;
@@ -200,15 +200,15 @@
   transition: border-color 0.2s, transform 0.2s;
 }
 .dev-tool-card:hover {
-  border-color: #6fb5ff;
-  border-left-color: #6fb5ff;
+  border-color: #8b5cf6;
+  border-left-color: #8b5cf6;
   transform: translateY(-2px);
 }
 .dev-tool-card__name {
   font-family: var(--mg-font-mono);
   font-size: 0.75rem;
   font-weight: 600;
-  color: #6fb5ff;
+  color: #8b5cf6;
   margin-bottom: 8px;
 }
 .dev-tool-card__name.green {
@@ -247,7 +247,7 @@
   content: '';
   position: absolute;
   inset: 0;
-  background-image: url('../img/hex-grid-blue.svg');
+  background-image: url('../img/hex-grid-purple.svg');
   background-size: 56px 64px;
   opacity: 0.03;
   pointer-events: none;
@@ -262,11 +262,11 @@
   background: #fff;
   border-color: var(--mg-hairline-light);
 }
-.dev-build--light .dev-build-card:hover { border-color: var(--mg-blue); }
-.dev-build--light .dev-build-card__icon { background: rgba(12,79,141,0.06); }
+.dev-build--light .dev-build-card:hover { border-color: #8b5cf6; }
+.dev-build--light .dev-build-card__icon { background: rgba(139,92,246,0.06); }
 .dev-build--light .dev-build-card__title { color: var(--mg-ink); }
 .dev-build--light .dev-build-card__body { color: var(--mg-ink); opacity: 0.7; }
-.dev-build--light .dev-build-card__tools { color: var(--mg-blue); }
+.dev-build--light .dev-build-card__tools { color: #8b5cf6; }
 .dev-build__heading {
   font-family: var(--mg-font-display);
   font-size: 2rem;
@@ -287,7 +287,7 @@
   transition: border-color 0.2s, transform 0.2s;
 }
 .dev-build-card:hover {
-  border-color: rgba(111,181,255,0.4);
+  border-color: rgba(139,92,246,0.4);
   transform: translateY(-2px);
 }
 .dev-build-card__icon {
@@ -297,7 +297,7 @@
   align-items: center;
   justify-content: center;
   font-size: 1.5rem;
-  background: rgba(111,181,255,0.08);
+  background: rgba(139,92,246,0.08);
   border-radius: 12px;
   margin-bottom: 16px;
 }
@@ -317,7 +317,7 @@
 .dev-build-card__tools {
   font-family: var(--mg-font-mono);
   font-size: 0.68rem;
-  color: #6fb5ff;
+  color: #8b5cf6;
   opacity: 0.7;
 }
 
