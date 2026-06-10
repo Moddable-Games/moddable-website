@@ -236,7 +236,7 @@
 }
 
 
-/* ── Build ideas (dark) ── */
+/* ── Build ideas (dark default, light variant) ── */
 .dev-build {
   padding: 100px 0;
   background: #0a0d2a;
@@ -253,6 +253,20 @@
   pointer-events: none;
 }
 .dev-build .mg-container { position: relative; }
+.dev-build--light {
+  background: var(--mg-canvas-light);
+}
+.dev-build--light::before { display: none; }
+.dev-build--light .dev-build__heading { color: var(--mg-ink); }
+.dev-build--light .dev-build-card {
+  background: #fff;
+  border-color: var(--mg-hairline-light);
+}
+.dev-build--light .dev-build-card:hover { border-color: var(--mg-blue); }
+.dev-build--light .dev-build-card__icon { background: rgba(12,79,141,0.06); }
+.dev-build--light .dev-build-card__title { color: var(--mg-ink); }
+.dev-build--light .dev-build-card__body { color: var(--mg-ink); opacity: 0.7; }
+.dev-build--light .dev-build-card__tools { color: var(--mg-blue); }
 .dev-build__heading {
   font-family: var(--mg-font-display);
   font-size: 2rem;

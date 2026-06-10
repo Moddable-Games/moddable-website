@@ -54,6 +54,11 @@
     }
   ];
 
+  // CTA buttons
+  var ctaBtns = document.getElementById('examples-cta-btns');
+  ctaBtns.appendChild(MG.linkBtn('Tools API', '/developers/api/', 'blue'));
+  ctaBtns.appendChild(MG.linkBtn('Live Server', 'https://tools.moddable.games/', 'outline-dark'));
+
   var buildGrid = document.getElementById('build-grid');
   buildIdeas.forEach(function(idea) {
     var card = el('div', { class: 'dev-build-card' },
