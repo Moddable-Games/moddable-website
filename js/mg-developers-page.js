@@ -11,7 +11,7 @@
     eyebrow: 'TOOLS API',
     title: 'Board game engines as AI tools',
     lede: '13 callable tools for chess variant analysis and hex map generation. Connect from Claude, Cursor, VS Code, or any HTTP client.',
-    accent: 'blue',
+    accent: MG.T.cosmicGlow,
     withHorizon: true,
     minHeight: '340px'
   }));
@@ -31,10 +31,10 @@
     var grid = document.getElementById('tools-grid');
     namespaces.forEach(function(ns) {
       ns.tools.forEach(function(tool) {
-        var card = el('div', { className: 'dev-tool-card' },
-          el('div', { className: 'dev-tool-card__name' + (ns.accent === 'green' ? ' green' : '') }, tool.name),
-          el('div', { className: 'dev-tool-card__desc' }, tool.description),
-          el('div', { className: 'dev-tool-card__example' }, '"' + tool.example + '"')
+        var card = el('div', { class: 'dev-tool-card' },
+          el('div', { class: 'dev-tool-card__name' + (ns.accent === 'green' ? ' green' : '') }, tool.name),
+          el('div', { class: 'dev-tool-card__desc' }, tool.description),
+          el('div', { class: 'dev-tool-card__example' }, '"' + tool.example + '"')
         );
         grid.appendChild(card);
       });
@@ -83,11 +83,11 @@
 
   var buildGrid = document.getElementById('build-grid');
   buildIdeas.forEach(function(idea) {
-    var card = el('div', { className: 'dev-build-card' },
-      el('div', { className: 'dev-build-card__icon' }, idea.icon),
-      el('div', { className: 'dev-build-card__title' }, idea.title),
-      el('div', { className: 'dev-build-card__body' }, idea.body),
-      el('div', { className: 'dev-build-card__tools' }, idea.tools)
+    var card = el('div', { class: 'dev-build-card' },
+      el('div', { class: 'dev-build-card__icon' }, idea.icon),
+      el('div', { class: 'dev-build-card__title' }, idea.title),
+      el('div', { class: 'dev-build-card__body' }, idea.body),
+      el('div', { class: 'dev-build-card__tools' }, idea.tools)
     );
     buildGrid.appendChild(card);
   });
@@ -122,21 +122,21 @@
 
   var engGrid = document.getElementById('engines-grid');
   engines.forEach(function(eng) {
-    var statsEl = el('div', { className: 'dev-engine-card__stats' });
+    var statsEl = el('div', { class: 'dev-engine-card__stats' });
     eng.stats.forEach(function(s) {
-      statsEl.appendChild(el('div', { className: 'dev-engine-card__stat' },
-        el('div', { className: 'dev-engine-card__stat-value' + (eng.accent === 'green' ? ' green' : '') }, s.value),
-        el('div', { className: 'dev-engine-card__stat-label' }, s.label)
+      statsEl.appendChild(el('div', { class: 'dev-engine-card__stat' },
+        el('div', { class: 'dev-engine-card__stat-value' + (eng.accent === 'green' ? ' green' : '') }, s.value),
+        el('div', { class: 'dev-engine-card__stat-label' }, s.label)
       ));
     });
 
-    var card = el('div', { className: 'dev-engine-card' },
-      el('div', { className: 'dev-engine-card__title' }, eng.title),
-      el('div', { className: 'dev-engine-card__tagline' }, eng.tagline),
+    var card = el('div', { class: 'dev-engine-card' },
+      el('div', { class: 'dev-engine-card__title' }, eng.title),
+      el('div', { class: 'dev-engine-card__tagline' }, eng.tagline),
       statsEl,
-      el('div', { className: 'dev-engine-card__links' },
-        el('a', { className: 'dev-engine-card__link', href: eng.url, target: '_blank', rel: 'noopener' }, 'Live site →'),
-        el('a', { className: 'dev-engine-card__link', href: eng.repo, target: '_blank', rel: 'noopener' }, 'GitHub →')
+      el('div', { class: 'dev-engine-card__links' },
+        el('a', { class: 'dev-engine-card__link', href: eng.url, target: '_blank', rel: 'noopener' }, 'Live site →'),
+        el('a', { class: 'dev-engine-card__link', href: eng.repo, target: '_blank', rel: 'noopener' }, 'GitHub →')
       )
     );
     engGrid.appendChild(card);
