@@ -324,4 +324,35 @@
   .dev-connect__copy {
     opacity: 1;
   }
+  .dev-connect__heading,
+  .dev-tools__heading,
+  .dev-rest__heading,
+  .dev-build__heading,
+  .dev-engines__heading {
+    text-align: center;
+  }
+  .dev-rest__lede {
+    text-align: center;
+    margin-left: auto;
+    margin-right: auto;
+  }
+  .dev-rest__endpoint {
+    align-items: center;
+    text-align: center;
+  }
+  .dev-engine-card {
+    text-align: center;
+  }
+  .dev-engine-card__stats {
+    justify-content: center;
+  }
+  .dev-engine-card__links {
+    justify-content: center;
+  }
+  .dev-build-card {
+    text-align: center;
+  }
+  .dev-connect__block code {
+    word-break: break-all;
+  }
 }

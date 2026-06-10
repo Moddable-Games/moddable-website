@@ -447,9 +447,19 @@ a:hover{text-decoration:underline}
 .footer p{color:rgba(255,255,255,0.45);margin-top:8px}
 
 @media(max-width:768px){
+  .hero{padding:60px 16px 48px}
+  .hero__connect{white-space:normal;padding:14px 16px 14px 16px;word-break:break-all}
+  .hero__connect-copy{position:static;display:block;margin-top:12px;width:fit-content}
+  .hero__stats{flex-direction:row;flex-wrap:wrap;justify-content:center;gap:24px}
+  .section{padding:48px 16px}
+  .section__title{text-align:center}
+  .section__eyebrow{text-align:center}
   .tools-grid{grid-template-columns:1fr}
-  .hero__stats{flex-direction:column;gap:16px}
-  .endpoint{flex-direction:column;align-items:flex-start;gap:4px}
+  .endpoint{flex-direction:column;align-items:center;text-align:center;gap:4px}
+  .endpoint code{white-space:normal;word-break:break-all}
+  .code-block pre{font-size:0.7rem}
+  .links{justify-content:center}
+  .footer p{font-size:0.75rem}
 }
 </style>
 </head>
