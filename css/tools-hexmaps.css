@@ -5,6 +5,9 @@
   border-radius: 20px;
   padding: 32px;
 }
+.hexmap-embed--flush {
+  margin-top: 32px;
+}
 
 .hexmap-embed__header {
   display: flex;
