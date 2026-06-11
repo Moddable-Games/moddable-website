@@ -65,21 +65,23 @@
     lines.push('<svg xmlns="http://www.w3.org/2000/svg" width="' + FACTION_W + '" height="' + FACTION_H + '" viewBox="0 0 ' + FACTION_W + ' ' + FACTION_H + '">');
     lines.push('<image href="' + imgBase + 'TI4-Faction-Blank.png" width="' + FACTION_W + '" height="' + FACTION_H + '"/>');
 
-    // ===== FACTION NAME (top center, large bold) =====
-    lines.push(textEl(780, 65, state.factionName, {fontSize: 72, fill: '#fff', weight: '700', anchor: 'start'}));
+    // ===== FACTION NAME — measured from reference: x:700, baseline y:48, ~58px =====
+    lines.push(textEl(700, 48, state.factionName, {fontSize: 58, fill: '#fff', weight: '700', anchor: 'start'}));
 
-    // ===== FLAGSHIP CARD (top-left, x:38-505, y:22-295) =====
-    // Name: top of card, centered in header strip
-    lines.push(textEl(270, 46, state.flagshipName, {fontSize: 24, fill: '#fff', weight: '700', anchor: 'middle'}));
-    // Ability description: below ship image, above stats. Area: x:55-490, y:80-195
-    lines.push(wrapText(55, 85, state.flagshipAbility, {fontSize: 16, maxWidth: 430, fill: '#ddd', lineHeight: 20}));
-    // Ability markers (sustain damage etc): y:~195
-    lines.push(textEl(65, 200, state.flagshipTitle, {fontSize: 14, fill: '#00f6b1', weight: '600'}));
-    // Stats in green boxes: y:230-278, 4 boxes centered at x:108, 218, 328, 438
-    lines.push(textEl(108, 272, state.flagshipCost, {fontSize: 52, fill: '#fff', weight: '700', anchor: 'middle'}));
-    lines.push(textEl(218, 272, state.flagshipCombat, {fontSize: 52, fill: '#fff', weight: '700', anchor: 'middle'}));
-    lines.push(textEl(328, 272, state.flagshipMove, {fontSize: 52, fill: '#fff', weight: '700', anchor: 'middle'}));
-    lines.push(textEl(438, 272, state.flagshipCapacity, {fontSize: 52, fill: '#fff', weight: '700', anchor: 'middle'}));
+    // ===== FLAGSHIP CARD — measured from reference =====
+    // Name (QUEEN ANNAH): x:100, y:38, bold 24px
+    lines.push(textEl(100, 38, state.flagshipName, {fontSize: 24, fill: '#fff', weight: '700'}));
+    // Subtitle (NOKAR FLAGSHIP): x:100, y:62, italic 14px
+    lines.push(textEl(100, 62, 'FACTION FLAGSHIP', {fontSize: 14, fill: '#c8a415', weight: '600'}));
+    // Ability text: x:50, y:92, 16px body, wraps at 460px
+    lines.push(wrapText(50, 92, state.flagshipAbility, {fontSize: 16, maxWidth: 460, fill: '#ddd', lineHeight: 21}));
+    // Ability markers (SUSTAIN DAMAGE etc): x:50, y:218
+    lines.push(textEl(50, 218, state.flagshipTitle, {fontSize: 13, fill: '#00f6b1', weight: '600'}));
+    // Stats: y:280, centered in each box at x:108, 218, 328, 438, 50px
+    lines.push(textEl(108, 280, state.flagshipCost, {fontSize: 50, fill: '#fff', weight: '700', anchor: 'middle'}));
+    lines.push(textEl(218, 280, state.flagshipCombat, {fontSize: 50, fill: '#fff', weight: '700', anchor: 'middle'}));
+    lines.push(textEl(328, 280, state.flagshipMove, {fontSize: 50, fill: '#fff', weight: '700', anchor: 'middle'}));
+    lines.push(textEl(438, 280, state.flagshipCapacity, {fontSize: 50, fill: '#fff', weight: '700', anchor: 'middle'}));
 
     // ===== HOME SYSTEM RESOURCES/INFLUENCE =====
     // From reference: resources and influence appear in the system card area
@@ -87,24 +89,24 @@
     // Numbers don't appear on the faction back in this template — skip for now
     // (The reference shows planets with numbers but those are part of the artwork)
 
-    // ===== QUOTE (top-right, italic, small) =====
-    lines.push(wrapText(1680, 35, state.factionQuote, {fontSize: 18, fill: '#ccc', font: FONT_BODY, maxWidth: 400, lineHeight: 24}));
-    lines.push(textEl(2080, 100, state.factionQuoter, {fontSize: 16, fill: '#aaa', weight: '400', font: FONT_BODY, anchor: 'end'}));
+    // ===== QUOTE — measured: centered ~x:1850, y:200, italic 16px =====
+    lines.push(wrapText(1650, 195, state.factionQuote, {fontSize: 16, fill: '#ccc', font: FONT_BODY, maxWidth: 420, lineHeight: 22}));
+    // Quoter: centered ~x:1850, y:275
+    lines.push(textEl(1850, 275, state.factionQuoter, {fontSize: 16, fill: '#aaa', weight: '400', font: FONT_BODY, anchor: 'middle'}));
 
     // ===== FACTION SYMBOL (top-right corner) =====
     // ~x:2050-2150, y:20-120 (handled by image upload, not text)
 
-    // ===== ABILITIES (right panel) =====
-    // Panel inner: x:1700-2120, y:130-750
+    // ===== ABILITIES — measured: title x:1600, y:375/650, 20px bold; body y+27, 15px =====
     // Ability 1
-    lines.push(textEl(1700, 160, state.factionAbility1Title, {fontSize: 24, fill: '#fff', weight: '700'}));
-    lines.push(wrapText(1700, 192, state.factionAbility1, {fontSize: 18, maxWidth: 400, fill: '#ddd', lineHeight: 24}));
+    lines.push(textEl(1600, 375, state.factionAbility1Title, {fontSize: 20, fill: '#fff', weight: '700'}));
+    lines.push(wrapText(1600, 402, state.factionAbility1, {fontSize: 15, maxWidth: 480, fill: '#ddd', lineHeight: 20}));
     // Ability 2
-    lines.push(textEl(1700, 400, state.factionAbility2Title, {fontSize: 24, fill: '#fff', weight: '700'}));
-    lines.push(wrapText(1700, 432, state.factionAbility2, {fontSize: 18, maxWidth: 400, fill: '#ddd', lineHeight: 24}));
-    // Ability 3
-    lines.push(textEl(1700, 620, state.factionAbility3Title, {fontSize: 24, fill: '#fff', weight: '700'}));
-    lines.push(wrapText(1700, 652, state.factionAbility3, {fontSize: 18, maxWidth: 400, fill: '#ddd', lineHeight: 24}));
+    lines.push(textEl(1600, 620, state.factionAbility2Title, {fontSize: 20, fill: '#fff', weight: '700'}));
+    lines.push(wrapText(1600, 647, state.factionAbility2, {fontSize: 15, maxWidth: 480, fill: '#ddd', lineHeight: 20}));
+    // Ability 3 (if present)
+    lines.push(textEl(1600, 820, state.factionAbility3Title, {fontSize: 20, fill: '#fff', weight: '700'}));
+    lines.push(wrapText(1600, 847, state.factionAbility3, {fontSize: 15, maxWidth: 480, fill: '#ddd', lineHeight: 20}));
 
     // ===== COMMODITIES (bottom-right) =====
     // Large number, approximately x:2080-2140, y:700-800
@@ -124,9 +126,10 @@
     lines.push('<svg xmlns="http://www.w3.org/2000/svg" width="' + LEADER_W + '" height="' + LEADER_H + '" viewBox="0 0 ' + LEADER_W + ' ' + LEADER_H + '">');
     lines.push('<image href="' + imgBase + 'TI4-Leader-Blank.png" width="' + LEADER_W + '" height="' + LEADER_H + '"/>');
 
-    lines.push(textEl(300, 110, name || label + ' Name', {fontSize: 32, fill: '#fff', weight: '700'}));
-    lines.push(textEl(300, 148, label, {fontSize: 22, fill: '#00f6b1', weight: '600'}));
-    lines.push(wrapText(300, 185, ability || '', {fontSize: 20, maxWidth: 400, fill: '#ddd', lineHeight: 28}));
+    // Measured from reference: name at ~38%x/12%y, subtitle 18%y, body 35%y
+    lines.push(textEl(285, 65, name || label + ' Name', {fontSize: 26, fill: '#fff', weight: '700'}));
+    lines.push(textEl(285, 95, label, {fontSize: 16, fill: '#00f6b1', weight: '600'}));
+    lines.push(wrapText(285, 145, ability || '', {fontSize: 16, maxWidth: 420, fill: '#ddd', lineHeight: 22}));
 
     lines.push('</svg>');
     return lines.join('\n');
@@ -142,10 +145,9 @@
     lines.push('<svg xmlns="http://www.w3.org/2000/svg" width="' + TECH_W + '" height="' + TECH_H + '" viewBox="0 0 ' + TECH_W + ' ' + TECH_H + '">');
     lines.push('<image href="' + imgBase + 'TI4-Technology-Blank.png" width="' + TECH_W + '" height="' + TECH_H + '"/>');
 
-    // Title in header strip
-    lines.push(textEl(380, 55, name || label, {fontSize: 34, fill: '#fff', weight: '700', anchor: 'middle'}));
-    // Ability text in card body
-    lines.push(wrapText(80, 150, ability || '', {fontSize: 22, maxWidth: 600, fill: '#ddd', lineHeight: 30}));
+    // Measured from reference: title x:125 y:55, body x:85 y:185
+    lines.push(textEl(125, 58, name || label, {fontSize: 30, fill: '#fff', weight: '700'}));
+    lines.push(wrapText(85, 185, ability || '', {fontSize: 24, maxWidth: 580, fill: '#ddd', lineHeight: 32}));
 
     // Req pips (left edge, bottom area)
     var reqColors = {r: '#d11a1a', g: '#3a9928', y: '#e6c020', b: '#0c4f8d'};
@@ -162,8 +164,9 @@
     lines.push('<svg xmlns="http://www.w3.org/2000/svg" width="' + MECH_W + '" height="' + MECH_H + '" viewBox="0 0 ' + MECH_W + ' ' + MECH_H + '">');
     lines.push('<image href="' + imgBase + 'TI4-Mech-Blank.png" width="' + MECH_W + '" height="' + MECH_H + '"/>');
 
-    lines.push(textEl(300, 110, name || 'Mech', {fontSize: 32, fill: '#fff', weight: '700'}));
-    lines.push(wrapText(100, 165, ability || '', {fontSize: 20, maxWidth: 550, fill: '#ddd', lineHeight: 28}));
+    // Mech uses same template as leader (750x500)
+    lines.push(textEl(285, 65, name || 'Mech', {fontSize: 26, fill: '#fff', weight: '700'}));
+    lines.push(wrapText(285, 110, ability || '', {fontSize: 16, maxWidth: 420, fill: '#ddd', lineHeight: 22}));
 
     lines.push('</svg>');
     return lines.join('\n');
@@ -179,10 +182,9 @@
     lines.push('<svg xmlns="http://www.w3.org/2000/svg" width="' + NOTE_W + '" height="' + NOTE_H + '" viewBox="0 0 ' + NOTE_W + ' ' + NOTE_H + '">');
     lines.push('<image href="' + imgBase + 'TI4-Note-Blank.png" width="' + NOTE_W + '" height="' + NOTE_H + '"/>');
 
-    // Title centered at top
-    lines.push(textEl(250, 50, name || 'Note', {fontSize: 30, fill: '#fff', weight: '700', anchor: 'middle'}));
-    // Body text left-aligned inside green content panel
-    lines.push(wrapText(60, 260, ability || '', {fontSize: 20, maxWidth: 380, fill: '#ddd', lineHeight: 28}));
+    // Measured from reference (scaled 2.25x): title centered y:40, body x:40 y:140
+    lines.push(textEl(250, 42, name || 'Note', {fontSize: 28, fill: '#fff', weight: '700', anchor: 'middle'}));
+    lines.push(wrapText(42, 140, ability || '', {fontSize: 18, maxWidth: 415, fill: '#ddd', lineHeight: 25}));
 
     lines.push('</svg>');
     return lines.join('\n');
