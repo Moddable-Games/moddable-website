@@ -53,9 +53,13 @@
     var container = document.getElementById('fd-preview-inner');
     container.innerHTML = '';
 
-    container.appendChild(buildFactionSheet());
-    container.appendChild(buildLeadersRow());
-    container.appendChild(buildTechRow());
+    var imgBase = url('/img/tools/ti4-factions/');
+    var parts = FactionSVG.generateAll(state, imgBase);
+    parts.forEach(function(p) {
+      var wrap = el('div', {class: 'fd-card fd-card--' + p.type});
+      wrap.innerHTML = p.svg;
+      container.appendChild(wrap);
+    });
   }
 
   function buildFactionSheet() {
@@ -448,7 +452,7 @@
   }
 
   function exportSVG() {
-    var imgBase = url('/img/tools/ti4-factions/');
+    var imgBase = window.location.origin + url('/img/tools/ti4-factions/');
     var parts = FactionSVG.generateAll(state, imgBase);
     parts.forEach(function(p) {
       var blob = new Blob([p.svg], {type: 'image/svg+xml'});
@@ -461,7 +465,7 @@
   }
 
   function exportPNG() {
-    var imgBase = url('/img/tools/ti4-factions/');
+    var imgBase = window.location.origin + url('/img/tools/ti4-factions/');
     var parts = FactionSVG.generateAll(state, imgBase);
     var downloaded = 0;
     parts.forEach(function(p) {
