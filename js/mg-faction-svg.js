@@ -138,21 +138,25 @@
   }
 
   function generateTechCard(name, ability, label, req1, req2, req3, imgBase) {
-    // Tech cards: similar layout to leaders but with req pips on left
-    // Title at top, label below, ability text filling main area
-    // Req pips in left column
+    // From reference (Neural Motivator, Predictive Intelligence):
+    // Title: bold caps in metallic header strip, centered, ~y:40-55
+    // Ability text: centered in main body, ~y:130-380 (large text, centered)
+    // Req pips: left edge, stacked vertically ~x:30, y:350-430
+    // Faction symbol: bottom-right ~x:650, y:400
     var lines = [];
     lines.push('<svg xmlns="http://www.w3.org/2000/svg" width="' + TECH_W + '" height="' + TECH_H + '" viewBox="0 0 ' + TECH_W + ' ' + TECH_H + '">');
     lines.push('<image href="' + imgBase + 'TI4-Technology-Blank.png" width="' + TECH_W + '" height="' + TECH_H + '"/>');
 
-    lines.push(textEl(140, 95, name || label, {fontSize: 20, fill: '#fff', weight: '700'}));
-    lines.push(textEl(140, 120, label, {fontSize: 14, fill: '#00f6b1', weight: '600'}));
-    lines.push(wrapText(140, 150, ability || '', {fontSize: 12, maxWidth: 560, fill: '#ddd', lineHeight: 16}));
+    // Title in header strip
+    lines.push(textEl(380, 50, name || label, {fontSize: 24, fill: '#fff', weight: '700', anchor: 'middle'}));
+    // Ability text: centered in card body
+    lines.push(wrapText(80, 140, ability || '', {fontSize: 16, maxWidth: 600, fill: '#ddd', lineHeight: 22}));
 
+    // Req pips (left edge, bottom area)
     var reqColors = {r: '#d11a1a', g: '#3a9928', y: '#e6c020', b: '#0c4f8d'};
-    if (req1 && reqColors[req1]) lines.push('<circle cx="45" cy="320" r="12" fill="' + reqColors[req1] + '"/>');
-    if (req2 && reqColors[req2]) lines.push('<circle cx="45" cy="365" r="12" fill="' + reqColors[req2] + '"/>');
-    if (req3 && reqColors[req3]) lines.push('<circle cx="45" cy="410" r="12" fill="' + reqColors[req3] + '"/>');
+    if (req1 && reqColors[req1]) lines.push('<circle cx="35" cy="360" r="12" fill="' + reqColors[req1] + '"/>');
+    if (req2 && reqColors[req2]) lines.push('<circle cx="35" cy="400" r="12" fill="' + reqColors[req2] + '"/>');
+    if (req3 && reqColors[req3]) lines.push('<circle cx="35" cy="440" r="12" fill="' + reqColors[req3] + '"/>');
 
     lines.push('</svg>');
     return lines.join('\n');
@@ -171,14 +175,19 @@
   }
 
   function generateNoteCard(name, ability, imgBase) {
-    // Note card is portrait (500x750)
-    // Title near top of content panel, ability below
+    // From reference (Stymie, Blood Pact):
+    // Portrait card (500x750)
+    // Title: bold caps, centered at top ~y:35-50
+    // Body text: left-aligned, starts ~y:180, padded x:45-450
+    // Faction symbol: bottom-center ~y:650
     var lines = [];
     lines.push('<svg xmlns="http://www.w3.org/2000/svg" width="' + NOTE_W + '" height="' + NOTE_H + '" viewBox="0 0 ' + NOTE_W + ' ' + NOTE_H + '">');
     lines.push('<image href="' + imgBase + 'TI4-Note-Blank.png" width="' + NOTE_W + '" height="' + NOTE_H + '"/>');
 
-    lines.push(textEl(60, 130, name || 'Note', {fontSize: 20, fill: '#fff', weight: '700'}));
-    lines.push(wrapText(60, 165, ability || '', {fontSize: 12, maxWidth: 380, fill: '#757575', lineHeight: 16}));
+    // Title centered at top
+    lines.push(textEl(250, 45, name || 'Note', {fontSize: 22, fill: '#fff', weight: '700', anchor: 'middle'}));
+    // Body text left-aligned inside green content panel
+    lines.push(wrapText(70, 250, ability || '', {fontSize: 13, maxWidth: 360, fill: '#ddd', lineHeight: 19}));
 
     lines.push('</svg>');
     return lines.join('\n');
