@@ -7,53 +7,47 @@
 
   var IMG_BASE = url('/img/tools/ti4-factions/');
 
-  var state = {
-    factionName: '',
-    factionQuote: '',
-    factionQuoter: '',
-    factionAbility1Title: '',
-    factionAbility1: '',
-    factionAbility2Title: '',
-    factionAbility2: '',
-    factionAbility3Title: '',
-    factionAbility3: '',
-    factionCommodities: '',
-    factionResources: '',
-    factionInfluence: '',
-    flagshipName: '',
-    flagshipTitle: '',
-    flagshipAbility: '',
-    flagshipCost: '',
-    flagshipCombat: '',
-    flagshipMove: '',
-    flagshipCapacity: '',
-    agentName: '',
-    agentAbility: '',
-    commanderName: '',
-    commanderAbility: '',
-    heroName: '',
-    heroAbility: '',
-    tech1Name: '',
-    tech1Ability: '',
-    tech1Req1: '',
-    tech1Req2: '',
-    tech1Req3: '',
-    tech2Name: '',
-    tech2Ability: '',
-    tech2Req1: '',
-    tech2Req2: '',
-    tech2Req3: '',
-    mechName: '',
-    mechAbility: '',
-    noteName: '',
-    noteAbility: '',
-    imgSymbol: null,
-    imgRace: null,
-    imgSystem: null,
-    imgAgent: null,
-    imgCommander: null,
-    imgHero: null
-  };
+  var TEXT_KEYS = [
+    'factionName', 'factionQuote', 'factionQuoter',
+    'factionAbility1Title', 'factionAbility1',
+    'factionAbility2Title', 'factionAbility2',
+    'factionAbility3Title', 'factionAbility3',
+    'factionCommodities', 'factionResources', 'factionInfluence',
+    'flagshipName', 'flagshipTitle', 'flagshipAbility',
+    'flagshipCost', 'flagshipCombat', 'flagshipMove', 'flagshipCapacity',
+    'agentName', 'agentAbility',
+    'commanderName', 'commanderAbility',
+    'heroName', 'heroAbility',
+    'tech1Name', 'tech1Ability', 'tech1Req1', 'tech1Req2', 'tech1Req3',
+    'tech2Name', 'tech2Ability', 'tech2Req1', 'tech2Req2', 'tech2Req3',
+    'mechName', 'mechAbility',
+    'noteName', 'noteAbility'
+  ];
+
+  var state = {};
+  TEXT_KEYS.forEach(function(k) { state[k] = ''; });
+  state.imgSymbol = null;
+  state.imgRace = null;
+  state.imgSystem = null;
+  state.imgAgent = null;
+  state.imgCommander = null;
+  state.imgHero = null;
+
+  function loadFromParams() {
+    var params = new URLSearchParams(window.location.search);
+    TEXT_KEYS.forEach(function(k) {
+      if (params.has(k)) state[k] = params.get(k);
+    });
+  }
+  loadFromParams();
+
+  function buildShareURL() {
+    var params = new URLSearchParams();
+    TEXT_KEYS.forEach(function(k) {
+      if (state[k]) params.set(k, state[k]);
+    });
+    return window.location.origin + window.location.pathname + '?' + params.toString();
+  }
 
   function renderPreview() {
     var container = document.getElementById('fd-preview-inner');
@@ -453,6 +447,73 @@
     ];
   }
 
+  function exportSVG() {
+    var imgBase = url('/img/tools/ti4-factions/');
+    var parts = FactionSVG.generateAll(state, imgBase);
+    parts.forEach(function(p) {
+      var blob = new Blob([p.svg], {type: 'image/svg+xml'});
+      var link = document.createElement('a');
+      link.download = (state.factionName || 'faction') + '-' + p.type + '.svg';
+      link.href = URL.createObjectURL(blob);
+      link.click();
+      URL.revokeObjectURL(link.href);
+    });
+  }
+
+  function exportPNG() {
+    var imgBase = url('/img/tools/ti4-factions/');
+    var parts = FactionSVG.generateAll(state, imgBase);
+    var downloaded = 0;
+    parts.forEach(function(p) {
+      var svgBlob = new Blob([p.svg], {type: 'image/svg+xml'});
+      var svgUrl = URL.createObjectURL(svgBlob);
+      var img = new Image();
+      img.onload = function() {
+        var canvas = document.createElement('canvas');
+        canvas.width = img.naturalWidth;
+        canvas.height = img.naturalHeight;
+        var ctx = canvas.getContext('2d');
+        ctx.drawImage(img, 0, 0);
+        URL.revokeObjectURL(svgUrl);
+        var link = document.createElement('a');
+        link.download = (state.factionName || 'faction') + '-' + p.type + '.png';
+        link.href = canvas.toDataURL('image/png');
+        link.click();
+        downloaded++;
+      };
+      img.src = svgUrl;
+    });
+  }
+
+  function copyShareLink() {
+    var shareUrl = buildShareURL();
+    navigator.clipboard.writeText(shareUrl).then(function() {
+      var btn = document.getElementById('fd-share-btn');
+      if (btn) { btn.textContent = 'Copied'; setTimeout(function() { btn.textContent = 'Copy Link'; }, 2000); }
+    });
+  }
+
+  function buildExportBar() {
+    var bar = el('div', {class: 'fd-export-bar'});
+
+    var svgBtn = el('button', {class: 'fd-export-btn'}, 'Export SVG');
+    svgBtn.addEventListener('click', exportSVG);
+    bar.appendChild(svgBtn);
+
+    var pngBtn = el('button', {class: 'fd-export-btn'}, 'Export PNG');
+    pngBtn.addEventListener('click', exportPNG);
+    bar.appendChild(pngBtn);
+
+    var shareBtn = el('button', {class: 'fd-export-btn fd-export-btn--outline', id: 'fd-share-btn'}, 'Copy Link');
+    shareBtn.addEventListener('click', copyShareLink);
+    bar.appendChild(shareBtn);
+
+    return bar;
+  }
+
   renderEditor();
   renderPreview();
+
+  var editorEl = document.getElementById('fd-editor');
+  editorEl.appendChild(buildExportBar());
 })();

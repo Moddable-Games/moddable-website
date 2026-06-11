@@ -3,7 +3,6 @@
 .fd-app {
   display: grid;
   grid-template-columns: 1fr 380px;
-  min-height: calc(100vh - 64px - 200px);
   background: #0a0d2a;
 }
 
@@ -31,6 +30,7 @@
   width: 100%;
   height: auto;
   display: block;
+  min-width: 100%;
 }
 .fd-card__overlay {
   position: absolute;
@@ -287,6 +287,35 @@
 .fd-req-pip--g { background: #3a9928; }
 .fd-req-pip--y { background: #e6c020; }
 .fd-req-pip--b { background: #0c4f8d; }
+
+/* Export bar */
+.fd-export-bar {
+  display: flex;
+  gap: 10px;
+  margin-top: 32px;
+  padding-top: 20px;
+  border-top: 1px solid rgba(255,255,255,0.1);
+}
+.fd-export-btn {
+  flex: 1;
+  padding: 10px 16px;
+  border: none;
+  border-radius: 9999px;
+  font-family: var(--mg-font-body);
+  font-size: 13px;
+  font-weight: 600;
+  cursor: pointer;
+  transition: opacity 150ms;
+  background: #0c4f8d;
+  color: #fff;
+}
+.fd-export-btn:hover { opacity: 0.85; }
+.fd-export-btn--outline {
+  background: transparent;
+  border: 1px solid rgba(255,255,255,0.2);
+  color: rgba(255,255,255,0.7);
+}
+.fd-export-btn--outline:hover { border-color: rgba(255,255,255,0.5); color: #fff; }
 
 /* Responsive */
 @media (max-width: 1024px) {
