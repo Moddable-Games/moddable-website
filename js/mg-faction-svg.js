@@ -66,20 +66,20 @@
     lines.push('<image href="' + imgBase + 'TI4-Faction-Blank.png" width="' + FACTION_W + '" height="' + FACTION_H + '"/>');
 
     // ===== FACTION NAME (top center, large bold) =====
-    lines.push(textEl(780, 55, state.factionName, {fontSize: 52, fill: '#fff', weight: '700', anchor: 'start'}));
+    lines.push(textEl(780, 65, state.factionName, {fontSize: 72, fill: '#fff', weight: '700', anchor: 'start'}));
 
     // ===== FLAGSHIP CARD (top-left, x:38-505, y:22-295) =====
     // Name: top of card, centered in header strip
-    lines.push(textEl(270, 42, state.flagshipName, {fontSize: 16, fill: '#fff', weight: '700', anchor: 'middle'}));
-    // Ability description: below ship image, above stats. Area: x:55-490, y:95-185
-    lines.push(wrapText(55, 82, state.flagshipAbility, {fontSize: 11, maxWidth: 430, fill: '#ddd'}));
-    // Ability markers (sustain damage etc): y:~190
-    lines.push(textEl(65, 195, state.flagshipTitle, {fontSize: 10, fill: '#00f6b1', weight: '600'}));
-    // Stats in green boxes: y:230-275, 4 boxes centered at x:108, 218, 328, 438
-    lines.push(textEl(108, 270, state.flagshipCost, {fontSize: 38, fill: '#fff', weight: '700', anchor: 'middle'}));
-    lines.push(textEl(218, 270, state.flagshipCombat, {fontSize: 38, fill: '#fff', weight: '700', anchor: 'middle'}));
-    lines.push(textEl(328, 270, state.flagshipMove, {fontSize: 38, fill: '#fff', weight: '700', anchor: 'middle'}));
-    lines.push(textEl(438, 270, state.flagshipCapacity, {fontSize: 38, fill: '#fff', weight: '700', anchor: 'middle'}));
+    lines.push(textEl(270, 46, state.flagshipName, {fontSize: 24, fill: '#fff', weight: '700', anchor: 'middle'}));
+    // Ability description: below ship image, above stats. Area: x:55-490, y:80-195
+    lines.push(wrapText(55, 85, state.flagshipAbility, {fontSize: 16, maxWidth: 430, fill: '#ddd', lineHeight: 20}));
+    // Ability markers (sustain damage etc): y:~195
+    lines.push(textEl(65, 200, state.flagshipTitle, {fontSize: 14, fill: '#00f6b1', weight: '600'}));
+    // Stats in green boxes: y:230-278, 4 boxes centered at x:108, 218, 328, 438
+    lines.push(textEl(108, 272, state.flagshipCost, {fontSize: 52, fill: '#fff', weight: '700', anchor: 'middle'}));
+    lines.push(textEl(218, 272, state.flagshipCombat, {fontSize: 52, fill: '#fff', weight: '700', anchor: 'middle'}));
+    lines.push(textEl(328, 272, state.flagshipMove, {fontSize: 52, fill: '#fff', weight: '700', anchor: 'middle'}));
+    lines.push(textEl(438, 272, state.flagshipCapacity, {fontSize: 52, fill: '#fff', weight: '700', anchor: 'middle'}));
 
     // ===== HOME SYSTEM RESOURCES/INFLUENCE =====
     // From reference: resources and influence appear in the system card area
@@ -88,28 +88,23 @@
     // (The reference shows planets with numbers but those are part of the artwork)
 
     // ===== QUOTE (top-right, italic, small) =====
-    // From reference: quote appears right of faction name, right-aligned
-    // Approximately x:1700-2080, y:25-80
-    lines.push(wrapText(1680, 30, state.factionQuote, {fontSize: 12, fill: '#ccc', font: FONT_BODY, maxWidth: 380, lineHeight: 16}));
-    // Quoter: below quote, right-aligned style
-    lines.push(textEl(2060, 80, state.factionQuoter, {fontSize: 11, fill: '#aaa', weight: '400', font: FONT_BODY, anchor: 'end'}));
+    lines.push(wrapText(1680, 35, state.factionQuote, {fontSize: 18, fill: '#ccc', font: FONT_BODY, maxWidth: 400, lineHeight: 24}));
+    lines.push(textEl(2080, 100, state.factionQuoter, {fontSize: 16, fill: '#aaa', weight: '400', font: FONT_BODY, anchor: 'end'}));
 
     // ===== FACTION SYMBOL (top-right corner) =====
     // ~x:2050-2150, y:20-120 (handled by image upload, not text)
 
     // ===== ABILITIES (right panel) =====
-    // From reference: right column, starting below quote area
-    // Panel inner area: x:1700-2120, y:110-700
-    // Each ability: TITLE (bold caps) + multi-line description
+    // Panel inner: x:1700-2120, y:130-750
     // Ability 1
-    lines.push(textEl(1700, 140, state.factionAbility1Title, {fontSize: 16, fill: '#fff', weight: '700'}));
-    lines.push(wrapText(1700, 163, state.factionAbility1, {fontSize: 12, maxWidth: 400, fill: '#ddd', lineHeight: 16}));
+    lines.push(textEl(1700, 160, state.factionAbility1Title, {fontSize: 24, fill: '#fff', weight: '700'}));
+    lines.push(wrapText(1700, 192, state.factionAbility1, {fontSize: 18, maxWidth: 400, fill: '#ddd', lineHeight: 24}));
     // Ability 2
-    lines.push(textEl(1700, 340, state.factionAbility2Title, {fontSize: 16, fill: '#fff', weight: '700'}));
-    lines.push(wrapText(1700, 363, state.factionAbility2, {fontSize: 12, maxWidth: 400, fill: '#ddd', lineHeight: 16}));
+    lines.push(textEl(1700, 400, state.factionAbility2Title, {fontSize: 24, fill: '#fff', weight: '700'}));
+    lines.push(wrapText(1700, 432, state.factionAbility2, {fontSize: 18, maxWidth: 400, fill: '#ddd', lineHeight: 24}));
     // Ability 3
-    lines.push(textEl(1700, 520, state.factionAbility3Title, {fontSize: 16, fill: '#fff', weight: '700'}));
-    lines.push(wrapText(1700, 543, state.factionAbility3, {fontSize: 12, maxWidth: 400, fill: '#ddd', lineHeight: 16}));
+    lines.push(textEl(1700, 620, state.factionAbility3Title, {fontSize: 24, fill: '#fff', weight: '700'}));
+    lines.push(wrapText(1700, 652, state.factionAbility3, {fontSize: 18, maxWidth: 400, fill: '#ddd', lineHeight: 24}));
 
     // ===== COMMODITIES (bottom-right) =====
     // Large number, approximately x:2080-2140, y:700-800
@@ -129,9 +124,9 @@
     lines.push('<svg xmlns="http://www.w3.org/2000/svg" width="' + LEADER_W + '" height="' + LEADER_H + '" viewBox="0 0 ' + LEADER_W + ' ' + LEADER_H + '">');
     lines.push('<image href="' + imgBase + 'TI4-Leader-Blank.png" width="' + LEADER_W + '" height="' + LEADER_H + '"/>');
 
-    lines.push(textEl(300, 95, name || label + ' Name', {fontSize: 20, fill: '#fff', weight: '700'}));
-    lines.push(textEl(300, 120, label, {fontSize: 14, fill: '#00f6b1', weight: '600'}));
-    lines.push(wrapText(300, 150, ability || '', {fontSize: 12, maxWidth: 400, fill: '#ddd', lineHeight: 16}));
+    lines.push(textEl(300, 110, name || label + ' Name', {fontSize: 32, fill: '#fff', weight: '700'}));
+    lines.push(textEl(300, 148, label, {fontSize: 22, fill: '#00f6b1', weight: '600'}));
+    lines.push(wrapText(300, 185, ability || '', {fontSize: 20, maxWidth: 400, fill: '#ddd', lineHeight: 28}));
 
     lines.push('</svg>');
     return lines.join('\n');
@@ -148,15 +143,15 @@
     lines.push('<image href="' + imgBase + 'TI4-Technology-Blank.png" width="' + TECH_W + '" height="' + TECH_H + '"/>');
 
     // Title in header strip
-    lines.push(textEl(380, 50, name || label, {fontSize: 24, fill: '#fff', weight: '700', anchor: 'middle'}));
-    // Ability text: centered in card body
-    lines.push(wrapText(80, 140, ability || '', {fontSize: 16, maxWidth: 600, fill: '#ddd', lineHeight: 22}));
+    lines.push(textEl(380, 55, name || label, {fontSize: 34, fill: '#fff', weight: '700', anchor: 'middle'}));
+    // Ability text in card body
+    lines.push(wrapText(80, 150, ability || '', {fontSize: 22, maxWidth: 600, fill: '#ddd', lineHeight: 30}));
 
     // Req pips (left edge, bottom area)
     var reqColors = {r: '#d11a1a', g: '#3a9928', y: '#e6c020', b: '#0c4f8d'};
-    if (req1 && reqColors[req1]) lines.push('<circle cx="35" cy="360" r="12" fill="' + reqColors[req1] + '"/>');
-    if (req2 && reqColors[req2]) lines.push('<circle cx="35" cy="400" r="12" fill="' + reqColors[req2] + '"/>');
-    if (req3 && reqColors[req3]) lines.push('<circle cx="35" cy="440" r="12" fill="' + reqColors[req3] + '"/>');
+    if (req1 && reqColors[req1]) lines.push('<circle cx="40" cy="350" r="14" fill="' + reqColors[req1] + '"/>');
+    if (req2 && reqColors[req2]) lines.push('<circle cx="40" cy="395" r="14" fill="' + reqColors[req2] + '"/>');
+    if (req3 && reqColors[req3]) lines.push('<circle cx="40" cy="440" r="14" fill="' + reqColors[req3] + '"/>');
 
     lines.push('</svg>');
     return lines.join('\n');
@@ -167,8 +162,8 @@
     lines.push('<svg xmlns="http://www.w3.org/2000/svg" width="' + MECH_W + '" height="' + MECH_H + '" viewBox="0 0 ' + MECH_W + ' ' + MECH_H + '">');
     lines.push('<image href="' + imgBase + 'TI4-Mech-Blank.png" width="' + MECH_W + '" height="' + MECH_H + '"/>');
 
-    lines.push(textEl(300, 95, name || 'Mech', {fontSize: 20, fill: '#fff', weight: '700'}));
-    lines.push(wrapText(100, 150, ability || '', {fontSize: 12, maxWidth: 550, fill: '#ddd', lineHeight: 16}));
+    lines.push(textEl(300, 110, name || 'Mech', {fontSize: 32, fill: '#fff', weight: '700'}));
+    lines.push(wrapText(100, 165, ability || '', {fontSize: 20, maxWidth: 550, fill: '#ddd', lineHeight: 28}));
 
     lines.push('</svg>');
     return lines.join('\n');
@@ -185,9 +180,9 @@
     lines.push('<image href="' + imgBase + 'TI4-Note-Blank.png" width="' + NOTE_W + '" height="' + NOTE_H + '"/>');
 
     // Title centered at top
-    lines.push(textEl(250, 45, name || 'Note', {fontSize: 22, fill: '#fff', weight: '700', anchor: 'middle'}));
+    lines.push(textEl(250, 50, name || 'Note', {fontSize: 30, fill: '#fff', weight: '700', anchor: 'middle'}));
     // Body text left-aligned inside green content panel
-    lines.push(wrapText(70, 250, ability || '', {fontSize: 13, maxWidth: 360, fill: '#ddd', lineHeight: 19}));
+    lines.push(wrapText(60, 260, ability || '', {fontSize: 20, maxWidth: 380, fill: '#ddd', lineHeight: 28}));
 
     lines.push('</svg>');
     return lines.join('\n');
