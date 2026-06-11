@@ -1,0 +1,311 @@
+/* tools-ti-factions.css — TI4 Faction Designer */
+
+.fd-app {
+  display: grid;
+  grid-template-columns: 1fr 380px;
+  min-height: calc(100vh - 64px - 200px);
+  background: #0a0d2a;
+}
+
+/* Preview panel */
+.fd-preview {
+  padding: 32px;
+  overflow-y: auto;
+  display: flex;
+  align-items: flex-start;
+  justify-content: center;
+}
+.fd-preview__inner {
+  width: 100%;
+  max-width: 900px;
+}
+
+/* Card component base */
+.fd-card {
+  position: relative;
+  border-radius: 12px;
+  overflow: hidden;
+  background: #1a1e3a;
+}
+.fd-card__img {
+  width: 100%;
+  height: auto;
+  display: block;
+}
+.fd-card__overlay {
+  position: absolute;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  pointer-events: none;
+}
+
+/* Faction sheet */
+.fd-faction {
+  margin-bottom: 24px;
+}
+.fd-faction .fd-card__overlay {
+  height: 65%;
+}
+
+/* Text overlays — positioned absolutely within overlay */
+.fd-text {
+  position: absolute;
+  overflow: hidden;
+  color: #eee;
+  font-family: var(--mg-font-display);
+  font-weight: 600;
+  display: flex;
+  align-items: center;
+  white-space: nowrap;
+  text-overflow: ellipsis;
+}
+.fd-text--small {
+  font-family: var(--mg-font-body);
+  font-weight: 400;
+  font-size: 10px;
+  color: #ddd;
+  white-space: normal;
+  line-height: 1.3;
+}
+.fd-text--big {
+  font-size: 14px;
+  font-weight: 700;
+  text-transform: uppercase;
+  color: #fff;
+}
+.fd-text--green {
+  color: #00f6b1;
+}
+
+/* Faction sheet overlay positions */
+.fd-faction__name { top: 3.5%; left: 50%; width: 33%; height: 4%; justify-content: center; text-align: center; }
+.fd-faction__flagship-name { top: 4%; left: 15%; width: 60%; height: 6%; }
+.fd-faction__flagship-title { top: 20%; left: 9%; width: 70%; height: 5%; }
+.fd-faction__flagship-ability { top: 26%; left: 9%; width: 70%; height: 10%; }
+.fd-faction__flagship-cost { top: 55%; left: 7%; width: 16%; height: 14%; justify-content: center; text-align: center; }
+.fd-faction__flagship-combat { top: 55%; left: 28%; width: 16%; height: 14%; justify-content: center; text-align: center; }
+.fd-faction__flagship-move { top: 55%; left: 50%; width: 16%; height: 14%; justify-content: center; text-align: center; }
+.fd-faction__flagship-capacity { top: 55%; left: 72%; width: 16%; height: 14%; justify-content: center; text-align: center; }
+.fd-faction__resources { top: 75%; left: 27%; width: 8%; height: 12%; justify-content: center; text-align: center; }
+.fd-faction__influence { top: 75%; left: 42%; width: 8%; height: 12%; justify-content: center; text-align: center; }
+.fd-faction__quote { top: 55%; left: 76%; width: 20%; height: 20%; text-align: center; justify-content: center; }
+.fd-faction__quoter { top: 80%; left: 76%; width: 20%; height: 8%; text-align: center; justify-content: center; }
+.fd-faction__ability1-title { top: 27%; left: 76%; width: 20%; height: 6%; }
+.fd-faction__ability1 { top: 34%; left: 76%; width: 20%; height: 12%; }
+.fd-faction__ability2-title { top: 50%; left: 76%; width: 20%; height: 6%; }
+.fd-faction__ability2 { top: 57%; left: 76%; width: 20%; height: 12%; }
+.fd-faction__ability3-title { top: 73%; left: 76%; width: 20%; height: 6%; }
+.fd-faction__ability3 { top: 80%; left: 76%; width: 20%; height: 12%; }
+.fd-faction__commodities { top: 55%; left: 90%; width: 6%; height: 8%; justify-content: center; text-align: center; }
+
+/* Image upload regions */
+.fd-faction__symbol { top: 1%; left: 1%; width: 13%; height: 14%; background-size: contain; background-repeat: no-repeat; background-position: center; }
+.fd-faction__race-img { top: 10%; left: 50%; width: 22%; height: 30%; background-size: contain; background-repeat: no-repeat; background-position: center; opacity: 0.5; }
+.fd-faction__system-img { top: 3%; left: 26%; width: 22%; height: 65%; background-size: contain; background-repeat: no-repeat; background-position: center; opacity: 0.7; }
+
+/* Leader / Tech / Mech / Note cards row */
+.fd-cards-row {
+  display: grid;
+  grid-template-columns: repeat(3, 1fr);
+  gap: 12px;
+  margin-bottom: 24px;
+}
+.fd-cards-row--with-note {
+  grid-template-columns: 3fr 1fr;
+  gap: 12px;
+}
+.fd-cards-3col {
+  display: grid;
+  grid-template-columns: repeat(3, 1fr);
+  gap: 12px;
+}
+
+/* Leader card overlays */
+.fd-leader .fd-card__overlay {
+  top: 67%;
+  height: 15%;
+  width: 75%;
+}
+.fd-leader__icon { top: 5%; left: 2%; width: 14%; height: 18%; background-size: contain; background-repeat: no-repeat; background-position: center; }
+.fd-leader__name { top: 4%; left: 18%; width: 75%; height: 10%; }
+.fd-leader__label { top: 17%; left: 18%; width: 50%; height: 8%; }
+.fd-leader__ability { top: 34%; left: 45%; width: 47%; height: 55%; }
+
+/* Tech card overlays */
+.fd-tech .fd-card__overlay {
+  top: 84%;
+  height: 15%;
+  width: 75%;
+}
+.fd-tech__icon { top: 5%; left: 2%; width: 14%; height: 18%; background-size: contain; background-repeat: no-repeat; background-position: center; }
+.fd-tech__name { top: 4%; left: 18%; width: 75%; height: 10%; }
+.fd-tech__label { top: 17%; left: 18%; width: 50%; height: 8%; }
+.fd-tech__ability { top: 34%; left: 18%; width: 73%; height: 55%; }
+.fd-tech__req1 { top: 53%; left: 2%; width: 10%; height: 14%; justify-content: center; }
+.fd-tech__req2 { top: 68%; left: 2%; width: 10%; height: 14%; justify-content: center; }
+.fd-tech__req3 { top: 83%; left: 2%; width: 10%; height: 14%; justify-content: center; }
+
+/* Mech card overlays */
+.fd-mech .fd-card__overlay {
+  top: 84%;
+  height: 15%;
+  width: 75%;
+}
+.fd-mech__icon { top: 5%; left: 2%; width: 14%; height: 18%; background-size: contain; background-repeat: no-repeat; background-position: center; }
+.fd-mech__name { top: 4%; left: 18%; width: 75%; height: 10%; }
+.fd-mech__ability { top: 30%; left: 8%; width: 83%; height: 20%; }
+
+/* Note card overlays */
+.fd-note .fd-card__overlay {
+  top: 67%;
+  height: 29.5%;
+  width: 100%;
+}
+.fd-note__icon { bottom: 3%; right: 6%; width: 22%; height: 14%; background-size: contain; background-repeat: no-repeat; background-position: center; position: absolute; top: auto; left: auto; }
+.fd-note__name { top: 4%; left: 8%; width: 84%; height: 10%; }
+.fd-note__ability { top: 24%; left: 10%; width: 80%; height: 50%; }
+
+/* Editor panel */
+.fd-editor {
+  background: #111428;
+  border-left: 1px solid rgba(255,255,255,0.08);
+  padding: 24px;
+  overflow-y: auto;
+  max-height: calc(100vh - 64px);
+  position: sticky;
+  top: 64px;
+}
+.fd-editor__tabs {
+  display: flex;
+  gap: 4px;
+  margin-bottom: 24px;
+  border-bottom: 1px solid rgba(255,255,255,0.1);
+  padding-bottom: 12px;
+}
+.fd-editor__tab {
+  font-family: var(--mg-font-body);
+  font-size: 12px;
+  font-weight: 600;
+  color: rgba(255,255,255,0.5);
+  background: none;
+  border: none;
+  padding: 8px 14px;
+  border-radius: 9999px;
+  cursor: pointer;
+  transition: background 150ms, color 150ms;
+}
+.fd-editor__tab:hover { color: rgba(255,255,255,0.8); background: rgba(255,255,255,0.05); }
+.fd-editor__tab--active { color: #fff; background: rgba(255,255,255,0.1); }
+
+.fd-editor__panel { display: none; }
+.fd-editor__panel--active { display: block; }
+
+/* Form elements */
+.fd-field {
+  margin-bottom: 14px;
+}
+.fd-field__label {
+  display: block;
+  font-family: var(--mg-font-mono);
+  font-size: 10px;
+  color: rgba(255,255,255,0.5);
+  text-transform: uppercase;
+  letter-spacing: 0.5px;
+  margin-bottom: 5px;
+}
+.fd-field__input,
+.fd-field__select {
+  width: 100%;
+  box-sizing: border-box;
+  background: rgba(255,255,255,0.06);
+  border: 1px solid rgba(255,255,255,0.12);
+  border-radius: 8px;
+  padding: 8px 12px;
+  font-family: var(--mg-font-body);
+  font-size: 13px;
+  color: #fff;
+  outline: none;
+  transition: border-color 150ms;
+}
+.fd-field__input:focus,
+.fd-field__select:focus {
+  border-color: rgba(255,255,255,0.3);
+}
+.fd-field__input::placeholder {
+  color: rgba(255,255,255,0.3);
+}
+.fd-field__select option {
+  background: #111428;
+  color: #fff;
+}
+.fd-field__row {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  gap: 10px;
+}
+.fd-field__row--3 {
+  grid-template-columns: 1fr 1fr 1fr;
+}
+.fd-field__row--4 {
+  grid-template-columns: 1fr 1fr 1fr 1fr;
+}
+.fd-field__file {
+  width: 100%;
+  box-sizing: border-box;
+  background: rgba(255,255,255,0.04);
+  border: 1px dashed rgba(255,255,255,0.15);
+  border-radius: 8px;
+  padding: 10px 12px;
+  font-family: var(--mg-font-body);
+  font-size: 12px;
+  color: rgba(255,255,255,0.6);
+  cursor: pointer;
+}
+.fd-field__file::-webkit-file-upload-button {
+  background: rgba(255,255,255,0.1);
+  border: none;
+  border-radius: 6px;
+  padding: 4px 10px;
+  font-family: var(--mg-font-body);
+  font-size: 11px;
+  color: #fff;
+  cursor: pointer;
+  margin-right: 8px;
+}
+
+/* Req colour pips */
+.fd-req-pip {
+  display: inline-block;
+  width: 12px;
+  height: 12px;
+  border-radius: 50%;
+  border: 1px solid rgba(255,255,255,0.3);
+}
+.fd-req-pip--r { background: #d11a1a; }
+.fd-req-pip--g { background: #3a9928; }
+.fd-req-pip--y { background: #e6c020; }
+.fd-req-pip--b { background: #0c4f8d; }
+
+/* Responsive */
+@media (max-width: 1024px) {
+  .fd-app {
+    grid-template-columns: 1fr;
+  }
+  .fd-editor {
+    position: static;
+    max-height: none;
+    border-left: none;
+    border-top: 1px solid rgba(255,255,255,0.08);
+  }
+}
+@media (max-width: 600px) {
+  .fd-cards-row,
+  .fd-cards-3col {
+    grid-template-columns: 1fr;
+  }
+  .fd-preview {
+    padding: 16px;
+  }
+}
