@@ -341,7 +341,7 @@ function handleMcpSse(request, corsHeaders) {
       capabilities: {
         tools: { listChanged: false },
         prompts: { listChanged: false },
-        resources: { listChanged: false },
+        resources: { listChanged: false, subscribe: false },
       },
       serverInfo: SERVER_INFO,
     },
@@ -378,7 +378,7 @@ async function handleMcpMessage(request, corsHeaders) {
         capabilities: {
           tools: { listChanged: false },
           prompts: { listChanged: false },
-          resources: { listChanged: false },
+          resources: { listChanged: false, subscribe: false },
         },
         serverInfo: SERVER_INFO,
         configSchema: {
@@ -434,6 +434,11 @@ async function handleMcpMessage(request, corsHeaders) {
     case 'notifications/initialized':
     case 'notifications/cancelled':
       return new Response(null, { status: 204, headers: corsHeaders });
+
+    case 'resources/subscribe':
+    case 'resources/unsubscribe':
+      result = {};
+      break;
 
     case 'ai.smithery/events/list':
       result = { events: [] };
