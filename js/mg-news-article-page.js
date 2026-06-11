@@ -21,7 +21,7 @@
     renderHeader(post);
     renderLeftRail(post, team);
     renderRightRail(post, mods);
-    renderArticleBody(post);
+    renderArticleBody(post, team);
     renderRelated(posts, post);
     initParallax();
   });
@@ -186,7 +186,7 @@
     return {eyebrow: 'COMMUNITY', title: 'Moddable Community', version: 'Discord · Open to all', href: '/community/', btnLabel: 'Join Discord'};
   }
 
-  function renderArticleBody(post) {
+  function renderArticleBody(post, team) {
     var article = document.getElementById('article-body');
     if (!article) return;
 
@@ -200,8 +200,75 @@
         article.querySelectorAll('a[href^="/"]').forEach(function(a) {
           a.href = url(a.getAttribute('href'));
         });
+        renderMobileAuthor(post, team, article);
         initTocSpy(post);
       });
+  }
+
+  function renderMobileAuthor(post, team, article) {
+    var member = team.find(function(t) { return t.slug === post.teamSlug; });
+    var block = el('div', {class: 'post-mobile-author'});
+
+    var authorRow = el('a', {
+      class: 'post-mobile-author__row',
+      href: member ? url('/team/' + member.slug + '/') : '#'
+    });
+    if (member) {
+      var avatar = el('div', {class: 'post-mobile-author__avatar'});
+      avatar.style.background = 'linear-gradient(135deg, ' + member.color + ', #0a0d2a)';
+      avatar.appendChild(el('img', {
+        src: url('/assets/team/' + member.img),
+        alt: member.name,
+        class: 'post-mobile-author__img'
+      }));
+      authorRow.appendChild(avatar);
+    }
+    var info = el('div', {class: 'post-mobile-author__info'});
+    info.appendChild(el('span', {class: 'post-mobile-author__name'}, member ? member.name : post.author));
+    info.appendChild(el('span', {class: 'post-mobile-author__role'}, member ? member.role : (post.authorHandle || '')));
+    authorRow.appendChild(info);
+    block.appendChild(authorRow);
+
+    var pageUrl = encodeURIComponent(window.location.href);
+    var pageTitle = encodeURIComponent(post.title + ' — Moddable.Games');
+    var shares = [
+      {label: 'X', icon: '𝕏', href: 'https://x.com/intent/tweet?url=' + pageUrl + '&text=' + pageTitle},
+      {label: 'Facebook', icon: 'f', href: 'https://www.facebook.com/sharer/sharer.php?u=' + pageUrl},
+      {label: 'LinkedIn', icon: 'in', href: 'https://www.linkedin.com/sharing/share-offsite/?url=' + pageUrl},
+      {label: 'Copy', icon: '⎘', action: 'copy'}
+    ];
+    var shareBtns = el('div', {class: 'post-mobile-author__share'});
+    shares.forEach(function(s) {
+      if (s.action === 'copy') {
+        var b = el('button', {class: 'post-share-btn', 'aria-label': 'Copy link', title: 'Copy link'});
+        b.textContent = s.icon;
+        b.addEventListener('click', function(e) {
+          e.preventDefault();
+          navigator.clipboard.writeText(window.location.href).then(function() {
+            b.textContent = '✓';
+            setTimeout(function() { b.textContent = s.icon; }, 2000);
+          });
+        });
+        shareBtns.appendChild(b);
+      } else {
+        shareBtns.appendChild(el('a', {
+          href: s.href,
+          target: '_blank',
+          rel: 'noopener',
+          class: 'post-share-btn',
+          'aria-label': 'Share on ' + s.label,
+          title: 'Share on ' + s.label
+        }, s.icon));
+      }
+    });
+    block.appendChild(shareBtns);
+
+    var firstP = article.querySelector('p');
+    if (firstP && firstP.nextSibling) {
+      firstP.parentNode.insertBefore(block, firstP.nextSibling);
+    } else {
+      article.appendChild(block);
+    }
   }
 
   function initTocSpy(post) {
