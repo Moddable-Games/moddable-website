@@ -55,11 +55,32 @@
 
     var imgBase = url('/img/tools/ti4-factions/');
     var parts = FactionSVG.generateAll(state, imgBase);
-    parts.forEach(function(p) {
-      var wrap = el('div', {class: 'fd-card fd-card--' + p.type});
-      wrap.innerHTML = p.svg;
-      container.appendChild(wrap);
-    });
+
+    // Faction sheet (full width)
+    var factionWrap = el('div', {class: 'fd-card fd-card--faction'});
+    factionWrap.innerHTML = parts[0].svg;
+    container.appendChild(factionWrap);
+
+    // Leaders row (3 cards) + Note card
+    var leadersRow = el('div', {class: 'fd-row fd-row--leaders'});
+    for (var i = 1; i <= 3; i++) {
+      var card = el('div', {class: 'fd-card fd-card--leader'});
+      card.innerHTML = parts[i].svg;
+      leadersRow.appendChild(card);
+    }
+    var noteCard = el('div', {class: 'fd-card fd-card--note'});
+    noteCard.innerHTML = parts[7].svg;
+    leadersRow.appendChild(noteCard);
+    container.appendChild(leadersRow);
+
+    // Tech row (2 tech + mech)
+    var techRow = el('div', {class: 'fd-row fd-row--tech'});
+    for (var j = 4; j <= 6; j++) {
+      var tcard = el('div', {class: 'fd-card fd-card--tech'});
+      tcard.innerHTML = parts[j].svg;
+      techRow.appendChild(tcard);
+    }
+    container.appendChild(techRow);
   }
 
   function buildFactionSheet() {

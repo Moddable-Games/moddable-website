@@ -33,6 +33,21 @@
   display: block;
 }
 
+/* Card grid rows */
+.fd-row {
+  display: grid;
+  gap: 12px;
+}
+.fd-row--leaders {
+  grid-template-columns: 1fr 1fr 1fr auto;
+}
+.fd-row--leaders .fd-card--note {
+  width: 160px;
+}
+.fd-row--tech {
+  grid-template-columns: 1fr 1fr 1fr;
+}
+
 /* Editor panel */
 .fd-editor {
   background: #111428;
