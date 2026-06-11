@@ -182,9 +182,9 @@
     lines.push('<svg xmlns="http://www.w3.org/2000/svg" width="' + NOTE_W + '" height="' + NOTE_H + '" viewBox="0 0 ' + NOTE_W + ' ' + NOTE_H + '">');
     lines.push('<image href="' + imgBase + 'TI4-Note-Blank.png" width="' + NOTE_W + '" height="' + NOTE_H + '"/>');
 
-    // Measured from reference (scaled 2.25x): title centered y:40, body x:40 y:140
+    // Title at top, body starts at 35% down (inside green panel well below border)
     lines.push(textEl(250, 42, name || 'Note', {fontSize: 28, fill: '#fff', weight: '700', anchor: 'middle'}));
-    lines.push(wrapText(42, 140, ability || '', {fontSize: 18, maxWidth: 415, fill: '#ddd', lineHeight: 25}));
+    lines.push(wrapText(70, 265, ability || '', {fontSize: 17, maxWidth: 360, fill: '#ddd', lineHeight: 24}));
 
     lines.push('</svg>');
     return lines.join('\n');
