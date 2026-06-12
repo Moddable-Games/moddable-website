@@ -14,7 +14,7 @@
   });
   var heroBtns = el('div', { class: 'mg-hero__btns' });
   heroBtns.appendChild(linkBtn('Join Discord', 'https://discord.gg/VhsVGNq6Za', 'primary'));
-  heroBtns.appendChild(linkBtn('Submit Mod', '/submit/', 'outline-light'));
+  heroBtns.appendChild(linkBtn('Submit Mod', '/submit/', 'outline-dark'));
   hero.querySelector('.mg-hero__text').appendChild(heroBtns);
   document.getElementById('page-hero').appendChild(hero);
 
