@@ -4,6 +4,9 @@ This file documents the full automation workflow designed for Moddable Games.
 It is the recovery document for Claude Desktop sessions — read this at the start of any session
 where routine setup or issue workflow is being discussed.
 
+> **Issue state is always read live from GitHub via MCP — never stored here.**
+> At the start of each Desktop session, pull open issues across all 6 repos to get current state.
+
 ---
 
 ## Overview
@@ -107,7 +110,7 @@ https://raw.githubusercontent.com/Moddable-Games/moddable-website/main/.moddable
 ### Research Routine
 - **Name:** Research Routine
 - **URL:** claude.ai/code/routines
-- **Schedule:** Daily at 09:00 BST
+- **Schedule:** Daily at 09:00 BST — update to 03:00 BST so results are ready by 5/6am
 - **GitHub trigger:** Issue labeled `research` on Moddable-Games/moddable-website
 - **Repos:** All 6 Moddable-Games repos
 - **Note:** GitHub trigger only watches moddable-website — schedule fallback catches all repos daily
@@ -115,14 +118,17 @@ https://raw.githubusercontent.com/Moddable-Games/moddable-website/main/.moddable
 ### Implementation Routine
 - **Name:** Implementation Routine
 - **URL:** claude.ai/code/routines
-- **Schedule:** Daily at 10:00 BST
+- **Schedule:** Daily at 10:00 BST — update to 04:00 BST so results are ready by 5/6am
 - **GitHub trigger:** Issue labeled `ready` on Moddable-Games/moddable-website
 - **Repos:** All 6 Moddable-Games repos
 - **Note:** GitHub trigger only watches moddable-website — schedule fallback catches all repos daily
 
-### Future improvements
-- Add API triggers to both routines for on-demand firing
-- Expand GitHub triggers to cover all 6 repos when platform supports multiple GitHub triggers per routine
+### Pending improvements
+- [ ] Change Research Routine schedule to 03:00 BST
+- [ ] Change Implementation Routine schedule to 04:00 BST
+- [ ] Add API triggers to both routines for on-demand firing
+- [ ] Expand GitHub triggers to cover all 6 repos when platform supports multiple GitHub triggers per routine
+- [ ] Set label colours in GitHub (per repo) — see hex values in Label System above
 
 ---
 
@@ -272,47 +278,6 @@ Stop immediately. Do not guess. Do not partially implement.
 
 ---
 
-## Current Issue State (as of 2026-06-14)
-
-### Next labels applied (5 issues)
-| Repo | Issue | Label |
-|---|---|---|
-| moddable-chess | #101 | ready + next |
-| moddable-website | #105 | ready + next |
-| dungeon-chess | #43 | ready + next |
-| moddable-rules | #51 | research + next |
-| moddable-rules | #53 | research + next |
-
-### Ready (7 issues)
-| Repo | Issue | Notes |
-|---|---|---|
-| moddable-chess | #101 | Draughts SVG rendering — unblocks rules#57 ⭐ next |
-| moddable-website | #105 | TI4 Faction Designer text positioning ⭐ next |
-| dungeon-chess | #44 | Embed mode |
-| dungeon-chess | #43 | Extract game data to JSON ⭐ next |
-| dungeon-chess | #10 | Deploy/placement UX |
-| moddable-decks | #36 | Verify noindex |
-
-### Research (8 issues)
-| Repo | Issue | Notes |
-|---|---|---|
-| moddable-rules | #51 | Mancala + public domain classics ⭐ next |
-| moddable-rules | #53 | Carcassonne + Gloomhaven mods ⭐ next |
-| moddable-rules | #52 | Ultimate Monopoly mod |
-| moddable-website | #103 | Expand MCP tools |
-| moddable-website | #100 | TI4 Game Dashboard |
-| moddable-chess | #93 | Multiplayer WebSocket |
-| moddable-hexmaps | #53 | Interactive sessions |
-| moddable-hexmaps | #52 | Fog of war |
-
-### Blocked (3 issues)
-| Repo | Issue | Blocked by |
-|---|---|---|
-| moddable-rules | #57 | moddable-chess #101 |
-| dungeon-chess | #28 | moddable-chess #93 |
-
----
-
 ## Setup Checklist
 
 - [x] Label system designed
@@ -325,5 +290,7 @@ Stop immediately. Do not guess. Do not partially implement.
 - [x] Research Routine created at claude.ai/code/routines (daily 09:00 BST + issue labeled trigger)
 - [x] Implementation Routine created at claude.ai/code/routines (daily 10:00 BST + issue labeled trigger)
 - [x] Claude GitHub App installed on Moddable-Games org (all repositories)
-- [ ] API triggers added to both routines for on-demand firing
+- [ ] Change Research Routine to 03:00 BST
+- [ ] Change Implementation Routine to 04:00 BST
+- [ ] Add API triggers to both routines
 - [ ] Label colours set manually in GitHub (per repo)
