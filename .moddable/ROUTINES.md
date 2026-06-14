@@ -46,7 +46,7 @@ Mark reviews dev periodically → merges to main → deploys
 | `next` | Priority override — routine picks this above all others | Mark |
 | `blocker` | Pre-existing label — kept for backward compatibility | Mark |
 
-### Label colours (set manually in GitHub per repo)
+### Label colours (set via script — do not edit manually)
 | Label | Hex |
 |---|---|
 | `research` | `#0075ca` |
@@ -110,7 +110,7 @@ https://raw.githubusercontent.com/Moddable-Games/moddable-website/main/.moddable
 ### Research Routine
 - **Name:** Research Routine
 - **URL:** claude.ai/code/routines
-- **Schedule:** Daily at 09:00 BST — update to 03:00 BST so results are ready by 5/6am
+- **Schedule:** Daily at 03:00 BST ✓
 - **GitHub trigger:** Issue labeled `research` on Moddable-Games/moddable-website
 - **Repos:** All 6 Moddable-Games repos
 - **Note:** GitHub trigger only watches moddable-website — schedule fallback catches all repos daily
@@ -118,17 +118,21 @@ https://raw.githubusercontent.com/Moddable-Games/moddable-website/main/.moddable
 ### Implementation Routine
 - **Name:** Implementation Routine
 - **URL:** claude.ai/code/routines
-- **Schedule:** Daily at 10:00 BST — update to 04:00 BST so results are ready by 5/6am
+- **Schedule:** Daily at 04:00 BST ✓
 - **GitHub trigger:** Issue labeled `ready` on Moddable-Games/moddable-website
 - **Repos:** All 6 Moddable-Games repos
 - **Note:** GitHub trigger only watches moddable-website — schedule fallback catches all repos daily
 
 ### Pending improvements
-- [ ] Change Research Routine schedule to 03:00 BST
-- [ ] Change Implementation Routine schedule to 04:00 BST
-- [ ] Add API triggers to both routines for on-demand firing
+- [ ] Add API triggers to both routines for on-demand firing — see notes below
 - [ ] Expand GitHub triggers to cover all 6 repos when platform supports multiple GitHub triggers per routine
-- [ ] Set label colours in GitHub (per repo) — see hex values in Label System above
+
+### API triggers — what they mean and how to set up
+API triggers would allow firing a routine on demand via an HTTP request, rather than waiting for the next scheduled run or a GitHub label event. Use cases:
+- Mark wants to kick off a research run immediately after labelling an issue, without waiting until 03:00
+- A future webhook (e.g. from Discord bot or a GitHub Action) fires the routine automatically
+
+**Current status:** claude.ai/code/routines does not yet expose an API trigger option in the UI. This is a platform feature not yet available. When it becomes available, both routines should be configured with an API trigger and the endpoint URL recorded here so it can be called from scripts or webhooks.
 
 ---
 
@@ -287,10 +291,11 @@ Stop immediately. Do not guess. Do not partially implement.
 - [x] First 5 `next` labels applied
 - [x] Research routine prompt written
 - [x] Implementation routine prompt written
-- [x] Research Routine created at claude.ai/code/routines (daily 09:00 BST + issue labeled trigger)
-- [x] Implementation Routine created at claude.ai/code/routines (daily 10:00 BST + issue labeled trigger)
+- [x] Research Routine created at claude.ai/code/routines (daily 03:00 BST + issue labeled trigger)
+- [x] Implementation Routine created at claude.ai/code/routines (daily 04:00 BST + issue labeled trigger)
 - [x] Claude GitHub App installed on Moddable-Games org (all repositories)
-- [ ] Change Research Routine to 03:00 BST
-- [ ] Change Implementation Routine to 04:00 BST
-- [ ] Add API triggers to both routines
-- [ ] Label colours set manually in GitHub (per repo)
+- [x] Research Routine schedule updated to 03:00 BST
+- [x] Implementation Routine schedule updated to 04:00 BST
+- [x] Label colours set in GitHub via script (all 6 repos)
+- [ ] Add API triggers to both routines — blocked on platform support (see notes above)
+- [ ] Expand GitHub triggers to cover all 6 repos — blocked on platform support
