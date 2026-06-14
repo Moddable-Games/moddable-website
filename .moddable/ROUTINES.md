@@ -74,6 +74,7 @@ Mark reviews dev periodically → merges to main → deploys
 - Two routines share the budget: research + implementation
 - No fixed split — Mark decides daily allocation via `next` labels
 - If no `next` labels exist, routines self-select by oldest issue (see priority logic below)
+- Daily runs reset at midnight UTC (01:00 BST)
 
 ---
 
@@ -101,20 +102,33 @@ https://raw.githubusercontent.com/Moddable-Games/moddable-website/main/.moddable
 
 ---
 
-## Routine Prompts
-
-### Status: WRITTEN — pending setup at claude.ai/code/routines
-
-To set up routines, run `/schedule` in Claude Code CLI from any Moddable repo.
-Select "remote" when prompted. Answer questions interactively (name, prompt, trigger).
-API and GitHub triggers must be added via the web UI at claude.ai/code/routines after creation.
-The Claude GitHub App must also be installed on the Moddable-Games org for GitHub triggers to fire.
+## Routine Configuration
 
 ### Research Routine
+- **Name:** Research Routine
+- **URL:** claude.ai/code/routines
+- **Schedule:** Daily at 09:00 BST
+- **GitHub trigger:** Issue labeled `research` on Moddable-Games/moddable-website
+- **Repos:** All 6 Moddable-Games repos
+- **Note:** GitHub trigger only watches moddable-website — schedule fallback catches all repos daily
 
-**Name:** Moddable Research
-**Trigger:** GitHub — issues labelled `research` in any Moddable-Games repo
-**Prompt:**
+### Implementation Routine
+- **Name:** Implementation Routine
+- **URL:** claude.ai/code/routines
+- **Schedule:** Daily at 10:00 BST
+- **GitHub trigger:** Issue labeled `ready` on Moddable-Games/moddable-website
+- **Repos:** All 6 Moddable-Games repos
+- **Note:** GitHub trigger only watches moddable-website — schedule fallback catches all repos daily
+
+### Future improvements
+- Add API triggers to both routines for on-demand firing
+- Expand GitHub triggers to cover all 6 repos when platform supports multiple GitHub triggers per routine
+
+---
+
+## Routine Prompts
+
+### Research Routine Prompt
 
 ```
 You are an automated research agent for Moddable Games. Your job is to investigate open research issues across the Moddable Games GitHub repositories and produce detailed findings that enable implementation without further context-switching.
@@ -182,11 +196,7 @@ After posting your comment:
 
 ---
 
-### Implementation Routine
-
-**Name:** Moddable Implementation
-**Trigger:** GitHub — issues labelled `ready` in any Moddable-Games repo
-**Prompt:**
+### Implementation Routine Prompt
 
 ```
 You are an automated implementation agent for Moddable Games. Your job is to pick up fully scoped issues labelled ready, implement them, and merge the work into the dev branch.
@@ -264,16 +274,6 @@ Stop immediately. Do not guess. Do not partially implement.
 
 ## Current Issue State (as of 2026-06-14)
 
-### Ready (7 issues — implementation routine can action)
-| Repo | Issue | Notes |
-|---|---|---|
-| moddable-chess | #101 | Draughts SVG rendering — unblocks rules#57 ⭐ next |
-| moddable-website | #105 | TI4 Faction Designer text positioning ⭐ next |
-| dungeon-chess | #44 | Embed mode |
-| dungeon-chess | #43 | Extract game data to JSON ⭐ next |
-| dungeon-chess | #10 | Deploy/placement UX |
-| moddable-decks | #36 | Verify noindex |
-
 ### Next labels applied (5 issues)
 | Repo | Issue | Label |
 |---|---|---|
@@ -283,7 +283,17 @@ Stop immediately. Do not guess. Do not partially implement.
 | moddable-rules | #51 | research + next |
 | moddable-rules | #53 | research + next |
 
-### Research (8 issues — research routine can action)
+### Ready (7 issues)
+| Repo | Issue | Notes |
+|---|---|---|
+| moddable-chess | #101 | Draughts SVG rendering — unblocks rules#57 ⭐ next |
+| moddable-website | #105 | TI4 Faction Designer text positioning ⭐ next |
+| dungeon-chess | #44 | Embed mode |
+| dungeon-chess | #43 | Extract game data to JSON ⭐ next |
+| dungeon-chess | #10 | Deploy/placement UX |
+| moddable-decks | #36 | Verify noindex |
+
+### Research (8 issues)
 | Repo | Issue | Notes |
 |---|---|---|
 | moddable-rules | #51 | Mancala + public domain classics ⭐ next |
@@ -294,20 +304,6 @@ Stop immediately. Do not guess. Do not partially implement.
 | moddable-chess | #93 | Multiplayer WebSocket |
 | moddable-hexmaps | #53 | Interactive sessions |
 | moddable-hexmaps | #52 | Fog of war |
-
-### Discuss (17 issues — need Desktop conversation first)
-moddable-rules: #39, #12, #11
-moddable-website: #102, #90, #81, #66, #12
-moddable-chess: #91, #70, #68, #66, #53
-moddable-hexmaps: #25
-dungeon-chess: #27, #11, #7, #2, #1
-
-### Needs-decision (15 issues — blocked on Mark)
-moddable-rules: #48, #46, #45, #44, #43
-moddable-website: #86, #82, #45
-moddable-hexmaps: #46
-dungeon-chess: #15
-moddable-decks: #31, #30, #25, #23, #22
 
 ### Blocked (3 issues)
 | Repo | Issue | Blocked by |
@@ -326,6 +322,8 @@ moddable-decks: #31, #30, #25, #23, #22
 - [x] First 5 `next` labels applied
 - [x] Research routine prompt written
 - [x] Implementation routine prompt written
-- [ ] Routines set up at claude.ai/code/routines (run `/schedule` in Claude Code CLI)
-- [ ] Claude GitHub App installed on Moddable-Games org
+- [x] Research Routine created at claude.ai/code/routines (daily 09:00 BST + issue labeled trigger)
+- [x] Implementation Routine created at claude.ai/code/routines (daily 10:00 BST + issue labeled trigger)
+- [x] Claude GitHub App installed on Moddable-Games org (all repositories)
+- [ ] API triggers added to both routines for on-demand firing
 - [ ] Label colours set manually in GitHub (per repo)
