@@ -46,7 +46,7 @@ Never conflate these layers:
 - **No drop shadows** anywhere in UI
 - **Version system:** `version.txt` + `bump.sh [major|minor|patch]` — always bump before deploying cached-asset changes
 - **Deployment:** GitHub Pages, push to main = deploy (push to dev = staging)
-- **Branching:** All automated work branches from `dev`, merges back to `dev`. Never commit directly to `main`.
+- **Branching:** All automated work branches from `dev` using `claude/` prefix, merges back to `dev`. Never commit directly to `main`.
 
 ---
 
@@ -133,7 +133,7 @@ Never conflate these layers:
 - Triggered by `ready` label
 - If a `next` label exists on any `ready` issue, pick that first
 - Otherwise pick the oldest open `ready` issue with no `blocked` label
-- Branch from `dev` using format `auto/issue-{repo}-{number}` (e.g. `auto/issue-chess-101`)
+- Branch from `dev` using format `claude/issue-{repo}-{number}` (e.g. `claude/issue-chess-101`)
 - Implement per acceptance criteria in the issue
 - Bump version via `bump.sh patch` before pushing if cached assets changed
 - Merge branch into `dev` on completion
