@@ -111,7 +111,10 @@ https://raw.githubusercontent.com/Moddable-Games/moddable-website/main/.moddable
 - **Name:** Research Routine
 - **URL:** claude.ai/code/routines
 - **Schedule:** Daily at 03:00 BST ✓
-- **GitHub trigger:** Issue labeled `research` on Moddable-Games/moddable-website
+- **GitHub trigger:** Issue labeled `research` on Moddable-Games/moddable-website ✓
+- **API Fire URL:** `https://api.anthropic.com/v1/claude_code/routines/trig_01LnV8dQzRy1R35j2kP5iBq7/fire`
+- **API Token:** stored in `claude_desktop_config.json` as `RESEARCH_ROUTINE_TOKEN`
+- **Fire script:** `fire-research-routine.sh` (in Downloads)
 - **Repos:** All 6 Moddable-Games repos
 - **Note:** GitHub trigger only watches moddable-website — schedule fallback catches all repos daily
 
@@ -119,20 +122,28 @@ https://raw.githubusercontent.com/Moddable-Games/moddable-website/main/.moddable
 - **Name:** Implementation Routine
 - **URL:** claude.ai/code/routines
 - **Schedule:** Daily at 04:00 BST ✓
-- **GitHub trigger:** Issue labeled `ready` on Moddable-Games/moddable-website
+- **GitHub trigger:** Issue labeled `ready` on Moddable-Games/moddable-website ✓
+- **API Fire URL:** `https://api.anthropic.com/v1/claude_code/routines/trig_01JQPz1wg2R3jbJuDYC5iJBi/fire`
+- **API Token:** stored in `claude_desktop_config.json` as `IMPLEMENTATION_ROUTINE_TOKEN`
+- **Fire script:** `fire-implementation-routine.sh` (in Downloads)
 - **Repos:** All 6 Moddable-Games repos
 - **Note:** GitHub trigger only watches moddable-website — schedule fallback catches all repos daily
 
 ### Pending improvements
-- [ ] Add API triggers to both routines for on-demand firing — see notes below
 - [ ] Expand GitHub triggers to cover all 6 repos when platform supports multiple GitHub triggers per routine
 
-### API triggers — what they mean and how to set up
-API triggers would allow firing a routine on demand via an HTTP request, rather than waiting for the next scheduled run or a GitHub label event. Use cases:
-- Mark wants to kick off a research run immediately after labelling an issue, without waiting until 03:00
-- A future webhook (e.g. from Discord bot or a GitHub Action) fires the routine automatically
-
-**Current status:** claude.ai/code/routines does not yet expose an API trigger option in the UI. This is a platform feature not yet available. When it becomes available, both routines should be configured with an API trigger and the endpoint URL recorded here so it can be called from scripts or webhooks.
+### Token setup
+Tokens are NOT stored here (this file is public). Add them to `claude_desktop_config.json`:
+```json
+{
+  "env": {
+    "GITHUB_TOKEN": "...",
+    "RESEARCH_ROUTINE_TOKEN": "sk-ant-oat01-...",
+    "IMPLEMENTATION_ROUTINE_TOKEN": "sk-ant-oat01-..."
+  }
+}
+```
+Fire scripts read `$RESEARCH_ROUTINE_TOKEN` and `$IMPLEMENTATION_ROUTINE_TOKEN` from your shell environment.
 
 ---
 
@@ -297,5 +308,5 @@ Stop immediately. Do not guess. Do not partially implement.
 - [x] Research Routine schedule updated to 03:00 BST
 - [x] Implementation Routine schedule updated to 04:00 BST
 - [x] Label colours set in GitHub via script (all 6 repos)
-- [ ] Add API triggers to both routines — blocked on platform support (see notes above)
+- [x] API triggers configured — Fire URLs recorded above, tokens in claude_desktop_config.json
 - [ ] Expand GitHub triggers to cover all 6 repos — blocked on platform support
