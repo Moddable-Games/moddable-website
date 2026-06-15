@@ -136,6 +136,29 @@ https://raw.githubusercontent.com/Moddable-Games/moddable-website/main/.moddable
 
 ---
 
+## Rules Research Sources
+
+For any research involving moddable-rules content, routines must also fetch:
+
+**Dead ends registry** (sources and games ruled out — do not re-attempt):
+```
+https://raw.githubusercontent.com/Moddable-Games/moddable-rules/main/.moddable/dead-ends.md
+```
+
+**Sources registry** (verified accessible sources by game family):
+```
+https://raw.githubusercontent.com/Moddable-Games/moddable-rules/main/.moddable/sources.md
+```
+
+Rules research hard constraints:
+- Only public domain game families — no modern commercial games
+- Must successfully fetch and verify at least 2 independent sources
+- If fewer than 2 sources accessible: label `needs-decision`, do not label `ready`
+- Transcribe from source only — never generate or extrapolate rules content
+- Add any newly discovered reliable sources to sources.md as part of the research comment
+
+---
+
 ## Routine Configuration
 
 ### Research Routine
@@ -255,21 +278,30 @@ Select the issue using repo priority order above, then oldest within repo.
 Pick `next`-labelled issues first if any exist.
 Skip `blocked` and `needs-decision`.
 
+Before researching, fetch:
+- Dead ends registry: https://raw.githubusercontent.com/Moddable-Games/moddable-rules/main/.moddable/dead-ends.md
+- Sources registry: https://raw.githubusercontent.com/Moddable-Games/moddable-rules/main/.moddable/sources.md
+
 Research process:
 1. Read the issue in full including all comments
 2. Read relevant files in the repository to understand existing structure and patterns
-3. Research thoroughly — verify facts against authoritative sources
-4. Produce findings detailed enough for implementation with zero ambiguity
+3. Check dead-ends.md — do not attempt any listed source or game
+4. Check sources.md — use listed reliable sources first
+5. Research thoroughly — verify facts against authoritative sources
+6. Must successfully fetch at least 2 independent sources — if not possible, label `needs-decision`
+7. Transcribe from source only — never generate or extrapolate rules content
+8. Produce findings detailed enough for implementation with zero ambiguity
 
 Post as issue comment including:
 - **Summary** — what you found and the recommendation
 - **Proposed approach** — specific files to create or modify with exact paths
 - **Acceptance criteria** — checklist of what done looks like
 - **Any dependencies** — other issues or files needed first
-- **Sources** — links or references used
+- **Sources verified** — exact URLs successfully fetched and read (minimum 2 for rules content)
 
 Relabelling after posting:
-- Scope clear, no decisions needed: remove `research`, add `ready`
+- Scope clear, no decisions needed, 2+ sources verified: remove `research`, add `ready`
+- Fewer than 2 sources accessible: add `needs-decision`, do NOT add `ready`
 - Mark decision needed: add `needs-decision`, do NOT add `ready`
 - Always remove `next` after actioning
 
@@ -333,6 +365,10 @@ You are an automated research agent for Moddable Games. Your job is to investiga
 2. Fetch and read the routines design file in full:
    https://raw.githubusercontent.com/Moddable-Games/moddable-website/main/.moddable/ROUTINES.md
 
+3. If the selected issue involves moddable-rules content, also fetch:
+   - Dead ends registry: https://raw.githubusercontent.com/Moddable-Games/moddable-rules/main/.moddable/dead-ends.md
+   - Sources registry: https://raw.githubusercontent.com/Moddable-Games/moddable-rules/main/.moddable/sources.md
+
 ## Select an issue to work
 
 Scan these 6 repositories for open issues labelled `research`:
@@ -357,8 +393,14 @@ Once you have selected an issue:
 
 1. Read the issue in full including all comments
 2. Read the relevant files in the repository — understand the existing structure, conventions, and patterns before researching
-3. Research the topic thoroughly — for rules/variants content, verify facts against authoritative public domain sources; for technical issues, read the relevant code files and understand the architecture
-4. Produce findings that are detailed enough for an implementation routine to act on with zero ambiguity
+3. For moddable-rules content issues:
+   - Check dead-ends.md — do not attempt any listed source or game
+   - Check sources.md — use listed reliable sources first
+   - Only research public domain game families — no modern commercial games
+   - Must successfully fetch at least 2 independent sources — if not possible, label `needs-decision`
+   - Transcribe from source only — never generate or extrapolate rules content
+4. For technical issues: read the relevant code files and understand the architecture
+5. Produce findings that are detailed enough for an implementation routine to act on with zero ambiguity
 
 ## Output — post as issue comment
 
@@ -368,14 +410,15 @@ Your comment must include:
 - **Proposed approach** — specific files to create or modify, with exact paths
 - **Acceptance criteria** — a clear checklist of what done looks like
 - **Any dependencies** — other issues or files that must exist first
-- **Sources** — links or references used (for rules/content research)
+- **Sources verified** — exact URLs successfully fetched (for rules content, minimum 2 required)
 
 ## Relabelling
 
 After posting your comment:
 
-- If scope is fully clear and Mark needs to make no decisions: remove `research` label, add `ready` label
-- If anything requires Mark's input before implementation can proceed: add `needs-decision` label, do NOT add `ready`, explain the blocker clearly in your comment
+- If scope is fully clear, no decisions needed, and (for rules content) 2+ sources verified: remove `research`, add `ready`
+- If fewer than 2 sources were accessible (rules content): add `needs-decision`, do NOT add `ready`
+- If anything requires Mark's input: add `needs-decision`, do NOT add `ready`
 - Always remove the `next` label after actioning an issue (whether or not it had one)
 
 ## Hard rules — never break these
@@ -385,6 +428,7 @@ After posting your comment:
 - Never include AI co-author lines in any output
 - Never mention Claude or AI in issue comments or any file
 - Never guess at Mark's decisions — if something is ambiguous, flag it as `needs-decision`
+- Never generate or extrapolate rules content — transcribe from verified sources only
 - Always verify facts before including them in findings
 ```
 
@@ -488,4 +532,6 @@ Stop immediately. Do not guess. Do not partially implement.
 - [x] API fire URLs documented for all 5 routines
 - [x] Claude GitHub App installed on Moddable-Games org (all repositories)
 - [x] Label colours set in GitHub (per repo)
+- [x] Dead ends registry created (moddable-rules/.moddable/dead-ends.md)
+- [x] Sources registry created (moddable-rules/.moddable/sources.md)
 - [ ] Expand GitHub triggers to cover all 6 repos
