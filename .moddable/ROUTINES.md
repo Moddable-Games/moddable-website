@@ -14,14 +14,14 @@ where routine setup or issue workflow is being discussed.
 Five-run daily pipeline across three token windows:
 
 ```
-01:00 BST — Research A       ► Window 1 opens (rolling 5h, closes ~06:00)
-02:00 BST — Implementation A  ► Inside Window 1
+03:00 BST — Research Routine   ► Window 1 opens (rolling 5h, closes ~08:00)
+04:00 BST — Implementation     ► Inside Window 1
              [results ready when Mark wakes]
-08:00 BST — Triage           ► Window 2 opens (cheap — label management only)
+08:00 BST — Triage Time        ► Window 2 opens (cheap — label management only)
              [Mark reviews overnight work, can adjust next labels before afternoon]
-17:00 BST — Research B       ► Window 3 opens (rolling 5h, closes ~22:00)
-18:00 BST — Implementation B  ► Inside Window 3
-             [7h gap before Window 1 reopens at 01:00 — tokens fully reset]
+17:00 BST — Research B         ► Window 3 opens (rolling 5h, closes ~22:00)
+18:00 BST — Implementation B   ► Inside Window 3
+             [7h gap before Window 1 reopens at 03:00 — tokens fully reset]
         ↓
 Mark reviews dev periodically → merges to main → deploys
 ```
@@ -72,16 +72,16 @@ Claude Desktop (Mark + Claude) handles planning, issue creation, and decisions b
 - Claude Pro: 5 routine runs per day
 - Token window: rolling 5 hours from first activity after reset (resets 00:00 UTC / 01:00 BST)
 - Three token windows are used across the day:
-  - **Window 1** (01:00–06:00 BST): Research A + Implementation A
-  - **Window 2** (08:00 BST): Triage only — cheap, barely uses allowance
+  - **Window 1** (03:00–08:00 BST): Research Routine + Implementation Routine
+  - **Window 2** (08:00 BST): Triage Time only — cheap, barely uses allowance
   - **Window 3** (17:00–22:00 BST): Research B + Implementation B
-- 7-hour gap between Window 3 closing (~22:00) and Window 1 reopening (01:00) ensures full token reset
+- 7-hour gap between Window 3 closing (~22:00) and Window 1 reopening (03:00) ensures full token reset
 - Mark can adjust `next` labels between 08:00 and 17:00 to influence afternoon/evening runs
 
 ### Handling imbalanced queues
 
 When the triage routine runs, it checks the ratio of open `research` vs `ready` issues:
-- If both exist: apply `next` to 1 of each — balanced split across A and B pairs
+- If both exist: apply `next` to 1 of each — balanced split across the two pairs
 - If only `research` exists: apply `next` to 2 `research` issues — both pairs do research
 - If only `ready` exists: apply `next` to 2 `ready` issues — both pairs do implementation
 - If one queue has 1 issue and the other has 0: apply `next` to that 1 issue only
@@ -101,7 +101,7 @@ This ensures all 5 runs are used whenever work is available in either queue.
 5. If nothing actionable exists, exit gracefully with a log note — do not force work
 
 ### `next` label behaviour:
-- Applied by triage routine each morning at 08:00, or manually by Mark at any time
+- Applied by Triage Time each morning at 08:00, or manually by Mark at any time
 - Applied per-issue alongside the primary label (e.g. `research` + `next`)
 - Removed by the routine after actioning the issue
 - Triage removes stale `next` labels before applying new ones each run
@@ -119,34 +119,34 @@ https://raw.githubusercontent.com/Moddable-Games/moddable-website/main/.moddable
 
 ## Routine Configuration
 
-### Research Routine A
-- **Name:** Research Routine A
-- **Schedule:** Daily at 01:00 BST
+### Research Routine
+- **Name:** Research Routine
+- **Schedule:** Daily at 03:00 BST
 - **GitHub trigger:** Issue labeled `research` on Moddable-Games/moddable-website
 - **Repos:** All 6 Moddable-Games repos
 
-### Implementation Routine A
-- **Name:** Implementation Routine A
-- **Schedule:** Daily at 02:00 BST
+### Implementation Routine
+- **Name:** Implementation Routine
+- **Schedule:** Daily at 04:00 BST
 - **GitHub trigger:** Issue labeled `ready` on Moddable-Games/moddable-website
 - **Repos:** All 6 Moddable-Games repos
 
-### Triage Routine
-- **Name:** Triage Routine
+### Triage Time
+- **Name:** Triage Time
 - **Schedule:** Daily at 08:00 BST
 - **GitHub trigger:** None (schedule only)
 - **API fire URL:** https://api.anthropic.com/v1/claude_code/routines/trig_01SFuiAPF4vEb6coS4ais6z6/fire
 - **Repos:** All 6 Moddable-Games repos
 - **Purpose:** Review overnight results, remove stale `next` labels, set `next` on optimal issues for afternoon/evening runs
 
-### Research Routine B
-- **Name:** Research Routine B
+### Research B
+- **Name:** Research B
 - **Schedule:** Daily at 17:00 BST
 - **GitHub trigger:** None (schedule only — triage handles priority)
 - **Repos:** All 6 Moddable-Games repos
 
-### Implementation Routine B
-- **Name:** Implementation Routine B
+### Implementation B
+- **Name:** Implementation B
 - **Schedule:** Daily at 18:00 BST
 - **GitHub trigger:** None (schedule only — triage handles priority)
 - **Repos:** All 6 Moddable-Games repos
@@ -154,20 +154,13 @@ https://raw.githubusercontent.com/Moddable-Games/moddable-website/main/.moddable
 ### Notes on GitHub triggers
 - GitHub triggers currently only watch moddable-website — scheduled runs catch all repos
 - Expand triggers to all 6 repos when the platform supports multiple GitHub triggers per routine
-- Research A and Implementation A retain GitHub triggers as on-demand fallback during the day
-
-### Pending setup
-- [ ] Create Triage Routine at claude.ai/code/routines (08:00 BST)
-- [ ] Create Research Routine B at claude.ai/code/routines (17:00 BST)
-- [ ] Create Implementation Routine B at claude.ai/code/routines (18:00 BST)
-- [ ] Add API triggers to all routines for on-demand firing
-- [ ] Expand GitHub triggers to cover all 6 repos
+- Research Routine and Implementation Routine retain GitHub triggers as on-demand fallback during the day
 
 ---
 
 ## Routine Prompts
 
-### Triage Routine Prompt
+### Triage Time Prompt
 
 ```
 You are an automated triage agent for Moddable Games. Your job is to review the overnight routine results and prepare the issue queue so that the afternoon research and implementation routines make maximum use of their token window.
@@ -221,7 +214,7 @@ You are an automated triage agent for Moddable Games. Your job is to review the 
 
 ### Research Routine Prompt
 
-(Used by both Research Routine A and Research Routine B — identical prompt)
+(Used by both Research Routine and Research B — identical prompt)
 
 ```
 You are an automated research agent for Moddable Games. Your job is to investigate open research issues across the Moddable Games GitHub repositories and produce detailed findings that enable implementation without further context-switching.
@@ -292,7 +285,7 @@ After posting your comment:
 
 ### Implementation Routine Prompt
 
-(Used by both Implementation Routine A and Implementation Routine B — identical prompt)
+(Used by both Implementation Routine and Implementation B — identical prompt)
 
 ```
 You are an automated implementation agent for Moddable Games. Your job is to pick up fully scoped issues labelled ready, implement them, and merge the work into the dev branch.
@@ -379,12 +372,12 @@ Stop immediately. Do not guess. Do not partially implement.
 - [x] Research routine prompt written
 - [x] Implementation routine prompt written
 - [x] Triage routine prompt written
-- [x] Research Routine A created at claude.ai/code/routines (01:00 BST + issue labeled trigger)
-- [x] Implementation Routine A created at claude.ai/code/routines (02:00 BST + issue labeled trigger)
+- [x] Research Routine created at claude.ai/code/routines (03:00 BST + issue labeled trigger)
+- [x] Implementation Routine created at claude.ai/code/routines (04:00 BST + issue labeled trigger)
+- [x] Triage Time created at claude.ai/code/routines (08:00 BST)
+- [x] Research B created at claude.ai/code/routines (17:00 BST)
+- [x] Implementation B created at claude.ai/code/routines (18:00 BST)
 - [x] Claude GitHub App installed on Moddable-Games org (all repositories)
 - [x] Label colours set in GitHub (per repo)
-- [ ] Create Triage Routine at claude.ai/code/routines (08:00 BST)
-- [ ] Create Research Routine B at claude.ai/code/routines (17:00 BST)
-- [ ] Create Implementation Routine B at claude.ai/code/routines (18:00 BST)
 - [ ] Add API triggers to all routines for on-demand firing
 - [ ] Expand GitHub triggers to cover all 6 repos
