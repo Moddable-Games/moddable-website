@@ -32,6 +32,25 @@ Claude Desktop (Mark + Claude) handles planning, issue creation, and decisions b
 
 ---
 
+## Issue Priority Framework
+
+When no `next` label is present, routines select issues using this repo priority order:
+
+| Priority | Repo | Rationale |
+|---|---|---|
+| 1 | moddable-rules | Rules drive everything — engines, website, tools, and community all depend on content |
+| 2 | moddable-chess | Engine powering multiple products (chess.moddable.games + dungeon-chess) |
+| 2 | moddable-hexmaps | Engine powering multiple products (hex.moddable.games + TI4/Nukes tools) |
+| 3 | moddable-website | Business visibility, investor presence, tools hub |
+| 4 | dungeon-chess | Revenue product but depends on engines above |
+| 4 | moddable-decks | Investor/business material |
+
+Within each repo, oldest open issue first (by created_at).
+
+`next` labels always override this order — they are Mark's explicit priority signal.
+
+---
+
 ## Label System
 
 | Label | Meaning | Who applies |
@@ -94,10 +113,11 @@ Triage bonus execution picks the queue with the deeper backlog:
 
 ### All routines follow this order:
 1. Pick any issue with `next` label first (Mark's explicit override or triage assignment)
-2. If no `next` exists, pick the oldest open issue with the matching label (`research` or `ready`)
-3. Skip any issue that also has `blocked` label
-4. Skip any issue that also has `needs-decision` label
-5. If nothing actionable exists, exit gracefully with a log note — do not force work
+2. If no `next` exists, apply the repo priority order above — moddable-rules first, then engines, then business repos
+3. Within the same repo, pick the oldest open issue first (by created_at)
+4. Skip any issue that also has `blocked` label
+5. Skip any issue that also has `needs-decision` label
+6. If nothing actionable exists, exit gracefully with a log note — do not force work
 
 ### `next` label behaviour:
 - Applied by Triage Time at 08:00, or manually by Mark at any time
@@ -205,11 +225,15 @@ intentionally. Only add new `next` labels where gaps exist.
 Fill gaps according to this logic:
 - Target: 1 `next` on a `research` issue + 1 `next` on a `ready` issue
 - If a slot already has a `next` issue: do not add another
-- If `research` slot is empty: apply `next` to the oldest actionable `research` issue
-- If `ready` slot is empty: apply `next` to the oldest actionable `ready` issue
+- If `research` slot is empty: apply `next` to the highest-priority actionable `research` issue
+- If `ready` slot is empty: apply `next` to the highest-priority actionable `ready` issue
 - If both slots are already filled: skip to Phase 2
 - If one queue is empty and the other has 2+: apply a second `next` to that queue
-- Selection priority: oldest open issue first, skip `blocked` and `needs-decision`
+
+Selection priority (in order):
+1. Repo priority: moddable-rules first, then moddable-chess/moddable-hexmaps, then moddable-website, then dungeon-chess/moddable-decks
+2. Within same repo: oldest open issue first (by created_at)
+3. Skip any issue labelled `blocked` or `needs-decision`
 
 ## Phase 2 — Bonus execution
 
@@ -227,10 +251,9 @@ Then execute that work following the full process below.
 
 ### If running a research task:
 
-Select the issue:
-1. Pick any `research` + `next` issue first (oldest)
-2. If none, pick the oldest open `research` issue
-3. Skip `blocked` and `needs-decision`
+Select the issue using repo priority order above, then oldest within repo.
+Pick `next`-labelled issues first if any exist.
+Skip `blocked` and `needs-decision`.
 
 Research process:
 1. Read the issue in full including all comments
@@ -252,11 +275,10 @@ Relabelling after posting:
 
 ### If running an implementation task:
 
-Select the issue:
-1. Pick any `ready` + `next` issue first (oldest)
-2. If none, pick the oldest open `ready` issue
-3. Skip `blocked` and `needs-decision`
-4. Check for cross-repo dependencies — if a dependency issue is not closed, add `blocked` and stop
+Select the issue using repo priority order above, then oldest within repo.
+Pick `next`-labelled issues first if any exist.
+Skip `blocked` and `needs-decision`.
+Check for cross-repo dependencies — if a dependency issue is not closed, add `blocked` and stop.
 
 Implementation process:
 1. Read the issue in full including all comments
@@ -323,10 +345,11 @@ Scan these 6 repositories for open issues labelled `research`:
 
 Priority order:
 1. Any issue labelled both `research` and `next` — pick the oldest of these first
-2. If no `next` issues exist, pick the oldest open `research` issue
-3. Skip any issue also labelled `blocked` or `needs-decision`
-4. If no actionable `research` issues exist, exit gracefully — do not force work
-5. Work one issue per run only
+2. If no `next` issues exist, apply repo priority: moddable-rules first, then moddable-chess/moddable-hexmaps, then moddable-website, then dungeon-chess/moddable-decks
+3. Within the same repo, pick the oldest open issue first (by created_at)
+4. Skip any issue also labelled `blocked` or `needs-decision`
+5. If no actionable `research` issues exist, exit gracefully — do not force work
+6. Work one issue per run only
 
 ## Research process
 
@@ -394,10 +417,11 @@ Scan these 6 repositories for open issues labelled `ready`:
 
 Priority order:
 1. Any issue labelled both `ready` and `next` — pick the oldest of these first
-2. If no `next` issues exist, pick the oldest open `ready` issue
-3. Skip any issue also labelled `blocked` or `needs-decision`
-4. If no actionable `ready` issues exist, exit gracefully — do not force work
-5. Work one issue per run only
+2. If no `next` issues exist, apply repo priority: moddable-rules first, then moddable-chess/moddable-hexmaps, then moddable-website, then dungeon-chess/moddable-decks
+3. Within the same repo, pick the oldest open issue first (by created_at)
+4. Skip any issue also labelled `blocked` or `needs-decision`
+5. If no actionable `ready` issues exist, exit gracefully — do not force work
+6. Work one issue per run only
 
 ## Before writing any code
 
