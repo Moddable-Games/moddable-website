@@ -11,20 +11,22 @@ where routine setup or issue workflow is being discussed.
 
 ## Overview
 
-Five-run daily pipeline across three token windows:
+Five-run daily pipeline across three token windows — with Triage Time acting as a third execution slot:
 
 ```
 03:00 BST — Research Routine   ► Window 1 opens (rolling 5h, closes ~08:00)
 04:00 BST — Implementation     ► Inside Window 1
              [results ready when Mark wakes]
-08:00 BST — Triage Time        ► Window 2 opens (cheap — label management only)
-             [Mark reviews overnight work, can adjust next labels before afternoon]
+08:00 BST — Triage Time        ► Window 2 opens — labels first, then bonus execution
+             [fills next label gaps, then works whichever queue has deeper backlog]
 17:00 BST — Research B         ► Window 3 opens (rolling 5h, closes ~22:00)
 18:00 BST — Implementation B   ► Inside Window 3
              [7h gap before Window 1 reopens at 03:00 — tokens fully reset]
         ↓
 Mark reviews dev periodically → merges to main → deploys
 ```
+
+**Effective throughput: 3 issue executions per day** (not 2) — Research, Implementation, and Triage bonus.
 
 Claude Desktop (Mark + Claude) handles planning, issue creation, and decisions between runs.
 
@@ -71,23 +73,20 @@ Claude Desktop (Mark + Claude) handles planning, issue creation, and decisions b
 
 - Claude Pro: 5 routine runs per day
 - Token window: rolling 5 hours from first activity after reset (resets 00:00 UTC / 01:00 BST)
-- Three token windows are used across the day:
+- Three token windows used across the day:
   - **Window 1** (03:00–08:00 BST): Research Routine + Implementation Routine
-  - **Window 2** (08:00 BST): Triage Time only — cheap, barely uses allowance
+  - **Window 2** (08:00 BST): Triage Time — label management + bonus execution
   - **Window 3** (17:00–22:00 BST): Research B + Implementation B
 - 7-hour gap between Window 3 closing (~22:00) and Window 1 reopening (03:00) ensures full token reset
 - Mark can adjust `next` labels between 08:00 and 17:00 to influence afternoon/evening runs
 
 ### Handling imbalanced queues
 
-When the triage routine runs, it checks the ratio of open `research` vs `ready` issues:
-- If both exist: apply `next` to 1 of each — balanced split across the two pairs
-- If only `research` exists: apply `next` to 2 `research` issues — both pairs do research
-- If only `ready` exists: apply `next` to 2 `ready` issues — both pairs do implementation
-- If one queue has 1 issue and the other has 0: apply `next` to that 1 issue only
-- If both queues are empty: do nothing, log that no work is available
-
-This ensures all 5 runs are used whenever work is available in either queue.
+Triage bonus execution picks the queue with the deeper backlog:
+- More `ready` than `research`: Triage runs an implementation
+- More `research` than `ready`: Triage runs a research
+- Equal: Triage runs an implementation (bias toward shipping)
+- Both empty: Triage skips the bonus execution
 
 ---
 
@@ -139,7 +138,7 @@ https://raw.githubusercontent.com/Moddable-Games/moddable-website/main/.moddable
 - **GitHub trigger:** None (schedule only)
 - **API fire URL:** https://api.anthropic.com/v1/claude_code/routines/trig_01SFuiAPF4vEb6coS4ais6z6/fire
 - **Repos:** All 6 Moddable-Games repos
-- **Purpose:** Count existing `next` labels, fill gaps up to 2 total — one research, one ready where possible
+- **Purpose:** Label management first, then bonus execution of whichever queue (research or implementation) has the deeper backlog
 
 ### Research B
 - **Name:** Research B
@@ -176,7 +175,7 @@ https://raw.githubusercontent.com/Moddable-Games/moddable-website/main/.moddable
 ### Triage Time Prompt
 
 ```
-You are an automated triage agent for Moddable Games. Your job is to ensure the issue queue always has the right `next` labels set so that the research and implementation routines pick up the highest-priority work.
+You are an automated triage and execution agent for Moddable Games. You run in two phases: first you manage the issue queue labels, then you execute one piece of work from whichever queue has the deeper backlog.
 
 ## Setup — do this first, every run
 
@@ -186,49 +185,113 @@ You are an automated triage agent for Moddable Games. Your job is to ensure the 
 2. Fetch and read the routines design file in full:
    https://raw.githubusercontent.com/Moddable-Games/moddable-website/main/.moddable/ROUTINES.md
 
-## Triage process
+## Phase 1 — Label management
 
-1. Scan all 6 repositories for open issues:
-   - Moddable-Games/moddable-website
-   - Moddable-Games/moddable-chess
-   - Moddable-Games/moddable-hexmaps
-   - Moddable-Games/moddable-rules
-   - Moddable-Games/moddable-decks
-   - Moddable-Games/dungeon-chess
+Scan all 6 repositories for open issues:
+- Moddable-Games/moddable-website
+- Moddable-Games/moddable-chess
+- Moddable-Games/moddable-hexmaps
+- Moddable-Games/moddable-rules
+- Moddable-Games/moddable-decks
+- Moddable-Games/dungeon-chess
 
-2. Count existing `next` labels already on open issues — split by type:
-   - How many open `research` + `next` issues exist?
-   - How many open `ready` + `next` issues exist?
+Count existing `next` labels already on open issues — split by type:
+- How many open `research` + `next` issues exist?
+- How many open `ready` + `next` issues exist?
 
-   IMPORTANT: Do NOT remove any existing `next` labels. Mark may have set them
-   intentionally. Only add new `next` labels where gaps exist.
+IMPORTANT: Do NOT remove any existing `next` labels. Mark may have set them
+intentionally. Only add new `next` labels where gaps exist.
 
-3. Determine how many `next` labels need to be added:
-   - Target: 1 `next` on a `research` issue + 1 `next` on a `ready` issue
-   - If a `research` + `next` already exists: do not add another research `next`
-   - If a `ready` + `next` already exists: do not add another ready `next`
-   - Only add where the slot is empty
+Fill gaps according to this logic:
+- Target: 1 `next` on a `research` issue + 1 `next` on a `ready` issue
+- If a slot already has a `next` issue: do not add another
+- If `research` slot is empty: apply `next` to the oldest actionable `research` issue
+- If `ready` slot is empty: apply `next` to the oldest actionable `ready` issue
+- If both slots are already filled: skip to Phase 2
+- If one queue is empty and the other has 2+: apply a second `next` to that queue
+- Selection priority: oldest open issue first, skip `blocked` and `needs-decision`
 
-4. Fill gaps according to this logic:
-   - If `research` slot is empty and actionable `research` issues exist:
-     apply `next` to the oldest open `research` issue (not `blocked`, not `needs-decision`)
-   - If `ready` slot is empty and actionable `ready` issues exist:
-     apply `next` to the oldest open `ready` issue (not `blocked`, not `needs-decision`)
-   - If both slots are already filled: do nothing
-   - If a queue is empty and the other has 2+ issues: apply a second `next` to that queue
+## Phase 2 — Bonus execution
 
-5. Selection priority within each queue:
-   - Oldest open issue first (by created_at)
-   - Skip any issue labelled `blocked` or `needs-decision`
-   - Prefer issues that unblock downstream dependencies
+After labels are set, count the full actionable backlog:
+- Total open `research` issues (not `blocked`, not `needs-decision`)
+- Total open `ready` issues (not `blocked`, not `needs-decision`)
+
+Decide which type of work to do:
+- If `ready` count > `research` count: run an implementation
+- If `research` count > `ready` count: run a research
+- If counts are equal: run an implementation (bias toward shipping)
+- If both queues are empty: exit gracefully — no work to do
+
+Then execute that work following the full process below.
+
+### If running a research task:
+
+Select the issue:
+1. Pick any `research` + `next` issue first (oldest)
+2. If none, pick the oldest open `research` issue
+3. Skip `blocked` and `needs-decision`
+
+Research process:
+1. Read the issue in full including all comments
+2. Read relevant files in the repository to understand existing structure and patterns
+3. Research thoroughly — verify facts against authoritative sources
+4. Produce findings detailed enough for implementation with zero ambiguity
+
+Post as issue comment including:
+- **Summary** — what you found and the recommendation
+- **Proposed approach** — specific files to create or modify with exact paths
+- **Acceptance criteria** — checklist of what done looks like
+- **Any dependencies** — other issues or files needed first
+- **Sources** — links or references used
+
+Relabelling after posting:
+- Scope clear, no decisions needed: remove `research`, add `ready`
+- Mark decision needed: add `needs-decision`, do NOT add `ready`
+- Always remove `next` after actioning
+
+### If running an implementation task:
+
+Select the issue:
+1. Pick any `ready` + `next` issue first (oldest)
+2. If none, pick the oldest open `ready` issue
+3. Skip `blocked` and `needs-decision`
+4. Check for cross-repo dependencies — if a dependency issue is not closed, add `blocked` and stop
+
+Implementation process:
+1. Read the issue in full including all comments
+2. Read every relevant file — understand patterns before writing anything
+3. Branch from `dev` using format: `claude/issue-{repo}-{number}`
+4. Implement per the acceptance criteria — no more, no less
+5. Match existing code style exactly
+6. No inline styles or scripts in HTML — external CSS/JS only
+7. No drop shadows anywhere in UI
+8. If cached assets changed, run `bump.sh patch`
+
+Merging:
+1. Merge branch into `dev` — never into `main`
+2. Delete the working branch
+3. Post a comment summarising what was done, files changed, merged to `dev`
+4. Close the issue
+5. Remove `next` label if present
+
+If blocked mid-implementation:
+- Post a comment explaining the blocker
+- Add `needs-decision`, remove `ready`
+- Do not merge anything
 
 ## Hard rules — never break these
 
-- Never remove existing `next` labels — only add them
-- Never commit any code or files
-- Never close, modify body, or comment on issues — only add the `next` label
-- Never apply `next` to issues labelled `blocked`, `needs-decision`, or `discuss`
-- Never mention Claude or AI in any output
+- Never remove existing `next` labels in Phase 1 — only add them
+- Never commit to `main` under any circumstances — dev only
+- Never include AI co-author lines in commits or comments
+- Never mention Claude or AI in any file, issue comment, or commit message
+- Never guess at Mark's decisions — flag as `needs-decision` if ambiguous
+- Never add features beyond issue scope
+- Never swap engine themes — moddable-chess is blue, moddable-hexmaps is green
+- Always verify branching from `dev` not `main`
+- Commit message format: short imperative summary referencing issue number
+  Example: `Add Sittuyin variant plugin (closes #66)`
 ```
 
 ---
