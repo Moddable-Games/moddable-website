@@ -1,7 +1,22 @@
 # Moddable Games — Universal Conventions
 
-This file is the authoritative source for all automated routines (research and implementation).
-Read it in full at the start of every routine run. It supersedes any repo-level instructions.
+This file is the authoritative source for all automated routines and Claude Desktop sessions.
+Read it in full at the start of every session and routine run. It supersedes any repo-level instructions.
+
+Always fetch this file via the GitHub API — never via raw.githubusercontent.com (cached, unreliable):
+- Owner: Moddable-Games
+- Repo: moddable-website
+- Path: .moddable/conventions.md
+
+---
+
+## Claude Desktop Session Notes
+
+- **MODDABLE-PROJECT.md is read-only** — Claude cannot edit it. It is a project file mounted read-only in the Claude Desktop environment. Never offer to update it.
+- **conventions.md and ROUTINES.md are the maintainable files** — all project context that needs to stay current lives here or in ROUTINES.md, both of which Claude can commit to via GitHub MCP.
+- **Always fetch via GitHub API** — not raw.githubusercontent.com URLs, which are CDN-cached and may serve stale content.
+- **Session start is on-demand** — do not pull all 6 repos' open issues automatically. Fetch ROUTINES.md and conventions.md only, then wait for Mark's instructions. Pull issues only when needed for planning or triage.
+- **Mark will report what routines did** — do not attempt to reconstruct overnight activity from closed issue timestamps. Ask if unclear.
 
 ---
 
@@ -11,6 +26,15 @@ Read it in full at the start of every routine run. It supersedes any repo-level 
 - **Live platform:** https://moddable.games
 - **Entity:** UK-registered 2025, founded Kuala Lumpur 2024
 - **Team:** Mark (founder), Kevin Chand (growth/ops), Akmal Fikri (engine/community), Iqbal Ridzuan (lead artist)
+- **Discord:** https://discord.com/invite/WXENAywsQb
+
+---
+
+## Business Context
+
+- **Goal:** Raise $250K–$500K from angel/HNW investors via personal network
+- **Model:** Equity + per-game royalties (5–15% net revenue, capped at 3×)
+- **Licensing:** Rules & mechanics: CC-BY-SA 4.0 / Code: MIT / Art, brand, assets: All Rights Reserved
 
 ---
 
@@ -24,6 +48,8 @@ Never conflate these layers:
 | **Engines** | SDKs / moat | Moddable Chess Engine, Moddable Hexmaps |
 | **Platform** | Hosting / marketplace / embed API | moddable.games, tools.moddable.games |
 
+Chess is the catalyst product. Nukes is the flagship creative property.
+
 ---
 
 ## Repos
@@ -36,6 +62,13 @@ Never conflate these layers:
 | moddable-rules | https://rules.moddable.games | Canonical rulebook source for all games |
 | moddable-decks | https://decks.moddable.games | Investor pitch deck (multi-audience) |
 | dungeon-chess | https://dungeon.moddable.games | Digital asymmetric skirmish game |
+
+---
+
+## Local Development
+
+All repos: `/Applications/MAMP/htdocs/MODDABLE/`
+MAMP serves on port 80 — no port number in localhost URLs.
 
 ---
 
@@ -55,7 +88,7 @@ Never conflate these layers:
 - **Never** include AI co-author lines in commits
 - **Never** mention Claude or AI in commit messages or public-facing files
 - **"Commit" means commit AND push**
-- Commit message format: short imperative summary, reference issue number where applicable (e.g. `Add Sittuyin variant plugin (closes #66)`)
+- Commit message format: short imperative summary, reference issue number where applicable
 - `CLAUDE.md` is gitignored in every repo — never commit it
 
 ---
@@ -113,31 +146,26 @@ Never conflate these layers:
 
 ## Routine Behaviour Rules
 
-### Both routines
-- Fetch this file at the start of every run
+### All routines
+- Fetch this file and ROUTINES.md at the start of every run via GitHub API
 - Never commit to `main` — always work on and merge into `dev`
 - Never include AI co-author lines
 - Never mention Claude or AI in any file or commit message
 - Verify facts against authoritative source files before committing
-- If a task is ambiguous or hits a decision only Mark can make, add `needs-decision` label and post a comment explaining what is needed — do not guess
+- If a task is ambiguous or hits a decision only Mark can make, add `needs-decision` and post a comment — do not guess
 
 ### Research routine
-- Triggered by `research` label
-- If a `next` label exists on any `research` issue, pick that first
-- Otherwise pick the oldest open `research` issue with no `blocked` label
-- Output: post findings as a detailed issue comment
-- If scope is clear and no decisions needed: relabel issue `ready`, remove `research`
-- If a Mark decision is needed: add `needs-decision`, post comment explaining the blocker
+- Pre-flight before committing to an issue: check dead-ends.md, then verify at least 2 independent sources are accessible. If not, label `needs-decision` immediately and move to the next actionable `research` issue — do not burn the run on a dead end.
+- If scope is clear and 2+ sources verified: relabel `ready`, remove `research`
+- If fewer than 2 sources accessible: add `needs-decision`, do NOT add `ready`
+- Always remove `next` after actioning
 
 ### Implementation routine
-- Triggered by `ready` label
-- If a `next` label exists on any `ready` issue, pick that first
-- Otherwise pick the oldest open `ready` issue with no `blocked` label
-- Branch from `dev` using format `claude/issue-{repo}-{number}` (e.g. `claude/issue-chess-101`)
-- Implement per acceptance criteria in the issue
-- Bump version via `bump.sh patch` before pushing if cached assets changed
-- Merge branch into `dev` on completion
-- Close the issue with a comment summarising what was done
+- Branch from `dev` using format `claude/issue-{repo}-{number}`
+- Implement per acceptance criteria — no more, no less
+- Bump version via `bump.sh patch` if cached assets changed
+- Merge branch into `dev`, close issue, post summary comment
+- If blocked mid-implementation: add `needs-decision`, remove `ready`, do not merge
 
 ---
 
@@ -156,4 +184,4 @@ moddable-hexmaps
   └─ mcp/tools.js → moddable-website/workers/mcp/hex-tools.js
 ```
 
-When closing an issue that has downstream dependents, post a comment on the dependent issue noting the blocker is resolved and relabel it `ready` if appropriate.
+When closing an issue that has downstream dependents, post a comment on the dependent issue noting the blocker is resolved and relabel `ready` if appropriate.
