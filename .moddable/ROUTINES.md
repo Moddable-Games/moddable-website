@@ -123,12 +123,14 @@ https://raw.githubusercontent.com/Moddable-Games/moddable-website/main/.moddable
 - **Name:** Research Routine
 - **Schedule:** Daily at 03:00 BST
 - **GitHub trigger:** Issue labeled `research` on Moddable-Games/moddable-website
+- **API fire URL:** https://api.anthropic.com/v1/claude_code/routines/trig_01LnV8dQzRy1R35j2kP5iBq7/fire
 - **Repos:** All 6 Moddable-Games repos
 
 ### Implementation Routine
 - **Name:** Implementation Routine
 - **Schedule:** Daily at 04:00 BST
 - **GitHub trigger:** Issue labeled `ready` on Moddable-Games/moddable-website
+- **API fire URL:** https://api.anthropic.com/v1/claude_code/routines/trig_01JQPz1wg2R3jbJuDYC5iJBi/fire
 - **Repos:** All 6 Moddable-Games repos
 
 ### Triage Time
@@ -152,6 +154,15 @@ https://raw.githubusercontent.com/Moddable-Games/moddable-website/main/.moddable
 - **GitHub trigger:** None (schedule only — triage handles priority)
 - **API fire URL:** https://api.anthropic.com/v1/claude_code/routines/trig_0125Lpb7ewAMDrMusVjJZKqW/fire
 - **Repos:** All 6 Moddable-Games repos
+
+### All API fire URLs — quick reference
+| Routine | API fire URL |
+|---|---|
+| Research Routine | https://api.anthropic.com/v1/claude_code/routines/trig_01LnV8dQzRy1R35j2kP5iBq7/fire |
+| Implementation Routine | https://api.anthropic.com/v1/claude_code/routines/trig_01JQPz1wg2R3jbJuDYC5iJBi/fire |
+| Triage Time | https://api.anthropic.com/v1/claude_code/routines/trig_01SFuiAPF4vEb6coS4ais6z6/fire |
+| Research B | https://api.anthropic.com/v1/claude_code/routines/trig_01RbRYDhjcJv255kW35V24Wu/fire |
+| Implementation B | https://api.anthropic.com/v1/claude_code/routines/trig_0125Lpb7ewAMDrMusVjJZKqW/fire |
 
 ### Notes on GitHub triggers
 - GitHub triggers currently only watch moddable-website — scheduled runs catch all repos
@@ -379,8 +390,7 @@ Stop immediately. Do not guess. Do not partially implement.
 - [x] Triage Time created at claude.ai/code/routines (08:00 BST)
 - [x] Research B created at claude.ai/code/routines (17:00 BST)
 - [x] Implementation B created at claude.ai/code/routines (18:00 BST)
-- [x] API fire URLs documented for Triage Time, Research B, Implementation B
+- [x] API fire URLs documented for all 5 routines
 - [x] Claude GitHub App installed on Moddable-Games org (all repositories)
 - [x] Label colours set in GitHub (per repo)
-- [ ] Add API fire URLs for Research Routine and Implementation Routine
 - [ ] Expand GitHub triggers to cover all 6 repos
