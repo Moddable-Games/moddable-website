@@ -11,30 +11,22 @@ where routine setup or issue workflow is being discussed.
 
 ## Overview
 
-Three-layer pipeline:
+Five-run daily pipeline across three token windows:
 
 ```
-Claude Desktop (Mark + Claude)
-  → discuss, plan, decide
-  → create issues labelled research or discuss
-  → optionally add next to set priority
-        ↓
-Triage Routine (automated, evening — scans queue, sets next labels)
-  → balances research vs ready backlog
-  → applies next labels to optimal issues for next morning's runs
-        ↓
-Research Routine (automated, triggered by research label or schedule)
-  → investigates issue, reads codebase, writes findings as issue comment
-  → relabels ready if scope is clear
-  → relabels needs-decision if blocked on Mark
-        ↓
-Implementation Routine (automated, triggered by ready label or schedule)
-  → branches from dev (claude/ prefix)
-  → implements per acceptance criteria
-  → merges into dev
+01:00 BST — Research A      ► Window 1 opens (rolling 5h, closes ~06:00)
+02:00 BST — Implementation A ► Inside Window 1
+            [results ready when Mark wakes]
+08:00 BST — Triage          ► Window 2 opens (cheap — label management only)
+            [Mark reviews overnight work, can adjust next labels before evening]
+20:00 BST — Research B      ► Window 3 opens (rolling 5h, closes ~01:00)
+21:00 BST — Implementation B ► Inside Window 3
+            [results ready before Mark sleeps]
         ↓
 Mark reviews dev periodically → merges to main → deploys
 ```
+
+Claude Desktop (Mark + Claude) handles planning, issue creation, and decisions between runs.
 
 ---
 
@@ -77,28 +69,30 @@ Mark reviews dev periodically → merges to main → deploys
 
 ## Routine Budget
 
-- Claude Pro: 5 routine runs per day (resets midnight UTC / 01:00 BST)
-- Three routines share the budget: triage (1) + research (2) + implementation (2)
-- Triage runs once at 20:00 BST and sets next labels for the following morning
-- Research runs at 03:00 BST and 05:00 BST
-- Implementation runs at 04:00 BST and 06:00 BST
-- Mark can override triage decisions by manually setting/removing `next` labels
+- Claude Pro: 5 routine runs per day
+- Token window: rolling 5 hours from first activity after reset (resets 00:00 UTC / 01:00 BST)
+- Three token windows are used across the day:
+  - **Window 1** (01:00–06:00 BST): Research A + Implementation A
+  - **Window 2** (08:00 BST): Triage only — cheap, barely uses allowance
+  - **Window 3** (20:00–01:00 BST): Research B + Implementation B
+- Mark can adjust `next` labels between 08:00 and 20:00 to influence evening runs
 
 ### Handling imbalanced queues
 
 When the triage routine runs, it checks the ratio of open `research` vs `ready` issues:
-- If no `ready` issues exist: triage sets `next` on 2 `research` issues — both morning runs go to research
-- If no `research` issues exist: triage sets `next` on 2 `ready` issues — both morning runs can be claimed by implementation (research routine skips gracefully if nothing to do)
-- If both exist: triage sets `next` on 1 of each — balanced split
-- Triage never sets `next` on issues already labelled `blocked` or `needs-decision`
+- If both exist: apply `next` to 1 of each — balanced split across A and B pairs
+- If only `research` exists: apply `next` to 2 `research` issues — both pairs do research
+- If only `ready` exists: apply `next` to 2 `ready` issues — both pairs do implementation
+- If one queue has 1 issue and the other has 0: apply `next` to that 1 issue only
+- If both queues are empty: do nothing, log that no work is available
 
-This means all 5 daily runs are used whenever there is work available in either queue.
+This ensures all 5 runs are used whenever work is available in either queue.
 
 ---
 
 ## Priority Logic
 
-### Both routines follow this order:
+### All routines follow this order:
 1. Pick any issue with `next` label first (Mark's explicit override or triage assignment)
 2. If no `next` exists, pick the oldest open issue with the matching label (`research` or `ready`)
 3. Skip any issue that also has `blocked` label
@@ -106,10 +100,10 @@ This means all 5 daily runs are used whenever there is work available in either 
 5. If nothing actionable exists, exit gracefully with a log note — do not force work
 
 ### `next` label behaviour:
-- Applied by triage routine each evening, or manually by Mark
+- Applied by triage routine each morning at 08:00, or manually by Mark at any time
 - Applied per-issue alongside the primary label (e.g. `research` + `next`)
-- Remove `next` after the routine has actioned the issue (routine should do this automatically)
-- Triage removes any stale `next` labels before applying new ones
+- Removed by the routine after actioning the issue
+- Triage removes stale `next` labels before applying new ones each run
 
 ---
 
@@ -124,36 +118,50 @@ https://raw.githubusercontent.com/Moddable-Games/moddable-website/main/.moddable
 
 ## Routine Configuration
 
-### Triage Routine
-- **Name:** Triage Routine
-- **URL:** claude.ai/code/routines
-- **Schedule:** Daily at 20:00 BST
-- **GitHub trigger:** None (schedule only)
-- **Repos:** All 6 Moddable-Games repos
-- **Purpose:** Scan all repos, remove stale `next` labels, apply `next` to the optimal 1–2 research and 1–2 ready issues for next morning's runs. Handles imbalanced queues (see Routine Budget above).
-
-### Research Routine
-- **Name:** Research Routine
-- **URL:** claude.ai/code/routines
-- **Schedule:** Daily at 03:00 BST and 05:00 BST (two scheduled instances)
+### Research Routine A
+- **Name:** Research Routine A
+- **Schedule:** Daily at 01:00 BST
 - **GitHub trigger:** Issue labeled `research` on Moddable-Games/moddable-website
 - **Repos:** All 6 Moddable-Games repos
-- **Note:** GitHub trigger only watches moddable-website — schedule fallback catches all repos
 
-### Implementation Routine
-- **Name:** Implementation Routine
-- **URL:** claude.ai/code/routines
-- **Schedule:** Daily at 04:00 BST and 06:00 BST (two scheduled instances)
+### Implementation Routine A
+- **Name:** Implementation Routine A
+- **Schedule:** Daily at 02:00 BST
 - **GitHub trigger:** Issue labeled `ready` on Moddable-Games/moddable-website
 - **Repos:** All 6 Moddable-Games repos
-- **Note:** GitHub trigger only watches moddable-website — schedule fallback catches all repos
 
-### Pending improvements
-- [ ] Create Triage Routine at claude.ai/code/routines (daily 20:00 BST)
-- [ ] Add second Research Routine instance (05:00 BST)
-- [ ] Add second Implementation Routine instance (06:00 BST)
+### Triage Routine
+- **Name:** Triage Routine
+- **Schedule:** Daily at 08:00 BST
+- **GitHub trigger:** None (schedule only)
+- **Repos:** All 6 Moddable-Games repos
+- **Purpose:** Review overnight results, remove stale `next` labels, set `next` on optimal issues for evening runs
+
+### Research Routine B
+- **Name:** Research Routine B
+- **Schedule:** Daily at 20:00 BST
+- **GitHub trigger:** None (schedule only — triage handles priority)
+- **Repos:** All 6 Moddable-Games repos
+
+### Implementation Routine B
+- **Name:** Implementation Routine B
+- **Schedule:** Daily at 21:00 BST
+- **GitHub trigger:** None (schedule only — triage handles priority)
+- **Repos:** All 6 Moddable-Games repos
+
+### Notes on GitHub triggers
+- GitHub triggers currently only watch moddable-website — scheduled runs catch all repos
+- Expand triggers to all 6 repos when the platform supports multiple GitHub triggers per routine
+- Research A and Implementation A retain GitHub triggers as on-demand fallback during the day
+
+### Pending setup
+- [ ] Create Triage Routine at claude.ai/code/routines (08:00 BST)
+- [ ] Create Research Routine B at claude.ai/code/routines (20:00 BST)
+- [ ] Create Implementation Routine B at claude.ai/code/routines (21:00 BST)
+- [ ] Rename existing Research Routine → Research Routine A, update schedule to 01:00 BST
+- [ ] Rename existing Implementation Routine → Implementation Routine A, update schedule to 02:00 BST
 - [ ] Add API triggers to all routines for on-demand firing
-- [ ] Expand GitHub triggers to cover all 6 repos when platform supports multiple triggers per routine
+- [ ] Expand GitHub triggers to cover all 6 repos
 - [ ] Set label colours in GitHub (per repo) — see hex values in Label System above
 
 ---
@@ -163,7 +171,7 @@ https://raw.githubusercontent.com/Moddable-Games/moddable-website/main/.moddable
 ### Triage Routine Prompt
 
 ```
-You are an automated triage agent for Moddable Games. Your job is to prepare the issue queue each evening so that the research and implementation routines can make maximum use of the 4 morning run slots.
+You are an automated triage agent for Moddable Games. Your job is to review the overnight routine results and prepare the issue queue so that the evening research and implementation routines make maximum use of their token window.
 
 ## Setup — do this first, every run
 
@@ -183,36 +191,38 @@ You are an automated triage agent for Moddable Games. Your job is to prepare the
    - Moddable-Games/moddable-decks
    - Moddable-Games/dungeon-chess
 
-2. Remove any existing `next` labels from issues that have not been actioned yet (stale next labels from previous days)
+2. Remove any existing `next` labels from open issues that have not yet been actioned
+   (stale next labels left from previous runs)
 
-3. Count open `research` issues (excluding `blocked` and `needs-decision`)
-   Count open `ready` issues (excluding `blocked` and `needs-decision`)
+3. Count actionable open issues by type:
+   - `research` issues: open, not `blocked`, not `needs-decision`
+   - `ready` issues: open, not `blocked`, not `needs-decision`
 
-4. Apply `next` labels according to this logic:
-   - If research ≥ 1 and ready ≥ 1: apply `next` to 1 research issue + 1 ready issue (balanced)
-   - If research ≥ 2 and ready = 0: apply `next` to 2 research issues (both morning slots go to research)
-   - If ready ≥ 2 and research = 0: apply `next` to 2 ready issues (implementation takes both slots)
-   - If research = 1 and ready = 0: apply `next` to 1 research issue only
-   - If ready = 1 and research = 0: apply `next` to 1 ready issue only
+4. Apply `next` labels for the evening runs according to this logic:
+   - If research ≥ 1 and ready ≥ 1: apply `next` to 1 research + 1 ready (balanced)
+   - If research ≥ 2 and ready = 0: apply `next` to 2 research issues
+   - If ready ≥ 2 and research = 0: apply `next` to 2 ready issues
+   - If only 1 issue exists across both queues: apply `next` to that 1 issue only
    - If both queues are empty: do nothing, log that no work is available
 
 5. Selection priority within each queue:
    - Oldest open issue first (by created_at)
-   - Skip any issue also labelled `blocked` or `needs-decision`
-   - Prefer cross-repo dependency chains (if issue A blocks issue B, prioritise A)
+   - Skip any issue labelled `blocked` or `needs-decision`
+   - Prefer issues that unblock downstream dependencies
 
 ## Hard rules — never break these
 
 - Never commit any code or files
-- Never close, modify, or comment on issues — only add or remove the `next` label
-- Never apply `next` to issues labelled `blocked` or `needs-decision`
-- Never apply `next` to `discuss` issues — those need Desktop conversation first
+- Never close, modify body, or comment on issues — only add or remove the `next` label
+- Never apply `next` to issues labelled `blocked`, `needs-decision`, or `discuss`
 - Never mention Claude or AI in any output
 ```
 
 ---
 
 ### Research Routine Prompt
+
+(Used by both Research Routine A and Research Routine B — identical prompt)
 
 ```
 You are an automated research agent for Moddable Games. Your job is to investigate open research issues across the Moddable Games GitHub repositories and produce detailed findings that enable implementation without further context-switching.
@@ -282,6 +292,8 @@ After posting your comment:
 ---
 
 ### Implementation Routine Prompt
+
+(Used by both Implementation Routine A and Implementation Routine B — identical prompt)
 
 ```
 You are an automated implementation agent for Moddable Games. Your job is to pick up fully scoped issues labelled ready, implement them, and merge the work into the dev branch.
@@ -364,16 +376,16 @@ Stop immediately. Do not guess. Do not partially implement.
 - [x] Labels applied to all issues across 6 repos
 - [x] `.moddable/conventions.md` created in moddable-website
 - [x] `dev` branch created in all 6 repos
-- [x] First `next` labels applied
+- [x] `next` labels applied to priority issues
 - [x] Research routine prompt written
 - [x] Implementation routine prompt written
 - [x] Triage routine prompt written
-- [x] Research Routine created at claude.ai/code/routines (03:00 BST + issue labeled trigger)
-- [x] Implementation Routine created at claude.ai/code/routines (04:00 BST + issue labeled trigger)
+- [x] Research Routine A created at claude.ai/code/routines (01:00 BST + issue labeled trigger)
+- [x] Implementation Routine A created at claude.ai/code/routines (02:00 BST + issue labeled trigger)
 - [x] Claude GitHub App installed on Moddable-Games org (all repositories)
 - [x] Label colours set in GitHub (per repo)
-- [ ] Create Triage Routine at claude.ai/code/routines (20:00 BST)
-- [ ] Add second Research Routine instance (05:00 BST)
-- [ ] Add second Implementation Routine instance (06:00 BST)
+- [ ] Create Triage Routine at claude.ai/code/routines (08:00 BST)
+- [ ] Create Research Routine B at claude.ai/code/routines (20:00 BST)
+- [ ] Create Implementation Routine B at claude.ai/code/routines (21:00 BST)
 - [ ] Add API triggers to all routines for on-demand firing
-- [ ] Expand GitHub triggers to cover all 6 repos when platform supports multiple triggers per routine
+- [ ] Expand GitHub triggers to cover all 6 repos
