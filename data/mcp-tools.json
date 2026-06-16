@@ -46,6 +46,12 @@
         "description": "Generate a tactical puzzle (mate-in-N) for any variant.",
         "example": "Generate a mate-in-2 puzzle for Atomic Chess",
         "returns": "FEN position with solution moves"
+      },
+      {
+        "name": "chess_render_svg",
+        "description": "Render a board position as a self-contained SVG image. Supports all board sizes (4x8 to 12x8) and 6 themes.",
+        "example": "Render the starting position of Grand Chess with cosmic theme",
+        "returns": "Complete SVG string with pieces, board squares, and coordinate labels"
       }
     ]
   },
