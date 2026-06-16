@@ -14,14 +14,14 @@ where routine setup or issue workflow is being discussed.
 Five-run daily pipeline across three token windows — with Triage Time acting as a third execution slot:
 
 ```
-03:00 BST — Research Routine   ► Window 1 opens (rolling 5h, closes ~08:00)
-04:00 BST — Implementation     ► Inside Window 1
+01:00 BST — Research Routine   ► Window 1 opens (rolling 5h, closes ~06:00)
+02:00 BST — Implementation     ► Inside Window 1
              [results ready when Mark wakes]
 08:00 BST — Triage Time        ► Window 2 opens — labels first, then bonus execution
              [fills next label gaps, then works whichever queue has deeper backlog]
 17:00 BST — Research B         ► Window 3 opens (rolling 5h, closes ~22:00)
 18:00 BST — Implementation B   ► Inside Window 3
-             [7h gap before Window 1 reopens at 03:00 — tokens fully reset]
+             [7h gap before Window 1 reopens at 01:00 — tokens fully reset]
         ↓
 Mark reviews dev periodically → merges to main → deploys
 ```
@@ -93,10 +93,10 @@ Within each repo, oldest open issue first (by created_at).
 - Claude Pro: 5 routine runs per day
 - Token window: rolling 5 hours from first activity after reset (resets 00:00 UTC / 01:00 BST)
 - Three token windows used across the day:
-  - **Window 1** (03:00–08:00 BST): Research Routine + Implementation Routine
+  - **Window 1** (01:00–06:00 BST): Research Routine + Implementation Routine
   - **Window 2** (08:00 BST): Triage Time — label management + bonus execution
   - **Window 3** (17:00–22:00 BST): Research B + Implementation B
-- 7-hour gap between Window 3 closing (~22:00) and Window 1 reopening (03:00) ensures full token reset
+- 7-hour gap between Window 3 closing (~22:00) and Window 1 reopening (01:00) ensures full token reset
 - Mark can adjust `next` labels between 08:00 and 17:00 to influence afternoon/evening runs
 
 ### Handling imbalanced queues
@@ -163,14 +163,14 @@ Rules research hard constraints:
 
 ### Research Routine
 - **Name:** Research Routine
-- **Schedule:** Daily at 03:00 BST
+- **Schedule:** Daily at 01:00 BST
 - **GitHub trigger:** Issue labeled `research` on Moddable-Games/moddable-website
 - **API fire URL:** https://api.anthropic.com/v1/claude_code/routines/trig_01LnV8dQzRy1R35j2kP5iBq7/fire
 - **Repos:** All 6 Moddable-Games repos
 
 ### Implementation Routine
 - **Name:** Implementation Routine
-- **Schedule:** Daily at 04:00 BST
+- **Schedule:** Daily at 02:00 BST
 - **GitHub trigger:** Issue labeled `ready` on Moddable-Games/moddable-website
 - **API fire URL:** https://api.anthropic.com/v1/claude_code/routines/trig_01JQPz1wg2R3jbJuDYC5iJBi/fire
 - **Repos:** All 6 Moddable-Games repos
@@ -524,8 +524,8 @@ Stop immediately. Do not guess. Do not partially implement.
 - [x] Research routine prompt written
 - [x] Implementation routine prompt written
 - [x] Triage routine prompt written
-- [x] Research Routine created at claude.ai/code/routines (03:00 BST + issue labeled trigger)
-- [x] Implementation Routine created at claude.ai/code/routines (04:00 BST + issue labeled trigger)
+- [x] Research Routine created at claude.ai/code/routines (01:00 BST + issue labeled trigger)
+- [x] Implementation Routine created at claude.ai/code/routines (02:00 BST + issue labeled trigger)
 - [x] Triage Time created at claude.ai/code/routines (08:00 BST)
 - [x] Research B created at claude.ai/code/routines (17:00 BST)
 - [x] Implementation B created at claude.ai/code/routines (18:00 BST)
