@@ -17,6 +17,7 @@ Always fetch this file via the GitHub API — never via raw.githubusercontent.co
 - **Always fetch via GitHub API** — not raw.githubusercontent.com URLs, which are CDN-cached and may serve stale content.
 - **Session start is on-demand** — do not pull all 6 repos' open issues automatically. Fetch ROUTINES.md and conventions.md only, then wait for Mark's instructions. Pull issues only when needed for planning or triage.
 - **Mark will report what routines did** — do not attempt to reconstruct overnight activity from closed issue timestamps. Ask if unclear.
+- **Timezone:** Mark is based near Manchester, England — timezone is **BST (UTC+1)** in summer, **GMT (UTC+0)** in winter. All routine schedules are set in BST. Claude Desktop does not have a real-time clock and cannot reliably determine the current time or Mark's location (VPN may affect location detection). When reasoning about which routines have run or what time it is, **ask Mark** rather than guessing.
 
 ---
 
@@ -86,7 +87,7 @@ MAMP serves on port 80 — no port number in localhost URLs.
 ## Commit Rules
 
 - **Never** include AI co-author lines in commits
-- **Never** mention Claude or AI in commit messages or public-facing files
+- **Never** mention Claude, Claude Code, or AI in commit messages, public-facing files, issue comments, or pull request descriptions
 - **"Commit" means commit AND push**
 - Commit message format: short imperative summary, reference issue number where applicable
 - `CLAUDE.md` is gitignored in every repo — never commit it
@@ -137,10 +138,10 @@ MAMP serves on port 80 — no port number in localhost URLs.
 |---|---|
 | `research` | Needs investigation — research routine picks this up |
 | `ready` | Fully scoped, Mark has approved — implementation routine picks this up |
-| `discuss` | Needs a conversation in Claude Desktop before any action |
-| `blocked` | Depends on another issue being completed first |
-| `needs-decision` | Blocked on a real-world decision only Mark can make |
-| `next` | Optional override — routine prioritises this above all others |
+| `discuss` | Needs a conversation in Claude Desktop before any action — conversation not yet happened |
+| `blocked` | Depends on another issue being completed first — carries only this label while blocked |
+| `needs-decision` | Conversation is done; blocked on a real-world action only Mark can take |
+| `next` | Priority override — routine picks this above all others |
 
 ---
 
@@ -150,19 +151,21 @@ MAMP serves on port 80 — no port number in localhost URLs.
 - Fetch this file and ROUTINES.md at the start of every run via GitHub API
 - Never commit to `main` — always work on and merge into `dev`
 - Never include AI co-author lines
-- Never mention Claude or AI in any file or commit message
+- Never mention Claude, Claude Code, or AI in any file, commit message, issue comment, or pull request description
 - Verify facts against authoritative source files before committing
 - If a task is ambiguous or hits a decision only Mark can make, add `needs-decision` and post a comment — do not guess
 
 ### Research routine
-- Pre-flight before committing to an issue: check dead-ends.md, then verify at least 2 independent sources are accessible. If not, label `needs-decision` immediately and move to the next actionable `research` issue — do not burn the run on a dead end.
-- If scope is clear and 2+ sources verified: relabel `ready`, remove `research`
+- Produces architecture-level design specs, not findings documents — see ROUTINES.md for full standard
+- Must identify a consumer before proceeding — no building into a void
+- Pre-flight: check dead-ends.md and sources.md before starting any rules research
 - If fewer than 2 sources accessible: add `needs-decision`, do NOT add `ready`
 - Always remove `next` after actioning
 
 ### Implementation routine
+- Executes research specs to production quality — see ROUTINES.md for full standard
 - Branch from `dev` using format `claude/issue-{repo}-{number}`
-- Implement per acceptance criteria — no more, no less
+- If research spec is thin: relabel `research`, remove `ready`, post comment explaining what's missing
 - Bump version via `bump.sh patch` if cached assets changed
 - Merge branch into `dev`, close issue, post summary comment
 - If blocked mid-implementation: add `needs-decision`, remove `ready`, do not merge
