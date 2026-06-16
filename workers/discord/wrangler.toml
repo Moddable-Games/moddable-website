@@ -1,0 +1,20 @@
+name = "moddable-discord"
+main = "index.js"
+compatibility_date = "2024-01-01"
+workers_dev = true
+
+[vars]
+TOOLS_API = "https://tools.moddable.games/api/call"
+MODS_DATA = "https://moddable.games/data/mods.json"
+
+# Secrets (set via `wrangler secret put`):
+# DISCORD_TOKEN — bot token
+# DISCORD_PUBLIC_KEY — from Discord Developer Portal (for signature verification)
+# DISCORD_APP_ID — application ID (for command registration)
+
+[[kv_namespaces]]
+binding = "JAM_KV"
+id = "918c60b4bb144827a93c98905eb97f68"
+
+[triggers]
+crons = ["0 12 * * *"]
