@@ -71,7 +71,7 @@
         "desc": "Launch from a Base, jump over occupied hexes like Artillery. Blast radius: target hex becomes Biohazard, all units in target + 6 surrounding hexes destroyed immediately."
       }
     ],
-    "community": null
+    "community": []
   },
   "mongo": {
     "slug": "planet-mongo",
