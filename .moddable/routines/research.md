@@ -33,8 +33,26 @@ Priority order:
 2. If no `next` issues exist, apply repo priority: moddable-rules first, then moddable-chess/moddable-hexmaps, then moddable-website, then dungeon-chess/moddable-decks
 3. Within the same repo, pick the oldest open issue first (by created_at)
 4. Skip any issue also labelled `blocked` or `needs-decision`
-5. If no actionable `research` issues exist, exit gracefully — do not force work
+5. **If no actionable `research` issues exist, do not exit — proceed to the fallback procedure below**
 6. Work one issue per run only
+
+## Fallback procedure — when the queue is empty
+
+If no actionable `research` issues exist across all 6 repos, do not idle. Instead, pick the next variant from the candidate pools in inventory.md and research it as if it were a queued issue.
+
+**Selection order for fallback work:**
+1. Chess family candidate pool — pick the first unresearched variant listed
+2. Draughts family candidate pool — pick the first unresearched variant listed
+3. Go family candidate pool — pick the first unresearched variant listed
+4. If all candidate pools are exhausted: exit gracefully with a log note
+
+**What to do with fallback work:**
+1. Create a `research` issue in moddable-rules for the selected variant before starting — title format: `Research: [Variant name] ([Family] variant)`
+2. Research it following the full process below
+3. Post findings as a comment on the new issue
+4. Relabel per the standard relabelling rules
+
+This ensures hubs are continuously improved and the routine never wastes a run.
 
 ## Before researching anything
 
