@@ -364,7 +364,7 @@ def gen_developers():
 
 def gen_developers_api():
     img = base_image(accent_color=DEVELOPERS)
-    add_text(img, 'TOOLS API', 'Connect and call', '15 tools via MCP protocol and REST', accent=DEVELOPERS)
+    add_text(img, 'TOOLS API', 'Connect and call', '16 tools via MCP protocol and REST', accent=DEVELOPERS)
     save(img, 'img/og/developers-api.png')
 
 
