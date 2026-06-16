@@ -48,6 +48,7 @@ For every `research` issue, check:
 - **Premature?** — does this depend on upstream work that isn't done yet? If so, label `blocked` with a comment naming the dependency
 - **Wrong layer?** — is this something that needs a Desktop conversation before a routine can research it meaningfully? If so, relabel `discuss`
 - **Dead end risk?** — for moddable-rules content, is this a game family or source that's likely to hit bot-blocks or licensing issues? Flag `needs-decision` if so
+- **Duplicate check** — does this issue research something already live in moddable-rules or already queued in another open issue? Cross-reference inventory.md before passing
 
 Issues that pass these checks stay as `research` — no action needed.
 
@@ -63,9 +64,23 @@ Flag any issue that has been in the same state for more than 7 days without acti
 - `research` with no comments and no recent activity — post a comment asking if this is still relevant or needs a Desktop session first
 - `ready` with no comments and no recent activity — likely means implementation kept skipping it; check if it's actually blocked or underspecified
 
-## Phase 5 — `next` label management
+## Phase 5 — Inventory update (moddable-rules only)
 
-Only after the quality gates above are complete:
+After the quality gates, update `.moddable/inventory.md` in moddable-rules to reflect current reality:
+
+1. Scan `games/*/content/variants/` directories — any new .md files not yet listed as ✅ Live should be added
+2. Scan open research issues — any newly created issues not yet listed as 🔧 Queued should be added
+3. Check dead-ends.md — any new dead end entries not yet listed should be added
+4. Any issues that were queued and are now closed (completed) should be updated to ✅ Live or ❌ Dead end as appropriate
+5. Update the "Last updated" line at the bottom of the file
+
+Commit the updated inventory.md with message: `Update content inventory (triage {date})`
+
+If no changes are needed, skip the commit.
+
+## Phase 6 — `next` label management
+
+Only after the quality gates and inventory update are complete:
 
 Count existing `next` labels on open issues — split by type:
 - How many open `research` + `next` issues exist?
@@ -92,6 +107,7 @@ Post a comment on moddable-website summarising this run — use issue #82 (the M
 - How many `ready` issues passed the quality gate
 - How many were sent back to `research` and why
 - How many `research` issues were flagged or relabelled
+- What inventory changes were made
 - What `next` labels were applied
 - Any stale or `discuss` issues flagged
 
@@ -100,7 +116,7 @@ This gives Mark a clear picture of queue health without needing to read every is
 ## Hard rules — never break these
 
 - Never execute research or implementation work — triage only
-- Never commit any code or files
+- Never commit any code or files other than inventory.md
 - Never commit to `main`
 - Never include AI co-author lines or mention Claude, Claude Code, or AI anywhere
 - Never append a signature, attribution, or generated-by statement to any comment
