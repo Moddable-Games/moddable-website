@@ -84,6 +84,30 @@ body { background: #f5f4ef; }
 .jam-card__result a:hover { text-decoration-color: var(--mg-blue); }
 .jam-card__upcoming-msg { font-family: var(--mg-font-body); font-size: 13px; font-style: italic; color: var(--mg-mute); margin-top: auto; }
 
+/* The House section */
+.house-intro { font-family: var(--mg-font-body); font-size: 16px; line-height: 1.6; color: var(--mg-body-color); margin-top: 12px; }
+.house-intro code { font-family: var(--mg-font-mono); font-size: 14px; background: rgba(12,79,141,0.06); padding: 2px 6px; border-radius: 4px; }
+.house-commands { margin-top: 32px; display: grid; grid-template-columns: repeat(3, 1fr); gap: 16px; }
+.house-commands__group { background: #fff; border: 1px solid var(--mg-hairline-light); border-radius: 14px; padding: 20px 22px; border-top: 3px solid var(--mg-cosmic-glow); }
+.house-commands__group--chess { border-top-color: var(--mg-blue); }
+.house-commands__group--hex { border-top-color: var(--mg-green); }
+.house-commands__group--ti4 { border-top-color: var(--mg-blue); }
+.house-commands__group--jam { border-top-color: var(--mg-red); }
+.house-commands__heading { font-family: var(--mg-font-display); font-weight: 600; font-size: 15px; color: var(--mg-ink); margin: 0 0 14px; padding-bottom: 10px; border-bottom: 1px solid var(--mg-hairline-light); }
+.house-cmd { display: grid; grid-template-columns: auto 1fr; gap: 12px; padding: 7px 0; }
+.house-cmd code { font-family: var(--mg-font-mono); font-size: 12px; font-weight: 600; color: var(--mg-blue); white-space: nowrap; }
+.house-cmd span { font-family: var(--mg-font-body); font-size: 13px; color: var(--mg-mute); }
+.house-footer-note { font-family: var(--mg-font-body); font-size: 13px; color: var(--mg-mute); margin-top: 24px; }
+.house-footer-note a { color: var(--mg-blue); text-decoration: underline; text-decoration-color: rgba(12,79,141,0.3); text-underline-offset: 2px; }
+.house-footer-note a:hover { text-decoration-color: var(--mg-blue); }
+
+@media (max-width: 900px) {
+  .house-commands { grid-template-columns: repeat(2, 1fr); }
+}
+@media (max-width: 768px) {
+  .house-commands { grid-template-columns: 1fr; }
+}
+
 /* CTA band */
 .community-cta { background: #000; color: #fff; border-radius: 20px; padding: 56px 40px; text-align: center; position: relative; overflow: hidden; }
 .community-cta__hex { position: absolute; inset: 0; background-image: url('../img/hex-grid-blue.svg'); background-size: 56px 64px; animation: hexFloat 30s linear infinite; opacity: 0.5; }
