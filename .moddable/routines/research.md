@@ -32,7 +32,7 @@ Priority order:
 1. Any issue labelled both `research` and `next` — pick the oldest first
 2. If no `next` issues exist, apply repo priority: moddable-rules first, then moddable-chess/moddable-hexmaps, then moddable-website, then dungeon-chess/moddable-decks
 3. Within the same repo, pick the oldest open issue first (by created_at)
-4. Skip any issue also labelled `blocked` or `needs-decision`
+4. Skip any issue also labelled `blocked`, `needs-decision`, or `waiting`
 5. **If no actionable `research` issues exist, do not exit — proceed to the fallback procedure below**
 6. Work one issue per run only
 
@@ -106,6 +106,54 @@ Your spec must cover:
 
 **What not to build** — explicitly state what's out of scope for this issue so implementation doesn't over-build or under-build.
 
+---
+
+## Rules transcription issues — additional standard
+
+For any issue in moddable-rules that involves transcribing game rules from external sources, the research run is not complete until the source content is embedded directly in the spec comment. Writing a spec and citing URLs is not done.
+
+**The implementation routine runs in a network-isolated environment. It cannot fetch external URLs. If the spec says "transcribe from [URL]" and does not embed the content, the implementor will hit the same 403 walls the research routine hit and the issue will bounce back as `needs-decision`. This is a wasted run.**
+
+### What "done" means for rules transcription issues
+
+Done means: an implementor working only within GitHub (no external web access, no external APIs) can execute the issue completely. Every piece of source content they need to write the rules files must be present in the issue comments.
+
+### Required for rules transcription issues to be labelled `ready`
+
+1. **Architecture spec complete** — files, structure, frontmatter, acceptance criteria (same standard as all issues)
+
+2. **Source content embedded** — the actual rules text, board descriptions, equipment lists, win conditions, and any other content the implementor needs to write the target files must be quoted or transcribed directly into a comment on the issue. Do not summarise — embed the full relevant sections.
+
+3. **All variants and editions scoped** — for hub entries, identify every confirmed distinct variant. Check sources for named editions, regional versions, named rule variants, and community versions. The spec must list all confirmed variants with enough content to implement each. Do not leave variant discovery to the implementor.
+
+4. **Board space names embedded** — if the game has named board spaces, every confirmed space name must be listed in the issue. The implementor must not need to fetch a patent or rulebook to find space names.
+
+5. **Source attribution embedded** — exact source for each piece of content: patent number, edition year, publisher, Wikipedia (CC-BY-SA). The implementor must be able to write the Attribution section of each file without looking anything up.
+
+6. **Sourcing notes for each variant** — where rules differ between editions, note which edition each rule comes from. Do not mix 1904 patent rules with 1906 edition rules without labelling them.
+
+### How to embed source content
+
+Fetch the source via the most reliable path available:
+- GitHub API first (public repos with transcribed content — e.g. `hoelzl/L3` for Landlord's Game patent)
+- Web search + web fetch for Wikipedia and other accessible sources
+- If all external sources are blocked (403): label `needs-decision`, post the complete architecture spec including all file structure, and note exactly which sources need to be fetched from Desktop. Do NOT label `ready` — the issue is not ready until the content is embedded.
+
+When embedding content, quote the relevant sections in full. Do not paraphrase rules content — paraphrasing introduces errors. The implementor transcribes from your embedded quote into the target file.
+
+### Hub entries — scope requirement
+
+When researching a standalone game family entry for moddable-rules, always check whether the game has a family of variants, editions, or regional versions that warrant a hub entry (variants: true). The default assumption for any game with historical depth should be hub, not single rulebook.
+
+For each confirmed variant, the research comment must include:
+- Variant name and slug
+- Source edition and date
+- Win condition
+- Key rules differences from the base game
+- Enough rules content embedded to implement the variant file without external fetches
+
+---
+
 ## Output format — post as issue comment
 
 - **Summary** — one paragraph: what this is, what problem it solves, what the consumer is
@@ -118,14 +166,15 @@ Your spec must cover:
 - **Integration detail** — exactly how the consumer calls/uses this; build step if applicable
 - **Out of scope** — what is explicitly not part of this issue
 - **Acceptance criteria** — checklist of what genuinely done looks like; must include "works end-to-end with [named consumer]" as a criterion
-- **Sources verified** — for rules content only; exact URLs successfully fetched (minimum 2)
+- **Sources verified** — for rules content: exact sources fetched, confirmation they are accessible, and confirmation that source content is embedded in a follow-up comment
 
 ## Relabelling
 
-- Spec is complete, consumer identified, no decisions needed, (for rules content) 2+ sources verified: remove `research`, add `ready`
+- Spec is complete, consumer identified, no decisions needed, (for rules content) 2+ sources verified AND source content embedded in issue: remove `research`, add `ready`
 - Consumer cannot be identified: add `discuss`, do NOT add `ready`, explain in comment
 - Issue is premature (upstream work unfinished, wrong layer, no real consumer): add `discuss` or `blocked` as appropriate, explain why
 - Mark decision needed: add `needs-decision`, do NOT add `ready`
+- Rules content issue where sources are inaccessible from this environment: add `needs-decision`, do NOT add `ready`. Post complete architecture spec so Desktop can embed content and relabel.
 - Always remove `next` after actioning
 
 ## Hard rules — never break these
@@ -137,5 +186,6 @@ Your spec must cover:
 - Never generate or extrapolate rules content — transcribe from verified sources only
 - Never proceed without an identified consumer
 - Never produce a thin findings document and call it a spec — if it doesn't tell implementation exactly what to build, it's not done
+- Never label a rules transcription issue `ready` unless source content is fully embedded in the issue — a spec with URLs but no embedded content is not ready
 - Never close a dead end issue without first updating dead-ends.md and identifying an open alternative
 - Never create a research issue for something already listed as live or queued in inventory.md
