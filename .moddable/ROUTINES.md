@@ -168,14 +168,14 @@ Rules research hard constraints:
 ### Research Routine
 - **Name:** Research Routine
 - **Schedule:** Daily at 01:00 BST
-- **GitHub trigger:** Issue labeled `research` on Moddable-Games/moddable-website
+- **GitHub trigger:** None — removed 2026-06-17 (budget conservation; webhook double-fired with Research B)
 - **API fire URL:** https://api.anthropic.com/v1/claude_code/routines/trig_01LnV8dQzRy1R35j2kP5iBq7/fire
 - **Repos:** All 6 Moddable-Games repos
 
 ### Implementation Routine
 - **Name:** Implementation Routine
 - **Schedule:** Daily at 02:00 BST
-- **GitHub trigger:** Issue labeled `ready` on Moddable-Games/moddable-website
+- **GitHub trigger:** None — removed 2026-06-17 (budget conservation; webhook double-fired with Implementation B)
 - **API fire URL:** https://api.anthropic.com/v1/claude_code/routines/trig_01JQPz1wg2R3jbJuDYC5iJBi/fire
 - **Repos:** All 6 Moddable-Games repos
 
@@ -190,14 +190,14 @@ Rules research hard constraints:
 ### Research B
 - **Name:** Research B
 - **Schedule:** Daily at 17:00 BST
-- **GitHub trigger:** None (schedule only — triage handles priority)
+- **GitHub trigger:** None — removed 2026-06-17 (budget conservation)
 - **API fire URL:** https://api.anthropic.com/v1/claude_code/routines/trig_01RbRYDhjcJv255kW35V24Wu/fire
 - **Repos:** All 6 Moddable-Games repos
 
 ### Implementation B
 - **Name:** Implementation B
 - **Schedule:** Daily at 18:00 BST
-- **GitHub trigger:** None (schedule only — triage handles priority)
+- **GitHub trigger:** None — removed 2026-06-17 (budget conservation)
 - **API fire URL:** https://api.anthropic.com/v1/claude_code/routines/trig_0125Lpb7ewAMDrMusVjJZKqW/fire
 - **Repos:** All 6 Moddable-Games repos
 
@@ -211,9 +211,9 @@ Rules research hard constraints:
 | Implementation B | https://api.anthropic.com/v1/claude_code/routines/trig_0125Lpb7ewAMDrMusVjJZKqW/fire |
 
 ### Notes on GitHub triggers
-- GitHub triggers currently only watch moddable-website — scheduled runs catch all repos
-- Expand triggers to all 6 repos when the platform supports multiple GitHub triggers per routine
-- Research Routine and Implementation Routine retain GitHub triggers as on-demand fallback during the day
+- All GitHub triggers removed 2026-06-17 — on a 5-run/day budget, webhooks caused double-firing that consumed runs outside the intended schedule windows
+- Reinstate when daily run limit increases or a use case emerges that scheduled runs can't cover
+- The API fire URLs remain available for on-demand manual triggering
 
 ---
 
@@ -284,8 +284,8 @@ Same information, completely different outcome. The difference is acting vs defe
 - [x] Research routine prompt written
 - [x] Implementation routine prompt written
 - [x] Triage routine prompt written
-- [x] Research Routine created at claude.ai/code/routines (01:00 BST + issue labeled trigger)
-- [x] Implementation Routine created at claude.ai/code/routines (02:00 BST + issue labeled trigger)
+- [x] Research Routine created at claude.ai/code/routines (01:00 BST)
+- [x] Implementation Routine created at claude.ai/code/routines (02:00 BST)
 - [x] Triage Time created at claude.ai/code/routines (08:00 BST)
 - [x] Research B created at claude.ai/code/routines (17:00 BST)
 - [x] Implementation B created at claude.ai/code/routines (18:00 BST)
@@ -298,5 +298,6 @@ Same information, completely different outcome. The difference is acting vs defe
 - [x] Individual routine files created: .moddable/routines/research.md, implementation.md, triage.md (2026-06-16)
 - [x] ROUTINES.md stripped to design document only — prompts moved to individual files (2026-06-16)
 - [x] North star example added — rules#52 / rules#65 dead end pivot (2026-06-16)
+- [x] GitHub triggers removed from all 4 routines — budget conservation (2026-06-17)
 - [ ] Update Claude Code stub prompts to point to individual routine files (test one run first)
-- [ ] Expand GitHub triggers to cover all 6 repos
+- [ ] Reinstate GitHub triggers when daily run limit increases
