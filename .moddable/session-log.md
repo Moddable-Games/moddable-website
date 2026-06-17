@@ -6,7 +6,80 @@ Read this at the start of every Desktop session after conventions.md and ROUTINE
 
 ---
 
-## 2026-06-17 — Mark + Claude
+## 2026-06-17 — Mark + Claude (continued, afternoon)
+
+### Routine activity today
+
+- Research Routine fired manually ~10:16 BST — picked up rules#65 (Landlord's Game). Produced a complete architecture spec but couldn't verify external sources (all 403 from cloud runner). Correctly labelled `needs-decision`. Good structural output, wrong label outcome — Desktop finished the job.
+- Triage ran 08:05 and 09:17 (both failed on PushNotification tool). Despite failures, 08:05 run completed all phases successfully — labelled hexmaps#59 `discuss`, applied `next` to rules#64 (Colony) and rules#66 (Pachisi). Both `next` labels removed later as incorrect given queue state changes.
+- rules#65 completed by Desktop: sources verified via GitHub API (hoelzl/L3), full source content embedded across 4 comments, architecture spec expanded to 6-variant hub, relabelled `ready` + `next`.
+
+### Key decisions made
+
+**Rules transcription standard overhauled**
+Research routine was marking issues `needs-decision` when external sources were blocked, leaving them incomplete for Desktop to finish. Two problems identified: (1) routine wasn't trying GitHub API search first, (2) even when it produced a spec, source content wasn't embedded so implementation would hit the same 403 walls. Fixed in research.md: GitHub search strategy added as primary source path; hard rule added that rules transcription issues are never `ready` until source content is fully embedded. Triage.md updated with content completeness gate.
+
+**Catan → Harvesters**
+rules#64 (Colony) was incorrectly closed as a dead end. The error was treating "no existing open ruleset" as a dead end — completely wrong for an open source board game company. Moddable Games can create original games. rules#64 reopened, renamed to "Design: Harvesters", reframed as an original Moddable Games hex farming game.
+
+**Dead end pivot procedure updated in research.md**
+New priority order: (1) public domain precursor, (2) open equivalent, (3) create original Moddable Games version, (4) true dead end. Option 3 was entirely missing before. Hard rule added: never close an issue simply because no existing open ruleset exists.
+
+**Moddable Games open source identity**
+The site and decks undersell the open source identity — it's framed as a feature, not a founding claim. Two issues created:
+- moddable-website#112 (`research`) — verify and strengthen "possibly the world's first open source board game company" claim across homepage and about page
+- moddable-decks#41 (`discuss`) — position open source identity as core investor differentiator in pitch deck
+
+**Harvesters design brief (rules#64)**
+First design session for Harvesters. Key decisions:
+- Name confirmed: Harvesters (clean on BGG, strong historical resonance — Bruegel 1565)
+- Core principle: simpler than Catan, not more complex. Base game = one sheet of rules, playable with Catan box
+- Solves Catan's biggest flaw: dice dominance replaced by dice pool allocation
+- Dice pool mechanic: roll your personal pool, allocate results to your own hexes (you decide where effort goes, not random number generation)
+- Dice pool grows with farm development (2→5 dice) — pool size = farm productive capacity
+- Push-your-luck: reroll unallocated dice at a cost (TBD)
+- Pastoral vs arable specialisation emerges from terrain placement naturally
+- Shared failure state + individual win condition
+- Advanced mechanics (seasons, weather track, Common Land, hex exhaustion) deferred to expansions
+
+**What's still needed for Harvesters before `ready`:**
+One more Desktop session to nail:
+- Exact dice pool growth triggers
+- 7/robber replacement mechanic
+- Trading rules (simplified)
+- Win condition numbers and triggers
+- Shared failure state (lightweight)
+- Turn structure written step by step
+- Player count and target duration
+Once answered: Desktop writes full architecture spec, labels `ready`, implementation routine builds it. Research routine never touches this issue.
+
+### Pipeline improvements made today
+
+- research.md: GitHub search strategy, content embedding standard, hub scope requirement, dead end pivot procedure rewritten with 4-step priority including original game creation
+- triage.md: content completeness gate for moddable-rules, fix attempt check, regression risk check
+- dead-ends.md: Catan added, cloud runner blocking notes, all external sources documented
+- ROUTINES.md: scripts section added, waiting label documented, checklist updated
+- session-log.md and pipeline-log.md created
+- set-label-colours.sh and fire-routine.sh backed up to .moddable/scripts/
+- `waiting` label created across all 6 repos (#bfd4f2)
+
+### Current queue state (end of afternoon session)
+- rules#65 — `ready` + `next` — Landlord's Game, fully self-contained, 6 variants, all source content embedded
+- rules#64 — `discuss` — Harvesters design, needs one more Desktop session
+- rules#66–70 — `research` — Pachisi, Halma, Reversi, Draughts variants, Go variants (all need GitHub search for sources)
+- chess#104 — `research` — Chess960 castling bug, reverted fix attempt documented
+- moddable-website#112 — `research` — open source identity claim
+- moddable-decks#41 — `discuss` — open source investor positioning (depends on #112)
+
+### For next session
+1. **MCP server in Docker** — fire_routine, set_label, list_labels tools. Most important infrastructure item.
+2. **Harvesters design session** — finish the open mechanics questions, write the spec, label `ready`
+3. **Review tonight's routine runs** — first real test of overhauled research.md and triage.md
+4. **moddable-website#112** — verify "world's first open source board game company" claim, draft copy
+
+---
+
+## 2026-06-17 — Mark + Claude (morning)
 
 ### Context
 First session after the routine pipeline had been running for a few days. Focus was on diagnosing why routines didn't fire as expected overnight, and improving the pipeline's self-awareness going forward.
@@ -23,63 +96,16 @@ First session after the routine pipeline had been running for a few days. Focus 
 ### Decisions made
 
 **Webhooks removed from all 4 routines**
-Root cause of the double-fire: both Implementation Routine and Implementation B had "issue labeled" webhook triggers on moddable-website. Triage applied a `ready` label at 08:05 and both fired simultaneously. With only 5 runs/day, webhook triggers are a liability — they can exhaust the budget before the scheduled windows. Removed from all 4 routines (Research Routine, Research B, Implementation Routine, Implementation B). Reinstate when daily run limit increases. ROUTINES.md updated to reflect this.
+Root cause of the double-fire: both Implementation Routine and Implementation B had "issue labeled" webhook triggers on moddable-website. Triage applied a `ready` label at 08:05 and both fired simultaneously. With only 5 runs/day, webhook triggers are a liability — they can exhaust the budget before the scheduled windows. Removed from all 4 routines. ROUTINES.md updated.
 
 **PR footer ban added explicitly to conventions.md**
-PRs #102, #110, #111 all had `_Generated by Claude Code_` footers. These predate the conventions update that added the explicit ban (conventions updated 16 Jun at 09:52, all three PRs were before that). Added the footer ban to both Commit Rules and Routine Behaviour Rules sections in conventions.md so it appears in two places.
+PRs #102, #110, #111 all had `_Generated by Claude Code_` footers — pre-conventions-update artefacts. Ban added to both Commit Rules and Routine Behaviour Rules sections.
 
 **Character encoding standards added to conventions.md**
-Routine reformatted entire `games-content.json` when making a targeted 2-line change — unicode escapes converted to literal UTF-8, multi-line arrays compressed to single lines. Harmless but produced a 400-line diff. Two standards now explicit: HTML files use HTML entities (`&mdash;`, `&middot;`); JSON/JS data files use literal UTF-8. File editing discipline rule added: write back only changed lines, never reformat unrelated content.
+HTML files use HTML entities; JSON/JS data files use literal UTF-8. File editing discipline rule added: write back only changed lines, never reformat unrelated content.
 
-**chess#104 relabelled `research`**
-Originally labelled `ready` without reading comments. Second comment documented a fix attempt that was reverted — three interdependent problems deeper than the issue body described. Triage.md strengthened with explicit fix attempt check and regression risk check so this doesn't slip through again.
+**Session log, pipeline log, script backups, waiting label** — all created this morning (see afternoon entry for full details).
 
-**Triage quality gate strengthened**
-Added to triage.md: read all comments not just issue body; fix attempt check (if a previous attempt was reverted, spec must address why); regression risk check (engine changes must reference npm test in acceptance criteria); `waiting` added to Phase 6 skip list.
-
-**Session log and pipeline log created**
-Agreed to create `.moddable/session-log.md` (this file) and `.moddable/pipeline-log.md` for persistent memory across sessions and routine runs. Both wired into ROUTINES.md session start fetch list. Pipeline log wired into triage.md.
-
-**`waiting` label added**
-New label for issues blocked on human action (manual testing, physical work, team review, external dependency) — distinct from `needs-decision` (which is for real-world decisions only Mark can make). Colour: `#bfd4f2`. Applied to chess#53 and website#82. May split into sub-labels if volume warrants it.
-
-**Label colour management — local script**
-Label colours across all 6 repos are managed via `set-label-colours.sh` on Mark's local machine. Safe backup (token redacted) committed to `.moddable/scripts/set-label-colours.sh`. When adding a new label, update the script and run it — do not ask Mark to set colours manually in GitHub UI. No Docker needed — pure curl.
-
-**Script backups committed**
-Both local scripts now have safe (credential-redacted) backups in `.moddable/scripts/`:
-- `set-label-colours.sh` — sets label colours across all 6 repos via GitHub API
-- `fire-routine.sh` — fires any routine by name via Anthropic API
-
-**chess#104 relabelled `research`**
-Originally labelled `ready` in error — comments documented a reverted fix attempt with three interdependent problems. Research comment added pointing to the second comment as starting point and specifying what the spec must cover.
-
-**chess#53 relabelled `waiting`**
-Automated test suite covers bulk of original scope. Manual QA session still needed for high-priority hook variants.
-
-### Next session — pipeline MCP server
-**This is the most important infrastructure item for next session.**
-
-Currently the pipeline has gaps that require Mark to intervene manually:
-- Firing routines (requires Anthropic API key)
-- Setting label colours (requires GitHub token + local script)
-- Any GitHub operations not exposed by the current MCP (label create/update, etc.)
-
-The right fix is a **local MCP server running in Docker** that exposes tools for the entire pipeline — Desktop sessions and routines alike. Mark grants credentials once at setup; neither Claude Desktop nor the routines ever see the keys. Same pattern Claude Code already uses.
-
-Candidates for first tools to build:
-- `fire_routine(name)` — fires a routine via Anthropic API
-- `set_label(repo, label, colour)` — creates/updates a label via GitHub API
-- `list_labels(repo)` — reads current label state
-
-Docker is already installed and running. This is the natural next step for pipeline infrastructure. Pick this up at the start of the next session with fresh tokens.
-
-### Current queue state (as of end of session)
-- rules#65 — Landlord's Game (`research` + `next`) — first real end-to-end test of the routine loop
-- rules#66–70 — batch of research issues (Pachisi, Halma, Reversi, Draughts variants, Go variants)
-- chess#104 — Chess960 bug (`research`) — relabelled, needs proper spec
-- 6 research issues open in moddable-rules — healthy queue
-
-### Pending on reset
-- Manual fire: Research Routine then Implementation Routine via `fire-routine.sh` after token reset (~08:09 BST)
-- Confirm end-to-end routine loop works — tonight's scheduled runs are the first real test
+### Pending (carried to afternoon)
+- Manual fire Research + Implementation after token reset
+- First real test of routine loop tonight
