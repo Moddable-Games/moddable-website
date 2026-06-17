@@ -169,7 +169,8 @@ When making a targeted change to any file, write back only the changed lines. Ne
 | `ready` | Fully scoped, Mark has approved — implementation routine picks this up |
 | `discuss` | Needs a conversation in Claude Desktop before any action — conversation not yet happened |
 | `blocked` | Depends on another issue being completed first — carries only this label while blocked |
-| `needs-decision` | Conversation is done; blocked on a real-world action only Mark can take |
+| `needs-decision` | Conversation is done; blocked on a real-world decision only Mark can make |
+| `waiting` | Blocked on a human action — manual testing, physical work, team review, external dependency. May be split into sub-labels later if volume warrants it. |
 | `next` | Priority override — routine picks this above all others |
 
 ---
@@ -184,6 +185,7 @@ When making a targeted change to any file, write back only the changed lines. Ne
 - Never append a generated-by footer or attribution to pull request descriptions
 - Verify facts against authoritative source files before committing
 - If a task is ambiguous or hits a decision only Mark can make, add `needs-decision` and post a comment — do not guess
+- Skip issues labelled `waiting` — these are blocked on human action, not actionable by routines
 
 ### Research routine
 - Produces architecture-level design specs, not findings documents — see ROUTINES.md for full standard
