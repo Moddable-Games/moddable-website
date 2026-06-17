@@ -65,7 +65,7 @@ Within each repo, oldest open issue first (by created_at).
 | `next` | Priority override — routine picks this above all others | Mark or Triage routine |
 | `blocker` | Pre-existing label — kept for backward compatibility | Mark |
 
-### Label colours (set manually in GitHub per repo)
+### Label colours (set via .moddable/scripts/set-label-colours.sh)
 | Label | Hex |
 |---|---|
 | `research` | `#0075ca` |
@@ -161,6 +161,21 @@ Then pull open issues across all 6 repos.
 
 ---
 
+## Local Scripts
+
+Shell scripts for manual operations. Safe (token-redacted) backups live in `.moddable/scripts/`. Copy to local machine and add credentials before running.
+
+| Script | Purpose | Credentials needed |
+|---|---|---|
+| `set-label-colours.sh` | Create/update label colours across all 6 repos | GitHub personal access token (repo scope) |
+| `fire-routine.sh` | Manually fire any routine via API | Anthropic API key |
+
+**When to use:**
+- `set-label-colours.sh` — whenever a new label is added or a colour changes. Run after updating the label table in this file.
+- `fire-routine.sh` — when a scheduled run was missed (e.g. budget exhausted) and needs manual recovery. Usage: `./fire-routine.sh research`, `./fire-routine.sh implementation`, `./fire-routine.sh triage`, `./fire-routine.sh research-b`, `./fire-routine.sh implementation-b`, or `./fire-routine.sh all`.
+
+---
+
 ## Conventions Source
 
 All routines fetch `.moddable/conventions.md` from moddable-website at the start of every run.
@@ -237,7 +252,7 @@ Rules research hard constraints:
 ### Notes on GitHub triggers
 - All GitHub triggers removed 2026-06-17 — on a 5-run/day budget, webhooks caused double-firing that consumed runs outside the intended schedule windows
 - Reinstate when daily run limit increases or a use case emerges that scheduled runs can't cover
-- The API fire URLs remain available for on-demand manual triggering
+- The API fire URLs remain available for on-demand manual triggering via fire-routine.sh
 
 ---
 
@@ -315,7 +330,7 @@ Same information, completely different outcome. The difference is acting vs defe
 - [x] Implementation B created at claude.ai/code/routines (18:00 BST)
 - [x] API fire URLs documented for all 5 routines
 - [x] Claude GitHub App installed on Moddable-Games org (all repositories)
-- [x] Label colours set in GitHub (per repo)
+- [x] Label colours set in GitHub (per repo) — managed via set-label-colours.sh
 - [x] Dead ends registry created (moddable-rules/.moddable/dead-ends.md)
 - [x] Sources registry created (moddable-rules/.moddable/sources.md)
 - [x] Routine prompts overhauled — quality gate standard, architecture-level research, production-quality implementation, triage as queue health (2026-06-16)
@@ -325,7 +340,7 @@ Same information, completely different outcome. The difference is acting vs defe
 - [x] GitHub triggers removed from all 4 routines — budget conservation (2026-06-17)
 - [x] Session log and pipeline log created — persistent memory across sessions and runs (2026-06-17)
 - [x] Claude Code stub prompts confirmed pointing to individual routine files — configured but not yet run-tested (2026-06-17)
-- [x] `waiting` label added to label system (2026-06-17)
-- [ ] Set `waiting` label colour `#bfd4f2` across all 6 repos in GitHub label settings
+- [x] `waiting` label added, coloured `#bfd4f2` across all 6 repos (2026-06-17)
+- [x] Script backups committed to `.moddable/scripts/` — set-label-colours.sh, fire-routine.sh (token/key redacted) (2026-06-17)
 - [ ] Confirm stub prompts working end-to-end — pending first successful routine run with new files
 - [ ] Reinstate GitHub triggers when daily run limit increases
