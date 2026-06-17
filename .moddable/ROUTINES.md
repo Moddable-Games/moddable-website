@@ -137,6 +137,27 @@ All five routines use a minimal stub that fetches conventions.md and the relevan
 
 ---
 
+## Memory Files
+
+These files provide persistent memory across sessions and routine runs. Read all of them at the start of every Desktop session.
+
+| File | Purpose | Written by |
+|---|---|---|
+| `.moddable/session-log.md` | Desktop session summaries — decisions, reasoning, context that doesn't belong in conventions | Desktop sessions |
+| `.moddable/pipeline-log.md` | Routine run quality assessments — what ran, how well, what was sent back and why | Triage Time |
+
+### Desktop session start — mandatory fetch list
+
+At the start of every Desktop session, fetch and read in full via GitHub API:
+1. Owner: Moddable-Games / Repo: moddable-website / Path: .moddable/conventions.md
+2. Owner: Moddable-Games / Repo: moddable-website / Path: .moddable/ROUTINES.md
+3. Owner: Moddable-Games / Repo: moddable-website / Path: .moddable/session-log.md
+4. Owner: Moddable-Games / Repo: moddable-website / Path: .moddable/pipeline-log.md
+
+Then pull open issues across all 6 repos.
+
+---
+
 ## Conventions Source
 
 All routines fetch `.moddable/conventions.md` from moddable-website at the start of every run.
@@ -299,5 +320,6 @@ Same information, completely different outcome. The difference is acting vs defe
 - [x] ROUTINES.md stripped to design document only — prompts moved to individual files (2026-06-16)
 - [x] North star example added — rules#52 / rules#65 dead end pivot (2026-06-16)
 - [x] GitHub triggers removed from all 4 routines — budget conservation (2026-06-17)
+- [x] Session log and pipeline log created — persistent memory across sessions and runs (2026-06-17)
 - [ ] Update Claude Code stub prompts to point to individual routine files (test one run first)
 - [ ] Reinstate GitHub triggers when daily run limit increases
