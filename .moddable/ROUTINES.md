@@ -321,5 +321,6 @@ Same information, completely different outcome. The difference is acting vs defe
 - [x] North star example added — rules#52 / rules#65 dead end pivot (2026-06-16)
 - [x] GitHub triggers removed from all 4 routines — budget conservation (2026-06-17)
 - [x] Session log and pipeline log created — persistent memory across sessions and runs (2026-06-17)
-- [ ] Update Claude Code stub prompts to point to individual routine files (test one run first)
+- [x] Claude Code stub prompts confirmed pointing to individual routine files — configured but not yet run-tested (2026-06-17)
+- [ ] Confirm stub prompts working end-to-end — pending first successful routine run with new files
 - [ ] Reinstate GitHub triggers when daily run limit increases
