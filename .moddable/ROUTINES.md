@@ -60,7 +60,8 @@ Within each repo, oldest open issue first (by created_at).
 | `ready` | Fully scoped, Mark approved — implementation routine picks this up | Research routine or Mark |
 | `discuss` | Needs a conversation in Claude Desktop before any action — conversation not yet happened | Claude Desktop or Mark |
 | `blocked` | Depends on another issue being completed first — carries only this label while blocked | Claude Desktop or Mark |
-| `needs-decision` | Conversation is done; blocked on a real-world action only Mark can take | Research routine or Mark |
+| `needs-decision` | Conversation is done; blocked on a real-world decision only Mark can make | Research routine or Mark |
+| `waiting` | Blocked on a human action — manual testing, physical work, team review, external dependency. Routines skip these. May split into sub-labels if volume warrants it. | Claude Desktop or Mark |
 | `next` | Priority override — routine picks this above all others | Mark or Triage routine |
 | `blocker` | Pre-existing label — kept for backward compatibility | Mark |
 
@@ -72,6 +73,7 @@ Within each repo, oldest open issue first (by created_at).
 | `discuss` | `#e4e669` |
 | `blocked` | `#d93f0b` |
 | `needs-decision` | `#cc317c` |
+| `waiting` | `#bfd4f2` |
 | `next` | `#ffffff` |
 
 ---
@@ -110,7 +112,8 @@ Within each repo, oldest open issue first (by created_at).
 3. Within the same repo, pick the oldest open issue first (by created_at)
 4. Skip any issue that also has `blocked` label
 5. Skip any issue that also has `needs-decision` label
-6. If nothing actionable exists, exit gracefully with a log note — do not force work
+6. Skip any issue that also has `waiting` label
+7. If nothing actionable exists, exit gracefully with a log note — do not force work
 
 ### `next` label behaviour:
 - Applied by Triage Time at 08:00, or manually by Mark at any time
@@ -322,5 +325,7 @@ Same information, completely different outcome. The difference is acting vs defe
 - [x] GitHub triggers removed from all 4 routines — budget conservation (2026-06-17)
 - [x] Session log and pipeline log created — persistent memory across sessions and runs (2026-06-17)
 - [x] Claude Code stub prompts confirmed pointing to individual routine files — configured but not yet run-tested (2026-06-17)
+- [x] `waiting` label added to label system (2026-06-17)
+- [ ] Set `waiting` label colour `#bfd4f2` across all 6 repos in GitHub label settings
 - [ ] Confirm stub prompts working end-to-end — pending first successful routine run with new files
 - [ ] Reinstate GitHub triggers when daily run limit increases
