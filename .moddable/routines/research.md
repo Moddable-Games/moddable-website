@@ -121,25 +121,35 @@ A research run that finds one GitHub source and cannot access a second should: p
 
 ## Dead end pivot procedure
 
-When a moddable-rules research issue turns out to be a dead end — commercially locked game, inaccessible sources, unlicensable rules — do not simply close and ask for confirmation. Act:
+When a moddable-rules research issue turns out to be a dead end — commercially locked game, inaccessible sources, unlicensable rules — work through this priority order before declaring a true dead end and closing:
 
-1. **Update dead-ends.md immediately** — add the entry, commit it. Do not wait for Mark to confirm. A confirmed dead end belongs in dead-ends.md.
+### Priority order for dead end pivots
 
-2. **Apply the open alternatives principle** — Monopoly is commercially locked; The Landlord's Game (its public domain precursor) is the alternative. When a game is a dead end, search for:
-   - The historical or public domain precursor to the commercial game
-   - Open-licensed games covering similar design space
-   - Any news posts, issues, or comments in the Moddable repos that already mention an alternative
-   - Note: not every commercial game has a viable open alternative. Catan has no public domain precursor and no open-licensed ruleset equivalent — it is a confirmed dead end with no pivot. Do not create a placeholder issue when no viable alternative exists.
+**1. Find a public domain precursor**
+Many commercial games have historical predecessors whose rules have expired into the public domain. Monopoly → The Landlord's Game. Risk → La Conquête du Monde. Always search for the historical origin before giving up. If found: create a research issue for the precursor and close the original as not planned.
 
-3. **Check inventory.md before creating a new issue** — if the alternative is already live or queued, note it in the closing comment instead of creating a duplicate.
+**2. Find an openly licensed equivalent**
+Search for games covering similar design space with confirmed open licences (CC-BY, CC-BY-SA, OGL, or equivalent). Check GitHub for openly licensed rule sets. If found and licence confirmed: create a research issue and close the original.
 
-4. **Create a new research issue for the viable alternative** — if a credible open alternative is found and it's not already in inventory.md, create a `research` issue in moddable-rules for it immediately, with a comment explaining the connection to the dead end game.
+**3. Create an original Moddable Games version**
+This is the option that was missing and must never be skipped. Moddable Games is an open source board game company — possibly the first in history. Creating original openly licensed games is the core proposition, not a fallback. If a commercially locked game has no public domain precursor and no open equivalent, the correct response is to design an original Moddable Games game that covers similar design space, published under CC-BY-SA.
 
-5. **Close the original issue as not planned** — post a comment explaining: what was a dead end and why, what alternative was identified (or that none exists), what new issue was created if applicable. Then close.
+This means: relabel the issue `discuss` (not close it), add a comment explaining that the game needs to be designed as an original Moddable Games work, and flag it for a Desktop session. The Desktop session designs the original game — thematic frame, mechanics, win conditions, distinct enough to stand on its own. Once designed it becomes a `research` issue.
 
-6. **Do not ask Mark to confirm any of the above** — closing a confirmed dead end, updating dead-ends.md, and pivoting to an open alternative are all within routine authority. The only time to flag `needs-decision` is if no viable alternative can be found and the queue would be left empty.
+**Do not close an issue as a dead end simply because no existing open ruleset exists.** That reasoning ignores Moddable Games' ability to create one.
 
-**Reference example:** moddable-rules#52 (closed, dead end) → moddable-rules#65 (created, The Landlord's Game). This is the north star for how a dead end pivot should work. Read the ROUTINES.md north star section for the full before/after.
+**4. True dead end — no viable path exists**
+Only declare a true dead end and close if:
+- No public domain precursor exists
+- No openly licensed equivalent exists
+- Creating an original version has been explicitly ruled out by Mark in a Desktop session
+- The issue is fundamentally incompatible with moddable-rules scope (e.g. requires proprietary components, commercial artwork, licensed IP)
+
+If closing as a true dead end: update dead-ends.md, post a comment explaining all four paths were considered and why each was ruled out, then close as not planned.
+
+**Reference example — correct pivot:** moddable-rules#52 (closed, dead end) → moddable-rules#65 (created, The Landlord's Game). Public domain precursor found. This is the north star.
+
+**Reference example — original game path:** moddable-rules#64 (Colony / Catan alternative). No public domain precursor. No open equivalent. Correct action: relabel `discuss`, design an original Moddable Games hex settlement game. Do NOT close.
 
 ---
 
@@ -230,6 +240,7 @@ For each confirmed variant, the research comment must include:
 - Issue is premature (upstream work unfinished, wrong layer, no real consumer): add `discuss` or `blocked` as appropriate, explain why
 - Mark decision needed: add `needs-decision`, do NOT add `ready`
 - Rules content issue where sources are inaccessible from this environment: add `needs-decision`, do NOT add `ready`. Post complete architecture spec and embed any content found via GitHub API. Flag for Desktop to complete source embedding and relabel.
+- No existing open ruleset found but original game creation is viable: add `discuss`, do NOT close, flag for Desktop session to design the original game
 - Always remove `next` after actioning
 
 ## Hard rules — never break these
@@ -242,6 +253,7 @@ For each confirmed variant, the research comment must include:
 - Never proceed without an identified consumer
 - Never produce a thin findings document and call it a spec — if it doesn't tell implementation exactly what to build, it's not done
 - Never label a rules transcription issue `ready` unless source content is fully embedded in the issue — a spec with URLs but no embedded content is not ready
-- Never close a dead end issue without first updating dead-ends.md and identifying an open alternative where one exists
+- Never close a dead end issue as not planned without first working through all four pivot options in the dead end pivot procedure
+- Never close an issue simply because no existing open ruleset exists — Moddable Games can create one
 - Never create a research issue for something already listed as live or queued in inventory.md
 - Never attempt to web fetch external URLs — all outbound web is blocked from the cloud runner. Use GitHub API search instead.
