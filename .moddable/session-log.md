@@ -37,13 +37,22 @@ Bug with clear root cause already documented in the issue — no research needed
 **Session log and pipeline log created**
 Agreed to create `.moddable/session-log.md` (this file) and `.moddable/pipeline-log.md` for persistent memory across sessions and routine runs. Both wired into ROUTINES.md session start fetch list. Pipeline log wired into triage.md.
 
+**`waiting` label added**
+New label for issues blocked on human action (manual testing, physical work, team review, external dependency) — distinct from `needs-decision` (which is for real-world decisions only Mark can make). Colour: `#bfd4f2`. Applied to chess#53 (playtest variants — automated test suite now exists, manual QA session still needed) and website#82 (Mod Jam posts — postponed to 2026-06-23, waiting on The House bot being ready). May split into sub-labels (waiting:human, waiting:external, etc.) if volume warrants it.
+
+**Label colour management — local script**
+Label colours across all 6 repos are managed via a shell script on Mark's local machine: `set-label-colours.sh`. This was written in a previous Desktop session specifically for this purpose. When adding a new label, update this script with the new label name and hex colour, then run it. Do NOT ask Mark to set colours manually in GitHub UI — use this script. Location: Mark's local machine (not in any repo). Docker must be running for the script to execute.
+
+**chess#53 relabelled to `waiting`**
+Automated test suite (69/70 engine pass, 70/70 visual pass) added by Mark via Claude Code session on 16 Jun covers the bulk of the original issue scope. Chess960 failure is the known castling bug tracked in chess#104 (`ready`). Remaining item is a manual QA session for the high-priority hook variants. Relabelled `waiting` with comment explaining state.
+
 ### Current queue state (as of this session)
-- rules#65 — Landlord's Game (`research` + `next`) — first real end-to-end test of the routine loop. Not just another research issue — this is the north star example issue that the routine was modelled on. Tonight's Research Routine should pick this up first.
-- rules#66–70 — batch of research issues created last night (Pachisi, Halma, Reversi, Draughts variants, Go variants)
-- chess#104 — Chess960 bug (`ready`) — will queue behind rules issues on priority order
+- rules#65 — Landlord's Game (`research` + `next`) — first real end-to-end test of the routine loop
+- rules#66–70 — batch of research issues (Pachisi, Halma, Reversi, Draughts variants, Go variants)
+- chess#104 — Chess960 bug (`ready`)
 - 6 research issues open in moddable-rules total — healthy queue
 
 ### Pending
-- Token reset ~08:09 BST, routine reset ~08:09 BST — Triage may miss today (too close to reset). Research B (17:00) and Implementation B (18:00) will run fine.
-- Manual API fire of Research Routine and Implementation Routine planned after token reset (~10:00 BST) to recover the two missed overnight runs
-- Still need to confirm the routine loop actually works end-to-end — tonight's runs are the first real test since conventions and instruction files were overhauled
+- Run `set-label-colours.sh` to set `waiting` label to `#bfd4f2` across all 6 repos
+- Manual API fire of Research Routine and Implementation Routine after token reset (~10:00 BST)
+- Confirm routine loop works end-to-end — tonight's runs are the first real test
