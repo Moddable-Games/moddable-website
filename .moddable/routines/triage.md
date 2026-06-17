@@ -25,7 +25,7 @@ Pull all open issues across:
 - Moddable-Games/moddable-decks
 - Moddable-Games/dungeon-chess
 
-Read every open issue labelled `research` or `ready` in full — **including every comment, not just the issue body**. Comments frequently contain fix attempts, reversions, scope changes, and additional constraints that are not in the body. An issue whose body looks ready may have comments that prove otherwise.
+Read every open issue labelled `research` or `ready` in full — **including every comment, not just the issue body**. Comments frequently contain fix attempts, reversions, scope changes, source content, and additional constraints that are not in the body. An issue whose body looks ready may have comments that prove otherwise.
 
 ## Phase 1 — Quality gate: `ready` issues
 
@@ -48,6 +48,18 @@ For every `ready` issue, evaluate the research comment against this standard. A 
 - If it doesn't, the issue fails the quality gate regardless of how complete the spec looks otherwise
 
 **Regression risk check:** for engine changes (moddable-chess, moddable-hexmaps), the acceptance criteria must include running the full test suite — not just testing the specific fix. If `npm test` exists and the spec doesn't reference it, flag this as missing.
+
+**Content completeness check (moddable-rules only):** for any `ready` issue in moddable-rules that involves transcribing game rules, apply this additional gate:
+
+The implementation routine runs in a network-isolated environment — it cannot fetch external URLs. Ask: can an implementor execute this issue using only what is in the issue comments and the GitHub API? If the answer is no — if the spec says "transcribe from [URL]" without embedding the content, or if board space names are missing, or if variant rules are cited but not quoted — the issue fails.
+
+Specifically check:
+- Is the actual rules text embedded in the issue, or only cited by URL?
+- Are all board space names listed explicitly?
+- For hub entries: is every confirmed variant listed with embedded rules content?
+- Are sourcing notes present for each piece of content (which edition, which patent)?
+
+If any of these are missing: relabel `research`, remove `ready`, post a comment stating exactly what content needs to be embedded before this issue can be implementation-ready.
 
 If any checks fail:
 - Relabel `research`, remove `ready`
@@ -162,3 +174,4 @@ This gives Mark a clear picture of queue health without needing to read every is
 - Never apply `next` to an issue that failed a quality gate
 - Never relabel `discuss` issues without flagging for Mark's confirmation
 - Never remove existing `next` labels — only add
+- Never pass a moddable-rules rules transcription issue where source content is cited by URL but not embedded — an implementor cannot fetch external URLs
