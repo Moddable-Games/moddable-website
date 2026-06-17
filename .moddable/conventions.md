@@ -84,10 +84,39 @@ MAMP serves on port 80 — no port number in localhost URLs.
 
 ---
 
+## Character Encoding Standards
+
+Two different standards apply depending on file type — never mix them:
+
+### HTML files — use HTML entities
+All special characters in `.html` files must use HTML entities:
+- Em dash: `&mdash;` (never `—`)
+- Middle dot / interpunct: `&middot;` (never `·`)
+- Left arrow: `&larr;`
+- Right arrow: `&rarr;`
+- Ampersand in text: `&amp;`
+
+This is the established pattern across the entire codebase. Routines must preserve this when editing HTML files and must never convert entities to literal UTF-8 characters.
+
+### JSON and JS data files — use literal UTF-8
+Data files (`.json`, data arrays in `.js`) store content as plain UTF-8 strings:
+- Em dash: `—` (never `\u2014` or `&mdash;`)
+- Middle dot: `·` (never `\u00b7` or `&middot;`)
+- En dash: `–`
+- Curly quotes: `'` `'` `"` `"`
+
+The JS that reads these files and injects into the DOM handles rendering — HTML entities are not needed and should not appear in data files.
+
+### File editing discipline
+When making a targeted change to any file, write back only the changed lines. Never reformat, reorder, or re-serialise the rest of the file. A routine fixing one bug should not produce a 400-line diff across unrelated content. If using a JSON parser that changes formatting on write, use string replacement instead to avoid reformatting side effects.
+
+---
+
 ## Commit Rules
 
 - **Never** include AI co-author lines in commits
 - **Never** mention Claude, Claude Code, or AI in commit messages, public-facing files, issue comments, or pull request descriptions
+- **Never** append a generated-by footer or any attribution to pull request descriptions — the final line must be substantive content
 - **"Commit" means commit AND push**
 - Commit message format: short imperative summary, reference issue number where applicable
 - `CLAUDE.md` is gitignored in every repo — never commit it
@@ -152,6 +181,7 @@ MAMP serves on port 80 — no port number in localhost URLs.
 - Never commit to `main` — always work on and merge into `dev`
 - Never include AI co-author lines
 - Never mention Claude, Claude Code, or AI in any file, commit message, issue comment, or pull request description
+- Never append a generated-by footer or attribution to pull request descriptions
 - Verify facts against authoritative source files before committing
 - If a task is ambiguous or hits a decision only Mark can make, add `needs-decision` and post a comment — do not guess
 
