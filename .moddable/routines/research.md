@@ -67,26 +67,81 @@ Read widely before designing anything. For every issue:
 7. For moddable-rules content: check dead-ends.md and sources.md, verify at least 2 independent sources are accessible, transcribe only — never generate or extrapolate
 8. Check the news post index for prior mentions of the game or topic — these may contain context, prior decisions, or alternative game suggestions already noted by Mark
 
+---
+
+## Finding sources for public domain game rules
+
+**The cloud runner has no outbound web access. All external URLs return 403 — Wikipedia, Google Patents, archive.org, everything. This is not intermittent; it is a hard environment constraint.**
+
+The primary source strategy for public domain game rules is GitHub API search, not web fetch. Many public domain rulesets — particularly historical games — have been transcribed into public GitHub repositories by researchers, hobbyists, and digital humanities projects. These are accessible via the GitHub API even when all external web sources are blocked.
+
+### GitHub search strategy (use this first, before declaring sources inaccessible)
+
+For any public domain game, run these searches in order:
+
+1. **Search for transcription repos:**
+   `github.com search: "[game name] rules" language:Markdown`
+   `github.com search: "[game name] rulebook"`
+   `github.com search: "[game name] patent" (for pre-1930 games)`
+
+2. **Check known reliable transcription repos:**
+   - `hoelzl/L3` — contains The Landlord's Game 1904 patent and 1906 rules in full Markdown. Check `doc/` directory. This is the reference example of what to look for.
+   - Search for similar repos: historical game transcriptions, public domain game archives, digital humanities projects.
+
+3. **For chess variants specifically:**
+   - chessvariants.com is 403 to bots but many variants are documented in GitHub repos
+   - Search: `"chess variant" "[variant name]" rules site:github.com`
+
+4. **For ancient/classical games (Go, Draughts, Mancala, etc.):**
+   - These have extensive Wikipedia articles — Wikipedia is blocked from the cloud runner but accessible from Desktop
+   - Search GitHub for: `"[game name]" rules markdown public-domain`
+   - If found on GitHub: fetch and embed. If not found: label `needs-decision` with architecture spec complete, flag for Desktop to embed Wikipedia content.
+
+5. **For patent-era games (pre-1923):**
+   - US patents before 1923 are public domain. Many have been transcribed to GitHub.
+   - Search: `"US patent" "[game name]" markdown`
+   - If transcription found: fetch via GitHub API, verify it matches the patent number cited in sources.md or the issue.
+
+### When GitHub search finds nothing
+
+If GitHub search finds no transcription for a game:
+
+- Check sources.md — a previous Desktop session may have already identified a reliable source path
+- If sources.md has a GitHub API path: use it
+- If sources.md has only external URLs: those are blocked — label `needs-decision`, post complete architecture spec, note that Desktop needs to embed content from those URLs before the issue can be `ready`
+- Do NOT label `ready` — do NOT attempt web fetch of blocked URLs — do NOT generate or extrapolate rules content
+
+### The standard: 2 sources, both embedded
+
+Two independent sources must be verified accessible AND their relevant content embedded in the issue. One GitHub transcription repo counts as one source. Wikipedia (accessible from Desktop, not from the cloud runner) counts as a second source when Desktop completes the issue.
+
+A research run that finds one GitHub source and cannot access a second should: post the architecture spec, embed the content from the one accessible source, label `needs-decision` with a note that Desktop needs to verify and embed a second source. This is better than blocking entirely — it leaves the issue 80% complete for Desktop to finish quickly.
+
+---
+
 ## Dead end pivot procedure
 
 When a moddable-rules research issue turns out to be a dead end — commercially locked game, inaccessible sources, unlicensable rules — do not simply close and ask for confirmation. Act:
 
 1. **Update dead-ends.md immediately** — add the entry, commit it. Do not wait for Mark to confirm. A confirmed dead end belongs in dead-ends.md.
 
-2. **Apply the open alternatives principle** — Monopoly is commercially locked, but The Landlord's Game (its public domain precursor) is not. Catan is commercially locked, but Colony covers similar territory with open rules. When a game is a dead end, web search for:
+2. **Apply the open alternatives principle** — Monopoly is commercially locked; The Landlord's Game (its public domain precursor) is the alternative. When a game is a dead end, search for:
    - The historical or public domain precursor to the commercial game
    - Open-licensed games covering similar design space
    - Any news posts, issues, or comments in the Moddable repos that already mention an alternative
+   - Note: not every commercial game has a viable open alternative. Catan has no public domain precursor and no open-licensed ruleset equivalent — it is a confirmed dead end with no pivot. Do not create a placeholder issue when no viable alternative exists.
 
 3. **Check inventory.md before creating a new issue** — if the alternative is already live or queued, note it in the closing comment instead of creating a duplicate.
 
 4. **Create a new research issue for the viable alternative** — if a credible open alternative is found and it's not already in inventory.md, create a `research` issue in moddable-rules for it immediately, with a comment explaining the connection to the dead end game.
 
-5. **Close the original issue as not planned** — post a comment explaining: what was a dead end and why, what alternative was identified, what new issue was created (or already existed). Then close.
+5. **Close the original issue as not planned** — post a comment explaining: what was a dead end and why, what alternative was identified (or that none exists), what new issue was created if applicable. Then close.
 
 6. **Do not ask Mark to confirm any of the above** — closing a confirmed dead end, updating dead-ends.md, and pivoting to an open alternative are all within routine authority. The only time to flag `needs-decision` is if no viable alternative can be found and the queue would be left empty.
 
 **Reference example:** moddable-rules#52 (closed, dead end) → moddable-rules#65 (created, The Landlord's Game). This is the north star for how a dead end pivot should work. Read the ROUTINES.md north star section for the full before/after.
+
+---
 
 ## What research must produce
 
@@ -134,12 +189,12 @@ Done means: an implementor working only within GitHub (no external web access, n
 
 ### How to embed source content
 
-Fetch the source via the most reliable path available:
-- GitHub API first (public repos with transcribed content — e.g. `hoelzl/L3` for Landlord's Game patent)
-- Web search + web fetch for Wikipedia and other accessible sources
-- If all external sources are blocked (403): label `needs-decision`, post the complete architecture spec including all file structure, and note exactly which sources need to be fetched from Desktop. Do NOT label `ready` — the issue is not ready until the content is embedded.
+Use the GitHub search strategy above to find sources. When found:
+- Fetch via GitHub API
+- Quote the relevant sections in full — do not paraphrase rules content, paraphrasing introduces errors
+- The implementor transcribes from your embedded quote into the target file
 
-When embedding content, quote the relevant sections in full. Do not paraphrase rules content — paraphrasing introduces errors. The implementor transcribes from your embedded quote into the target file.
+If only one source found via GitHub and a second source (e.g. Wikipedia) is blocked: label `needs-decision`, embed the one accessible source, post complete architecture spec, note exactly what Desktop needs to add before relabelling `ready`.
 
 ### Hub entries — scope requirement
 
@@ -174,7 +229,7 @@ For each confirmed variant, the research comment must include:
 - Consumer cannot be identified: add `discuss`, do NOT add `ready`, explain in comment
 - Issue is premature (upstream work unfinished, wrong layer, no real consumer): add `discuss` or `blocked` as appropriate, explain why
 - Mark decision needed: add `needs-decision`, do NOT add `ready`
-- Rules content issue where sources are inaccessible from this environment: add `needs-decision`, do NOT add `ready`. Post complete architecture spec so Desktop can embed content and relabel.
+- Rules content issue where sources are inaccessible from this environment: add `needs-decision`, do NOT add `ready`. Post complete architecture spec and embed any content found via GitHub API. Flag for Desktop to complete source embedding and relabel.
 - Always remove `next` after actioning
 
 ## Hard rules — never break these
@@ -187,5 +242,6 @@ For each confirmed variant, the research comment must include:
 - Never proceed without an identified consumer
 - Never produce a thin findings document and call it a spec — if it doesn't tell implementation exactly what to build, it's not done
 - Never label a rules transcription issue `ready` unless source content is fully embedded in the issue — a spec with URLs but no embedded content is not ready
-- Never close a dead end issue without first updating dead-ends.md and identifying an open alternative
+- Never close a dead end issue without first updating dead-ends.md and identifying an open alternative where one exists
 - Never create a research issue for something already listed as live or queued in inventory.md
+- Never attempt to web fetch external URLs — all outbound web is blocked from the cloud runner. Use GitHub API search instead.
