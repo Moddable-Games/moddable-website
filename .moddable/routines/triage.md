@@ -25,7 +25,7 @@ Pull all open issues across:
 - Moddable-Games/moddable-decks
 - Moddable-Games/dungeon-chess
 
-Read every open issue labelled `research` or `ready` in full, including all comments.
+Read every open issue labelled `research` or `ready` in full — **including every comment, not just the issue body**. Comments frequently contain fix attempts, reversions, scope changes, and additional constraints that are not in the body. An issue whose body looks ready may have comments that prove otherwise.
 
 ## Phase 1 — Quality gate: `ready` issues
 
@@ -40,7 +40,16 @@ For every `ready` issue, evaluate the research comment against this standard. A 
 - **Consumer integration detail** — exactly how the consumer calls or uses what's being built
 - **Acceptance criteria** — includes "works end-to-end with [named consumer]" as a criterion
 
-If any of these are missing or thin:
+### Additional checks for `ready` issues
+
+**Fix attempt check:** scan all comments for evidence of a previous fix attempt that was reverted or abandoned. If such a comment exists:
+- The spec must explicitly address why the previous attempt failed
+- The spec must describe how the new approach avoids the same problem
+- If it doesn't, the issue fails the quality gate regardless of how complete the spec looks otherwise
+
+**Regression risk check:** for engine changes (moddable-chess, moddable-hexmaps), the acceptance criteria must include running the full test suite — not just testing the specific fix. If `npm test` exists and the spec doesn't reference it, flag this as missing.
+
+If any checks fail:
 - Relabel `research`, remove `ready`
 - Post a comment listing exactly what's missing and why the spec isn't sufficient for implementation
 - Do not leave it in the `ready` queue
@@ -102,7 +111,7 @@ Fill gaps only with issues that passed:
 Selection priority:
 1. Repo priority: moddable-rules first, then moddable-chess/moddable-hexmaps, then moddable-website, then dungeon-chess/moddable-decks
 2. Within same repo: oldest open issue first (by created_at)
-3. Skip any issue labelled `blocked` or `needs-decision`
+3. Skip any issue labelled `blocked`, `needs-decision`, or `waiting`
 
 IMPORTANT: Never remove existing `next` labels — only add new ones to fill gaps.
 
