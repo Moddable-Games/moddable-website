@@ -78,5 +78,35 @@
     "path": "/mods/phantom-go/",
     "source": "Sensei's Library (OPL 1.0)",
     "logo": "img/moddable-cube-logo.png"
+  },
+  {
+    "category": "Conversion",
+    "baseGame": "Nukes",
+    "title": "Nukes: Siege",
+    "body": "Total conversion of the hostage mechanic. Start with your own tokens in reserve; recruit them by returning to occupied regions. Enemy hostages only arrive through combat.",
+    "stats": "2 players · 90 min · 14+",
+    "path": "/mods/nukes-siege/",
+    "source": "Moddable.Games",
+    "logo": "img/nukes-logo.png"
+  },
+  {
+    "category": "Rebalance",
+    "baseGame": "Nukes",
+    "title": "Nukes: Asymmetric Powers",
+    "body": "Each player draws one Power Card at setup — Covert Network, Arms Industry, or Airborne Corps. No two players hold the same card. Standard Nukes underneath, explicit asymmetry on top.",
+    "stats": "2–3 players · 60 min · 12+",
+    "path": "/mods/nukes-asymmetric-powers/",
+    "source": "Moddable.Games",
+    "logo": "img/nukes-logo.png"
+  },
+  {
+    "category": "Reskin",
+    "baseGame": "Nukes",
+    "title": "Nukes: Fallout",
+    "body": "Biohazard tiles spread each round. Every nuclear strike leaves a growing contamination zone. City tiles are immune to spread. Win before the map runs out.",
+    "stats": "2–3 players · 60 min · 12+",
+    "path": "/mods/nukes-fallout/",
+    "source": "Moddable.Games",
+    "logo": "img/nukes-logo.png"
   }
 ]

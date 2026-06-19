@@ -185,17 +185,25 @@ function render(game) {
       cg.appendChild(card);
     });
 
-    var submitCard = document.createElement('a');
-    submitCard.href = url('/submit/');
-    submitCard.className = 'mods-submit-cta mg-lift';
-    submitCard.innerHTML =
-      '<div class="mods-submit-cta__inner">' +
-        '<div class="mg-eyebrow mg-eyebrow--green">CONTRIBUTE</div>' +
-        '<h3 class="mods-submit-cta__title">Submit your own mod</h3>' +
-        '<p class="mods-submit-cta__body">Got a variant for ' + (game.title || 'this game') + '? Share it with the community.</p>' +
-        '<span class="mods-submit-cta__btn">Submit Mod →</span>' +
-      '</div>';
-    cg.appendChild(submitCard);
+    if (game.communityLink) {
+      var linkCard = el('a', {href: url(game.communityLink.href), class: 'mods-submit-cta mg-lift'});
+      var linkInner = el('div', {class: 'mods-submit-cta__inner'});
+      linkInner.appendChild(el('h3', {class: 'mods-submit-cta__title'}, game.communityLink.label));
+      linkCard.appendChild(linkInner);
+      cg.appendChild(linkCard);
+    } else {
+      var submitCard = document.createElement('a');
+      submitCard.href = url('/submit/');
+      submitCard.className = 'mods-submit-cta mg-lift';
+      submitCard.innerHTML =
+        '<div class="mods-submit-cta__inner">' +
+          '<div class="mg-eyebrow mg-eyebrow--green">CONTRIBUTE</div>' +
+          '<h3 class="mods-submit-cta__title">Submit your own mod</h3>' +
+          '<p class="mods-submit-cta__body">Got a variant for ' + (game.title || 'this game') + '? Share it with the community.</p>' +
+          '<span class="mods-submit-cta__btn">Submit Mod →</span>' +
+        '</div>';
+      cg.appendChild(submitCard);
+    }
   }
 
   // Factions/races grid
