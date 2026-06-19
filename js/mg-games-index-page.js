@@ -20,6 +20,21 @@
   cb.appendChild(linkBtn('Explore Engines', '/engines/', 'blue'));
   cb.appendChild(linkBtn('See Roadmap', '/about/roadmap/', 'outline-dark'));
 
+  // Rules section
+  var rulesHex = document.getElementById('rules-hex');
+  if (rulesHex) rulesHex.style.backgroundImage = 'url("' + url('/img/hex-grid-blue.svg') + '")';
+  var rulesStats = document.getElementById('rules-stats');
+  var STATS = [['20','Game Families'],['135','Variants'],['CC BY-SA','Licence'],['PDF + Web','Formats']];
+  STATS.forEach(function(s) {
+    var d = el('div', {class:'games-rules__stat'});
+    d.appendChild(el('span', {class:'games-rules__stat-value'}, s[0]));
+    d.appendChild(el('span', {class:'games-rules__stat-label'}, s[1]));
+    rulesStats.appendChild(d);
+  });
+  var rb = document.getElementById('rules-btns');
+  rb.appendChild(linkBtn('Browse Rulebooks', 'https://rules.moddable.games/', 'primary'));
+  rb.appendChild(linkBtn('View on GitHub', 'https://github.com/Moddable-Games/moddable-rules', 'outline-dark'));
+
   var grid = document.getElementById('games-grid');
 
   MG.data.load(['games']).then(function(store) {

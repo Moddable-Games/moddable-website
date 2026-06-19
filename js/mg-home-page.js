@@ -205,6 +205,18 @@ nb2.appendChild(linkBtn('Read Article', '/news/nuking-catan/', 'outline-dark'));
   }
 })();
 
+// Rules card
+const hrc = document.getElementById('home-rules-stats');
+[['20','Games'],['135','Variants'],['PDF + Web','Formats']].forEach(function(s) {
+  var d = el('div', {class:'home-rules-card__stat'});
+  d.appendChild(el('span', {class:'home-rules-card__stat-value'}, s[0]));
+  d.appendChild(el('span', {class:'home-rules-card__stat-label'}, s[1]));
+  hrc.appendChild(d);
+});
+var hrb = document.getElementById('home-rules-btns');
+hrb.appendChild(linkBtn('Browse Rulebooks', 'https://rules.moddable.games/', 'green'));
+hrb.appendChild(linkBtn('GitHub', 'https://github.com/Moddable-Games/moddable-rules', 'outline-dark'));
+
 // Featured mod buttons
 const fb = document.getElementById('featured-btns');
 fb.appendChild(linkBtn('Read Rules', 'https://rules.moddable.games/dist/hyper-imperium/', 'primary'));

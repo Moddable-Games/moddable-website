@@ -39,13 +39,16 @@
   linksCard.appendChild(el('div', { class: 'about-sidebar__card-title' }, 'Explore'));
   var linksWrap = el('div', { class: 'about-sidebar__links' });
   var links = [
+    { label: 'Rulebooks', sub: '20 game families', color: MG.T.green, href: 'https://rules.moddable.games/', external: true },
     { label: 'Discord', sub: 'Join Community', color: MG.T.red, href: url('/community/') },
-    { label: 'Team', sub: 'Meet Workshop', color: MG.T.green, href: url('/team/') },
-    { label: 'Roadmap', sub: '18-month plan', color: MG.T.blue, href: url('/about/roadmap/') },
+    { label: 'Team', sub: 'Meet Workshop', color: MG.T.blue, href: url('/team/') },
+    { label: 'Roadmap', sub: '18-month plan', color: MG.T.ink, href: url('/about/roadmap/') },
     { label: 'Press Kit', sub: 'Logos and assets', color: MG.T.ink, href: url('/press/') },
   ];
   links.forEach(function(l) {
-    var a = el('a', { href: l.href, class: 'about-link' });
+    var attrs = { href: l.href, class: 'about-link' };
+    if (l.external) { attrs.target = '_blank'; attrs.rel = 'noopener'; }
+    var a = el('a', attrs);
     var icon = el('div', { class: 'about-link__icon' });
     icon.style.background = l.color;
     a.appendChild(icon);

@@ -4,7 +4,7 @@
   function footer() {
     const COLS = [
       { title:'Mods',      href:url('/mods/'),      links:[['Conversions',url('/mods/#Conversion')],['Rebalances',url('/mods/#Rebalance')],['Reskins',url('/mods/#Reskin')],['Submit Mod',url('/submit/')]] },
-      { title:'Games',     href:url('/games/'),     links:[['Endless Skies',url('/games/endless-skies/')],['Planet Mongo',url('/games/planet-mongo/')],['Nukes',url('/games/nukes/')]] },
+      { title:'Games',     href:url('/games/'),     links:[['Endless Skies',url('/games/endless-skies/')],['Planet Mongo',url('/games/planet-mongo/')],['Nukes',url('/games/nukes/')],['Rulebooks','https://rules.moddable.games/']] },
       { title:'Engines',   href:url('/engines/'),   links:[['Chess',url('/engines/moddable-chess/')],['Hexmaps',url('/engines/moddable-hexmaps/')]] },
       { title:'Developers', href:url('/developers/'), links:[['Tools API',url('/developers/api/')],['Examples',url('/developers/examples/')],['Live Server','https://tools.moddable.games/'],['GitHub','https://github.com/Moddable-Games']] },
       { title:'Tools',     href:url('/tools/'),     links:[['Twilight',url('/tools/ti/')],['Talisman',url('/tools/talisman/')],['Nukes',url('/tools/nukes/')],['Dice',url('/tools/dice/')],['Decks',url('/tools/decks/')],['Chess',url('/tools/chess/')]] },
@@ -25,7 +25,9 @@
       c.appendChild(titleEl);
       const ul = el('ul', { class:'mg-footer__col-list' });
       for (const [text, href] of col.links) {
-        ul.appendChild(el('li', {}, el('a', { href, class:'mg-footer__col-link' }, text)));
+        const attrs = { href, class:'mg-footer__col-link' };
+        if (href.startsWith('http')) { attrs.target = '_blank'; attrs.rel = 'noopener'; }
+        ul.appendChild(el('li', {}, el('a', attrs, text)));
       }
       c.appendChild(ul);
       grid.appendChild(c);
