@@ -980,7 +980,7 @@
     ],
     "buttons": {
       "hero": [
-        ["Read Rules", "rules:nukes", "outline-dark"],
+        ["Read Rules", "rules:nukes/variants/siege", "red"],
         ["View Nukes", "/games/nukes/", "outline-dark"]
       ],
       "cta": [
@@ -1043,7 +1043,7 @@
     ],
     "buttons": {
       "hero": [
-        ["Read Rules", "rules:nukes", "outline-dark"],
+        ["Read Rules", "rules:nukes/variants/asymmetric-powers", "green"],
         ["View Nukes", "/games/nukes/", "outline-dark"]
       ],
       "cta": [
@@ -1106,7 +1106,7 @@
     ],
     "buttons": {
       "hero": [
-        ["Read Rules", "rules:nukes", "outline-dark"],
+        ["Read Rules", "rules:nukes/variants/fallout", "blue"],
         ["View Nukes", "/games/nukes/", "outline-dark"]
       ],
       "cta": [
