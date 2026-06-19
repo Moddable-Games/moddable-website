@@ -71,7 +71,37 @@
         "desc": "Launch from a Base, jump over occupied hexes like Artillery. Blast radius: target hex becomes Biohazard, all units in target + 6 surrounding hexes destroyed immediately."
       }
     ],
-    "community": []
+    "communityLabel": "Augmented Mods by The House",
+    "communityLink": {"label": "All mods →", "href": "/mods/"},
+    "community": [
+      {
+        "category": "Conversion",
+        "baseGame": "Nukes",
+        "title": "Nukes: Siege",
+        "body": "Total conversion of the hostage mechanic. Start with your own tokens in reserve; recruit them by returning to occupied regions. Enemy hostages only arrive through combat.",
+        "stats": "2 players · 90 min · 14+",
+        "href": "/mods/nukes-siege/",
+        "source": "Moddable.Games"
+      },
+      {
+        "category": "Rebalance",
+        "baseGame": "Nukes",
+        "title": "Nukes: Asymmetric Powers",
+        "body": "Each player draws one Power Card at setup — Covert Network, Arms Industry, or Airborne Corps. No two players hold the same card. Standard Nukes underneath, explicit asymmetry on top.",
+        "stats": "2–3 players · 60 min · 12+",
+        "href": "/mods/nukes-asymmetric-powers/",
+        "source": "Moddable.Games"
+      },
+      {
+        "category": "Reskin",
+        "baseGame": "Nukes",
+        "title": "Nukes: Fallout",
+        "body": "Biohazard tiles spread each round. Every nuclear strike leaves a growing contamination zone. City tiles are immune to spread. Win before the map runs out.",
+        "stats": "2–3 players · 60 min · 12+",
+        "href": "/mods/nukes-fallout/",
+        "source": "Moddable.Games"
+      }
+    ]
   },
   "mongo": {
     "slug": "planet-mongo",
@@ -921,5 +951,194 @@
         "stats": "4 players · 60–90 min · 12+"
       }
     ]
+  },
+  "nukes-siege": {
+    "slug": "nukes-siege",
+    "title": "Nukes: Siege",
+    "accent": "red",
+    "heroImage": "/img/nukes-logo.png",
+    "colors": {
+      "gradient": "linear-gradient(180deg,#2a0a0a 0%,#3a0d0d 40%,#000 100%)",
+      "hexGrid": "hex-grid-red.svg",
+      "textColor": "#e63232",
+      "textShadow": "0 0 8px rgba(230,50,50,0.5)",
+      "bloom": "radial-gradient(ellipse,rgba(209,26,26,0.35) 0%,transparent 65%)"
+    },
+    "stats": [
+      ["Players", "2"],
+      ["Time", "90 min"],
+      ["Age", "14+"],
+      ["Base game", "Nukes"],
+      ["Designer", "The House"],
+      ["Version", "v1.0.0"]
+    ],
+    "buttons": {
+      "hero": [
+        ["Read Rules", "rules:nukes", "outline-dark"],
+        ["View Nukes", "/games/nukes/", "outline-dark"]
+      ],
+      "cta": [
+        ["View Nukes →", "/games/nukes/", "outline-dark"]
+      ]
+    },
+    "steps": [
+      {
+        "n": "01",
+        "title": "Deploy from reserve",
+        "body": "Return 1–3 of your own tokens from your off-board supply onto regions where you already have units. Each return earns one move. Your city starts with 4 units; your supply starts with 21."
+      },
+      {
+        "n": "02",
+        "title": "Build through combat",
+        "body": "The only way to get hostages is to capture them mid-game. Win combat with excess strength and take enemy units into your supply for future turns."
+      },
+      {
+        "n": "03",
+        "title": "Two economies emerge",
+        "body": "Your own supply tokens fuel early expansion. Enemy hostages, once captured, fuel rapid strikes. Both follow the same return-to-move mechanic but come from different places."
+      },
+      {
+        "n": "04",
+        "title": "The endgame is familiar",
+        "body": "Bases, isotopes, nuclear strikes, and Meltdowns all work identically to standard Nukes. Siege changes how you get there, not what you're fighting over."
+      }
+    ],
+    "hooks": [
+      {
+        "name": "Own supply → own moves",
+        "desc": "Return your own tokens to build your force. The hostage economy only activates once you've won combat and taken enemy units."
+      },
+      {
+        "name": "Capture to escalate",
+        "desc": "Every unit you take in combat becomes a hostage you can return on future turns. Combat is now both offensive and economic."
+      }
+    ],
+    "community": []
+  },
+  "nukes-asymmetric-powers": {
+    "slug": "nukes-asymmetric-powers",
+    "title": "Nukes: Asymmetric Powers",
+    "accent": "green",
+    "heroImage": "/img/nukes-logo.png",
+    "colors": {
+      "gradient": "linear-gradient(180deg,#0a2a0a 0%,#0d3a0d 40%,#000 100%)",
+      "hexGrid": "hex-grid-green.svg",
+      "textColor": "#4eb735",
+      "textShadow": "0 0 8px rgba(78,183,53,0.5)",
+      "bloom": "radial-gradient(ellipse,rgba(58,153,40,0.25) 0%,transparent 65%)"
+    },
+    "stats": [
+      ["Players", "2–3"],
+      ["Time", "60 min"],
+      ["Age", "12+"],
+      ["Base game", "Nukes"],
+      ["Designer", "The House"],
+      ["Version", "v1.0.0"]
+    ],
+    "buttons": {
+      "hero": [
+        ["Read Rules", "rules:nukes", "outline-dark"],
+        ["View Nukes", "/games/nukes/", "outline-dark"]
+      ],
+      "cta": [
+        ["View Nukes →", "/games/nukes/", "outline-dark"]
+      ]
+    },
+    "steps": [
+      {
+        "n": "01",
+        "title": "Draw your power",
+        "body": "Before setup, each player draws a Power Card. Reveal simultaneously. Powers are public from that point on."
+      },
+      {
+        "n": "02",
+        "title": "Play standard Nukes",
+        "body": "The hostage economy, fluid platoons, biome rules, and nuclear mechanics are identical to the base game."
+      },
+      {
+        "n": "03",
+        "title": "Exploit your asymmetry",
+        "body": "Covert Network enables aggressive repositioning of enemy forces. Arms Industry enables faster nuclear escalation. Airborne Corps enables longer slingshot chains and harder-to-predict troop movements."
+      },
+      {
+        "n": "04",
+        "title": "Read your opponents",
+        "body": "Knowing their power changes how you play. An Arms Industry opponent needs to be pressured before their isotope count grows. A Covert Network opponent threatens to strand your units in hostile terrain."
+      }
+    ],
+    "hooks": [
+      {
+        "name": "One power per player",
+        "desc": "Covert Network, Arms Industry, or Airborne Corps. Draw blind at setup. All three remain public once revealed."
+      },
+      {
+        "name": "Same rules, different leverage",
+        "desc": "Standard Nukes underneath. The power card changes one rule for you specifically — not a house rule, an asymmetry."
+      }
+    ],
+    "community": []
+  },
+  "nukes-fallout": {
+    "slug": "nukes-fallout",
+    "title": "Nukes: Fallout",
+    "accent": "blue",
+    "heroImage": "/img/nukes-logo.png",
+    "colors": {
+      "gradient": "linear-gradient(180deg,#0a0d2a 0%,#0c2e5a 40%,#000 100%)",
+      "hexGrid": "hex-grid-blue.svg",
+      "textColor": "#6fb5ff",
+      "textShadow": "0 0 8px rgba(111,181,255,0.5)",
+      "bloom": "radial-gradient(ellipse,rgba(12,79,141,0.35) 0%,transparent 65%)"
+    },
+    "stats": [
+      ["Players", "2–3"],
+      ["Time", "60 min"],
+      ["Age", "12+"],
+      ["Base game", "Nukes"],
+      ["Designer", "The House"],
+      ["Version", "v1.0.0"]
+    ],
+    "buttons": {
+      "hero": [
+        ["Read Rules", "rules:nukes", "outline-dark"],
+        ["View Nukes", "/games/nukes/", "outline-dark"]
+      ],
+      "cta": [
+        ["View Nukes →", "/games/nukes/", "outline-dark"]
+      ]
+    },
+    "steps": [
+      {
+        "n": "01",
+        "title": "The board degrades",
+        "body": "Every nuclear strike or Meltdown creates a Biohazard that will spread each round. The map shrinks from the sites of past violence."
+      },
+      {
+        "n": "02",
+        "title": "Early nukes poison the centre",
+        "body": "Launching nuclear strikes on contested central territory in mid-game may cut off your own movement corridors by late game."
+      },
+      {
+        "n": "03",
+        "title": "Territory becomes precious",
+        "body": "As Biohazard zones spread, viable regions for Infantry chaining, Artillery jumping, and Airborne landing shrink. Late game forces confrontations neither player planned."
+      },
+      {
+        "n": "04",
+        "title": "Win before the map does",
+        "body": "City destruction remains the win condition. But a long game of attrition now ends with both armies squeezed into an ever-smaller safe zone."
+      }
+    ],
+    "hooks": [
+      {
+        "name": "Biohazard spreads",
+        "desc": "Each round, every existing Biohazard tile converts one adjacent non-city tile. The first player chooses direction. Newly converted tiles don't spread until next round."
+      },
+      {
+        "name": "City tiles are immune",
+        "desc": "Spread cannot convert city tiles. Cities can still be destroyed by direct nuke or Meltdown — they just don't become Biohazard from adjacency."
+      }
+    ],
+    "community": []
   }
 }
