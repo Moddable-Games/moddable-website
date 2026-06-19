@@ -92,18 +92,18 @@
       ["Components", "127 hex tiles · 800 units"],
       ["Factions", "8"],
       ["Status", "In development"],
-      ["Version", "v0.9.0"]
+      ["Version", "v0.9.2"]
     ],
     "buttons": {
       "hero": [
-        ["Read Rules", "rules:mongo", "green"],
-        ["View on GitHub", "https://github.com/Moddable-Games/moddable-rules/blob/main/games/mongo/content/rulebook.md", "outline-dark"]
+        ["Generate Map", "https://hex.moddable.games/generate/?game=mongo", "green"],
+        ["View on GitHub", "https://github.com/Moddable-Games/moddable-rules/tree/main/games/mongo", "outline-dark"]
       ],
       "cta": [],
       "extra": {
         "playtest-btns": [
-          ["Read Rules", "rules:mongo", "green"],
-          ["View on GitHub", "https://github.com/Moddable-Games/moddable-rules/blob/main/games/mongo/content/rulebook.md", "outline-dark"]
+          ["Generate Map", "https://hex.moddable.games/generate/?game=mongo", "green"],
+          ["View on GitHub", "https://github.com/Moddable-Games/moddable-rules/tree/main/games/mongo", "outline-dark"]
         ]
       }
     },
@@ -218,14 +218,20 @@
       ["Components", "113 hex tiles · 128 ships"],
       ["Factions", "8"],
       ["Status", "In development"],
-      ["Version", "v0.2.0"]
+      ["Version", "v0.4.0"]
     ],
     "buttons": {
       "hero": [
-        ["Read Rules", "rules:endless-skies", "blue"],
-        ["View on GitHub", "https://github.com/Moddable-Games/moddable-rules/blob/main/games/endless-skies/content/rulebook.md", "outline-dark"]
+        ["Generate Map", "https://hex.moddable.games/generate/?game=endless-skies", "blue"],
+        ["View on GitHub", "https://github.com/Moddable-Games/moddable-rules/tree/main/games/endless-skies", "outline-dark"]
       ],
-      "cta": []
+      "cta": [],
+      "extra": {
+        "dev-btns": [
+          ["Generate Map", "https://hex.moddable.games/generate/?game=endless-skies", "blue"],
+          ["View on GitHub", "https://github.com/Moddable-Games/moddable-rules/tree/main/games/endless-skies", "outline-dark"]
+        ]
+      }
     },
     "steps": [
       {

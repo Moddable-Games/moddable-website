@@ -31,11 +31,13 @@
     "stats": [
       { "value": "6", "label": "supported games" },
       { "value": "4", "label": "render styles" },
-      { "value": "4", "label": "consumer apps" }
+      { "value": "6", "label": "consumer apps" }
     ],
     "features": ["Canvas renderer", "Seeded RNG", "Import/export JSON", "Style selector", "Editor mode"],
     "consumers": [
       { "title": "Nukes", "href": "/games/nukes/" },
+      { "title": "Planet Mongo", "href": "/games/planet-mongo/" },
+      { "title": "Endless Skies", "href": "/games/endless-skies/" },
       { "title": "Colony", "href": "https://hex.moddable.games/generate/?game=colony" },
       { "title": "Talisman Worlds", "href": "/mods/talisman-worlds/" },
       { "title": "Hyper Imperium", "href": "/mods/hyper-imperium/" }
