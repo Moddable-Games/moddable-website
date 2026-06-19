@@ -207,7 +207,7 @@ nb2.appendChild(linkBtn('Read Article', '/news/nuking-catan/', 'outline-dark'));
 
 // Rules card
 const hrc = document.getElementById('home-rules-stats');
-[['20','Games'],['135','Variants'],['PDF + Web','Formats']].forEach(function(s) {
+[['21','Games'],['171','Variants'],['PDF + Web','Formats']].forEach(function(s) {
   var d = el('div', {class:'home-rules-card__stat'});
   d.appendChild(el('span', {class:'home-rules-card__stat-value'}, s[0]));
   d.appendChild(el('span', {class:'home-rules-card__stat-label'}, s[1]));

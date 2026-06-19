@@ -39,7 +39,7 @@
   linksCard.appendChild(el('div', { class: 'about-sidebar__card-title' }, 'Explore'));
   var linksWrap = el('div', { class: 'about-sidebar__links' });
   var links = [
-    { label: 'Rulebooks', sub: '20 game families', color: MG.T.green, href: 'https://rules.moddable.games/', external: true },
+    { label: 'Rulebooks', sub: '21 game families', color: MG.T.green, href: 'https://rules.moddable.games/', external: true },
     { label: 'Discord', sub: 'Join Community', color: MG.T.red, href: url('/community/') },
     { label: 'Team', sub: 'Meet Workshop', color: MG.T.blue, href: url('/team/') },
     { label: 'Roadmap', sub: '18-month plan', color: MG.T.ink, href: url('/about/roadmap/') },
