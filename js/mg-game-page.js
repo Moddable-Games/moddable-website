@@ -192,7 +192,7 @@ function render(game) {
       linkInner.appendChild(el('h3', {class: 'mods-submit-cta__title'}, game.communityLink.label));
       linkCard.appendChild(linkInner);
       cg.appendChild(linkCard);
-    } else {
+    } else if (game.communitySubmit !== false) {
       var submitCard = document.createElement('a');
       submitCard.href = url('/submit/');
       submitCard.className = 'mods-submit-cta mg-lift';
