@@ -179,7 +179,8 @@ function render(game) {
       commHeading.innerHTML = game.communityLabel || `Community mods for <em>${game.title || ''}</em>.`;
     }
     game.community.forEach(m => {
-      const card = modCard(m);
+      const resolved = Object.assign({}, m, m.href ? {href: url(m.href)} : {});
+      const card = modCard(resolved);
       card.removeAttribute('data-reveal');
       card.style.opacity = '1';
       cg.appendChild(card);
