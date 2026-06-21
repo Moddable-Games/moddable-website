@@ -31,7 +31,7 @@ One shared component library (`_mg.js` + `_mg.css`), one page per HTML file.
 │   ├── mods.json           ← mod library (10 entries)
 │   ├── games.json          ← games (3 entries)
 │   ├── engines.json        ← engine/SDK listings (2 entries)
-│   ├── mcp-tools.json      ← MCP tool registry (13 tools, 2 namespaces)
+│   ├── mcp-tools.json      ← MCP tool registry (17 tools, 3 namespaces)
 │   ├── news.json           ← news posts (13 entries)
 │   └── team.json           ← team members (4 entries)
 │
@@ -73,7 +73,7 @@ One shared component library (`_mg.js` + `_mg.css`), one page per HTML file.
     ├── index.js            ← forms API Worker (subscribe, submit)
     ├── wrangler.toml       ← Cloudflare config for moddable-api
     └── mcp/
-        ├── index.js        ← MCP tools Worker (13 tools, 2 engines)
+        ├── index.js        ← MCP tools Worker (17 tools, 3 engines)
         ├── chess-tools.js  ← re-exports from moddable-chess/mcp/tools.js
         ├── hex-tools.js    ← re-exports from moddable-hexmaps/mcp/tools.js
         ├── wrangler.toml   ← Cloudflare config for moddable-tools
@@ -128,9 +128,10 @@ gzipped). No runtime filesystem access needed.
 
 **Deploy:** `cd workers/mcp && wrangler deploy`
 
-**Limitation:** The free Workers tier (10ms CPU) is insufficient for
-`chess_generate_puzzle` which does a random search. Upgrade to paid ($5/mo)
-for 50ms CPU if puzzle generation is needed.
+**Puzzle pool:** `chess_generate_puzzle` serves from a pre-computed pool of
+1,557 puzzles across 66 variants (no CPU-intensive search at runtime). The
+pool is imported from `puzzle-pool.json` at bundle time. Board images are
+rendered via `@resvg/resvg-wasm` at `/api/board.png`.
 
 ---
 

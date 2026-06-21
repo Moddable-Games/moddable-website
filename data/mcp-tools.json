@@ -43,9 +43,15 @@
       },
       {
         "name": "chess_generate_puzzle",
-        "description": "Generate a tactical puzzle (mate-in-N) for any variant.",
-        "example": "Generate a mate-in-2 puzzle for Atomic Chess",
-        "returns": "FEN position with solution moves"
+        "description": "Serve a random puzzle from 1,617 pre-generated puzzles across 70+ variants. Includes SVG board, rating, themes, and solution.",
+        "example": "Give me an atomic chess puzzle rated above 1200",
+        "returns": "FEN, SVG board image, solution, rating, themes, variant info"
+      },
+      {
+        "name": "chess_list_puzzle_types",
+        "description": "Discover available puzzle types with counts and rating ranges. Filterable by variant.",
+        "example": "What puzzle types are available for Atomic Chess?",
+        "returns": "List of variant:type keys with puzzle counts and rating ranges"
       },
       {
         "name": "chess_render_svg",

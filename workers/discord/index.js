@@ -238,15 +238,59 @@ async function cmdHexGames(options, env) {
 }
 
 async function cmdPuzzle(options, env) {
-  const variant = getOption(options, 'variant') || 'standard';
-  const type = getOption(options, 'type') || 'mate-in-1';
+  let variant = getOption(options, 'variant') || 'standard';
+  const type = getOption(options, 'type') || undefined;
+  const difficulty = getOption(options, 'difficulty');
+
+  if (variant === 'random') {
+    const typesResult = await callTool('chess_list_puzzle_types', {}, env);
+    const variants = typesResult.variants || [];
+    variant = variants[Math.floor(Math.random() * variants.length)] || 'standard';
+  }
+
+  let variantInfo = null;
+  if (variant !== 'standard') {
+    try {
+      const varResult = await callTool('chess_list_variants', {}, env);
+      const vars = varResult.variants || [];
+      variantInfo = vars.find(v => v.key === variant) || null;
+    } catch {}
+  }
+
+  const args = { variant, include_svg: false };
+  if (type) args.type = type;
+
+  if (difficulty === 'easy') { args.rating_max = 1000; }
+  else if (difficulty === 'medium') { args.rating_min = 1000; args.rating_max = 1500; }
+  else if (difficulty === 'hard') { args.rating_min = 1500; args.rating_max = 2000; }
+  else if (difficulty === 'expert') { args.rating_min = 2000; }
+
   try {
-    const result = await callTool('chess_generate_puzzle', { variant, type }, env);
+    const result = await callTool('chess_generate_puzzle', args, env);
+    if (result.error) return ephemeral(result.error);
+
     const link = `https://chess.moddable.games/play/?variant=${variant}&fen=${encodeURIComponent(result.fen)}`;
-    return embed({
-      title: `🧩 Puzzle (${type})`,
-      description: `Find the best move!\n\n[▶ Open on board](${link})\n\n||Solution: ${result.solution ? result.solution.join(' → ') : 'N/A'}||`,
-      footer: `FEN: ${result.fen}`,
+    const rulesLink = `https://rules.moddable.games/dist/moddable-chess/`;
+    const boardUrl = `https://tools.moddable.games/api/board.png?variant=${variant}&fen=${encodeURIComponent(result.fen)}&size=480`;
+    const ratingStr = result.rating ? ` · Rating: ${result.rating}` : '';
+    const turnEmoji = result.turn === 'white' ? '⬜' : '⬛';
+    const themeStr = result.themes && result.themes.length > 0
+      ? `\nThemes: ${result.themes.slice(0, 4).join(', ')}`
+      : '';
+    const variantLabel = variantInfo ? variantInfo.label : (variant !== 'standard' ? camelToTitle(variant) : '');
+
+    let desc = `${turnEmoji} **${result.turn}** to move — find the best move!\n\n**Type:** ${result.type}${themeStr}`;
+    if (variantInfo) {
+      desc += `\n\n> **${variantInfo.label}** — ${variantInfo.description}`;
+      desc += `\n> ${variantInfo.rule} · [Full rules](${rulesLink})`;
+    }
+    desc += `\n\n[▶ Open on board](${link})\n\n||Solution: ${result.solution ? result.solution.join(' → ') : 'N/A'}||`;
+
+    return embedWithImage({
+      title: `🧩 ${variantLabel ? variantLabel + ' ' : ''}Puzzle${ratingStr}`,
+      description: desc,
+      footer: `ID: ${result.id || '?'} · Pool: ${result.poolSize || '?'} puzzles`,
+      image: boardUrl,
       color: 0x0c4f8d,
     });
   } catch (e) {
@@ -410,6 +454,21 @@ function embed({ title, description, footer, color }) {
   });
 }
 
+function embedWithImage({ title, description, footer, image, color }) {
+  return json({
+    type: InteractionResponseType.CHANNEL_MESSAGE,
+    data: {
+      embeds: [{
+        title,
+        description,
+        color: color || 0x0a0d2a,
+        ...(footer ? { footer: { text: footer } } : {}),
+        ...(image ? { image: { url: image } } : {}),
+      }],
+    },
+  });
+}
+
 function ephemeral(content) {
   return json({
     type: InteractionResponseType.CHANNEL_MESSAGE,
@@ -427,6 +486,10 @@ function getOption(options, name) {
   if (!options) return null;
   const opt = options.find(o => o.name === name);
   return opt ? opt.value : null;
+}
+
+function camelToTitle(str) {
+  return str.replace(/([A-Z])/g, ' $1').replace(/^./, c => c.toUpperCase()).trim();
 }
 
 // --- Ed25519 signature verification ---

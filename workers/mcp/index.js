@@ -2,9 +2,60 @@ import { CHESS_TOOLS, handleChessToolCall } from './chess-tools.js';
 import { HEX_TOOLS, handleHexToolCall } from './hex-tools.js';
 import PUZZLE_POOL from './puzzle-pool.json';
 import { GameRoom } from './game-room.js';
+import { Resvg, initWasm } from '@resvg/resvg-wasm';
+import resvgWasm from '@resvg/resvg-wasm/index_bg.wasm';
 export { GameRoom };
 
+let wasmReady = false;
+
+const PUZZLE_POOL_TOOL = {
+  name: 'chess_generate_puzzle',
+  description: 'Serve a random chess puzzle from a pool of 1,617 pre-generated puzzles across 70+ variants. Returns position, solution, metadata, and an SVG board image. Use chess_list_puzzle_types to discover available variant:type combinations.',
+  inputSchema: {
+    type: 'object',
+    properties: {
+      variant: {
+        type: 'string',
+        description: 'Variant key (e.g. "standard", "atomic", "racingKings") or "random" for a surprise variant. Defaults to "standard". Use chess_list_puzzle_types to see all available variants.',
+      },
+      type: {
+        type: 'string',
+        description: 'Puzzle type (e.g. "mate-in-1", "detonate-in-1", "sacrifice-your-king"). Defaults to the first available type for the variant. Use chess_list_puzzle_types to see all types.',
+      },
+      rating_min: {
+        type: 'number',
+        description: 'Minimum puzzle rating filter (Lichess rating scale). Omit for no minimum.',
+      },
+      rating_max: {
+        type: 'number',
+        description: 'Maximum puzzle rating filter. Omit for no maximum.',
+      },
+      theme: {
+        type: 'string',
+        description: 'Filter by puzzle theme (e.g. "backRankMate", "sacrifice", "endgame"). Only applies to Lichess-sourced puzzles.',
+      },
+      include_svg: {
+        type: 'boolean',
+        description: 'Include an SVG board render of the puzzle position. Defaults to true.',
+      },
+    },
+  },
+};
+
 const SITE_TOOLS = [
+  {
+    name: 'chess_list_puzzle_types',
+    description: 'List all available puzzle types in the pool with counts. Returns variant:type keys, total puzzles per key, and rating ranges. Use this to discover what puzzles are available before calling chess_generate_puzzle.',
+    inputSchema: {
+      type: 'object',
+      properties: {
+        variant: {
+          type: 'string',
+          description: 'Filter to a specific variant (e.g. "standard", "atomic"). Omit to see all variants.',
+        },
+      },
+    },
+  },
   {
     name: 'dice_roll',
     description: 'Roll dice using standard notation (e.g. "2d6+3", "4d8-1", "d20"). Supports any combination of dice, modifiers, and multiple pools.',
@@ -39,11 +90,16 @@ const SITE_TOOLS = [
   },
 ];
 
-const ALL_TOOLS = [...CHESS_TOOLS, ...HEX_TOOLS, ...SITE_TOOLS];
+const ALL_TOOLS = [
+  ...CHESS_TOOLS.filter(t => t.name !== 'chess_generate_puzzle'),
+  PUZZLE_POOL_TOOL,
+  ...HEX_TOOLS,
+  ...SITE_TOOLS,
+];
 
 const SERVER_INFO = {
   name: 'moddable-tools',
-  version: '1.2.0',
+  version: '1.3.0',
   description: 'AI-callable tools for chess variant analysis, hex map generation, and board game utilities',
 };
 
@@ -192,6 +248,10 @@ export default {
       return json({ tools: ALL_TOOLS, count: ALL_TOOLS.length }, corsHeaders);
     }
 
+    if (path === '/api/board.png') {
+      return handleBoardPng(url, corsHeaders);
+    }
+
     if (path.startsWith('/api/call') && request.method === 'POST') {
       return handleRestCall(request, corsHeaders);
     }
@@ -208,6 +268,7 @@ export default {
 
 function handleToolCall(name, args) {
   if (name === 'chess_generate_puzzle') return servePuzzleFromPool(args);
+  if (name === 'chess_list_puzzle_types') return listPuzzleTypes(args);
   if (name.startsWith('chess_')) return handleChessToolCall(name, args);
   if (name.startsWith('hex_')) return handleHexToolCall(name, args);
   if (name === 'dice_roll') return diceRoll(args);
@@ -215,22 +276,128 @@ function handleToolCall(name, args) {
   return { error: `Unknown tool: ${name}` };
 }
 
+function listPuzzleTypes(args) {
+  const filterVariant = args && args.variant;
+  const types = [];
+
+  for (const [key, puzzles] of Object.entries(PUZZLE_POOL)) {
+    const [variant, ...typeParts] = key.split(':');
+    const type = typeParts.join(':');
+    if (filterVariant && variant !== filterVariant) continue;
+
+    const ratings = puzzles.map(p => p.rating).filter(r => typeof r === 'number');
+    types.push({
+      key,
+      variant,
+      type,
+      count: puzzles.length,
+      ratingRange: ratings.length > 0
+        ? { min: Math.min(...ratings), max: Math.max(...ratings) }
+        : null,
+    });
+  }
+
+  types.sort((a, b) => a.key.localeCompare(b.key));
+
+  const variants = [...new Set(types.map(t => t.variant))].sort();
+  const totalPuzzles = types.reduce((sum, t) => sum + t.count, 0);
+
+  return {
+    totalPuzzles,
+    totalTypes: types.length,
+    variants,
+    variantCount: variants.length,
+    types,
+  };
+}
+
+function extractHighlightSquares(moveStr) {
+  if (!moveStr) return [];
+  if (/^[a-l]\d[a-l]\d/.test(moveStr)) {
+    return [moveStr.slice(0, 2), moveStr.slice(2, 4)];
+  }
+  const squares = moveStr.match(/[a-l][1-9][0-2]?/g);
+  return squares ? squares.slice(0, 2) : [];
+}
+
 function servePuzzleFromPool(args) {
-  const variant = (args && args.variant) || 'standard';
-  const type = (args && args.type) || 'mate-in-1';
+  let variant = (args && args.variant) || 'standard';
+  if (variant === 'random') {
+    const allVariants = [...new Set(Object.keys(PUZZLE_POOL).map(k => k.split(':')[0]))];
+    variant = allVariants[Math.floor(Math.random() * allVariants.length)];
+  }
+  const ratingMin = args && args.rating_min;
+  const ratingMax = args && args.rating_max;
+  const themeFilter = args && args.theme;
+  const includeSvg = args && args.include_svg !== false;
+
+  let type = args && args.type;
+  if (!type) {
+    const variantKeys = Object.keys(PUZZLE_POOL).filter(k => k.startsWith(variant + ':'));
+    if (variantKeys.length === 0) {
+      const available = [...new Set(Object.keys(PUZZLE_POOL).map(k => k.split(':')[0]))].sort();
+      return {
+        variant,
+        error: `No puzzles available for variant "${variant}". Available variants: ${available.join(', ')}`,
+      };
+    }
+    type = variantKeys[0].split(':').slice(1).join(':');
+  }
+
   const key = variant + ':' + type;
-  const pool = PUZZLE_POOL[key];
+  let pool = PUZZLE_POOL[key];
 
   if (!pool || pool.length === 0) {
+    const variantKeys = Object.keys(PUZZLE_POOL).filter(k => k.startsWith(variant + ':'));
     return {
-      type, variant,
-      error: `No pre-generated puzzles for ${variant} ${type}. Available: ${Object.keys(PUZZLE_POOL).join(', ')}`,
+      variant, type,
+      error: `No puzzles for "${key}". Available types for ${variant}: ${variantKeys.map(k => k.split(':').slice(1).join(':')).join(', ') || 'none'}`,
+    };
+  }
+
+  if (ratingMin) pool = pool.filter(p => (p.rating || 0) >= ratingMin);
+  if (ratingMax) pool = pool.filter(p => (p.rating || 9999) <= ratingMax);
+  if (themeFilter) pool = pool.filter(p => p.themes && p.themes.includes(themeFilter));
+
+  if (pool.length === 0) {
+    return {
+      variant, type,
+      error: 'No puzzles match the given filters. Try widening rating range or removing theme filter.',
+      totalBeforeFilter: PUZZLE_POOL[key].length,
     };
   }
 
   const idx = Math.floor(Math.random() * pool.length);
   const puzzle = pool[idx];
-  return { type, variant, fen: puzzle.fen, turn: puzzle.turn, solution: puzzle.solution };
+
+  const result = {
+    variant,
+    type,
+    id: puzzle.id,
+    fen: puzzle.fen,
+    turn: puzzle.turn,
+    solution: puzzle.solution,
+    rating: puzzle.rating || null,
+    themes: puzzle.themes || [],
+    source: puzzle.source || null,
+    poolSize: pool.length,
+  };
+
+  if (includeSvg) {
+    const highlights = extractHighlightSquares(puzzle.solution[0]);
+    const svgResult = handleChessToolCall('chess_render_svg', {
+      variant,
+      fen: puzzle.fen,
+      theme: 'classic',
+      highlights,
+      size: 480,
+    });
+    if (svgResult && svgResult.svg) {
+      result.svg = svgResult.svg;
+    }
+  }
+
+  return result;
 }
 
 function diceRoll(args) {
@@ -324,6 +491,53 @@ async function handleRestCall(request, corsHeaders) {
   const result = handleToolCall(tool, args || {});
   const status = result.error ? 400 : 200;
   return json(result, corsHeaders, status);
+}
+
+async function handleBoardPng(url, corsHeaders) {
+  const fen = url.searchParams.get('fen');
+  const variant = url.searchParams.get('variant') || 'standard';
+  const theme = url.searchParams.get('theme') || 'classic';
+  const size = parseInt(url.searchParams.get('size') || '480');
+  const highlights = url.searchParams.get('highlights');
+
+  if (!fen) {
+    return json({ error: 'fen parameter is required' }, corsHeaders, 400);
+  }
+
+  const svgResult = handleChessToolCall('chess_render_svg', {
+    variant,
+    fen,
+    theme,
+    size,
+    highlights: highlights ? highlights.split(',') : [],
+  });
+
+  if (!svgResult || !svgResult.svg) {
+    return json({ error: 'Failed to render SVG' }, corsHeaders, 500);
+  }
+
+  try {
+    if (!wasmReady) {
+      await initWasm(resvgWasm);
+      wasmReady = true;
+    }
+
+    const resvg = new Resvg(svgResult.svg, {
+      fitTo: { mode: 'width', value: size },
+    });
+    const pngData = resvg.render();
+    const pngBuffer = pngData.asPng();
+
+    return new Response(pngBuffer, {
+      headers: {
+        'Content-Type': 'image/png',
+        'Cache-Control': 'public, max-age=86400',
+        ...corsHeaders,
+      },
+    });
+  } catch (e) {
+    return json({ error: `PNG render failed: ${e.message}` }, corsHeaders, 500);
+  }
 }
 
 function handleMcpSse(request, corsHeaders) {
@@ -530,7 +744,7 @@ function generateLlmsTxt() {
   let txt = `# Moddable.Games — AI Tool Server\n`;
   txt += `# https://tools.moddable.games\n\n`;
   txt += `> Moddable.Games provides open-source board game engines as AI-callable tools.\n`;
-  txt += `> 13 tools across two engines: chess variant analysis (70+ variants) and hex map generation (6 games).\n\n`;
+  txt += `> ${ALL_TOOLS.length} tools across chess variant analysis (70+ variants, 1,500+ puzzles), hex map generation (6 games), and board game utilities.\n\n`;
   txt += `## Endpoints\n\n`;
   txt += `- MCP (SSE): https://tools.moddable.games/mcp\n`;
   txt += `- MCP (message): POST https://tools.moddable.games/mcp/message\n`;

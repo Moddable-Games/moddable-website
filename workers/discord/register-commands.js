@@ -62,14 +62,16 @@ const commands = [
   },
   {
     name: 'puzzle',
-    description: 'Get a chess puzzle to solve',
+    description: 'Get a chess puzzle from 1,600+ puzzles across 70+ variants',
     options: [
-      { name: 'type', type: 3, description: 'Puzzle type', required: false, choices: [
-        { name: 'Mate in 1', value: 'mate-in-1' },
-        { name: 'Mate in 2', value: 'mate-in-2' },
-        { name: 'Tactics', value: 'tactics' },
+      { name: 'variant', type: 3, description: 'Chess variant (e.g. atomic, racingKings, codrus) or "random" for surprise', required: false },
+      { name: 'difficulty', type: 3, description: 'Difficulty level', required: false, choices: [
+        { name: 'Easy (< 1000)', value: 'easy' },
+        { name: 'Medium (1000-1500)', value: 'medium' },
+        { name: 'Hard (1500-2000)', value: 'hard' },
+        { name: 'Expert (2000+)', value: 'expert' },
       ]},
-      { name: 'variant', type: 3, description: 'Chess variant (default: standard)', required: false },
+      { name: 'type', type: 3, description: 'Puzzle type (default: auto, e.g. mate-in-1, detonate-in-1)', required: false },
     ],
   },
   {
