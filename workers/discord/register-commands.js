@@ -239,11 +239,6 @@ const commands = [
     ],
   },
   {
-    name: 'test',
-    description: 'Run the full tool test suite (bot-testing channel only)',
-    options: [],
-  },
-  {
     name: 'help',
     description: 'Show all available commands',
     options: [],

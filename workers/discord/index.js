@@ -128,7 +128,6 @@ async function handleCommand(interaction, env) {
     case 'morris': return cmdMorris(options, env);
     case 'ur': return cmdUr(options, env);
     case 'cowries': return cmdCowries(options, env);
-    case 'test': return cmdTest(interaction, env);
     case 'help': return cmdHelp();
     default:
       return ephemeral(`Unknown command: \`/${name}\``);
@@ -766,92 +765,6 @@ async function cmdCowries(options, env) {
   }
 }
 
-async function cmdTest(interaction, env) {
-  const channelId = interaction.channel_id;
-  const token = env.DISCORD_TOKEN;
-
-  const tests = [
-    { cmd: '/roll 3d6+2', tool: 'dice_roll', args: { notation: '3d6+2' } },
-    { cmd: '/flip pizza,tacos,sushi', tool: 'coin_flip', args: { options: ['pizza', 'tacos', 'sushi'] } },
-    { cmd: '/teams Alice,Bob,Charlie,Dave', tool: 'team_split', args: { players: ['Alice', 'Bob', 'Charlie', 'Dave'], teams: 2 } },
-    { cmd: '/variants Tactical', tool: 'chess_list_variants', args: { group: 'Tactical' } },
-    { cmd: '/validate e2e4', tool: 'chess_validate_move', args: { variant: 'standard', move: 'e2e4' } },
-    { cmd: '/moves (starting position)', tool: 'chess_get_legal_moves', args: { variant: 'standard' } },
-    { cmd: '/analyze (starting position)', tool: 'chess_analyze_position', args: { variant: 'standard' } },
-    { cmd: '/play e4 e5 Nf3', tool: 'chess_make_moves', args: { variant: 'standard', moves: ['e2e4', 'e7e5', 'g1f3'] } },
-    { cmd: '/openings', tool: 'chess_get_opening_book', args: { variant: 'standard' } },
-    { cmd: '/puzzle (standard)', tool: 'chess_generate_puzzle', args: { variant: 'standard', include_svg: false } },
-    { cmd: '/puzzle types (atomic)', tool: 'chess_list_puzzle_types', args: { variant: 'atomic' } },
-    { cmd: '/hexgames', tool: 'hex_list_games', args: {} },
-    { cmd: '/map nukes 4', tool: 'hex_generate_map', args: { game: 'nukes', players: 4, seed: 'test' } },
-    { cmd: '/rules (list all)', tool: 'rules_list_games', args: {} },
-    { cmd: '/rules backgammon', tool: 'rules_get_game', args: { slug: 'backgammon' } },
-    { cmd: '/howtoplay backgammon Acey-Deucey', tool: 'rules_get_variant', args: { game: 'backgammon', variant: 'acey-deucey' } },
-    { cmd: '/search dice movement', tool: 'rules_search', args: { query: 'dice movement' } },
-    { cmd: '/randomgame', tool: 'rules_random', args: {} },
-    { cmd: '/factions 5 pok', tool: 'ti4_random_factions', args: { players: 5, expansion: 'pok' } },
-    { cmd: '/draft 6 3', tool: 'ti4_draft_factions', args: { players: 6, pool_size: 3, expansions: ['base', 'pok'] } },
-    { cmd: '/objectives 1', tool: 'ti4_draw_objectives', args: { stage: 1, count: 5 } },
-    { cmd: '/agendas 2', tool: 'ti4_draw_agendas', args: { count: 2 } },
-    { cmd: '/setup 4', tool: 'nukes_setup_generator', args: { players: 4 } },
-    { cmd: '/odds 5,6,8,9', tool: 'colony_dice_odds', args: { numbers: [5, 6, 8, 9] } },
-    { cmd: '/mancala 3', tool: 'mancala_simulate_move', args: { board: [4,4,4,4,4,4,0,4,4,4,4,4,4,0], pit: 3, variant: 'kalah' } },
-    { cmd: '/morris', tool: 'morris_legal_moves', args: { board: new Array(24).fill(0), player: 1, phase: 'place' } },
-    { cmd: '/ur', tool: 'ur_roll_dice', args: {} },
-    { cmd: '/cowries', tool: 'pachisi_roll_cowries', args: { shells: 6, game: 'pachisi' } },
-    { cmd: '/jam status', tool: 'jam_status', args: {} },
-    { cmd: '/jam timer', tool: 'jam_timer', args: {} },
-    { cmd: '/jam vote', tool: 'jam_vote', args: {} },
-  ];
-
-  const postMessage = async (content, embeds) => {
-    await fetch(`${DISCORD_API}/channels/${channelId}/messages`, {
-      method: 'POST',
-      headers: { 'Authorization': `Bot ${token}`, 'Content-Type': 'application/json' },
-      body: JSON.stringify({ content, embeds }),
-    });
-  };
-
-  // Respond immediately, then post results async
-  setTimeout(async () => {
-    await postMessage('**🧪 Tool Test Suite — 31 commands**\n━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━');
-
-    let passed = 0;
-    let failed = 0;
-
-    for (const test of tests) {
-      try {
-        const result = await callTool(test.tool, test.args, env);
-        const hasError = result && result.error;
-        const icon = hasError ? '❌' : '✅';
-        const status = hasError ? `FAIL: ${result.error}` : 'PASS';
-        if (hasError) failed++; else passed++;
-
-        const preview = hasError ? result.error : JSON.stringify(result).slice(0, 150);
-        await postMessage(null, [{
-          title: `${icon} ${test.cmd}`,
-          description: `\`${test.tool}\`\n\`\`\`json\n${preview}\n\`\`\``,
-          color: hasError ? 0xd11a1a : 0x3a9928,
-        }]);
-      } catch (e) {
-        failed++;
-        await postMessage(null, [{
-          title: `💥 ${test.cmd}`,
-          description: `\`${test.tool}\`\nException: ${e.message}`,
-          color: 0xd11a1a,
-        }]);
-      }
-    }
-
-    await postMessage(`\n**Results: ${passed} passed, ${failed} failed out of ${tests.length}**\n━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━`);
-  }, 100);
-
-  return embed({
-    title: '🧪 Running Test Suite',
-    description: `Testing ${tests.length} tools against \`tools.moddable.games\`…\nResults will appear below.`,
-    color: 0x0a0d2a,
-  });
-}
 
 function cmdHelp() {
   return embed({
@@ -903,8 +816,6 @@ function cmdHelp() {
       '`/jam timer` — Time remaining',
       '`/jam vote` — Vote standings',
       '',
-      '**Admin**',
-      '`/test` — Run full test suite',
     ].join('\n'),
     footer: 'The House always wins. · 39 tools at tools.moddable.games',
     color: 0x0a0d2a,
