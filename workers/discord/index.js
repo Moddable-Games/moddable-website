@@ -62,9 +62,9 @@ export default {
 // --- House post reply tracking ---
 
 async function checkHousePostReplies(env) {
-  if (!env.KV) return;
-  const raw = await env.KV.get('house_posts', 'json');
-  if (!raw || !Array.length) return;
+  if (!env.JAM_KV) return;
+  const raw = await env.JAM_KV.get('house_posts', 'json');
+  if (!raw || !raw.length) return;
   const posts = Array.isArray(raw) ? raw : [];
   const headers = { 'Authorization': `Bot ${env.DISCORD_TOKEN}` };
 
@@ -91,7 +91,7 @@ async function checkHousePostReplies(env) {
     } catch (e) {}
   }
 
-  await env.KV.put('house_posts', JSON.stringify(posts));
+  await env.JAM_KV.put('house_posts', JSON.stringify(posts));
 }
 
 // --- Command routing ---
