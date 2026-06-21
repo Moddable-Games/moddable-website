@@ -7,7 +7,7 @@
 
   var hero = document.getElementById('dev-hero');
   hero.appendChild(MG.sectionHero({
-    section: 'dev-examples',
+    section: 'developers',
     tier: 2,
     hexColor: 'purple',
     eyebrow: 'EXAMPLES',

@@ -338,6 +338,7 @@ button:focus-visible, a:focus-visible, input:focus-visible, textarea:focus-visib
 .mg-eyebrow--green { color: var(--mg-green); }
 .mg-eyebrow--blue { color: var(--mg-blue); }
 .mg-eyebrow--red { color: var(--mg-red); }
+.mg-eyebrow--purple { color: #8b5cf6; }
 .mg-eyebrow--glow { color: var(--mg-cosmic-glow); text-shadow: 0 0 12px rgba(111,181,255,0.5); }
 .mg-heading-xl { font-family: var(--mg-font-display); font-weight: 600; font-size: clamp(36px, 4.5vw, 56px); line-height: 1.05; letter-spacing: -0.025em; color: var(--mg-ink); margin: 0 0 48px; text-wrap: balance; }
 .mg-heading-xl--light { color: #fff; }
