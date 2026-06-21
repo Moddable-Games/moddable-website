@@ -3,14 +3,21 @@ const { T, el, btn, navbar, footer, data } = MG;
 document.getElementById('nav-root').appendChild(navbar('Tools'));
 document.getElementById('footer-root').appendChild(footer());
 
-document.getElementById('page-hero').appendChild(MG.sectionHero({
+const heroEl = MG.sectionHero({
   section: 'tool-ti',
   tier: 2,
   hexColor: 'green',
   eyebrow: 'HYPER IMPERIUM',
   title: 'TI4 tools.',
   lede: 'Faction picker, objective tracker, and agenda voter for Hyper Imperium.'
-}));
+});
+const ctaWrap = el('div', { className: 'ti-dashboard-cta' });
+ctaWrap.appendChild(el('p', { className: 'ti-dashboard-cta__text', textContent: 'Playing Hyper Imperium tonight?' }));
+const ctaLink = el('a', { href: 'dashboard/', className: 'ti-dashboard-cta__btn', html: 'Launch session dashboard &rarr;' });
+ctaWrap.appendChild(ctaLink);
+const heroContent = heroEl.querySelector('.mg-hero__content') || heroEl;
+heroContent.appendChild(ctaWrap);
+document.getElementById('page-hero').appendChild(heroEl);
 
 let ti4Data = null;
 let enabledExpansions = { base: true, pok: true, codex: true };
