@@ -4,7 +4,7 @@
    ========================================================================= */
 
 window.MG = (() => {
-  const VERSION = '1.0.202';
+  const VERSION = '1.0.205';
   const META_BASE = (document.querySelector('meta[name="mg-base"]') || {}).content;
   const BASE = META_BASE != null ? META_BASE
     : location.pathname.includes('/MODDABLE/moddable-website')
@@ -49,6 +49,10 @@ window.MG = (() => {
           Object.assign(e.style, v);
         } else if (k === 'html') {
           e.innerHTML = v;
+        } else if (k === 'textContent') {
+          e.textContent = v;
+        } else if (k === 'className') {
+          e.className = v;
         } else if (k.startsWith('on')) {
           e.addEventListener(k.slice(2).toLowerCase(), v);
         } else {
