@@ -359,3 +359,272 @@
     word-break: break-all;
   }
 }
+
+/* ── Live integrations section ── */
+.dev-live {
+  padding: 100px 0 80px;
+  background: var(--mg-canvas-light);
+  position: relative;
+  overflow: hidden;
+  border-top: 1px solid var(--mg-hairline-light);
+}
+.dev-live .mg-container {
+  position: relative;
+}
+.dev-live__header {
+  margin-bottom: 48px;
+}
+.dev-live__heading {
+  font-family: var(--mg-font-display);
+  font-size: clamp(1.75rem, 3.5vw, 2.5rem);
+  font-weight: 700;
+  color: var(--mg-ink);
+  margin: 12px 0 16px;
+  letter-spacing: -0.02em;
+}
+.dev-live__lede {
+  font-size: 1rem;
+  line-height: 1.6;
+  color: var(--mg-ink);
+  opacity: 0.6;
+  max-width: 520px;
+}
+.dev-live__grid {
+  display: grid;
+  grid-template-columns: repeat(2, 1fr);
+  gap: 20px;
+}
+
+/* ── Live card ── */
+.dev-live-card {
+  background: #0f1235;
+  border: 1px solid rgba(139,92,246,0.15);
+  border-radius: 16px;
+  padding: 28px 28px 24px;
+  display: flex;
+  flex-direction: column;
+  gap: 14px;
+  opacity: 0;
+  transform: translateY(20px);
+  transition: opacity 0.5s ease, transform 0.5s ease, border-color 0.2s;
+  transition-delay: var(--delay, 0ms);
+}
+.dev-live-card.dev-revealed {
+  opacity: 1;
+  transform: translateY(0);
+}
+.dev-live-card:hover {
+  border-color: rgba(139,92,246,0.4);
+}
+.dev-live-card--blue:hover { border-color: rgba(12,79,141,0.6); }
+.dev-live-card--green:hover { border-color: rgba(58,153,40,0.6); }
+.dev-live-card--red:hover { border-color: rgba(209,26,26,0.5); }
+.dev-live-card--purple:hover { border-color: rgba(139,92,246,0.5); }
+
+.dev-live-card__header {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+}
+.dev-live-card__status {
+  display: flex;
+  align-items: center;
+  gap: 6px;
+}
+.dev-live-card__dot {
+  width: 7px;
+  height: 7px;
+  border-radius: 50%;
+  background: #3a9928;
+  animation: devPulse 2.5s ease-in-out infinite;
+}
+@keyframes devPulse {
+  0%, 100% { opacity: 1; }
+  50% { opacity: 0.4; }
+}
+.dev-live-card__status-text {
+  font-family: var(--mg-font-mono);
+  font-size: 0.68rem;
+  font-weight: 600;
+  color: #3a9928;
+  text-transform: uppercase;
+  letter-spacing: 0.5px;
+}
+.dev-live-card__subtitle {
+  font-family: var(--mg-font-mono);
+  font-size: 0.7rem;
+  color: rgba(255,255,255,0.4);
+}
+.dev-live-card__title {
+  font-family: var(--mg-font-display);
+  font-size: 1.35rem;
+  font-weight: 700;
+  color: #fff;
+  margin: 0;
+  letter-spacing: -0.01em;
+}
+.dev-live-card__desc {
+  font-size: 0.84rem;
+  line-height: 1.6;
+  color: rgba(255,255,255,0.55);
+  margin: 0;
+}
+.dev-live-card__stats {
+  display: flex;
+  gap: 24px;
+  padding: 14px 0;
+  border-top: 1px solid rgba(255,255,255,0.06);
+  margin-top: auto;
+}
+.dev-live-card__stat {
+  display: flex;
+  flex-direction: column;
+  gap: 2px;
+}
+.dev-live-card__stat-value {
+  font-family: var(--mg-font-mono);
+  font-size: 1.1rem;
+  font-weight: 700;
+  color: #fff;
+}
+.dev-live-card--blue .dev-live-card__stat-value { color: #6fb5ff; }
+.dev-live-card--green .dev-live-card__stat-value { color: #6ddb5a; }
+.dev-live-card--red .dev-live-card__stat-value { color: #ff6b6b; }
+.dev-live-card--purple .dev-live-card__stat-value { color: #b794f6; }
+.dev-live-card__stat-label {
+  font-size: 0.68rem;
+  color: rgba(255,255,255,0.35);
+  text-transform: uppercase;
+  letter-spacing: 0.3px;
+}
+.dev-live-card__links {
+  display: flex;
+  gap: 16px;
+}
+.dev-live-card__link {
+  font-family: var(--mg-font-body);
+  font-size: 0.8rem;
+  font-weight: 600;
+  color: rgba(255,255,255,0.7);
+  text-decoration: none;
+  display: flex;
+  align-items: center;
+  gap: 4px;
+  transition: color 0.2s;
+}
+.dev-live-card__link:hover { color: #fff; text-decoration: none; }
+.dev-live-card--blue .dev-live-card__link:hover { color: #6fb5ff; }
+.dev-live-card--green .dev-live-card__link:hover { color: #6ddb5a; }
+.dev-live-card--red .dev-live-card__link:hover { color: #ff6b6b; }
+.dev-live-card--purple .dev-live-card__link:hover { color: #b794f6; }
+.dev-live-card__link-arrow {
+  font-size: 0.9rem;
+  transition: transform 0.2s;
+}
+.dev-live-card__link:hover .dev-live-card__link-arrow {
+  transform: translateX(2px);
+}
+
+/* ── Build section enhancements ── */
+.dev-build__lede {
+  font-size: 1rem;
+  line-height: 1.6;
+  color: var(--mg-ink);
+  opacity: 0.6;
+  margin: -28px 0 40px;
+  max-width: 480px;
+}
+.dev-build__grid {
+  grid-template-columns: repeat(4, 1fr);
+  gap: 16px;
+}
+.dev-build-card {
+  opacity: 0;
+  transform: translateY(16px);
+  transition: opacity 0.4s ease, transform 0.4s ease, border-color 0.2s;
+  transition-delay: var(--delay, 0ms);
+  padding: 22px 20px;
+}
+.dev-build-card.dev-revealed {
+  opacity: 1;
+  transform: translateY(0);
+}
+.dev-build--light .dev-build-card--blue:hover { border-color: var(--mg-blue); }
+.dev-build--light .dev-build-card--green:hover { border-color: var(--mg-green); }
+.dev-build--light .dev-build-card--red:hover { border-color: var(--mg-red); }
+.dev-build--light .dev-build-card--blue .dev-build-card__tools { color: var(--mg-blue); }
+.dev-build--light .dev-build-card--green .dev-build-card__tools { color: var(--mg-green); }
+.dev-build--light .dev-build-card--red .dev-build-card__tools { color: var(--mg-red); }
+.dev-build-card__title {
+  font-size: 0.92rem;
+  margin-bottom: 6px;
+}
+.dev-build-card__body {
+  font-size: 0.8rem;
+  line-height: 1.5;
+  margin-bottom: 12px;
+}
+.dev-build-card__tools {
+  font-size: 0.65rem;
+  line-height: 1.4;
+}
+
+/* ── CTA connect block variant ── */
+.dev-connect__block--cta {
+  max-width: 680px;
+  margin: 0 auto 28px;
+  text-align: left;
+}
+
+/* ── Mobile: examples page ── */
+@media (max-width: 1024px) {
+  .dev-live__grid {
+    grid-template-columns: 1fr;
+  }
+  .dev-build__grid {
+    grid-template-columns: repeat(2, 1fr);
+  }
+}
+@media (max-width: 768px) {
+  .dev-live {
+    padding: 56px 0;
+  }
+  .dev-live__heading {
+    text-align: center;
+  }
+  .dev-live__lede {
+    text-align: center;
+    margin-left: auto;
+    margin-right: auto;
+  }
+  .dev-live-card {
+    padding: 24px 20px;
+  }
+  .dev-live-card__stats {
+    flex-wrap: wrap;
+    gap: 16px;
+  }
+  .dev-live-card__links {
+    flex-wrap: wrap;
+  }
+  .dev-build__grid {
+    grid-template-columns: 1fr;
+  }
+  .dev-build__lede {
+    text-align: center;
+    margin-left: auto;
+    margin-right: auto;
+  }
+  .dev-build-card {
+    text-align: center;
+  }
+  .dev-connect__block--cta {
+    padding-right: 24px;
+  }
+  .dev-connect__block--cta .dev-connect__copy {
+    position: static;
+    transform: none;
+    margin-top: 12px;
+    opacity: 1;
+  }
+}

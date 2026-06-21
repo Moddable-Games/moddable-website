@@ -28,10 +28,22 @@
 
 <section id="dev-hero"></section>
 
+<section class="dev-live">
+  <div class="mg-container">
+    <div class="dev-live__header">
+      <div class="mg-eyebrow mg-eyebrow--glow">LIVE NOW</div>
+      <h2 class="dev-live__heading">Running in production</h2>
+      <p class="dev-live__lede">These aren't mockups. Every integration below is deployed, public, and callable right now.</p>
+    </div>
+    <div class="dev-live__grid" id="live-grid"></div>
+  </div>
+</section>
+
 <section class="dev-build dev-build--light">
   <div class="mg-container">
     <div class="mg-eyebrow mg-eyebrow--blue">BUILD WITH IT</div>
     <h2 class="dev-build__heading">What you could make</h2>
+    <p class="dev-build__lede">Eight ideas to get you started. Each uses 2-4 tools from the API.</p>
     <div class="dev-build__grid" id="build-grid"></div>
   </div>
 </section>
@@ -42,6 +54,10 @@
       <div class="mg-eyebrow mg-eyebrow--glow">GET STARTED</div>
       <h2 class="dev-cta-card__heading">One command to connect</h2>
       <p class="dev-cta-card__body">All 22 tools are live and free. Connect from Claude, Cursor, or VS Code and start building in seconds.</p>
+      <div class="dev-connect__block dev-connect__block--cta">
+        <pre><code>npx @anthropic-ai/claude-code mcp add moddable -- npx mcp-remote https://tools.moddable.games/mcp</code></pre>
+        <button class="dev-connect__copy" id="cta-copy">Copy</button>
+      </div>
       <div class="dev-cta-card__btns" id="examples-cta-btns"></div>
     </div>
   </div>
