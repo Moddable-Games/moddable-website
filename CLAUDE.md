@@ -31,7 +31,7 @@ One shared component library (`_mg.js` + `_mg.css`), one page per HTML file.
 │   ├── mods.json           ← mod library (10 entries)
 │   ├── games.json          ← games (3 entries)
 │   ├── engines.json        ← engine/SDK listings (2 entries)
-│   ├── mcp-tools.json      ← MCP tool registry (22 tools, 4 namespaces)
+│   ├── mcp-tools.json      ← MCP tool registry (39 tools, 5 namespaces)
 │   ├── news.json           ← news posts (13 entries)
 │   └── team.json           ← team members (4 entries)
 │
@@ -72,10 +72,15 @@ One shared component library (`_mg.js` + `_mg.css`), one page per HTML file.
 └── workers/
     ├── index.js            ← forms API Worker (subscribe, submit)
     ├── wrangler.toml       ← Cloudflare config for moddable-api
+    ├── discord/
+    │   ├── index.js        ← The House Discord bot (30 slash commands)
+    │   ├── register-commands.js ← Discord command registration script
+    │   └── wrangler.toml   ← Cloudflare config for moddable-bot
     └── mcp/
-        ├── index.js        ← MCP tools Worker (22 tools, 4 namespaces)
+        ├── index.js        ← MCP tools Worker (39 tools, 5 namespaces)
         ├── chess-tools.js  ← re-exports from moddable-chess/mcp/tools.js
         ├── hex-tools.js    ← re-exports from moddable-hexmaps/mcp/tools.js
+        ├── game-tools.js   ← classic game engines (Mancala, Morris, Ur, Pachisi, etc)
         ├── rules-tools.js  ← rules library tools (queries rules-index.json)
         ├── rules-index.json← search index from moddable-rules/dist/
         ├── wrangler.toml   ← Cloudflare config for moddable-tools
@@ -109,8 +114,9 @@ The script:
 
 ## MCP Tools Worker
 
-The repo contains a Cloudflare Worker at `workers/mcp/` that serves 22
-AI-callable tools across 4 namespaces (Chess, Hexmaps, Rules, Utilities).
+The repo contains a Cloudflare Worker at `workers/mcp/` that serves 39
+AI-callable tools across 5 namespaces (Chess, Hexmaps, Rules, Game Tools,
+Utilities).
 
 **Live at:** `https://tools.moddable.games/`
 
@@ -123,10 +129,17 @@ AI-callable tools across 4 namespaces (Chess, Hexmaps, Rules, Utilities).
 - `/openapi.json` — OpenAPI 3.1 spec
 - `/.well-known/mcp.json` — MCP server discovery manifest
 
+**Namespaces:**
+- **moddable-chess** (9 tools) — variant listing, legal moves, analysis, puzzles, SVG render
+- **moddable-hexmaps** (6 tools) — map generation, pathfinding, FOV, SVG export
+- **moddable-rules** (5 tools) — game/variant lookup, search, random
+- **game-tools** (12 tools) — TI4 objectives/agendas/draft, Mancala, Morris, Ur, Pachisi, Nukes setup, Colony odds
+- **moddable-tools** (7 tools) — dice roll, faction assign, coin flip, team split, jam status/timer/vote
+
 **Architecture:** The Worker imports tool handlers from sibling repos
 (`moddable-chess/mcp/tools.js`, `moddable-hexmaps/mcp/tools.js`) and local
-modules (`rules-tools.js`) via relative paths. Wrangler's bundler resolves and
-inlines everything at deploy time. No runtime filesystem access needed.
+modules (`rules-tools.js`, `game-tools.js`) via relative paths. Wrangler's
+bundler resolves and inlines everything at deploy time.
 
 **Deploy:** `cd workers/mcp && wrangler deploy`
 
@@ -134,6 +147,29 @@ inlines everything at deploy time. No runtime filesystem access needed.
 1,557 puzzles across 66 variants (no CPU-intensive search at runtime). The
 pool is imported from `puzzle-pool.json` at bundle time. Board images are
 rendered via `@resvg/resvg-wasm` at `/api/board.png`.
+
+---
+
+## Discord Bot (The House)
+
+The repo contains a Cloudflare Worker at `workers/discord/` that powers "The
+House" — the server bot for the Moddable.Games Discord.
+
+**30 registered slash commands** consuming all 39 MCP tools via the REST API
+bridge (`callTool` → `POST tools.moddable.games/api/call`).
+
+**Command groups:** Dice & Utilities, Chess (8 commands), Hex Maps, Rules
+Library, Twilight Imperium, Game Tools (Mancala/Morris/Ur/Pachisi/Nukes/Colony),
+Mod Jam, Admin (`/test`).
+
+**`/test` command:** Runs the full tool test suite in any channel — calls each
+of the 31 testable tools and posts pass/fail embeds with response previews.
+
+**Deploy:** `cd workers/discord && wrangler deploy`
+**Register commands:** `DISCORD_TOKEN=xxx DISCORD_APP_ID=xxx node register-commands.js`
+
+**Scheduled tasks:** Cron trigger checks for Mod Jam deadline milestones (7d,
+3d, 1d warnings) and monitors replies to House posts.
 
 ---
 
