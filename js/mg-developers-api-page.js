@@ -7,13 +7,13 @@
 
   // Sub-page hero
   var hero = document.getElementById('dev-hero');
-  hero.appendChild(MG.pageHero({
+  hero.appendChild(MG.sectionHero({
+    section: 'dev-api',
+    tier: 2,
+    hexColor: 'purple',
     eyebrow: 'TOOLS API',
     title: 'Connect and call',
-    lede: 'One endpoint, 22 tools. MCP protocol for AI agents, REST for everything else.',
-    accent: '#8b5cf6',
-    withHorizon: true,
-    minHeight: '300px'
+    lede: 'One endpoint, 22 tools. MCP protocol for AI agents, REST for everything else.'
   }));
 
   // Copy buttons

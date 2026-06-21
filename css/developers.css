@@ -599,13 +599,23 @@
   }
   .dev-live-card {
     padding: 24px 20px;
+    text-align: center;
+  }
+  .dev-live-card__header {
+    justify-content: center;
+    gap: 12px;
+  }
+  .dev-live-card__subtitle {
+    display: none;
   }
   .dev-live-card__stats {
     flex-wrap: wrap;
     gap: 16px;
+    justify-content: center;
   }
   .dev-live-card__links {
     flex-wrap: wrap;
+    justify-content: center;
   }
   .dev-build__grid {
     grid-template-columns: 1fr;

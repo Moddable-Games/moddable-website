@@ -6,13 +6,13 @@
   document.getElementById('footer-root').appendChild(MG.footer());
 
   var hero = document.getElementById('dev-hero');
-  hero.appendChild(MG.pageHero({
+  hero.appendChild(MG.sectionHero({
+    section: 'dev-examples',
+    tier: 2,
+    hexColor: 'purple',
     eyebrow: 'EXAMPLES',
     title: 'Built with <em>Moddable</em> Tools',
-    lede: 'Live integrations and ideas for what to build next.',
-    accent: '#8b5cf6',
-    withHorizon: true,
-    minHeight: '300px'
+    lede: 'Live integrations and ideas for what to build next.'
   }));
 
   // ── Live Integrations ──
