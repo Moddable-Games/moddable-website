@@ -90,6 +90,63 @@ const SITE_TOOLS = [
       },
     },
   },
+  {
+    name: 'coin_flip',
+    description: 'Flip a coin or pick randomly from a list of options. Use for quick binary decisions or random selection.',
+    inputSchema: {
+      type: 'object',
+      properties: {
+        options: {
+          type: 'array',
+          items: { type: 'string' },
+          description: 'Custom options to pick from (e.g. ["pizza","tacos","sushi"]). Defaults to ["heads","tails"].',
+        },
+      },
+    },
+  },
+  {
+    name: 'team_split',
+    description: 'Randomly split a list of players into balanced teams. Handles odd numbers gracefully.',
+    inputSchema: {
+      type: 'object',
+      properties: {
+        players: {
+          type: 'array',
+          items: { type: 'string' },
+          description: 'Player names to split into teams.',
+        },
+        teams: {
+          type: 'number',
+          description: 'Number of teams (default 2).',
+        },
+      },
+      required: ['players'],
+    },
+  },
+  {
+    name: 'jam_status',
+    description: 'Get the current Mod Jam status: active/inactive, theme, base game, time remaining, and submission count.',
+    inputSchema: {
+      type: 'object',
+      properties: {},
+    },
+  },
+  {
+    name: 'jam_timer',
+    description: 'Get the countdown timer for the current Mod Jam phase (voting, building, or judging).',
+    inputSchema: {
+      type: 'object',
+      properties: {},
+    },
+  },
+  {
+    name: 'jam_vote',
+    description: 'Get current vote standings for the active Mod Jam vote. Returns anonymised tallies per option.',
+    inputSchema: {
+      type: 'object',
+      properties: {},
+    },
+  },
 ];
 
 const ALL_TOOLS = [
@@ -103,7 +160,7 @@ const ALL_TOOLS = [
 
 const SERVER_INFO = {
   name: 'moddable-tools',
-  version: '1.4.0',
+  version: '1.5.0',
   description: 'AI-callable tools for chess variant analysis, hex map generation, rules library queries, and board game utilities',
 };
 
@@ -279,6 +336,11 @@ function handleToolCall(name, args) {
   if (GAME_TOOLS.some(t => t.name === name)) return handleGameToolCall(name, args);
   if (name === 'dice_roll') return diceRoll(args);
   if (name === 'ti4_random_factions') return ti4RandomFactions(args);
+  if (name === 'coin_flip') return coinFlip(args);
+  if (name === 'team_split') return teamSplit(args);
+  if (name === 'jam_status') return jamStatus(args);
+  if (name === 'jam_timer') return jamTimer(args);
+  if (name === 'jam_vote') return jamVote(args);
   return { error: `Unknown tool: ${name}` };
 }
 
@@ -481,6 +543,43 @@ function ti4RandomFactions(args) {
     factions: assigned.map((f, i) => ({ player: i + 1, faction: f })),
     poolSize: pool.length + players,
   };
+}
+
+function coinFlip(args) {
+  const options = (args && args.options && args.options.length >= 2) ? args.options : ['heads', 'tails'];
+  const idx = Math.floor(Math.random() * options.length);
+  return { result: options[idx], options, index: idx };
+}
+
+function teamSplit(args) {
+  if (!args || !args.players || args.players.length < 2) {
+    return { error: 'Provide at least 2 player names.' };
+  }
+  const teamCount = Math.min(args.teams || 2, args.players.length);
+  const shuffled = [...args.players];
+  for (let i = shuffled.length - 1; i > 0; i--) {
+    const j = Math.floor(Math.random() * (i + 1));
+    [shuffled[i], shuffled[j]] = [shuffled[j], shuffled[i]];
+  }
+  const teams = Array.from({ length: teamCount }, () => []);
+  shuffled.forEach((p, i) => teams[i % teamCount].push(p));
+  return {
+    teams: teams.map((members, i) => ({ team: i + 1, members })),
+    teamCount,
+    totalPlayers: args.players.length,
+  };
+}
+
+function jamStatus() {
+  return { active: false, message: 'No Mod Jam is currently running. Check back soon or join the Discord for announcements.' };
+}
+
+function jamTimer() {
+  return { active: false, message: 'No active jam phase. The timer starts when a jam is announced.' };
+}
+
+function jamVote() {
+  return { active: false, message: 'No active vote. Voting opens when a new Mod Jam is announced.' };
 }
 
 async function handleRestCall(request, corsHeaders) {

@@ -240,6 +240,36 @@
         "description": "Generate random faction assignments for a Twilight Imperium 4e game session.",
         "example": "Pick factions for 6 players with Prophecy of Kings",
         "returns": "Array of faction assignments with colours and home systems"
+      },
+      {
+        "name": "coin_flip",
+        "description": "Flip a coin or pick randomly from a custom list of options.",
+        "example": "Flip a coin to decide who goes first",
+        "returns": "The winning option plus full options list"
+      },
+      {
+        "name": "team_split",
+        "description": "Randomly split players into balanced teams. Handles odd numbers.",
+        "example": "Split 7 players into 2 teams",
+        "returns": "Team assignments with member lists"
+      },
+      {
+        "name": "jam_status",
+        "description": "Get the current Mod Jam status: active/inactive, theme, base game, and submission count.",
+        "example": "Is there a Mod Jam running right now?",
+        "returns": "Jam state, theme, base game, time remaining"
+      },
+      {
+        "name": "jam_timer",
+        "description": "Get the countdown timer for the current Mod Jam phase.",
+        "example": "How much time is left in the jam?",
+        "returns": "Phase name, time remaining, deadline"
+      },
+      {
+        "name": "jam_vote",
+        "description": "Get current vote standings for the active Mod Jam vote.",
+        "example": "What are the current jam vote results?",
+        "returns": "Anonymised tallies per option"
       }
     ]
   }

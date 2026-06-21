@@ -13,7 +13,7 @@
     hexColor: 'purple',
     eyebrow: 'DEVELOPERS',
     title: 'Board game engines as <em>AI</em> tools',
-    lede: '34 callable tools across five namespaces. Connect from any MCP client, call via REST, or build bots for Telegram, Slack, and Discord.',
+    lede: '39 callable tools across five namespaces. Connect from any MCP client, call via REST, or build bots for Telegram, Slack, and Discord.',
     feature: MG.buildHeroFeature('developers')
   }));
 
@@ -21,9 +21,9 @@
   var destinations = [
     {
       title: 'Tools API',
-      body: '34 tools for chess, hex maps, rules queries, and classic game engines. Connect in one command via MCP or call via REST.',
+      body: '39 tools for chess, hex maps, rules queries, classic game engines, and utilities. Connect in one command via MCP or call via REST.',
       href: url('/developers/api/'),
-      stat: '34 tools',
+      stat: '39 tools',
       accent: 'blue'
     },
     {
