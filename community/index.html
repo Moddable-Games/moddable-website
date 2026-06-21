@@ -15,13 +15,13 @@
 <meta property="og:url" content="https://moddable.games/community/">
 <meta property="og:type" content="website">
 <meta property="og:site_name" content="Moddable.Games">
-<meta property="og:image" content="https://moddable.games/img/og/community.png?v=1.2.0">
+<meta property="og:image" content="https://moddable.games/img/og/community.png?v=1.2.1">
 <meta name="twitter:card" content="summary_large_image">
 <meta name="twitter:title" content="Community">
 <meta name="twitter:description" content="Join the Moddable.Games Discord — designers, playtesters, and rule-tinkerers building open-source board games together.">
-<meta name="twitter:image" content="https://moddable.games/img/og/community.png?v=1.2.0">
-<link rel="stylesheet" href="../css/_mg.css?v=1.2.0">
-<link rel="stylesheet" href="../css/community.css?v=1.2.0">
+<meta name="twitter:image" content="https://moddable.games/img/og/community.png?v=1.2.1">
+<link rel="stylesheet" href="../css/_mg.css?v=1.2.1">
+<link rel="stylesheet" href="../css/community.css?v=1.2.1">
 </head>
 <body>
 <div id="nav-root"></div>
@@ -67,7 +67,7 @@
     <div>
       <div class="mg-eyebrow mg-eyebrow--glow">THE HOUSE</div>
       <h2 class="mg-heading-lg">Meet the scorekeeper</h2>
-      <p class="house-intro">The House is our server bot. It rolls dice, drafts factions, generates maps, serves puzzles with board images, looks up rules, and picks random games. Type <code>/</code> in any channel.</p>
+      <p class="house-intro">The House is our server bot. It rolls dice, drafts factions, generates maps, serves puzzles with board images, looks up rules, simulates classic games, and calculates odds. Type <code>/</code> in any channel.</p>
       <div class="house-commands">
         <div class="house-commands__group">
           <h3 class="house-commands__heading">Dice and Utilities</h3>
@@ -104,6 +104,18 @@
         <div class="house-commands__group house-commands__group--ti4">
           <h3 class="house-commands__heading">Twilight Imperium</h3>
           <div class="house-cmd"><code>/factions 5 pok</code><span>Random faction draft</span></div>
+          <div class="house-cmd"><code>/draft 6 3</code><span>Milty draft: 6 players, 3 picks each</span></div>
+          <div class="house-cmd"><code>/objectives 1</code><span>Draw Stage 1 objectives</span></div>
+          <div class="house-cmd"><code>/agendas 2</code><span>Draw agenda cards</span></div>
+        </div>
+        <div class="house-commands__group house-commands__group--game">
+          <h3 class="house-commands__heading">Game Tools</h3>
+          <div class="house-cmd"><code>/setup 4</code><span>Random Nukes territory assignment</span></div>
+          <div class="house-cmd"><code>/odds 5,6,8,9</code><span>Colony dice probability calculator</span></div>
+          <div class="house-cmd"><code>/mancala 3</code><span>Simulate sowing from pit 3</span></div>
+          <div class="house-cmd"><code>/morris</code><span>Nine Men's Morris legal moves</span></div>
+          <div class="house-cmd"><code>/ur</code><span>Roll Royal Ur dice (0-4)</span></div>
+          <div class="house-cmd"><code>/cowries</code><span>Roll Pachisi cowrie shells</span></div>
         </div>
         <div class="house-commands__group">
           <h3 class="house-commands__heading">Help</h3>
@@ -126,7 +138,7 @@
 </section>
 
 <div id="footer-root"></div>
-<script src="../js/mg-loader.js?v=1.2.0"></script>
-<script src="../js/mg-community-page.js?v=1.2.0"></script>
+<script src="../js/mg-loader.js?v=1.2.1"></script>
+<script src="../js/mg-community-page.js?v=1.2.1"></script>
 </body>
 </html>

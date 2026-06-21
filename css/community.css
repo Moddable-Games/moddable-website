@@ -93,6 +93,8 @@ body { background: #f5f4ef; }
 .house-commands__group--hex { border-top-color: var(--mg-green); }
 .house-commands__group--ti4 { border-top-color: var(--mg-blue); }
 .house-commands__group--jam { border-top-color: var(--mg-red); }
+.house-commands__group--rules { border-top-color: var(--mg-red); }
+.house-commands__group--game { border-top-color: var(--mg-green); }
 .house-commands__heading { font-family: var(--mg-font-display); font-weight: 600; font-size: 15px; color: var(--mg-ink); margin: 0 0 14px; padding-bottom: 10px; border-bottom: 1px solid var(--mg-hairline-light); }
 .house-cmd { display: grid; grid-template-columns: auto 1fr; gap: 12px; padding: 7px 0; }
 .house-cmd code { font-family: var(--mg-font-mono); font-size: 12px; font-weight: 600; color: var(--mg-blue); white-space: nowrap; }

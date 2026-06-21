@@ -36,10 +36,10 @@
     {
       title: 'MCP Server',
       subtitle: 'tools.moddable.games',
-      description: '22 AI-callable tools across chess analysis, hex map generation, rules library queries, and board game utilities. MCP + REST.',
+      description: '34 AI-callable tools across chess analysis, hex map generation, rules library queries, classic game engines, and board game utilities. MCP + REST.',
       stats: [
-        { label: 'Tools', value: '22' },
-        { label: 'Namespaces', value: '4' },
+        { label: 'Tools', value: '34' },
+        { label: 'Namespaces', value: '5' },
         { label: 'Protocols', value: 'MCP + REST' }
       ],
       accent: 'blue',
