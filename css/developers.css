@@ -362,7 +362,7 @@
 
 /* ── Live integrations section ── */
 .dev-live {
-  padding: 100px 0 80px;
+  padding: 100px 32px 80px;
   background: var(--mg-canvas-light);
   position: relative;
   overflow: hidden;
@@ -587,7 +587,11 @@
 }
 @media (max-width: 768px) {
   .dev-live {
-    padding: 56px 0;
+    padding: 56px 20px;
+  }
+  .dev-build {
+    padding-left: 20px;
+    padding-right: 20px;
   }
   .dev-live__heading {
     text-align: center;
