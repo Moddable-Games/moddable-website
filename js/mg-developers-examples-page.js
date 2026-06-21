@@ -51,6 +51,18 @@
       title: 'Variant Explorer App',
       body: 'A web app that lets users browse 70+ chess variants, play positions, and get engine analysis with explanations.',
       tools: 'chess_list_variants, chess_make_moves, chess_analyze_position'
+    },
+    {
+      icon: '\u{1F4DA}',
+      title: 'Rules Lookup Bot',
+      body: 'A Discord or Slack bot that answers "how do you play X?" with official rules, variant lists, and links to full rulebooks.',
+      tools: 'rules_get_game, rules_get_variant, rules_search'
+    },
+    {
+      icon: '\u{1F3B2}',
+      title: 'Random Game Night Picker',
+      body: 'Can\'t decide what to play? A tool that picks a random game from the library, filtered by player count or game family.',
+      tools: 'rules_list_games, rules_random'
     }
   ];
 

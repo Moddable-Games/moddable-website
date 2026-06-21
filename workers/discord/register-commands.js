@@ -89,6 +89,28 @@ const commands = [
     ],
   },
   {
+    name: 'rules',
+    description: 'Browse the rules library or get details on a game',
+    options: [
+      { name: 'game', type: 3, description: 'Game slug (e.g. backgammon, draughts, nukes). Omit to list all.', required: false },
+    ],
+  },
+  {
+    name: 'howtoplay',
+    description: 'Get rules for a specific game variant',
+    options: [
+      { name: 'game', type: 3, description: 'Game slug (e.g. backgammon, draughts)', required: true },
+      { name: 'variant', type: 3, description: 'Variant name (e.g. Acey-Deucey, German Draughts)', required: true },
+    ],
+  },
+  {
+    name: 'randomgame',
+    description: 'Pick a random game or variant from the library',
+    options: [
+      { name: 'family', type: 3, description: 'Optional: pick random variant within this game family', required: false },
+    ],
+  },
+  {
     name: 'jam',
     description: 'Mod Jam commands',
     options: [

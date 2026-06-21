@@ -43,7 +43,7 @@
       },
       {
         "name": "chess_generate_puzzle",
-        "description": "Serve a random puzzle from 1,617 pre-generated puzzles across 70+ variants. Includes SVG board, rating, themes, and solution.",
+        "description": "Serve a random puzzle from 1,557 pre-generated puzzles across 66 variants (plus standard). Includes SVG board, rating, themes, and solution.",
         "example": "Give me an atomic chess puzzle rated above 1200",
         "returns": "FEN, SVG board image, solution, rating, themes, variant info"
       },
@@ -102,6 +102,44 @@
         "description": "Find shortest path between two hexes avoiding terrain.",
         "example": "Find path from (0,0) to (3,2) avoiding water and mountains",
         "returns": "Path array with distance, or unreachable verdict"
+      }
+    ]
+  },
+  {
+    "namespace": "moddable-rules",
+    "engine": "Moddable Rules",
+    "engineUrl": "https://rules.moddable.games/",
+    "accent": "red",
+    "tools": [
+      {
+        "name": "rules_list_games",
+        "description": "List all game families in the rules library with variant counts, player info, and URLs.",
+        "example": "What board games does Moddable Games have rules for?",
+        "returns": "Array of game objects with slug, title, tagline, players, variantCount"
+      },
+      {
+        "name": "rules_get_game",
+        "description": "Get full metadata and variant list for a specific game family.",
+        "example": "What variants of Backgammon are documented?",
+        "returns": "Game metadata, variant list, summary, rules URL"
+      },
+      {
+        "name": "rules_get_variant",
+        "description": "Get rules content for a specific variant within a game family.",
+        "example": "What are the rules for Acey-Deucey?",
+        "returns": "Rules text, headings, entry count, direct URL to variant page"
+      },
+      {
+        "name": "rules_search",
+        "description": "Search the entire rules library by keyword across all games and variants.",
+        "example": "Which games use dice for movement?",
+        "returns": "Ranked results with game, section, heading, and matching content"
+      },
+      {
+        "name": "rules_random",
+        "description": "Pick a random game or variant from the library. Optionally filter by game family.",
+        "example": "Surprise me with a random board game variant",
+        "returns": "Random game metadata or variant rules content"
       }
     ]
   },

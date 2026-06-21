@@ -1,5 +1,6 @@
 import { CHESS_TOOLS, handleChessToolCall } from './chess-tools.js';
 import { HEX_TOOLS, handleHexToolCall } from './hex-tools.js';
+import { RULES_TOOLS, handleRulesToolCall } from './rules-tools.js';
 import PUZZLE_POOL from './puzzle-pool.json';
 import { GameRoom } from './game-room.js';
 import { Resvg, initWasm } from '@resvg/resvg-wasm';
@@ -10,7 +11,7 @@ let wasmReady = false;
 
 const PUZZLE_POOL_TOOL = {
   name: 'chess_generate_puzzle',
-  description: 'Serve a random chess puzzle from a pool of 1,617 pre-generated puzzles across 70+ variants. Returns position, solution, metadata, and an SVG board image. Use chess_list_puzzle_types to discover available variant:type combinations.',
+  description: 'Serve a random chess puzzle from a pool of 1,557 pre-generated puzzles across 66 variants (plus standard). Returns position, solution, metadata, and an SVG board image. Use chess_list_puzzle_types to discover available variant:type combinations.',
   inputSchema: {
     type: 'object',
     properties: {
@@ -94,13 +95,14 @@ const ALL_TOOLS = [
   ...CHESS_TOOLS.filter(t => t.name !== 'chess_generate_puzzle'),
   PUZZLE_POOL_TOOL,
   ...HEX_TOOLS,
+  ...RULES_TOOLS,
   ...SITE_TOOLS,
 ];
 
 const SERVER_INFO = {
   name: 'moddable-tools',
-  version: '1.3.0',
-  description: 'AI-callable tools for chess variant analysis, hex map generation, and board game utilities',
+  version: '1.4.0',
+  description: 'AI-callable tools for chess variant analysis, hex map generation, rules library queries, and board game utilities',
 };
 
 const PROMPTS = [
@@ -271,6 +273,7 @@ function handleToolCall(name, args) {
   if (name === 'chess_list_puzzle_types') return listPuzzleTypes(args);
   if (name.startsWith('chess_')) return handleChessToolCall(name, args);
   if (name.startsWith('hex_')) return handleHexToolCall(name, args);
+  if (name.startsWith('rules_')) return handleRulesToolCall(name, args);
   if (name === 'dice_roll') return diceRoll(args);
   if (name === 'ti4_random_factions') return ti4RandomFactions(args);
   return { error: `Unknown tool: ${name}` };
@@ -744,7 +747,7 @@ function generateLlmsTxt() {
   let txt = `# Moddable.Games — AI Tool Server\n`;
   txt += `# https://tools.moddable.games\n\n`;
   txt += `> Moddable.Games provides open-source board game engines as AI-callable tools.\n`;
-  txt += `> ${ALL_TOOLS.length} tools across chess variant analysis (70+ variants, 1,500+ puzzles), hex map generation (6 games), and board game utilities.\n\n`;
+  txt += `> ${ALL_TOOLS.length} tools across chess variant analysis (70+ variants, 1,500+ puzzles), hex map generation (6 games), rules library queries (18 game families, 1,100+ indexed entries), and board game utilities.\n\n`;
   txt += `## Endpoints\n\n`;
   txt += `- MCP (SSE): https://tools.moddable.games/mcp\n`;
   txt += `- MCP (message): POST https://tools.moddable.games/mcp/message\n`;

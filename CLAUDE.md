@@ -31,7 +31,7 @@ One shared component library (`_mg.js` + `_mg.css`), one page per HTML file.
 │   ├── mods.json           ← mod library (10 entries)
 │   ├── games.json          ← games (3 entries)
 │   ├── engines.json        ← engine/SDK listings (2 entries)
-│   ├── mcp-tools.json      ← MCP tool registry (17 tools, 3 namespaces)
+│   ├── mcp-tools.json      ← MCP tool registry (22 tools, 4 namespaces)
 │   ├── news.json           ← news posts (13 entries)
 │   └── team.json           ← team members (4 entries)
 │
@@ -73,9 +73,11 @@ One shared component library (`_mg.js` + `_mg.css`), one page per HTML file.
     ├── index.js            ← forms API Worker (subscribe, submit)
     ├── wrangler.toml       ← Cloudflare config for moddable-api
     └── mcp/
-        ├── index.js        ← MCP tools Worker (17 tools, 3 engines)
+        ├── index.js        ← MCP tools Worker (22 tools, 4 namespaces)
         ├── chess-tools.js  ← re-exports from moddable-chess/mcp/tools.js
         ├── hex-tools.js    ← re-exports from moddable-hexmaps/mcp/tools.js
+        ├── rules-tools.js  ← rules library tools (queries rules-index.json)
+        ├── rules-index.json← search index from moddable-rules/dist/
         ├── wrangler.toml   ← Cloudflare config for moddable-tools
         └── deploy.sh       ← deploy script
 ```
@@ -107,8 +109,8 @@ The script:
 
 ## MCP Tools Worker
 
-The repo contains a Cloudflare Worker at `workers/mcp/` that serves 13
-AI-callable tools from both engines (Moddable Chess + Moddable Hexmaps).
+The repo contains a Cloudflare Worker at `workers/mcp/` that serves 22
+AI-callable tools across 4 namespaces (Chess, Hexmaps, Rules, Utilities).
 
 **Live at:** `https://tools.moddable.games/`
 
@@ -122,9 +124,9 @@ AI-callable tools from both engines (Moddable Chess + Moddable Hexmaps).
 - `/.well-known/mcp.json` — MCP server discovery manifest
 
 **Architecture:** The Worker imports tool handlers from sibling repos
-(`moddable-chess/mcp/tools.js`, `moddable-hexmaps/mcp/tools.js`) via relative
-paths. Wrangler's bundler resolves and inlines everything at deploy time (~67KB
-gzipped). No runtime filesystem access needed.
+(`moddable-chess/mcp/tools.js`, `moddable-hexmaps/mcp/tools.js`) and local
+modules (`rules-tools.js`) via relative paths. Wrangler's bundler resolves and
+inlines everything at deploy time. No runtime filesystem access needed.
 
 **Deploy:** `cd workers/mcp && wrangler deploy`
 

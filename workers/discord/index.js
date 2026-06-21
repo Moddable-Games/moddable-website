@@ -108,6 +108,9 @@ async function handleCommand(interaction, env) {
     case 'hexgames': return cmdHexGames(options, env);
     case 'puzzle': return cmdPuzzle(options, env);
     case 'map': return cmdMap(options, env);
+    case 'rules': return cmdRules(options, env);
+    case 'howtoplay': return cmdHowToPlay(options, env);
+    case 'randomgame': return cmdRandomGame(options, env);
     case 'jam': return cmdJam(options, env);
     case 'spotlight': return cmdSpotlight(env);
     case 'teams': return cmdTeams(options, interaction);
@@ -316,6 +319,94 @@ async function cmdMap(options, env) {
   }
 }
 
+async function cmdRules(options, env) {
+  const game = getOption(options, 'game');
+  if (!game) {
+    try {
+      const result = await callTool('rules_list_games', { status: 'published' }, env);
+      const lines = (result.games || []).slice(0, 15).map(g =>
+        `**${g.title}** — ${g.tagline || `${g.players} players`}${g.variantCount > 0 ? ` · ${g.variantCount} variants` : ''}`
+      );
+      return embed({
+        title: '📚 Rules Library',
+        description: lines.join('\n') || 'No games found.',
+        footer: `${result.total || 0} games · Use /rules game:<slug> for details`,
+        color: 0xd11a1a,
+      });
+    } catch (e) {
+      return ephemeral(`Rules lookup failed: ${e.message}`);
+    }
+  }
+  try {
+    const result = await callTool('rules_get_game', { slug: game }, env);
+    if (result.error) return ephemeral(result.error);
+    const variants = (result.variants || []).slice(0, 20);
+    let desc = result.tagline ? `*${result.tagline}*\n\n` : '';
+    if (result.summary) desc += result.summary + '\n\n';
+    if (variants.length > 0) desc += `**Variants (${result.variantCount}):**\n${variants.join(', ')}`;
+    if (result.rulesUrl) desc += `\n\n[📖 Full rulebook](${result.rulesUrl})`;
+    return embed({
+      title: `📚 ${result.title || game}`,
+      description: desc || 'No details available.',
+      footer: result.players ? `${result.players} players · ${result.duration || '?'}` : '',
+      color: 0xd11a1a,
+    });
+  } catch (e) {
+    return ephemeral(`Rules lookup failed: ${e.message}`);
+  }
+}
+
+async function cmdHowToPlay(options, env) {
+  const game = getOption(options, 'game');
+  const variant = getOption(options, 'variant');
+  if (!game) return ephemeral('Required: `/howtoplay game:<slug>` (e.g. `game:backgammon`)');
+  if (!variant) return ephemeral('Required: `/howtoplay game:<slug> variant:<name>` (e.g. `variant:Acey-Deucey`)');
+  try {
+    const result = await callTool('rules_get_variant', { game, variant }, env);
+    if (result.error) return ephemeral(result.error);
+    let desc = result.content || 'No rules content available.';
+    if (desc.length > 3900) desc = desc.slice(0, 3900) + '…';
+    if (result.rulesUrl) desc += `\n\n[📖 Full rules](${result.rulesUrl})`;
+    return embed({
+      title: `📖 ${result.gameTitle}: ${result.variant}`,
+      description: desc,
+      color: 0xd11a1a,
+    });
+  } catch (e) {
+    return ephemeral(`Rules lookup failed: ${e.message}`);
+  }
+}
+
+async function cmdRandomGame(options, env) {
+  const family = getOption(options, 'family') || undefined;
+  try {
+    const result = await callTool('rules_random', family ? { family } : {}, env);
+    if (result.error) return ephemeral(result.error);
+    if (result.content) {
+      let desc = result.content;
+      if (desc.length > 3900) desc = desc.slice(0, 3900) + '…';
+      if (result.rulesUrl) desc += `\n\n[📖 Full rules](${result.rulesUrl})`;
+      return embed({
+        title: `🎲 ${result.gameTitle}: ${result.variant}`,
+        description: desc,
+        color: 0xd11a1a,
+      });
+    }
+    let desc = result.tagline ? `*${result.tagline}*\n\n` : '';
+    if (result.summary) desc += result.summary + '\n\n';
+    if (result.variants && result.variants.length > 0) desc += `**Variants:** ${result.variants.slice(0, 10).join(', ')}`;
+    if (result.rulesUrl) desc += `\n\n[📖 Full rulebook](${result.rulesUrl})`;
+    return embed({
+      title: `🎲 ${result.title || 'Random Game'}`,
+      description: desc || 'No details available.',
+      footer: result.players ? `${result.players} players · ${result.duration || '?'}` : '',
+      color: 0xd11a1a,
+    });
+  } catch (e) {
+    return ephemeral(`Random game failed: ${e.message}`);
+  }
+}
+
 async function cmdJam(options, env) {
   const sub = getOption(options, 'action') || 'status';
   const jam = await getJamState(env);
@@ -424,6 +515,12 @@ function cmdHelp() {
       '**Hex Maps**',
       '`/hexgames` — Available hex map games',
       '`/map` — Generate a hex map',
+      '',
+      '**Rules Library**',
+      '`/rules` — Browse all games in the library',
+      '`/rules game:<slug>` — Game details + variants',
+      '`/howtoplay` — Get rules for a specific variant',
+      '`/randomgame` — Pick a random game or variant',
       '',
       '**TI4**',
       '`/factions` — Random faction draft',
