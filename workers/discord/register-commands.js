@@ -142,6 +142,108 @@ const commands = [
     ],
   },
   {
+    name: 'moves',
+    description: 'List legal moves for a chess position',
+    options: [
+      { name: 'variant', type: 3, description: 'Chess variant (default: standard)', required: false },
+      { name: 'fen', type: 3, description: 'FEN string of position', required: false },
+    ],
+  },
+  {
+    name: 'analyze',
+    description: 'Evaluate a chess position (best move, threats)',
+    options: [
+      { name: 'variant', type: 3, description: 'Chess variant (default: standard)', required: false },
+      { name: 'fen', type: 3, description: 'FEN string of position', required: false },
+    ],
+  },
+  {
+    name: 'play',
+    description: 'Play a sequence of chess moves and show the result',
+    options: [
+      { name: 'moves', type: 3, description: 'Space-separated moves (e.g. e4 e5 Nf3)', required: true },
+      { name: 'variant', type: 3, description: 'Chess variant (default: standard)', required: false },
+    ],
+  },
+  {
+    name: 'search',
+    description: 'Search the rules library by keyword',
+    options: [
+      { name: 'query', type: 3, description: 'Search terms (e.g. "dice movement", "capture rules")', required: true },
+    ],
+  },
+  {
+    name: 'draft',
+    description: 'Milty-style TI4 faction draft with pick pools',
+    options: [
+      { name: 'players', type: 4, description: 'Number of players (3-8)', required: false },
+      { name: 'pool_size', type: 4, description: 'Factions per player to choose from (default: 3)', required: false },
+      { name: 'expansion', type: 3, description: 'Expansion filter', required: false, choices: [{ name: 'Base', value: 'base' }, { name: 'Prophecy of Kings', value: 'pok' }] },
+    ],
+  },
+  {
+    name: 'objectives',
+    description: 'Draw TI4 public objectives',
+    options: [
+      { name: 'stage', type: 4, description: 'Stage 1 or 2', required: false, choices: [{ name: 'Stage 1', value: 1 }, { name: 'Stage 2', value: 2 }] },
+      { name: 'count', type: 4, description: 'Number to draw (default: 5)', required: false },
+    ],
+  },
+  {
+    name: 'agendas',
+    description: 'Draw TI4 agenda cards',
+    options: [
+      { name: 'count', type: 4, description: 'Number to draw (default: 2)', required: false },
+    ],
+  },
+  {
+    name: 'setup',
+    description: 'Random Nukes territory assignment',
+    options: [
+      { name: 'players', type: 4, description: 'Number of players (2-6)', required: false },
+    ],
+  },
+  {
+    name: 'odds',
+    description: 'Colony (Catan) dice probability calculator',
+    options: [
+      { name: 'numbers', type: 3, description: 'Settlement numbers, comma-separated (e.g. 5,6,8,9)', required: true },
+    ],
+  },
+  {
+    name: 'mancala',
+    description: 'Simulate a mancala move (sow from a pit)',
+    options: [
+      { name: 'pit', type: 4, description: 'Pit index (0-5 for player 1, 7-12 for player 2)', required: true },
+      { name: 'variant', type: 3, description: 'Rule variant', required: false, choices: [{ name: 'Kalah', value: 'kalah' }, { name: 'Oware', value: 'oware' }] },
+    ],
+  },
+  {
+    name: 'morris',
+    description: "Nine Men's Morris legal moves",
+    options: [
+      { name: 'player', type: 4, description: 'Player number (1 or 2)', required: false },
+      { name: 'phase', type: 3, description: 'Game phase', required: false, choices: [{ name: 'Place', value: 'place' }, { name: 'Slide', value: 'slide' }, { name: 'Fly', value: 'fly' }] },
+    ],
+  },
+  {
+    name: 'ur',
+    description: 'Roll the Royal Game of Ur dice (4 binary dice, sum 0-4)',
+    options: [],
+  },
+  {
+    name: 'cowries',
+    description: 'Roll Pachisi cowrie shells or Chaupar long dice',
+    options: [
+      { name: 'game', type: 3, description: 'Which game', required: false, choices: [{ name: 'Pachisi', value: 'pachisi' }, { name: 'Chaupar', value: 'chaupar' }] },
+    ],
+  },
+  {
+    name: 'test',
+    description: 'Run the full tool test suite (bot-testing channel only)',
+    options: [],
+  },
+  {
     name: 'help',
     description: 'Show all available commands',
     options: [],

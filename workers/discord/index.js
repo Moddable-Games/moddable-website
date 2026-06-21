@@ -115,6 +115,20 @@ async function handleCommand(interaction, env) {
     case 'spotlight': return cmdSpotlight(env);
     case 'teams': return cmdTeams(options, interaction);
     case 'flip': return cmdFlip(options);
+    case 'moves': return cmdMoves(options, env);
+    case 'analyze': return cmdAnalyze(options, env);
+    case 'play': return cmdPlay(options, env);
+    case 'search': return cmdSearch(options, env);
+    case 'draft': return cmdDraft(options, env);
+    case 'objectives': return cmdObjectives(options, env);
+    case 'agendas': return cmdAgendas(options, env);
+    case 'setup': return cmdSetup(options, env);
+    case 'odds': return cmdOdds(options, env);
+    case 'mancala': return cmdMancala(options, env);
+    case 'morris': return cmdMorris(options, env);
+    case 'ur': return cmdUr(options, env);
+    case 'cowries': return cmdCowries(options, env);
+    case 'test': return cmdTest(interaction, env);
     case 'help': return cmdHelp();
     default:
       return ephemeral(`Unknown command: \`/${name}\``);
@@ -496,6 +510,349 @@ function cmdFlip(options) {
   return embed({ title: '🪙 Coin Flip', description: `**${result}**`, color: 0xd4a017 });
 }
 
+async function cmdMoves(options, env) {
+  const variant = getOption(options, 'variant') || 'standard';
+  const fen = getOption(options, 'fen') || undefined;
+  try {
+    const result = await callTool('chess_get_legal_moves', { variant, fen }, env);
+    const moves = result.moves || [];
+    const display = moves.slice(0, 30).map(m => `\`${m.san || m.move || m}\``).join(', ');
+    return embed({
+      title: `♟️ Legal Moves (${moves.length})`,
+      description: display || 'No legal moves (checkmate or stalemate).',
+      footer: variant !== 'standard' ? `Variant: ${variant}` : '',
+      color: 0x0c4f8d,
+    });
+  } catch (e) {
+    return ephemeral(`Moves lookup failed: ${e.message}`);
+  }
+}
+
+async function cmdAnalyze(options, env) {
+  const variant = getOption(options, 'variant') || 'standard';
+  const fen = getOption(options, 'fen') || undefined;
+  try {
+    const result = await callTool('chess_analyze_position', { variant, fen }, env);
+    let desc = '';
+    if (result.bestMove) desc += `**Best move:** \`${result.bestMove}\`\n`;
+    if (result.evaluation !== undefined) desc += `**Eval:** ${result.evaluation}\n`;
+    if (result.pv) desc += `**Line:** ${result.pv}\n`;
+    if (result.material) desc += `**Material:** ${result.material}`;
+    return embed({
+      title: '🔍 Position Analysis',
+      description: desc || JSON.stringify(result).slice(0, 500),
+      footer: variant !== 'standard' ? `Variant: ${variant}` : '',
+      color: 0x0c4f8d,
+    });
+  } catch (e) {
+    return ephemeral(`Analysis failed: ${e.message}`);
+  }
+}
+
+async function cmdPlay(options, env) {
+  const variant = getOption(options, 'variant') || 'standard';
+  const moves = getOption(options, 'moves') || '';
+  const moveList = moves.split(/[\s,]+/).filter(Boolean);
+  if (!moveList.length) return ephemeral('Provide moves (e.g. `/play moves:e4 e5 Nf3`).');
+  try {
+    const result = await callTool('chess_make_moves', { variant, moves: moveList }, env);
+    let desc = `**Moves:** ${moveList.join(' ')}\n`;
+    if (result.fen) desc += `**FEN:** \`${result.fen}\`\n`;
+    if (result.status) desc += `**Status:** ${result.status}`;
+    return embed({
+      title: `♟️ Game (${moveList.length} moves)`,
+      description: desc,
+      footer: variant !== 'standard' ? `Variant: ${variant}` : '',
+      color: 0x0c4f8d,
+    });
+  } catch (e) {
+    return ephemeral(`Play failed: ${e.message}`);
+  }
+}
+
+async function cmdSearch(options, env) {
+  const query = getOption(options, 'query');
+  if (!query) return ephemeral('Provide a search query (e.g. `/search query:dice movement`).');
+  try {
+    const result = await callTool('rules_search', { query }, env);
+    const hits = result.results || [];
+    if (!hits.length) return embed({ title: '🔍 Rules Search', description: `No results for "${query}".`, color: 0xd11a1a });
+    const lines = hits.slice(0, 8).map(h => `**${h.game}** ${h.heading ? `· ${h.heading}` : ''}\n> ${(h.content || '').slice(0, 100)}…`);
+    return embed({
+      title: `🔍 "${query}" — ${hits.length} results`,
+      description: lines.join('\n\n'),
+      footer: hits.length > 8 ? `Showing 8 of ${hits.length}` : '',
+      color: 0xd11a1a,
+    });
+  } catch (e) {
+    return ephemeral(`Search failed: ${e.message}`);
+  }
+}
+
+async function cmdDraft(options, env) {
+  const players = getOption(options, 'players') || 6;
+  const poolSize = getOption(options, 'pool_size') || 3;
+  const expansion = getOption(options, 'expansion') || 'pok';
+  try {
+    const result = await callTool('ti4_draft_factions', { players, pool_size: poolSize, expansions: [expansion === 'base' ? 'base' : 'base', 'pok'] }, env);
+    if (result.error) return ephemeral(result.error);
+    const lines = result.draft.map(d => `**Player ${d.player}:** ${d.options.join(' · ')}`);
+    return embed({
+      title: '🪐 Milty Draft',
+      description: lines.join('\n'),
+      footer: `${poolSize} picks each · ${result.totalPool} factions in pool`,
+      color: 0x0c4f8d,
+    });
+  } catch (e) {
+    return ephemeral(`Draft failed: ${e.message}`);
+  }
+}
+
+async function cmdObjectives(options, env) {
+  const stage = getOption(options, 'stage') || 1;
+  const count = getOption(options, 'count') || 5;
+  try {
+    const result = await callTool('ti4_draw_objectives', { stage, count }, env);
+    if (result.error) return ephemeral(result.error);
+    const lines = result.drawn.map(o => `• ${o.name || o.text || o}`);
+    return embed({
+      title: `🪐 Stage ${stage} Objectives`,
+      description: lines.join('\n'),
+      footer: `${result.count} drawn from ${result.poolSize} available`,
+      color: 0x0c4f8d,
+    });
+  } catch (e) {
+    return ephemeral(`Objectives failed: ${e.message}`);
+  }
+}
+
+async function cmdAgendas(options, env) {
+  const count = getOption(options, 'count') || 2;
+  try {
+    const result = await callTool('ti4_draw_agendas', { count }, env);
+    if (result.error) return ephemeral(result.error);
+    const lines = result.drawn.map(a => {
+      let text = `**${a.name || a.title}**`;
+      if (a.type) text += ` (${a.type})`;
+      if (a.for) text += `\n> For: ${a.for}`;
+      if (a.against) text += `\n> Against: ${a.against}`;
+      return text;
+    });
+    return embed({
+      title: '🪐 Agenda Phase',
+      description: lines.join('\n\n'),
+      footer: `${result.count} drawn from ${result.poolSize} agendas`,
+      color: 0x0c4f8d,
+    });
+  } catch (e) {
+    return ephemeral(`Agendas failed: ${e.message}`);
+  }
+}
+
+async function cmdSetup(options, env) {
+  const players = getOption(options, 'players') || 3;
+  try {
+    const result = await callTool('nukes_setup_generator', { players }, env);
+    const grouped = {};
+    result.territories.forEach(t => {
+      if (!grouped[t.player]) grouped[t.player] = [];
+      grouped[t.player].push(t.territory);
+    });
+    const lines = Object.entries(grouped).map(([p, terrs]) => `**Player ${p}:** territories ${terrs.join(', ')}`);
+    return embed({
+      title: '☢️ Nukes Setup',
+      description: lines.join('\n'),
+      footer: `${result.totalTerritories} territories · Seed: ${result.seed}`,
+      color: 0x3a9928,
+    });
+  } catch (e) {
+    return ephemeral(`Setup failed: ${e.message}`);
+  }
+}
+
+async function cmdOdds(options, env) {
+  const numbersStr = getOption(options, 'numbers') || '';
+  const numbers = numbersStr.split(',').map(n => parseInt(n.trim())).filter(n => n >= 2 && n <= 12);
+  if (!numbers.length) return ephemeral('Provide settlement numbers (e.g. `/odds numbers:5,6,8,9`).');
+  try {
+    const result = await callTool('colony_dice_odds', { numbers }, env);
+    const lines = result.individual.map(n => `**${n.number}:** ${n.percent}`);
+    lines.push('', `**At least one:** ${result.probabilityAtLeastOne}`, `**Expected rolls:** ${result.expectedRollsPerResource}`);
+    return embed({
+      title: '🎲 Colony Dice Odds',
+      description: lines.join('\n'),
+      color: 0x3a9928,
+    });
+  } catch (e) {
+    return ephemeral(`Odds calculation failed: ${e.message}`);
+  }
+}
+
+async function cmdMancala(options, env) {
+  const pit = getOption(options, 'pit');
+  const variant = getOption(options, 'variant') || 'kalah';
+  if (pit === null || pit === undefined) return ephemeral('Provide a pit index (0-5 for player 1, 7-12 for player 2).');
+  try {
+    const result = await callTool('mancala_simulate_move', { board: [4,4,4,4,4,4,0,4,4,4,4,4,4,0], pit, variant }, env);
+    if (result.error) return ephemeral(result.error);
+    const p1 = result.board.slice(0, 7);
+    const p2 = result.board.slice(7);
+    let desc = `**Board after sowing from pit ${pit}:**\n`;
+    desc += `P2: [${p2.slice(0, 6).reverse().join(', ')}] Store: ${p2[6]}\n`;
+    desc += `P1: [${p1.slice(0, 6).join(', ')}] Store: ${p1[6]}\n`;
+    if (result.extraTurn) desc += '\n⭐ **Extra turn!**';
+    if (result.captured) desc += `\n💰 Captured ${result.captured} seeds`;
+    return embed({
+      title: `🫘 Mancala (${variant})`,
+      description: desc,
+      color: 0x3a9928,
+    });
+  } catch (e) {
+    return ephemeral(`Mancala failed: ${e.message}`);
+  }
+}
+
+async function cmdMorris(options, env) {
+  const player = getOption(options, 'player') || 1;
+  const phase = getOption(options, 'phase') || 'place';
+  try {
+    const board = new Array(24).fill(0);
+    const result = await callTool('morris_legal_moves', { board, player, phase }, env);
+    return embed({
+      title: `⚫ Nine Men's Morris`,
+      description: `**Phase:** ${phase}\n**Player ${player}** has **${result.count}** legal moves.\n\nMoves: ${result.moves.slice(0, 10).map(m => `${m.type} → ${m.to}`).join(', ')}${result.count > 10 ? '…' : ''}`,
+      color: 0x3a9928,
+    });
+  } catch (e) {
+    return ephemeral(`Morris failed: ${e.message}`);
+  }
+}
+
+async function cmdUr(options, env) {
+  try {
+    const result = await callTool('ur_roll_dice', {}, env);
+    const pips = result.dice.map(d => d ? '●' : '○').join(' ');
+    return embed({
+      title: '🎲 Royal Ur Dice',
+      description: `${pips}\n\n**Roll: ${result.total}** (${result.description})`,
+      color: 0xd4a017,
+    });
+  } catch (e) {
+    return ephemeral(`Ur dice failed: ${e.message}`);
+  }
+}
+
+async function cmdCowries(options, env) {
+  const game = getOption(options, 'game') || 'pachisi';
+  try {
+    const result = await callTool('pachisi_roll_cowries', { game }, env);
+    if (game === 'chaupar') {
+      return embed({
+        title: '🐚 Chaupar Dice',
+        description: `Dice: [${result.dice.join(', ')}]\n**Total: ${result.total}**`,
+        color: 0xd4a017,
+      });
+    }
+    const shells = result.shells.map(s => s ? '⬆' : '⬇').join(' ');
+    let desc = `${shells}\n\n**Faces up:** ${result.facesUp} → **Move: ${result.move}**`;
+    if (result.isGrace) desc += '\n⭐ **Grace! Extra turn**';
+    return embed({
+      title: '🐚 Pachisi Cowries',
+      description: desc,
+      color: 0xd4a017,
+    });
+  } catch (e) {
+    return ephemeral(`Cowries failed: ${e.message}`);
+  }
+}
+
+async function cmdTest(interaction, env) {
+  const channelId = interaction.channel_id;
+  const token = env.DISCORD_TOKEN;
+
+  const tests = [
+    { cmd: '/roll 3d6+2', tool: 'dice_roll', args: { notation: '3d6+2' } },
+    { cmd: '/flip pizza,tacos,sushi', tool: 'coin_flip', args: { options: ['pizza', 'tacos', 'sushi'] } },
+    { cmd: '/teams Alice,Bob,Charlie,Dave', tool: 'team_split', args: { players: ['Alice', 'Bob', 'Charlie', 'Dave'], teams: 2 } },
+    { cmd: '/variants Tactical', tool: 'chess_list_variants', args: { group: 'Tactical' } },
+    { cmd: '/validate e2e4', tool: 'chess_validate_move', args: { variant: 'standard', move: 'e2e4' } },
+    { cmd: '/moves (starting position)', tool: 'chess_get_legal_moves', args: { variant: 'standard' } },
+    { cmd: '/analyze (starting position)', tool: 'chess_analyze_position', args: { variant: 'standard' } },
+    { cmd: '/play e4 e5 Nf3', tool: 'chess_make_moves', args: { variant: 'standard', moves: ['e2e4', 'e7e5', 'g1f3'] } },
+    { cmd: '/openings', tool: 'chess_get_opening_book', args: { variant: 'standard' } },
+    { cmd: '/puzzle (standard)', tool: 'chess_generate_puzzle', args: { variant: 'standard', include_svg: false } },
+    { cmd: '/puzzle types (atomic)', tool: 'chess_list_puzzle_types', args: { variant: 'atomic' } },
+    { cmd: '/hexgames', tool: 'hex_list_games', args: {} },
+    { cmd: '/map nukes 4', tool: 'hex_generate_map', args: { game: 'nukes', players: 4, seed: 'test' } },
+    { cmd: '/rules (list all)', tool: 'rules_list_games', args: {} },
+    { cmd: '/rules backgammon', tool: 'rules_get_game', args: { slug: 'backgammon' } },
+    { cmd: '/howtoplay backgammon Acey-Deucey', tool: 'rules_get_variant', args: { game: 'backgammon', variant: 'acey-deucey' } },
+    { cmd: '/search dice movement', tool: 'rules_search', args: { query: 'dice movement' } },
+    { cmd: '/randomgame', tool: 'rules_random', args: {} },
+    { cmd: '/factions 5 pok', tool: 'ti4_random_factions', args: { players: 5, expansion: 'pok' } },
+    { cmd: '/draft 6 3', tool: 'ti4_draft_factions', args: { players: 6, pool_size: 3, expansions: ['base', 'pok'] } },
+    { cmd: '/objectives 1', tool: 'ti4_draw_objectives', args: { stage: 1, count: 5 } },
+    { cmd: '/agendas 2', tool: 'ti4_draw_agendas', args: { count: 2 } },
+    { cmd: '/setup 4', tool: 'nukes_setup_generator', args: { players: 4 } },
+    { cmd: '/odds 5,6,8,9', tool: 'colony_dice_odds', args: { numbers: [5, 6, 8, 9] } },
+    { cmd: '/mancala 3', tool: 'mancala_simulate_move', args: { board: [4,4,4,4,4,4,0,4,4,4,4,4,4,0], pit: 3, variant: 'kalah' } },
+    { cmd: '/morris', tool: 'morris_legal_moves', args: { board: new Array(24).fill(0), player: 1, phase: 'place' } },
+    { cmd: '/ur', tool: 'ur_roll_dice', args: {} },
+    { cmd: '/cowries', tool: 'pachisi_roll_cowries', args: { shells: 6, game: 'pachisi' } },
+    { cmd: '/jam status', tool: 'jam_status', args: {} },
+    { cmd: '/jam timer', tool: 'jam_timer', args: {} },
+    { cmd: '/jam vote', tool: 'jam_vote', args: {} },
+  ];
+
+  const postMessage = async (content, embeds) => {
+    await fetch(`${DISCORD_API}/channels/${channelId}/messages`, {
+      method: 'POST',
+      headers: { 'Authorization': `Bot ${token}`, 'Content-Type': 'application/json' },
+      body: JSON.stringify({ content, embeds }),
+    });
+  };
+
+  // Respond immediately, then post results async
+  setTimeout(async () => {
+    await postMessage('**🧪 Tool Test Suite — 31 commands**\n━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━');
+
+    let passed = 0;
+    let failed = 0;
+
+    for (const test of tests) {
+      try {
+        const result = await callTool(test.tool, test.args, env);
+        const hasError = result && result.error;
+        const icon = hasError ? '❌' : '✅';
+        const status = hasError ? `FAIL: ${result.error}` : 'PASS';
+        if (hasError) failed++; else passed++;
+
+        const preview = hasError ? result.error : JSON.stringify(result).slice(0, 150);
+        await postMessage(null, [{
+          title: `${icon} ${test.cmd}`,
+          description: `\`${test.tool}\`\n\`\`\`json\n${preview}\n\`\`\``,
+          color: hasError ? 0xd11a1a : 0x3a9928,
+        }]);
+      } catch (e) {
+        failed++;
+        await postMessage(null, [{
+          title: `💥 ${test.cmd}`,
+          description: `\`${test.tool}\`\nException: ${e.message}`,
+          color: 0xd11a1a,
+        }]);
+      }
+    }
+
+    await postMessage(`\n**Results: ${passed} passed, ${failed} failed out of ${tests.length}**\n━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━`);
+  }, 100);
+
+  return embed({
+    title: '🧪 Running Test Suite',
+    description: `Testing ${tests.length} tools against \`tools.moddable.games\`…\nResults will appear below.`,
+    color: 0x0a0d2a,
+  });
+}
+
 function cmdHelp() {
   return embed({
     title: '🏠 The House — Commands',
@@ -507,30 +864,49 @@ function cmdHelp() {
       '`/spotlight` — Random mod from the library',
       '',
       '**Chess**',
-      '`/variants` — Browse chess variants',
+      '`/variants` — Browse 70+ chess variants',
       '`/validate` — Check if a move is legal',
+      '`/moves` — Legal moves for a position',
+      '`/analyze` — Evaluate a position',
+      '`/play` — Play moves and show result',
       '`/openings` — Opening book moves',
       '`/puzzle` — Get a chess puzzle',
+      '`/puzzle types` — Discover puzzle categories',
       '',
       '**Hex Maps**',
       '`/hexgames` — Available hex map games',
       '`/map` — Generate a hex map',
       '',
       '**Rules Library**',
-      '`/rules` — Browse all games in the library',
+      '`/rules` — Browse all games',
       '`/rules game:<slug>` — Game details + variants',
-      '`/howtoplay` — Get rules for a specific variant',
-      '`/randomgame` — Pick a random game or variant',
+      '`/howtoplay` — Get variant rules',
+      '`/search` — Search rules by keyword',
+      '`/randomgame` — Random game or variant',
       '',
-      '**TI4**',
-      '`/factions` — Random faction draft',
+      '**Twilight Imperium**',
+      '`/factions` — Random faction assignment',
+      '`/draft` — Milty draft with pick pools',
+      '`/objectives` — Draw public objectives',
+      '`/agendas` — Draw agenda cards',
+      '',
+      '**Game Tools**',
+      '`/setup` — Random Nukes territory assignment',
+      '`/odds` — Colony dice probability',
+      '`/mancala` — Simulate a mancala move',
+      '`/morris` — Nine Men\'s Morris moves',
+      '`/ur` — Roll Royal Ur dice',
+      '`/cowries` — Roll Pachisi shells',
       '',
       '**Mod Jam**',
       '`/jam status` — Current jam state',
       '`/jam timer` — Time remaining',
       '`/jam vote` — Vote standings',
+      '',
+      '**Admin**',
+      '`/test` — Run full test suite',
     ].join('\n'),
-    footer: 'The House always wins.',
+    footer: 'The House always wins. · 39 tools at tools.moddable.games',
     color: 0x0a0d2a,
   });
 }
