@@ -2,6 +2,7 @@
 .claude/
 CLAUDE.md
 font-test.html
+**/node_modules/
 **/.wrangler/
 
 # wrangler files
