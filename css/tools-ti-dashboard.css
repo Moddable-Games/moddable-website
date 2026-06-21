@@ -1061,6 +1061,10 @@
 .td-winner__name { font-size: 1.4rem; font-weight: 700; color: #fff; }
 .td-winner__sub { font-size: 0.8rem; color: rgba(255,255,255,0.5); margin-top: 4px; }
 
+/* --- Utility classes --- */
+.td-score__info { flex: 1; min-width: 0; }
+.td-agenda-discard { margin-top: 16px; }
+
 /* --- Mobile breakpoint --- */
 @media (max-width: 899px) {
   .ti-dash__sidebar { display: none; }
