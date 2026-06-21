@@ -60,6 +60,13 @@ TOOLS = [
         'color': (12, 79, 141),
         'icon': 'galaxy',
     },
+    {
+        'slug': 'tools-ti-dashboard',
+        'title': 'TI4 Game Dashboard',
+        'subtitle': 'Shared-screen session tracker · VP · Objectives · Agenda',
+        'color': (111, 181, 255),
+        'icon': 'galaxy',
+    },
 ]
 
 
