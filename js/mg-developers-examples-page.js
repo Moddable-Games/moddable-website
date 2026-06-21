@@ -9,7 +9,7 @@
   hero.appendChild(MG.pageHero({
     eyebrow: 'EXAMPLES',
     title: 'Built with <em>Moddable</em> Tools',
-    lede: 'Live integrations running in production, plus ideas for what you could build next.',
+    lede: 'Live integrations and ideas for what to build next.',
     accent: '#8b5cf6',
     withHorizon: true,
     minHeight: '300px'
