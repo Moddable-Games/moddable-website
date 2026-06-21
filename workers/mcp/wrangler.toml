@@ -9,3 +9,11 @@ ALLOWED_ORIGINS = "https://moddable.games,https://chess.moddable.games,https://h
 [[routes]]
 pattern = "tools.moddable.games/*"
 zone_name = "moddable.games"
+
+[[durable_objects.bindings]]
+name = "GAME_ROOMS"
+class_name = "GameRoom"
+
+[[migrations]]
+tag = "v1"
+new_sqlite_classes = ["GameRoom"]

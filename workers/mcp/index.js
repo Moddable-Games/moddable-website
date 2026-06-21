@@ -1,6 +1,8 @@
 import { CHESS_TOOLS, handleChessToolCall } from './chess-tools.js';
 import { HEX_TOOLS, handleHexToolCall } from './hex-tools.js';
 import PUZZLE_POOL from './puzzle-pool.json';
+import { GameRoom } from './game-room.js';
+export { GameRoom };
 
 const SITE_TOOLS = [
   {
@@ -108,6 +110,12 @@ export default {
 
     if (request.method === 'OPTIONS') {
       return new Response(null, { status: 204, headers: corsHeaders });
+    }
+
+    if (path === '/do-test') {
+      const id = env.GAME_ROOMS.idFromName('test-room');
+      const stub = env.GAME_ROOMS.get(id);
+      return stub.fetch(new Request('https://fake/ping'));
     }
 
     if ((path === '/mcp' || path === '/mcp/sse') && request.method === 'GET') {
