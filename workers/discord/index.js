@@ -36,6 +36,8 @@ export default {
   },
 
   async scheduled(controller, env, ctx) {
+    await checkHousePostReplies(env);
+
     const jam = await getJamState(env);
     if (!jam || !jam.deadline || !jam.channelId) return;
 
@@ -56,6 +58,41 @@ export default {
     });
   },
 };
+
+// --- House post reply tracking ---
+
+async function checkHousePostReplies(env) {
+  if (!env.KV) return;
+  const raw = await env.KV.get('house_posts', 'json');
+  if (!raw || !Array.length) return;
+  const posts = Array.isArray(raw) ? raw : [];
+  const headers = { 'Authorization': `Bot ${env.DISCORD_TOKEN}` };
+
+  for (const post of posts) {
+    try {
+      const res = await fetch(
+        `${DISCORD_API}/channels/${post.channel}/messages?after=${post.id}&limit=50`,
+        { headers }
+      );
+      if (!res.ok) continue;
+      const messages = await res.json();
+      const replies = messages.filter(m =>
+        m.message_reference && m.message_reference.message_id === post.id
+      );
+      post.replyCount = replies.length;
+      post.lastChecked = new Date().toISOString();
+      if (replies.length > 0) {
+        post.latestReplies = replies.slice(0, 5).map(r => ({
+          author: r.author.username,
+          content: r.content.slice(0, 200),
+          timestamp: r.timestamp
+        }));
+      }
+    } catch (e) {}
+  }
+
+  await env.KV.put('house_posts', JSON.stringify(posts));
+}
 
 // --- Command routing ---
 
