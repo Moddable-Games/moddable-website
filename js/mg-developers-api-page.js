@@ -13,7 +13,7 @@
     hexColor: 'purple',
     eyebrow: 'TOOLS API',
     title: 'Connect and call',
-    lede: 'One endpoint, 22 tools. MCP protocol for AI agents, REST for everything else.'
+    lede: 'One endpoint, 34 tools. MCP protocol for AI agents, REST for everything else.'
   }));
 
   // Copy buttons

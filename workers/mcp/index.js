@@ -1,6 +1,7 @@
 import { CHESS_TOOLS, handleChessToolCall } from './chess-tools.js';
 import { HEX_TOOLS, handleHexToolCall } from './hex-tools.js';
 import { RULES_TOOLS, handleRulesToolCall } from './rules-tools.js';
+import { GAME_TOOLS, handleGameToolCall } from './game-tools.js';
 import PUZZLE_POOL from './puzzle-pool.json';
 import { GameRoom } from './game-room.js';
 import { Resvg, initWasm } from '@resvg/resvg-wasm';
@@ -96,6 +97,7 @@ const ALL_TOOLS = [
   PUZZLE_POOL_TOOL,
   ...HEX_TOOLS,
   ...RULES_TOOLS,
+  ...GAME_TOOLS,
   ...SITE_TOOLS,
 ];
 
@@ -274,6 +276,7 @@ function handleToolCall(name, args) {
   if (name.startsWith('chess_')) return handleChessToolCall(name, args);
   if (name.startsWith('hex_')) return handleHexToolCall(name, args);
   if (name.startsWith('rules_')) return handleRulesToolCall(name, args);
+  if (GAME_TOOLS.some(t => t.name === name)) return handleGameToolCall(name, args);
   if (name === 'dice_roll') return diceRoll(args);
   if (name === 'ti4_random_factions') return ti4RandomFactions(args);
   return { error: `Unknown tool: ${name}` };

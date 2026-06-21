@@ -144,6 +144,86 @@
     ]
   },
   {
+    "namespace": "game-tools",
+    "engine": "Game Tools",
+    "engineUrl": "https://tools.moddable.games/",
+    "accent": "green",
+    "tools": [
+      {
+        "name": "ti4_draw_objectives",
+        "description": "Draw random public objectives for a TI4 game round with expansion filtering.",
+        "example": "Draw 5 Stage 1 objectives with Prophecy of Kings",
+        "returns": "Array of objective cards with text and expansion source"
+      },
+      {
+        "name": "ti4_draw_agendas",
+        "description": "Draw random agenda cards for the TI4 agenda phase with for/against text.",
+        "example": "Draw 2 agendas from the base game",
+        "returns": "Agenda cards with title, type, for/against effects"
+      },
+      {
+        "name": "ti4_draft_factions",
+        "description": "Run a Milty-style faction draft with configurable pool size and ban lists.",
+        "example": "Draft for 6 players, 3 choices each, ban Winnu",
+        "returns": "Per-player faction options to choose from"
+      },
+      {
+        "name": "nukes_setup_generator",
+        "description": "Generate random starting territory assignments for a Nukes game.",
+        "example": "Set up a 4-player Nukes game with seed 'volcano'",
+        "returns": "Territory assignments per player with map seed"
+      },
+      {
+        "name": "colony_dice_odds",
+        "description": "Calculate 2d6 probability for Catan-style resource numbers on your settlements.",
+        "example": "What are my odds with settlements on 5, 6, 8, 9?",
+        "returns": "Per-number probability, combined odds, expected rolls"
+      },
+      {
+        "name": "mancala_simulate_move",
+        "description": "Simulate a mancala sow from a pit and return the resulting board state.",
+        "example": "Sow from pit 3 in a Kalah game",
+        "returns": "New board state, captures, extra turn status"
+      },
+      {
+        "name": "mancala_legal_moves",
+        "description": "List legal pits to sow from for the current mancala player.",
+        "example": "What moves can player 1 make?",
+        "returns": "Array of pit indices with seeds available"
+      },
+      {
+        "name": "morris_legal_moves",
+        "description": "List legal moves in Nine Men's Morris across place/slide/fly phases.",
+        "example": "What moves can player 1 make in the sliding phase?",
+        "returns": "Array of moves with type, from, and to positions"
+      },
+      {
+        "name": "morris_detect_mill",
+        "description": "Check if a position forms a mill (three in a row) in Nine Men's Morris.",
+        "example": "Does placing at position 4 form a mill?",
+        "returns": "Boolean isMill plus the specific mill line(s) formed"
+      },
+      {
+        "name": "ur_roll_dice",
+        "description": "Roll four tetrahedral dice for the Royal Game of Ur (binary, sum 0-4).",
+        "example": "Roll the Ur dice",
+        "returns": "Individual die results and total (0-4)"
+      },
+      {
+        "name": "ur_legal_moves",
+        "description": "List legal moves for a Royal Game of Ur position given a dice roll.",
+        "example": "What can player 1 do with a roll of 3?",
+        "returns": "Array of moves: enter, move, capture, or bear off"
+      },
+      {
+        "name": "pachisi_roll_cowries",
+        "description": "Roll cowrie shells for Pachisi or long dice for Chaupar.",
+        "example": "Roll the Pachisi shells",
+        "returns": "Faces up, move value, grace status, extra turn"
+      }
+    ]
+  },
+  {
     "namespace": "moddable-tools",
     "engine": "Moddable Tools",
     "engineUrl": "https://moddable.games/tools/",
