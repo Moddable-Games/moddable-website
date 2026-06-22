@@ -18,12 +18,24 @@
     'heroName', 'heroAbility',
     'tech1Name', 'tech1Ability', 'tech1Req1', 'tech1Req2', 'tech1Req3',
     'tech2Name', 'tech2Ability', 'tech2Req1', 'tech2Req2', 'tech2Req3',
-    'mechName', 'mechAbility',
+    'mechName', 'mechAbility', 'mechKeywords', 'mechCost', 'mechCombat',
     'noteName', 'noteAbility'
+  ];
+
+  var PLAYER_COLORS = [
+    { name: 'Green', hex: '#4eb735' },
+    { name: 'Red', hex: '#e63232' },
+    { name: 'Blue', hex: '#4a9eff' },
+    { name: 'Yellow', hex: '#f0c040' },
+    { name: 'Purple', hex: '#b366e0' },
+    { name: 'Pink', hex: '#e85a9a' },
+    { name: 'Orange', hex: '#f09030' },
+    { name: 'Cyan', hex: '#40d4d4' }
   ];
 
   var state = {};
   TEXT_KEYS.forEach(function(k) { state[k] = ''; });
+  state.factionColor = '#4eb735';
   state.imgSymbol = null;
   state.imgRace = null;
   state.imgSystem = null;
@@ -36,6 +48,7 @@
     TEXT_KEYS.forEach(function(k) {
       if (params.has(k)) state[k] = params.get(k);
     });
+    if (params.has('factionColor')) state.factionColor = params.get('factionColor');
   }
   loadFromParams();
 
@@ -44,22 +57,47 @@
     TEXT_KEYS.forEach(function(k) {
       if (state[k]) params.set(k, state[k]);
     });
+    state.units.forEach(function(u, i) {
+      var def = UNIT_DEFAULTS[i];
+      UNIT_FIELDS.forEach(function(f) {
+        if (u[f] !== def[f]) params.set('unit_' + u.id + '_' + f, u[f]);
+      });
+    });
+    if (state.factionColor !== '#4eb735') params.set('factionColor', state.factionColor);
     return window.location.origin + window.location.pathname + '?' + params.toString();
   }
 
   /* ── Card rendering (pure HTML/CSS, no PNGs) ─────────────────── */
 
-  var UNITS = [
-    { name: 'War Sun', cost: '-', combat: '-', move: '-', capacity: '-', pos: 'r2c1', abilities: 'You cannot produce this unit unless you own its unit upgrade technology.', keywords: '' },
-    { name: 'Cruiser I', cost: '2', combat: '7', move: '2', capacity: '-', pos: 'r2c2', abilities: '', keywords: '' },
-    { name: 'Dreadnought I', cost: '4', combat: '5', move: '1', capacity: '1', pos: 'r3c1', abilities: '', keywords: 'Sustain Damage • Bombardment 5' },
-    { name: 'Destroyer I', cost: '1', combat: '9', move: '2', capacity: '', pos: 'r3c2', abilities: '', keywords: 'Anti-Fighter Barrage 9 (x2)' },
-    { name: 'PDS I', cost: '-', combat: '-', move: '', capacity: '', pos: 'r3c3', abilities: '', keywords: 'Planetary Shield • Space Cannon 6' },
-    { name: 'Carrier I', cost: '3', combat: '9', move: '1', capacity: '4', pos: 'r4c1', abilities: '', keywords: '' },
-    { name: 'Fighter I', cost: '-', combat: '9', move: '-', capacity: '', pos: 'r4c2', abilities: '', keywords: '' },
-    { name: 'Infantry I', cost: '-', combat: '-', move: '-', capacity: '', pos: 'r4c3', abilities: '', keywords: '' },
-    { name: 'Space Dock I', cost: '-', combat: '-', move: '', capacity: '', pos: 'r4c4', abilities: 'This unit\'s PRODUCTION value is equal to 2 more than the resource value of this planet. Up to 3 fighters in this system do not count against your ship\'s capacity.', keywords: 'Production X' }
+  var UNIT_DEFAULTS = [
+    { id: 'warsun', name: 'War Sun', cost: '-', combat: '-', move: '-', capacity: '-', pos: 'r2c1', abilities: 'You cannot produce this unit unless you own its unit upgrade technology.', keywords: '', pips: 'yrrr' },
+    { id: 'cruiser', name: 'Cruiser I', cost: '2', combat: '7', move: '2', capacity: '-', pos: 'r2c2', abilities: '', keywords: '', pips: 'gyr' },
+    { id: 'dreadnought', name: 'Dreadnought I', cost: '4', combat: '5', move: '1', capacity: '1', pos: 'r3c1', abilities: '', keywords: 'Sustain Damage • Bombardment 5', pips: 'bby' },
+    { id: 'destroyer', name: 'Destroyer I', cost: '1', combat: '9', move: '2', capacity: '-', pos: 'r3c2', abilities: '', keywords: 'Anti-Fighter Barrage 9 (x2)', pips: 'rr' },
+    { id: 'pds', name: 'PDS I', cost: '-', combat: '-', move: '-', capacity: '-', pos: 'r3c3', abilities: '', keywords: 'Planetary Shield • Space Cannon 6', pips: 'yr' },
+    { id: 'carrier', name: 'Carrier I', cost: '3', combat: '9', move: '1', capacity: '4', pos: 'r4c1', abilities: '', keywords: '', pips: 'bb' },
+    { id: 'fighter', name: 'Fighter I', cost: '1(x2)', combat: '9', move: '-', capacity: '-', pos: 'r4c2', abilities: '', keywords: '', pips: 'gb' },
+    { id: 'infantry', name: 'Infantry I', cost: '1(x2)', combat: '8', move: '-', capacity: '-', pos: 'r4c3', abilities: '', keywords: '', pips: 'gg' },
+    { id: 'spacedock', name: 'Space Dock I', cost: '-', combat: '-', move: '-', capacity: '-', pos: 'r4c4', abilities: 'This unit\'s PRODUCTION value is equal to 2 more than the resource value of this planet. Up to 3 fighters in this system do not count against your ship\'s capacity.', keywords: 'Production X', pips: 'yy' }
   ];
+
+  var UNIT_FIELDS = ['name', 'cost', 'combat', 'move', 'capacity', 'keywords', 'abilities', 'pips'];
+
+  function initUnits() {
+    state.units = UNIT_DEFAULTS.map(function(d) {
+      var u = { id: d.id, pos: d.pos };
+      UNIT_FIELDS.forEach(function(f) { u[f] = d[f]; });
+      return u;
+    });
+    var params = new URLSearchParams(window.location.search);
+    state.units.forEach(function(u) {
+      UNIT_FIELDS.forEach(function(f) {
+        var key = 'unit_' + u.id + '_' + f;
+        if (params.has(key)) u[f] = params.get(key);
+      });
+    });
+  }
+  initUnits();
 
   function buildFactionSheet() {
     var sheet = el('div', { class: 'fc-sheet' });
@@ -123,18 +161,28 @@
 
     // Unit cards
     var units = el('div', { class: 'fc-sheet__units' });
-    UNITS.forEach(function(u) {
+    state.units.forEach(function(u) {
       var unit = el('div', { class: 'fc-unit', 'data-pos': u.pos });
+      var pipsArr = u.pips ? u.pips.split('') : [];
+      var pipsHtml = '';
+      if (pipsArr.length) {
+        pipsHtml = '<div class="fc-unit__pips">';
+        pipsArr.forEach(function(p) { pipsHtml += '<div class="fc-unit__pip fc-unit__pip--' + p + '"></div>'; });
+        pipsHtml += '</div>';
+      }
       unit.innerHTML =
-        '<div class="fc-unit__name">' + u.name + '</div>' +
-        (u.keywords ? '<div class="fc-unit__keywords">' + u.keywords + '</div>' : '') +
-        (u.abilities ? '<div class="fc-unit__ability">' + u.abilities + '</div>' : '') +
-        '<div class="fc-unit__stats">' +
-          (u.cost !== '' ? '<div class="fc-unit__stat"><div class="fc-unit__stat-val">' + u.cost + '</div><div class="fc-unit__stat-lbl">Cost</div></div>' : '') +
-          (u.combat !== '' ? '<div class="fc-unit__stat"><div class="fc-unit__stat-val">' + u.combat + '</div><div class="fc-unit__stat-lbl">Combat</div></div>' : '') +
-          (u.move !== '' ? '<div class="fc-unit__stat"><div class="fc-unit__stat-val">' + u.move + '</div><div class="fc-unit__stat-lbl">Move</div></div>' : '') +
-          (u.capacity !== '' ? '<div class="fc-unit__stat"><div class="fc-unit__stat-val">' + u.capacity + '</div><div class="fc-unit__stat-lbl">Cap</div></div>' : '') +
-        '</div>';
+        '<div class="fc-unit__body">' +
+          '<div class="fc-unit__name">' + u.name + '</div>' +
+          (u.keywords ? '<div class="fc-unit__keywords">' + u.keywords + '</div>' : '') +
+          (u.abilities ? '<div class="fc-unit__ability">' + u.abilities + '</div>' : '') +
+          '<div class="fc-unit__stats">' +
+            '<div class="fc-unit__stat"><div class="fc-unit__stat-val">' + formatStat(u.cost) + '</div><div class="fc-unit__stat-lbl">Cost</div></div>' +
+            '<div class="fc-unit__stat"><div class="fc-unit__stat-val">' + formatStat(u.combat) + '</div><div class="fc-unit__stat-lbl">Combat</div></div>' +
+            '<div class="fc-unit__stat"><div class="fc-unit__stat-val">' + formatStat(u.move) + '</div><div class="fc-unit__stat-lbl">Move</div></div>' +
+            '<div class="fc-unit__stat"><div class="fc-unit__stat-val">' + formatStat(u.capacity) + '</div><div class="fc-unit__stat-lbl">Cap</div></div>' +
+          '</div>' +
+        '</div>' +
+        pipsHtml;
       units.appendChild(unit);
     });
     sheet.appendChild(units);
@@ -145,10 +193,15 @@
   function buildLeaderCard(type, nameId, abilityId, avatarId) {
     var card = el('div', { class: 'fc-leader' });
     card.innerHTML =
-      '<div class="fc-leader__left"><div class="fc-leader__avatar" id="' + avatarId + '"></div></div>' +
-      '<div class="fc-leader__right">' +
-        '<div class="fc-leader__name" id="' + nameId + '"></div>' +
-        '<div class="fc-leader__type">' + type + '</div>' +
+      '<div class="fc-card__header">' +
+        '<div class="fc-card__icon fc-faction-icon"></div>' +
+        '<div class="fc-card__titles">' +
+          '<div class="fc-card__name" id="' + nameId + '"></div>' +
+          '<div class="fc-card__type">' + type + '</div>' +
+        '</div>' +
+      '</div>' +
+      '<div class="fc-leader__content">' +
+        '<div class="fc-leader__avatar" id="' + avatarId + '"></div>' +
         '<div class="fc-leader__ability" id="' + abilityId + '"></div>' +
       '</div>';
     return card;
@@ -158,21 +211,27 @@
     var card = el('div', { class: 'fc-note' });
     card.innerHTML =
       '<div class="fc-note__name" id="fc-note-name"></div>' +
-      '<div class="fc-note__text" id="fc-note-text"></div>';
+      '<div class="fc-note__text" id="fc-note-text"></div>' +
+      '<div class="fc-note__icon fc-faction-icon"></div>';
     return card;
   }
 
   function buildTechCard(idx) {
     var card = el('div', { class: 'fc-tech' });
     card.innerHTML =
-      '<div class="fc-tech__pips">' +
-        '<div class="fc-tech__pip" id="fc-t' + idx + '-r1"></div>' +
-        '<div class="fc-tech__pip" id="fc-t' + idx + '-r2"></div>' +
-        '<div class="fc-tech__pip" id="fc-t' + idx + '-r3"></div>' +
+      '<div class="fc-card__header">' +
+        '<div class="fc-card__icon fc-faction-icon"></div>' +
+        '<div class="fc-card__titles">' +
+          '<div class="fc-card__name" id="fc-t' + idx + '-name"></div>' +
+          '<div class="fc-card__type">Technology</div>' +
+        '</div>' +
       '</div>' +
-      '<div class="fc-tech__body">' +
-        '<div class="fc-tech__name" id="fc-t' + idx + '-name"></div>' +
-        '<div class="fc-tech__type">Technology</div>' +
+      '<div class="fc-tech__content">' +
+        '<div class="fc-tech__pips">' +
+          '<div class="fc-tech__pip" id="fc-t' + idx + '-r1"></div>' +
+          '<div class="fc-tech__pip" id="fc-t' + idx + '-r2"></div>' +
+          '<div class="fc-tech__pip" id="fc-t' + idx + '-r3"></div>' +
+        '</div>' +
         '<div class="fc-tech__ability" id="fc-t' + idx + '-ability"></div>' +
       '</div>';
     return card;
@@ -181,35 +240,74 @@
   function buildMechCard() {
     var card = el('div', { class: 'fc-mech' });
     card.innerHTML =
-      '<div class="fc-mech__name" id="fc-mech-name"></div>' +
-      '<div class="fc-mech__type">Mech</div>' +
-      '<div class="fc-mech__ability" id="fc-mech-ability"></div>';
+      '<div class="fc-card__header">' +
+        '<div class="fc-card__icon fc-faction-icon"></div>' +
+        '<div class="fc-card__titles">' +
+          '<div class="fc-card__name" id="fc-mech-name"></div>' +
+          '<div class="fc-card__type">Mech</div>' +
+        '</div>' +
+      '</div>' +
+      '<div class="fc-mech__ability" id="fc-mech-ability"></div>' +
+      '<div class="fc-mech__keywords" id="fc-mech-keywords"></div>' +
+      '<div class="fc-mech__stats">' +
+        '<div class="fc-unit__stat"><div class="fc-unit__stat-val" id="fc-mech-cost"></div><div class="fc-unit__stat-lbl">Cost</div></div>' +
+        '<div class="fc-unit__stat"><div class="fc-unit__stat-val" id="fc-mech-combat"></div><div class="fc-unit__stat-lbl">Combat</div></div>' +
+      '</div>';
     return card;
   }
+
+  var activePreviewTab = 'sheet';
 
   function renderPreview() {
     var container = document.getElementById('fd-preview-inner');
     container.innerHTML = '';
 
-    container.appendChild(buildFactionSheet());
+    // Preview tabs
+    var tabs = el('div', { class: 'fd-preview__tabs' });
+    var tabData = [
+      { id: 'sheet', label: 'Faction Sheet' },
+      { id: 'cards', label: 'Cards' }
+    ];
+    tabData.forEach(function(t) {
+      var btn = el('button', { class: 'fd-preview__tab' + (activePreviewTab === t.id ? ' fd-preview__tab--active' : '') });
+      btn.textContent = t.label;
+      btn.addEventListener('click', function() {
+        activePreviewTab = t.id;
+        renderPreview();
+      });
+      tabs.appendChild(btn);
+    });
+    container.appendChild(tabs);
 
-    var leadersRow = el('div', { class: 'leaders-row' });
-    leadersRow.appendChild(buildLeaderCard('Agent', 'fc-agent-name', 'fc-agent-ability', 'fc-avatar-agent'));
-    leadersRow.appendChild(buildLeaderCard('Commander', 'fc-cmdr-name', 'fc-cmdr-ability', 'fc-avatar-cmdr'));
-    leadersRow.appendChild(buildLeaderCard('Hero', 'fc-hero-name', 'fc-hero-ability', 'fc-avatar-hero'));
-    leadersRow.appendChild(buildNoteCard());
-    container.appendChild(leadersRow);
-
-    var techRow = el('div', { class: 'tech-row' });
-    techRow.appendChild(buildTechCard(1));
-    techRow.appendChild(buildTechCard(2));
-    techRow.appendChild(buildMechCard());
-    container.appendChild(techRow);
+    if (activePreviewTab === 'sheet') {
+      container.appendChild(buildFactionSheet());
+    } else {
+      var cardsGrid = el('div', { class: 'fc-cards-grid' });
+      cardsGrid.appendChild(buildLeaderCard('Agent', 'fc-agent-name', 'fc-agent-ability', 'fc-avatar-agent'));
+      cardsGrid.appendChild(buildLeaderCard('Commander', 'fc-cmdr-name', 'fc-cmdr-ability', 'fc-avatar-cmdr'));
+      cardsGrid.appendChild(buildLeaderCard('Hero', 'fc-hero-name', 'fc-hero-ability', 'fc-avatar-hero'));
+      var noteWrap = el('div', { class: 'fc-cards-grid__note' });
+      noteWrap.appendChild(buildNoteCard());
+      cardsGrid.appendChild(noteWrap);
+      cardsGrid.appendChild(buildTechCard(1));
+      cardsGrid.appendChild(buildTechCard(2));
+      cardsGrid.appendChild(buildMechCard());
+      container.appendChild(cardsGrid);
+    }
 
     syncStateToDOM();
   }
 
+  function applyFactionColor() {
+    var preview = document.getElementById('fd-preview-inner');
+    if (preview) {
+      preview.style.setProperty('--fc-border', state.factionColor);
+      preview.style.setProperty('--fc-accent', state.factionColor);
+    }
+  }
+
   function syncStateToDOM() {
+    applyFactionColor();
     setText('fc-name', state.factionName);
     setText('fc-quote', state.factionQuote);
     setText('fc-quoter', state.factionQuoter);
@@ -226,10 +324,10 @@
     setText('fc-fs-name', state.flagshipName);
     setText('fc-fs-atitle', state.flagshipTitle);
     setText('fc-fs-ability', state.flagshipAbility);
-    setText('fc-fs-cost', state.flagshipCost);
-    setText('fc-fs-combat', state.flagshipCombat);
-    setText('fc-fs-move', state.flagshipMove);
-    setText('fc-fs-cap', state.flagshipCapacity);
+    setStatVal('fc-fs-cost', state.flagshipCost);
+    setStatVal('fc-fs-combat', state.flagshipCombat);
+    setStatVal('fc-fs-move', state.flagshipMove);
+    setStatVal('fc-fs-cap', state.flagshipCapacity);
 
     setText('fc-agent-name', state.agentName);
     setText('fc-agent-ability', state.agentAbility);
@@ -252,6 +350,9 @@
 
     setText('fc-mech-name', state.mechName);
     setText('fc-mech-ability', state.mechAbility);
+    setText('fc-mech-keywords', state.mechKeywords);
+    setStatVal('fc-mech-cost', state.mechCost);
+    setStatVal('fc-mech-combat', state.mechCombat);
     setText('fc-note-name', state.noteName);
     setText('fc-note-text', state.noteAbility);
 
@@ -261,11 +362,30 @@
     setBg('fc-avatar-agent', state.imgAgent);
     setBg('fc-avatar-cmdr', state.imgCommander);
     setBg('fc-avatar-hero', state.imgHero);
+
+    var iconSrc = state.imgSymbol || PLACEHOLDER_SYMBOL;
+    document.querySelectorAll('.fc-faction-icon').forEach(function(el) {
+      el.style.backgroundImage = 'url(' + iconSrc + ')';
+    });
   }
 
   function setText(id, val) {
     var e = document.getElementById(id);
     if (e) e.textContent = val || '';
+  }
+
+  function setStatVal(id, val) {
+    var e = document.getElementById(id);
+    if (!e) return;
+    if (!val) { e.textContent = ''; return; }
+    e.innerHTML = formatStat(val);
+  }
+
+  function formatStat(val) {
+    if (!val) return '';
+    var match = val.match(/^(\d+)\(?[xX](\d+)\)?$/);
+    if (match) return match[1] + '<span class="fc-stat-mult">x' + match[2] + '</span>';
+    return val;
   }
 
   function setPip(id, val) {
@@ -277,6 +397,7 @@
   var PLACEHOLDER_SYMBOL = url('/img/tools/ti4-factions/placeholder-icon.png');
   var PLACEHOLDER_RACE = url('/img/tools/ti4-factions/placeholder-race-white.png');
   var PLACEHOLDER_SYSTEM = url('/img/tools/ti4-factions/placeholder-planet-white.png');
+  var PLACEHOLDER_AVATAR = url('/img/tools/ti4-factions/placeholder-race-white.png');
 
   function setBg(id, src) {
     var e = document.getElementById(id);
@@ -285,7 +406,8 @@
     if (id === 'fc-symbol') fallback = PLACEHOLDER_SYMBOL;
     else if (id === 'fc-race') fallback = PLACEHOLDER_RACE;
     else if (id === 'fc-system') fallback = PLACEHOLDER_SYSTEM;
-    e.style.backgroundImage = 'url(' + (src || fallback) + ')';
+    else if (id.indexOf('fc-avatar') === 0) fallback = PLACEHOLDER_AVATAR;
+    if (src || fallback) e.style.backgroundImage = 'url(' + (src || fallback) + ')';
   }
 
   function printPreview() { window.print(); }
@@ -301,16 +423,71 @@
     });
   }
 
+  function exportJSON() {
+    var data = {};
+    TEXT_KEYS.forEach(function(k) { if (state[k]) data[k] = state[k]; });
+    data.factionColor = state.factionColor;
+    data.units = state.units.map(function(u, i) {
+      var def = UNIT_DEFAULTS[i];
+      var out = { id: u.id };
+      UNIT_FIELDS.forEach(function(f) { if (u[f] !== def[f]) out[f] = u[f]; });
+      return Object.keys(out).length > 1 ? out : null;
+    }).filter(Boolean);
+    if (!data.units.length) delete data.units;
+    var blob = new Blob([JSON.stringify(data, null, 2)], { type: 'application/json' });
+    var a = document.createElement('a');
+    a.href = URL.createObjectURL(blob);
+    a.download = (state.factionName || 'faction').replace(/\s+/g, '-').toLowerCase() + '.json';
+    a.click();
+  }
+
+  function importJSON() {
+    var input = document.createElement('input');
+    input.type = 'file';
+    input.accept = '.json';
+    input.addEventListener('change', function(e) {
+      var file = e.target.files[0];
+      if (!file) return;
+      var reader = new FileReader();
+      reader.onload = function(ev) {
+        try {
+          var data = JSON.parse(ev.target.result);
+          TEXT_KEYS.forEach(function(k) { if (data[k] !== undefined) state[k] = data[k]; });
+          if (data.factionColor) state.factionColor = data.factionColor;
+          if (data.units) {
+            data.units.forEach(function(u) {
+              var target = state.units.find(function(s) { return s.id === u.id; });
+              if (target) UNIT_FIELDS.forEach(function(f) { if (u[f] !== undefined) target[f] = u[f]; });
+            });
+          }
+          renderEditor();
+          renderPreview();
+          document.getElementById('fd-editor').appendChild(buildExportBar());
+        } catch(err) { alert('Invalid JSON file'); }
+      };
+      reader.readAsText(file);
+    });
+    input.click();
+  }
+
   function buildExportBar() {
     var bar = el('div', { class: 'fd-export-bar' });
     var printBtn = el('button', { class: 'fd-export-btn' });
-    printBtn.textContent = 'Print / Save PDF';
+    printBtn.textContent = 'Save PDF';
     printBtn.addEventListener('click', printPreview);
     bar.appendChild(printBtn);
     var shareBtn = el('button', { class: 'fd-export-btn fd-export-btn--outline', id: 'fd-share-btn' });
     shareBtn.textContent = 'Copy Link';
     shareBtn.addEventListener('click', copyShareLink);
     bar.appendChild(shareBtn);
+    var expBtn = el('button', { class: 'fd-export-btn fd-export-btn--outline' });
+    expBtn.textContent = 'Export';
+    expBtn.addEventListener('click', exportJSON);
+    bar.appendChild(expBtn);
+    var impBtn = el('button', { class: 'fd-export-btn fd-export-btn--outline' });
+    impBtn.textContent = 'Import';
+    impBtn.addEventListener('click', importJSON);
+    bar.appendChild(impBtn);
     return bar;
   }
 
@@ -323,9 +500,8 @@
     var panels = [];
     var tabData = [
       { id: 'faction', label: 'Faction' },
-      { id: 'flagship', label: 'Flagship' },
-      { id: 'leaders', label: 'Leaders' },
-      { id: 'tech', label: 'Tech' },
+      { id: 'units', label: 'Units' },
+      { id: 'cards', label: 'Cards' },
       { id: 'images', label: 'Images' }
     ];
     tabData.forEach(function(t, i) {
@@ -341,9 +517,8 @@
     });
     editor.appendChild(tabs);
     panels.push(buildFactionPanel());
-    panels.push(buildFlagshipPanel());
-    panels.push(buildLeadersPanel());
-    panels.push(buildTechPanel());
+    panels.push(buildUnitsPanel());
+    panels.push(buildCardsPanel());
     panels.push(buildImagesPanel());
     panels.forEach(function(p, i) {
       if (i === 0) p.classList.add('fd-editor__panel--active');
@@ -351,8 +526,31 @@
     });
   }
 
+  function buildColorPicker() {
+    var wrap = el('div', { class: 'fd-field' });
+    var lbl = el('label', { class: 'fd-field__label' });
+    lbl.textContent = 'Faction Colour';
+    wrap.appendChild(lbl);
+    var row = el('div', { class: 'fd-color-row' });
+    PLAYER_COLORS.forEach(function(c) {
+      var swatch = el('button', { class: 'fd-color-swatch' + (state.factionColor === c.hex ? ' fd-color-swatch--active' : ''), title: c.name });
+      swatch.style.background = c.hex;
+      swatch.addEventListener('click', function() {
+        state.factionColor = c.hex;
+        row.querySelectorAll('.fd-color-swatch').forEach(function(s) { s.classList.remove('fd-color-swatch--active'); });
+        swatch.classList.add('fd-color-swatch--active');
+        syncStateToDOM();
+        renderPreview();
+      });
+      row.appendChild(swatch);
+    });
+    wrap.appendChild(row);
+    return wrap;
+  }
+
   function buildFactionPanel() {
     var panel = el('div', { class: 'fd-editor__panel', id: 'fd-panel-faction' });
+    panel.appendChild(buildColorPicker());
     panel.appendChild(field('Faction Name', 'text', 'factionName', 'The Xxcha Kingdom'));
     panel.appendChild(fieldRow([
       field('Quote', 'text', 'factionQuote', 'A faction quote...'),
@@ -375,35 +573,79 @@
       fieldSelect('Resources', 'factionResources', numOptions(0, 9)),
       fieldSelect('Influence', 'factionInfluence', numOptions(0, 9))
     ]));
-    panel.appendChild(fieldRow([
-      field('Note Name', 'text', 'noteName', 'Faction note...'),
-      field('Note Contents', 'text', 'noteAbility', 'Note description...')
-    ]));
-    panel.appendChild(fieldRow([
-      field('Mech Name', 'text', 'mechName', 'Mech name'),
-      field('Mech Ability', 'text', 'mechAbility', 'Mech ability...')
-    ]));
     return panel;
   }
 
-  function buildFlagshipPanel() {
-    var panel = el('div', { class: 'fd-editor__panel', id: 'fd-panel-flagship' });
-    panel.appendChild(field('Flagship Name', 'text', 'flagshipName', 'The Loncara Ssodu'));
-    panel.appendChild(fieldRow([
+  function buildUnitsPanel() {
+    var panel = el('div', { class: 'fd-editor__panel', id: 'fd-panel-units' });
+    // Flagship first
+    var fsSection = el('div', { class: 'fd-section' });
+    var fsHead = el('div', { class: 'fd-section__head' });
+    fsHead.textContent = 'Flagship';
+    fsSection.appendChild(fsHead);
+    fsSection.appendChild(field('Name', 'text', 'flagshipName', 'The Loncara Ssodu'));
+    fsSection.appendChild(fieldRow([
       field('Ability Title', 'text', 'flagshipTitle', 'Sustain Damage'),
       field('Ability', 'text', 'flagshipAbility', 'Description...')
     ]));
-    panel.appendChild(fieldRow([
+    fsSection.appendChild(fieldRow([
       fieldSelect('Cost', 'flagshipCost', numOptions(1, 9)),
       fieldSelect('Combat', 'flagshipCombat', combatOptions()),
       fieldSelect('Move', 'flagshipMove', numOptions(1, 5)),
       fieldSelect('Capacity', 'flagshipCapacity', numOptions(1, 9))
     ]));
+    panel.appendChild(fsSection);
+    // Standard units as collapsible rows
+    state.units.forEach(function(u, idx) {
+      panel.appendChild(buildUnitSection(u, idx));
+    });
     return panel;
   }
 
-  function buildLeadersPanel() {
-    var panel = el('div', { class: 'fd-editor__panel', id: 'fd-panel-leaders' });
+  function buildUnitSection(u, idx) {
+    var section = el('div', { class: 'fd-section fd-section--collapsed' });
+    var head = el('div', { class: 'fd-section__head fd-section__head--toggle' });
+    head.textContent = u.name;
+    head.addEventListener('click', function() {
+      section.classList.toggle('fd-section--collapsed');
+    });
+    section.appendChild(head);
+    var body = el('div', { class: 'fd-section__body' });
+    body.appendChild(unitField('Name', idx, 'name', u.name));
+    body.appendChild(fieldRow([
+      unitField('Cost', idx, 'cost', u.cost),
+      unitField('Combat', idx, 'combat', u.combat),
+      unitField('Move', idx, 'move', u.move),
+      unitField('Cap', idx, 'capacity', u.capacity)
+    ]));
+    body.appendChild(unitField('Keywords', idx, 'keywords', u.keywords));
+    body.appendChild(unitField('Abilities', idx, 'abilities', u.abilities));
+    body.appendChild(unitField('Pips (r/g/b/y)', idx, 'pips', u.pips));
+    section.appendChild(body);
+    return section;
+  }
+
+  function unitField(label, idx, field, placeholder) {
+    var wrap = el('div', { class: 'fd-field' });
+    var lbl = el('label', { class: 'fd-field__label' });
+    lbl.textContent = label;
+    wrap.appendChild(lbl);
+    var input = el('input', { class: 'fd-field__input', type: 'text', placeholder: placeholder || '' });
+    input.value = state.units[idx][field] || '';
+    input.addEventListener('input', function() {
+      state.units[idx][field] = input.value;
+      renderPreview();
+    });
+    wrap.appendChild(input);
+    return wrap;
+  }
+
+  function buildCardsPanel() {
+    var panel = el('div', { class: 'fd-editor__panel', id: 'fd-panel-cards' });
+    // Leaders
+    var ldrHead = el('div', { class: 'fd-section__head' });
+    ldrHead.textContent = 'Leaders';
+    panel.appendChild(ldrHead);
     panel.appendChild(fieldRow([
       field('Agent Name', 'text', 'agentName', 'Agent name'),
       field('Agent Ability', 'text', 'agentAbility', 'Agent ability...')
@@ -416,11 +658,10 @@
       field('Hero Name', 'text', 'heroName', 'Hero name'),
       field('Hero Ability', 'text', 'heroAbility', 'Hero ability...')
     ]));
-    return panel;
-  }
-
-  function buildTechPanel() {
-    var panel = el('div', { class: 'fd-editor__panel', id: 'fd-panel-tech' });
+    // Tech
+    var techHead = el('div', { class: 'fd-section__head' });
+    techHead.textContent = 'Technology';
+    panel.appendChild(techHead);
     panel.appendChild(fieldRow([
       field('Tech 1 Name', 'text', 'tech1Name', 'Tech name'),
       field('Tech 1 Ability', 'text', 'tech1Ability', 'Tech ability...')
@@ -438,6 +679,23 @@
       fieldSelect('Req 1', 'tech2Req1', reqOptions()),
       fieldSelect('Req 2', 'tech2Req2', reqOptions()),
       fieldSelect('Req 3', 'tech2Req3', reqOptions())
+    ]));
+    // Mech + Note
+    var mechHead = el('div', { class: 'fd-section__head' });
+    mechHead.textContent = 'Mech & Notes';
+    panel.appendChild(mechHead);
+    panel.appendChild(fieldRow([
+      field('Mech Name', 'text', 'mechName', 'Mech name'),
+      field('Mech Ability', 'text', 'mechAbility', 'Mech ability...')
+    ]));
+    panel.appendChild(fieldRow([
+      field('Keywords', 'text', 'mechKeywords', 'Sustain Damage'),
+      fieldSelect('Cost', 'mechCost', numOptions(1, 9)),
+      fieldSelect('Combat', 'mechCombat', combatOptions())
+    ]));
+    panel.appendChild(fieldRow([
+      field('Note Name', 'text', 'noteName', 'Faction note...'),
+      field('Note Contents', 'text', 'noteAbility', 'Note description...')
     ]));
     return panel;
   }
