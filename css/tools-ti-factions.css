@@ -302,8 +302,13 @@
 /* Print stylesheet */
 @media print {
   @page { size: A4 landscape; margin: 0; }
-  * { margin: 0; padding: 0; }
-  body { background: #0a0d2a !important; -webkit-print-color-adjust: exact; print-color-adjust: exact; margin: 0 !important; }
+  html, body {
+    margin: 0 !important;
+    padding: 0 !important;
+    background: #0a0d2a !important;
+    -webkit-print-color-adjust: exact !important;
+    print-color-adjust: exact !important;
+  }
   #nav-root,
   #footer-root,
   .fd-editor,
@@ -311,19 +316,22 @@
   .fd-app {
     display: block !important;
     background: #0a0d2a !important;
+    height: auto !important;
   }
   .fd-preview {
-    padding: 5mm !important;
+    padding: 0 !important;
     background: #0a0d2a !important;
     overflow: visible !important;
+    display: block !important;
   }
   .fd-preview__inner {
     max-width: none !important;
-    gap: 5mm !important;
+    padding: 3mm !important;
+    gap: 0 !important;
   }
   .fc-sheet {
-    width: calc(297mm - 10mm) !important;
-    height: calc(210mm - 10mm) !important;
+    width: 100% !important;
+    height: calc(210mm - 6mm) !important;
     break-after: page;
     break-inside: avoid;
   }
@@ -335,6 +343,7 @@
   }
   .fc-cards-grid {
     width: 100% !important;
+    padding-top: 3mm;
   }
 }
 
