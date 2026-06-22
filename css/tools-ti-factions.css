@@ -322,8 +322,16 @@
     gap: 5mm !important;
   }
   .fc-sheet {
-    width: 100% !important;
+    width: calc(297mm - 10mm) !important;
+    height: calc(210mm - 10mm) !important;
     break-after: page;
+    break-inside: avoid;
+  }
+  .fc-unit,
+  .fc-flagship,
+  .fc-commodities,
+  .fc-sheet__system {
+    aspect-ratio: unset !important;
   }
   .fc-cards-grid {
     width: 100% !important;
