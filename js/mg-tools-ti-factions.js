@@ -410,7 +410,29 @@
     if (src || fallback) e.style.backgroundImage = 'url(' + (src || fallback) + ')';
   }
 
-  function printPreview() { window.print(); }
+  function printPreview() {
+    var savedTab = activePreviewTab;
+    // Render both sections for print
+    var container = document.getElementById('fd-preview-inner');
+    container.innerHTML = '';
+    container.appendChild(buildFactionSheet());
+    var cardsGrid = el('div', { class: 'fc-cards-grid' });
+    cardsGrid.appendChild(buildLeaderCard('Agent', 'fc-agent-name', 'fc-agent-ability', 'fc-avatar-agent'));
+    cardsGrid.appendChild(buildLeaderCard('Commander', 'fc-cmdr-name', 'fc-cmdr-ability', 'fc-avatar-cmdr'));
+    cardsGrid.appendChild(buildLeaderCard('Hero', 'fc-hero-name', 'fc-hero-ability', 'fc-avatar-hero'));
+    var noteWrap = el('div', { class: 'fc-cards-grid__note' });
+    noteWrap.appendChild(buildNoteCard());
+    cardsGrid.appendChild(noteWrap);
+    cardsGrid.appendChild(buildTechCard(1));
+    cardsGrid.appendChild(buildTechCard(2));
+    cardsGrid.appendChild(buildMechCard());
+    container.appendChild(cardsGrid);
+    syncStateToDOM();
+    window.print();
+    // Restore tabbed view after print
+    activePreviewTab = savedTab;
+    renderPreview();
+  }
 
   function copyShareLink() {
     var shareUrl = buildShareURL();
