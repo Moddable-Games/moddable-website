@@ -600,6 +600,14 @@
     "anchor": "rule-variants"
   },
   {
+    "game": "go",
+    "gameTitle": "Go",
+    "section": "Variant Library",
+    "heading": "Placement Games",
+    "content": "Five-in-a-row games played on the Go board without capture. - Gomokuvariants/gomoku/ — Ancient placement game: five in a row wins - Renjuvariants/renju/ — Competitive Gomoku with forbidden moves for B",
+    "anchor": "placement-games"
+  },
+  {
     "game": "halma",
     "gameTitle": "Halma",
     "section": "Variant Library",
@@ -4070,6 +4078,56 @@
   {
     "game": "go",
     "gameTitle": "Go",
+    "section": "Gomoku",
+    "heading": "Gomoku",
+    "content": "Gomoku, also known as Five in a Row, is a two-player strategy board game. Players use black and white pieces, taking turns placing them on the intersections of horizontal and vertical lines on the boa",
+    "anchor": "gomoku",
+    "variant": "gomoku",
+    "variantUrl": "dist/go/variants/gomoku/"
+  },
+  {
+    "game": "go",
+    "gameTitle": "Go",
+    "section": "Gomoku",
+    "heading": "Setup",
+    "content": "Board: 15×15 intersections. The game is also playable on a full 19×19 Go board using 15×15 of the intersecting lines. Pieces: Black and white stones. First move: Black plays first.",
+    "anchor": "setup",
+    "variant": "gomoku",
+    "variantUrl": "dist/go/variants/gomoku/"
+  },
+  {
+    "game": "go",
+    "gameTitle": "Go",
+    "section": "Gomoku",
+    "heading": "Rules",
+    "content": "Players take turns placing one stone per turn on any empty intersection. Stones are never moved or captured after placement. The first player to form an unbroken line of five pieces horizontally, vert",
+    "anchor": "rules",
+    "variant": "gomoku",
+    "variantUrl": "dist/go/variants/gomoku/"
+  },
+  {
+    "game": "go",
+    "gameTitle": "Go",
+    "section": "Gomoku",
+    "heading": "Terminology",
+    "content": "- Five in a Row: Five consecutive pieces of the same colour in a horizontal, vertical, or diagonal line. - Open Four: A row of four pieces with both ends open, allowing for two ways to form Five in a ",
+    "anchor": "terminology",
+    "variant": "gomoku",
+    "variantUrl": "dist/go/variants/gomoku/"
+  },
+  {
+    "game": "go",
+    "gameTitle": "Go",
+    "section": "Gomoku",
+    "heading": "Attribution",
+    "content": "Ancient Chinese placement game. Public domain. Origin: Japan, around 1905. Source: Murray 1951: 50.",
+    "anchor": "attribution",
+    "variant": "gomoku",
+    "variantUrl": "dist/go/variants/gomoku/"
+  },
+  {
+    "game": "go",
+    "gameTitle": "Go",
     "section": "One-Colour Go",
     "heading": "One-Colour Go",
     "content": "Both players use stones of the same colour. All other rules are unchanged. Players must remember which stones belong to whom. A referee or agreed record tracks ownership secretly. The ultimate memory ",
@@ -4266,6 +4324,66 @@
     "anchor": "attribution",
     "variant": "rengo",
     "variantUrl": "dist/go/variants/rengo/"
+  },
+  {
+    "game": "go",
+    "gameTitle": "Go",
+    "section": "Renju",
+    "heading": "Renju",
+    "content": "Renju is a professional variant of Gomoku. It was named renju by Japanese journalist Ruikou Kuroiwa on December 6, 1899. The name \"renju\" means \"connected pearls\" in Japanese. The game is played with ",
+    "anchor": "renju",
+    "variant": "renju",
+    "variantUrl": "dist/go/variants/renju/"
+  },
+  {
+    "game": "go",
+    "gameTitle": "Go",
+    "section": "Renju",
+    "heading": "Setup",
+    "content": "Board: 15×15. Black plays first. Pieces: Black and white stones.",
+    "anchor": "setup",
+    "variant": "renju",
+    "variantUrl": "dist/go/variants/renju/"
+  },
+  {
+    "game": "go",
+    "gameTitle": "Go",
+    "section": "Renju",
+    "heading": "Rules",
+    "content": "Players alternate placing one stone per turn on an empty intersection. Black plays first; stones alternate strictly by move order. Stones are never moved or captured after placement. Winning: - Black ",
+    "anchor": "rules",
+    "variant": "renju",
+    "variantUrl": "dist/go/variants/renju/"
+  },
+  {
+    "game": "go",
+    "gameTitle": "Go",
+    "section": "Renju",
+    "heading": "Opening Rules",
+    "content": "Competitive Renju uses a special opening protocol to further balance the starting position. The current official rule for World Championships is Soosõrv-8 adopted 2017. The Taraguchi-10 opening, used ",
+    "anchor": "opening-rules",
+    "variant": "renju",
+    "variantUrl": "dist/go/variants/renju/"
+  },
+  {
+    "game": "go",
+    "gameTitle": "Go",
+    "section": "Renju",
+    "heading": "Strategy",
+    "content": "Under standard rules, unless one side makes a mistake by not blocking a closed four or open three, Black can only win through a four-three combination. White can win through four-three, three-three, f",
+    "anchor": "strategy",
+    "variant": "renju",
+    "variantUrl": "dist/go/variants/renju/"
+  },
+  {
+    "game": "go",
+    "gameTitle": "Go",
+    "section": "Renju",
+    "heading": "Attribution",
+    "content": "Competitive variant of Gomoku. Rules governed by the Renju International Federation. Public domain. The Renju International Federation was founded in Stockholm, Sweden on August 8, 1988.",
+    "anchor": "attribution",
+    "variant": "renju",
+    "variantUrl": "dist/go/variants/renju/"
   },
   {
     "game": "go",
