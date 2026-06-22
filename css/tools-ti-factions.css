@@ -19,33 +19,7 @@
   max-width: 900px;
   display: flex;
   flex-direction: column;
-  gap: 16px;
-}
-
-/* SVG cards */
-.fd-card {
-  border-radius: 8px;
-  overflow: hidden;
-}
-.fd-card svg {
-  width: 100%;
-  height: auto;
-  display: block;
-}
-
-/* Card grid rows */
-.fd-row {
-  display: grid;
   gap: 12px;
-}
-.fd-row--leaders {
-  grid-template-columns: 1fr 1fr 1fr auto;
-}
-.fd-row--leaders .fd-card--note {
-  width: 160px;
-}
-.fd-row--tech {
-  grid-template-columns: 1fr 1fr 1fr;
 }
 
 /* Editor panel */
@@ -206,112 +180,7 @@
   }
 }
 
-/* =================================================================
-   Card overlay — CSS overlay on PNG approach
-   Faction sheet: 2180 x 1496 px. Leaders/Mech: 750 x 500 px.
-   Tech: 760 x 495 px. Note: 500 x 750 px.
-   [Positions marked ESTIMATED — verify visually after build]
-   ================================================================= */
-
-/* Card container base */
-
-.faction.back,
-.leader,
-.note,
-.tech {
-  position: relative;
-  display: block;
-}
-
-.img-block {
-  min-width: 100%;
-  max-width: 100%;
-  width: 100%;
-  height: auto;
-  display: block;
-}
-
-.details {
-  position: absolute;
-  top: 0;
-  left: 0;
-  width: 100%;
-  height: 100%;
-  pointer-events: none;
-}
-
-.rectangle {
-  position: absolute;
-  overflow: hidden;
-}
-
-/* Text element base */
-
-.text.big {
-  position: absolute;
-  color: #ffffff;
-  font-family: var(--mg-font-display);
-  font-weight: 700;
-  font-size: 14px;
-  line-height: 1.2;
-  overflow: hidden;
-}
-
-.text.small {
-  position: absolute;
-  color: #dddddd;
-  font-family: var(--mg-font-body);
-  font-weight: 400;
-  font-size: 10px;
-  line-height: 1.4;
-  overflow: hidden;
-}
-
-.text.big.green,
-.text.small.green {
-  color: #00f6b1;
-}
-
-.note .content.text.small {
-  color: #757575;
-}
-
-/* Image placeholder divs */
-.img-symbol,
-.img-race,
-.img-system,
-.img-agent,
-.img-commander,
-.img-hero {
-  position: absolute;
-  background-size: contain;
-  background-repeat: no-repeat;
-  background-position: center;
-}
-
-/* Preview layout */
-
-.fd-preview__inner .faction.back {
-  width: 100%;
-  margin-bottom: 12px;
-}
-
-.leaders-row {
-  display: grid;
-  grid-template-columns: 1fr 1fr 1fr 160px;
-  gap: 12px;
-  align-items: start;
-  margin-bottom: 12px;
-}
-
-.tech-row {
-  display: grid;
-  grid-template-columns: 1fr 1fr 1fr;
-  gap: 12px;
-}
-
 /* Print stylesheet */
-
 @media print {
   #nav-root,
   #footer-root,
@@ -319,7 +188,7 @@
   .fd-app { display: block !important; }
   .fd-preview {
     padding: 0 !important;
-    background: #fff !important;
+    background: #000 !important;
   }
   .fd-preview__inner {
     max-width: none !important;
@@ -327,353 +196,577 @@
 }
 
 /* =================================================================
-   FACTION SHEET REGIONS
-   Each .rectangle is positioned within .details (full card overlay).
+   CODE-GENERATED CARDS — Pure CSS/HTML approach
+   No PNG backgrounds. Full control over every element.
    ================================================================= */
 
-.faction.back .details .title {
-  left: 30%;
-  top: 0%;
-  width: 40%;
-  height: 5.5%;
+/* Shared card tokens */
+:root {
+  --fc-bg: #0b1020;
+  --fc-panel: #0a1a10;
+  --fc-border: #2d8a4e;
+  --fc-border-glow: #4dff91;
+  --fc-accent: #00f6b1;
+  --fc-text: #ffffff;
+  --fc-text-dim: #aabbaa;
+  --fc-text-muted: #667766;
+  --fc-stat-bg: #0a1a10;
+  --fc-card-w: 200px;
+  --fc-card-h: calc(var(--fc-card-w) / 1.386);
 }
 
-.faction.back .details .flagship {
-  left: 0%;
-  top: 0%;
-  width: 25%;
-  height: 22%;
+/* --- FACTION SHEET --- */
+/* A4 landscape full bleed: 297mm x 210mm (aspect 297:210 = 1.414:1)
+   Contains: 4 unit cols + right abilities panel, 3 unit rows.
+   Unit slots sized to fit landscape poker cards (88 x 63.5mm). */
+.fc-sheet {
+  background: linear-gradient(135deg, #050d1a 0%, #0a1a2a 40%, #061218 100%);
+  border: 2px solid var(--fc-border);
+  border-radius: 12px;
+  position: relative;
+  overflow: hidden;
+  display: grid;
+  grid-template-columns: repeat(4, 1fr);
+  grid-template-rows: repeat(4, auto);
+  gap: 4px;
+  padding: 4px;
+  font-family: var(--mg-font-body);
 }
 
-.faction.back .details .system {
-  /* ESTIMATED */
-  left: 0%;
-  top: 22%;
-  width: 26%;
-  height: 28%;
-  background-size: cover;
-  background-position: center;
-}
-
-.faction.back .details .race {
-  /* ESTIMATED */
-  left: 25%;
-  top: 3%;
-  width: 47%;
-  height: 67%;
-  background-size: cover;
-  background-position: center top;
-}
-
-.faction.back .details .meta {
-  left: 73%;
-  top: 0%;
-  width: 27%;
-  height: 22%;
-}
-
-.faction.back .details .abilities {
-  left: 73%;
-  top: 22%;
-  width: 27%;
-  height: 44%;
-}
-
-.faction.back .details .commodities {
-  left: 91%;
-  top: 44%;
-  width: 9%;
-  height: 12%;
-  display: flex;
-  align-items: center;
-  justify-content: center;
+.fc-sheet__name {
+  grid-column: 3;
+  grid-row: 1;
+  align-self: start;
+  justify-self: center;
+  padding-top: 6px;
   font-family: var(--mg-font-display);
+  font-size: clamp(14px, 2.2vw, 24px);
   font-weight: 700;
-  font-size: 20px;
-  color: #ffffff;
+  color: var(--fc-text);
+  z-index: 2;
+  white-space: nowrap;
 }
 
-.faction.back .commodities span {
-  position: static;
+.fc-sheet__symbol {
+  grid-column: 4;
+  grid-row: 1;
+  align-self: start;
+  justify-self: end;
+  margin: 6px 6px 0 0;
+  width: 32px;
+  height: 32px;
+  border-radius: 50%;
+  background: rgba(255,255,255,0.05);
+  border: 1px solid var(--fc-border);
+  background-size: contain;
+  background-position: center;
+  background-repeat: no-repeat;
+  z-index: 3;
 }
 
-/* =================================================================
-   FACTION SHEET — ELEMENT POSITIONS WITHIN EACH REGION
-   Percentages relative to the region div.
-   ================================================================= */
-
-/* .title region */
-
-.faction.back .title.text.big {
-  left: 5%;
-  top: 24%;
-  width: 92%;
-  text-align: center;
+/* Flagship unit card — same aspect as a unit slot */
+.fc-flagship {
+  grid-column: 1;
+  grid-row: 1;
+  aspect-ratio: 88 / 63.5;
+  border: 1px solid var(--fc-border);
+  border-radius: 8px;
+  padding: 6px 8px;
+  display: flex;
+  flex-direction: column;
+  background: var(--fc-panel);
 }
 
-/* .flagship region */
-
-.faction.back .flagship .img-symbol {
-  /* ESTIMATED */
-  left: 2%;
-  top: 2%;
-  width: 14%;
-  height: 14%;
-}
-
-.faction.back .flagship .name {
-  left: 11%;
-  top: 7.6%;
-  width: 86%;
-}
-
-.faction.back .flagship .ability {
-  left: 9%;
-  top: 24.3%;
-  width: 89%;
-  height: 39%;
-}
-
-.faction.back .flagship .abilityt {
-  left: 9%;
-  top: 63.8%;
-  width: 89%;
-}
-
-.faction.back .flagship .cost   { left: 11%;   top: 71.4%; }
-.faction.back .flagship .combat { left: 31.2%; top: 71.4%; }
-.faction.back .flagship .move   { left: 51.4%; top: 71.4%; }
-.faction.back .flagship .capacity { left: 71.6%; top: 71.4%; }
-
-/* .system region (ESTIMATED positions within region) */
-
-.faction.back .system .resources,
-.faction.back .system .influence {
-  position: absolute;
-  width: 80%;
-  left: 10%;
-}
-
-.faction.back .system .resources { top: 55%; }
-.faction.back .system .influence { top: 76%; }
-
-.faction.back .system .resources .title,
-.faction.back .system .influence .title {
-  position: static;
-  display: block;
-  font-family: var(--mg-font-mono);
-  font-size: 7px;
+.fc-flagship__label {
+  font-size: 8px;
   font-weight: 600;
-  color: rgba(255,255,255,0.6);
+  color: var(--fc-accent);
   text-transform: uppercase;
-  letter-spacing: 0.05em;
+  letter-spacing: 0.5px;
   margin-bottom: 2px;
 }
 
-.faction.back .system .resources .text.big,
-.faction.back .system .influence .text.big {
-  position: static;
-  display: block;
-  font-size: 16px;
+.fc-flagship__name {
+  font-family: var(--mg-font-display);
+  font-size: clamp(10px, 1.4vw, 14px);
+  font-weight: 700;
+  color: var(--fc-text);
+  margin-bottom: 4px;
 }
 
-/* .meta region */
-
-.faction.back .meta .img-symbol {
-  /* ESTIMATED */
-  position: absolute;
-  right: 5%;
-  top: 3%;
-  width: 18%;
-  height: 22%;
+.fc-flagship__ability-title {
+  font-size: 9px;
+  font-weight: 600;
+  color: var(--fc-accent);
+  margin-bottom: 2px;
 }
 
-.faction.back .meta .quote {
-  left: 6.6%;
-  top: 51.7%;
-  width: 76.5%;
-  height: 25%;
+.fc-flagship__ability {
+  font-size: clamp(8px, 1vw, 10px);
+  color: var(--fc-text-dim);
+  line-height: 1.3;
+  flex: 1;
+  overflow: hidden;
+}
+
+.fc-flagship__stats {
+  display: grid;
+  grid-template-columns: 1fr 1fr 1fr 1fr;
+  gap: 4px;
+  margin-top: auto;
+  padding-top: 4px;
+  border-top: 1px solid rgba(45,138,78,0.3);
+}
+
+.fc-flagship__stat {
   text-align: center;
+}
+
+.fc-flagship__stat-val {
+  font-family: var(--mg-font-display);
+  font-size: clamp(12px, 1.8vw, 20px);
+  font-weight: 700;
+  color: var(--fc-text);
+  line-height: 1;
+}
+
+.fc-flagship__stat-lbl {
+  font-size: 6px;
+  color: var(--fc-text-muted);
+  text-transform: uppercase;
+  letter-spacing: 0.3px;
+}
+
+/* Race image area — col 3, rows 1-2 */
+.fc-sheet__race {
+  grid-column: 3;
+  grid-row: 1 / 3;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  background-size: 80% auto;
+  background-position: center 55%;
+  background-repeat: no-repeat;
+  border: 1px solid rgba(45,138,78,0.2);
+  border-radius: 8px;
+  opacity: 0.5;
+  margin-top: 30px;
+  margin-bottom: 8px;
+}
+
+/* Home system — col 2, row 1 (above cruiser) */
+.fc-sheet__system {
+  grid-column: 2;
+  grid-row: 1;
+  aspect-ratio: 88 / 63.5;
+  border: 1px solid var(--fc-border);
+  border-radius: 8px;
+  background: var(--fc-panel);
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  background-size: contain;
+  background-repeat: no-repeat;
+  background-position: center;
+}
+
+.fc-sheet__system-stats {
+  display: flex;
+  gap: 12px;
+  padding: 4px 8px;
+  background: rgba(0,0,0,0.6);
+  border-radius: 4px;
+}
+
+.fc-sheet__system-stat {
+  text-align: center;
+}
+
+.fc-sheet__system-stat-lbl {
+  font-size: 6px;
+  color: var(--fc-text-muted);
+  text-transform: uppercase;
+}
+
+.fc-sheet__system-stat-val {
+  font-family: var(--mg-font-display);
+  font-size: clamp(12px, 1.6vw, 18px);
+  font-weight: 700;
+  color: var(--fc-text);
+}
+
+/* Right panel: quote + abilities — col 4, rows 1-2 */
+.fc-sheet__right {
+  grid-column: 4;
+  grid-row: 1 / 3;
+  border: 1px solid var(--fc-border);
+  border-radius: 8px;
+  display: flex;
+  flex-direction: column;
+  padding: 0;
+  background: var(--fc-panel);
+  overflow: hidden;
+}
+
+.fc-meta {
+  padding: 30px 10px 8px;
+  border-bottom: 1px solid rgba(45,138,78,0.3);
+  flex: 0 0 auto;
+}
+
+.fc-meta__quote {
+  font-size: clamp(7px, 0.9vw, 9px);
+  color: var(--fc-text-dim);
   font-style: italic;
+  line-height: 1.3;
+  margin-bottom: 4px;
 }
 
-.faction.back .meta .quoter {
-  left: 6.6%;
-  top: 77.5%;
-  width: 76.5%;
+.fc-meta__quoter {
+  font-family: var(--mg-font-display);
+  font-size: clamp(8px, 1vw, 11px);
+  font-weight: 600;
+  color: var(--fc-text);
+}
+
+.fc-abilities {
+  padding: 10px 10px;
+  flex: 1;
+  overflow: hidden;
+  display: flex;
+  flex-direction: column;
+  gap: 10px;
+}
+
+.fc-ability {
+  flex: 1;
+  overflow: hidden;
+}
+
+.fc-ability__title {
+  font-family: var(--mg-font-display);
+  font-size: clamp(8px, 1vw, 11px);
+  font-weight: 700;
+  color: var(--fc-text);
+  margin-bottom: 2px;
+}
+
+.fc-ability__text {
+  font-size: clamp(7px, 0.85vw, 9px);
+  color: var(--fc-text-dim);
+  line-height: 1.3;
+  overflow: hidden;
+}
+
+.fc-commodities {
+  grid-column: 4;
+  grid-row: 3;
+  aspect-ratio: 88 / 63.5;
+  border: 1px solid rgba(45,138,78,0.4);
+  border-radius: 6px;
+  background: var(--fc-panel);
+  padding: 6px 10px;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  gap: 4px;
+}
+
+.fc-commodities__label {
+  font-size: 7px;
+  color: var(--fc-text-muted);
+  text-transform: uppercase;
+  letter-spacing: 0.3px;
+}
+
+.fc-commodities__val {
+  font-family: var(--mg-font-display);
+  font-size: clamp(14px, 2vw, 22px);
+  font-weight: 700;
+  color: #e6c020;
+}
+
+/* Unit cards wrapper — no longer used, units placed individually */
+.fc-sheet__units {
+  display: contents;
+}
+
+.fc-unit {
+  aspect-ratio: 88 / 63.5;
+  border: 1px solid rgba(45,138,78,0.4);
+  border-radius: 6px;
+  background: var(--fc-panel);
+  padding: 4px 0 4px 6px;
+  display: grid;
+  grid-template-columns: 1fr 12px;
+  grid-template-rows: auto 1fr auto;
+}
+
+/* Staircase unit placement via data attributes */
+.fc-unit[data-pos="r2c1"] { grid-column: 1; grid-row: 2; }
+.fc-unit[data-pos="r2c2"] { grid-column: 2; grid-row: 2; }
+.fc-unit[data-pos="r3c1"] { grid-column: 1; grid-row: 3; }
+.fc-unit[data-pos="r3c2"] { grid-column: 2; grid-row: 3; }
+.fc-unit[data-pos="r3c3"] { grid-column: 3; grid-row: 3; }
+.fc-unit[data-pos="r4c1"] { grid-column: 1; grid-row: 4; }
+.fc-unit[data-pos="r4c2"] { grid-column: 2; grid-row: 4; }
+.fc-unit[data-pos="r4c3"] { grid-column: 3; grid-row: 4; }
+.fc-unit[data-pos="r4c4"] { grid-column: 4; grid-row: 4; }
+
+.fc-unit__name {
+  font-size: 7px;
+  font-weight: 600;
+  color: var(--fc-accent);
+  text-transform: uppercase;
+  letter-spacing: 0.3px;
+}
+
+.fc-unit__keywords {
+  font-size: 6px;
+  color: var(--fc-accent);
+  margin-top: 2px;
+  letter-spacing: 0.2px;
+}
+
+.fc-unit__ability {
+  font-size: 6px;
+  color: var(--fc-text-dim);
+  line-height: 1.3;
+  margin-top: 3px;
+  flex: 1;
+  overflow: hidden;
+}
+
+.fc-unit__stats {
+  display: flex;
+  gap: 6px;
+  margin-top: 4px;
+}
+
+.fc-unit__stat {
   text-align: center;
 }
 
-/* .abilities region */
-
-.faction.back .abilities .abilityt  { left: 1.5%; top: 3.2%;  width: 97%; }
-.faction.back .abilities .ability   { left: 1.5%; top: 8.5%;  width: 97%; height: 30%; }
-.faction.back .abilities .abilityt2 { left: 1.5%; top: 41.1%; width: 97%; }
-.faction.back .abilities .ability2  { left: 1.5%; top: 46.4%; width: 97%; height: 23%; }
-.faction.back .abilities .abilityt3 { left: 1.5%; top: 71.5%; width: 97%; }
-.faction.back .abilities .ability3  { left: 1.5%; top: 76.8%; width: 97%; height: 18%; }
-
-/* =================================================================
-   LEADER CARDS (750 x 500 px)
-   ================================================================= */
-
-.leader .details,
-.leader .details .rectangle {
-  position: absolute;
-  top: 0; left: 0; width: 100%; height: 100%;
+.fc-unit__stat-val {
+  font-family: var(--mg-font-display);
+  font-size: clamp(10px, 1.4vw, 16px);
+  font-weight: 700;
+  color: #e6c020;
 }
 
-.leader .icon {
-  /* ESTIMATED */
-  left: 3%;
-  top: 5%;
-  width: 32%;
-  height: 53%;
-  background-size: cover;
-  background-position: center top;
+.fc-unit__stat-lbl {
+  font-size: 5px;
+  color: var(--fc-text-muted);
+  text-transform: uppercase;
 }
 
-.leader .avatar {
-  /* ESTIMATED */
-  left: 3%;
-  top: 60%;
-  width: 32%;
-  height: 35%;
+/* --- LEADER CARDS --- */
+/* All cards: 88mm x 63.5mm landscape = aspect 88:63.5 = 1.386:1
+   Note card: 63.5mm x 88mm portrait = aspect 63.5:88 = 0.722:1
+   Note width relative to leader height: leader height = width/1.386,
+   note width = height * 0.722. Since they share same physical card,
+   note width should = leader card height visually. */
+.leaders-row {
+  display: flex;
+  gap: 4px;
+  align-items: flex-start;
+  flex-wrap: wrap;
+}
+
+.fc-leader {
+  width: var(--fc-card-w);
+  height: var(--fc-card-h);
+  background: linear-gradient(160deg, #0a1a10 0%, #051510 100%);
+  border: 2px solid var(--fc-border);
+  border-radius: 10px;
+  display: grid;
+  grid-template-columns: 35% 65%;
+  overflow: hidden;
+}
+
+.fc-leader__left {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  padding: 8px;
+  border-right: 1px solid rgba(45,138,78,0.3);
+}
+
+.fc-leader__avatar {
+  width: 70%;
+  aspect-ratio: 1;
   border-radius: 50%;
   background: rgba(255,255,255,0.05);
-  overflow: hidden;
+  border: 2px solid var(--fc-border);
   background-size: cover;
   background-position: center;
 }
 
-.leader .title.text.big {
-  left: 38%;
-  top: 10%;
-  width: 59%;
+.fc-leader__right {
+  padding: 10px 12px;
+  display: flex;
+  flex-direction: column;
 }
 
-.leader .byline.text.big.green {
-  left: 38%;
-  top: 17%;
-  width: 59%;
+.fc-leader__name {
+  font-family: var(--mg-font-display);
+  font-size: clamp(9px, 1.2vw, 13px);
+  font-weight: 700;
+  color: var(--fc-text);
+  margin-bottom: 2px;
 }
 
-.leader .content.text.small {
-  left: 38%;
-  top: 24%;
-  width: 59%;
-  height: 68%;
+.fc-leader__type {
+  font-size: clamp(7px, 0.9vw, 9px);
+  font-weight: 600;
+  color: var(--fc-accent);
+  text-transform: uppercase;
+  letter-spacing: 0.5px;
+  margin-bottom: 6px;
 }
 
-/* =================================================================
-   NOTE CARD (500 x 750 px)
-   ================================================================= */
-
-.note .details,
-.note .details .rectangle {
-  position: absolute;
-  top: 0; left: 0; width: 100%; height: 100%;
+.fc-leader__ability {
+  font-size: clamp(7px, 0.85vw, 9px);
+  color: var(--fc-text-dim);
+  line-height: 1.35;
+  overflow: hidden;
+  flex: 1;
 }
 
-.note .icon.img-symbol {
-  left: auto;
-  right: 5%;
-  bottom: 5%;
-  top: auto;
-  width: 22%;
-  height: 14%;
+/* --- NOTE CARD (portrait: 63.5mm x 88mm — same card rotated) --- */
+.fc-note {
+  width: var(--fc-card-h);
+  height: calc(var(--fc-card-h) * 88 / 63.5);
+  background: linear-gradient(180deg, #f8f8f0 0%, #e8e8e0 100%);
+  border: 2px solid var(--fc-border);
+  border-radius: 10px;
+  padding: 12px 10px;
+  display: flex;
+  flex-direction: column;
+  align-self: start;
 }
 
-.note .title.text.big {
-  left: 10%;
-  top: 2.7%;
-  width: 80%;
+.fc-note__name {
+  font-family: var(--mg-font-display);
+  font-size: 11px;
+  font-weight: 700;
+  color: #1a1a1a;
+  margin-bottom: 8px;
 }
 
-.note .content.text.small {
-  left: 13%;
-  top: 33.3%;
-  width: 74%;
-  height: 55%;
+.fc-note__text {
+  font-size: 8px;
+  color: #444;
+  line-height: 1.4;
+  flex: 1;
+  overflow: hidden;
 }
 
-/* =================================================================
-   TECH CARDS (760 x 495 px)
-   ================================================================= */
-
-.tech .details,
-.tech .details .rectangle {
-  position: absolute;
-  top: 0; left: 0; width: 100%; height: 100%;
+/* --- TECH CARDS --- */
+.tech-row {
+  display: flex;
+  gap: 4px;
+  flex-wrap: wrap;
 }
 
-.tech .icon.img-symbol {
-  /* ESTIMATED */
-  left: 1%;
-  top: 2%;
-  width: 11%;
-  height: 20%;
+.fc-tech {
+  width: var(--fc-card-w);
+  height: var(--fc-card-h);
+  background: linear-gradient(160deg, #0a1a10 0%, #051510 100%);
+  border: 2px solid var(--fc-border);
+  border-radius: 10px;
+  display: grid;
+  grid-template-columns: 12% 88%;
+  overflow: hidden;
 }
 
-.tech .title.text.big {
-  left: 13.2%;
-  top: 6.1%;
-  width: 73%;
+.fc-tech__pips {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: flex-end;
+  padding: 6px 0 10px;
+  gap: 4px;
+  border-right: 1px solid rgba(45,138,78,0.2);
 }
 
-.tech .byline.text.big.green {
-  left: 13.2%;
-  top: 16%;
-  width: 73%;
-}
-
-.tech .content.text.small {
-  left: 11.2%;
-  top: 30.3%;
-  width: 76%;
-  height: 38%;
-}
-
-/* Req pips */
-.tech .reqs {
-  position: absolute;
-  left: 3%;
-  width: 8%;
-  height: 7%;
+.fc-tech__pip {
+  width: 14px;
+  height: 14px;
   border-radius: 50%;
-  display: none;
+  background: #333;
 }
 
-.tech .reqs[data-req="r"] { background: #d11a1a; display: block; }
-.tech .reqs[data-req="g"] { background: #3a9928; display: block; }
-.tech .reqs[data-req="y"] { background: #e6c020; display: block; }
-.tech .reqs[data-req="b"] { background: #0c4f8d; display: block; }
+.fc-tech__pip--r { background: #d11a1a; }
+.fc-tech__pip--g { background: #3a9928; }
+.fc-tech__pip--y { background: #e6c020; }
+.fc-tech__pip--b { background: #0c4f8d; }
+.fc-tech__pip--none { display: none; }
 
-.tech .req1 { top: 72%; }
-.tech .req2 { top: 80%; }
-.tech .req3 { top: 88%; }
-
-/* =================================================================
-   MECH CARD (750 x 500 px) — uses .tech.mech
-   ================================================================= */
-
-.tech.mech .icon.img-symbol {
-  /* ESTIMATED */
-  left: 3%;
-  top: 5%;
-  width: 30%;
-  height: 53%;
+.fc-tech__body {
+  padding: 10px 12px;
+  display: flex;
+  flex-direction: column;
 }
 
-.tech.mech .title.text.big {
-  left: 38%;
-  top: 10%;
-  width: 59%;
+.fc-tech__name {
+  font-family: var(--mg-font-display);
+  font-size: clamp(9px, 1.2vw, 13px);
+  font-weight: 700;
+  color: var(--fc-text);
+  margin-bottom: 2px;
 }
 
-.tech.mech .content.text.small {
-  left: 38%;
-  top: 24%;
-  width: 59%;
-  height: 68%;
+.fc-tech__type {
+  font-size: clamp(7px, 0.9vw, 9px);
+  font-weight: 600;
+  color: var(--fc-accent);
+  margin-bottom: 6px;
+}
+
+.fc-tech__ability {
+  font-size: clamp(7px, 0.85vw, 9px);
+  color: var(--fc-text-dim);
+  line-height: 1.35;
+  overflow: hidden;
+  flex: 1;
+}
+
+/* --- MECH CARD (same dimensions as tech/leader: landscape poker) --- */
+.fc-mech {
+  width: var(--fc-card-w);
+  height: var(--fc-card-h);
+  background: linear-gradient(160deg, #0a1a10 0%, #051510 100%);
+  border: 2px solid var(--fc-border);
+  border-radius: 10px;
+  padding: 10px 12px;
+  display: flex;
+  flex-direction: column;
+}
+
+.fc-mech__name {
+  font-family: var(--mg-font-display);
+  font-size: clamp(9px, 1.2vw, 13px);
+  font-weight: 700;
+  color: var(--fc-text);
+  margin-bottom: 2px;
+}
+
+.fc-mech__type {
+  font-size: clamp(7px, 0.9vw, 9px);
+  font-weight: 600;
+  color: var(--fc-accent);
+  text-transform: uppercase;
+  margin-bottom: 6px;
+}
+
+.fc-mech__ability {
+  font-size: clamp(7px, 0.85vw, 9px);
+  color: var(--fc-text-dim);
+  line-height: 1.35;
+  overflow: hidden;
+  flex: 1;
 }
