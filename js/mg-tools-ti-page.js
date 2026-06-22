@@ -191,6 +191,12 @@ function renderAgenda() {
   sec.appendChild(btns2);
 }
 
+/* ── FACTION DESIGNER LINK ── */
+const fdLinkWrap = document.getElementById('faction-designer-link');
+if (fdLinkWrap) {
+  fdLinkWrap.appendChild(MG.linkBtn('Open Faction Designer', '/tools/ti/factions/', 'blue'));
+}
+
 /* ── JUMP NAV ACTIVE STATE ── */
 (function() {
   const links = document.querySelectorAll('.ti-jumpnav__link');

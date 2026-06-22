@@ -49,203 +49,263 @@
     return window.location.origin + window.location.pathname + '?' + params.toString();
   }
 
+  /* ── Card DOM helpers ────────────────────────────────────────── */
+
+  function mkDiv(className) {
+    var d = document.createElement('div');
+    d.className = className;
+    return d;
+  }
+
+  function mkSpan(id) {
+    var s = document.createElement('span');
+    s.id = id;
+    return s;
+  }
+
+  function mkImg(path) {
+    var i = document.createElement('img');
+    i.src = url(path);
+    i.className = 'img-block';
+    return i;
+  }
+
+  function textEl(className, spanId) {
+    var d = mkDiv(className);
+    d.appendChild(mkSpan(spanId));
+    return d;
+  }
+
+  function buildLeaderCard(type, nameId, labelText, contentsId, iconClass) {
+    var wrap = mkDiv('leader ' + type);
+    wrap.appendChild(mkImg('/img/tools/ti4-factions/TI4-Leader-Blank.png'));
+    var details = mkDiv('details');
+    var rect = mkDiv('rectangle');
+    rect.appendChild(mkDiv('icon ' + iconClass));
+    rect.appendChild(textEl('title text big', nameId));
+    var byline = mkDiv('byline text big green');
+    var lbl = mkSpan(type + '-label');
+    lbl.textContent = labelText;
+    byline.appendChild(lbl);
+    rect.appendChild(byline);
+    rect.appendChild(mkDiv('avatar'));
+    rect.appendChild(textEl('content text small', contentsId));
+    details.appendChild(rect);
+    wrap.appendChild(details);
+    return wrap;
+  }
+
+  function buildTechCard(cssClass, png, nameId, labelText, labelSpanId, r1Id, r2Id, r3Id, contentsId) {
+    var wrap = mkDiv(cssClass);
+    wrap.appendChild(mkImg('/img/tools/ti4-factions/' + png));
+    var details = mkDiv('details');
+    var rect = mkDiv('rectangle');
+    rect.appendChild(mkDiv('icon img-symbol'));
+    rect.appendChild(textEl('title text big', nameId));
+    if (labelText) {
+      var byline = mkDiv('byline text big green');
+      var lbl = mkSpan(labelSpanId);
+      lbl.textContent = labelText;
+      byline.appendChild(lbl);
+      rect.appendChild(byline);
+    }
+    if (r1Id) {
+      var r1 = mkDiv('reqs req1 text big'); r1.appendChild(mkSpan(r1Id)); rect.appendChild(r1);
+      var r2 = mkDiv('reqs req2 text big'); r2.appendChild(mkSpan(r2Id)); rect.appendChild(r2);
+      var r3 = mkDiv('reqs req3 text big'); r3.appendChild(mkSpan(r3Id)); rect.appendChild(r3);
+    }
+    rect.appendChild(textEl('content text small', contentsId));
+    details.appendChild(rect);
+    wrap.appendChild(details);
+    return wrap;
+  }
+
+  function buildCardHTML() {
+    var frag = document.createDocumentFragment();
+
+    /* Faction sheet (full width) */
+    var faction = mkDiv('faction back');
+    faction.appendChild(mkImg('/img/tools/ti4-factions/TI4-Faction-Blank.png'));
+    var fd = mkDiv('details');
+
+    var flagship = mkDiv('rectangle flagship');
+    flagship.appendChild(mkDiv('icon img-symbol'));
+    flagship.appendChild(textEl('name text big', 'flagship-name'));
+    flagship.appendChild(textEl('abilityt text big', 'flagship-title'));
+    flagship.appendChild(textEl('ability text small', 'flagship-ability'));
+    flagship.appendChild(textEl('cost text big', 'flagship-cost'));
+    flagship.appendChild(textEl('combat text big', 'flagship-combat'));
+    flagship.appendChild(textEl('move text big', 'flagship-move'));
+    flagship.appendChild(textEl('capacity text big', 'flagship-capacity'));
+    fd.appendChild(flagship);
+
+    var system = mkDiv('rectangle system img-system');
+    var res = mkDiv('resources');
+    var resTitle = mkDiv('title text small');
+    resTitle.appendChild(document.createTextNode('RESOURCES'));
+    res.appendChild(resTitle);
+    res.appendChild(textEl('text big', 'faction-resources'));
+    system.appendChild(res);
+    var inf = mkDiv('influence');
+    var infTitle = mkDiv('title text small');
+    infTitle.appendChild(document.createTextNode('INFLUENCE'));
+    inf.appendChild(infTitle);
+    inf.appendChild(textEl('text big', 'faction-influence'));
+    system.appendChild(inf);
+    fd.appendChild(system);
+
+    fd.appendChild(mkDiv('rectangle race img-race'));
+
+    var meta = mkDiv('rectangle meta');
+    meta.appendChild(mkDiv('icon img-symbol'));
+    meta.appendChild(textEl('quote text small', 'faction-quote'));
+    meta.appendChild(textEl('quoter text big', 'faction-quoter'));
+    fd.appendChild(meta);
+
+    var abilities = mkDiv('rectangle abilities');
+    abilities.appendChild(textEl('abilityt text big', 'faction-title1'));
+    abilities.appendChild(textEl('ability text small', 'faction-ability1'));
+    abilities.appendChild(textEl('abilityt2 text big', 'faction-title2'));
+    abilities.appendChild(textEl('ability2 text small', 'faction-ability2'));
+    abilities.appendChild(textEl('abilityt3 text big', 'faction-title3'));
+    abilities.appendChild(textEl('ability3 text small', 'faction-ability3'));
+    fd.appendChild(abilities);
+
+    fd.appendChild(textEl('rectangle commodities text big', 'faction-commodities'));
+    fd.appendChild(textEl('rectangle title text big', 'faction-name'));
+    faction.appendChild(fd);
+    frag.appendChild(faction);
+
+    /* Leaders row */
+    var leadersRow = mkDiv('leaders-row');
+    leadersRow.appendChild(buildLeaderCard('agent', 'agent-name', 'Agent', 'agent-contents', 'img-agent'));
+    leadersRow.appendChild(buildLeaderCard('commander', 'commander-name', 'Commander', 'commander-contents', 'img-commander'));
+    leadersRow.appendChild(buildLeaderCard('hero', 'hero-name', 'Hero', 'hero-contents', 'img-hero'));
+
+    var note = mkDiv('note');
+    note.appendChild(mkImg('/img/tools/ti4-factions/TI4-Note-Blank.png'));
+    var nd = mkDiv('details');
+    var nr = mkDiv('rectangle');
+    nr.appendChild(mkDiv('icon img-symbol'));
+    nr.appendChild(textEl('title text big', 'note-name'));
+    nr.appendChild(textEl('content text small', 'note-contents'));
+    nd.appendChild(nr);
+    note.appendChild(nd);
+    leadersRow.appendChild(note);
+    frag.appendChild(leadersRow);
+
+    /* Tech row */
+    var techRow = mkDiv('tech-row');
+    techRow.appendChild(buildTechCard('tech tech1', 'TI4-Technology-Blank.png', 'tech1-name', 'Tech #1', 'tech1-label', 'req11-type', 'req12-type', 'req13-type', 'tech1-contents'));
+    techRow.appendChild(buildTechCard('tech tech2', 'TI4-Technology-Blank.png', 'tech2-name', 'Tech #2', 'tech2-label', 'req21-type', 'req22-type', 'req23-type', 'tech2-contents'));
+    techRow.appendChild(buildTechCard('tech mech', 'TI4-Mech-Blank.png', 'mech-name', null, null, null, null, null, 'mech-contents'));
+    frag.appendChild(techRow);
+
+    return frag;
+  }
+
   function renderPreview() {
     var container = document.getElementById('fd-preview-inner');
     container.innerHTML = '';
-
-    var imgBase = url('/img/tools/ti4-factions/');
-    var parts = FactionSVG.generateAll(state, imgBase);
-
-    // Faction sheet (full width)
-    var factionWrap = el('div', {class: 'fd-card fd-card--faction'});
-    factionWrap.innerHTML = parts[0].svg;
-    container.appendChild(factionWrap);
-
-    // Leaders row (3 cards) + Note card
-    var leadersRow = el('div', {class: 'fd-row fd-row--leaders'});
-    for (var i = 1; i <= 3; i++) {
-      var card = el('div', {class: 'fd-card fd-card--leader'});
-      card.innerHTML = parts[i].svg;
-      leadersRow.appendChild(card);
-    }
-    var noteCard = el('div', {class: 'fd-card fd-card--note'});
-    noteCard.innerHTML = parts[7].svg;
-    leadersRow.appendChild(noteCard);
-    container.appendChild(leadersRow);
-
-    // Tech row (2 tech + mech)
-    var techRow = el('div', {class: 'fd-row fd-row--tech'});
-    for (var j = 4; j <= 6; j++) {
-      var tcard = el('div', {class: 'fd-card fd-card--tech'});
-      tcard.innerHTML = parts[j].svg;
-      techRow.appendChild(tcard);
-    }
-    container.appendChild(techRow);
+    container.appendChild(buildCardHTML());
+    syncStateToDOM();
   }
 
-  function buildFactionSheet() {
-    var wrap = el('div', {class: 'fd-card fd-faction'});
-    var img = el('img', {class: 'fd-card__img', src: IMG_BASE + 'TI4-Faction-Blank.png', alt: 'Faction sheet'});
-    var overlay = el('div', {class: 'fd-card__overlay'});
+  function syncStateToDOM() {
+    var map = {
+      'factionName':          'faction-name',
+      'factionQuote':         'faction-quote',
+      'factionQuoter':        'faction-quoter',
+      'factionAbility1Title': 'faction-title1',
+      'factionAbility1':      'faction-ability1',
+      'factionAbility2Title': 'faction-title2',
+      'factionAbility2':      'faction-ability2',
+      'factionAbility3Title': 'faction-title3',
+      'factionAbility3':      'faction-ability3',
+      'factionCommodities':   'faction-commodities',
+      'factionResources':     'faction-resources',
+      'factionInfluence':     'faction-influence',
+      'flagshipName':         'flagship-name',
+      'flagshipTitle':        'flagship-title',
+      'flagshipAbility':      'flagship-ability',
+      'flagshipCost':         'flagship-cost',
+      'flagshipCombat':       'flagship-combat',
+      'flagshipMove':         'flagship-move',
+      'flagshipCapacity':     'flagship-capacity',
+      'agentName':            'agent-name',
+      'agentAbility':         'agent-contents',
+      'commanderName':        'commander-name',
+      'commanderAbility':     'commander-contents',
+      'heroName':             'hero-name',
+      'heroAbility':          'hero-contents',
+      'tech1Name':            'tech1-name',
+      'tech1Ability':         'tech1-contents',
+      'tech2Name':            'tech2-name',
+      'tech2Ability':         'tech2-contents',
+      'mechName':             'mech-name',
+      'mechAbility':          'mech-contents',
+      'noteName':             'note-name',
+      'noteAbility':          'note-contents'
+    };
+    Object.keys(map).forEach(function(k) {
+      var s = document.getElementById(map[k]);
+      if (s) s.textContent = state[k] || '';
+    });
 
-    overlay.appendChild(makeText('fd-faction__name fd-text--big', state.factionName || 'Faction Name'));
-    overlay.appendChild(makeText('fd-faction__flagship-name fd-text--big', state.flagshipName || 'Flagship'));
-    overlay.appendChild(makeText('fd-faction__flagship-title fd-text--big', state.flagshipTitle || ''));
-    overlay.appendChild(makeText('fd-faction__flagship-ability fd-text--small', state.flagshipAbility || ''));
-    overlay.appendChild(makeText('fd-faction__flagship-cost fd-text--big', state.flagshipCost || '?'));
-    overlay.appendChild(makeText('fd-faction__flagship-combat fd-text--big', state.flagshipCombat || '?'));
-    overlay.appendChild(makeText('fd-faction__flagship-move fd-text--big', state.flagshipMove || '?'));
-    overlay.appendChild(makeText('fd-faction__flagship-capacity fd-text--big', state.flagshipCapacity || '?'));
-    overlay.appendChild(makeText('fd-faction__resources fd-text--big', state.factionResources || '?'));
-    overlay.appendChild(makeText('fd-faction__influence fd-text--big', state.factionInfluence || '?'));
-    overlay.appendChild(makeText('fd-faction__quote fd-text--small', state.factionQuote || ''));
-    overlay.appendChild(makeText('fd-faction__quoter fd-text--big', state.factionQuoter || ''));
-    overlay.appendChild(makeText('fd-faction__ability1-title fd-text--big', state.factionAbility1Title || ''));
-    overlay.appendChild(makeText('fd-faction__ability1 fd-text--small', state.factionAbility1 || ''));
-    overlay.appendChild(makeText('fd-faction__ability2-title fd-text--big', state.factionAbility2Title || ''));
-    overlay.appendChild(makeText('fd-faction__ability2 fd-text--small', state.factionAbility2 || ''));
-    overlay.appendChild(makeText('fd-faction__ability3-title fd-text--big', state.factionAbility3Title || ''));
-    overlay.appendChild(makeText('fd-faction__ability3 fd-text--small', state.factionAbility3 || ''));
-    overlay.appendChild(makeText('fd-faction__commodities fd-text--big', state.factionCommodities || '?'));
+    var reqMap = {
+      'tech1Req1': 'req11-type', 'tech1Req2': 'req12-type', 'tech1Req3': 'req13-type',
+      'tech2Req1': 'req21-type', 'tech2Req2': 'req22-type', 'tech2Req3': 'req23-type'
+    };
+    Object.keys(reqMap).forEach(function(k) {
+      var s = document.getElementById(reqMap[k]);
+      if (s && s.parentElement) s.parentElement.setAttribute('data-req', state[k] || '');
+    });
 
-    var symbolEl = el('div', {class: 'fd-text fd-faction__symbol'});
-    if (state.imgSymbol) symbolEl.style.backgroundImage = 'url(' + state.imgSymbol + ')';
-    else symbolEl.style.backgroundImage = 'url(' + IMG_BASE + 'placeholder-icon.png)';
-    overlay.appendChild(symbolEl);
-
-    var raceEl = el('div', {class: 'fd-text fd-faction__race-img'});
-    if (state.imgRace) { raceEl.style.backgroundImage = 'url(' + state.imgRace + ')'; raceEl.style.opacity = '1'; }
-    else raceEl.style.backgroundImage = 'url(' + IMG_BASE + 'placeholder-race-white.png)';
-    overlay.appendChild(raceEl);
-
-    var systemEl = el('div', {class: 'fd-text fd-faction__system-img'});
-    if (state.imgSystem) { systemEl.style.backgroundImage = 'url(' + state.imgSystem + ')'; systemEl.style.opacity = '1'; }
-    else systemEl.style.backgroundImage = 'url(' + IMG_BASE + 'placeholder-planet-white.png)';
-    overlay.appendChild(systemEl);
-
-    wrap.appendChild(img);
-    wrap.appendChild(overlay);
-    return wrap;
+    setImg('.img-symbol',    state.imgSymbol    || IMG_BASE + 'placeholder-icon.png');
+    setImg('.img-race',      state.imgRace      || IMG_BASE + 'placeholder-race-white.png');
+    setImg('.img-system',    state.imgSystem    || IMG_BASE + 'placeholder-planet-white.png');
+    setImg('.img-agent',     state.imgAgent     || IMG_BASE + 'placeholder-icon.png');
+    setImg('.img-commander', state.imgCommander || IMG_BASE + 'placeholder-icon.png');
+    setImg('.img-hero',      state.imgHero      || IMG_BASE + 'placeholder-icon.png');
   }
 
-  function buildLeadersRow() {
-    var row = el('div', {class: 'fd-cards-row fd-cards-row--with-note'});
-    var leaders = el('div', {class: 'fd-cards-3col'});
-
-    leaders.appendChild(buildLeaderCard('Agent', state.agentName, state.agentAbility, state.imgAgent));
-    leaders.appendChild(buildLeaderCard('Commander', state.commanderName, state.commanderAbility, state.imgCommander));
-    leaders.appendChild(buildLeaderCard('Hero', state.heroName, state.heroAbility, state.imgHero));
-
-    row.appendChild(leaders);
-    row.appendChild(buildNoteCard());
-    return row;
+  function setImg(selector, src) {
+    document.querySelectorAll(selector).forEach(function(e) {
+      e.style.backgroundImage = 'url(' + src + ')';
+    });
   }
 
-  function buildLeaderCard(label, name, ability, imgData) {
-    var wrap = el('div', {class: 'fd-card fd-leader'});
-    var img = el('img', {class: 'fd-card__img', src: IMG_BASE + 'TI4-Leader-Blank.png', alt: label});
-    var overlay = el('div', {class: 'fd-card__overlay'});
-
-    var iconEl = el('div', {class: 'fd-text fd-leader__icon'});
-    if (imgData) iconEl.style.backgroundImage = 'url(' + imgData + ')';
-    else iconEl.style.backgroundImage = 'url(' + IMG_BASE + 'placeholder-icon.png)';
-    overlay.appendChild(iconEl);
-
-    overlay.appendChild(makeText('fd-leader__name fd-text--big', name || label + ' Name'));
-    overlay.appendChild(makeText('fd-leader__label fd-text--big fd-text--green', label));
-    overlay.appendChild(makeText('fd-leader__ability fd-text--small', ability || ''));
-
-    wrap.appendChild(img);
-    wrap.appendChild(overlay);
-    return wrap;
+  function printPreview() {
+    window.print();
   }
 
-  function buildNoteCard() {
-    var wrap = el('div', {class: 'fd-card fd-note'});
-    var img = el('img', {class: 'fd-card__img', src: IMG_BASE + 'TI4-Note-Blank.png', alt: 'Note'});
-    var overlay = el('div', {class: 'fd-card__overlay'});
-
-    var iconEl = el('div', {class: 'fd-text fd-note__icon'});
-    if (state.imgSymbol) iconEl.style.backgroundImage = 'url(' + state.imgSymbol + ')';
-    else iconEl.style.backgroundImage = 'url(' + IMG_BASE + 'placeholder-icon.png)';
-    overlay.appendChild(iconEl);
-
-    overlay.appendChild(makeText('fd-note__name fd-text--big', state.noteName || 'Note'));
-    overlay.appendChild(makeText('fd-note__ability fd-text--small', state.noteAbility || ''));
-
-    wrap.appendChild(img);
-    wrap.appendChild(overlay);
-    return wrap;
+  function copyShareLink() {
+    var shareUrl = buildShareURL();
+    navigator.clipboard.writeText(shareUrl).then(function() {
+      var shareBtn = document.getElementById('fd-share-btn');
+      if (shareBtn) {
+        shareBtn.textContent = 'Copied';
+        setTimeout(function() { shareBtn.textContent = 'Copy Link'; }, 2000);
+      }
+    });
   }
 
-  function buildTechRow() {
-    var row = el('div', {class: 'fd-cards-row'});
-
-    row.appendChild(buildTechCard(state.tech1Name, state.tech1Ability, 'Tech #1', state.tech1Req1, state.tech1Req2, state.tech1Req3));
-    row.appendChild(buildTechCard(state.tech2Name, state.tech2Ability, 'Tech #2', state.tech2Req1, state.tech2Req2, state.tech2Req3));
-    row.appendChild(buildMechCard());
-
-    return row;
-  }
-
-  function buildTechCard(name, ability, label, req1, req2, req3) {
-    var wrap = el('div', {class: 'fd-card fd-tech'});
-    var img = el('img', {class: 'fd-card__img', src: IMG_BASE + 'TI4-Technology-Blank.png', alt: label});
-    var overlay = el('div', {class: 'fd-card__overlay'});
-
-    var iconEl = el('div', {class: 'fd-text fd-tech__icon'});
-    if (state.imgSymbol) iconEl.style.backgroundImage = 'url(' + state.imgSymbol + ')';
-    else iconEl.style.backgroundImage = 'url(' + IMG_BASE + 'placeholder-icon.png)';
-    overlay.appendChild(iconEl);
-
-    overlay.appendChild(makeText('fd-tech__name fd-text--big', name || label));
-    overlay.appendChild(makeText('fd-tech__label fd-text--big fd-text--green', label));
-    overlay.appendChild(makeText('fd-tech__ability fd-text--small', ability || ''));
-
-    if (req1) overlay.appendChild(makeReqPip('fd-tech__req1', req1));
-    if (req2) overlay.appendChild(makeReqPip('fd-tech__req2', req2));
-    if (req3) overlay.appendChild(makeReqPip('fd-tech__req3', req3));
-
-    wrap.appendChild(img);
-    wrap.appendChild(overlay);
-    return wrap;
-  }
-
-  function buildMechCard() {
-    var wrap = el('div', {class: 'fd-card fd-mech'});
-    var img = el('img', {class: 'fd-card__img', src: IMG_BASE + 'TI4-Mech-Blank.png', alt: 'Mech'});
-    var overlay = el('div', {class: 'fd-card__overlay'});
-
-    var iconEl = el('div', {class: 'fd-text fd-mech__icon'});
-    if (state.imgSymbol) iconEl.style.backgroundImage = 'url(' + state.imgSymbol + ')';
-    else iconEl.style.backgroundImage = 'url(' + IMG_BASE + 'placeholder-icon.png)';
-    overlay.appendChild(iconEl);
-
-    overlay.appendChild(makeText('fd-mech__name fd-text--big', state.mechName || 'Mech'));
-    overlay.appendChild(makeText('fd-mech__ability fd-text--small', state.mechAbility || ''));
-
-    wrap.appendChild(img);
-    wrap.appendChild(overlay);
-    return wrap;
-  }
-
-  function makeText(cls, text) {
-    var span = el('div', {class: 'fd-text ' + cls});
-    span.textContent = text;
-    return span;
-  }
-
-  function makeReqPip(cls, colour) {
-    var pip = el('div', {class: 'fd-text ' + cls});
-    var dot = el('span', {class: 'fd-req-pip fd-req-pip--' + colour});
-    pip.appendChild(dot);
-    return pip;
+  function buildExportBar() {
+    var bar = el('div', {class: 'fd-export-bar'});
+    var printBtn = el('button', {class: 'fd-export-btn'});
+    printBtn.textContent = 'Print / Save PDF';
+    printBtn.addEventListener('click', printPreview);
+    bar.appendChild(printBtn);
+    var shareBtn = el('button', {class: 'fd-export-btn fd-export-btn--outline', id: 'fd-share-btn'});
+    shareBtn.textContent = 'Copy Link';
+    shareBtn.addEventListener('click', copyShareLink);
+    bar.appendChild(shareBtn);
+    return bar;
   }
 
   function renderEditor() {
     var editor = document.getElementById('fd-editor');
     editor.innerHTML = '';
-
     var tabs = el('div', {class: 'fd-editor__tabs'});
     var panels = [];
     var tabData = [
@@ -255,26 +315,23 @@
       {id: 'tech', label: 'Tech'},
       {id: 'images', label: 'Images'}
     ];
-
     tabData.forEach(function(t, i) {
-      var btn = el('button', {class: 'fd-editor__tab' + (i === 0 ? ' fd-editor__tab--active' : ''), 'data-tab': t.id});
-      btn.textContent = t.label;
-      btn.addEventListener('click', function() {
+      var tabBtn = el('button', {class: 'fd-editor__tab' + (i === 0 ? ' fd-editor__tab--active' : ''), 'data-tab': t.id});
+      tabBtn.textContent = t.label;
+      tabBtn.addEventListener('click', function() {
         tabs.querySelectorAll('.fd-editor__tab').forEach(function(b) { b.classList.remove('fd-editor__tab--active'); });
-        btn.classList.add('fd-editor__tab--active');
+        tabBtn.classList.add('fd-editor__tab--active');
         panels.forEach(function(p) { p.classList.remove('fd-editor__panel--active'); });
         document.getElementById('fd-panel-' + t.id).classList.add('fd-editor__panel--active');
       });
-      tabs.appendChild(btn);
+      tabs.appendChild(tabBtn);
     });
     editor.appendChild(tabs);
-
     panels.push(buildFactionPanel());
     panels.push(buildFlagshipPanel());
     panels.push(buildLeadersPanel());
     panels.push(buildTechPanel());
     panels.push(buildImagesPanel());
-
     panels.forEach(function(p, i) {
       if (i === 0) p.classList.add('fd-editor__panel--active');
       editor.appendChild(p);
@@ -385,12 +442,14 @@
 
   function field(label, type, key, placeholder) {
     var wrap = el('div', {class: 'fd-field'});
-    wrap.appendChild(el('label', {class: 'fd-field__label'}, label));
+    var lbl = el('label', {class: 'fd-field__label'});
+    lbl.textContent = label;
+    wrap.appendChild(lbl);
     var input = el('input', {class: 'fd-field__input', type: type, placeholder: placeholder || '', 'data-key': key});
     input.value = state[key] || '';
     input.addEventListener('input', function() {
       state[key] = input.value;
-      renderPreview();
+      syncStateToDOM();
     });
     wrap.appendChild(input);
     return wrap;
@@ -398,20 +457,24 @@
 
   function fieldSelect(label, key, options) {
     var wrap = el('div', {class: 'fd-field'});
-    wrap.appendChild(el('label', {class: 'fd-field__label'}, label));
+    var lbl = el('label', {class: 'fd-field__label'});
+    lbl.textContent = label;
+    wrap.appendChild(lbl);
     var select = el('select', {class: 'fd-field__select', 'data-key': key});
-    var def = el('option', {value: ''});
+    var def = document.createElement('option');
+    def.value = '';
     def.textContent = '—';
     select.appendChild(def);
     options.forEach(function(o) {
-      var opt = el('option', {value: o.value});
+      var opt = document.createElement('option');
+      opt.value = o.value;
       opt.textContent = o.label;
       if (state[key] === o.value) opt.selected = true;
       select.appendChild(opt);
     });
     select.addEventListener('change', function() {
       state[key] = select.value;
-      renderPreview();
+      syncStateToDOM();
     });
     wrap.appendChild(select);
     return wrap;
@@ -419,7 +482,9 @@
 
   function fileField(label, key) {
     var wrap = el('div', {class: 'fd-field'});
-    wrap.appendChild(el('label', {class: 'fd-field__label'}, label));
+    var lbl = el('label', {class: 'fd-field__label'});
+    lbl.textContent = label;
+    wrap.appendChild(lbl);
     var input = el('input', {class: 'fd-field__file', type: 'file', accept: 'image/*'});
     input.addEventListener('change', function(e) {
       var file = e.target.files[0];
@@ -427,7 +492,7 @@
       var reader = new FileReader();
       reader.onload = function(ev) {
         state[key] = ev.target.result;
-        renderPreview();
+        syncStateToDOM();
       };
       reader.readAsDataURL(file);
     });
@@ -435,7 +500,7 @@
     return wrap;
   }
 
-  function fieldRow(fields, multiCol) {
+  function fieldRow(fields) {
     var cls = 'fd-field__row';
     if (fields.length === 3) cls += ' fd-field__row--3';
     else if (fields.length >= 4) cls += ' fd-field__row--4';
@@ -446,9 +511,7 @@
 
   function numOptions(min, max) {
     var opts = [];
-    for (var i = min; i <= max; i++) {
-      opts.push({value: String(i), label: String(i)});
-    }
+    for (var i = min; i <= max; i++) opts.push({value: String(i), label: String(i)});
     return opts;
   }
 
@@ -456,9 +519,7 @@
     var opts = [];
     for (var base = 3; base <= 9; base++) {
       opts.push({value: String(base), label: String(base)});
-      for (var mult = 2; mult <= 4; mult++) {
-        opts.push({value: base + 'X' + mult, label: base + 'x' + mult});
-      }
+      for (var mult = 2; mult <= 4; mult++) opts.push({value: base + 'X' + mult, label: base + 'x' + mult});
     }
     return opts;
   }
@@ -472,73 +533,7 @@
     ];
   }
 
-  function exportSVG() {
-    var imgBase = window.location.origin + url('/img/tools/ti4-factions/');
-    var parts = FactionSVG.generateAll(state, imgBase);
-    parts.forEach(function(p) {
-      var blob = new Blob([p.svg], {type: 'image/svg+xml'});
-      var link = document.createElement('a');
-      link.download = (state.factionName || 'faction') + '-' + p.type + '.svg';
-      link.href = URL.createObjectURL(blob);
-      link.click();
-      URL.revokeObjectURL(link.href);
-    });
-  }
-
-  function exportPNG() {
-    var imgBase = window.location.origin + url('/img/tools/ti4-factions/');
-    var parts = FactionSVG.generateAll(state, imgBase);
-    var downloaded = 0;
-    parts.forEach(function(p) {
-      var svgBlob = new Blob([p.svg], {type: 'image/svg+xml'});
-      var svgUrl = URL.createObjectURL(svgBlob);
-      var img = new Image();
-      img.onload = function() {
-        var canvas = document.createElement('canvas');
-        canvas.width = img.naturalWidth;
-        canvas.height = img.naturalHeight;
-        var ctx = canvas.getContext('2d');
-        ctx.drawImage(img, 0, 0);
-        URL.revokeObjectURL(svgUrl);
-        var link = document.createElement('a');
-        link.download = (state.factionName || 'faction') + '-' + p.type + '.png';
-        link.href = canvas.toDataURL('image/png');
-        link.click();
-        downloaded++;
-      };
-      img.src = svgUrl;
-    });
-  }
-
-  function copyShareLink() {
-    var shareUrl = buildShareURL();
-    navigator.clipboard.writeText(shareUrl).then(function() {
-      var btn = document.getElementById('fd-share-btn');
-      if (btn) { btn.textContent = 'Copied'; setTimeout(function() { btn.textContent = 'Copy Link'; }, 2000); }
-    });
-  }
-
-  function buildExportBar() {
-    var bar = el('div', {class: 'fd-export-bar'});
-
-    var svgBtn = el('button', {class: 'fd-export-btn'}, 'Export SVG');
-    svgBtn.addEventListener('click', exportSVG);
-    bar.appendChild(svgBtn);
-
-    var pngBtn = el('button', {class: 'fd-export-btn'}, 'Export PNG');
-    pngBtn.addEventListener('click', exportPNG);
-    bar.appendChild(pngBtn);
-
-    var shareBtn = el('button', {class: 'fd-export-btn fd-export-btn--outline', id: 'fd-share-btn'}, 'Copy Link');
-    shareBtn.addEventListener('click', copyShareLink);
-    bar.appendChild(shareBtn);
-
-    return bar;
-  }
-
   renderEditor();
   renderPreview();
-
-  var editorEl = document.getElementById('fd-editor');
-  editorEl.appendChild(buildExportBar());
+  document.getElementById('fd-editor').appendChild(buildExportBar());
 })();

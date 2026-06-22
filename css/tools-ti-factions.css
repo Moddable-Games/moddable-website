@@ -205,3 +205,475 @@
     padding: 16px;
   }
 }
+
+/* =================================================================
+   Card overlay — CSS overlay on PNG approach
+   Faction sheet: 2180 x 1496 px. Leaders/Mech: 750 x 500 px.
+   Tech: 760 x 495 px. Note: 500 x 750 px.
+   [Positions marked ESTIMATED — verify visually after build]
+   ================================================================= */
+
+/* Card container base */
+
+.faction.back,
+.leader,
+.note,
+.tech {
+  position: relative;
+  display: block;
+}
+
+.img-block {
+  min-width: 100%;
+  max-width: 100%;
+  width: 100%;
+  height: auto;
+  display: block;
+}
+
+.details {
+  position: absolute;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  pointer-events: none;
+}
+
+.rectangle {
+  position: absolute;
+  overflow: hidden;
+}
+
+/* Text element base */
+
+.text.big {
+  position: absolute;
+  color: #ffffff;
+  font-family: var(--mg-font-display);
+  font-weight: 700;
+  font-size: 14px;
+  line-height: 1.2;
+  overflow: hidden;
+}
+
+.text.small {
+  position: absolute;
+  color: #dddddd;
+  font-family: var(--mg-font-body);
+  font-weight: 400;
+  font-size: 10px;
+  line-height: 1.4;
+  overflow: hidden;
+}
+
+.text.big.green,
+.text.small.green {
+  color: #00f6b1;
+}
+
+.note .content.text.small {
+  color: #757575;
+}
+
+/* Image placeholder divs */
+.img-symbol,
+.img-race,
+.img-system,
+.img-agent,
+.img-commander,
+.img-hero {
+  position: absolute;
+  background-size: contain;
+  background-repeat: no-repeat;
+  background-position: center;
+}
+
+/* Preview layout */
+
+.fd-preview__inner .faction.back {
+  width: 100%;
+  margin-bottom: 12px;
+}
+
+.leaders-row {
+  display: grid;
+  grid-template-columns: 1fr 1fr 1fr 160px;
+  gap: 12px;
+  align-items: start;
+  margin-bottom: 12px;
+}
+
+.tech-row {
+  display: grid;
+  grid-template-columns: 1fr 1fr 1fr;
+  gap: 12px;
+}
+
+/* Print stylesheet */
+
+@media print {
+  #nav-root,
+  #footer-root,
+  .fd-editor { display: none !important; }
+  .fd-app { display: block !important; }
+  .fd-preview {
+    padding: 0 !important;
+    background: #fff !important;
+  }
+  .fd-preview__inner {
+    max-width: none !important;
+  }
+}
+
+/* =================================================================
+   FACTION SHEET REGIONS
+   Each .rectangle is positioned within .details (full card overlay).
+   ================================================================= */
+
+.faction.back .details .title {
+  left: 30%;
+  top: 0%;
+  width: 40%;
+  height: 5.5%;
+}
+
+.faction.back .details .flagship {
+  left: 0%;
+  top: 0%;
+  width: 25%;
+  height: 22%;
+}
+
+.faction.back .details .system {
+  /* ESTIMATED */
+  left: 0%;
+  top: 22%;
+  width: 26%;
+  height: 28%;
+  background-size: cover;
+  background-position: center;
+}
+
+.faction.back .details .race {
+  /* ESTIMATED */
+  left: 25%;
+  top: 3%;
+  width: 47%;
+  height: 67%;
+  background-size: cover;
+  background-position: center top;
+}
+
+.faction.back .details .meta {
+  left: 73%;
+  top: 0%;
+  width: 27%;
+  height: 22%;
+}
+
+.faction.back .details .abilities {
+  left: 73%;
+  top: 22%;
+  width: 27%;
+  height: 44%;
+}
+
+.faction.back .details .commodities {
+  left: 91%;
+  top: 44%;
+  width: 9%;
+  height: 12%;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  font-family: var(--mg-font-display);
+  font-weight: 700;
+  font-size: 20px;
+  color: #ffffff;
+}
+
+.faction.back .commodities span {
+  position: static;
+}
+
+/* =================================================================
+   FACTION SHEET — ELEMENT POSITIONS WITHIN EACH REGION
+   Percentages relative to the region div.
+   ================================================================= */
+
+/* .title region */
+
+.faction.back .title.text.big {
+  left: 5%;
+  top: 24%;
+  width: 92%;
+  text-align: center;
+}
+
+/* .flagship region */
+
+.faction.back .flagship .img-symbol {
+  /* ESTIMATED */
+  left: 2%;
+  top: 2%;
+  width: 14%;
+  height: 14%;
+}
+
+.faction.back .flagship .name {
+  left: 11%;
+  top: 7.6%;
+  width: 86%;
+}
+
+.faction.back .flagship .ability {
+  left: 9%;
+  top: 24.3%;
+  width: 89%;
+  height: 39%;
+}
+
+.faction.back .flagship .abilityt {
+  left: 9%;
+  top: 63.8%;
+  width: 89%;
+}
+
+.faction.back .flagship .cost   { left: 11%;   top: 71.4%; }
+.faction.back .flagship .combat { left: 31.2%; top: 71.4%; }
+.faction.back .flagship .move   { left: 51.4%; top: 71.4%; }
+.faction.back .flagship .capacity { left: 71.6%; top: 71.4%; }
+
+/* .system region (ESTIMATED positions within region) */
+
+.faction.back .system .resources,
+.faction.back .system .influence {
+  position: absolute;
+  width: 80%;
+  left: 10%;
+}
+
+.faction.back .system .resources { top: 55%; }
+.faction.back .system .influence { top: 76%; }
+
+.faction.back .system .resources .title,
+.faction.back .system .influence .title {
+  position: static;
+  display: block;
+  font-family: var(--mg-font-mono);
+  font-size: 7px;
+  font-weight: 600;
+  color: rgba(255,255,255,0.6);
+  text-transform: uppercase;
+  letter-spacing: 0.05em;
+  margin-bottom: 2px;
+}
+
+.faction.back .system .resources .text.big,
+.faction.back .system .influence .text.big {
+  position: static;
+  display: block;
+  font-size: 16px;
+}
+
+/* .meta region */
+
+.faction.back .meta .img-symbol {
+  /* ESTIMATED */
+  position: absolute;
+  right: 5%;
+  top: 3%;
+  width: 18%;
+  height: 22%;
+}
+
+.faction.back .meta .quote {
+  left: 6.6%;
+  top: 51.7%;
+  width: 76.5%;
+  height: 25%;
+  text-align: center;
+  font-style: italic;
+}
+
+.faction.back .meta .quoter {
+  left: 6.6%;
+  top: 77.5%;
+  width: 76.5%;
+  text-align: center;
+}
+
+/* .abilities region */
+
+.faction.back .abilities .abilityt  { left: 1.5%; top: 3.2%;  width: 97%; }
+.faction.back .abilities .ability   { left: 1.5%; top: 8.5%;  width: 97%; height: 30%; }
+.faction.back .abilities .abilityt2 { left: 1.5%; top: 41.1%; width: 97%; }
+.faction.back .abilities .ability2  { left: 1.5%; top: 46.4%; width: 97%; height: 23%; }
+.faction.back .abilities .abilityt3 { left: 1.5%; top: 71.5%; width: 97%; }
+.faction.back .abilities .ability3  { left: 1.5%; top: 76.8%; width: 97%; height: 18%; }
+
+/* =================================================================
+   LEADER CARDS (750 x 500 px)
+   ================================================================= */
+
+.leader .details,
+.leader .details .rectangle {
+  position: absolute;
+  top: 0; left: 0; width: 100%; height: 100%;
+}
+
+.leader .icon {
+  /* ESTIMATED */
+  left: 3%;
+  top: 5%;
+  width: 32%;
+  height: 53%;
+  background-size: cover;
+  background-position: center top;
+}
+
+.leader .avatar {
+  /* ESTIMATED */
+  left: 3%;
+  top: 60%;
+  width: 32%;
+  height: 35%;
+  border-radius: 50%;
+  background: rgba(255,255,255,0.05);
+  overflow: hidden;
+  background-size: cover;
+  background-position: center;
+}
+
+.leader .title.text.big {
+  left: 38%;
+  top: 10%;
+  width: 59%;
+}
+
+.leader .byline.text.big.green {
+  left: 38%;
+  top: 17%;
+  width: 59%;
+}
+
+.leader .content.text.small {
+  left: 38%;
+  top: 24%;
+  width: 59%;
+  height: 68%;
+}
+
+/* =================================================================
+   NOTE CARD (500 x 750 px)
+   ================================================================= */
+
+.note .details,
+.note .details .rectangle {
+  position: absolute;
+  top: 0; left: 0; width: 100%; height: 100%;
+}
+
+.note .icon.img-symbol {
+  left: auto;
+  right: 5%;
+  bottom: 5%;
+  top: auto;
+  width: 22%;
+  height: 14%;
+}
+
+.note .title.text.big {
+  left: 10%;
+  top: 2.7%;
+  width: 80%;
+}
+
+.note .content.text.small {
+  left: 13%;
+  top: 33.3%;
+  width: 74%;
+  height: 55%;
+}
+
+/* =================================================================
+   TECH CARDS (760 x 495 px)
+   ================================================================= */
+
+.tech .details,
+.tech .details .rectangle {
+  position: absolute;
+  top: 0; left: 0; width: 100%; height: 100%;
+}
+
+.tech .icon.img-symbol {
+  /* ESTIMATED */
+  left: 1%;
+  top: 2%;
+  width: 11%;
+  height: 20%;
+}
+
+.tech .title.text.big {
+  left: 13.2%;
+  top: 6.1%;
+  width: 73%;
+}
+
+.tech .byline.text.big.green {
+  left: 13.2%;
+  top: 16%;
+  width: 73%;
+}
+
+.tech .content.text.small {
+  left: 11.2%;
+  top: 30.3%;
+  width: 76%;
+  height: 38%;
+}
+
+/* Req pips */
+.tech .reqs {
+  position: absolute;
+  left: 3%;
+  width: 8%;
+  height: 7%;
+  border-radius: 50%;
+  display: none;
+}
+
+.tech .reqs[data-req="r"] { background: #d11a1a; display: block; }
+.tech .reqs[data-req="g"] { background: #3a9928; display: block; }
+.tech .reqs[data-req="y"] { background: #e6c020; display: block; }
+.tech .reqs[data-req="b"] { background: #0c4f8d; display: block; }
+
+.tech .req1 { top: 72%; }
+.tech .req2 { top: 80%; }
+.tech .req3 { top: 88%; }
+
+/* =================================================================
+   MECH CARD (750 x 500 px) — uses .tech.mech
+   ================================================================= */
+
+.tech.mech .icon.img-symbol {
+  /* ESTIMATED */
+  left: 3%;
+  top: 5%;
+  width: 30%;
+  height: 53%;
+}
+
+.tech.mech .title.text.big {
+  left: 38%;
+  top: 10%;
+  width: 59%;
+}
+
+.tech.mech .content.text.small {
+  left: 38%;
+  top: 24%;
+  width: 59%;
+  height: 68%;
+}
