@@ -60,69 +60,7 @@
   line-height: 1.6;
 }
 
-.chess-body {
-  background: var(--mg-canvas-light);
-  padding: 48px 24px 80px;
-}
-
-.chess-body__inner {
-  max-width: 780px;
-  margin: 0 auto;
-  display: flex;
-  flex-direction: column;
-  gap: 32px;
-}
-
-.chess-card {
-  background: #fff;
-  border: 1px solid var(--mg-hairline-light);
-  border-radius: 16px;
-  padding: 28px;
-}
-
-.chess-card__header {
-  display: flex;
-  align-items: flex-start;
-  gap: 16px;
-  margin-bottom: 20px;
-}
-
-.chess-card__accent {
-  width: 4px;
-  height: 40px;
-  border-radius: 2px;
-  flex-shrink: 0;
-  margin-top: 2px;
-}
-
-.chess-card__accent--blue { background: var(--mg-blue); }
-.chess-card__accent--green { background: var(--mg-green); }
-.chess-card__accent--red { background: var(--mg-red); }
-
-.chess-card__eyebrow {
-  font-family: 'Press Start 2P', monospace;
-  font-size: 9px;
-  letter-spacing: 0.06em;
-  margin-bottom: 4px;
-}
-
-.chess-card__eyebrow--blue { color: var(--mg-blue); }
-.chess-card__eyebrow--green { color: var(--mg-green); }
-.chess-card__eyebrow--red { color: var(--mg-red); }
-
-.chess-card__title {
-  font-family: 'Inter Tight', sans-serif;
-  font-size: 1.25rem;
-  font-weight: 600;
-  color: var(--mg-ink);
-  margin: 0 0 4px;
-}
-
-.chess-card__desc {
-  font-size: 0.9rem;
-  color: #555;
-  margin: 0;
-}
+/* Body + cards now provided by tools.css */
 
 .variant-display {
   border: 1px solid var(--mg-hairline-light);
@@ -379,9 +317,6 @@
 }
 
 @media (max-width: 768px) {
-  .chess-card { padding: 20px; text-align: center; }
-  .chess-card__header { flex-direction: column; align-items: center; text-align: center; }
-  .chess-card__accent { display: none; }
   .rules-ref__grid { grid-template-columns: 1fr; gap: 4px 0; }
   .rules-ref__label { margin-top: 8px; }
   .match-form__row { flex-direction: column; align-items: stretch; gap: 6px; }

@@ -200,7 +200,7 @@ if (fdLinkWrap) {
 
 /* ── JUMP NAV ACTIVE STATE ── */
 (function() {
-  const links = document.querySelectorAll('.ti-jumpnav__link');
+  const links = document.querySelectorAll('.tools-jumpnav__link');
   const sections = Array.from(links).map(a => document.querySelector(a.getAttribute('href'))).filter(Boolean);
   let suppress = false;
 
