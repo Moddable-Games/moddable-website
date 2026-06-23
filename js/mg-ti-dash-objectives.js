@@ -27,7 +27,14 @@ function renderStage(state, stage) {
 
   revealed.forEach((obj, i) => {
     const row = el('div', { class: 'td-objectives__obj' });
-    row.appendChild(el('span', { class: 'td-objectives__obj-name' }, obj.name));
+    const nameWrap = el('span', { class: 'td-objectives__obj-name' }, obj.name);
+    if (obj.desc) {
+      const hint = el('span', { class: 'td-objectives__hint', 'aria-label': obj.desc }, '?');
+      const tooltip = el('span', { class: 'td-objectives__tooltip' }, obj.desc);
+      hint.appendChild(tooltip);
+      nameWrap.appendChild(hint);
+    }
+    row.appendChild(nameWrap);
     const scorers = el('div', { class: 'td-objectives__scorers' });
     state.players.forEach((p, pi) => {
       const scored = (state.objectives.scored[pi] || []).some(s => s.name === obj.name && s.stage === stage);

@@ -762,6 +762,46 @@
   font-size: 12px;
   color: #f5f4ef;
 }
+.td-objectives__hint {
+  position: relative;
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  width: 14px;
+  height: 14px;
+  margin-left: 5px;
+  font-size: 9px;
+  font-weight: 700;
+  color: rgba(111,181,255,0.7);
+  border: 1px solid rgba(111,181,255,0.3);
+  border-radius: 50%;
+  cursor: help;
+  vertical-align: middle;
+}
+.td-objectives__hint:hover {
+  color: #6fb5ff;
+  border-color: rgba(111,181,255,0.6);
+}
+.td-objectives__tooltip {
+  display: none;
+  position: absolute;
+  bottom: calc(100% + 6px);
+  left: 50%;
+  transform: translateX(-50%);
+  white-space: nowrap;
+  font-size: 11px;
+  font-weight: 400;
+  color: #f5f4ef;
+  background: #1a1d2e;
+  border: 1px solid rgba(111,181,255,0.2);
+  border-radius: 6px;
+  padding: 5px 10px;
+  z-index: 100;
+  pointer-events: none;
+}
+.td-objectives__hint:hover .td-objectives__tooltip {
+  display: block;
+}
 .td-objectives__scorers {
   display: flex;
   gap: 4px;
