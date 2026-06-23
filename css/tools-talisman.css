@@ -11,23 +11,7 @@ body { background:#f5f4ef; }
 .talisman-hero__title { font-family:var(--mg-font-display); font-weight:600; font-size:clamp(44px,5.5vw,80px); line-height:1.0; letter-spacing:-0.025em; margin:0 0 18px; }
 .talisman-hero__lede { font-family:var(--mg-font-body); font-size:17px; line-height:1.55; color:rgba(255,255,255,0.75); max-width:560px; margin:0; }
 
-/* ── Tools section ── */
-.talisman-tools { background:#f5f4ef; padding:48px 32px 96px; }
-.talisman-tools__inner { max-width:900px; margin:0 auto; display:flex; flex-direction:column; gap:24px; }
-
-/* ── Tool cards ── */
-.tool-card { background:#fff; border:1px solid #e6e3d8; border-radius:20px; padding:32px; }
-.tool-card__header { display:flex; align-items:flex-start; gap:16px; margin-bottom:22px; padding-bottom:22px; border-bottom:1px solid #e6e3d8; }
-.tool-card__accent { width:6px; height:48px; border-radius:3px; flex:none; }
-.tool-card__accent--purple { background:#5d2a8a; }
-.tool-card__accent--blue { background:#0c4f8d; }
-.tool-card__accent--green { background:#3a9928; }
-.tool-card__eyebrow { font-family:var(--mg-font-pixel); font-size:9px; letter-spacing:1.5px; margin-bottom:6px; }
-.tool-card__eyebrow--purple { color:#5d2a8a; }
-.tool-card__eyebrow--blue { color:#0c4f8d; }
-.tool-card__eyebrow--green { color:#3a9928; }
-.tool-card__title { font-family:var(--mg-font-display); font-weight:600; font-size:24px; color:#14161c; margin:0; letter-spacing:-0.3px; }
-.tool-card__desc { font-family:var(--mg-font-body); font-size:14px; color:#4f5764; margin:4px 0 0; }
+/* Body + cards now provided by tools.css */
 
 /* ── Character lottery ── */
 .char-controls { display:flex; gap:10px; align-items:center; margin-bottom:20px; flex-wrap:wrap; }
@@ -64,15 +48,10 @@ body { background:#f5f4ef; }
 .ring-btn--inactive { border:1px solid #c3c5cc; background:transparent; color:#14161c; }
 
 @media (max-width: 768px) {
-  .talisman-tools { padding: 36px 20px 64px; }
-  .tool-card { padding: 20px; }
   .char-grid { grid-template-columns: 1fr; }
   .char-controls { flex-direction:column; align-items:stretch; }
   .char-controls__btns { justify-content:center; }
   .char-controls__draw { margin-left:0; width:100%; }
   .board-controls { flex-direction:column; align-items:stretch; gap:12px; }
   .board-controls .mg-btn { width:100%; }
-  .tool-card { text-align:center; }
-  .tool-card__header { flex-direction:column; align-items:center; text-align:center; }
-  .tool-card__accent { display:none; }
 }

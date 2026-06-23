@@ -20,6 +20,7 @@
 <meta name="twitter:title" content="Twilight Imperium tools">
 <meta name="twitter:description" content="Twilight Imperium tools &mdash; faction picker, objective tracker, agenda voter.">
 <meta name="twitter:image" content="https://moddable.games/img/og/tools-ti.png?v=1.4.0">
+<link rel="stylesheet" href="../../css/tools.css?v=1.4.0">
 <link rel="stylesheet" href="../../css/_mg.css?v=1.4.0">
 <link rel="stylesheet" href="../../css/tools-ti.css?v=1.4.0">
 <link rel="stylesheet" href="../../css/tools-hexmaps.css?v=1.4.0">
@@ -36,28 +37,28 @@
 <div id="page-hero"></div>
 
 
-<nav class="ti-jumpnav">
-  <div class="ti-jumpnav__inner">
-    <a href="dashboard/" class="ti-jumpnav__link ti-jumpnav__link--blue">Dashboard</a>
-    <a href="#ti-galaxy" class="ti-jumpnav__link">Galaxy</a>
-    <a href="#ti-factions" class="ti-jumpnav__link ti-jumpnav__link--blue">Factions</a>
-    <a href="#ti-objectives" class="ti-jumpnav__link ti-jumpnav__link--green">Objectives</a>
-    <a href="#ti-agenda" class="ti-jumpnav__link ti-jumpnav__link--red">Agenda</a>
-    <a href="/tools/ti/factions/" class="ti-jumpnav__link ti-jumpnav__link--blue">Faction Designer</a>
+<nav class="tools-jumpnav">
+  <div class="tools-jumpnav__inner">
+    <a href="dashboard/" class="tools-jumpnav__link tools-jumpnav__link--blue">Dashboard</a>
+    <a href="#ti-galaxy" class="tools-jumpnav__link">Galaxy</a>
+    <a href="#ti-factions" class="tools-jumpnav__link tools-jumpnav__link--blue">Factions</a>
+    <a href="#ti-objectives" class="tools-jumpnav__link tools-jumpnav__link--green">Objectives</a>
+    <a href="#ti-agenda" class="tools-jumpnav__link tools-jumpnav__link--red">Agenda</a>
+    <a href="/tools/ti/factions/" class="tools-jumpnav__link tools-jumpnav__link--blue">Designer</a>
   </div>
 </nav>
 
-<section class="ti-body">
-  <div class="ti-body__inner">
+<section class="tools-body">
+  <div class="tools-body__inner tools-body__inner--narrow">
 
     <!-- Hex Map Generator (embedded from Moddable Hexmaps) -->
-    <div class="hexmap-embed" id="ti-galaxy">
-      <div class="hexmap-embed__header">
-        <div class="hexmap-embed__accent"></div>
+    <div class="tool-card hexmap-embed" id="ti-galaxy">
+      <div class="tool-card__header">
+        <div class="tool-card__accent tool-card__accent--blue"></div>
         <div>
-          <div class="hexmap-embed__eyebrow">HEX MAP</div>
-          <h3 class="hexmap-embed__title">Galaxy generator</h3>
-          <p class="hexmap-embed__desc">Generate balanced galaxy maps for 3&ndash;8 players. Official layouts including Prophecy of Kings and Hyper Imperium.</p>
+          <div class="tool-card__eyebrow tool-card__eyebrow--blue">HEX MAP</div>
+          <h3 class="tool-card__title">Galaxy generator</h3>
+          <p class="tool-card__desc">Generate balanced galaxy maps for 3&ndash;8 players. Official layouts including Prophecy of Kings and Hyper Imperium.</p>
         </div>
       </div>
       <div class="hexmap-embed__controls" id="hexmap-controls"></div>
@@ -66,13 +67,13 @@
     </div>
 
     <!-- Faction Picker -->
-    <div class="ti-card" id="ti-factions">
-      <div class="ti-card__header">
-        <div class="ti-card__accent ti-card__accent--blue"></div>
+    <div class="tool-card" id="ti-factions">
+      <div class="tool-card__header">
+        <div class="tool-card__accent tool-card__accent--blue"></div>
         <div>
-          <div class="ti-card__eyebrow ti-card__eyebrow--blue">FACTION DRAFT</div>
-          <h3 class="ti-card__title">Faction picker</h3>
-          <p class="ti-card__desc">Deal each player a hand of factions. They pick one &mdash; banker&rsquo;s-draft style.</p>
+          <div class="tool-card__eyebrow tool-card__eyebrow--blue">FACTION DRAFT</div>
+          <h3 class="tool-card__title">Faction picker</h3>
+          <p class="tool-card__desc">Deal each player a hand of factions. They pick one &mdash; banker&rsquo;s-draft style.</p>
         </div>
       </div>
       <div class="ti-expansion-toggles" id="faction-toggles"></div>
@@ -91,26 +92,26 @@
     </div>
 
     <!-- Objective Tracker -->
-    <div class="ti-card" id="ti-objectives">
-      <div class="ti-card__header">
-        <div class="ti-card__accent ti-card__accent--green"></div>
+    <div class="tool-card" id="ti-objectives">
+      <div class="tool-card__header">
+        <div class="tool-card__accent tool-card__accent--green"></div>
         <div>
-          <div class="ti-card__eyebrow ti-card__eyebrow--green">VICTORY POINTS</div>
-          <h3 class="ti-card__title">Objective tracker</h3>
-          <p class="ti-card__desc">Track public and secret objectives, bonus VP, and player scores. First to 10 VP wins.</p>
+          <div class="tool-card__eyebrow tool-card__eyebrow--green">VICTORY POINTS</div>
+          <h3 class="tool-card__title">Objective tracker</h3>
+          <p class="tool-card__desc">Track public and secret objectives, bonus VP, and player scores. First to 10 VP wins.</p>
         </div>
       </div>
       <div id="obj-tracker-root"></div>
     </div>
 
     <!-- Agenda Voter -->
-    <div class="ti-card" id="ti-agenda">
-      <div class="ti-card__header">
-        <div class="ti-card__accent ti-card__accent--red"></div>
+    <div class="tool-card" id="ti-agenda">
+      <div class="tool-card__header">
+        <div class="tool-card__accent tool-card__accent--red"></div>
         <div>
-          <div class="ti-card__eyebrow ti-card__eyebrow--red">AGENDA PHASE</div>
-          <h3 class="ti-card__title">Agenda voter</h3>
-          <p class="ti-card__desc">Draw an agenda, cast votes, track the outcome.</p>
+          <div class="tool-card__eyebrow tool-card__eyebrow--red">AGENDA PHASE</div>
+          <h3 class="tool-card__title">Agenda voter</h3>
+          <p class="tool-card__desc">Draw an agenda, cast votes, track the outcome.</p>
         </div>
       </div>
       <div class="ti-expansion-toggles" id="agenda-toggles"></div>
@@ -118,13 +119,13 @@
     </div>
 
     <!-- Faction Designer -->
-    <div class="ti-card" id="ti-faction-designer">
-      <div class="ti-card__header">
-        <div class="ti-card__accent ti-card__accent--blue"></div>
+    <div class="tool-card" id="ti-faction-designer">
+      <div class="tool-card__header">
+        <div class="tool-card__accent tool-card__accent--blue"></div>
         <div>
-          <div class="ti-card__eyebrow ti-card__eyebrow--blue">FACTION DESIGNER</div>
-          <h3 class="ti-card__title">Faction designer</h3>
-          <p class="ti-card__desc">Design custom TI4 factions with auto-styled print-and-play components.</p>
+          <div class="tool-card__eyebrow tool-card__eyebrow--blue">FACTION DESIGNER</div>
+          <h3 class="tool-card__title">Faction designer</h3>
+          <p class="tool-card__desc">Design custom TI4 factions with auto-styled print-and-play components.</p>
         </div>
       </div>
       <div id="faction-designer-link"></div>

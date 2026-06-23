@@ -20,6 +20,7 @@
 <meta name="twitter:title" content="Card Deck Builder">
 <meta name="twitter:description" content="Card deck builder — design, shuffle, and deal custom card decks for any tabletop game.">
 <meta name="twitter:image" content="https://moddable.games/img/og/tools-decks.png?v=1.4.0">
+<link rel="stylesheet" href="../../css/tools.css?v=1.4.0">
 <link rel="stylesheet" href="../../css/_mg.css?v=1.4.0">
 <link rel="stylesheet" href="../../css/tools-decks.css?v=1.4.0">
 <link rel="stylesheet" href="../../css/navbar.css?v=1.4.0">
@@ -33,40 +34,48 @@
 
 <div id="page-hero"></div>
 
-<section class="decks-body">
-  <div class="decks-body__inner">
+<nav class="tools-jumpnav">
+  <div class="tools-jumpnav__inner">
+    <a href="#decks-designer" class="tools-jumpnav__link tools-jumpnav__link--green">Design</a>
+    <a href="#decks-dealer" class="tools-jumpnav__link tools-jumpnav__link--blue">Shuffle &amp; Deal</a>
+    <a href="#decks-presets" class="tools-jumpnav__link tools-jumpnav__link--red">Presets</a>
+  </div>
+</nav>
 
-    <div class="deck-card">
-      <div class="deck-card__header">
-        <div class="deck-card__accent deck-card__accent--green"></div>
+<section class="tools-body">
+  <div class="tools-body__inner tools-body__inner--narrow">
+
+    <div class="tool-card" id="decks-designer">
+      <div class="tool-card__header">
+        <div class="tool-card__accent tool-card__accent--green"></div>
         <div>
-          <div class="deck-card__eyebrow deck-card__eyebrow--green">DESIGN</div>
-          <h3 class="deck-card__title">Deck designer</h3>
-          <p class="deck-card__desc">Add card types with names and quantities to build your custom deck.</p>
+          <div class="tool-card__eyebrow tool-card__eyebrow--green">DESIGN</div>
+          <h3 class="tool-card__title">Deck designer</h3>
+          <p class="tool-card__desc">Add card types with names and quantities to build your custom deck.</p>
         </div>
       </div>
       <div id="deck-designer"></div>
     </div>
 
-    <div class="deck-card">
-      <div class="deck-card__header">
-        <div class="deck-card__accent deck-card__accent--blue"></div>
+    <div class="tool-card" id="decks-dealer">
+      <div class="tool-card__header">
+        <div class="tool-card__accent tool-card__accent--blue"></div>
         <div>
-          <div class="deck-card__eyebrow deck-card__eyebrow--blue">PLAY</div>
-          <h3 class="deck-card__title">Shuffle &amp; Deal</h3>
-          <p class="deck-card__desc">Shuffle the deck and deal hands to players. Reshuffle any time.</p>
+          <div class="tool-card__eyebrow tool-card__eyebrow--blue">PLAY</div>
+          <h3 class="tool-card__title">Shuffle &amp; Deal</h3>
+          <p class="tool-card__desc">Shuffle the deck and deal hands to players. Reshuffle any time.</p>
         </div>
       </div>
       <div id="deck-dealer"></div>
     </div>
 
-    <div class="deck-card">
-      <div class="deck-card__header">
-        <div class="deck-card__accent deck-card__accent--red"></div>
+    <div class="tool-card" id="decks-presets">
+      <div class="tool-card__header">
+        <div class="tool-card__accent tool-card__accent--red"></div>
         <div>
-          <div class="deck-card__eyebrow deck-card__eyebrow--red">PRESETS</div>
-          <h3 class="deck-card__title">Preset decks</h3>
-          <p class="deck-card__desc">Load a standard deck to get started quickly.</p>
+          <div class="tool-card__eyebrow tool-card__eyebrow--red">PRESETS</div>
+          <h3 class="tool-card__title">Preset decks</h3>
+          <p class="tool-card__desc">Load a standard deck to get started quickly.</p>
         </div>
       </div>
       <div id="deck-presets"></div>

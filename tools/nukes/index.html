@@ -20,6 +20,7 @@
 <meta name="twitter:title" content="Nukes tools">
 <meta name="twitter:description" content="Nukes game tools — hex map generator, combat calculator, and hostage tracker.">
 <meta name="twitter:image" content="https://moddable.games/img/og/tools-nukes.png?v=1.4.0">
+<link rel="stylesheet" href="../../css/tools.css?v=1.4.0">
 <link rel="stylesheet" href="../../css/_mg.css?v=1.4.0">
 <link rel="stylesheet" href="../../css/tools-nukes.css?v=1.4.0">
 <link rel="stylesheet" href="../../css/tools-hexmaps.css?v=1.4.0">
@@ -34,17 +35,26 @@
 
 <div id="page-hero"></div>
 
-<section class="nukes-content">
-  <div class="nukes-content__inner">
+<nav class="tools-jumpnav">
+  <div class="tools-jumpnav__inner">
+    <a href="#nukes-hexmap" class="tools-jumpnav__link tools-jumpnav__link--red">Map</a>
+    <a href="#nukes-combat" class="tools-jumpnav__link tools-jumpnav__link--blue">Combat</a>
+    <a href="#nukes-hostages" class="tools-jumpnav__link tools-jumpnav__link--orange">Hostages</a>
+    <a href="#nukes-units" class="tools-jumpnav__link tools-jumpnav__link--green">Units</a>
+  </div>
+</nav>
+
+<section class="tools-body">
+  <div class="tools-body__inner tools-body__inner--narrow">
 
     <!-- Hex Map Generator (embedded from Moddable Hexmaps) -->
-    <div class="hexmap-embed">
-      <div class="hexmap-embed__header">
-        <div class="hexmap-embed__accent"></div>
+    <div class="tool-card hexmap-embed" id="nukes-hexmap">
+      <div class="tool-card__header">
+        <div class="tool-card__accent tool-card__accent--red"></div>
         <div>
-          <div class="hexmap-embed__eyebrow">HEX MAP</div>
-          <h3 class="hexmap-embed__title">Map generator</h3>
-          <p class="hexmap-embed__desc">Generate randomised hex maps for Nukes. Click hexes to edit terrain, share via seed.</p>
+          <div class="tool-card__eyebrow tool-card__eyebrow--red">HEX MAP</div>
+          <h3 class="tool-card__title">Map generator</h3>
+          <p class="tool-card__desc">Generate randomised hex maps for Nukes. Click hexes to edit terrain, share via seed.</p>
         </div>
       </div>
       <div class="hexmap-embed__controls" id="hexmap-controls"></div>
@@ -52,41 +62,40 @@
       <div class="hexmap-embed__actions" id="hexmap-actions"></div>
     </div>
 
-
     <!-- Combat Calculator -->
-    <div class="nukes-card">
-      <div class="nukes-card__header">
-        <div class="nukes-card__accent nukes-card__accent--blue"></div>
+    <div class="tool-card" id="nukes-combat">
+      <div class="tool-card__header">
+        <div class="tool-card__accent tool-card__accent--blue"></div>
         <div>
-          <div class="nukes-card__eyebrow nukes-card__eyebrow--blue">COMBAT</div>
-          <h3 class="nukes-card__title">Strength calculator</h3>
-          <p class="nukes-card__desc">Calculate attacker vs defender strength. Attacker must be strictly greater to attack.</p>
+          <div class="tool-card__eyebrow tool-card__eyebrow--blue">COMBAT</div>
+          <h3 class="tool-card__title">Strength calculator</h3>
+          <p class="tool-card__desc">Calculate attacker vs defender strength. Attacker must be strictly greater to attack.</p>
         </div>
       </div>
       <div id="combat-calc"></div>
     </div>
 
     <!-- Hostage Tracker -->
-    <div class="nukes-card">
-      <div class="nukes-card__header">
-        <div class="nukes-card__accent nukes-card__accent--orange"></div>
+    <div class="tool-card" id="nukes-hostages">
+      <div class="tool-card__header">
+        <div class="tool-card__accent tool-card__accent--orange"></div>
         <div>
-          <div class="nukes-card__eyebrow nukes-card__eyebrow--orange">HOSTAGES</div>
-          <h3 class="nukes-card__title">Hostage tracker</h3>
-          <p class="nukes-card__desc">Track hostages held per player. Return 1–3 per turn to earn moves. Run out and you're eliminated.</p>
+          <div class="tool-card__eyebrow tool-card__eyebrow--orange">HOSTAGES</div>
+          <h3 class="tool-card__title">Hostage tracker</h3>
+          <p class="tool-card__desc">Track hostages held per player. Return 1&ndash;3 per turn to earn moves. Run out and you're eliminated.</p>
         </div>
       </div>
       <div id="hostage-tracker"></div>
     </div>
 
     <!-- Unit Reference -->
-    <div class="nukes-card">
-      <div class="nukes-card__header">
-        <div class="nukes-card__accent nukes-card__accent--green"></div>
+    <div class="tool-card" id="nukes-units">
+      <div class="tool-card__header">
+        <div class="tool-card__accent tool-card__accent--green"></div>
         <div>
-          <div class="nukes-card__eyebrow nukes-card__eyebrow--green">REFERENCE</div>
-          <h3 class="nukes-card__title">Unit types</h3>
-          <p class="nukes-card__desc">Token count determines unit type. This is the fluid platoon principle.</p>
+          <div class="tool-card__eyebrow tool-card__eyebrow--green">REFERENCE</div>
+          <h3 class="tool-card__title">Unit types</h3>
+          <p class="tool-card__desc">Token count determines unit type. This is the fluid platoon principle.</p>
         </div>
       </div>
       <div id="unit-table"></div>

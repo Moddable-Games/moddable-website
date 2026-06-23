@@ -20,6 +20,7 @@
 <meta name="twitter:title" content="Talisman tools">
 <meta name="twitter:description" content="Talisman Worlds tools — character lottery, hex board generator, encounter quick-draw.">
 <meta name="twitter:image" content="https://moddable.games/img/og/tools-talisman.png?v=1.4.0">
+<link rel="stylesheet" href="../../css/tools.css?v=1.4.0">
 <link rel="stylesheet" href="../../css/_mg.css?v=1.4.0">
 <link rel="stylesheet" href="../../css/tools-talisman.css?v=1.4.0">
 <link rel="stylesheet" href="../../css/tools-hexmaps.css?v=1.4.0">
@@ -34,11 +35,19 @@
 
 <div id="page-hero"></div>
 
-<section class="talisman-tools">
-  <div class="talisman-tools__inner">
+<nav class="tools-jumpnav">
+  <div class="tools-jumpnav__inner">
+    <a href="#talisman-characters" class="tools-jumpnav__link tools-jumpnav__link--purple">Characters</a>
+    <a href="#talisman-hexmap" class="tools-jumpnav__link">Hex Board</a>
+    <a href="#talisman-encounter" class="tools-jumpnav__link tools-jumpnav__link--green">Encounters</a>
+  </div>
+</nav>
+
+<section class="tools-body">
+  <div class="tools-body__inner tools-body__inner--narrow">
 
     <!-- Character Lottery -->
-    <div class="tool-card">
+    <div class="tool-card" id="talisman-characters">
       <div class="tool-card__header">
         <div class="tool-card__accent tool-card__accent--purple"></div>
         <div>
@@ -56,13 +65,13 @@
     </div>
 
     <!-- Hex Board Generator (embedded from Moddable Hexmaps) -->
-    <div class="hexmap-embed">
-      <div class="hexmap-embed__header">
-        <div class="hexmap-embed__accent"></div>
+    <div class="tool-card hexmap-embed" id="talisman-hexmap">
+      <div class="tool-card__header">
+        <div class="tool-card__accent tool-card__accent--purple"></div>
         <div>
-          <div class="hexmap-embed__eyebrow">HEX MAP</div>
-          <h3 class="hexmap-embed__title">Hex board generator</h3>
-          <p class="hexmap-embed__desc">Generate randomised 4-ring hex maps for Talisman Worlds. Click hexes to reassign terrain rings.</p>
+          <div class="tool-card__eyebrow tool-card__eyebrow--purple">HEX MAP</div>
+          <h3 class="tool-card__title">Hex board generator</h3>
+          <p class="tool-card__desc">Generate randomised 4-ring hex maps for Talisman Worlds. Click hexes to reassign terrain rings.</p>
         </div>
       </div>
       <div class="hexmap-embed__controls" id="hexmap-controls"></div>
@@ -71,7 +80,7 @@
     </div>
 
     <!-- Encounter Quick-draw -->
-    <div class="tool-card">
+    <div class="tool-card" id="talisman-encounter">
       <div class="tool-card__header">
         <div class="tool-card__accent tool-card__accent--green"></div>
         <div>
