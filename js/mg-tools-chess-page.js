@@ -218,20 +218,6 @@ data.get('chess-variants').then(function(raw) {
       const evalData = evaluation.result || evaluation;
 
       const bestMove = evalData.bestMove || '';
-      const highlights = bestMove ? bestMove.slice(0, 2) + ',' + bestMove.slice(2, 4) : '';
-
-      const svgRes = await fetch(API_BASE + '/api/call', {
-        method: 'POST',
-        headers: { 'Content-Type': 'application/json' },
-        body: JSON.stringify({ tool: 'chess_render_svg', args: { variant, fen, highlights } })
-      });
-      const svgJson = await svgRes.json();
-      const svgData = svgJson.result || svgJson;
-      if (svgData.svg) {
-        const board = el('div', { class: 'chess-analyzer__board' });
-        board.innerHTML = svgData.svg;
-        result.appendChild(board);
-      }
 
       if (evalData.evaluation !== undefined || evalData.score !== undefined) {
         const evalBlock = el('div', { class: 'chess-analyzer__eval' });
