@@ -164,7 +164,7 @@ data.get('chess-variants').then(function(raw) {
     }
   }
 
-  loadPuzzle();
+  body.appendChild(btn('Load puzzle', 'green', loadPuzzle));
 })();
 
 (function() {
