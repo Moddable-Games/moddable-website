@@ -35,15 +35,22 @@ let selectedTool = null;
 
 async function loadTools() {
   const sidebar = document.getElementById('api-sidebar');
+  let usingFallback = false;
   try {
     const res = await fetch(API_BASE + '/api/tools');
     const json = await res.json();
     allTools = json.tools;
   } catch (e) {
+    usingFallback = true;
     const fallback = await data.get('mcp-tools');
     allTools = fallback.flatMap(ns => ns.tools.map(t => ({
       name: t.name, description: t.description, inputSchema: { type: 'object', properties: {} }
     })));
+  }
+  if (usingFallback) {
+    const notice = el('div', { class: 'api-explorer__notice' },
+      'Schema unavailable locally. Deploy to moddable.games to test with live API schemas.');
+    document.querySelector('.api-explorer__chrome').prepend(notice);
   }
   const randomTool = allTools[Math.floor(Math.random() * allTools.length)];
   renderSidebar(sidebar, randomTool);
