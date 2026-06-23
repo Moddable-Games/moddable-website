@@ -97,6 +97,8 @@
 .chess-analyzer__label { font-family:var(--mg-font-mono); font-size:12px; color:var(--mg-mute); flex:none; }
 .chess-analyzer__loading { font-family:var(--mg-font-mono); font-size:13px; color:var(--mg-mute); padding:16px 0; }
 .chess-analyzer__error { font-family:var(--mg-font-mono); font-size:13px; color:var(--mg-red); padding:16px 0; }
+.chess-analyzer__board { margin-bottom:16px; border-radius:8px; overflow:hidden; border:1px solid var(--mg-hairline-light); }
+.chess-analyzer__board svg { width:100%; height:auto; display:block; }
 .chess-analyzer__eval { display:flex; align-items:center; gap:14px; padding:14px 18px; background:var(--mg-canvas-light); border-radius:10px; margin-bottom:12px; }
 .chess-analyzer__eval-label { font-family:var(--mg-font-mono); font-size:10px; font-weight:600; color:var(--mg-mute); text-transform:uppercase; }
 .chess-analyzer__eval-score { font-family:var(--mg-font-display); font-weight:700; font-size:28px; color:var(--mg-ink); }

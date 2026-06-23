@@ -219,13 +219,29 @@ data.get('chess-variants').then(function(raw) {
       const movesData = moves.result || moves;
       const evalData = evaluation.result || evaluation;
 
+      const bestMove = evalData.bestMove || '';
+      const highlights = bestMove ? bestMove.slice(0, 2) + ',' + bestMove.slice(2, 4) : '';
+
+      const svgRes = await fetch(API_BASE + '/api/call', {
+        method: 'POST',
+        headers: { 'Content-Type': 'application/json' },
+        body: JSON.stringify({ tool: 'chess_render_svg', args: { variant, fen, highlights } })
+      });
+      const svgJson = await svgRes.json();
+      const svgData = svgJson.result || svgJson;
+      if (svgData.svg) {
+        const board = el('div', { class: 'chess-analyzer__board' });
+        board.innerHTML = svgData.svg;
+        result.appendChild(board);
+      }
+
       if (evalData.evaluation !== undefined || evalData.score !== undefined) {
         const evalBlock = el('div', { class: 'chess-analyzer__eval' });
         const score = evalData.evaluation || evalData.score || '0';
         evalBlock.appendChild(el('span', { class: 'chess-analyzer__eval-label' }, 'Evaluation'));
         evalBlock.appendChild(el('span', { class: 'chess-analyzer__eval-score' }, String(score)));
-        if (evalData.bestMove) {
-          evalBlock.appendChild(el('span', { class: 'chess-analyzer__eval-best' }, 'Best: ' + evalData.bestMove));
+        if (bestMove) {
+          evalBlock.appendChild(el('span', { class: 'chess-analyzer__eval-best' }, 'Best: ' + bestMove));
         }
         result.appendChild(evalBlock);
       }
