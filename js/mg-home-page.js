@@ -1,6 +1,6 @@
-(function() {
-const { T, el, btn, linkBtn, navbar, footer, modCard, url } = MG;
+import { T, el, url, data, track, btn, linkBtn, modCard, navbar, footer, initReveal } from './mg.js';
 
+(function() {
 // Enable hero animations (content visible by default if this fails)
 document.getElementById('hero').classList.add('hero-anim-ready');
 
@@ -18,7 +18,6 @@ const heroHex = document.getElementById('hero-hex');
 const heroGlow = document.getElementById('hero-glow');
 const heroBotFade = document.getElementById('hero-bot-fade');
 const heroWash = document.getElementById('hero-wash');
-var heroScrollActive = false;
 window.addEventListener('scroll', () => {
   const rect = heroSection.getBoundingClientRect();
   const scrolled = Math.max(0, -rect.top);
@@ -94,7 +93,6 @@ setTimeout(function() {
   var wordIdx = 0;
   var colorIdx = 0;
   var charIdx = WORDS[0].length;
-  var deleting = true;
 
   function showCursor() { tw.classList.add('typing'); }
   function hideCursor() { tw.classList.remove('typing'); }
@@ -140,7 +138,7 @@ let activeFilter = 'All';
 const filtersEl = document.getElementById('gallery-filters');
 const gridEl = document.getElementById('gallery-grid');
 
-MG.data.load(['mods','news']).then(store => {
+data.load(['mods','news']).then(store => {
   const MODS = store.mods;
   const baseGames = ['All'].concat([...new Set(MODS.map(m => m.baseGame))].sort());
 
@@ -149,7 +147,7 @@ MG.data.load(['mods','news']).then(store => {
     baseGames.forEach(f => {
       const isActive = f === activeFilter;
       const b = el('button', { class: isActive ? 'filter-btn filter-btn--active' : 'filter-btn' }, f);
-      b.addEventListener('click', () => { activeFilter = f; renderFilter(); renderGrid(); if (MG.track) MG.track('filter_select', { filter_type: 'base_game', filter_value: f, page: 'home' }); });
+      b.addEventListener('click', () => { activeFilter = f; renderFilter(); renderGrid(); if (track) track('filter_select', { filter_type: 'base_game', filter_value: f, page: 'home' }); });
       filtersEl.appendChild(b);
     });
   }
@@ -158,7 +156,7 @@ MG.data.load(['mods','news']).then(store => {
     gridEl.innerHTML = '';
     const filtered = activeFilter === 'All' ? MODS : MODS.filter(m => m.baseGame === activeFilter);
     filtered.slice(0, MAX_SHOWN).forEach(m => gridEl.appendChild(modCard(m)));
-    MG.initReveal();
+    initReveal();
   }
 
   renderFilter(); renderGrid();
@@ -167,7 +165,7 @@ MG.data.load(['mods','news']).then(store => {
   const ng = document.getElementById('news-grid');
   store.news.slice(0, 3).forEach(n => {
     const a = el('a', { href:url(`/news/${n.slug}/`), class:'news-card mg-lift', 'data-reveal':'up' });
-    a.addEventListener('click', function() { if (MG.track) MG.track('select_content', { content_type: 'news', item_id: n.slug }); });
+    a.addEventListener('click', function() { if (track) track('select_content', { content_type: 'news', item_id: n.slug }); });
     const row = el('div', { class:'news-card__header' });
     row.appendChild(el('span', { class:'news-card__tag' }, n.tags[0]));
     row.appendChild(el('span', { class:'news-card__date' }, n.date));
@@ -177,7 +175,7 @@ MG.data.load(['mods','news']).then(store => {
     a.appendChild(el('span', { class:'news-card__more' }, 'Read more →'));
     ng.appendChild(a);
   });
-  MG.initReveal();
+  initReveal();
 });
 
 const nb2 = document.getElementById('nuke-btns');

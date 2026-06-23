@@ -22,28 +22,30 @@
 <meta name="twitter:image" content="https://moddable.games/img/og/tools-ti-dashboard.png?v=1.3.0">
 <link rel="stylesheet" href="../../../css/_mg.css?v=1.3.0">
 <link rel="stylesheet" href="../../../css/tools-ti-dashboard.css?v=1.3.0">
+<link rel="stylesheet" href="../../../css/navbar.css?v=1.3.0">
+<link rel="stylesheet" href="../../../css/footer.css?v=1.3.0">
+<link rel="stylesheet" href="../../../css/cards.css?v=1.3.0">
+<link rel="stylesheet" href="../../../css/hero.css?v=1.3.0">
+<link rel="stylesheet" href="../../../css/hero-features.css?v=1.3.0">
 </head>
 <body>
 <div id="nav-root"></div>
 <div id="dashboard-root"></div>
 <div id="footer-root"></div>
-<script src="../../../js/mg-loader.js?v=1.3.0"></script>
-<script src="../../../js/mg-ti-dash-state.js?v=1.3.0"></script>
-<script src="../../../js/mg-ti-dash-objectives.js?v=1.3.0"></script>
-<script src="../../../js/mg-ti-dash-agenda.js?v=1.3.0"></script>
-<script src="../../../js/mg-ti-dash-score.js?v=1.3.0"></script>
-<script src="../../../js/mg-ti-dash-setup.js?v=1.3.0"></script>
-<script>
-const { navbar, footer } = MG;
+<script type="module">
+import { navbar, footer } from '../../../js/mg.js';
+import * as State from '../../../js/mg-ti-dash-state.js';
+import * as Setup from '../../../js/mg-ti-dash-setup.js';
+import { render as renderScore } from '../../../js/mg-ti-dash-score.js';
 document.getElementById('nav-root').appendChild(navbar('Tools'));
 document.getElementById('footer-root').appendChild(footer());
 (async () => {
   const root = document.getElementById('dashboard-root');
-  await MG_TIDash_Setup.loadData();
-  if (MG_TIDash_State.load()) {
-    MG_TIDash_Score.render(root);
+  await Setup.loadData();
+  if (State.load()) {
+    renderScore(root);
   } else {
-    MG_TIDash_Setup.render(root);
+    Setup.render(root);
   }
 })();
 </script>

@@ -1,9 +1,10 @@
+import { T, el, url, data, track, btn, linkBtn, navbar, footer, sectionHero } from './mg.js';
+
 (function() {
-const { T, el, btn, navbar, footer, data } = MG;
 document.getElementById('nav-root').appendChild(navbar('Tools'));
 document.getElementById('footer-root').appendChild(footer());
 
-const heroEl = MG.sectionHero({
+const heroEl = sectionHero({
   section: 'tool-ti',
   tier: 2,
   hexColor: 'green',
@@ -57,7 +58,7 @@ function renderHandBtns() {
 }
 
 function deal() {
-  if (MG.track) MG.track('faction_pick', { player_count: playerCount, hand_size: handSize });
+  if (track) track('faction_pick', { player_count: playerCount, hand_size: handSize });
   const factions = getFactions();
   const shuffled = [...factions].sort(() => Math.random()-0.5);
   const hands = document.getElementById('faction-hands'); hands.innerHTML = '';
@@ -110,7 +111,7 @@ function renderExpansionTogglesInto(container) {
   });
 }
 
-fetch(MG.url('/data/ti4.json')).then(r => r.json()).then(d => {
+fetch(url('/data/ti4.json')).then(r => r.json()).then(d => {
   ti4Data = d;
   document.querySelectorAll('.ti-expansion-toggles').forEach(t => renderExpansionTogglesInto(t));
   renderPlayerBtns(); renderHandBtns(); deal();
@@ -136,7 +137,7 @@ function drawAgenda() {
   currentAgenda = pool[Math.floor(Math.random()*pool.length)];
   votes = {for:0, against:0};
   renderAgenda();
-  if (MG.track) MG.track('agenda_draw', { agenda_title: currentAgenda.title });
+  if (track) track('agenda_draw', { agenda_title: currentAgenda.title });
 }
 
 function renderAgenda() {
@@ -194,7 +195,7 @@ function renderAgenda() {
 /* ── FACTION DESIGNER LINK ── */
 const fdLinkWrap = document.getElementById('faction-designer-link');
 if (fdLinkWrap) {
-  fdLinkWrap.appendChild(MG.linkBtn('Open Faction Designer', '/tools/ti/factions/', 'blue'));
+  fdLinkWrap.appendChild(linkBtn('Open Faction Designer', '/tools/ti/factions/', 'blue'));
 }
 
 /* ── JUMP NAV ACTIVE STATE ── */
@@ -233,5 +234,4 @@ if (fdLinkWrap) {
     }
   }
 })();
-
 })();

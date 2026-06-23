@@ -1,5 +1,4 @@
-(function() {
-const { T, el, linkBtn, navbar, footer, url } = MG;
+import { T, el, url, data, linkBtn, navbar, footer, initReveal } from './mg.js';
 document.getElementById('nav-root').appendChild(navbar('Engines'));
 document.getElementById('footer-root').appendChild(footer());
 
@@ -24,48 +23,48 @@ ghLink.setAttribute('rel', 'noopener');
 document.getElementById('hero-btns').appendChild(ghLink);
 
 var STATS = [
-  ['Variants', '70'],
-  ['AI Difficulties', '5'],
-  ['Consumers', '3'],
-  ['Engine', 'v0.7.1'],
-  ['Board types', 'Square · 4×8 to 12×8'],
-  ['Status', 'Live']
+['Variants', '70'],
+['AI Difficulties', '5'],
+['Consumers', '3'],
+['Engine', 'v0.7.1'],
+['Board types', 'Square · 4×8 to 12×8'],
+['Status', 'Live']
 ];
 var sb = document.getElementById('stats-bar');
 STATS.forEach(function(pair, i) {
-  if (i > 0) sb.appendChild(el('span', { class: 'stats-row__divider' }));
-  var d = el('div', { class: 'stats-row__item' });
-  d.appendChild(el('span', { class: 'stats-row__label' }, pair[0]));
-  d.appendChild(el('span', { class: 'stats-row__value' }, pair[1]));
-  sb.appendChild(d);
+if (i > 0) sb.appendChild(el('span', { class: 'stats-row__divider' }));
+var d = el('div', { class: 'stats-row__item' });
+d.appendChild(el('span', { class: 'stats-row__label' }, pair[0]));
+d.appendChild(el('span', { class: 'stats-row__value' }, pair[1]));
+sb.appendChild(d);
 });
 
 var VARIANTS = [
-  { n: '01', title: 'Standard + Classics', body: 'Regular chess plus Fischer Random, No Castling, and Torpedo — familiar rules with one twist each.' },
-  { n: '02', title: 'Alternate Win Conditions', body: 'King of the Hill, Three-Check, Racing Kings, Extinction — different paths to victory.' },
-  { n: '03', title: 'Chaos Variants', body: 'Atomic, Duck Chess, Fog of War, Horde, Rifle — explosive mechanics that shatter standard strategy.' },
-  { n: '04', title: 'Big Boards', body: 'Capablanca (10×8), Grand (10×10), Courier (12×8) — wider boards with fairy pieces. Plus Breakthrough on 7×7.' },
-  { n: '05', title: 'Asymmetric', body: 'Maharaja & Sepoys, Antichess, Marseillais — unequal forces or unequal turns. Mind-bending.' },
-  { n: '06', title: 'Dungeon Chess', body: 'Our most ambitious variant — four asymmetric factions, XP drafting, cannon mechanics, and modular dungeon boards. A total conversion of chess.', href: '/mods/dungeon-chess/' }
+{ n: '01', title: 'Standard + Classics', body: 'Regular chess plus Fischer Random, No Castling, and Torpedo — familiar rules with one twist each.' },
+{ n: '02', title: 'Alternate Win Conditions', body: 'King of the Hill, Three-Check, Racing Kings, Extinction — different paths to victory.' },
+{ n: '03', title: 'Chaos Variants', body: 'Atomic, Duck Chess, Fog of War, Horde, Rifle — explosive mechanics that shatter standard strategy.' },
+{ n: '04', title: 'Big Boards', body: 'Capablanca (10×8), Grand (10×10), Courier (12×8) — wider boards with fairy pieces. Plus Breakthrough on 7×7.' },
+{ n: '05', title: 'Asymmetric', body: 'Maharaja & Sepoys, Antichess, Marseillais — unequal forces or unequal turns. Mind-bending.' },
+{ n: '06', title: 'Dungeon Chess', body: 'Our most ambitious variant — four asymmetric factions, XP drafting, cannon mechanics, and modular dungeon boards. A total conversion of chess.', href: '/mods/dungeon-chess/' }
 ];
 var vg = document.getElementById('variants-grid');
 VARIANTS.forEach(function(s) {
-  var a = el('article', { class: 'mg-card' });
-  a.appendChild(el('div', { class: 'mg-card__eyebrow mg-eyebrow--blue' }, s.n));
-  a.appendChild(el('h3', { class: 'mg-card__title' }, s.title));
-  a.appendChild(el('p', { class: 'mg-card__body' }, s.body));
-  if (s.href) {
-    var link = el('a', { href: s.href, class: 'mg-card__link' });
-    link.textContent = 'Learn more →';
-    a.appendChild(link);
-  }
-  vg.appendChild(a);
+var a = el('article', { class: 'mg-card' });
+a.appendChild(el('div', { class: 'mg-card__eyebrow mg-eyebrow--blue' }, s.n));
+a.appendChild(el('h3', { class: 'mg-card__title' }, s.title));
+a.appendChild(el('p', { class: 'mg-card__body' }, s.body));
+if (s.href) {
+  var link = el('a', { href: s.href, class: 'mg-card__link' });
+  link.textContent = 'Learn more →';
+  a.appendChild(link);
+}
+vg.appendChild(a);
 });
 
 var FEATURES = ['Embed API', 'Consumer APIs', 'AI + Opening books', 'Game controller', 'Developer guides', 'Touch/mobile'];
 var ef = document.getElementById('engine-features');
 FEATURES.forEach(function(f) {
-  ef.appendChild(el('span', { class: 'mg-dark-center__pill' }, f));
+ef.appendChild(el('span', { class: 'mg-dark-center__pill' }, f));
 });
 
 var tryBtn = linkBtn('Try Engine', 'https://chess.moddable.games/play/', 'blue');
@@ -78,44 +77,43 @@ docsBtn.setAttribute('rel', 'noopener');
 document.getElementById('engine-cta').appendChild(docsBtn);
 
 var HOOKS = [
-  { name: 'Embed via iframe', desc: 'Drop a single iframe into any page. Control variant, theme, difficulty, and layout via URL params. Responsive and touch-ready.' },
-  { name: 'postMessage control', desc: 'Switch variants, change themes, and reset games without reloading the iframe. Send typed messages to the embed window.' }
+{ name: 'Embed via iframe', desc: 'Drop a single iframe into any page. Control variant, theme, difficulty, and layout via URL params. Responsive and touch-ready.' },
+{ name: 'postMessage control', desc: 'Switch variants, change themes, and reset games without reloading the iframe. Send typed messages to the embed window.' }
 ];
 var hg = document.getElementById('hooks-grid');
 HOOKS.forEach(function(h) {
-  var d = el('div', { class: 'mg-card mg-card--row' });
-  var icon = el('div', { class: 'mg-card__icon' });
-  icon.style.background = T.blue;
-  icon.textContent = '◈';
-  d.appendChild(icon);
-  var txt = el('div');
-  var title = el('div', { class: 'mg-card__mono-title' });
-  title.style.color = T.blue;
-  title.textContent = h.name;
-  txt.appendChild(title);
-  txt.appendChild(el('div', { class: 'mg-card__desc' }, h.desc));
-  d.appendChild(txt);
-  hg.appendChild(d);
+var d = el('div', { class: 'mg-card mg-card--row' });
+var icon = el('div', { class: 'mg-card__icon' });
+icon.style.background = T.blue;
+icon.textContent = '◈';
+d.appendChild(icon);
+var txt = el('div');
+var title = el('div', { class: 'mg-card__mono-title' });
+title.style.color = T.blue;
+title.textContent = h.name;
+txt.appendChild(title);
+txt.appendChild(el('div', { class: 'mg-card__desc' }, h.desc));
+d.appendChild(txt);
+hg.appendChild(d);
 });
 
 document.getElementById('comm-heading').textContent = 'Built on this engine';
 
 var CONSUMERS = [
-  { title: 'Dungeon Chess', desc: 'Asymmetric fantasy strategy on modular dungeon boards. Four factions, 24 units, XP drafting.', href: '/mods/dungeon-chess/', accent: T.red },
-  { title: 'Chess Variant Loader', desc: 'Pick, preview, and play any of 70 variants from the browser. Rules reference and match launcher.', href: '/tools/chess/', accent: T.blue }
+{ title: 'Dungeon Chess', desc: 'Asymmetric fantasy strategy on modular dungeon boards. Four factions, 24 units, XP drafting.', href: '/mods/dungeon-chess/', accent: T.red },
+{ title: 'Chess Variant Loader', desc: 'Pick, preview, and play any of 70 variants from the browser. Rules reference and match launcher.', href: '/tools/chess/', accent: T.blue }
 ];
 var cg = document.getElementById('comm-grid');
 CONSUMERS.forEach(function(c) {
-  var card = el('a', { href: url(c.href), class: 'mg-card mg-lift', 'data-reveal': 'up' });
-  card.style.borderTop = '3px solid ' + c.accent;
-  card.style.textDecoration = 'none';
-  card.appendChild(el('h3', { class: 'mg-card__title' }, c.title));
-  card.appendChild(el('p', { class: 'mg-card__body' }, c.desc));
-  var link = el('span', { class: 'mg-card__link' });
-  link.style.color = c.accent;
-  link.textContent = 'Explore →';
-  card.appendChild(link);
-  cg.appendChild(card);
+var card = el('a', { href: url(c.href), class: 'mg-card mg-lift', 'data-reveal': 'up' });
+card.style.borderTop = '3px solid ' + c.accent;
+card.style.textDecoration = 'none';
+card.appendChild(el('h3', { class: 'mg-card__title' }, c.title));
+card.appendChild(el('p', { class: 'mg-card__body' }, c.desc));
+var link = el('span', { class: 'mg-card__link' });
+link.style.color = c.accent;
+link.textContent = 'Explore →';
+card.appendChild(link);
+cg.appendChild(card);
 });
-MG.initReveal();
-})();
+initReveal();

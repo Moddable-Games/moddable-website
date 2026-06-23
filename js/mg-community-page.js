@@ -1,180 +1,177 @@
-(function() {
-  var el = MG.el;
-  var linkBtn = MG.linkBtn;
+import { el, cubeSVG, url, navbar, footer, sectionHero, linkBtn } from './mg.js';
 
-  document.getElementById('nav-root').appendChild(MG.navbar('About'));
-  document.getElementById('footer-root').appendChild(MG.footer());
-  var hero = MG.sectionHero({
-    section: 'community',
-    tier: 2,
-    hexColor: 'blue',
-    eyebrow: 'COMMUNITY',
-    title: 'Join the table.',
-    lede: 'Designers, playtesters, and rule-tinkerers building open-source board games together.'
-  });
-  var heroBtns = el('div', { class: 'mg-hero__btns' });
-  heroBtns.appendChild(linkBtn('Join Discord', 'https://discord.gg/VhsVGNq6Za', 'primary'));
-  heroBtns.appendChild(linkBtn('Submit Mod', '/submit/', 'outline-dark'));
-  hero.querySelector('.mg-hero__text').appendChild(heroBtns);
-  document.getElementById('page-hero').appendChild(hero);
+document.getElementById('nav-root').appendChild(navbar('About'));
+document.getElementById('footer-root').appendChild(footer());
+var hero = sectionHero({
+  section: 'community',
+  tier: 2,
+  hexColor: 'blue',
+  eyebrow: 'COMMUNITY',
+  title: 'Join the table.',
+  lede: 'Designers, playtesters, and rule-tinkerers building open-source board games together.'
+});
+var heroBtns = el('div', { class: 'mg-hero__btns' });
+heroBtns.appendChild(linkBtn('Join Discord', 'https://discord.gg/VhsVGNq6Za', 'primary'));
+heroBtns.appendChild(linkBtn('Submit Mod', '/submit/', 'outline-dark'));
+hero.querySelector('.mg-hero__text').appendChild(heroBtns);
+document.getElementById('page-hero').appendChild(hero);
 
-  // Stats row
-  var STATS = [
-    { number: '15', label: 'Members' },
-    { number: '12', label: 'Channels' },
-    { number: '3', label: 'Countries' },
-    { number: '50+', label: 'Posts' }
-  ];
-  var sg = document.getElementById('stats-grid');
-  STATS.forEach(function(s, i) {
-    var card = el('div', {class: 'stat-card'});
-    card.appendChild(el('div', {class: 'stat-card__number'}, s.number));
-    card.appendChild(el('div', {class: 'stat-card__label stat-card__label--' + (i + 1)}, s.label));
-    sg.appendChild(card);
-  });
+// Stats row
+var STATS = [
+  { number: '15', label: 'Members' },
+  { number: '12', label: 'Channels' },
+  { number: '3', label: 'Countries' },
+  { number: '50+', label: 'Posts' }
+];
+var sg = document.getElementById('stats-grid');
+STATS.forEach(function(s, i) {
+  var card = el('div', {class: 'stat-card'});
+  card.appendChild(el('div', {class: 'stat-card__number'}, s.number));
+  card.appendChild(el('div', {class: 'stat-card__label stat-card__label--' + (i + 1)}, s.label));
+  sg.appendChild(card);
+});
 
-  // Channels as cards in 2-col grid
-  var CHANNELS = [
-    { name: 'viticulture', desc: 'Strategy wine-making and worker placement discussion', cat: 'boardgames' },
-    { name: 'twilight', desc: 'Twilight Imperium strategy, session reports, and Hyper Imperium playtesting', cat: 'boardgames' },
-    { name: 'catan', desc: 'Catan mods, hex variants, and Nukes conversion guides', cat: 'boardgames' },
-    { name: 'monopoly', desc: 'Econopoly playtesting, house rules, and economic fixes', cat: 'boardgames' },
-    { name: 'print-n-play', desc: 'PnP builds, card stock selection, and DIY production tips', cat: 'boardgames' },
-    { name: 'design', desc: 'Game design theory, prototyping, and mechanics discussion', cat: 'community' },
-    { name: 'showcase', desc: 'Share your artwork, mod concepts, and board designs', cat: 'community' },
-    { name: 'playtesting', desc: 'Find testers, offer feedback, and report session results', cat: 'community' },
-    { name: 'online', desc: 'Online games: nukes.moddable.games, chess, and open-source titles', cat: 'community' },
-    { name: 'events-uk', desc: 'UK meetups, conventions, and game nights', cat: 'events' },
-    { name: 'events-usa', desc: 'US meetups, conventions, and community gatherings', cat: 'events' },
-    { name: 'events-malaysia', desc: 'Malaysia meetups, cafes, and weekly game nights', cat: 'events' }
-  ];
+// Channels as cards in 2-col grid
+var CHANNELS = [
+  { name: 'viticulture', desc: 'Strategy wine-making and worker placement discussion', cat: 'boardgames' },
+  { name: 'twilight', desc: 'Twilight Imperium strategy, session reports, and Hyper Imperium playtesting', cat: 'boardgames' },
+  { name: 'catan', desc: 'Catan mods, hex variants, and Nukes conversion guides', cat: 'boardgames' },
+  { name: 'monopoly', desc: 'Econopoly playtesting, house rules, and economic fixes', cat: 'boardgames' },
+  { name: 'print-n-play', desc: 'PnP builds, card stock selection, and DIY production tips', cat: 'boardgames' },
+  { name: 'design', desc: 'Game design theory, prototyping, and mechanics discussion', cat: 'community' },
+  { name: 'showcase', desc: 'Share your artwork, mod concepts, and board designs', cat: 'community' },
+  { name: 'playtesting', desc: 'Find testers, offer feedback, and report session results', cat: 'community' },
+  { name: 'online', desc: 'Online games: nukes.moddable.games, chess, and open-source titles', cat: 'community' },
+  { name: 'events-uk', desc: 'UK meetups, conventions, and game nights', cat: 'events' },
+  { name: 'events-usa', desc: 'US meetups, conventions, and community gatherings', cat: 'events' },
+  { name: 'events-malaysia', desc: 'Malaysia meetups, cafes, and weekly game nights', cat: 'events' }
+];
 
-  var cl = document.getElementById('channels-list');
-  cl.className = 'channels-grid';
-  CHANNELS.forEach(function(ch) {
-    var card = el('div', {class: 'channel-card channel-card--' + ch.cat});
-    var icon = el('div', {class: 'channel-card__icon channel-card__icon--' + ch.cat}, '#');
-    card.appendChild(icon);
-    var txt = el('div', {class: 'channel-card__text'});
-    txt.appendChild(el('div', {class: 'channel-card__name'}, ch.name));
-    txt.appendChild(el('div', {class: 'channel-card__desc'}, ch.desc));
-    txt.appendChild(el('div', {class: 'channel-card__category'}, ch.cat));
-    card.appendChild(txt);
-    cl.appendChild(card);
-  });
+var cl = document.getElementById('channels-list');
+cl.className = 'channels-grid';
+CHANNELS.forEach(function(ch) {
+  var card = el('div', {class: 'channel-card channel-card--' + ch.cat});
+  var icon = el('div', {class: 'channel-card__icon channel-card__icon--' + ch.cat}, '#');
+  card.appendChild(icon);
+  var txt = el('div', {class: 'channel-card__text'});
+  txt.appendChild(el('div', {class: 'channel-card__name'}, ch.name));
+  txt.appendChild(el('div', {class: 'channel-card__desc'}, ch.desc));
+  txt.appendChild(el('div', {class: 'channel-card__category'}, ch.cat));
+  card.appendChild(txt);
+  cl.appendChild(card);
+});
 
-  // Featured resources shared in channels
-  var FEATURED = [
-    { type: 'video', title: 'Behind the scenes: card game production', user: 'djkaspa', source: 'YouTube', url: 'https://www.youtube.com/watch?v=joMpOOZAz9c', videoId: 'joMpOOZAz9c' },
-    { type: 'link', title: 'Deciding card stock for your games', user: 'darktalon8', source: 'Article', url: 'https://www.qpmarketnetwork.com/card-design', thumb: null },
-    { type: 'link', title: 'Simple card maker with free tier', user: 'darktalon8', source: 'Tool', url: 'https://www.dextrous.com.au/', thumb: null }
-  ];
+// Featured resources shared in channels
+var FEATURED = [
+  { type: 'video', title: 'Behind the scenes: card game production', user: 'djkaspa', source: 'YouTube', url: 'https://www.youtube.com/watch?v=joMpOOZAz9c', videoId: 'joMpOOZAz9c' },
+  { type: 'link', title: 'Deciding card stock for your games', user: 'darktalon8', source: 'Article', url: 'https://www.qpmarketnetwork.com/card-design', thumb: null },
+  { type: 'link', title: 'Simple card maker with free tier', user: 'darktalon8', source: 'Tool', url: 'https://www.dextrous.com.au/', thumb: null }
+];
 
-  var fg = document.getElementById('featured-grid');
-  FEATURED.forEach(function(f) {
-    var card = el('a', {class: 'featured-card', href: f.url, target: '_blank', rel: 'noopener'});
-    var thumb = el('div', {class: 'featured-card__thumb'});
-    if (f.type === 'video') {
-      thumb.style.backgroundImage = 'url(https://img.youtube.com/vi/' + f.videoId + '/hqdefault.jpg)';
-      thumb.style.backgroundSize = 'cover';
-      thumb.style.backgroundPosition = 'center';
-      thumb.appendChild(el('div', {class: 'featured-card__play'}));
-    } else {
-      var gradients = { 'Article': 'linear-gradient(135deg, #0c4f8d 0%, #0a0d2a 100%)', 'Tool': 'linear-gradient(135deg, #3a9928 0%, #0a0d2a 100%)' };
-      thumb.style.background = gradients[f.source] || 'linear-gradient(135deg, #0a0d2a 0%, #1a3680 100%)';
-      thumb.appendChild(MG.cubeSVG(64));
-    }
-    card.appendChild(thumb);
-    var body = el('div', {class: 'featured-card__body'});
-    body.appendChild(el('div', {class: 'featured-card__source'}, f.source));
-    body.appendChild(el('div', {class: 'featured-card__title'}, f.title));
-    body.appendChild(el('div', {class: 'featured-card__user'}, 'Shared by ' + f.user));
-    card.appendChild(body);
-    fg.appendChild(card);
-  });
+var fg = document.getElementById('featured-grid');
+FEATURED.forEach(function(f) {
+  var card = el('a', {class: 'featured-card', href: f.url, target: '_blank', rel: 'noopener'});
+  var thumb = el('div', {class: 'featured-card__thumb'});
+  if (f.type === 'video') {
+    thumb.style.backgroundImage = 'url(https://img.youtube.com/vi/' + f.videoId + '/hqdefault.jpg)';
+    thumb.style.backgroundSize = 'cover';
+    thumb.style.backgroundPosition = 'center';
+    thumb.appendChild(el('div', {class: 'featured-card__play'}));
+  } else {
+    var gradients = { 'Article': 'linear-gradient(135deg, #0c4f8d 0%, #0a0d2a 100%)', 'Tool': 'linear-gradient(135deg, #3a9928 0%, #0a0d2a 100%)' };
+    thumb.style.background = gradients[f.source] || 'linear-gradient(135deg, #0a0d2a 0%, #1a3680 100%)';
+    thumb.appendChild(cubeSVG(64));
+  }
+  card.appendChild(thumb);
+  var body = el('div', {class: 'featured-card__body'});
+  body.appendChild(el('div', {class: 'featured-card__source'}, f.source));
+  body.appendChild(el('div', {class: 'featured-card__title'}, f.title));
+  body.appendChild(el('div', {class: 'featured-card__user'}, 'Shared by ' + f.user));
+  card.appendChild(body);
+  fg.appendChild(card);
+});
 
-  // Activity feed
-  var ACTIVITY = [
-    { channel: '#design', user: 'djkaspa', avatar: 'https://cdn.discordapp.com/avatars/1059998798027444304/41d74062e4ad48206877b2aaba7a640e.png?size=64', msg: 'Nice BTS video on card game production workflows', date: 'May 22' },
-    { channel: '#design', user: 'darktalon8', avatar: 'https://cdn.discordapp.com/avatars/433932623941730304/fbd8e6a47ac0580e0af2cf3b7d896dd9.png?size=64', msg: 'Great article on deciding card stock for your games', date: 'May 20' },
-    { channel: '#design', user: 'darktalon8', avatar: 'https://cdn.discordapp.com/avatars/433932623941730304/fbd8e6a47ac0580e0af2cf3b7d896dd9.png?size=64', msg: 'Simple card maker with a free layer to test it out', date: 'May 11' },
-    { channel: '#general', user: 'arjitraj_', avatar: 'https://cdn.discordapp.com/avatars/190300566046507018/4eb2498fe54b8bb8c23f7948b183ec5b.png?size=64', msg: 'Thanks Kevin for the invite.', date: 'Jun 3' },
-    { channel: '#print-n-play', user: 'reshwindblade', avatar: 'https://cdn.discordapp.com/avatars/243395223898554368/14332d7f98baf422e6c2bc3d67bdedfc.png?size=64', msg: 'First prototype printed — card alignment is tricky', date: 'Jun 1' },
-    { channel: '#monopoly', user: 'wundercover', avatar: 'https://cdn.discordapp.com/avatars/113239562452541440/135bed57657861016f475a42771de44f.png?size=64', msg: 'Econopoly v1.4 playtest report — variable objectives feel great', date: 'May 8' }
-  ];
+// Activity feed
+var ACTIVITY = [
+  { channel: '#design', user: 'djkaspa', avatar: 'https://cdn.discordapp.com/avatars/1059998798027444304/41d74062e4ad48206877b2aaba7a640e.png?size=64', msg: 'Nice BTS video on card game production workflows', date: 'May 22' },
+  { channel: '#design', user: 'darktalon8', avatar: 'https://cdn.discordapp.com/avatars/433932623941730304/fbd8e6a47ac0580e0af2cf3b7d896dd9.png?size=64', msg: 'Great article on deciding card stock for your games', date: 'May 20' },
+  { channel: '#design', user: 'darktalon8', avatar: 'https://cdn.discordapp.com/avatars/433932623941730304/fbd8e6a47ac0580e0af2cf3b7d896dd9.png?size=64', msg: 'Simple card maker with a free layer to test it out', date: 'May 11' },
+  { channel: '#general', user: 'arjitraj_', avatar: 'https://cdn.discordapp.com/avatars/190300566046507018/4eb2498fe54b8bb8c23f7948b183ec5b.png?size=64', msg: 'Thanks Kevin for the invite.', date: 'Jun 3' },
+  { channel: '#print-n-play', user: 'reshwindblade', avatar: 'https://cdn.discordapp.com/avatars/243395223898554368/14332d7f98baf422e6c2bc3d67bdedfc.png?size=64', msg: 'First prototype printed — card alignment is tricky', date: 'Jun 1' },
+  { channel: '#monopoly', user: 'wundercover', avatar: 'https://cdn.discordapp.com/avatars/113239562452541440/135bed57657861016f475a42771de44f.png?size=64', msg: 'Econopoly v1.4 playtest report — variable objectives feel great', date: 'May 8' }
+];
 
-  var al = document.getElementById('activity-list');
-  al.className = 'activity-feed';
-  ACTIVITY.forEach(function(a) {
-    var row = el('div', {class: 'activity-item'});
-    var avatarEl = el('img', {class: 'activity-item__avatar', src: a.avatar, alt: a.user});
-    row.appendChild(avatarEl);
-    var content = el('div', {class: 'activity-item__content'});
-    var header = el('div', {class: 'activity-item__header'});
-    header.appendChild(el('span', {class: 'activity-item__user'}, a.user));
-    header.appendChild(el('span', {class: 'activity-item__channel'}, a.channel));
-    header.appendChild(el('span', {class: 'activity-item__date'}, a.date));
-    content.appendChild(header);
-    content.appendChild(el('div', {class: 'activity-item__body'}, a.msg));
-    row.appendChild(content);
-    al.appendChild(row);
-  });
+var al = document.getElementById('activity-list');
+al.className = 'activity-feed';
+ACTIVITY.forEach(function(a) {
+  var row = el('div', {class: 'activity-item'});
+  var avatarEl = el('img', {class: 'activity-item__avatar', src: a.avatar, alt: a.user});
+  row.appendChild(avatarEl);
+  var content = el('div', {class: 'activity-item__content'});
+  var header = el('div', {class: 'activity-item__header'});
+  header.appendChild(el('span', {class: 'activity-item__user'}, a.user));
+  header.appendChild(el('span', {class: 'activity-item__channel'}, a.channel));
+  header.appendChild(el('span', {class: 'activity-item__date'}, a.date));
+  content.appendChild(header);
+  content.appendChild(el('div', {class: 'activity-item__body'}, a.msg));
+  row.appendChild(content);
+  al.appendChild(row);
+});
 
-  // Members — top 4 most recently active
-  var MEMBERS = [
-    { display: 'Darktalon', avatar: 'https://cdn.discordapp.com/avatars/433932623941730304/fbd8e6a47ac0580e0af2cf3b7d896dd9.png?size=128', role: 'management', msgs: 31, lastActive: 'Jun 5', lastMsg: 'New expansion from Stonemaier. Looking forward to this one.' },
-    { display: 'Arjit', avatar: 'https://cdn.discordapp.com/avatars/190300566046507018/4eb2498fe54b8bb8c23f7948b183ec5b.png?size=128', role: 'member', msgs: 1, lastActive: 'Jun 3', lastMsg: 'Thanks Kevin for the invite.' },
-    { display: 'djkaspa', avatar: 'https://cdn.discordapp.com/avatars/1059998798027444304/41d74062e4ad48206877b2aaba7a640e.png?size=128', role: 'management', msgs: 16, lastActive: 'May 22', lastMsg: 'Nice BTS video on card game production workflows.' },
-    { display: 'Wunder', avatar: 'https://cdn.discordapp.com/avatars/113239562452541440/135bed57657861016f475a42771de44f.png?size=128', role: 'member', msgs: 1, lastActive: 'Oct 19', lastMsg: 'Hi from the ara group.' }
-  ];
+// Members — top 4 most recently active
+var MEMBERS = [
+  { display: 'Darktalon', avatar: 'https://cdn.discordapp.com/avatars/433932623941730304/fbd8e6a47ac0580e0af2cf3b7d896dd9.png?size=128', role: 'management', msgs: 31, lastActive: 'Jun 5', lastMsg: 'New expansion from Stonemaier. Looking forward to this one.' },
+  { display: 'Arjit', avatar: 'https://cdn.discordapp.com/avatars/190300566046507018/4eb2498fe54b8bb8c23f7948b183ec5b.png?size=128', role: 'member', msgs: 1, lastActive: 'Jun 3', lastMsg: 'Thanks Kevin for the invite.' },
+  { display: 'djkaspa', avatar: 'https://cdn.discordapp.com/avatars/1059998798027444304/41d74062e4ad48206877b2aaba7a640e.png?size=128', role: 'management', msgs: 16, lastActive: 'May 22', lastMsg: 'Nice BTS video on card game production workflows.' },
+  { display: 'Wunder', avatar: 'https://cdn.discordapp.com/avatars/113239562452541440/135bed57657861016f475a42771de44f.png?size=128', role: 'member', msgs: 1, lastActive: 'Oct 19', lastMsg: 'Hi from the ara group.' }
+];
 
-  var mr = document.getElementById('members-grid');
-  MEMBERS.forEach(function(m) {
-    var card = el('div', {class: 'member-card'});
-    card.appendChild(el('img', {class: 'member-card__avatar', src: m.avatar, alt: m.display}));
-    var info = el('div', {class: 'member-card__info'});
-    info.appendChild(el('div', {class: 'member-card__name'}, m.display));
-    var meta = el('div', {class: 'member-card__meta'});
-    var roleEl = el('span', {class: 'member-card__role member-card__role--' + m.role});
-    roleEl.textContent = m.role === 'management' ? 'Management' : 'Member';
-    meta.appendChild(roleEl);
-    if (m.msgs > 0) meta.appendChild(el('span', {class: 'member-card__stat'}, m.msgs + ' posts'));
-    meta.appendChild(el('span', {class: 'member-card__stat'}, 'Active ' + m.lastActive));
-    info.appendChild(meta);
-    if (m.lastMsg) info.appendChild(el('div', {class: 'member-card__msg'}, '"' + m.lastMsg + '"'));
-    card.appendChild(info);
-    mr.appendChild(card);
-  });
+var mr = document.getElementById('members-grid');
+MEMBERS.forEach(function(m) {
+  var card = el('div', {class: 'member-card'});
+  card.appendChild(el('img', {class: 'member-card__avatar', src: m.avatar, alt: m.display}));
+  var info = el('div', {class: 'member-card__info'});
+  info.appendChild(el('div', {class: 'member-card__name'}, m.display));
+  var meta = el('div', {class: 'member-card__meta'});
+  var roleEl = el('span', {class: 'member-card__role member-card__role--' + m.role});
+  roleEl.textContent = m.role === 'management' ? 'Management' : 'Member';
+  meta.appendChild(roleEl);
+  if (m.msgs > 0) meta.appendChild(el('span', {class: 'member-card__stat'}, m.msgs + ' posts'));
+  meta.appendChild(el('span', {class: 'member-card__stat'}, 'Active ' + m.lastActive));
+  info.appendChild(meta);
+  if (m.lastMsg) info.appendChild(el('div', {class: 'member-card__msg'}, '"' + m.lastMsg + '"'));
+  card.appendChild(info);
+  mr.appendChild(card);
+});
 
-  // Mod Jams
-  var JAMS = [
-    { number: 'JAM #1', title: 'Monopoly', date: 'March 2024', color: '#3a9928', result: 'Produced <a href="/mods/econopoly/">Econopoly</a> — victory points replace bankruptcy', upcoming: false },
-    { number: 'JAM #2', title: 'Talisman', date: 'August 2024', color: '#0c4f8d', result: 'Produced <a href="/mods/talisman-worlds/">Talisman Worlds</a> — hex grid replaces the spiral', upcoming: false },
-    { number: 'JAM #3', title: 'Twilight Imperium', date: 'January 2025', color: '#d11a1a', result: 'Produced <a href="/mods/hyper-imperium/">Hyper Imperium</a> — 12 hours down to 8', upcoming: false },
-    { number: 'JAM #4', title: '???', date: 'Coming soon', color: '', result: '', upcoming: true }
-  ];
+// Mod Jams
+var JAMS = [
+  { number: 'JAM #1', title: 'Monopoly', date: 'March 2024', color: '#3a9928', result: 'Produced <a href="/mods/econopoly/">Econopoly</a> — victory points replace bankruptcy', upcoming: false },
+  { number: 'JAM #2', title: 'Talisman', date: 'August 2024', color: '#0c4f8d', result: 'Produced <a href="/mods/talisman-worlds/">Talisman Worlds</a> — hex grid replaces the spiral', upcoming: false },
+  { number: 'JAM #3', title: 'Twilight Imperium', date: 'January 2025', color: '#d11a1a', result: 'Produced <a href="/mods/hyper-imperium/">Hyper Imperium</a> — 12 hours down to 8', upcoming: false },
+  { number: 'JAM #4', title: '???', date: 'Coming soon', color: '', result: '', upcoming: true }
+];
 
-  var jg = document.getElementById('jams-grid');
-  JAMS.forEach(function(j) {
-    var card = el('div', {class: 'jam-card' + (j.upcoming ? ' jam-card--upcoming' : ' jam-card--complete')});
-    if (!j.upcoming) card.style.borderTopColor = j.color;
-    var num = el('div', {class: 'jam-card__number'});
-    num.style.color = j.upcoming ? 'var(--mg-cosmic-glow)' : j.color;
-    num.textContent = j.number;
-    card.appendChild(num);
-    card.appendChild(el('div', {class: 'jam-card__title'}, j.title));
-    card.appendChild(el('div', {class: 'jam-card__meta'}, j.date));
-    if (j.upcoming) {
-      card.appendChild(el('div', {class: 'jam-card__upcoming-msg'}, 'Community votes on the base game. You decide what gets modded next.'));
-    } else {
-      var result = el('div', {class: 'jam-card__result'});
-      result.innerHTML = j.result;
-      card.appendChild(result);
-    }
-    jg.appendChild(card);
-  });
+var jg = document.getElementById('jams-grid');
+JAMS.forEach(function(j) {
+  var card = el('div', {class: 'jam-card' + (j.upcoming ? ' jam-card--upcoming' : ' jam-card--complete')});
+  if (!j.upcoming) card.style.borderTopColor = j.color;
+  var num = el('div', {class: 'jam-card__number'});
+  num.style.color = j.upcoming ? 'var(--mg-cosmic-glow)' : j.color;
+  num.textContent = j.number;
+  card.appendChild(num);
+  card.appendChild(el('div', {class: 'jam-card__title'}, j.title));
+  card.appendChild(el('div', {class: 'jam-card__meta'}, j.date));
+  if (j.upcoming) {
+    card.appendChild(el('div', {class: 'jam-card__upcoming-msg'}, 'Community votes on the base game. You decide what gets modded next.'));
+  } else {
+    var result = el('div', {class: 'jam-card__result'});
+    result.innerHTML = j.result;
+    card.appendChild(result);
+  }
+  jg.appendChild(card);
+});
 
-  var cb = document.getElementById('cta-btns');
-  cb.appendChild(linkBtn('Join Discord', 'https://discord.gg/VhsVGNq6Za', 'primary'));
-  cb.appendChild(linkBtn('Submit Mod', '/submit/', 'outline-dark'));
-})();
+var cb = document.getElementById('cta-btns');
+cb.appendChild(linkBtn('Join Discord', 'https://discord.gg/VhsVGNq6Za', 'primary'));
+cb.appendChild(linkBtn('Submit Mod', '/submit/', 'outline-dark'));

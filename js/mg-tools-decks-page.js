@@ -1,9 +1,10 @@
+import { T, el, track, btn, navbar, footer, sectionHero } from './mg.js';
+
 (function() {
-const { T, el, btn, navbar, footer } = MG;
 document.getElementById('nav-root').appendChild(navbar('Tools'));
 document.getElementById('footer-root').appendChild(footer());
 
-document.getElementById('page-hero').appendChild(MG.sectionHero({
+document.getElementById('page-hero').appendChild(sectionHero({
   section: 'tool-decks',
   tier: 2,
   hexColor: 'green',
@@ -157,7 +158,7 @@ function deal() {
   const all = [];
   deck.forEach(c => { for (let i = 0; i < c.qty; i++) all.push(c.name); });
   if (all.length === 0) return;
-  if (MG.track) MG.track('deck_deal', { player_count: playerCount, cards_per_hand: cardsPerHand, total_cards: all.length });
+  if (track) track('deck_deal', { player_count: playerCount, cards_per_hand: cardsPerHand, total_cards: all.length });
 
   const shuffled = shuffle(all);
   const handSize = cardsPerHand === 'All' ? Math.floor(shuffled.length / playerCount) : cardsPerHand;
@@ -185,7 +186,7 @@ function renderPresets() {
       deck = JSON.parse(JSON.stringify(PRESETS[name]));
       renderDesigner();
       renderDealer();
-      if (MG.track) MG.track('deck_preset_select', { preset: name });
+      if (track) track('deck_preset_select', { preset: name });
     }));
   });
   wrap.appendChild(grid);

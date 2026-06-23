@@ -1,10 +1,6 @@
-/* =========================================================================
-   TI4 Objective Tracker with Player Scoring
-   Renders into #obj-tracker-root on the TI tools page
-   ========================================================================= */
-(function() {
-const { T, el, btn } = MG;
+import { T, el, url, data, track, btn } from './mg.js';
 
+(function() {
 const ROOT_ID = 'obj-tracker-root';
 let root = null;
 
@@ -50,7 +46,7 @@ function defaultState() {
 function init() {
   root = document.getElementById(ROOT_ID);
   if (!root) return;
-  fetch(MG.url('/data/ti4-objectives.json'))
+  fetch(url('/data/ti4-objectives.json'))
     .then(r => r.json())
     .then(d => {
       objData = d;
@@ -170,7 +166,7 @@ function renderSetup() {
   const startWrap = el('div', { class: 'ot-setup__start' });
   startWrap.appendChild(btn('Start game', 'dark', () => {
     startGame();
-    if (MG.track) MG.track('obj_tracker_start', { players: gameState.playerCount, vp: gameState.vpTarget, expansions: Object.keys(gameState.enabledExpansions).filter(k => gameState.enabledExpansions[k]) });
+    if (track) track('obj_tracker_start', { players: gameState.playerCount, vp: gameState.vpTarget, expansions: Object.keys(gameState.enabledExpansions).filter(k => gameState.enabledExpansions[k]) });
   }));
   wrap.appendChild(startWrap);
 
@@ -387,7 +383,7 @@ function renderPublicObjectives() {
     revealBtn.addEventListener('click', () => {
       const next = unrevealed1[Math.floor(Math.random() * unrevealed1.length)];
       gameState.revealedStage1.push(next.name);
-      if (MG.track) MG.track('obj_reveal', { stage: 1, name: next.name });
+      if (track) track('obj_reveal', { stage: 1, name: next.name });
       render();
     });
     s1Header.appendChild(revealBtn);
@@ -417,7 +413,7 @@ function renderPublicObjectives() {
     revealBtn2.addEventListener('click', () => {
       const next = unrevealed2[Math.floor(Math.random() * unrevealed2.length)];
       gameState.revealedStage2.push(next.name);
-      if (MG.track) MG.track('obj_reveal', { stage: 2, name: next.name });
+      if (track) track('obj_reveal', { stage: 2, name: next.name });
       render();
     });
     s2Header.appendChild(revealBtn2);
@@ -547,7 +543,7 @@ function renderSecretObjectives() {
       if (select.value) {
         if (!gameState.secretObjectives[pIndex]) gameState.secretObjectives[pIndex] = [];
         gameState.secretObjectives[pIndex].push(select.value);
-        if (MG.track) MG.track('obj_secret_scored', { player: pIndex, name: select.value });
+        if (track) track('obj_secret_scored', { player: pIndex, name: select.value });
         checkWinner();
         render();
       }

@@ -1,3 +1,5 @@
+import { el, btn, linkBtn, url } from './mg.js';
+
 (function() {
 var HEX_BASE = location.hostname === 'localhost'
   ? location.origin + '/MODDABLE/moddable-hexmaps/generate/'
@@ -53,7 +55,6 @@ function initHexmapEmbed(game, opts) {
   var actionsEl = document.getElementById('hexmap-actions');
   if (!controlsEl || !frameWrap) return;
 
-  var iframe = null;
 
   function buildUrl() {
     var url = HEX_BASE + '?game=' + game + '&seed=' + currentSeed
@@ -87,9 +88,7 @@ function initHexmapEmbed(game, opts) {
 
   function renderControls() {
     controlsEl.innerHTML = '';
-    var { el } = MG;
-
-    if (useLayouts) {
+if (useLayouts) {
       var layoutGroup = el('div', { class: 'hexmap-embed__control-group' });
       layoutGroup.appendChild(el('span', { class: 'hexmap-embed__label' }, 'Layout:'));
       var layoutSel = document.createElement('select');
@@ -195,8 +194,7 @@ function initHexmapEmbed(game, opts) {
   function renderActions() {
     if (!actionsEl) return;
     actionsEl.innerHTML = '';
-    var { btn } = MG;
-    actionsEl.appendChild(btn('New Map', 'dark', function() {
+actionsEl.appendChild(btn('New Map', 'dark', function() {
       currentSeed = Math.floor(Math.random() * 9999);
       regenerate();
     }));
@@ -210,7 +208,7 @@ function initHexmapEmbed(game, opts) {
       }
       navigator.clipboard.writeText(shareUrl);
     }));
-    var fullLink = MG.btn('Full Screen', 'outline-light', function() {
+    var fullLink = btn('Full Screen', 'outline-light', function() {
       if (iframe && iframe.requestFullscreen) {
         iframe.requestFullscreen();
       } else if (iframe && iframe.webkitRequestFullscreen) {
@@ -228,8 +226,8 @@ function initHexmapEmbed(game, opts) {
 function renderHexEngineBtns() {
   var btnsEl = document.getElementById('hex-engine-btns');
   if (!btnsEl) return;
-  var engineLink = MG.linkBtn('Moddable Hexmaps', '/engines/moddable-hexmaps/', 'primary');
-  var srcLink = MG.linkBtn('View Source', 'https://github.com/Moddable-Games/moddable-hexmaps', 'dark');
+  var engineLink = linkBtn('Moddable Hexmaps', '/engines/moddable-hexmaps/', 'primary');
+  var srcLink = linkBtn('View Source', 'https://github.com/Moddable-Games/moddable-hexmaps', 'dark');
   srcLink.setAttribute('target', '_blank');
   srcLink.setAttribute('rel', 'noopener');
   btnsEl.appendChild(engineLink);

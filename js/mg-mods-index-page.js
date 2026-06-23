@@ -1,24 +1,23 @@
-(function() {
-  var grid = document.getElementById('mods-grid');
-  if (!grid) return;
+import { url, data, track, modCard, navbar, footer, sectionHero, buildHeroFeature, initReveal } from './mg.js';
 
-  var navbar = MG.navbar;
-  var footer = MG.footer;
+(function() {
+var grid = document.getElementById('mods-grid');
+  if (!grid) return;
 
   document.getElementById('nav-root').appendChild(navbar('Mods'));
   document.getElementById('footer-root').appendChild(footer());
 
-  document.getElementById('page-hero').appendChild(MG.sectionHero({
+  document.getElementById('page-hero').appendChild(sectionHero({
     section: 'mods',
     tier: 1,
     hexColor: 'red',
     eyebrow: 'THE LIBRARY',
     title: 'Open <em>mods</em> for the boxes on your shelf',
     lede: 'Rulebook patches for the games gathering dust on your shelves. Filter, search, or browse.',
-    feature: MG.buildHeroFeature('mods')
+    feature: buildHeroFeature('mods')
   }));
 
-  MG.data.load(['mods']).then(function(store) {
+  data.load(['mods']).then(function(store) {
     var ALL_MODS = store.mods;
     var filters = ['All','Conversion','Rebalance','Reskin'];
     var activeCat = 'All';
@@ -33,7 +32,7 @@
         var b = document.createElement('button');
         b.className = 'mods-filter__btn' + (a ? ' mods-filter__btn--active' : '');
         b.textContent = f;
-        b.addEventListener('click', function() { activeCat = f; renderFilters(); renderGrid(); grid.scrollIntoView({ behavior:'smooth', block:'start' }); if (MG.track) MG.track('filter_select', { filter_type: 'category', filter_value: f, page: 'mods' }); });
+        b.addEventListener('click', function() { activeCat = f; renderFilters(); renderGrid(); grid.scrollIntoView({ behavior:'smooth', block:'start' }); if (track) track('filter_select', { filter_type: 'category', filter_value: f, page: 'mods' }); });
         el2.appendChild(b);
       });
     }
@@ -46,7 +45,7 @@
 
     function buildSubmitCard(span) {
       var card = document.createElement('a');
-      card.href = MG.url('/submit/');
+      card.href = url('/submit/');
       card.className = 'mods-submit-cta mg-lift';
       card.setAttribute('data-reveal', 'up');
       if (span > 1) card.style.gridColumn = 'span ' + span;
@@ -71,21 +70,20 @@
       document.getElementById('count-label').textContent = visible.length + ' OF ' + ALL_MODS.length + ' MODS';
       if (visible.length === 0) { empty.style.display = 'block'; return; }
       empty.style.display = 'none';
-      visible.forEach(function(m) { grid.appendChild(MG.modCard(m)); });
+      visible.forEach(function(m) { grid.appendChild(modCard(m)); });
       var cols = getGridColumns();
       var remainder = visible.length % cols;
       var span = remainder === 0 ? cols : cols - remainder;
       grid.appendChild(buildSubmitCard(span));
-      MG.initReveal();
+      initReveal();
     }
 
 
-    var modsSearchDebounce = null;
     document.getElementById('search-input').addEventListener('input', function(e) {
       searchVal = e.target.value; renderGrid(); grid.scrollIntoView({ behavior:'smooth', block:'start' });
       clearTimeout(modsSearchDebounce);
       if (searchVal.length >= 3) {
-        modsSearchDebounce = setTimeout(function() { if (MG.track) MG.track('search', { search_term: searchVal, page: 'mods' }); }, 800);
+        modsSearchDebounce = setTimeout(function() { if (track) track('search', { search_term: searchVal, page: 'mods' }); }, 800);
       }
     });
 

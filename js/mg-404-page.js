@@ -1,5 +1,4 @@
-(function() {
-  document.getElementById('nav-root').appendChild(MG.navbar(''));
-  document.getElementById('footer-root').appendChild(MG.footer());
-  document.getElementById('btn-root').appendChild(MG.linkBtn('Back to Home', '/', 'primary'));
-})();
+import { btn, linkBtn, navbar, footer } from './mg.js';
+document.getElementById('nav-root').appendChild(navbar(''));
+document.getElementById('footer-root').appendChild(footer());
+document.getElementById('btn-root').appendChild(linkBtn('Back to Home', '/', 'primary'));

@@ -26,7 +26,8 @@ One shared component library (`_mg.js` + `_mg.css`), one page per HTML file.
 ├── css/
 │   └── _mg.css             ← shared CSS variables + resets + keyframes
 ├── js/
-│   └── mg-loader.js        ← entry point; loads shared modules
+│   ├── mg.js               ← barrel re-export (single import for pages)
+│   └── mg-core.js          ← tokens, helpers, data layer
 ├── data/
 │   ├── mods.json           ← mod library (10 entries)
 │   ├── games.json          ← games (3 entries)
@@ -86,29 +87,6 @@ One shared component library (`_mg.js` + `_mg.css`), one page per HTML file.
         ├── wrangler.toml   ← Cloudflare config for moddable-tools
         └── deploy.sh       ← deploy script
 ```
-
----
-
-## The preview workflow
-
-**Never hand-edit `build/moddable-preview.html`.**
-
-After any change to any source file, regenerate it:
-
-```bash
-python3 build/build-preview.py
-```
-
-This bundles all pages into one self-contained HTML file with a client-side
-router and preview chrome (page switcher bar + back button). The output file
-can be opened directly in a browser with no server required.
-
-The script:
-1. Reads every page's `<body>` content and inline `<script>`
-2. Strips the two lines that call `navbar()` and `footer()` into `#nav-root`
-   / `#footer-root` (the preview shell owns those)
-3. Embeds `js/_mg.js` and `css/_mg.css` inline
-4. Writes `build/moddable-preview.html`
 
 ---
 
@@ -214,28 +192,31 @@ of the 31 testable tools and posts pass/fail embeds with response previews.
 
 ---
 
-## Component library (modular JS in `js/`)
+## Component library (native ESM in `js/`)
 
-All components live inside the `MG` namespace (built by `mg-core.js` + extension
-modules loaded via `mg-loader.js`).
+All components are native ES modules. The barrel file `js/mg.js` re-exports
+everything; page modules import from it.
 
-### Available exports
+### Module structure
+```
+js/mg-core.js       ← tokens, el(), url(), data, cubeSVG (root module)
+js/mg-analytics.js  ← GA4 track() + gtag init
+js/mg-buttons.js    ← btn(), linkBtn()
+js/mg-cards.js      ← modCard(), pageHero()
+js/mg-navbar.js     ← navbar()
+js/mg-footer.js     ← footer()
+js/mg-hero.js       ← sectionHero(), buildHeroFeature()
+js/mg-search.js     ← openSearch(), Cmd+K handler
+js/mg-animations.js ← initReveal(), initTocSpy()
+js/mg-schema.js     ← JSON-LD structured data (side-effect only)
+js/mg.js            ← barrel re-export (single import for pages)
+```
+
+### Available exports (from `./mg.js`)
 ```js
-MG.T               // colour tokens object
-MG.F               // font-family strings
-MG.HEX_BG          // hex grid CSS background-image data URI
-MG.CATEGORY_COLORS // { "Total conversion": red, "Rebalance": green, "Reskin": blue }
-MG.el(tag, attrs, ...children)  // DOM element builder
-MG.btn(label, variant, onClick, extraStyle)   // <button>
-MG.linkBtn(label, href, variant, extraStyle)  // <a> styled as button
-MG.navbar(activeId)    // sticky 64px navbar; activeId = 'Mods'|'Games'|'Tools'|'News'|'About'
-MG.footer()            // full site footer
-MG.modCard(props)      // mod card; props: { category, title, baseGame, stats, body, href, source }
-MG.pageHero(props)     // interior page hero; props: { eyebrow, title, lede, accent, withHorizon, minHeight }
-MG.cubeSVG(size)       // the tri-colour cube SVG logo mark
-MG.data.get(name)      // → Promise<Array> — fetches & caches automatically
-MG.data.get(type, slug) // → Promise<Object|null> — single item by slug (e.g. get('mod','nuke-catan'))
-MG.data.load(names)    // → Promise<store> — batch-fetch (backward compat)
+import { T, F, HEX_BG, CATEGORY_COLORS, el, url, data, cubeSVG,
+         btn, linkBtn, modCard, pageHero, navbar, footer,
+         sectionHero, buildHeroFeature, initReveal, track } from './mg.js';
 ```
 
 ### Button variants
@@ -248,19 +229,25 @@ MG.data.load(names)    // → Promise<store> — batch-fetch (backward compat)
 Every page follows this structure:
 
 ```html
+<link rel="stylesheet" href="../css/_mg.css?v=X.X.X">
+<link rel="stylesheet" href="../css/page-specific.css?v=X.X.X">
+<link rel="stylesheet" href="../css/navbar.css?v=X.X.X">
+<link rel="stylesheet" href="../css/footer.css?v=X.X.X">
+<link rel="stylesheet" href="../css/cards.css?v=X.X.X">
+<link rel="stylesheet" href="../css/hero.css?v=X.X.X">
+<link rel="stylesheet" href="../css/hero-features.css?v=X.X.X">
+...
 <div id="nav-root"></div>
-
 <!-- page-specific HTML sections -->
-
 <div id="footer-root"></div>
-<script src="../js/_mg.js"></script>  <!-- path depth varies by page -->
-<script>
-const { el, btn, linkBtn, navbar, footer, /* other needed exports */ } = MG;
+<script type="module" src="../js/mg-page-name.js?v=X.X.X"></script>
+```
+
+Each page JS file imports what it needs from `./mg.js`:
+```js
+import { navbar, footer, sectionHero, ... } from './mg.js';
 document.getElementById('nav-root').appendChild(navbar('ActiveSection'));
 document.getElementById('footer-root').appendChild(footer());
-
-// page-specific JS
-</script>
 ```
 
 **Dark pages** (games, home hero, news post) use `background:#000` on `<body>`.
@@ -302,37 +289,3 @@ publicly available community variants with attributions.
 | CivRisk | Risk | Rebalance | Chris Grey — self-published |
 | Custom World Risk | Risk | Reskin | Community / BGG |
 
----
-
-## How the preview router works
-
-`moddable-preview.html` contains three `<script>` blocks:
-
-1. **`_mg.js`** inlined verbatim
-2. **Page registry** — `PAGES` object with one entry per page:
-   ```js
-   PAGES['index'] = {
-     label: 'Home',
-     nav: 'Mods',        // which navbar item to highlight
-     style: '...',       // page-specific <style> contents
-     html: `...`,        // page body HTML (template literal)
-     init(container) {   // page JS with navbar()/footer() calls stripped
-       ...
-     }
-   }
-   ```
-3. **Router IIFE** — on `navigateTo(pid)`:
-   - Injects page style into `<head>`
-   - Renders `MG.navbar(p.nav)` into `#nav-root`
-   - Sets `#page-root.innerHTML = p.html`
-   - Renders `MG.footer()` into `#footer-root`
-   - Intercepts all internal `<a href="*.html">` clicks to stay in the router
-   - Calls `p.init()` for page-specific JS
-   - Re-intercepts links added by JS after a 60ms delay
-
-**Important:** `build-preview.py` strips the two lines
-`document.getElementById('nav-root').appendChild(navbar(...))` and
-`document.getElementById('footer-root').appendChild(footer())` from every
-page's init function, since the router handles those. If you add a new page,
-keep those lines in the source HTML (so it works standalone) — the build
-script removes them automatically for the preview.

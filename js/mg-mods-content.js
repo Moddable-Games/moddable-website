@@ -1,10 +1,4 @@
-/* =========================================================================
-   Moddable.Games — Mod Page Content (single source of truth)
-   Extends window.MG with MOD_PAGES lookup used by mg-mod-page.js
-   ========================================================================= */
-
-(function() {
-  window.MG.MOD_PAGES = {
+export const MOD_PAGES = {
 
     'turkish-draughts': {
       accent: 'green',
@@ -126,5 +120,4 @@
       ],
     }
 
-  };
-})();
+};

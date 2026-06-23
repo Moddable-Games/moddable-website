@@ -1,16 +1,16 @@
+import { T, F, el, css, url, rulesUrl, data, linkBtn, modCard, navbar, footer, btn } from './mg.js';
+
 (function() {
 const slug = document.body.dataset.game;
 if (!slug) return;
 
 function waitForMG(fn) {
-  if (MG.modCard) { fn(); return; }
+  if (modCard) { fn(); return; }
   setTimeout(() => waitForMG(fn), 10);
 }
 
 waitForMG(function() {
-  const { T, F, el, css, linkBtn, navbar, footer, url, rulesUrl, modCard } = MG;
-
-  fetch(url('/data/games-content.json'))
+fetch(url('/data/games-content.json'))
     .then(r => r.json())
     .then(allGames => {
       const game = allGames[slug];
@@ -96,7 +96,7 @@ function render(game) {
   const vg = document.getElementById('variants-grid');
   const vcEl = document.getElementById('variant-count');
   if (vcEl) {
-    MG.data.get('chess-variants').then(function(variants) {
+    data.get('chess-variants').then(function(variants) {
       vcEl.textContent = variants.length;
     });
   }

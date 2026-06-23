@@ -1,125 +1,123 @@
-(function() {
-const { T, el, btn, navbar, footer } = MG;
+import { T, el, track, btn, navbar, footer, sectionHero } from './mg.js';
 document.getElementById('nav-root').appendChild(navbar('Tools'));
 document.getElementById('footer-root').appendChild(footer());
 
-document.getElementById('page-hero').appendChild(MG.sectionHero({
-  section: 'tool-nukes',
-  tier: 2,
-  hexColor: 'green',
-  eyebrow: 'NUKES',
-  title: 'Nukes tools',
-  lede: 'Hex map generator, combat calculator, and hostage tracker.'
+document.getElementById('page-hero').appendChild(sectionHero({
+section: 'tool-nukes',
+tier: 2,
+hexColor: 'green',
+eyebrow: 'NUKES',
+title: 'Nukes tools',
+lede: 'Hex map generator, combat calculator, and hostage tracker.'
 }));
 
 /* ── COMBAT STRENGTH CALCULATOR ── */
 function renderCombat() {
-  const wrap = document.getElementById('combat-calc');
-  wrap.innerHTML = '';
+const wrap = document.getElementById('combat-calc');
+wrap.innerHTML = '';
 
-  const grid = el('div', { class: 'combat-grid' });
+const grid = el('div', { class: 'combat-grid' });
 
-  function buildAttacker() {
-    const side = el('div', { class: 'combat-side' });
-    side.appendChild(el('div', { class: 'combat-side__label' }, 'Attacker'));
+function buildAttacker() {
+  const side = el('div', { class: 'combat-side' });
+  side.appendChild(el('div', { class: 'combat-side__label' }, 'Attacker'));
 
-    const unitRow = el('div', { class: 'combat-row' });
-    unitRow.appendChild(el('span', { class: 'combat-row__key' }, 'Tokens in platoon'));
-    const unitInput = document.createElement('input');
-    unitInput.type = 'number'; unitInput.min = '1'; unitInput.max = '9'; unitInput.value = '3';
-    unitInput.className = 'combat-input'; unitInput.id = 'atk-units';
-    unitInput.addEventListener('input', calculate);
-    unitRow.appendChild(unitInput);
-    side.appendChild(unitRow);
+  const unitRow = el('div', { class: 'combat-row' });
+  unitRow.appendChild(el('span', { class: 'combat-row__key' }, 'Tokens in platoon'));
+  const unitInput = document.createElement('input');
+  unitInput.type = 'number'; unitInput.min = '1'; unitInput.max = '9'; unitInput.value = '3';
+  unitInput.className = 'combat-input'; unitInput.id = 'atk-units';
+  unitInput.addEventListener('input', calculate);
+  unitRow.appendChild(unitInput);
+  side.appendChild(unitRow);
 
-    const adjRow = el('div', { class: 'combat-row' });
-    adjRow.appendChild(el('span', { class: 'combat-row__key' }, 'Adjacent friendly regions'));
-    const adjInput = document.createElement('input');
-    adjInput.type = 'number'; adjInput.min = '0'; adjInput.max = '6'; adjInput.value = '0';
-    adjInput.className = 'combat-input'; adjInput.id = 'atk-adj';
-    adjInput.addEventListener('input', calculate);
-    adjRow.appendChild(adjInput);
-    side.appendChild(adjRow);
+  const adjRow = el('div', { class: 'combat-row' });
+  adjRow.appendChild(el('span', { class: 'combat-row__key' }, 'Adjacent friendly regions'));
+  const adjInput = document.createElement('input');
+  adjInput.type = 'number'; adjInput.min = '0'; adjInput.max = '6'; adjInput.value = '0';
+  adjInput.className = 'combat-input'; adjInput.id = 'atk-adj';
+  adjInput.addEventListener('input', calculate);
+  adjRow.appendChild(adjInput);
+  side.appendChild(adjRow);
 
-    const baseRow = el('div', { class: 'combat-row' });
-    baseRow.appendChild(el('span', { class: 'combat-row__key' }, 'Bases passed through'));
-    const baseInput = document.createElement('input');
-    baseInput.type = 'number'; baseInput.min = '0'; baseInput.max = '6'; baseInput.value = '0';
-    baseInput.className = 'combat-input'; baseInput.id = 'atk-bases';
-    baseInput.addEventListener('input', calculate);
-    baseRow.appendChild(baseInput);
-    side.appendChild(baseRow);
+  const baseRow = el('div', { class: 'combat-row' });
+  baseRow.appendChild(el('span', { class: 'combat-row__key' }, 'Bases passed through'));
+  const baseInput = document.createElement('input');
+  baseInput.type = 'number'; baseInput.min = '0'; baseInput.max = '6'; baseInput.value = '0';
+  baseInput.className = 'combat-input'; baseInput.id = 'atk-bases';
+  baseInput.addEventListener('input', calculate);
+  baseRow.appendChild(baseInput);
+  side.appendChild(baseRow);
 
-    side.appendChild(el('div', { class: 'combat-total', id: 'atk-total' }, 'Strength: 0'));
-    return side;
-  }
-
-  function buildDefender() {
-    const side = el('div', { class: 'combat-side' });
-    side.appendChild(el('div', { class: 'combat-side__label' }, 'Defender'));
-
-    const unitRow = el('div', { class: 'combat-row' });
-    unitRow.appendChild(el('span', { class: 'combat-row__key' }, 'Tokens in region'));
-    const unitInput = document.createElement('input');
-    unitInput.type = 'number'; unitInput.min = '1'; unitInput.max = '9'; unitInput.value = '3';
-    unitInput.className = 'combat-input'; unitInput.id = 'def-units';
-    unitInput.addEventListener('input', calculate);
-    unitRow.appendChild(unitInput);
-    side.appendChild(unitRow);
-
-    const adjRow = el('div', { class: 'combat-row' });
-    adjRow.appendChild(el('span', { class: 'combat-row__key' }, 'Adjacent friendly Bases'));
-    const adjInput = document.createElement('input');
-    adjInput.type = 'number'; adjInput.min = '0'; adjInput.max = '6'; adjInput.value = '0';
-    adjInput.className = 'combat-input'; adjInput.id = 'def-bases';
-    adjInput.addEventListener('input', calculate);
-    adjRow.appendChild(adjInput);
-    side.appendChild(adjRow);
-
-    side.appendChild(el('div', { class: 'combat-total', id: 'def-total' }, 'Strength: 0'));
-    return side;
-  }
-
-  grid.appendChild(buildAttacker());
-  grid.appendChild(el('div', { class: 'combat-vs' }, 'vs'));
-  grid.appendChild(buildDefender());
-  wrap.appendChild(grid);
-
-  const result = el('div', { class: 'combat-result', id: 'combat-result' });
-  wrap.appendChild(result);
-
-  calculate();
+  side.appendChild(el('div', { class: 'combat-total', id: 'atk-total' }, 'Strength: 0'));
+  return side;
 }
 
-var combatCalcDebounce = null;
+function buildDefender() {
+  const side = el('div', { class: 'combat-side' });
+  side.appendChild(el('div', { class: 'combat-side__label' }, 'Defender'));
+
+  const unitRow = el('div', { class: 'combat-row' });
+  unitRow.appendChild(el('span', { class: 'combat-row__key' }, 'Tokens in region'));
+  const unitInput = document.createElement('input');
+  unitInput.type = 'number'; unitInput.min = '1'; unitInput.max = '9'; unitInput.value = '3';
+  unitInput.className = 'combat-input'; unitInput.id = 'def-units';
+  unitInput.addEventListener('input', calculate);
+  unitRow.appendChild(unitInput);
+  side.appendChild(unitRow);
+
+  const adjRow = el('div', { class: 'combat-row' });
+  adjRow.appendChild(el('span', { class: 'combat-row__key' }, 'Adjacent friendly Bases'));
+  const adjInput = document.createElement('input');
+  adjInput.type = 'number'; adjInput.min = '0'; adjInput.max = '6'; adjInput.value = '0';
+  adjInput.className = 'combat-input'; adjInput.id = 'def-bases';
+  adjInput.addEventListener('input', calculate);
+  adjRow.appendChild(adjInput);
+  side.appendChild(adjRow);
+
+  side.appendChild(el('div', { class: 'combat-total', id: 'def-total' }, 'Strength: 0'));
+  return side;
+}
+
+grid.appendChild(buildAttacker());
+grid.appendChild(el('div', { class: 'combat-vs' }, 'vs'));
+grid.appendChild(buildDefender());
+wrap.appendChild(grid);
+
+const result = el('div', { class: 'combat-result', id: 'combat-result' });
+wrap.appendChild(result);
+
+calculate();
+}
+
 function calculate() {
-  const atkUnits = parseInt(document.getElementById('atk-units').value) || 0;
-  const atkAdj = parseInt(document.getElementById('atk-adj').value) || 0;
-  const atkBases = parseInt(document.getElementById('atk-bases').value) || 0;
-  const defUnits = parseInt(document.getElementById('def-units').value) || 0;
-  const defBases = parseInt(document.getElementById('def-bases').value) || 0;
+const atkUnits = parseInt(document.getElementById('atk-units').value) || 0;
+const atkAdj = parseInt(document.getElementById('atk-adj').value) || 0;
+const atkBases = parseInt(document.getElementById('atk-bases').value) || 0;
+const defUnits = parseInt(document.getElementById('def-units').value) || 0;
+const defBases = parseInt(document.getElementById('def-bases').value) || 0;
 
-  const atkTotal = atkUnits + atkAdj + atkBases;
-  const defTotal = defUnits + defBases;
+const atkTotal = atkUnits + atkAdj + atkBases;
+const defTotal = defUnits + defBases;
 
-  clearTimeout(combatCalcDebounce);
-  combatCalcDebounce = setTimeout(function() { if (MG.track) MG.track('combat_calculate', { atk_strength: atkTotal, def_strength: defTotal, tool: 'nukes' }); }, 1000);
+clearTimeout(combatCalcDebounce);
+combatCalcDebounce = setTimeout(function() { if (track) track('combat_calculate', { atk_strength: atkTotal, def_strength: defTotal, tool: 'nukes' }); }, 1000);
 
-  document.getElementById('atk-total').textContent = 'Strength: ' + atkTotal;
-  document.getElementById('def-total').textContent = 'Strength: ' + defTotal;
+document.getElementById('atk-total').textContent = 'Strength: ' + atkTotal;
+document.getElementById('def-total').textContent = 'Strength: ' + defTotal;
 
-  const resultEl = document.getElementById('combat-result');
-  if (atkTotal > defTotal) {
-    const excess = atkTotal - defTotal;
-    resultEl.className = 'combat-result combat-result--win';
-    resultEl.textContent = 'Attack succeeds — ' + excess + ' excess strength (can capture up to ' + excess + ' hostages)';
-  } else if (atkTotal === defTotal) {
-    resultEl.className = 'combat-result combat-result--tie';
-    resultEl.textContent = 'Cannot attack — tie is not sufficient (must be strictly greater)';
-  } else {
-    resultEl.className = 'combat-result combat-result--fail';
-    resultEl.textContent = 'Cannot attack — defender is stronger';
-  }
+const resultEl = document.getElementById('combat-result');
+if (atkTotal > defTotal) {
+  const excess = atkTotal - defTotal;
+  resultEl.className = 'combat-result combat-result--win';
+  resultEl.textContent = 'Attack succeeds — ' + excess + ' excess strength (can capture up to ' + excess + ' hostages)';
+} else if (atkTotal === defTotal) {
+  resultEl.className = 'combat-result combat-result--tie';
+  resultEl.textContent = 'Cannot attack — tie is not sufficient (must be strictly greater)';
+} else {
+  resultEl.className = 'combat-result combat-result--fail';
+  resultEl.textContent = 'Cannot attack — defender is stronger';
+}
 }
 
 renderCombat();
@@ -128,95 +126,95 @@ renderCombat();
 const PLAYER_COLORS = ['#d11a1a', '#0c4f8d', '#3a9928'];
 const PLAYER_NAMES = ['Red', 'Blue', 'Green'];
 let players = [
-  { name: 'Red', color: PLAYER_COLORS[0], hostages: 20, isotopes: 1 },
-  { name: 'Blue', color: PLAYER_COLORS[1], hostages: 20, isotopes: 1 },
+{ name: 'Red', color: PLAYER_COLORS[0], hostages: 20, isotopes: 1 },
+{ name: 'Blue', color: PLAYER_COLORS[1], hostages: 20, isotopes: 1 },
 ];
 
 function renderHostages() {
-  const wrap = document.getElementById('hostage-tracker');
-  wrap.innerHTML = '';
+const wrap = document.getElementById('hostage-tracker');
+wrap.innerHTML = '';
 
-  const controls = el('div', { class: 'hostage-controls' });
-  const playerCountLabel = el('span', { class: 'hostage-controls__label' }, 'Players:');
-  controls.appendChild(playerCountLabel);
-  [2, 3].forEach(n => {
-    const b = document.createElement('button');
-    b.textContent = n + 'P';
-    b.className = 'hostage-controls__btn' + (players.length === n ? ' hostage-controls__btn--active' : '');
-    b.addEventListener('click', () => {
-      if (n === 3 && players.length === 2) {
-        players.push({ name: 'Green', color: PLAYER_COLORS[2], hostages: 20, isotopes: 1 });
-        players.forEach(p => { p.hostages = 20; });
-      } else if (n === 2 && players.length === 3) {
-        players = players.slice(0, 2);
-        players.forEach(p => { p.hostages = 20; });
-      }
-      renderHostages();
-    });
-    controls.appendChild(b);
-  });
-  const resetBtn = document.createElement('button');
-  resetBtn.textContent = 'Reset';
-  resetBtn.className = 'hostage-controls__btn hostage-controls__btn--reset';
-  resetBtn.addEventListener('click', () => {
-    players.forEach(p => { p.hostages = players.length === 2 ? 20 : 20; p.isotopes = 1; });
+const controls = el('div', { class: 'hostage-controls' });
+const playerCountLabel = el('span', { class: 'hostage-controls__label' }, 'Players:');
+controls.appendChild(playerCountLabel);
+[2, 3].forEach(n => {
+  const b = document.createElement('button');
+  b.textContent = n + 'P';
+  b.className = 'hostage-controls__btn' + (players.length === n ? ' hostage-controls__btn--active' : '');
+  b.addEventListener('click', () => {
+    if (n === 3 && players.length === 2) {
+      players.push({ name: 'Green', color: PLAYER_COLORS[2], hostages: 20, isotopes: 1 });
+      players.forEach(p => { p.hostages = 20; });
+    } else if (n === 2 && players.length === 3) {
+      players = players.slice(0, 2);
+      players.forEach(p => { p.hostages = 20; });
+    }
     renderHostages();
   });
-  controls.appendChild(resetBtn);
-  wrap.appendChild(controls);
+  controls.appendChild(b);
+});
+const resetBtn = document.createElement('button');
+resetBtn.textContent = 'Reset';
+resetBtn.className = 'hostage-controls__btn hostage-controls__btn--reset';
+resetBtn.addEventListener('click', () => {
+  players.forEach(p => { p.hostages = players.length === 2 ? 20 : 20; p.isotopes = 1; });
+  renderHostages();
+});
+controls.appendChild(resetBtn);
+wrap.appendChild(controls);
 
-  const grid = el('div', { class: 'hostage-grid' });
-  players.forEach((p, i) => {
-    const card = el('div', { class: 'hostage-player' });
-    card.dataset.color = p.color;
+const grid = el('div', { class: 'hostage-grid' });
+players.forEach((p, i) => {
+  const card = el('div', { class: 'hostage-player' });
+  card.dataset.color = p.color;
 
-    const nameRow = el('div', { class: 'hostage-player__name' });
-    nameRow.textContent = p.name;
-    card.appendChild(nameRow);
+  const nameRow = el('div', { class: 'hostage-player__name' });
+  nameRow.textContent = p.name;
+  card.appendChild(nameRow);
 
-    const hostageRow = el('div', { class: 'hostage-player__row' });
-    hostageRow.appendChild(el('span', { class: 'hostage-player__key' }, 'Hostages held'));
-    const hVal = el('span', { class: 'hostage-player__value' }, String(p.hostages));
-    hostageRow.appendChild(hVal);
-    card.appendChild(hostageRow);
+  const hostageRow = el('div', { class: 'hostage-player__row' });
+  hostageRow.appendChild(el('span', { class: 'hostage-player__key' }, 'Hostages held'));
+  const hVal = el('span', { class: 'hostage-player__value' }, String(p.hostages));
+  hostageRow.appendChild(hVal);
+  card.appendChild(hostageRow);
 
-    const isoRow = el('div', { class: 'hostage-player__row' });
-    isoRow.appendChild(el('span', { class: 'hostage-player__key' }, 'Isotopes'));
-    isoRow.appendChild(el('span', { class: 'hostage-player__value' }, String(p.isotopes)));
-    card.appendChild(isoRow);
+  const isoRow = el('div', { class: 'hostage-player__row' });
+  isoRow.appendChild(el('span', { class: 'hostage-player__key' }, 'Isotopes'));
+  isoRow.appendChild(el('span', { class: 'hostage-player__value' }, String(p.isotopes)));
+  card.appendChild(isoRow);
 
-    const turnsLeft = Math.ceil(p.hostages / 1);
-    const minTurns = Math.ceil(p.hostages / 3);
-    const turnsRow = el('div', { class: 'hostage-player__row hostage-player__row--meta' });
-    turnsRow.appendChild(el('span', { class: 'hostage-player__key' }, 'Turns remaining'));
-    turnsRow.appendChild(el('span', { class: 'hostage-player__value' }, minTurns + '–' + turnsLeft));
-    card.appendChild(turnsRow);
+  const turnsLeft = Math.ceil(p.hostages / 1);
+  const minTurns = Math.ceil(p.hostages / 3);
+  const turnsRow = el('div', { class: 'hostage-player__row hostage-player__row--meta' });
+  turnsRow.appendChild(el('span', { class: 'hostage-player__key' }, 'Turns remaining'));
+  turnsRow.appendChild(el('span', { class: 'hostage-player__value' }, minTurns + '–' + turnsLeft));
+  card.appendChild(turnsRow);
 
-    const btns = el('div', { class: 'hostage-player__btns' });
-    [1, 2, 3].forEach(n => {
-      btns.appendChild(btn('Return ' + n, 'dark', () => {
-        p.hostages = Math.max(0, p.hostages - n);
-        renderHostages();
-      }));
-    });
-    btns.appendChild(btn('+Isotope', 'outline-light', () => {
-      p.isotopes++;
+  const btns = el('div', { class: 'hostage-player__btns' });
+  [1, 2, 3].forEach(n => {
+    btns.appendChild(btn('Return ' + n, 'dark', () => {
+      p.hostages = Math.max(0, p.hostages - n);
       renderHostages();
     }));
-    btns.appendChild(btn('−Isotope', 'outline-light', () => {
-      p.isotopes = Math.max(0, p.isotopes - 1);
-      renderHostages();
-    }));
-    card.appendChild(btns);
-
-    if (p.hostages === 0) {
-      const warn = el('div', { class: 'hostage-player__warn' }, '☢ ELIMINATED — no hostages to return');
-      card.appendChild(warn);
-    }
-
-    grid.appendChild(card);
   });
-  wrap.appendChild(grid);
+  btns.appendChild(btn('+Isotope', 'outline-light', () => {
+    p.isotopes++;
+    renderHostages();
+  }));
+  btns.appendChild(btn('−Isotope', 'outline-light', () => {
+    p.isotopes = Math.max(0, p.isotopes - 1);
+    renderHostages();
+  }));
+  card.appendChild(btns);
+
+  if (p.hostages === 0) {
+    const warn = el('div', { class: 'hostage-player__warn' }, '☢ ELIMINATED — no hostages to return');
+    card.appendChild(warn);
+  }
+
+  grid.appendChild(card);
+});
+wrap.appendChild(grid);
 }
 
 renderHostages();
@@ -227,20 +225,19 @@ MG_HexEmbed.renderBtns();
 
 /* ── UNIT REFERENCE TABLE ── */
 const UNITS = [
-  ['Tokens', 'Type', 'Movement', 'Terrain restriction'],
-  ['1', 'Infantry', 'Same-biome flood fill + 1 step into different biome', 'Destroyed in water or desert'],
-  ['2', 'Artillery', 'Straight-line jumps over occupied hexes; pivots at friendly Bases', 'Destroyed in water; no attack from forest'],
-  ['3', 'Airborne', 'Exactly 2 steps (any direction, not adjacent); slingshot via Bases', 'Cannot pass through mountains without Base'],
-  ['4–9', 'Base', 'Cannot move; converts units to isotopes; enables nuke launches', 'None'],
+['Tokens', 'Type', 'Movement', 'Terrain restriction'],
+['1', 'Infantry', 'Same-biome flood fill + 1 step into different biome', 'Destroyed in water or desert'],
+['2', 'Artillery', 'Straight-line jumps over occupied hexes; pivots at friendly Bases', 'Destroyed in water; no attack from forest'],
+['3', 'Airborne', 'Exactly 2 steps (any direction, not adjacent); slingshot via Bases', 'Cannot pass through mountains without Base'],
+['4–9', 'Base', 'Cannot move; converts units to isotopes; enables nuke launches', 'None'],
 ];
 const ut = document.getElementById('unit-table');
 UNITS.forEach((row, ri) => {
-  row.forEach((cell, ci) => {
-    let cls = 'resource-cell';
-    if (ri === 0) cls += ' resource-cell--header';
-    else if (ci === 0) cls += ' resource-cell--nuke-name';
-    else cls += ' resource-cell--body';
-    ut.appendChild(el('div', { class: cls }, cell));
-  });
+row.forEach((cell, ci) => {
+  let cls = 'resource-cell';
+  if (ri === 0) cls += ' resource-cell--header';
+  else if (ci === 0) cls += ' resource-cell--nuke-name';
+  else cls += ' resource-cell--body';
+  ut.appendChild(el('div', { class: cls }, cell));
 });
-})();
+});

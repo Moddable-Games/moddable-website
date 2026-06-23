@@ -1,16 +1,13 @@
+import { el, url, data, btn, modCard, navbar, footer, linkBtn, initTocSpy } from './mg.js';
+
 (function() {
-  var pathParts = window.location.pathname.replace(/\/$/, '').split('/');
+var pathParts = window.location.pathname.replace(/\/$/, '').split('/');
   var slug = pathParts[pathParts.length - 1];
   if (!slug || slug === 'news') return;
+document.getElementById('nav-root').appendChild(navbar('News'));
+  document.getElementById('footer-root').appendChild(footer());
 
-  var el = MG.el;
-  var linkBtn = MG.linkBtn;
-  var url = MG.url;
-
-  document.getElementById('nav-root').appendChild(MG.navbar('News'));
-  document.getElementById('footer-root').appendChild(MG.footer());
-
-  MG.data.load(['news', 'team', 'mods']).then(function(store) {
+  data.load(['news', 'team', 'mods']).then(function(store) {
     var posts = store.news;
     var team = store.team;
     var mods = store.mods;
@@ -176,7 +173,6 @@
 
   function deriveModCard(post, mods) {
     if (!post.tags || !mods) return {eyebrow: 'COMMUNITY', title: 'Moddable Community', version: 'Discord · Open to all', href: '/community/', btnLabel: 'Join Discord'};
-    var match = null;
     for (var i = 0; i < mods.length; i++) {
       if (post.tags.indexOf(mods[i].baseGame) !== -1) { match = mods[i]; break; }
     }
@@ -342,7 +338,6 @@
     wash.className = 'post-header__wash';
     header.appendChild(wash);
 
-    var ticking = false;
     window.addEventListener('scroll', function() {
       if (ticking) return;
       ticking = true;

@@ -21,7 +21,6 @@ NEW="$MAJOR.$MINOR.$PATCH"
 echo "$NEW" > "$FILE"
 
 sed -i '' "s/const VERSION = '.*'/const VERSION = '$NEW'/" js/mg-core.js
-sed -i '' "s/var V = '.*'/var V = '$NEW'/" js/mg-loader.js
 find . -name '*.html' -not -path './build/*' -print0 | xargs -0 sed -i '' "s/v=[0-9]*\.[0-9]*\.[0-9]*/v=$NEW/g"
 
 echo "Bumped: $CURRENT → $NEW"
