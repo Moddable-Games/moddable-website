@@ -65,8 +65,13 @@ data.get('chess-variants').then(function(raw) {
     grid.appendChild(makeInfoCell('Board', v.board));
     grid.appendChild(makeInfoCell('Players', v.players));
     grid.appendChild(makeInfoCell('Win', v.win));
-    if (v.special) grid.appendChild(makeInfoCell('Special', v.special));
     info.appendChild(grid);
+    if (v.special) {
+      const special = el('div', { class: 'chess-explorer__special' });
+      special.appendChild(el('span', { class: 'chess-explorer__cell-label' }, 'Special'));
+      special.appendChild(el('span', { class: 'chess-explorer__cell-value' }, v.special));
+      info.appendChild(special);
+    }
     body.appendChild(info);
 
     const embedWrap = el('div', { class: 'chess-explorer__embed' });

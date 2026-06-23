@@ -67,7 +67,8 @@
 .chess-explorer__select { flex:1; min-width:200px; height:38px; padding:0 14px; border-radius:9999px; border:1px solid var(--mg-hairline-light); font-family:var(--mg-font-body); font-size:14px; background:#fff; outline:none; }
 .chess-explorer__select:focus { border-color:var(--mg-blue); }
 .chess-explorer__info { margin-bottom:16px; }
-.chess-explorer__grid { display:grid; grid-template-columns:repeat(auto-fit, minmax(140px, 1fr)); gap:10px; }
+.chess-explorer__grid { display:grid; grid-template-columns:repeat(3, 1fr); gap:10px; }
+.chess-explorer__special { background:var(--mg-canvas-light); border-radius:8px; padding:10px 14px; margin-top:10px; }
 .chess-explorer__cell { background:var(--mg-canvas-light); border-radius:8px; padding:10px 14px; }
 .chess-explorer__cell-label { display:block; font-family:var(--mg-font-mono); font-size:10px; font-weight:600; color:var(--mg-mute); text-transform:uppercase; letter-spacing:0.5px; margin-bottom:3px; }
 .chess-explorer__cell-value { font-family:var(--mg-font-body); font-size:13px; color:var(--mg-ink); line-height:1.4; }
