@@ -58,13 +58,10 @@ async function loadTools() {
 }
 
 function getNamespace(toolName) {
-  for (const [ns, meta] of Object.entries(NAMESPACE_META)) {
-    const prefix = ns.replace('moddable-', '').replace('-tools', '');
-    if (toolName.startsWith('chess_')) return ns;
-    if (toolName.startsWith('hex_')) return ns;
-    if (toolName.startsWith('rules_')) return ns;
-    if (toolName.startsWith('game_') || toolName.startsWith('ti4_') || toolName.startsWith('mancala_') || toolName.startsWith('morris_') || toolName.startsWith('ur_') || toolName.startsWith('pachisi_') || toolName.startsWith('nukes_') || toolName.startsWith('colony_')) return 'game-tools';
-  }
+  if (toolName.startsWith('chess_')) return 'moddable-chess';
+  if (toolName.startsWith('hex_')) return 'moddable-hexmaps';
+  if (toolName.startsWith('rules_')) return 'moddable-rules';
+  if (/^(ti4|mancala|morris|ur|pachisi|nukes|colony)_/.test(toolName)) return 'game-tools';
   return 'moddable-tools';
 }
 
@@ -101,8 +98,13 @@ function renderSidebar(sidebar, initialTool) {
     group.appendChild(list);
 
     header.addEventListener('click', () => {
-      list.classList.toggle('api-sidebar__list--collapsed');
-      header.classList.toggle('api-sidebar__ns--collapsed');
+      const wasCollapsed = list.classList.contains('api-sidebar__list--collapsed');
+      sidebar.querySelectorAll('.api-sidebar__list').forEach(l => l.classList.add('api-sidebar__list--collapsed'));
+      sidebar.querySelectorAll('.api-sidebar__ns').forEach(h => h.classList.add('api-sidebar__ns--collapsed'));
+      if (wasCollapsed) {
+        list.classList.remove('api-sidebar__list--collapsed');
+        header.classList.remove('api-sidebar__ns--collapsed');
+      }
     });
 
     sidebar.appendChild(group);
