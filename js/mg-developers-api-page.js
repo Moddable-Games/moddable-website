@@ -45,8 +45,9 @@ async function loadTools() {
       name: t.name, description: t.description, inputSchema: { type: 'object', properties: {} }
     })));
   }
-  renderSidebar(sidebar);
-  if (allTools.length > 0) selectTool(allTools[0]);
+  const randomTool = allTools[Math.floor(Math.random() * allTools.length)];
+  renderSidebar(sidebar, randomTool);
+  selectTool(randomTool);
 }
 
 function getNamespace(toolName) {
@@ -60,7 +61,7 @@ function getNamespace(toolName) {
   return 'moddable-tools';
 }
 
-function renderSidebar(sidebar) {
+function renderSidebar(sidebar, initialTool) {
   sidebar.innerHTML = '';
   const grouped = {};
   for (const tool of allTools) {
@@ -68,17 +69,19 @@ function renderSidebar(sidebar) {
     if (!grouped[ns]) grouped[ns] = [];
     grouped[ns].push(tool);
   }
+  const activeNs = initialTool ? getNamespace(initialTool.name) : null;
 
   for (const [ns, meta] of Object.entries(NAMESPACE_META)) {
     const tools = grouped[ns];
     if (!tools || !tools.length) continue;
+    const isActiveGroup = ns === activeNs;
 
     const group = el('div', { class: 'api-sidebar__group' });
-    const header = el('button', { class: 'api-sidebar__ns' });
+    const header = el('button', { class: 'api-sidebar__ns' + (isActiveGroup ? '' : ' api-sidebar__ns--collapsed') });
     header.innerHTML = `<span class="api-sidebar__ns-dot" style="background:${meta.accent}"></span>${meta.label}<span class="api-sidebar__ns-count">${tools.length}</span>`;
     group.appendChild(header);
 
-    const list = el('div', { class: 'api-sidebar__list' });
+    const list = el('div', { class: 'api-sidebar__list' + (isActiveGroup ? '' : ' api-sidebar__list--collapsed') });
     for (const tool of tools) {
       const item = el('button', {
         class: 'api-sidebar__tool',
@@ -135,12 +138,21 @@ function renderMain(tool) {
     for (const key of propKeys) {
       const prop = props[key];
       const row = el('div', { class: 'api-detail__field' });
+
+      const labelRow = el('div', { class: 'api-detail__field-top' });
       const label = el('label', { class: 'api-detail__field-label' });
       label.textContent = key;
       if (required.includes(key)) {
-        label.appendChild(el('span', { class: 'api-detail__required' }, '*'));
+        label.appendChild(el('span', { class: 'api-detail__required' }, ' required'));
       }
-      row.appendChild(label);
+      labelRow.appendChild(label);
+      const typeBadge = el('span', { class: 'api-detail__type-badge' }, prop.type || 'string');
+      labelRow.appendChild(typeBadge);
+      row.appendChild(labelRow);
+
+      if (prop.description) {
+        row.appendChild(el('div', { class: 'api-detail__field-desc' }, prop.description));
+      }
 
       if (prop.type === 'boolean') {
         const cb = el('input', { type: 'checkbox', class: 'api-detail__checkbox', 'data-key': key });
@@ -149,7 +161,7 @@ function renderMain(tool) {
       } else if (prop.type === 'number' || prop.type === 'integer') {
         const input = el('input', {
           type: 'number', class: 'api-detail__input', 'data-key': key,
-          placeholder: prop.description || key
+          placeholder: prop.default !== undefined ? 'Default: ' + prop.default : key
         });
         input.addEventListener('input', updateCurl);
         row.appendChild(input);
@@ -161,22 +173,31 @@ function renderMain(tool) {
         }
         select.addEventListener('change', updateCurl);
         row.appendChild(select);
+      } else if (prop.type === 'array') {
+        const input = el('input', {
+          type: 'text', class: 'api-detail__input', 'data-key': key, 'data-type': 'array',
+          placeholder: 'Comma-separated values'
+        });
+        input.addEventListener('input', updateCurl);
+        row.appendChild(input);
       } else {
         const input = el('input', {
           type: 'text', class: 'api-detail__input', 'data-key': key,
-          placeholder: prop.description || key
+          placeholder: prop.default !== undefined ? 'Default: ' + prop.default : key
         });
         input.addEventListener('input', updateCurl);
         row.appendChild(input);
       }
 
-      if (prop.description) {
-        row.appendChild(el('span', { class: 'api-detail__field-hint' }, prop.description));
-      }
       form.appendChild(row);
     }
     formSection.appendChild(form);
     main.appendChild(formSection);
+  } else {
+    const noArgs = el('div', { class: 'api-detail__section' });
+    noArgs.appendChild(el('div', { class: 'api-detail__section-label' }, 'ARGUMENTS'));
+    noArgs.appendChild(el('div', { class: 'api-detail__no-args' }, 'This tool takes no arguments.'));
+    main.appendChild(noArgs);
   }
 
   const actions = el('div', { class: 'api-detail__actions' });
@@ -209,6 +230,8 @@ function getFormArgs() {
       if (input.checked) args[key] = true;
     } else if (input.type === 'number') {
       if (input.value !== '') args[key] = Number(input.value);
+    } else if (input.dataset.type === 'array') {
+      if (input.value.trim()) args[key] = input.value.split(',').map(s => s.trim()).filter(Boolean);
     } else {
       if (input.value.trim()) args[key] = input.value.trim();
     }
