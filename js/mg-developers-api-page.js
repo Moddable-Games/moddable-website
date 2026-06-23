@@ -119,7 +119,9 @@ function selectTool(tool) {
 
 function renderMain(tool) {
   const main = document.getElementById('api-main');
+  const argsPanel = document.getElementById('api-args');
   main.innerHTML = '';
+  argsPanel.innerHTML = '';
 
   const ns = getNamespace(tool.name);
   const meta = NAMESPACE_META[ns] || NAMESPACE_META['moddable-tools'];
@@ -133,14 +135,19 @@ function renderMain(tool) {
   header.appendChild(el('p', { class: 'api-detail__desc' }, tool.description));
   main.appendChild(header);
 
+  const actions = el('div', { class: 'api-detail__actions' });
+  const runBtn = el('button', { class: 'api-detail__run' }, 'Run');
+  runBtn.addEventListener('click', () => runTool(tool));
+  actions.appendChild(runBtn);
+  main.appendChild(actions);
+
   const schema = tool.inputSchema || { type: 'object', properties: {} };
   const props = schema.properties || {};
   const required = schema.required || [];
   const propKeys = Object.keys(props);
 
   if (propKeys.length > 0) {
-    const formSection = el('div', { class: 'api-detail__section' });
-    formSection.appendChild(el('div', { class: 'api-detail__section-label' }, 'ARGUMENTS'));
+    argsPanel.appendChild(el('div', { class: 'api-explorer__args-title' }, 'ARGUMENTS'));
     const form = el('div', { class: 'api-detail__form', id: 'api-form' });
     for (const key of propKeys) {
       const prop = props[key];
@@ -198,20 +205,11 @@ function renderMain(tool) {
 
       form.appendChild(row);
     }
-    formSection.appendChild(form);
-    main.appendChild(formSection);
+    argsPanel.appendChild(form);
   } else {
-    const noArgs = el('div', { class: 'api-detail__section' });
-    noArgs.appendChild(el('div', { class: 'api-detail__section-label' }, 'ARGUMENTS'));
-    noArgs.appendChild(el('div', { class: 'api-detail__no-args' }, 'This tool takes no arguments.'));
-    main.appendChild(noArgs);
+    argsPanel.appendChild(el('div', { class: 'api-explorer__args-title' }, 'ARGUMENTS'));
+    argsPanel.appendChild(el('div', { class: 'api-detail__no-args' }, 'No arguments.'));
   }
-
-  const actions = el('div', { class: 'api-detail__actions' });
-  const runBtn = el('button', { class: 'api-detail__run' }, 'Run');
-  runBtn.addEventListener('click', () => runTool(tool));
-  actions.appendChild(runBtn);
-  main.appendChild(actions);
 
   const curlSection = el('div', { class: 'api-detail__section' });
   curlSection.appendChild(el('div', { class: 'api-detail__section-label' }, 'CURL'));
