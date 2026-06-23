@@ -200,20 +200,18 @@ data.get('chess-variants').then(function(raw) {
     const variant = varInput.value.trim() || 'standard';
 
     try {
-      const [movesRes, evalRes] = await Promise.all([
-        fetch(API_BASE + '/api/call', {
-          method: 'POST',
-          headers: { 'Content-Type': 'application/json' },
-          body: JSON.stringify({ tool: 'chess_get_legal_moves', args: { variant, fen } })
-        }),
-        fetch(API_BASE + '/api/call', {
-          method: 'POST',
-          headers: { 'Content-Type': 'application/json' },
-          body: JSON.stringify({ tool: 'chess_analyze_position', args: { variant, fen, depth: 4 } })
-        })
-      ]);
-      const moves = await movesRes.json();
+      const evalRes = await fetch(API_BASE + '/api/call', {
+        method: 'POST',
+        headers: { 'Content-Type': 'application/json' },
+        body: JSON.stringify({ tool: 'chess_analyze_position', args: { variant, fen, depth: 4 } })
+      });
       const evaluation = await evalRes.json();
+      const movesRes = await fetch(API_BASE + '/api/call', {
+        method: 'POST',
+        headers: { 'Content-Type': 'application/json' },
+        body: JSON.stringify({ tool: 'chess_get_legal_moves', args: { variant, fen } })
+      });
+      const moves = await movesRes.json();
 
       result.innerHTML = '';
       const movesData = moves.result || moves;
