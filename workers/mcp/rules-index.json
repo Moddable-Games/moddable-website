@@ -604,7 +604,7 @@
     "gameTitle": "Go",
     "section": "Variant Library",
     "heading": "Placement Games",
-    "content": "Five-in-a-row games played on the Go board without capture. - Gomokuvariants/gomoku/ — Ancient placement game: five in a row wins - Renjuvariants/renju/ — Competitive Gomoku with forbidden moves for B",
+    "content": "Five-in-a-row placement games played on the Go board. - Gomokuvariants/gomoku/ — Ancient placement game: five in a row wins - Ninuki-Renjuvariants/ninuki-renju/ — Custodial captures added to Gomoku; h",
     "anchor": "placement-games"
   },
   {
@@ -1450,10 +1450,58 @@
   {
     "game": "stern-halma",
     "gameTitle": "Stern-Halma",
-    "section": "Variant Library",
-    "heading": "Variant Library",
-    "content": "Stern-Halma is a German abstract strategy race game first published in 1892, derived from the American game Halma. It is played on a six-pointed star board of 121 holes, with two to six players each o",
-    "anchor": "variant-library"
+    "section": "Overview",
+    "heading": "Overview",
+    "content": "Stern-Halma originated in Germany in 1892 as a variation of the older American game Halma. It supports two to six players and is played on a six-pointed star board.",
+    "anchor": "overview"
+  },
+  {
+    "game": "stern-halma",
+    "gameTitle": "Stern-Halma",
+    "section": "The Board",
+    "heading": "The Board",
+    "content": "The board is in the shape of a six-pointed star formed by two overlapping equilateral triangles. It contains 121 holes: - 6 triangular arms, each with 10 holes arranged in four rows of 4, 3, 2, 1 hole",
+    "anchor": "the-board"
+  },
+  {
+    "game": "stern-halma",
+    "gameTitle": "Stern-Halma",
+    "section": "Setup",
+    "heading": "Setup",
+    "content": "Pieces: Each player has 10 pieces in a distinct colour, filling one triangular arm. Camp assignment by player count: Arms used --- N and S N, SE, and SW NE, SE, SW, and NW All six arms Note: 5-player ",
+    "anchor": "setup"
+  },
+  {
+    "game": "stern-halma",
+    "gameTitle": "Stern-Halma",
+    "section": "Movement",
+    "heading": "Movement",
+    "content": "On each turn a player moves one marble. A marble may: - Step: Move to any adjacent hole, provided it is empty. A marble may step in any of the six directions of the triangular grid. - Hop: Jump over a",
+    "anchor": "movement"
+  },
+  {
+    "game": "stern-halma",
+    "gameTitle": "Stern-Halma",
+    "section": "Winning",
+    "heading": "Winning",
+    "content": "The first player to move all 10 of their marbles into the triangular arm diagonally opposite their starting arm wins.",
+    "anchor": "winning"
+  },
+  {
+    "game": "stern-halma",
+    "gameTitle": "Stern-Halma",
+    "section": "Camp Rule",
+    "heading": "Camp Rule",
+    "content": "Once a marble enters the destination arm, it is strongly recommended that it remain there. The treatment of marbles that have reached the goal whether they may be moved back out to assist chain hops i",
+    "anchor": "camp-rule"
+  },
+  {
+    "game": "stern-halma",
+    "gameTitle": "Stern-Halma",
+    "section": "Attribution",
+    "heading": "Attribution",
+    "content": "Stern-Halma. Originated in Germany, 1892. Public domain. Rules confirmed from ezekeal/bgg-get BGG entry for Sternhalma and Lehi-Innovation/boardgame-rules independent jump-rule audit confirming chain ",
+    "anchor": "attribution"
   },
   {
     "game": "talisman-worlds",
@@ -4128,6 +4176,46 @@
   {
     "game": "go",
     "gameTitle": "Go",
+    "section": "Ninuki-Renju",
+    "heading": "Ninuki-Renju",
+    "content": "Ninuki-Renju is a Japanese placement game in the Gomoku family that adds custodial capture to the five-in-a-row objective. It is the direct historical precursor to Pente 1977; Pente's designer Gary Ga",
+    "anchor": "ninuki-renju",
+    "variant": "ninuki-renju",
+    "variantUrl": "dist/go/variants/ninuki-renju/"
+  },
+  {
+    "game": "go",
+    "gameTitle": "Go",
+    "section": "Ninuki-Renju",
+    "heading": "Setup",
+    "content": "Board: 15×15. Pieces: Black and white stones. First move: Black plays first.",
+    "anchor": "setup",
+    "variant": "ninuki-renju",
+    "variantUrl": "dist/go/variants/ninuki-renju/"
+  },
+  {
+    "game": "go",
+    "gameTitle": "Go",
+    "section": "Ninuki-Renju",
+    "heading": "Rules",
+    "content": "Players alternate placing one stone per turn on any empty intersection. Capture: A pair of opponent stones may be captured by custodial capture: sandwiching exactly two opponent stones lengthwise betw",
+    "anchor": "rules",
+    "variant": "ninuki-renju",
+    "variantUrl": "dist/go/variants/ninuki-renju/"
+  },
+  {
+    "game": "go",
+    "gameTitle": "Go",
+    "section": "Ninuki-Renju",
+    "heading": "Attribution",
+    "content": "Japanese competitive game. Organised by the Ninuki Renju Sha, Japan, 1923-1940. Direct historical precursor to Pente 1977. Public domain. Sources: Renju International Federation renju.se; Wikipedia Pe",
+    "anchor": "attribution",
+    "variant": "ninuki-renju",
+    "variantUrl": "dist/go/variants/ninuki-renju/"
+  },
+  {
+    "game": "go",
+    "gameTitle": "Go",
     "section": "One-Colour Go",
     "heading": "One-Colour Go",
     "content": "Both players use stones of the same colour. All other rules are unchanged. Players must remember which stones belong to whom. A referee or agreed record tracks ownership secretly. The ultimate memory ",
@@ -4150,7 +4238,7 @@
     "gameTitle": "Go",
     "section": "One-Colour Go",
     "heading": "Rules",
-    "content": "All standard Go rules apply. The only change is visual: both players' stones look identical on the board. - Captures still work normally — a group with zero liberties is removed regardless of appearan",
+    "content": "All standard Go rules apply. The only change is visual: both players' stones look identical on the board. - Captures still work normally: a group with zero liberties is removed regardless of appearanc",
     "anchor": "rules",
     "variant": "one-colour",
     "variantUrl": "dist/go/variants/one-colour/"
@@ -4620,7 +4708,7 @@
     "gameTitle": "Go",
     "section": "Tibetan Go",
     "heading": "Strategy",
-    "content": "The delayed capture rule makes attacks less decisive — surrounding a group does not guarantee its death. This encourages peaceful coexistence and territory-building over aggressive fighting. The pre-p",
+    "content": "The delayed capture rule makes attacks less decisive: surrounding a group does not guarantee its death. This encourages peaceful coexistence and territory-building over aggressive fighting. The pre-pl",
     "anchor": "strategy",
     "variant": "tibetan",
     "variantUrl": "dist/go/variants/tibetan/"
@@ -11124,75 +11212,5 @@
     "anchor": "attribution",
     "variant": "standard",
     "variantUrl": "dist/reversi/variants/standard/"
-  },
-  {
-    "game": "stern-halma",
-    "gameTitle": "Stern-Halma",
-    "section": "Standard Stern-Halma",
-    "heading": "Standard Stern-Halma",
-    "content": "Stern-Halma originated in Germany in 1892 as a variation of the older American game Halma. It supports two to six players and is played on a six-pointed star board.",
-    "anchor": "standard-stern-halma",
-    "variant": "standard",
-    "variantUrl": "dist/stern-halma/variants/standard/"
-  },
-  {
-    "game": "stern-halma",
-    "gameTitle": "Stern-Halma",
-    "section": "Standard Stern-Halma",
-    "heading": "Board",
-    "content": "The board is in the shape of a six-pointed star formed by two overlapping equilateral triangles. It contains 121 holes: - 6 triangular arms, each with 10 holes arranged in four rows of 4, 3, 2, 1 hole",
-    "anchor": "board",
-    "variant": "standard",
-    "variantUrl": "dist/stern-halma/variants/standard/"
-  },
-  {
-    "game": "stern-halma",
-    "gameTitle": "Stern-Halma",
-    "section": "Standard Stern-Halma",
-    "heading": "Setup",
-    "content": "Pieces: Each player has 10 pieces in a distinct colour, filling one triangular arm. Camp assignment by player count: Arms used --- N and S N, SE, and SW NE, SE, SW, and NW All six arms Note: 5-player ",
-    "anchor": "setup",
-    "variant": "standard",
-    "variantUrl": "dist/stern-halma/variants/standard/"
-  },
-  {
-    "game": "stern-halma",
-    "gameTitle": "Stern-Halma",
-    "section": "Standard Stern-Halma",
-    "heading": "Movement",
-    "content": "On each turn a player moves one marble. A marble may: - Step: Move to any adjacent hole, provided it is empty. A marble may step in any of the six directions of the triangular grid. - Hop: Jump over a",
-    "anchor": "movement",
-    "variant": "standard",
-    "variantUrl": "dist/stern-halma/variants/standard/"
-  },
-  {
-    "game": "stern-halma",
-    "gameTitle": "Stern-Halma",
-    "section": "Standard Stern-Halma",
-    "heading": "Winning",
-    "content": "The first player to move all 10 of their marbles into the triangular arm diagonally opposite their starting arm wins.",
-    "anchor": "winning",
-    "variant": "standard",
-    "variantUrl": "dist/stern-halma/variants/standard/"
-  },
-  {
-    "game": "stern-halma",
-    "gameTitle": "Stern-Halma",
-    "section": "Standard Stern-Halma",
-    "heading": "Camp rule",
-    "content": "Once a marble enters the destination arm, it is strongly recommended that it remain there. The treatment of marbles that have reached the goal &mdash; whether they may be moved back out to assist chai",
-    "anchor": "camp-rule",
-    "variant": "standard",
-    "variantUrl": "dist/stern-halma/variants/standard/"
-  },
-  {
-    "game": "stern-halma",
-    "gameTitle": "Stern-Halma",
-    "section": "Standard Stern-Halma",
-    "heading": "Attribution",
-    "content": "Stern-Halma. Originated in Germany, 1892. Public domain. Rules confirmed from ezekeal/bgg-get BGG entry for Sternhalma and Lehi-Innovation/boardgame-rules independent jump-rule audit confirming chain ",
-    "anchor": "attribution",
-    "variant": "standard",
-    "variantUrl": "dist/stern-halma/variants/standard/"
   }
 ]
