@@ -8,26 +8,26 @@
 <link rel="apple-touch-icon" href="/img/apple-touch-icon.png">
 <link rel="manifest" href="/site.webmanifest">
 <meta name="theme-color" content="#0a0d2a">
-<title>Chess Variant Loader — Moddable.Games</title>
-<meta name="description" content="Chess variant loader — load and play from 70 chess variants with 5 AI difficulties.">
-<meta property="og:title" content="Chess Variant Loader">
-<meta property="og:description" content="Chess variant loader — load and play from 70 chess variants with 5 AI difficulties.">
+<title>Chess Variant Explorer — Moddable.Games</title>
+<meta name="description" content="70 chess variants with 5 AI difficulty levels. Play in-browser, solve puzzles, explore opening books.">
+<meta property="og:title" content="Chess Variant Explorer">
+<meta property="og:description" content="70 chess variants with 5 AI difficulty levels. Play in-browser, solve puzzles, explore opening books.">
 <meta property="og:url" content="https://moddable.games/tools/chess/">
 <meta property="og:type" content="website">
 <meta property="og:site_name" content="Moddable.Games">
-<meta property="og:image" content="https://moddable.games/img/og/tools-chess.png?v=1.4.5">
+<meta property="og:image" content="https://moddable.games/img/og/tools-chess.png?v=1.4.6">
 <meta name="twitter:card" content="summary_large_image">
-<meta name="twitter:title" content="Chess Variant Loader">
-<meta name="twitter:description" content="Chess variant loader — load and play from 70 chess variants with 5 AI difficulties.">
-<meta name="twitter:image" content="https://moddable.games/img/og/tools-chess.png?v=1.4.5">
-<link rel="stylesheet" href="../../css/tools.css?v=1.4.5">
-<link rel="stylesheet" href="../../css/_mg.css?v=1.4.5">
-<link rel="stylesheet" href="../../css/tools-chess.css?v=1.4.5">
-<link rel="stylesheet" href="../../css/navbar.css?v=1.4.5">
-<link rel="stylesheet" href="../../css/footer.css?v=1.4.5">
-<link rel="stylesheet" href="../../css/cards.css?v=1.4.5">
-<link rel="stylesheet" href="../../css/hero.css?v=1.4.5">
-<link rel="stylesheet" href="../../css/hero-features.css?v=1.4.5">
+<meta name="twitter:title" content="Chess Variant Explorer">
+<meta name="twitter:description" content="70 chess variants with 5 AI difficulty levels.">
+<meta name="twitter:image" content="https://moddable.games/img/og/tools-chess.png?v=1.4.6">
+<link rel="stylesheet" href="../../css/tools.css?v=1.4.6">
+<link rel="stylesheet" href="../../css/_mg.css?v=1.4.6">
+<link rel="stylesheet" href="../../css/tools-chess.css?v=1.4.6">
+<link rel="stylesheet" href="../../css/navbar.css?v=1.4.6">
+<link rel="stylesheet" href="../../css/footer.css?v=1.4.6">
+<link rel="stylesheet" href="../../css/cards.css?v=1.4.6">
+<link rel="stylesheet" href="../../css/hero.css?v=1.4.6">
+<link rel="stylesheet" href="../../css/hero-features.css?v=1.4.6">
 </head>
 <body>
 <div id="nav-root"></div>
@@ -36,52 +36,53 @@
 
 <nav class="tools-jumpnav">
   <div class="tools-jumpnav__inner">
-    <a href="#chess-picker-card" class="tools-jumpnav__link tools-jumpnav__link--blue">Variants</a>
-    <a href="#chess-rules-card" class="tools-jumpnav__link tools-jumpnav__link--green">Rules</a>
-    <a href="#chess-match-card" class="tools-jumpnav__link tools-jumpnav__link--red">Play</a>
+    <a href="#chess-explorer" class="tools-jumpnav__link tools-jumpnav__link--blue">Play</a>
+    <a href="#chess-puzzle" class="tools-jumpnav__link tools-jumpnav__link--green">Puzzle</a>
+    <a href="#chess-analyzer" class="tools-jumpnav__link tools-jumpnav__link--red">Analyze</a>
   </div>
 </nav>
 
 <section class="tools-body">
   <div class="tools-body__inner tools-body__inner--narrow">
 
-    <div class="tool-card" id="chess-picker-card">
+    <!-- Variant Explorer (unified) -->
+    <div class="tool-card" id="chess-explorer">
       <div class="tool-card__header">
         <div class="tool-card__accent tool-card__accent--blue"></div>
         <div>
-          <div class="tool-card__eyebrow tool-card__eyebrow--blue">DISCOVER</div>
-          <h3 class="tool-card__title">Variant picker</h3>
-          <p class="tool-card__desc">Cycle through chess variants to find your next game.</p>
+          <div class="tool-card__eyebrow tool-card__eyebrow--blue">VARIANT EXPLORER</div>
+          <h3 class="tool-card__title">Pick a variant and play</h3>
+          <p class="tool-card__desc">70 variants from standard to fairy chess. Select one to see its rules and start a match.</p>
         </div>
       </div>
-      <div id="chess-picker"></div>
+      <div id="chess-explorer-body"></div>
     </div>
 
-    <div class="tool-card" id="chess-rules-card">
+    <!-- Puzzle -->
+    <div class="tool-card" id="chess-puzzle">
       <div class="tool-card__header">
         <div class="tool-card__accent tool-card__accent--green"></div>
         <div>
-          <div class="tool-card__eyebrow tool-card__eyebrow--green">REFERENCE</div>
-          <h3 class="tool-card__title">Rules quick-reference</h3>
-          <p class="tool-card__desc">Board, win condition, and key rule changes for the selected variant.</p>
+          <div class="tool-card__eyebrow tool-card__eyebrow--green">DAILY PUZZLE</div>
+          <h3 class="tool-card__title">Solve a puzzle</h3>
+          <p class="tool-card__desc">Random puzzles from a pool of 1,557 across 66 variants. Find the winning move.</p>
         </div>
       </div>
-      <div id="chess-rules" class="rules-ref"></div>
+      <div id="chess-puzzle-body"></div>
     </div>
 
-    <div class="tool-card" id="chess-match-card">
+    <!-- Position Analyzer -->
+    <div class="tool-card" id="chess-analyzer">
       <div class="tool-card__header">
         <div class="tool-card__accent tool-card__accent--red"></div>
         <div>
-          <div class="tool-card__eyebrow tool-card__eyebrow--red">PLAY</div>
-          <h3 class="tool-card__title">Match setup</h3>
-          <p class="tool-card__desc">Configure variant, time control, and players for your next game.</p>
+          <div class="tool-card__eyebrow tool-card__eyebrow--red">ANALYSIS</div>
+          <h3 class="tool-card__title">Analyze a position</h3>
+          <p class="tool-card__desc">Paste a FEN string to see legal moves, evaluation, and best continuation.</p>
         </div>
       </div>
-      <div id="chess-match"></div>
+      <div id="chess-analyzer-body"></div>
     </div>
-
-    <div id="chess-embed-wrap" class="chess-embed chess-embed--hidden"></div>
 
   </div>
 </section>
@@ -94,7 +95,7 @@
     <p class="chess-engine-band__body">Every variant on this page runs on our open-source engine — designed for extensibility, not just standard chess.</p>
     <div class="chess-engine-band__grid">
       <div class="chess-engine-band__usp">
-        <span class="chess-engine-band__usp-num" id="variant-count">64</span>
+        <span class="chess-engine-band__usp-num" id="variant-count">70</span>
         <span class="chess-engine-band__usp-label">Playable variants</span>
       </div>
       <div class="chess-engine-band__usp">
@@ -102,12 +103,12 @@
         <span class="chess-engine-band__usp-label">Lines to add a variant</span>
       </div>
       <div class="chess-engine-band__usp">
-        <span class="chess-engine-band__usp-num">12×8</span>
+        <span class="chess-engine-band__usp-num">12&times;8</span>
         <span class="chess-engine-band__usp-label">Max board size</span>
       </div>
       <div class="chess-engine-band__usp">
-        <span class="chess-engine-band__usp-num">6</span>
-        <span class="chess-engine-band__usp-label">Fairy pieces supported</span>
+        <span class="chess-engine-band__usp-num">1,557</span>
+        <span class="chess-engine-band__usp-label">Puzzles in pool</span>
       </div>
     </div>
     <div class="chess-engine-band__btns" id="engine-btns"></div>
@@ -115,6 +116,6 @@
 </section>
 
 <div id="footer-root"></div>
-<script type="module" src="../../js/mg-tools-chess-page.js?v=1.4.5"></script>
+<script type="module" src="../../js/mg-tools-chess-page.js?v=1.4.6"></script>
 </body>
 </html>

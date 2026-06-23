@@ -62,178 +62,48 @@
 
 /* Body + cards now provided by tools.css */
 
-.variant-display {
-  border: 1px solid var(--mg-hairline-light);
-  border-radius: 12px;
-  padding: 20px;
-  background: var(--mg-canvas-light);
-  margin-bottom: 12px;
-}
+/* ── Variant Explorer ── */
+.chess-explorer__controls { display:flex; gap:10px; align-items:center; margin-bottom:16px; flex-wrap:wrap; }
+.chess-explorer__select { flex:1; min-width:200px; height:38px; padding:0 14px; border-radius:9999px; border:1px solid var(--mg-hairline-light); font-family:var(--mg-font-body); font-size:14px; background:#fff; outline:none; }
+.chess-explorer__select:focus { border-color:var(--mg-blue); }
+.chess-explorer__info { margin-bottom:16px; }
+.chess-explorer__grid { display:grid; grid-template-columns:repeat(auto-fit, minmax(140px, 1fr)); gap:10px; }
+.chess-explorer__cell { background:var(--mg-canvas-light); border-radius:8px; padding:10px 14px; }
+.chess-explorer__cell-label { display:block; font-family:var(--mg-font-mono); font-size:10px; font-weight:600; color:var(--mg-mute); text-transform:uppercase; letter-spacing:0.5px; margin-bottom:3px; }
+.chess-explorer__cell-value { font-family:var(--mg-font-body); font-size:13px; color:var(--mg-ink); line-height:1.4; }
+.chess-explorer__embed { margin-top:16px; }
+.chess-explorer__iframe { width:100%; border:none; border-radius:10px; background:#fff; display:block; min-height:320px; }
 
-.variant-display__name {
-  font-family: 'Inter Tight', sans-serif;
-  font-size: 1.3rem;
-  font-weight: 700;
-  color: var(--mg-ink);
-  margin-bottom: 8px;
-}
+/* ── Puzzle ── */
+.chess-puzzle__loading,.chess-puzzle__error { font-family:var(--mg-font-mono); font-size:13px; color:var(--mg-mute); padding:20px 0; text-align:center; }
+.chess-puzzle__error { color:var(--mg-red); }
+.chess-puzzle__meta { display:flex; gap:8px; flex-wrap:wrap; margin-bottom:14px; }
+.chess-puzzle__tag { font-family:var(--mg-font-mono); font-size:11px; font-weight:600; padding:3px 10px; border-radius:9999px; background:var(--mg-canvas-light); color:var(--mg-ink); }
+.chess-puzzle__board { margin-bottom:14px; border-radius:8px; overflow:hidden; background:#fff; border:1px solid var(--mg-hairline-light); }
+.chess-puzzle__board svg { width:100%; height:auto; display:block; }
+.chess-puzzle__fen { display:flex; align-items:center; gap:10px; margin-bottom:12px; padding:10px 14px; background:var(--mg-canvas-light); border-radius:8px; overflow-x:auto; }
+.chess-puzzle__fen-label { font-family:var(--mg-font-mono); font-size:10px; font-weight:700; color:var(--mg-mute); text-transform:uppercase; flex:none; }
+.chess-puzzle__fen-value { font-family:var(--mg-font-mono); font-size:12px; color:var(--mg-ink); white-space:nowrap; }
+.chess-puzzle__hint { font-family:var(--mg-font-body); font-size:14px; color:var(--mg-ink); margin-bottom:14px; }
+.chess-puzzle__solution { font-family:var(--mg-font-mono); font-size:14px; font-weight:600; color:var(--mg-green); padding:10px 14px; background:rgba(58,153,40,0.06); border-radius:8px; margin-bottom:12px; }
 
-.variant-display__meta {
-  display: flex;
-  flex-wrap: wrap;
-  gap: 12px;
-  font-size: 0.85rem;
-  color: #666;
-}
-
-.variant-display__meta span {
-  font-family: 'JetBrains Mono', monospace;
-}
-
-.rules-ref {
-  margin-top: 16px;
-}
-
-.rules-ref__grid {
-  display: grid;
-  grid-template-columns: 100px 1fr;
-  gap: 8px 16px;
-  font-size: 0.9rem;
-}
-
-.rules-ref__label {
-  font-weight: 600;
-  color: var(--mg-ink);
-}
-
-.rules-ref__value {
-  color: #555;
-}
-
-.match-form {
-  display: flex;
-  flex-direction: column;
-  gap: 12px;
-}
-
-.match-form__row {
-  display: flex;
-  align-items: center;
-  gap: 12px;
-}
-
-.match-form__label {
-  font-size: 0.85rem;
-  color: #666;
-  min-width: 80px;
-}
-
-.match-form__select {
-  padding: 8px 16px;
-  border: 1px solid var(--mg-hairline-light);
-  border-radius: 9999px;
-  font-size: 0.9rem;
-  background: #fff;
-  outline: none;
-}
-
-.match-form__select:focus {
-  border-color: var(--mg-blue);
-}
-
-.match-form__input {
-  padding: 8px 16px;
-  border: 1px solid var(--mg-hairline-light);
-  border-radius: 9999px;
-  font-size: 0.9rem;
-  background: #fff;
-  outline: none;
-  flex: 1;
-}
-
-.match-form__input:focus {
-  border-color: var(--mg-blue);
-}
-
-.match-ready {
-  border: 1px solid var(--mg-green);
-  border-radius: 12px;
-  padding: 16px 20px;
-  background: rgba(58, 153, 40, 0.05);
-  margin-top: 12px;
-}
-
-.match-ready__title {
-  font-family: 'Inter Tight', sans-serif;
-  font-weight: 600;
-  color: var(--mg-green);
-  margin-bottom: 8px;
-}
-
-.match-ready__detail {
-  font-size: 0.9rem;
-  color: #555;
-  margin: 4px 0;
-}
-
-.chess-board-live {
-  display: none;
-  background: #fff;
-  border: 1px solid var(--mg-hairline-light);
-  border-radius: 16px;
-  padding: 20px;
-  text-align: center;
-}
-
-.chess-board-live svg {
-  max-width: 100%;
-  height: auto;
-  border-radius: 4px;
-}
-
-.chess-embed--hidden {
-  display: none;
-}
-
-.chess-embed {
-  background: #fff;
-  border: 1px solid var(--mg-hairline-light);
-  border-radius: 16px;
-  padding: 28px;
-}
-
-.chess-embed__header {
-  display: flex;
-  align-items: center;
-  justify-content: space-between;
-  margin-bottom: 16px;
-  padding-bottom: 16px;
-  border-bottom: 1px solid var(--mg-hairline-light);
-}
-
-.chess-embed__title {
-  font-family: var(--mg-font-display);
-  font-weight: 700;
-  font-size: 1.2rem;
-  color: var(--mg-ink);
-  margin: 0;
-}
-
-.chess-embed__meta {
-  font-family: var(--mg-font-mono);
-  font-size: 12px;
-  color: var(--mg-stone);
-  display: flex;
-  gap: 12px;
-}
-
-.chess-embed__iframe {
-  width: 100%;
-  border: none;
-  border-radius: 8px;
-  background: #fff;
-  display: block;
-}
+/* ── Analyzer ── */
+.chess-analyzer__form { display:flex; flex-direction:column; gap:12px; margin-bottom:16px; }
+.chess-analyzer__input { height:38px; padding:0 14px; border-radius:9999px; border:1px solid var(--mg-hairline-light); font-family:var(--mg-font-mono); font-size:13px; background:#fff; outline:none; width:100%; }
+.chess-analyzer__input:focus { border-color:var(--mg-red); }
+.chess-analyzer__input--small { max-width:200px; }
+.chess-analyzer__row { display:flex; align-items:center; gap:10px; }
+.chess-analyzer__label { font-family:var(--mg-font-mono); font-size:12px; color:var(--mg-mute); flex:none; }
+.chess-analyzer__loading { font-family:var(--mg-font-mono); font-size:13px; color:var(--mg-mute); padding:16px 0; }
+.chess-analyzer__error { font-family:var(--mg-font-mono); font-size:13px; color:var(--mg-red); padding:16px 0; }
+.chess-analyzer__eval { display:flex; align-items:center; gap:14px; padding:14px 18px; background:var(--mg-canvas-light); border-radius:10px; margin-bottom:12px; }
+.chess-analyzer__eval-label { font-family:var(--mg-font-mono); font-size:10px; font-weight:600; color:var(--mg-mute); text-transform:uppercase; }
+.chess-analyzer__eval-score { font-family:var(--mg-font-display); font-weight:700; font-size:28px; color:var(--mg-ink); }
+.chess-analyzer__eval-best { font-family:var(--mg-font-mono); font-size:13px; color:var(--mg-blue); margin-left:auto; }
+.chess-analyzer__moves { padding:14px 18px; background:var(--mg-canvas-light); border-radius:10px; }
+.chess-analyzer__moves-label { font-family:var(--mg-font-mono); font-size:11px; font-weight:600; color:var(--mg-mute); margin-bottom:8px; }
+.chess-analyzer__moves-list { font-family:var(--mg-font-mono); font-size:12px; color:var(--mg-ink); line-height:1.6; }
+.chess-analyzer__raw { font-family:var(--mg-font-mono); font-size:11px; color:var(--mg-mute); background:var(--mg-canvas-light); padding:14px; border-radius:8px; overflow-x:auto; white-space:pre-wrap; margin:0; }
 
 .chess-engine-band {
   background: var(--mg-cosmic-deep);
@@ -317,10 +187,11 @@
 }
 
 @media (max-width: 768px) {
-  .rules-ref__grid { grid-template-columns: 1fr; gap: 4px 0; }
-  .rules-ref__label { margin-top: 8px; }
-  .match-form__row { flex-direction: column; align-items: stretch; gap: 6px; }
-  .match-form__label { min-width: unset; }
+  .chess-explorer__controls { flex-direction:column; }
+  .chess-explorer__select { width:100%; }
+  .chess-explorer__grid { grid-template-columns:1fr 1fr; }
+  .chess-analyzer__row { flex-direction:column; align-items:stretch; }
+  .chess-analyzer__input--small { max-width:none; }
   .chess-engine-band { padding: 56px 20px; }
   .chess-engine-band__grid { grid-template-columns: 1fr 1fr; }
 }
