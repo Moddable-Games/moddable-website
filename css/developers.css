@@ -99,8 +99,11 @@
 
 /* ── Connect section (light) ── */
 .dev-connect {
-  padding: 100px 0 80px;
+  padding: 100px 32px 80px;
   background: var(--mg-canvas-light);
+}
+.dev-connect .mg-container {
+  max-width: 1060px;
 }
 .dev-connect__heading {
   font-family: var(--mg-font-display);
@@ -1034,42 +1037,70 @@
   color: rgba(239,68,68,0.8);
 }
 
+/* ── Explorer intro ── */
+.api-explorer-intro {
+  background: #f5f4ef;
+  padding: 56px 32px 32px;
+  text-align: center;
+}
+.api-explorer-intro .mg-container {
+  max-width: 1060px;
+}
+.api-explorer-intro__heading {
+  font-family: var(--mg-font-display);
+  font-weight: 600;
+  font-size: clamp(28px, 4vw, 40px);
+  color: var(--mg-ink);
+  margin: 0 0 12px;
+  letter-spacing: -0.3px;
+}
+.api-explorer-intro__lede {
+  font-family: var(--mg-font-body);
+  font-size: 16px;
+  color: var(--mg-mute);
+  margin: 0 auto;
+  max-width: 520px;
+  line-height: 1.55;
+}
+
 /* ── Quick links ── */
 .dev-links {
   background: #f5f4ef;
-  padding: 64px 32px;
+  padding: 48px 32px 72px;
 }
 .dev-links__grid {
   display: grid;
   grid-template-columns: repeat(4, 1fr);
   gap: 16px;
-  max-width: 1000px;
+  max-width: 1060px;
   margin: 0 auto;
 }
 .dev-links__item {
   display: flex;
   flex-direction: column;
-  gap: 4px;
-  padding: 20px 18px;
+  gap: 6px;
+  padding: 24px 22px;
   background: #fff;
   border: 1px solid var(--mg-hairline-light);
-  border-radius: 10px;
+  border-radius: 12px;
   text-decoration: none;
   transition: border-color 0.15s, transform 0.15s;
+  border-top: 3px solid #8b5cf6;
 }
 .dev-links__item:hover {
   border-color: #8b5cf6;
+  border-top-color: #8b5cf6;
   transform: translateY(-2px);
 }
 .dev-links__label {
   font-family: var(--mg-font-body);
-  font-weight: 600;
-  font-size: 14px;
+  font-weight: 700;
+  font-size: 15px;
   color: var(--mg-ink);
 }
 .dev-links__url {
   font-family: var(--mg-font-mono);
-  font-size: 11px;
+  font-size: 12px;
   color: #8b5cf6;
 }
 
