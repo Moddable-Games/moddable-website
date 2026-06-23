@@ -50,6 +50,7 @@ function initHexmapEmbed(game, opts) {
   var currentStyle = params.get('style') || config.defaultStyle;
   var useLayouts = !!config.layouts;
 
+  var iframe;
   var controlsEl = document.getElementById('hexmap-controls');
   var frameWrap = document.getElementById('hexmap-frame-wrap');
   var actionsEl = document.getElementById('hexmap-actions');

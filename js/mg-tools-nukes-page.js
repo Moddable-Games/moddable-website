@@ -12,6 +12,7 @@ lede: 'Hex map generator, combat calculator, and hostage tracker.'
 }));
 
 /* ── COMBAT STRENGTH CALCULATOR ── */
+let combatCalcDebounce;
 function renderCombat() {
 const wrap = document.getElementById('combat-calc');
 wrap.innerHTML = '';
