@@ -46,6 +46,7 @@ async function loadTools() {
     })));
   }
   renderSidebar(sidebar);
+  if (allTools.length > 0) selectTool(allTools[0]);
 }
 
 function getNamespace(toolName) {
