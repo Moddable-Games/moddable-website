@@ -1,4 +1,4 @@
-const VERSION = '1.4.7';
+const VERSION = '1.4.8';
 const META_BASE = (document.querySelector('meta[name="mg-base"]') || {}).content;
 const BASE = META_BASE != null ? META_BASE
   : location.pathname.includes('/MODDABLE/moddable-website')

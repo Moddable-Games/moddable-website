@@ -234,7 +234,8 @@ data.get('chess-variants').then(function(raw) {
         const movesBlock = el('div', { class: 'chess-analyzer__moves' });
         movesBlock.appendChild(el('div', { class: 'chess-analyzer__moves-label' }, movesData.moves.length + ' legal moves'));
         const movesList = el('div', { class: 'chess-analyzer__moves-list' });
-        movesList.textContent = movesData.moves.slice(0, 30).join(', ') + (movesData.moves.length > 30 ? '...' : '');
+        const moveStrings = movesData.moves.slice(0, 30).map(m => typeof m === 'string' ? m : m.move || JSON.stringify(m));
+        movesList.textContent = moveStrings.join(', ') + (movesData.moves.length > 30 ? '...' : '');
         movesBlock.appendChild(movesList);
         result.appendChild(movesBlock);
       }
