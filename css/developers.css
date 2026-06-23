@@ -718,7 +718,9 @@
 .api-explorer__sidebar {
   border-right: 1px solid rgba(255,255,255,0.06);
   padding: 12px 0;
-  overflow-y: auto;
+  display: flex;
+  flex-direction: column;
+  overflow: hidden;
   max-height: 600px;
 }
 .api-explorer__sidebar-loading {
@@ -728,7 +730,14 @@
   padding: 20px 16px;
 }
 .api-sidebar__group {
-  margin-bottom: 4px;
+  margin-bottom: 0;
+  flex: none;
+}
+.api-sidebar__group:has(.api-sidebar__list:not(.api-sidebar__list--collapsed)) {
+  flex: 1;
+  min-height: 0;
+  display: flex;
+  flex-direction: column;
 }
 .api-sidebar__ns {
   display: flex;
@@ -766,6 +775,9 @@
 }
 .api-sidebar__list {
   padding: 2px 0 6px;
+  overflow-y: auto;
+  flex: 1;
+  min-height: 0;
 }
 .api-sidebar__tool {
   display: block;
