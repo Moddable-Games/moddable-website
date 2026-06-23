@@ -55,12 +55,46 @@
   </div>
 </section>
 
-<section class="dev-tools">
+<section class="api-explorer" id="api-explorer">
+  <div class="api-explorer__chrome">
+    <div class="api-explorer__tab-bar">
+      <span class="api-explorer__tab api-explorer__tab--active">Tool Explorer</span>
+      <span class="api-explorer__endpoint">POST tools.moddable.games/api/call</span>
+    </div>
+    <div class="api-explorer__body">
+      <aside class="api-explorer__sidebar" id="api-sidebar">
+        <div class="api-explorer__sidebar-loading">Loading tools...</div>
+      </aside>
+      <main class="api-explorer__main" id="api-main">
+        <div class="api-explorer__empty">
+          <div class="api-explorer__empty-icon">&#9881;</div>
+          <p>Select a tool from the sidebar to explore its schema, test it live, and grab the curl snippet.</p>
+        </div>
+      </main>
+    </div>
+  </div>
+</section>
+
+<section class="dev-links">
   <div class="mg-container">
-    <div class="mg-eyebrow mg-eyebrow--purple">39 TOOLS &middot; 5 NAMESPACES</div>
-    <h2 class="dev-tools__heading">Tool reference</h2>
-    <div id="tools-grid" class="dev-tools__grid"></div>
-    <div class="dev-tools__cta" id="tools-cta"></div>
+    <div class="dev-links__grid">
+      <a href="https://tools.moddable.games/" target="_blank" rel="noopener" class="dev-links__item">
+        <span class="dev-links__label">Live Server</span>
+        <span class="dev-links__url">tools.moddable.games</span>
+      </a>
+      <a href="https://tools.moddable.games/openapi.json" target="_blank" rel="noopener" class="dev-links__item">
+        <span class="dev-links__label">OpenAPI 3.1 Spec</span>
+        <span class="dev-links__url">/openapi.json</span>
+      </a>
+      <a href="https://tools.moddable.games/llms.txt" target="_blank" rel="noopener" class="dev-links__item">
+        <span class="dev-links__label">LLM Discovery</span>
+        <span class="dev-links__url">/llms.txt</span>
+      </a>
+      <a href="https://tools.moddable.games/.well-known/mcp.json" target="_blank" rel="noopener" class="dev-links__item">
+        <span class="dev-links__label">MCP Manifest</span>
+        <span class="dev-links__url">/.well-known/mcp.json</span>
+      </a>
+    </div>
   </div>
 </section>
 

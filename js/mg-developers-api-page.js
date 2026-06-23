@@ -1,10 +1,9 @@
-import { el, data, btn, linkBtn, navbar, footer, sectionHero } from './mg.js';
+import { el, data, navbar, footer, sectionHero } from './mg.js';
+
 document.getElementById('nav-root').appendChild(navbar('Developers'));
 document.getElementById('footer-root').appendChild(footer());
 
-// Sub-page hero
-var hero = document.getElementById('dev-hero');
-hero.appendChild(sectionHero({
+document.getElementById('dev-hero').appendChild(sectionHero({
   section: 'developers',
   tier: 2,
   hexColor: 'purple',
@@ -13,33 +12,241 @@ hero.appendChild(sectionHero({
   lede: 'One endpoint, 39 tools. MCP protocol for AI agents, REST for everything else.'
 }));
 
-// Copy buttons
-document.querySelectorAll('.dev-connect__copy').forEach(function(btn) {
-  btn.addEventListener('click', function() {
-    var code = btn.parentElement.querySelector('code');
+document.querySelectorAll('.dev-connect__copy').forEach(function(b) {
+  b.addEventListener('click', function() {
+    var code = b.parentElement.querySelector('code');
     navigator.clipboard.writeText(code.textContent.trim());
-    btn.textContent = 'Copied';
-    setTimeout(function() { btn.textContent = 'Copy'; }, 2000);
+    b.textContent = 'Copied';
+    setTimeout(function() { b.textContent = 'Copy'; }, 2000);
   });
 });
 
-// Load tools data
-data.get('mcp-tools').then(function(namespaces) {
-  var grid = document.getElementById('tools-grid');
-  namespaces.forEach(function(ns) {
-    ns.tools.forEach(function(tool) {
-      var accentClass = ns.accent === 'green' ? ' green' : ns.accent === 'red' ? ' red' : '';
-      var card = el('div', { class: 'dev-tool-card' },
-        el('div', { class: 'dev-tool-card__name' + accentClass }, tool.name),
-        el('div', { class: 'dev-tool-card__desc' }, tool.description),
-        el('div', { class: 'dev-tool-card__example' }, '"' + tool.example + '"')
-      );
-      grid.appendChild(card);
+const API_BASE = 'https://tools.moddable.games';
+const NAMESPACE_META = {
+  'moddable-chess': { label: 'Chess', accent: '#3b82f6' },
+  'moddable-hexmaps': { label: 'Hexmaps', accent: '#22c55e' },
+  'moddable-rules': { label: 'Rules', accent: '#f59e0b' },
+  'game-tools': { label: 'Game Tools', accent: '#ef4444' },
+  'moddable-tools': { label: 'Utilities', accent: '#8b5cf6' }
+};
+
+let allTools = [];
+let selectedTool = null;
+
+async function loadTools() {
+  const sidebar = document.getElementById('api-sidebar');
+  try {
+    const res = await fetch(API_BASE + '/api/tools');
+    const json = await res.json();
+    allTools = json.tools;
+  } catch (e) {
+    const fallback = await data.get('mcp-tools');
+    allTools = fallback.flatMap(ns => ns.tools.map(t => ({
+      name: t.name, description: t.description, inputSchema: { type: 'object', properties: {} }
+    })));
+  }
+  renderSidebar(sidebar);
+}
+
+function getNamespace(toolName) {
+  for (const [ns, meta] of Object.entries(NAMESPACE_META)) {
+    const prefix = ns.replace('moddable-', '').replace('-tools', '');
+    if (toolName.startsWith('chess_')) return ns;
+    if (toolName.startsWith('hex_')) return ns;
+    if (toolName.startsWith('rules_')) return ns;
+    if (toolName.startsWith('game_') || toolName.startsWith('ti4_') || toolName.startsWith('mancala_') || toolName.startsWith('morris_') || toolName.startsWith('ur_') || toolName.startsWith('pachisi_') || toolName.startsWith('nukes_') || toolName.startsWith('colony_')) return 'game-tools';
+  }
+  return 'moddable-tools';
+}
+
+function renderSidebar(sidebar) {
+  sidebar.innerHTML = '';
+  const grouped = {};
+  for (const tool of allTools) {
+    const ns = getNamespace(tool.name);
+    if (!grouped[ns]) grouped[ns] = [];
+    grouped[ns].push(tool);
+  }
+
+  for (const [ns, meta] of Object.entries(NAMESPACE_META)) {
+    const tools = grouped[ns];
+    if (!tools || !tools.length) continue;
+
+    const group = el('div', { class: 'api-sidebar__group' });
+    const header = el('button', { class: 'api-sidebar__ns' });
+    header.innerHTML = `<span class="api-sidebar__ns-dot" style="background:${meta.accent}"></span>${meta.label}<span class="api-sidebar__ns-count">${tools.length}</span>`;
+    group.appendChild(header);
+
+    const list = el('div', { class: 'api-sidebar__list' });
+    for (const tool of tools) {
+      const item = el('button', {
+        class: 'api-sidebar__tool',
+        'data-tool': tool.name
+      });
+      item.textContent = tool.name.replace(/^(chess|hex|rules|game|ti4|mancala|morris|ur|pachisi|nukes|colony|jam|coin|dice|faction|team)_/, '');
+      item.addEventListener('click', () => selectTool(tool));
+      list.appendChild(item);
+    }
+    group.appendChild(list);
+
+    header.addEventListener('click', () => {
+      list.classList.toggle('api-sidebar__list--collapsed');
+      header.classList.toggle('api-sidebar__ns--collapsed');
     });
-  });
-});
 
-// CTA below tools grid
-var toolsCta = document.getElementById('tools-cta');
-toolsCta.appendChild(linkBtn('Full Docs', 'https://tools.moddable.games/', 'blue'));
-toolsCta.appendChild(linkBtn('OpenAPI Spec', 'https://tools.moddable.games/openapi.json', 'outline-dark'));
+    sidebar.appendChild(group);
+  }
+}
+
+function selectTool(tool) {
+  selectedTool = tool;
+  document.querySelectorAll('.api-sidebar__tool--active').forEach(e => e.classList.remove('api-sidebar__tool--active'));
+  const active = document.querySelector(`[data-tool="${tool.name}"]`);
+  if (active) active.classList.add('api-sidebar__tool--active');
+  renderMain(tool);
+}
+
+function renderMain(tool) {
+  const main = document.getElementById('api-main');
+  main.innerHTML = '';
+
+  const ns = getNamespace(tool.name);
+  const meta = NAMESPACE_META[ns] || NAMESPACE_META['moddable-tools'];
+
+  const header = el('div', { class: 'api-detail__header' });
+  const badge = el('span', { class: 'api-detail__badge' });
+  badge.style.background = meta.accent;
+  badge.textContent = meta.label;
+  header.appendChild(badge);
+  header.appendChild(el('h2', { class: 'api-detail__name' }, tool.name));
+  header.appendChild(el('p', { class: 'api-detail__desc' }, tool.description));
+  main.appendChild(header);
+
+  const schema = tool.inputSchema || { type: 'object', properties: {} };
+  const props = schema.properties || {};
+  const required = schema.required || [];
+  const propKeys = Object.keys(props);
+
+  if (propKeys.length > 0) {
+    const formSection = el('div', { class: 'api-detail__section' });
+    formSection.appendChild(el('div', { class: 'api-detail__section-label' }, 'ARGUMENTS'));
+    const form = el('div', { class: 'api-detail__form', id: 'api-form' });
+    for (const key of propKeys) {
+      const prop = props[key];
+      const row = el('div', { class: 'api-detail__field' });
+      const label = el('label', { class: 'api-detail__field-label' });
+      label.textContent = key;
+      if (required.includes(key)) {
+        label.appendChild(el('span', { class: 'api-detail__required' }, '*'));
+      }
+      row.appendChild(label);
+
+      if (prop.type === 'boolean') {
+        const cb = el('input', { type: 'checkbox', class: 'api-detail__checkbox', 'data-key': key });
+        cb.addEventListener('change', updateCurl);
+        row.appendChild(cb);
+      } else if (prop.type === 'number' || prop.type === 'integer') {
+        const input = el('input', {
+          type: 'number', class: 'api-detail__input', 'data-key': key,
+          placeholder: prop.description || key
+        });
+        input.addEventListener('input', updateCurl);
+        row.appendChild(input);
+      } else if (prop.enum) {
+        const select = el('select', { class: 'api-detail__select', 'data-key': key });
+        select.appendChild(el('option', { value: '' }, '— select —'));
+        for (const v of prop.enum) {
+          select.appendChild(el('option', { value: v }, v));
+        }
+        select.addEventListener('change', updateCurl);
+        row.appendChild(select);
+      } else {
+        const input = el('input', {
+          type: 'text', class: 'api-detail__input', 'data-key': key,
+          placeholder: prop.description || key
+        });
+        input.addEventListener('input', updateCurl);
+        row.appendChild(input);
+      }
+
+      if (prop.description) {
+        row.appendChild(el('span', { class: 'api-detail__field-hint' }, prop.description));
+      }
+      form.appendChild(row);
+    }
+    formSection.appendChild(form);
+    main.appendChild(formSection);
+  }
+
+  const actions = el('div', { class: 'api-detail__actions' });
+  const runBtn = el('button', { class: 'api-detail__run' }, 'Run');
+  runBtn.addEventListener('click', () => runTool(tool));
+  actions.appendChild(runBtn);
+  main.appendChild(actions);
+
+  const curlSection = el('div', { class: 'api-detail__section' });
+  curlSection.appendChild(el('div', { class: 'api-detail__section-label' }, 'CURL'));
+  const curlBlock = el('pre', { class: 'api-detail__code', id: 'api-curl' });
+  curlBlock.textContent = buildCurl(tool, {});
+  curlSection.appendChild(curlBlock);
+  main.appendChild(curlSection);
+
+  const responseSection = el('div', { class: 'api-detail__section', id: 'api-response-section' });
+  responseSection.style.display = 'none';
+  responseSection.appendChild(el('div', { class: 'api-detail__section-label' }, 'RESPONSE'));
+  responseSection.appendChild(el('pre', { class: 'api-detail__code api-detail__code--response', id: 'api-response' }));
+  main.appendChild(responseSection);
+}
+
+function getFormArgs() {
+  const args = {};
+  const form = document.getElementById('api-form');
+  if (!form) return args;
+  form.querySelectorAll('[data-key]').forEach(input => {
+    const key = input.dataset.key;
+    if (input.type === 'checkbox') {
+      if (input.checked) args[key] = true;
+    } else if (input.type === 'number') {
+      if (input.value !== '') args[key] = Number(input.value);
+    } else {
+      if (input.value.trim()) args[key] = input.value.trim();
+    }
+  });
+  return args;
+}
+
+function buildCurl(tool, args) {
+  const body = JSON.stringify({ tool: tool.name, args }, null, 2);
+  return `curl -X POST ${API_BASE}/api/call \\\n  -H "Content-Type: application/json" \\\n  -d '${body}'`;
+}
+
+function updateCurl() {
+  const curlEl = document.getElementById('api-curl');
+  if (!curlEl || !selectedTool) return;
+  curlEl.textContent = buildCurl(selectedTool, getFormArgs());
+}
+
+async function runTool(tool) {
+  const args = getFormArgs();
+  const responseSection = document.getElementById('api-response-section');
+  const responseEl = document.getElementById('api-response');
+  responseSection.style.display = '';
+  responseEl.textContent = 'Running...';
+  responseEl.className = 'api-detail__code api-detail__code--response';
+
+  try {
+    const res = await fetch(API_BASE + '/api/call', {
+      method: 'POST',
+      headers: { 'Content-Type': 'application/json' },
+      body: JSON.stringify({ tool: tool.name, args })
+    });
+    const json = await res.json();
+    responseEl.textContent = JSON.stringify(json, null, 2);
+    responseEl.classList.add(res.ok ? 'api-detail__code--success' : 'api-detail__code--error');
+  } catch (e) {
+    responseEl.textContent = 'Error: ' + e.message;
+    responseEl.classList.add('api-detail__code--error');
+  }
+}
+
+loadTools();
