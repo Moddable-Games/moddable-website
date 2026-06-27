@@ -101,7 +101,7 @@ document.getElementById('comm-heading').textContent = 'Built on this engine';
 
 var CONSUMERS = [
 { title: 'Dungeon Chess', desc: 'Asymmetric fantasy strategy on modular dungeon boards. Four factions, 24 units, XP drafting.', href: '/mods/dungeon-chess/', accent: T.red },
-{ title: 'Chess Variant Loader', desc: 'Pick, preview, and play any of 70 variants from the browser. Rules reference and match launcher.', href: '/tools/chess/', accent: T.blue }
+{ title: 'Chess Variant Loader', desc: 'Pick, preview, and play any of 74 variants from the browser. Rules reference and match launcher.', href: '/tools/chess/', accent: T.blue }
 ];
 var cg = document.getElementById('comm-grid');
 CONSUMERS.forEach(function(c) {

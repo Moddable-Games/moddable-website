@@ -10,6 +10,7 @@
   {"title":"Berserk Chess","slug":"berserk","board":"8×8","players":"2","order":null,"win":"Checkmate","special":"Delivering check grants one bonus move with a different piece."},
   {"title":"Breakthrough","slug":"breakthrough","board":"7×7","players":"2","order":null,"win":"Reach opposite rank","special":"Pawns only — first to reach the far side wins. No captures backward."},
   {"title":"Capablanca Chess","slug":"capablanca","board":"10×8","players":"2","order":null,"win":"Checkmate","special":"Two extra pieces: Archbishop (B+N) and Chancellor (R+N). Wider board."},
+  {"title":"Chaturanga","slug":"chaturanga","board":"8×8","players":"2","order":12,"win":"Checkmate, bare king, or stalemate","special":"Ancient Indian ancestor of all chess (c. 600 CE). Weak counsellor and leaping elephant. Stalemate wins."},
   {"title":"Checkless Chess","slug":"checkless","board":"8×8","players":"2","order":null,"win":"Checkmate","special":"Cannot give check unless it is checkmate. King becomes aggressive."},
   {"title":"Chigorin","slug":"chigorin","board":"8×8","players":"2","order":null,"win":"Checkmate","special":"White's Bishops replaced by Knights. Four Knights vs standard army."},
   {"title":"Codrus","slug":"codrus","board":"8×8","players":"2","order":null,"win":"Lose your King","special":"No check exists. You win by getting your own King captured."},

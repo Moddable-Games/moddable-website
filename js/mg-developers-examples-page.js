@@ -48,7 +48,7 @@ var liveIntegrations = [
   {
     title: 'Chess Explorer',
     subtitle: 'chess.moddable.games',
-    description: '70 chess variants playable in-browser with AI opponents across 5 difficulty levels. Embeddable via iframe with postMessage API.',
+    description: '74 chess variants playable in-browser with AI opponents across 5 difficulty levels. Embeddable via iframe with postMessage API.',
     stats: [
       { label: 'Variants', value: '70' },
       { label: 'Puzzles', value: '1,557' },

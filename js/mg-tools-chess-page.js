@@ -9,7 +9,7 @@ document.getElementById('page-hero').appendChild(sectionHero({
   hexColor: 'green',
   eyebrow: 'CHESS VARIANTS',
   title: 'Chess variants.',
-  lede: 'Load and play from 70 variants across 5 difficulty levels. One engine, infinite rulesets.'
+  lede: 'Load and play from 74 variants across 5 difficulty levels. One engine, infinite rulesets.'
 }));
 
 const API_BASE = 'https://tools.moddable.games';

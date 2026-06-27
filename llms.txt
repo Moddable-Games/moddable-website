@@ -27,7 +27,7 @@ These JSON files contain structured data about all our content:
 
 ## Live Applications
 
-- [Moddable Chess Engine](https://chess.moddable.games): 70 playable chess variants with AI
+- [Moddable Chess Engine](https://chess.moddable.games): 74 playable chess variants with AI
 - [Moddable Hexmaps](https://hex.moddable.games): Hex map generator for tabletop games
 - [Nukes](https://nukes.moddable.games): Playable strategy game
 

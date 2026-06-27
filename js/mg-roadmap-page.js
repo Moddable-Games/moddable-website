@@ -12,7 +12,7 @@ lede: 'Our public roadmap, updated as milestones land.'
 
 var milestones = [
 { quarter: 'Q3 2026', text: 'Nukes: first 500-unit print run ships', color: '#d11a1a' },
-{ quarter: 'Q3 2026', text: 'Moddable Chess: 70 variants playable online', color: '#3a9928' },
+{ quarter: 'Q3 2026', text: 'Moddable Chess: 74 variants playable online', color: '#3a9928' },
 { quarter: 'Q4 2026', text: 'Dungeon Chess: crowdfunding campaign live', color: '#14161c' },
 { quarter: 'Q1 2027', text: 'Marketplace beta: creators upload + sell mods', color: '#0c4f8d' },
 { quarter: 'Q2 2027', text: 'Planet Mongo: multiplayer playtest online', color: '#0c4f8d' },
