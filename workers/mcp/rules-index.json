@@ -552,6 +552,78 @@
     "anchor": "jokers"
   },
   {
+    "game": "fanorona",
+    "gameTitle": "Fanorona",
+    "section": "History",
+    "heading": "History",
+    "content": "Fanorona is the national game of Madagascar, believed to have descended from Alquerque, a medieval strategy game that spread through Africa and Asia along historic trade routes. Three standard board s",
+    "anchor": "history"
+  },
+  {
+    "game": "fanorona",
+    "gameTitle": "Fanorona",
+    "section": "The Board",
+    "heading": "The Board",
+    "content": "The Fanorona board is a 9&times;5 grid of 45 intersection points, connected by horizontal, vertical, and diagonal lines. Intersections are of two types: - Strong: diagonal lines pass through the inter",
+    "anchor": "the-board"
+  },
+  {
+    "game": "fanorona",
+    "gameTitle": "Fanorona",
+    "section": "Equipment",
+    "heading": "Equipment",
+    "content": "Qty ----- 1 22 22 No dice or randomisers are used.",
+    "anchor": "equipment"
+  },
+  {
+    "game": "fanorona",
+    "gameTitle": "Fanorona",
+    "section": "Setup",
+    "heading": "Setup",
+    "content": "All 45 intersections are occupied except the centre point. White fills the two rows at one end of the board and the four left-of-centre intersections in the middle row. Black fills the two rows at the",
+    "anchor": "setup"
+  },
+  {
+    "game": "fanorona",
+    "gameTitle": "Fanorona",
+    "section": "Movement",
+    "heading": "Movement",
+    "content": "On each turn a player makes exactly one move: either a paika non-capturing move, or a capturing move. Capturing is mandatory: if any capture is available anywhere on the board, the player must make on",
+    "anchor": "movement"
+  },
+  {
+    "game": "fanorona",
+    "gameTitle": "Fanorona",
+    "section": "Capturing",
+    "heading": "Capturing",
+    "content": "Two types of capture exist: approach and withdrawal. Both types capture not just the first piece contacted, but every successive enemy piece in an unbroken line behind it. Approach capture: Move a pie",
+    "anchor": "capturing"
+  },
+  {
+    "game": "fanorona",
+    "gameTitle": "Fanorona",
+    "section": "Continuation Captures",
+    "heading": "Continuation Captures",
+    "content": "After completing a capture, the same piece may make further capturing moves in successive steps. Continuation is optional: the player may stop after any capture. Two restrictions govern continuation: ",
+    "anchor": "continuation-captures"
+  },
+  {
+    "game": "fanorona",
+    "gameTitle": "Fanorona",
+    "section": "Winning",
+    "heading": "Winning",
+    "content": "The player who captures all of their opponent's pieces wins. If neither player can achieve this, the game is a draw. In 2007, Schadd and Winands demonstrated that perfect play from both sides leads to",
+    "anchor": "winning"
+  },
+  {
+    "game": "fanorona",
+    "gameTitle": "Fanorona",
+    "section": "Attribution",
+    "heading": "Attribution",
+    "content": "Fanorona. Indigenous game of Madagascar. Public domain. Sources: ICGA International Computer Games Association Fanorona entry; Masters Traditional Games, Fanorona Rules 2019; UltraBoardGames, Fanorona",
+    "anchor": "attribution"
+  },
+  {
     "game": "go",
     "gameTitle": "Go",
     "section": "Variant Library",
@@ -1004,7 +1076,7 @@
     "gameTitle": "Moddable Chess",
     "section": "Variant Library",
     "heading": "Standard Board (8×8)",
-    "content": "- Standard Chessvariants/standard/ — Classic FIDE rules - Andernach Chessvariants/andernach/ — Capturing piece changes colour - Atomicvariants/atomic/ — Captures explode adjacent pieces - Benedict Che",
+    "content": "- Standard Chessvariants/standard/ — Classic FIDE rules - Absorption Chessvariants/absorption/ — Capturing piece gains the victim's movement permanently - Andernach Chessvariants/andernach/ — Capturin",
     "anchor": "standard-board-88"
   },
   {
@@ -1027,25 +1099,25 @@
     "game": "moddable-chess",
     "gameTitle": "Moddable Chess",
     "section": "Variant Library",
-    "heading": "Piece Replacement Variants",
-    "content": "- Almost Chessvariants/almost-chess/ — One queen replaced by Chancellor R+N - Amazon Chessvariants/amazon-chess/ — Queens replaced by Amazons Q+N - Chigorinvariants/chigorin/ — White has 4 knights ins",
-    "anchor": "piece-replacement-variants"
+    "heading": "Piece Replacement & Movement Variants",
+    "content": "- Almost Chessvariants/almost-chess/ — One queen replaced by Chancellor R+N - Amazon Chessvariants/amazon-chess/ — Queens replaced by Amazons Q+N - Berolina Chessvariants/berolina-chess/ — Pawns move ",
+    "anchor": "piece-replacement-movement-variants"
   },
   {
     "game": "moddable-chess",
     "gameTitle": "Moddable Chess",
     "section": "Variant Library",
     "heading": "Starting Position Variants",
-    "content": "- Endgame Chessvariants/endgame-chess/ — Only pawns and Kings from the start - Pawns Onlyvariants/pawns-only/ — Only pawns, first promotion wins - Peasants' Revoltvariants/peasants-revolt/ — King + pa",
+    "content": "- Endgame Chessvariants/endgame-chess/ — Only pawns and Kings from the start - Legan Chessvariants/legan-chess/ — Berolina pawns, King and Queen swap starting squares - Pawns Onlyvariants/pawns-only/ ",
     "anchor": "starting-position-variants"
   },
   {
     "game": "moddable-chess",
     "gameTitle": "Moddable Chess",
     "section": "Variant Library",
-    "heading": "Regional Variant",
-    "content": "- Makpongvariants/makpong/ — Thai variant, King cannot move out of check",
-    "anchor": "regional-variant"
+    "heading": "Regional & Historical Variants",
+    "content": "- Chaturangavariants/chaturanga/ — Indian ancestor of chess, c. 600 CE. Weak counsellor and leaping elephant. - Makpongvariants/makpong/ — Thai variant, King cannot move out of check - Makrukvariants/",
+    "anchor": "regional-historical-variants"
   },
   {
     "game": "moddable-chess",
@@ -1097,23 +1169,23 @@
   },
   {
     "game": "nukes",
-    "gameTitle": "Nukes",
+    "gameTitle": "Nukes: Official Rulebook",
     "section": "How to Play in 5 Minutes",
     "heading": "How to Play in 5 Minutes",
-    "content": "Nukes is a 2–3 player strategy game played on a board of hexagonal regions. You command armies across varied terrain, build fortified bases, and threaten opponents with nuclear strikes — all while man",
+    "content": "Nukes is a 2–3 player strategy game played on a board of hexagonal regions. You command armies across varied terrain, build fortified bases, and threaten opponents with nuclear strikes, all while mana",
     "anchor": "how-to-play-in-5-minutes"
   },
   {
     "game": "nukes",
-    "gameTitle": "Nukes",
+    "gameTitle": "Nukes: Official Rulebook",
     "section": "How to Play in 5 Minutes",
     "heading": "The Core Loop",
-    "content": "- Return 1–3 hostages to regions where their owner already has units — earning one move per token returned. You choose which of your units to move. - Move your platoons. Infantry chains through same-b",
+    "content": "- Return 1–3 hostages to regions where their owner already has units, earning one move per token returned. You choose which of your units to move. - Move your platoons. Infantry chains through same-bi",
     "anchor": "the-core-loop"
   },
   {
     "game": "nukes",
-    "gameTitle": "Nukes",
+    "gameTitle": "Nukes: Official Rulebook",
     "section": "Components",
     "heading": "Components",
     "content": "Qty ----- 44 75 3 1",
@@ -1121,7 +1193,7 @@
   },
   {
     "game": "nukes",
-    "gameTitle": "Nukes",
+    "gameTitle": "Nukes: Official Rulebook",
     "section": "Components",
     "heading": "Tokens",
     "content": "There are 25 tokens in 3 different colours for a total of 75 tokens. Depending upon where those tokens are located or how many are placed together, they can represent: - Hostages – tokens belonging to",
@@ -1129,7 +1201,7 @@
   },
   {
     "game": "nukes",
-    "gameTitle": "Nukes",
+    "gameTitle": "Nukes: Official Rulebook",
     "section": "Components",
     "heading": "Hex Tiles by Biome",
     "content": "Count ------- 13 9 7 7 5 3 Before the First Turn",
@@ -1137,7 +1209,7 @@
   },
   {
     "game": "nukes",
-    "gameTitle": "Nukes",
+    "gameTitle": "Nukes: Official Rulebook",
     "section": "Setting Up the Board",
     "heading": "Building the Board",
     "content": "The board uses 37 of the 44 tiles and can be built three ways: - Symmetrical: A pre-agreed mirrored layout. Visit moddable.games/tool/nukes {nowrap already-placed tile.}",
@@ -1145,23 +1217,23 @@
   },
   {
     "game": "nukes",
-    "gameTitle": "Nukes",
+    "gameTitle": "Nukes: Official Rulebook",
     "section": "Setting Up the Board",
     "heading": "2-Player Tile Counts",
-    "content": "Per Side ---------- 5 4 3 3 2 1",
+    "content": "Per Side ---------- 5 4 3 3 2 1 —",
     "anchor": "2-player-tile-counts"
   },
   {
     "game": "nukes",
-    "gameTitle": "Nukes",
+    "gameTitle": "Nukes: Official Rulebook",
     "section": "Setting Up the Board",
     "heading": "3-Player Tile Counts",
-    "content": "Per Side ---------- 4 2 2 2 1 1 ★ The central region must not be a City in either format.",
+    "content": "Per Side ---------- 4 2 2 2 1 1 — ★ The central region may be any biome except a City. It is chosen by the first player drafted or agreed upon symmetrical/pre-defined. 36 tiles are split evenly betwee",
     "anchor": "3-player-tile-counts"
   },
   {
     "game": "nukes",
-    "gameTitle": "Nukes",
+    "gameTitle": "Nukes: Official Rulebook",
     "section": "Setting Up the Board",
     "heading": "Starting Positions",
     "content": "- Place your City tile at the edge of the board, equally spaced from all other cities and the central region. - Place 4 of your tokens in your city as starting units. - Place 1 token beside the board ",
@@ -1169,15 +1241,15 @@
   },
   {
     "game": "nukes",
-    "gameTitle": "Nukes",
+    "gameTitle": "Nukes: Official Rulebook",
     "section": "Victory Conditions",
     "heading": "Victory Conditions",
-    "content": "The game ends immediately the moment any condition below is met. No further {nowrap city tile.} - Outlast all opponents — be the last player with hostages to return and units on {nowrap|the board.}",
+    "content": "The game ends immediately the moment any condition below is met. No further {nowrap city tile.} - Outlast all opponents by being the last player with hostages to return and units on {nowrap|the board.",
     "anchor": "victory-conditions"
   },
   {
     "game": "nukes",
-    "gameTitle": "Nukes",
+    "gameTitle": "Nukes: Official Rulebook",
     "section": "Victory Conditions",
     "heading": "Elimination",
     "content": "A player is eliminated when either of the following {nowrap Hostage Attrition:} You have no hostages to return at the start of your turn. Your city is immediately destroyed and all your units removed ",
@@ -1185,7 +1257,7 @@
   },
   {
     "game": "nukes",
-    "gameTitle": "Nukes",
+    "gameTitle": "Nukes: Official Rulebook",
     "section": "Turn Structure",
     "heading": "Turn Structure",
     "content": "Turns proceed clockwise. Each turn has three phases, always in this order.",
@@ -1193,103 +1265,103 @@
   },
   {
     "game": "nukes",
-    "gameTitle": "Nukes",
+    "gameTitle": "Nukes: Official Rulebook",
     "section": "Turn Structure",
-    "heading": "Phase 1 — Return Hostages",
+    "heading": "Phase 1: Return Hostages",
     "content": "✦ Understanding the Hostage Mechanic You hold your opponents' tokens as hostages in your supply. When you return a hostage, you take one of your opponent's tokens from your own supply and place it on ",
     "anchor": "phase-1-return-hostages"
   },
   {
     "game": "nukes",
-    "gameTitle": "Nukes",
+    "gameTitle": "Nukes: Official Rulebook",
     "section": "Turn Structure",
-    "heading": "Phase 2 — Move Units",
-    "content": "- You earn one move per hostage returned — between 1 and 3 moves total. - Moves are optional. You may use fewer than you earned. Only return as many hostages as moves you actually need — every returne",
+    "heading": "Phase 2: Move Units",
+    "content": "- You earn one move per hostage returned, between 1 and 3 moves total. - Moves are optional. You may use fewer than you earned. Only return as many hostages as moves you actually need; every returned ",
     "anchor": "phase-2-move-units"
   },
   {
     "game": "nukes",
-    "gameTitle": "Nukes",
+    "gameTitle": "Nukes: Official Rulebook",
     "section": "Turn Structure",
-    "heading": "Phase 3 — End-of-Turn Resolution",
-    "content": "After all moves and combat are resolved, any units resting in restricted terrain they cannot safely occupy are destroyed. Only a platoon's final resting position matters — a platoon may transit throug",
+    "heading": "Phase 3: End-of-Turn Resolution",
+    "content": "After all moves and combat are resolved, any units resting in restricted terrain they cannot safely occupy are destroyed. Only the final resting position matters for destruction. If a platoon's moveme",
     "anchor": "phase-3-end-of-turn-resolution"
   },
   {
     "game": "nukes",
-    "gameTitle": "Nukes",
+    "gameTitle": "Nukes: Official Rulebook",
     "section": "Units & Platoons",
     "heading": "Units & Platoons",
-    "content": "Platoon type is determined solely by the current unit count in a region. This fluidity is fundamental — platoons change type as units {nowrap what platoon does that make?}",
+    "content": "Platoon type is determined solely by the current unit count in a region. This fluidity is fundamental: platoons change type as units {nowrap what platoon does that make?}",
     "anchor": "units-platoons"
   },
   {
     "game": "nukes",
-    "gameTitle": "Nukes",
+    "gameTitle": "Nukes: Official Rulebook",
     "section": "Units & Platoons",
-    "heading": "Infantry — Movement & Rules",
-    "content": "Same-Biome Flood Fill Can Enter, Cannot Pass Through - Same-biome chaining: Infantry may travel through any number of connected regions sharing their starting biome in a single move — no distance limi",
+    "heading": "Infantry: Movement & Rules",
+    "content": "Same-Biome Flood Fill Can Enter, Cannot Pass Through - Same-biome chaining: Infantry may travel through any number of connected regions sharing their starting biome in a single move, with no distance ",
     "anchor": "infantry-movement-rules"
   },
   {
     "game": "nukes",
-    "gameTitle": "Nukes",
+    "gameTitle": "Nukes: Official Rulebook",
     "section": "Units & Platoons",
-    "heading": "Artillery — Movement & Rules",
+    "heading": "Artillery: Movement & Rules",
     "content": "Jump Mechanics Pivot at a Friendly Base - Straight-line jumps: Artillery moves by jumping to the directly opposing region across a hex axis. Intermediate regions must contain units at the moment of th",
     "anchor": "artillery-movement-rules"
   },
   {
     "game": "nukes",
-    "gameTitle": "Nukes",
+    "gameTitle": "Nukes: Official Rulebook",
     "section": "Units & Platoons",
-    "heading": "Airborne — Movement & Rules",
-    "content": "Exactly 2 Steps, Not Adjacent Slingshot Chain - Exactly two regions: Airborne moves in two steps, each to an adjacent region. The two steps can go in any direction — there is no requirement to move in",
+    "heading": "Airborne: Movement & Rules",
+    "content": "Exactly 2 Steps, Not Adjacent Slingshot Chain - Exactly two regions: Airborne moves in two steps, each to an adjacent region. The two steps can go in any direction; there is no requirement to move in ",
     "anchor": "airborne-movement-rules"
   },
   {
     "game": "nukes",
-    "gameTitle": "Nukes",
+    "gameTitle": "Nukes: Official Rulebook",
     "section": "Units & Platoons",
-    "heading": "Nukes — Movement & Rules",
+    "heading": "Nukes: Movement & Rules",
     "content": "Valid Targets After the Strike - Requires a Base: A nuke can only be launched from a region containing one of your Bases. The Base remains after launch. - Must jump at least once: A nuke must cross ov",
     "anchor": "nukes-movement-rules"
   },
   {
     "game": "nukes",
-    "gameTitle": "Nukes",
+    "gameTitle": "Nukes: Official Rulebook",
     "section": "Units & Platoons",
-    "heading": "Bases — Full Rules",
-    "content": "- A Base forms immediately when a 4th unit joins a region — mid-turn during Phase 2. - Maximum 9 units. Voluntarily moving your own platoon into a full Base is illegal. If an opponent returns a hostag",
+    "heading": "Bases: Full Rules",
+    "content": "- A Base forms immediately when a 4th unit joins a region, mid-turn during Phase 2. - Maximum 9 units. Voluntarily moving your own platoon into a full Base is illegal. If an opponent returns a hostage",
     "anchor": "bases-full-rules"
   },
   {
     "game": "nukes",
-    "gameTitle": "Nukes",
+    "gameTitle": "Nukes: Official Rulebook",
     "section": "Units & Platoons",
-    "heading": "Cities — Full Rules",
-    "content": "- Cities act as Bases for movement purposes only regardless of unit count — Infantry can pass through freely Cities count as any biome for infantry chaining, Artillery and Nukes can change direction w",
+    "heading": "Cities: Full Rules",
+    "content": "- Cities act as Bases for movement purposes only regardless of unit count. Infantry can pass through freely Cities count as any biome for infantry chaining, Artillery and Nukes can change direction wh",
     "anchor": "cities-full-rules"
   },
   {
     "game": "nukes",
-    "gameTitle": "Nukes",
+    "gameTitle": "Nukes: Official Rulebook",
     "section": "Units & Platoons",
     "heading": "Meltdown",
-    "content": "A Meltdown occurs when a hostage token is returned to a region already at its maximum capacity of 9 units. This is a legal and intentional offensive tactic. ☢ Meltdown Effect — Immediate Target hex: C",
+    "content": "A Meltdown occurs when a hostage token is returned to a region already at its maximum capacity of 9 units. This is a legal and intentional offensive tactic. ☢ Meltdown Effect Immediate Target hex: Con",
     "anchor": "meltdown"
   },
   {
     "game": "nukes",
-    "gameTitle": "Nukes",
+    "gameTitle": "Nukes: Official Rulebook",
     "section": "Combat",
     "heading": "Combat",
-    "content": "A platoon may only move into an enemy-occupied region if it can win. You must have strictly greater strength than the defender — a tie is not sufficient to attack.",
+    "content": "A platoon may only move into an enemy-occupied region if it can win. You must have strictly greater strength than the defender. A tie is not sufficient to attack.",
     "anchor": "combat"
   },
   {
     "game": "nukes",
-    "gameTitle": "Nukes",
+    "gameTitle": "Nukes: Official Rulebook",
     "section": "Combat",
     "heading": "Calculating Strength",
     "content": "- The surrounding bonus for the attacker is calculated relative to the target region's 6 adjacent hexes. - If the attacker wins, all defending units in the target region are destroyed and removed from",
@@ -1297,23 +1369,23 @@
   },
   {
     "game": "nukes",
-    "gameTitle": "Nukes",
+    "gameTitle": "Nukes: Official Rulebook",
     "section": "Combat",
     "heading": "Capturing Hostages",
-    "content": "Instead of destroying enemy units, you may capture them as hostages — adding to your supply and extending your opponent's time in the game while {nowrap support strength.} - The attacker chooses which",
+    "content": "Instead of destroying enemy units, you may capture them as hostages, adding to your supply and extending your opponent's time in the game while {nowrap support strength.} - The attacker chooses which ",
     "anchor": "capturing-hostages"
   },
   {
     "game": "nukes",
-    "gameTitle": "Nukes",
+    "gameTitle": "Nukes: Official Rulebook",
     "section": "Biomes",
     "heading": "Biomes",
-    "content": "Each region belongs to one of seven biome types. Terrain restrictions apply based on the {nowrap unit count.} ✦ \"Needs Support to Pass\" — What This Means A platoon can transit through a restricted ter",
+    "content": "Each region belongs to one of seven biome types. Terrain restrictions apply based on the {nowrap unit count.} ✦ \"Needs Support to Pass\": What This Means A platoon can transit through a restricted terr",
     "anchor": "biomes"
   },
   {
     "game": "nukes",
-    "gameTitle": "Nukes",
+    "gameTitle": "Nukes: Official Rulebook",
     "section": "Variants",
     "heading": "Variants",
     "content": "Each variant modifies one aspect of the base game. All other rules remain identical to standard Nukes. - Siegevariants/siege/ — Own-supply recruiting replaces the hostage economy - Asymmetric Powersva",
@@ -1448,6 +1520,38 @@
     "anchor": "attribution"
   },
   {
+    "game": "shogi",
+    "gameTitle": "Shogi",
+    "section": "Variant Library",
+    "heading": "Variant Library",
+    "content": "Shogi 将棋 is Japan's classic strategy board game, descended from the same chess lineage that spread across Asia before 1000 CE. The defining rule is the drop mechanic: captured pieces change allegiance",
+    "anchor": "variant-library"
+  },
+  {
+    "game": "shogi",
+    "gameTitle": "Shogi",
+    "section": "Variant Library",
+    "heading": "Standard Form",
+    "content": "- Standard Shogivariants/standard/ — The full 9×9 game with drops, promotion, and the complete piece set",
+    "anchor": "standard-form"
+  },
+  {
+    "game": "shogi",
+    "gameTitle": "Shogi",
+    "section": "Variant Library",
+    "heading": "Smaller Board Variants",
+    "content": "- Kyoto Shogivariants/kyoto-shogi/ — 5×5 game where every piece flips to its alternate face after each move - Minishogivariants/minishogi/ — Standard Shogi condensed to a 5×5 board with five pieces pe",
+    "anchor": "smaller-board-variants"
+  },
+  {
+    "game": "shogi",
+    "gameTitle": "Shogi",
+    "section": "Variant Library",
+    "heading": "Distinctive Mechanics",
+    "content": "- Hasami Shogivariants/hasami-shogi/ — 9×9 custodial-capture game with no drops, no promotion, and one piece type",
+    "anchor": "distinctive-mechanics"
+  },
+  {
     "game": "stern-halma",
     "gameTitle": "Stern-Halma",
     "section": "Overview",
@@ -1501,6 +1605,78 @@
     "section": "Attribution",
     "heading": "Attribution",
     "content": "Stern-Halma. Originated in Germany, 1892. Public domain. Rules confirmed from ezekeal/bgg-get BGG entry for Sternhalma and Lehi-Innovation/boardgame-rules independent jump-rule audit confirming chain ",
+    "anchor": "attribution"
+  },
+  {
+    "game": "surakarta",
+    "gameTitle": "Surakarta",
+    "section": "History",
+    "heading": "History",
+    "content": "Surakarta is a two-player abstract strategy game named after the royal city of Surakarta also called Solo in Central Java, Indonesia. The game was introduced to European audiences by Ravensberger Germ",
+    "anchor": "history"
+  },
+  {
+    "game": "surakarta",
+    "gameTitle": "Surakarta",
+    "section": "The Board",
+    "heading": "The Board",
+    "content": "The board is a 6×6 grid of 36 intersection points, connected by horizontal and vertical lines. Pieces are placed on intersections, not inside squares. At each of the four corners of the board, two con",
+    "anchor": "the-board"
+  },
+  {
+    "game": "surakarta",
+    "gameTitle": "Surakarta",
+    "section": "Equipment",
+    "heading": "Equipment",
+    "content": "Qty ----- 1 24 Traditional pieces are shells light versus pebbles or stones dark.",
+    "anchor": "equipment"
+  },
+  {
+    "game": "surakarta",
+    "gameTitle": "Surakarta",
+    "section": "Setup",
+    "heading": "Setup",
+    "content": "Each player takes 12 pieces of one colour. Place all 12 dark pieces on the 12 intersections of rows 1 and 2 the two rows closest to the dark player's side. Place all 12 light pieces on the 12 intersec",
+    "anchor": "setup"
+  },
+  {
+    "game": "surakarta",
+    "gameTitle": "Surakarta",
+    "section": "Movement",
+    "heading": "Movement",
+    "content": "Players alternate turns. On each turn, a player moves exactly one piece.",
+    "anchor": "movement"
+  },
+  {
+    "game": "surakarta",
+    "gameTitle": "Surakarta",
+    "section": "Movement",
+    "heading": "Non-Capturing Move",
+    "content": "Move one piece one step to any adjacent empty intersection. Movement is permitted in all eight directions: horizontally, vertically, and diagonally. A piece cannot move onto an occupied intersection.",
+    "anchor": "non-capturing-move"
+  },
+  {
+    "game": "surakarta",
+    "gameTitle": "Surakarta",
+    "section": "Movement",
+    "heading": "Capturing Move",
+    "content": "A capturing move must pass through at least one corner loop arc. Captures are optional: a player is never forced to capture even when a capturing move is available. The path of a capturing move: 1. Th",
+    "anchor": "capturing-move"
+  },
+  {
+    "game": "surakarta",
+    "gameTitle": "Surakarta",
+    "section": "Winning",
+    "heading": "Winning",
+    "content": "The player who captures all 12 of the opponent's pieces wins. Stalemate: If no further progress can be made, the game ends by mutual agreement. The player with more pieces remaining wins. If both play",
+    "anchor": "winning"
+  },
+  {
+    "game": "surakarta",
+    "gameTitle": "Surakarta",
+    "section": "Attribution",
+    "heading": "Attribution",
+    "content": "Surakarta. Traditional game attributed to Surakarta Solo, Central Java, Indonesia. European publication by Ravensberger, Germany, 1971. Public domain. Sources: Ludii Project, Maastricht University lud",
     "anchor": "attribution"
   },
   {
@@ -1702,6 +1878,22 @@
     "heading": "Outer Regions",
     "content": "Forest — Roll D6 1. Attacked by a brigand with Strength 4 2. Lost; lose your next turn 3. Lost; lose your next turn 4. Safe 5. Safe 6. A ranger guides you out; gain 1 Craft Graveyard — Based on Alignm",
     "anchor": "outer-regions"
+  },
+  {
+    "game": "xiangqi",
+    "gameTitle": "Xiangqi",
+    "section": "Variant Library",
+    "heading": "Variant Library",
+    "content": "Xiangqi 象棋, \"Elephant Chess\" is one of the world's most played strategy board games, tracing its origins to China no later than the 7th century. Played on the intersection points of a 9×10 grid, it fe",
+    "anchor": "variant-library"
+  },
+  {
+    "game": "xiangqi",
+    "gameTitle": "Xiangqi",
+    "section": "Variant Library",
+    "heading": "Chinese Chess",
+    "content": "- Standard Xiangqivariants/standard/ — The classic form: 9×10 board, river divide, Flying General rule, and the screen-jumping Cannon - Janggivariants/janggi/ — Korean Chess: no river, a longer Elepha",
+    "anchor": "chinese-chess"
   },
   {
     "game": "backgammon",
@@ -5756,6 +5948,66 @@
   {
     "game": "moddable-chess",
     "gameTitle": "Moddable Chess",
+    "section": "Absorption Chess",
+    "heading": "Absorption Chess",
+    "content": "When a piece captures, it permanently gains the victim's movement abilities in addition to its own. Multiple absorptions stack, creating increasingly powerful compound pieces as the game progresses.",
+    "anchor": "absorption-chess",
+    "variant": "absorption",
+    "variantUrl": "dist/moddable-chess/variants/absorption/"
+  },
+  {
+    "game": "moddable-chess",
+    "gameTitle": "Moddable Chess",
+    "section": "Absorption Chess",
+    "heading": "Setup",
+    "content": "Board: Standard 8×8. Pieces: Standard chess starting position. FEN: rnbqkbnr/pppppppp/8/8/8/8/PPPPPPPP/RNBQKBNR w KQkq - 0 1",
+    "anchor": "setup",
+    "variant": "absorption",
+    "variantUrl": "dist/moddable-chess/variants/absorption/"
+  },
+  {
+    "game": "moddable-chess",
+    "gameTitle": "Moddable Chess",
+    "section": "Absorption Chess",
+    "heading": "Rules",
+    "content": "All standard chess rules apply, with the following additions: - When a piece captures an enemy piece, the capturing piece permanently gains the movement abilities of the captured piece. - Absorbed abi",
+    "anchor": "rules",
+    "variant": "absorption",
+    "variantUrl": "dist/moddable-chess/variants/absorption/"
+  },
+  {
+    "game": "moddable-chess",
+    "gameTitle": "Moddable Chess",
+    "section": "Absorption Chess",
+    "heading": "Win Condition",
+    "content": "Checkmate the opponent's King. Because the king gains abilities through captures, checkmate becomes progressively harder to achieve as the game develops. Early aggression against the king is generally",
+    "anchor": "win-condition",
+    "variant": "absorption",
+    "variantUrl": "dist/moddable-chess/variants/absorption/"
+  },
+  {
+    "game": "moddable-chess",
+    "gameTitle": "Moddable Chess",
+    "section": "Absorption Chess",
+    "heading": "Strategy",
+    "content": "Material trades require careful calculation. Capturing a piece grants you its power, but your opponent loses a piece. The net effect depends on what abilities each side accumulates. Queens are dangero",
+    "anchor": "strategy",
+    "variant": "absorption",
+    "variantUrl": "dist/moddable-chess/variants/absorption/"
+  },
+  {
+    "game": "moddable-chess",
+    "gameTitle": "Moddable Chess",
+    "section": "Absorption Chess",
+    "heading": "Attribution",
+    "content": "Described in The Encyclopedia of Chess Variants by David Pritchard 1994. Also known as Cannibal Chess though that name more properly refers to the replacement variant where capturing substitutes movem",
+    "anchor": "attribution",
+    "variant": "absorption",
+    "variantUrl": "dist/moddable-chess/variants/absorption/"
+  },
+  {
+    "game": "moddable-chess",
+    "gameTitle": "Moddable Chess",
     "section": "Almost Chess",
     "heading": "Almost Chess",
     "content": "One Queen is replaced by a Chancellor Rook + Knight compound. \"Almost\" standard chess — one piece different, but the implications ripple through the entire game.",
@@ -6396,6 +6648,86 @@
   {
     "game": "moddable-chess",
     "gameTitle": "Moddable Chess",
+    "section": "Chaturanga",
+    "heading": "Chaturanga",
+    "content": "Chaturanga Sanskrit: चतुरङ्ग, \"four divisions\" is the ancient Indian predecessor of chess, Shogi, Xiangqi, and all related replacement-capture games. First attested in Sanskrit texts c. 600 CE, it is ",
+    "anchor": "chaturanga",
+    "variant": "chaturanga",
+    "variantUrl": "dist/moddable-chess/variants/chaturanga/"
+  },
+  {
+    "game": "moddable-chess",
+    "gameTitle": "Moddable Chess",
+    "section": "Chaturanga",
+    "heading": "Setup",
+    "content": "Board: Standard 8×8. The original ashtapada board was plain and uncheckered; the alternating square colouring shown here is a modern convention. Starting position Manasollasa, Bock-Raming 1996: Back r",
+    "anchor": "setup",
+    "variant": "chaturanga",
+    "variantUrl": "dist/moddable-chess/variants/chaturanga/"
+  },
+  {
+    "game": "moddable-chess",
+    "gameTitle": "Moddable Chess",
+    "section": "Chaturanga",
+    "heading": "Pieces",
+    "content": "English Movement --- --- King One step in any direction orthogonal or diagonal. No castling. Mantri 1 Elephant Leaps exactly two squares diagonally, jumping over any intervening piece. Colour-bound: r",
+    "anchor": "pieces",
+    "variant": "chaturanga",
+    "variantUrl": "dist/moddable-chess/variants/chaturanga/"
+  },
+  {
+    "game": "moddable-chess",
+    "gameTitle": "Moddable Chess",
+    "section": "Chaturanga",
+    "heading": "Rules",
+    "content": "White moves first. Players alternate one move per turn. A piece may move to an empty square or capture an opponent's piece by occupying its square, removing it from the board. A piece may not move to ",
+    "anchor": "rules",
+    "variant": "chaturanga",
+    "variantUrl": "dist/moddable-chess/variants/chaturanga/"
+  },
+  {
+    "game": "moddable-chess",
+    "gameTitle": "Moddable Chess",
+    "section": "Chaturanga",
+    "heading": "Win Conditions",
+    "content": "Checkmate: The Raja is in check with no legal escape. The opponent wins. Bare king: Capturing all of the opponent's pieces except the Raja wins the game. Exception: if the opponent can bare your own R",
+    "anchor": "win-conditions",
+    "variant": "chaturanga",
+    "variantUrl": "dist/moddable-chess/variants/chaturanga/"
+  },
+  {
+    "game": "moddable-chess",
+    "gameTitle": "Moddable Chess",
+    "section": "Chaturanga",
+    "heading": "Differences from Modern Chess",
+    "content": "- No castling - No en passant - No double pawn advance on the first move - Pawns promote to Mantri only - Stalemate is a win for the stalemated player, not a draw - Bare king wins: reducing the oppone",
+    "anchor": "differences-from-modern-chess",
+    "variant": "chaturanga",
+    "variantUrl": "dist/moddable-chess/variants/chaturanga/"
+  },
+  {
+    "game": "moddable-chess",
+    "gameTitle": "Moddable Chess",
+    "section": "Chaturanga",
+    "heading": "Historical Context",
+    "content": "Chaturanga was transmitted from India to Persia around the 7th century CE, where it became Shatranj. Key changes during this transition: the dice were abandoned entirely, and explicit check and checkm",
+    "anchor": "historical-context",
+    "variant": "chaturanga",
+    "variantUrl": "dist/moddable-chess/variants/chaturanga/"
+  },
+  {
+    "game": "moddable-chess",
+    "gameTitle": "Moddable Chess",
+    "section": "Chaturanga",
+    "heading": "Attribution",
+    "content": "Rules transcribed from two sources via the Ludii Game Corpus, Maastricht University: - Manasollasa ruleset, citing Bock-Raming 1996 Sanskrit scholarship on the 12th-century Manasollasa text - al-Adli ",
+    "anchor": "attribution",
+    "variant": "chaturanga",
+    "variantUrl": "dist/moddable-chess/variants/chaturanga/"
+  },
+  {
+    "game": "moddable-chess",
+    "gameTitle": "Moddable Chess",
     "section": "Checkless Chess",
     "heading": "Checkless Chess",
     "content": "You may not give check unless that check is also checkmate. The King becomes a bold attacker since it cannot be casually harassed.",
@@ -6588,7 +6920,7 @@
     "gameTitle": "Moddable Chess",
     "section": "Courier Chess",
     "heading": "Setup",
-    "content": "Board: 12×8 96 squares. FEN: rnbbqsksbbnr/pppppppppppp/12/12/12/12/PPPPPPPPPPPP/RNBBQSKSBBNR w - - 0 1 Pieces per side, from a-file: Rook, Knight, Elephant, Courier, Sage, King, General, Courier, Elep",
+    "content": "Board: 12×8 96 squares. FEN: rnebfsksbenr/pppppppppppp/12/12/12/12/PPPPPPPPPPPP/RNEBFSKSBENR w - - 0 1 Pieces per side, from a-file: Rook, Knight, Elephant, Courier, General, Sage, King, Sage, Courier",
     "anchor": "setup",
     "variant": "courier",
     "variantUrl": "dist/moddable-chess/variants/courier/"
@@ -8288,7 +8620,7 @@
     "gameTitle": "Moddable Chess",
     "section": "Makruk",
     "heading": "Setup",
-    "content": "Board: Standard 8×8. Setup: Pawns start on the 3rd rank not 2nd. Back rank: Rook, Knight, Silver General Met, King, Queen Met equivalent, Silver General, Knight, Rook. FEN: rnsmksnr/8/pppppppp/8/8/PPP",
+    "content": "Board: Standard 8×8. Setup: Pawns start on the 3rd rank not 2nd. Back rank: Rook, Knight, Silver General Met, King, Queen Met equivalent, Silver General, Knight, Rook. FEN: rngfkgnr/8/pppppppp/8/8/PPP",
     "anchor": "setup",
     "variant": "makruk",
     "variantUrl": "dist/moddable-chess/variants/makruk/"
@@ -9426,9 +9758,79 @@
   {
     "game": "moddable-chess",
     "gameTitle": "Moddable Chess",
+    "section": "Shatranj",
+    "heading": "Shatranj",
+    "content": "The medieval Islamic form of chess, played across the Islamic world from approximately the 7th century AD. Derived from the Indian game Chaturanga and the direct ancestor of modern Western chess. Docu",
+    "anchor": "shatranj",
+    "variant": "shatranj",
+    "variantUrl": "dist/moddable-chess/variants/shatranj/"
+  },
+  {
+    "game": "moddable-chess",
+    "gameTitle": "Moddable Chess",
+    "section": "Shatranj",
+    "heading": "Setup",
+    "content": "Board: Standard 8×8. Starting position: The Shah occupies the d-file and the Ferz occupies the e-file, reversed from modern chess. - White: Rukh a1, Faras b1, Alfil c1, Shah d1, Ferz e1, Alfil f1, Far",
+    "anchor": "setup",
+    "variant": "shatranj",
+    "variantUrl": "dist/moddable-chess/variants/shatranj/"
+  },
+  {
+    "game": "moddable-chess",
+    "gameTitle": "Moddable Chess",
+    "section": "Shatranj",
+    "heading": "Pieces",
+    "content": "Each side has 16 pieces: 1 Shah, 1 Ferz, 2 Alfil, 2 Faras, 2 Rukh, and 8 Baidaq. Shah King — moves one square in any direction, orthogonally or diagonally. May not move into, remain in, or pass throug",
+    "anchor": "pieces",
+    "variant": "shatranj",
+    "variantUrl": "dist/moddable-chess/variants/shatranj/"
+  },
+  {
+    "game": "moddable-chess",
+    "gameTitle": "Moddable Chess",
+    "section": "Shatranj",
+    "heading": "Rules",
+    "content": "White moves first. Players alternate one move per turn. A piece may not move to a square occupied by a friendly piece. Moving to a square occupied by an opponent's piece captures it and removes it fro",
+    "anchor": "rules",
+    "variant": "shatranj",
+    "variantUrl": "dist/moddable-chess/variants/shatranj/"
+  },
+  {
+    "game": "moddable-chess",
+    "gameTitle": "Moddable Chess",
+    "section": "Shatranj",
+    "heading": "Win Conditions",
+    "content": "Checkmate: The Shah is in check with no legal escape. The opponent wins. Bare King: Capturing all of the opponent's pieces except the Shah wins the game. If the opponent can bare your Shah on the very",
+    "anchor": "win-conditions",
+    "variant": "shatranj",
+    "variantUrl": "dist/moddable-chess/variants/shatranj/"
+  },
+  {
+    "game": "moddable-chess",
+    "gameTitle": "Moddable Chess",
+    "section": "Shatranj",
+    "heading": "Draw Conditions",
+    "content": "Draws occur by mutual agreement, threefold repetition of position, or the 70-move rule no pawn move or capture in 70 consecutive moves. A simultaneous counter-bare is also a draw.",
+    "anchor": "draw-conditions",
+    "variant": "shatranj",
+    "variantUrl": "dist/moddable-chess/variants/shatranj/"
+  },
+  {
+    "game": "moddable-chess",
+    "gameTitle": "Moddable Chess",
+    "section": "Shatranj",
+    "heading": "Attribution",
+    "content": "Rules documented in medieval Arabic manuscripts and in H.J.R. Murray, A History of Chess Oxford University Press, 1913. Public domain.",
+    "anchor": "attribution",
+    "variant": "shatranj",
+    "variantUrl": "dist/moddable-chess/variants/shatranj/"
+  },
+  {
+    "game": "moddable-chess",
+    "gameTitle": "Moddable Chess",
     "section": "Single-Check",
     "heading": "Single-Check",
-    "content": "One check wins. No checkmate needed — just deliver a single check and the game is over. Every move is life or death.",
+    "content": "One check wins. No checkmate needed: just deliver a single check and the game is over. Every move is life or death.",
     "anchor": "single-check",
     "variant": "single-check",
     "variantUrl": "dist/moddable-chess/variants/single-check/"
@@ -9448,7 +9850,7 @@
     "gameTitle": "Moddable Chess",
     "section": "Single-Check",
     "heading": "Rules",
-    "content": "All standard chess rules apply, except: - The game ends immediately when a player delivers check. - Checkmate is not required — any check wins, even if it could be blocked or evaded. - Stalemate is st",
+    "content": "All standard chess rules apply, except: - The game ends immediately when a player delivers check. - Checkmate is not required; any check wins, even if it could be blocked or evaded. - Stalemate is sti",
     "anchor": "rules",
     "variant": "single-check",
     "variantUrl": "dist/moddable-chess/variants/single-check/"
@@ -9482,6 +9884,96 @@
     "anchor": "attribution",
     "variant": "single-check",
     "variantUrl": "dist/moddable-chess/variants/single-check/"
+  },
+  {
+    "game": "moddable-chess",
+    "gameTitle": "Moddable Chess",
+    "section": "Sittuyin",
+    "heading": "Sittuyin (Burmese Chess)",
+    "content": "The traditional chess of Myanmar Burma, distinguished by its placement opening phase where players freely position pieces on their own half of the board before play begins.",
+    "anchor": "sittuyin-burmese-chess",
+    "variant": "sittuyin",
+    "variantUrl": "dist/moddable-chess/variants/sittuyin/"
+  },
+  {
+    "game": "moddable-chess",
+    "gameTitle": "Moddable Chess",
+    "section": "Sittuyin",
+    "heading": "Setup",
+    "content": "Board: Standard 8×8. Traditionally played on a monochromatic board with two diagonal lines running corner-to-corner forming an X the sit-ke-myin, or general's lines. These diagonals mark the promotion",
+    "anchor": "setup",
+    "variant": "sittuyin",
+    "variantUrl": "dist/moddable-chess/variants/sittuyin/"
+  },
+  {
+    "game": "moddable-chess",
+    "gameTitle": "Moddable Chess",
+    "section": "Sittuyin",
+    "heading": "Pieces",
+    "content": "Role --- King General Elephant Horse Chariot Pawn All piece movements are identical to Makruk Thai Chess. The General is a weak piece one diagonal step only. The Elephant moves one step diagonally in ",
+    "anchor": "pieces",
+    "variant": "sittuyin",
+    "variantUrl": "dist/moddable-chess/variants/sittuyin/"
+  },
+  {
+    "game": "moddable-chess",
+    "gameTitle": "Moddable Chess",
+    "section": "Sittuyin",
+    "heading": "Rules",
+    "content": "- No double-step pawn move. Pawns always move one square forward. - No castling. - No en passant. - Stalemate is a draw. - 50-move rule applies 50 moves without capture or pawn advance.",
+    "anchor": "rules",
+    "variant": "sittuyin",
+    "variantUrl": "dist/moddable-chess/variants/sittuyin/"
+  },
+  {
+    "game": "moddable-chess",
+    "gameTitle": "Moddable Chess",
+    "section": "Sittuyin",
+    "heading": "Promotion",
+    "content": "Pawns promote on specific diagonal squares forming a V-shape across the board: - White promotes on: a8, b7, c6, d5, e5, f6, g7, h8 - Black promotes on: a1, b2, c3, d4, e4, f3, g2, h1 Promotion rules: ",
+    "anchor": "promotion",
+    "variant": "sittuyin",
+    "variantUrl": "dist/moddable-chess/variants/sittuyin/"
+  },
+  {
+    "game": "moddable-chess",
+    "gameTitle": "Moddable Chess",
+    "section": "Sittuyin",
+    "heading": "Win Condition",
+    "content": "Checkmate the opponent's King.",
+    "anchor": "win-condition",
+    "variant": "sittuyin",
+    "variantUrl": "dist/moddable-chess/variants/sittuyin/"
+  },
+  {
+    "game": "moddable-chess",
+    "gameTitle": "Moddable Chess",
+    "section": "Sittuyin",
+    "heading": "Counting Rules",
+    "content": "When one player has only a bare King remaining, the opponent must deliver checkmate within a limited number of moves based on remaining material: - 16 moves with a Chariot Rook - 44 moves with an Elep",
+    "anchor": "counting-rules",
+    "variant": "sittuyin",
+    "variantUrl": "dist/moddable-chess/variants/sittuyin/"
+  },
+  {
+    "game": "moddable-chess",
+    "gameTitle": "Moddable Chess",
+    "section": "Sittuyin",
+    "heading": "Strategy",
+    "content": "The placement phase is the defining strategic feature. Experienced players position pieces to control key diagonals and prepare attacks from the opening. Since all pieces start in custom positions, th",
+    "anchor": "strategy",
+    "variant": "sittuyin",
+    "variantUrl": "dist/moddable-chess/variants/sittuyin/"
+  },
+  {
+    "game": "moddable-chess",
+    "gameTitle": "Moddable Chess",
+    "section": "Sittuyin",
+    "heading": "Attribution",
+    "content": "Traditional Burmese chess, played for centuries in Myanmar. Public domain.",
+    "anchor": "attribution",
+    "variant": "sittuyin",
+    "variantUrl": "dist/moddable-chess/variants/sittuyin/"
   },
   {
     "game": "moddable-chess",
@@ -9618,7 +10110,7 @@
     "gameTitle": "Moddable Chess",
     "section": "Suicide Chess",
     "heading": "Suicide Chess",
-    "content": "Nearly identical to Giveaway — forced captures, lose all pieces to win — but with one critical difference: stalemate is a draw, not a loss.",
+    "content": "Nearly identical to Giveaway forced captures, lose all pieces to win, with one critical difference: stalemate is a draw, not a loss.",
     "anchor": "suicide-chess",
     "variant": "suicide-chess",
     "variantUrl": "dist/moddable-chess/variants/suicide-chess/"
@@ -9638,7 +10130,7 @@
     "gameTitle": "Moddable Chess",
     "section": "Suicide Chess",
     "heading": "Rules",
-    "content": "- If you can capture, you MUST capture. If multiple captures are available, you choose which one. - The King is not royal — there is no check or checkmate. The King can be captured like any other piec",
+    "content": "- If you can capture, you MUST capture. If multiple captures are available, you choose which one. - The King is not royal; there is no check or checkmate. The King can be captured like any other piece",
     "anchor": "rules",
     "variant": "suicide-chess",
     "variantUrl": "dist/moddable-chess/variants/suicide-chess/"
@@ -9728,7 +10220,7 @@
     "gameTitle": "Moddable Chess",
     "section": "Teleportation Chess",
     "heading": "Strategy",
-    "content": "Teleports are powerful but finite — save them for decisive moments. Common uses: teleporting a Knight or Queen into a mating net, escaping a trapped piece, or repositioning the King to safety. Bluffin",
+    "content": "Teleports are powerful but finite; save them for decisive moments. Common uses: teleporting a Knight or Queen into a mating net, escaping a trapped piece, or repositioning the King to safety. Bluffing",
     "anchor": "strategy",
     "variant": "teleport-chess",
     "variantUrl": "dist/moddable-chess/variants/teleport-chess/"
@@ -9808,7 +10300,7 @@
     "gameTitle": "Moddable Chess",
     "section": "Toroidal Chess",
     "heading": "Toroidal Chess",
-    "content": "The board wraps in both directions — files connect left-to-right AND ranks connect top-to-bottom, forming a torus. There are no edges.",
+    "content": "The board wraps in both directions: files connect left-to-right and ranks connect top-to-bottom, forming a torus. There are no edges.",
     "anchor": "toroidal-chess",
     "variant": "toroidal-chess",
     "variantUrl": "dist/moddable-chess/variants/toroidal-chess/"
@@ -9848,7 +10340,7 @@
     "gameTitle": "Moddable Chess",
     "section": "Toroidal Chess",
     "heading": "Strategy",
-    "content": "On a torus, there are no safe corners or edges — every square is equally central. Bishops can reach every square of their colour not just 7 diagonals but infinitely wrapping ones. Rooks threaten ranks",
+    "content": "On a torus, there are no safe corners or edges; every square is equally central. Bishops can reach every square of their colour not just 7 diagonals but infinitely wrapping ones. Rooks threaten ranks ",
     "anchor": "strategy",
     "variant": "toroidal-chess",
     "variantUrl": "dist/moddable-chess/variants/toroidal-chess/"
@@ -9908,7 +10400,7 @@
     "gameTitle": "Moddable Chess",
     "section": "Torpedo Chess",
     "heading": "Strategy",
-    "content": "Passed pawns become much more dangerous because they can sprint two squares at a time. Pawn endgames are sharply different — a pawn on the 5th rank can reach promotion in two moves instead of three. B",
+    "content": "Passed pawns become much more dangerous because they can sprint two squares at a time. Pawn endgames are sharply different: a pawn on the 5th rank can reach promotion in two moves instead of three. Bl",
     "anchor": "strategy",
     "variant": "torpedo",
     "variantUrl": "dist/moddable-chess/variants/torpedo/"
@@ -9968,7 +10460,7 @@
     "gameTitle": "Moddable Chess",
     "section": "Upside-Down",
     "heading": "Strategy",
-    "content": "Pieces are already developed — there's no opening phase of moving pieces out. Pawns are immediately adjacent to enemy pieces, creating instant tactical tension. The game is sharp from move 1. Pawn str",
+    "content": "Pieces are already developed, with no opening phase of moving pieces out. Pawns are immediately adjacent to enemy pieces, creating instant tactical tension. The game is sharp from move 1. Pawn structu",
     "anchor": "strategy",
     "variant": "upside-down",
     "variantUrl": "dist/moddable-chess/variants/upside-down/"
@@ -9988,7 +10480,7 @@
     "gameTitle": "Moddable Chess",
     "section": "Weak!",
     "heading": "Weak!",
-    "content": "On each turn, you MUST move the weakest piece type that has a legal move. Pawns first, then Knights, Bishops, Rooks, Queen, King — in order of weakness.",
+    "content": "On each turn, you MUST move the weakest piece type that has a legal move. Pawns first, then Knights, Bishops, Rooks, Queen, King, in order of weakness.",
     "anchor": "weak",
     "variant": "weak",
     "variantUrl": "dist/moddable-chess/variants/weak/"
@@ -10625,7 +11117,7 @@
   },
   {
     "game": "nukes",
-    "gameTitle": "Nukes",
+    "gameTitle": "Nukes: Official Rulebook",
     "section": "Nukes: Asymmetric Powers",
     "heading": "Nukes: Asymmetric Powers",
     "content": "A rebalance mod that adds one unique Power Card per player at setup. Standard Nukes underneath, explicit asymmetry on top.",
@@ -10635,7 +11127,7 @@
   },
   {
     "game": "nukes",
-    "gameTitle": "Nukes",
+    "gameTitle": "Nukes: Official Rulebook",
     "section": "Nukes: Asymmetric Powers",
     "heading": "Overview",
     "content": "Before setup, each player draws one Power Card from a deck of three. Powers are revealed simultaneously and remain public for the entire game. No two players hold the same card. All other rules, inclu",
@@ -10645,7 +11137,7 @@
   },
   {
     "game": "nukes",
-    "gameTitle": "Nukes",
+    "gameTitle": "Nukes: Official Rulebook",
     "section": "Nukes: Asymmetric Powers",
     "heading": "Setup Changes",
     "content": "- Shuffle the three Power Cards face-down. - Each player draws one card. In a 2-player game, one card is removed from the game unseen. - Reveal all drawn cards simultaneously. Powers are public from t",
@@ -10655,7 +11147,7 @@
   },
   {
     "game": "nukes",
-    "gameTitle": "Nukes",
+    "gameTitle": "Nukes: Official Rulebook",
     "section": "Nukes: Asymmetric Powers",
     "heading": "Covert Network",
     "content": "Effect: Once per turn, after completing your moves, you may swap the positions of any two of your opponent's platoons on the board. Both platoons must be in regions adjacent to at least one of your un",
@@ -10665,27 +11157,27 @@
   },
   {
     "game": "nukes",
-    "gameTitle": "Nukes",
+    "gameTitle": "Nukes: Official Rulebook",
     "section": "Nukes: Asymmetric Powers",
     "heading": "Arms Industry",
-    "content": "Effect: When you build a Base 4+ units in a region, immediately gain one free isotope. You still gain isotopes through the standard conversion action. Strategic impact: Enables faster nuclear escalati",
+    "content": "Effect: When you build a Base 4+ units in a region, one of the units that formed the Base is immediately converted into an isotope and placed off-board. No additional tokens are needed; this is a free",
     "anchor": "arms-industry",
     "variant": "asymmetric-powers",
     "variantUrl": "dist/nukes/variants/asymmetric-powers/"
   },
   {
     "game": "nukes",
-    "gameTitle": "Nukes",
+    "gameTitle": "Nukes: Official Rulebook",
     "section": "Nukes: Asymmetric Powers",
     "heading": "Airborne Corps",
-    "content": "Effect: Your Airborne platoons 3 units may drop exactly three hexes away instead of two. Slingshot range through friendly Bases is also extended by one hex. Strategic impact: Enables longer slingshot ",
+    "content": "Effect: Your Airborne platoons 3 units may drop exactly three hexes away instead of two. The \"not adjacent\" restriction still applies cannot land adjacent to starting region. Slingshot range through f",
     "anchor": "airborne-corps",
     "variant": "asymmetric-powers",
     "variantUrl": "dist/nukes/variants/asymmetric-powers/"
   },
   {
     "game": "nukes",
-    "gameTitle": "Nukes",
+    "gameTitle": "Nukes: Official Rulebook",
     "section": "Nukes: Asymmetric Powers",
     "heading": "Reading Your Opponents",
     "content": "Knowing their power changes how you play: - An Arms Industry opponent needs to be pressured before their isotope count grows. Prevent Base formation or destroy Bases early. - A Covert Network opponent",
@@ -10695,7 +11187,7 @@
   },
   {
     "game": "nukes",
-    "gameTitle": "Nukes",
+    "gameTitle": "Nukes: Official Rulebook",
     "section": "Nukes: Asymmetric Powers",
     "heading": "No Stacking",
     "content": "Powers do not combine. Each player has exactly one Power Card for the entire game. Powers cannot be traded, discarded, or hidden.",
@@ -10705,7 +11197,7 @@
   },
   {
     "game": "nukes",
-    "gameTitle": "Nukes",
+    "gameTitle": "Nukes: Official Rulebook",
     "section": "Nukes: Asymmetric Powers",
     "heading": "Design Notes",
     "content": "Asymmetric Powers is designed to layer on top of standard Nukes with zero rule changes to the core systems. The power cards create different strategic pressures from the first turn without requiring p",
@@ -10715,7 +11207,7 @@
   },
   {
     "game": "nukes",
-    "gameTitle": "Nukes",
+    "gameTitle": "Nukes: Official Rulebook",
     "section": "Nukes: Fallout",
     "heading": "Nukes: Fallout",
     "content": "A reskin that adds persistent, spreading Biohazard contamination to the board. Every nuclear strike or Meltdown now has long-term territorial consequences as the map degrades around the blast sites.",
@@ -10725,7 +11217,7 @@
   },
   {
     "game": "nukes",
-    "gameTitle": "Nukes",
+    "gameTitle": "Nukes: Official Rulebook",
     "section": "Nukes: Fallout",
     "heading": "Overview",
     "content": "In standard Nukes, Biohazard tiles are created by nuclear strikes but remain static. In Fallout, Biohazard tiles spread outward each round, converting adjacent terrain into contaminated wasteland. Cit",
@@ -10735,7 +11227,7 @@
   },
   {
     "game": "nukes",
-    "gameTitle": "Nukes",
+    "gameTitle": "Nukes: Official Rulebook",
     "section": "Nukes: Fallout",
     "heading": "Setup Changes",
     "content": "No setup changes. Use standard Nukes setup for all players, board draft, and token distribution.",
@@ -10745,7 +11237,7 @@
   },
   {
     "game": "nukes",
-    "gameTitle": "Nukes",
+    "gameTitle": "Nukes: Official Rulebook",
     "section": "Nukes: Fallout",
     "heading": "Biohazard Spread Phase",
     "content": "At the end of each round after all players have taken their turns, every existing Biohazard tile converts one adjacent non-city tile into Biohazard: 1. The first player determined by turn order choose",
@@ -10755,7 +11247,7 @@
   },
   {
     "game": "nukes",
-    "gameTitle": "Nukes",
+    "gameTitle": "Nukes: Official Rulebook",
     "section": "Nukes: Fallout",
     "heading": "City Immunity",
     "content": "City tiles cannot be converted by Biohazard spread. They can still be: - Destroyed by a direct nuclear strike target hex. - Destroyed by a Meltdown. - Adjacent to Biohazard without being affected. Thi",
@@ -10765,17 +11257,17 @@
   },
   {
     "game": "nukes",
-    "gameTitle": "Nukes",
+    "gameTitle": "Nukes: Official Rulebook",
     "section": "Nukes: Fallout",
     "heading": "Movement Through Biohazard",
-    "content": "Biohazard tiles follow standard Nukes rules for hazardous terrain: - Infantry cannot remain in Biohazard alone destroyed at end of turn. - Artillery can pass through but not stop. - Airborne can land ",
+    "content": "In standard Nukes, Biohazard tiles are rare only created by nuclear strikes and treated as empty for movement purposes: no unit can stop there, and jump-based movement cannot use them as stepping ston",
     "anchor": "movement-through-biohazard",
     "variant": "fallout",
     "variantUrl": "dist/nukes/variants/fallout/"
   },
   {
     "game": "nukes",
-    "gameTitle": "Nukes",
+    "gameTitle": "Nukes: Official Rulebook",
     "section": "Nukes: Fallout",
     "heading": "Strategic Implications",
     "content": "Early nukes poison the centre. Launching nuclear strikes on contested central territory in mid-game may cut off your own movement corridors by late game. Every strike is a territorial sacrifice as wel",
@@ -10785,7 +11277,7 @@
   },
   {
     "game": "nukes",
-    "gameTitle": "Nukes",
+    "gameTitle": "Nukes: Official Rulebook",
     "section": "Nukes: Fallout",
     "heading": "Design Notes",
     "content": "Fallout adds a clock to the game without changing any core mechanics. The hostage economy, fluid platoons, and nuclear strikes all work identically. The spread mechanic simply punishes nuclear usage o",
@@ -10795,7 +11287,7 @@
   },
   {
     "game": "nukes",
-    "gameTitle": "Nukes",
+    "gameTitle": "Nukes: Official Rulebook",
     "section": "Nukes: Siege",
     "heading": "Nukes: Siege",
     "content": "A total conversion of the hostage mechanic. You start with your own tokens in reserve and deploy them to build your forces. The only way to acquire enemy hostages is through combat.",
@@ -10805,7 +11297,7 @@
   },
   {
     "game": "nukes",
-    "gameTitle": "Nukes",
+    "gameTitle": "Nukes: Official Rulebook",
     "section": "Nukes: Siege",
     "heading": "Overview",
     "content": "Standard Nukes gives each player a supply of their opponents' tokens from the start. Siege removes this entirely. You begin with 21 of your own tokens off-board. Return them to regions you control to ",
@@ -10815,17 +11307,17 @@
   },
   {
     "game": "nukes",
-    "gameTitle": "Nukes",
+    "gameTitle": "Nukes: Official Rulebook",
     "section": "Nukes: Siege",
     "heading": "Setup Changes",
-    "content": "- Each player starts with 4 units on their city standard and 21 of their own tokens off-board in a personal supply. - No tokens are distributed to opponents at setup. - All other setup board draft, bi",
+    "content": "- Each player starts with 4 units on their city standard and 21 of their own tokens off-board in a personal supply. - No starting isotope. You do not begin with any isotopes. Isotopes are earned exclu",
     "anchor": "setup-changes",
     "variant": "siege",
     "variantUrl": "dist/nukes/variants/siege/"
   },
   {
     "game": "nukes",
-    "gameTitle": "Nukes",
+    "gameTitle": "Nukes: Official Rulebook",
     "section": "Nukes: Siege",
     "heading": "Deploy from Reserve",
     "content": "On your turn, return 1–3 of your own tokens from your off-board supply onto regions where you already have units. Each return earns one move. This replaces the standard hostage-return mechanic for the",
@@ -10835,7 +11327,7 @@
   },
   {
     "game": "nukes",
-    "gameTitle": "Nukes",
+    "gameTitle": "Nukes: Official Rulebook",
     "section": "Nukes: Siege",
     "heading": "Build Through Combat",
     "content": "The only way to get enemy hostages is to capture them mid-game. When you win combat with excess strength attacking units minus defending units, take the excess as hostages into your off-board supply. ",
@@ -10845,7 +11337,7 @@
   },
   {
     "game": "nukes",
-    "gameTitle": "Nukes",
+    "gameTitle": "Nukes: Official Rulebook",
     "section": "Nukes: Siege",
     "heading": "Two Economies",
     "content": "Your own supply tokens fuel early expansion. Enemy hostages, once captured, fuel rapid strikes in the mid-to-late game. Both follow the same return-to-move mechanic but come from different sources.",
@@ -10855,7 +11347,7 @@
   },
   {
     "game": "nukes",
-    "gameTitle": "Nukes",
+    "gameTitle": "Nukes: Official Rulebook",
     "section": "Nukes: Siege",
     "heading": "Endgame",
     "content": "Bases, isotopes, nuclear strikes, and Meltdowns all work identically to standard Nukes. Siege changes how you build momentum, not what you're fighting over. You still lose if your supply runs out enti",
@@ -10865,7 +11357,7 @@
   },
   {
     "game": "nukes",
-    "gameTitle": "Nukes",
+    "gameTitle": "Nukes: Official Rulebook",
     "section": "Nukes: Siege",
     "heading": "Design Notes",
     "content": "Siege creates a slower, more positional early game. Without free hostages at setup, players must commit to combat earlier to unlock the faster pacing of the hostage economy. The 2-player restriction e",
@@ -11212,5 +11704,455 @@
     "anchor": "attribution",
     "variant": "standard",
     "variantUrl": "dist/reversi/variants/standard/"
+  },
+  {
+    "game": "shogi",
+    "gameTitle": "Shogi",
+    "section": "Hasami Shogi",
+    "heading": "Hasami Shogi",
+    "content": "Hasami Shogi はさみ将棋, \"sandwiching chess\" is a distinct branch of the Shogi family with a single piece type, no drops, and no promotion. Capture is by sandwiching: a piece is removed when flanked on two",
+    "anchor": "hasami-shogi",
+    "variant": "hasami-shogi",
+    "variantUrl": "dist/shogi/variants/hasami-shogi/"
+  },
+  {
+    "game": "shogi",
+    "gameTitle": "Shogi",
+    "section": "Hasami Shogi",
+    "heading": "Setup",
+    "content": "Board: 9×9 grid, 81 squares. Pieces: 9 per player, all identical. Player 1 places 9 pieces on the nearest rank; Player 2 places 9 pieces on the far rank.",
+    "anchor": "setup",
+    "variant": "hasami-shogi",
+    "variantUrl": "dist/shogi/variants/hasami-shogi/"
+  },
+  {
+    "game": "shogi",
+    "gameTitle": "Shogi",
+    "section": "Hasami Shogi",
+    "heading": "Rules",
+    "content": "Movement: Pieces move orthogonally any number of empty squares, in any direction. This is the same range as a Rook in chess. A piece cannot jump over another piece. Capture custodial sandwich: A piece",
+    "anchor": "rules",
+    "variant": "hasami-shogi",
+    "variantUrl": "dist/shogi/variants/hasami-shogi/"
+  },
+  {
+    "game": "shogi",
+    "gameTitle": "Shogi",
+    "section": "Hasami Shogi",
+    "heading": "Win Condition",
+    "content": "The player whose pieces are reduced to one remaining piece loses.",
+    "anchor": "win-condition",
+    "variant": "hasami-shogi",
+    "variantUrl": "dist/shogi/variants/hasami-shogi/"
+  },
+  {
+    "game": "shogi",
+    "gameTitle": "Shogi",
+    "section": "Hasami Shogi",
+    "heading": "Attribution",
+    "content": "Hasami Shogi Variant 1. Public domain. Sources: steventran619/Hasami-Shogi implementation documentation; ryan-gallagher-atx/Hasami-Shogi-Game OSU CS162 final project; OlliePoole/Hasami-Shogi iOS imple",
+    "anchor": "attribution",
+    "variant": "hasami-shogi",
+    "variantUrl": "dist/shogi/variants/hasami-shogi/"
+  },
+  {
+    "game": "shogi",
+    "gameTitle": "Shogi",
+    "section": "Kyoto Shogi",
+    "heading": "Kyoto Shogi",
+    "content": "Kyoto Shogi was invented by Tamiya Katsuya around 1976. It is played on a 5×5 board, and every piece except the King represents a pair: after each move, the moved piece must flip to show its other fac",
+    "anchor": "kyoto-shogi",
+    "variant": "kyoto-shogi",
+    "variantUrl": "dist/shogi/variants/kyoto-shogi/"
+  },
+  {
+    "game": "shogi",
+    "gameTitle": "Shogi",
+    "section": "Kyoto Shogi",
+    "heading": "Setup",
+    "content": "Board: 5×5 grid, 25 squares. Pieces per player: 5 King + 4 dual-sided pieces. Starting position: Rank --- Rank 5 Rank 1 Black Sente moves first. The position is point-symmetric 180-degree rotation.",
+    "anchor": "setup",
+    "variant": "kyoto-shogi",
+    "variantUrl": "dist/shogi/variants/kyoto-shogi/"
+  },
+  {
+    "game": "shogi",
+    "gameTitle": "Shogi",
+    "section": "Kyoto Shogi",
+    "heading": "Piece Pairs",
+    "content": "Each non-King piece has two faces. The piece flips to its alternate face after every move, mandatory. Face B --- Lance 香 Silver General 銀 Knight 桂 Pawn 歩 Piece movements: Movement --- One square in an",
+    "anchor": "piece-pairs",
+    "variant": "kyoto-shogi",
+    "variantUrl": "dist/shogi/variants/kyoto-shogi/"
+  },
+  {
+    "game": "shogi",
+    "gameTitle": "Shogi",
+    "section": "Kyoto Shogi",
+    "heading": "The Flip Rule",
+    "content": "After every move, the moved piece must flip to its alternate face. A piece may be moved to a square from which it would immediately have no legal move for example, a Lance on the final rank that will ",
+    "anchor": "the-flip-rule",
+    "variant": "kyoto-shogi",
+    "variantUrl": "dist/shogi/variants/kyoto-shogi/"
+  },
+  {
+    "game": "shogi",
+    "gameTitle": "Shogi",
+    "section": "Kyoto Shogi",
+    "heading": "Drops",
+    "content": "Captured pieces may be dropped back onto any empty square. When dropping, the player chooses which face of the pair to place face-up.",
+    "anchor": "drops",
+    "variant": "kyoto-shogi",
+    "variantUrl": "dist/shogi/variants/kyoto-shogi/"
+  },
+  {
+    "game": "shogi",
+    "gameTitle": "Shogi",
+    "section": "Kyoto Shogi",
+    "heading": "Win Condition",
+    "content": "Checkmate the opponent's King.",
+    "anchor": "win-condition",
+    "variant": "kyoto-shogi",
+    "variantUrl": "dist/shogi/variants/kyoto-shogi/"
+  },
+  {
+    "game": "shogi",
+    "gameTitle": "Shogi",
+    "section": "Kyoto Shogi",
+    "heading": "Draws",
+    "content": "The same position occurring three times with the same player to move is a draw.",
+    "anchor": "draws",
+    "variant": "kyoto-shogi",
+    "variantUrl": "dist/shogi/variants/kyoto-shogi/"
+  },
+  {
+    "game": "shogi",
+    "gameTitle": "Shogi",
+    "section": "Kyoto Shogi",
+    "heading": "Attribution",
+    "content": "Kyoto Shogi. Invented by Tamiya Katsuya, c. 1976. Rules published freely since at least the 1980s; game mechanics are not copyrightable. Sources: pychess.org/variants/kyotoshogi; Fairy-Stockfish varia",
+    "anchor": "attribution",
+    "variant": "kyoto-shogi",
+    "variantUrl": "dist/shogi/variants/kyoto-shogi/"
+  },
+  {
+    "game": "shogi",
+    "gameTitle": "Shogi",
+    "section": "Minishogi",
+    "heading": "Minishogi",
+    "content": "Minishogi was invented or rediscovered around 1970 by Shigenobu Kusumoto of Osaka, Japan. It applies Standard Shogi rules to a 5×5 board, reducing each player's force to five pieces and the promotion ",
+    "anchor": "minishogi",
+    "variant": "minishogi",
+    "variantUrl": "dist/shogi/variants/minishogi/"
+  },
+  {
+    "game": "shogi",
+    "gameTitle": "Shogi",
+    "section": "Minishogi",
+    "heading": "Setup",
+    "content": "Board: 5×5 grid, 25 squares. Pieces per player: 6 King, Rook, Bishop, Gold General, Silver General, one Pawn. No Knights or Lances: the board is too small for their jump. Starting position: Rank --- R",
+    "anchor": "setup",
+    "variant": "minishogi",
+    "variantUrl": "dist/shogi/variants/minishogi/"
+  },
+  {
+    "game": "shogi",
+    "gameTitle": "Shogi",
+    "section": "Minishogi",
+    "heading": "Pieces",
+    "content": "Movement --- One square in any direction. Cannot move into check. Rook Any number of squares diagonally. Gold General One step diagonally, or one step forward. Five directions. Pawn",
+    "anchor": "pieces",
+    "variant": "minishogi",
+    "variantUrl": "dist/shogi/variants/minishogi/"
+  },
+  {
+    "game": "shogi",
+    "gameTitle": "Shogi",
+    "section": "Minishogi",
+    "heading": "Promotion",
+    "content": "The promotion zone is the final rank only rank 5 for Black, rank 1 for White. A piece may promote when it moves into or within the promotion zone. Promotion is mandatory when the Pawn reaches the fina",
+    "anchor": "promotion",
+    "variant": "minishogi",
+    "variantUrl": "dist/shogi/variants/minishogi/"
+  },
+  {
+    "game": "shogi",
+    "gameTitle": "Shogi",
+    "section": "Minishogi",
+    "heading": "Drops",
+    "content": "The drop mechanic applies as in Standard Shogi. Captured pieces are held in hand and may be dropped onto any empty square on a later turn, unpromoted. Restrictions: no Pawn drop on a file already cont",
+    "anchor": "drops",
+    "variant": "minishogi",
+    "variantUrl": "dist/shogi/variants/minishogi/"
+  },
+  {
+    "game": "shogi",
+    "gameTitle": "Shogi",
+    "section": "Minishogi",
+    "heading": "Win Condition",
+    "content": "Checkmate the opponent's King. A player with no legal moves loses.",
+    "anchor": "win-condition",
+    "variant": "minishogi",
+    "variantUrl": "dist/shogi/variants/minishogi/"
+  },
+  {
+    "game": "shogi",
+    "gameTitle": "Shogi",
+    "section": "Minishogi",
+    "heading": "Draws",
+    "content": "Sennichite: The same position including pieces in hand occurs four times with the same player to move. Draw. If caused by perpetual check, the checking side loses. Impasse: Both Kings enter the promot",
+    "anchor": "draws",
+    "variant": "minishogi",
+    "variantUrl": "dist/shogi/variants/minishogi/"
+  },
+  {
+    "game": "shogi",
+    "gameTitle": "Shogi",
+    "section": "Minishogi",
+    "heading": "Attribution",
+    "content": "Minishogi. Invented or rediscovered c. 1970 by Shigenobu Kusumoto of Osaka. Rules freely published since then; game mechanics are not copyrightable. Sources: pychess.org/variants/minishogi; Fairy-Stoc",
+    "anchor": "attribution",
+    "variant": "minishogi",
+    "variantUrl": "dist/shogi/variants/minishogi/"
+  },
+  {
+    "game": "shogi",
+    "gameTitle": "Shogi",
+    "section": "Standard Shogi",
+    "heading": "Standard Shogi",
+    "content": "The full form of Japan's classic strategy game, played since at least the 10th century. The board is 9×9 and each player commands 20 pieces. The drop mechanic re-entering captured pieces as your own d",
+    "anchor": "standard-shogi",
+    "variant": "standard",
+    "variantUrl": "dist/shogi/variants/standard/"
+  },
+  {
+    "game": "shogi",
+    "gameTitle": "Shogi",
+    "section": "Standard Shogi",
+    "heading": "Setup",
+    "content": "Board: 9×9 grid, 81 squares. Traditional boards use natural wood throughout, with no alternating square colours. Pieces per player: 20, in eight types. Starting position: Files 9–1 left to right --- L",
+    "anchor": "setup",
+    "variant": "standard",
+    "variantUrl": "dist/shogi/variants/standard/"
+  },
+  {
+    "game": "shogi",
+    "gameTitle": "Shogi",
+    "section": "Standard Shogi",
+    "heading": "Pieces",
+    "content": "Abbreviation --- K R B G S N L P",
+    "anchor": "pieces",
+    "variant": "standard",
+    "variantUrl": "dist/shogi/variants/standard/"
+  },
+  {
+    "game": "shogi",
+    "gameTitle": "Shogi",
+    "section": "Standard Shogi",
+    "heading": "Promotion",
+    "content": "The promotion zone is the three ranks farthest from each player the opponent's back three ranks. A piece may promote when it moves into, out of, or entirely within the promotion zone. Promotion is opt",
+    "anchor": "promotion",
+    "variant": "standard",
+    "variantUrl": "dist/shogi/variants/standard/"
+  },
+  {
+    "game": "shogi",
+    "gameTitle": "Shogi",
+    "section": "Standard Shogi",
+    "heading": "The Drop Mechanic",
+    "content": "When a player captures an opponent's piece, that piece is held in hand. On any turn, instead of moving a piece on the board, the player may drop a piece from hand onto any empty square. Three restrict",
+    "anchor": "the-drop-mechanic",
+    "variant": "standard",
+    "variantUrl": "dist/shogi/variants/standard/"
+  },
+  {
+    "game": "shogi",
+    "gameTitle": "Shogi",
+    "section": "Standard Shogi",
+    "heading": "Win Condition",
+    "content": "Checkmate the opponent's King: attack the King such that no legal move can escape check. There is no stalemate rule in Shogi. A player with no legal move loses.",
+    "anchor": "win-condition",
+    "variant": "standard",
+    "variantUrl": "dist/shogi/variants/standard/"
+  },
+  {
+    "game": "shogi",
+    "gameTitle": "Shogi",
+    "section": "Standard Shogi",
+    "heading": "Draws",
+    "content": "Sennichite 千日手: The same position including pieces in hand occurs four times with the same player to move. The game is a draw. If the repetition is caused by perpetual check, the checking side loses. ",
+    "anchor": "draws",
+    "variant": "standard",
+    "variantUrl": "dist/shogi/variants/standard/"
+  },
+  {
+    "game": "shogi",
+    "gameTitle": "Shogi",
+    "section": "Standard Shogi",
+    "heading": "Attribution",
+    "content": "Standard Shogi. Ancient origin; public domain. Sources: GNU Shogi Manual GNU Project, public domain; mastersofgames.com rules reference; pychess.org variants documentation.",
+    "anchor": "attribution",
+    "variant": "standard",
+    "variantUrl": "dist/shogi/variants/standard/"
+  },
+  {
+    "game": "xiangqi",
+    "gameTitle": "Xiangqi",
+    "section": "Janggi",
+    "heading": "Janggi (Korean Chess)",
+    "content": "Janggi 장기 is the Korean form of chess, descended from the same historical lineage as Xiangqi but evolved independently into a distinct game. Key differences include no river, a different Elephant move",
+    "anchor": "janggi-korean-chess",
+    "variant": "janggi",
+    "variantUrl": "dist/xiangqi/variants/janggi/"
+  },
+  {
+    "game": "xiangqi",
+    "gameTitle": "Xiangqi",
+    "section": "Janggi",
+    "heading": "The Board",
+    "content": "The board is a 9×10 grid. Pieces are placed on the 90 intersection points. There is no river. Each side has a palace: a 3×3 area marked with diagonal lines files d–f, ranks 1–3 for the bottom player; ",
+    "anchor": "the-board",
+    "variant": "janggi",
+    "variantUrl": "dist/xiangqi/variants/janggi/"
+  },
+  {
+    "game": "xiangqi",
+    "gameTitle": "Xiangqi",
+    "section": "Janggi",
+    "heading": "Pieces",
+    "content": "Each side has 16 pieces. Korean/Chinese Movement --- --- 將/帥 One step orthogonally or diagonally within the 3×3 palace Advisor 2 象 One step orthogonally, then two steps diagonally outward. Blocked if ",
+    "anchor": "pieces",
+    "variant": "janggi",
+    "variantUrl": "dist/xiangqi/variants/janggi/"
+  },
+  {
+    "game": "xiangqi",
+    "gameTitle": "Xiangqi",
+    "section": "Janggi",
+    "heading": "Byunsu: Choosing the Starting Position",
+    "content": "Before play begins, each player independently chooses the arrangement of their Horses and Elephants. Four configurations exist per side: Right side --- Horse, Elephant Horse, Elephant Elephant, Horse ",
+    "anchor": "byunsu-choosing-the-starting-position",
+    "variant": "janggi",
+    "variantUrl": "dist/xiangqi/variants/janggi/"
+  },
+  {
+    "game": "xiangqi",
+    "gameTitle": "Xiangqi",
+    "section": "Janggi",
+    "heading": "Special Rules",
+    "content": "Bikjang laughing generals: when both Generals face each other on the same open file with no intervening piece, the player to move has two choices: make a move that breaks bikjang move the General or i",
+    "anchor": "special-rules",
+    "variant": "janggi",
+    "variantUrl": "dist/xiangqi/variants/janggi/"
+  },
+  {
+    "game": "xiangqi",
+    "gameTitle": "Xiangqi",
+    "section": "Janggi",
+    "heading": "Tournament Material Counting",
+    "content": "In tournaments that do not permit draws, when bikjang is reached the remaining pieces are counted by value to determine the winner: Value jeom --- 13 Cannon 5 Elephant 3 Soldier not counted | Han Red ",
+    "anchor": "tournament-material-counting",
+    "variant": "janggi",
+    "variantUrl": "dist/xiangqi/variants/janggi/"
+  },
+  {
+    "game": "xiangqi",
+    "gameTitle": "Xiangqi",
+    "section": "Janggi",
+    "heading": "Winning",
+    "content": "Checkmate the opponent's General: place it under threat with no legal move to escape.",
+    "anchor": "winning",
+    "variant": "janggi",
+    "variantUrl": "dist/xiangqi/variants/janggi/"
+  },
+  {
+    "game": "xiangqi",
+    "gameTitle": "Xiangqi",
+    "section": "Janggi",
+    "heading": "Attribution",
+    "content": "Janggi 장기. Public domain. Traditional Korean origin, ancient derivation from Xiangqi. Rules consistent with the Korean Janggi Association standard.",
+    "anchor": "attribution",
+    "variant": "janggi",
+    "variantUrl": "dist/xiangqi/variants/janggi/"
+  },
+  {
+    "game": "xiangqi",
+    "gameTitle": "Xiangqi",
+    "section": "Standard Xiangqi",
+    "heading": "Standard Xiangqi",
+    "content": "Xiangqi 象棋, \"Elephant Chess\" is the classical Chinese form of chess, played in China since at least the 7th century. It is the most widely played board game in China and among the most popular strateg",
+    "anchor": "standard-xiangqi",
+    "variant": "standard",
+    "variantUrl": "dist/xiangqi/variants/standard/"
+  },
+  {
+    "game": "xiangqi",
+    "gameTitle": "Xiangqi",
+    "section": "Standard Xiangqi",
+    "heading": "The Board",
+    "content": "The board is a 9×10 grid. Pieces are placed on the 90 intersection points, not inside squares. A river separates the two halves of the board between ranks 5 and 6. Each side has a palace: a 3×3 area m",
+    "anchor": "the-board",
+    "variant": "standard",
+    "variantUrl": "dist/xiangqi/variants/standard/"
+  },
+  {
+    "game": "xiangqi",
+    "gameTitle": "Xiangqi",
+    "section": "Standard Xiangqi",
+    "heading": "Pieces",
+    "content": "Each side has 16 pieces. Chinese Movement --- --- 帥/將 One step horizontally or vertically within the palace only. Cannot face the enemy General on an open file Flying General rule Advisor 2 相/象 Exactl",
+    "anchor": "pieces",
+    "variant": "standard",
+    "variantUrl": "dist/xiangqi/variants/standard/"
+  },
+  {
+    "game": "xiangqi",
+    "gameTitle": "Xiangqi",
+    "section": "Standard Xiangqi",
+    "heading": "Starting Position",
+    "content": "- Chariots: a1, i1 opponent: a10, i10 - Horses: b1, h1 opponent: b10, h10 - Elephants: c1, g1 opponent: c10, g10 - Advisors: d1, f1 opponent: d10, f10 - General: e1 opponent: e10 - Cannons: b3, h3 opp",
+    "anchor": "starting-position",
+    "variant": "standard",
+    "variantUrl": "dist/xiangqi/variants/standard/"
+  },
+  {
+    "game": "xiangqi",
+    "gameTitle": "Xiangqi",
+    "section": "Standard Xiangqi",
+    "heading": "Special Rules",
+    "content": "Flying General: the two Generals may never face each other on an open file with no intervening piece. A move that creates this position is illegal, even if the moving piece is not the General. Stalema",
+    "anchor": "special-rules",
+    "variant": "standard",
+    "variantUrl": "dist/xiangqi/variants/standard/"
+  },
+  {
+    "game": "xiangqi",
+    "gameTitle": "Xiangqi",
+    "section": "Standard Xiangqi",
+    "heading": "Winning",
+    "content": "Checkmate the opponent's General: place it under threat with no legal move to escape.",
+    "anchor": "winning",
+    "variant": "standard",
+    "variantUrl": "dist/xiangqi/variants/standard/"
+  },
+  {
+    "game": "xiangqi",
+    "gameTitle": "Xiangqi",
+    "section": "Standard Xiangqi",
+    "heading": "Strategy",
+    "content": "Control the cannon mounts carefully: a Cannon without a screen to jump over loses its capturing ability. The Flying General rule creates tactical opportunities to threaten the opponent's General by cl",
+    "anchor": "strategy",
+    "variant": "standard",
+    "variantUrl": "dist/xiangqi/variants/standard/"
+  },
+  {
+    "game": "xiangqi",
+    "gameTitle": "Xiangqi",
+    "section": "Standard Xiangqi",
+    "heading": "Attribution",
+    "content": "Xiangqi. Public domain. Ancient Chinese origin, no copyright concern. Rules in accordance with the World Xiangqi Federation WXF standard.",
+    "anchor": "attribution",
+    "variant": "standard",
+    "variantUrl": "dist/xiangqi/variants/standard/"
   }
 ]
