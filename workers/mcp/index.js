@@ -11,6 +11,28 @@ export { GameRoom };
 
 let wasmReady = false;
 
+const GA_MEASUREMENT_ID = 'G-N0N3JPVCBE';
+
+function trackToolCall(toolName, env, request) {
+  const secret = env.GA_API_SECRET;
+  if (!secret) return null;
+  const clientId = request?.headers?.get('cf-connecting-ip') || 'anonymous';
+  const payload = {
+    client_id: clientId.replace(/[.:]/g, '_'),
+    events: [{
+      name: 'tool_call',
+      params: {
+        tool_name: toolName,
+        engagement_time_msec: '1',
+      },
+    }],
+  };
+  return fetch(
+    `https://www.google-analytics.com/mp/collect?measurement_id=${GA_MEASUREMENT_ID}&api_secret=${secret}`,
+    { method: 'POST', body: JSON.stringify(payload) }
+  ).catch(() => {});
+}
+
 const PUZZLE_POOL_TOOL = {
   name: 'chess_generate_puzzle',
   description: 'Serve a random chess puzzle from a pool of 1,557 pre-generated puzzles across 66 variants (plus standard). Returns position, solution, metadata, and an SVG board image. Use chess_list_puzzle_types to discover available variant:type combinations.',
@@ -220,7 +242,7 @@ const RESOURCES = [
 ];
 
 export default {
-  async fetch(request, env) {
+  async fetch(request, env, ctx) {
     const url = new URL(request.url);
     const path = url.pathname.replace(/\/$/, '') || '/';
     const origin = request.headers.get('Origin') || '';
@@ -248,7 +270,7 @@ export default {
     }
 
     if ((path === '/mcp' || path === '/mcp/message') && request.method === 'POST') {
-      return handleMcpMessage(request, corsHeaders);
+      return handleMcpMessage(request, corsHeaders, env, ctx);
     }
 
     if (path === '/llms.txt') {
@@ -326,7 +348,7 @@ export default {
     }
 
     if (path.startsWith('/api/call') && request.method === 'POST') {
-      return handleRestCall(request, corsHeaders);
+      return handleRestCall(request, corsHeaders, env, ctx);
     }
 
     if (path === '/' || path === '') {
@@ -595,7 +617,7 @@ function jamVote() {
   return { active: false, message: 'No active vote. Voting opens when a new Mod Jam is announced.' };
 }
 
-async function handleRestCall(request, corsHeaders) {
+async function handleRestCall(request, corsHeaders, env, ctx) {
   let body;
   try {
     body = await request.json();
@@ -607,6 +629,8 @@ async function handleRestCall(request, corsHeaders) {
   if (!tool) return json({ error: 'Missing "tool" field' }, corsHeaders, 400);
 
   const result = handleToolCall(tool, args || {});
+  const track = trackToolCall(tool, env, request);
+  if (track && ctx) ctx.waitUntil(track);
   const status = result.error ? 400 : 200;
   return json(result, corsHeaders, status);
 }
@@ -737,7 +761,7 @@ function handleMcpSse(request, corsHeaders) {
   });
 }
 
-async function handleMcpMessage(request, corsHeaders) {
+async function handleMcpMessage(request, corsHeaders, env, ctx) {
   let msg;
   try {
     msg = await request.json();
@@ -774,6 +798,8 @@ async function handleMcpMessage(request, corsHeaders) {
     case 'tools/call': {
       const { name, arguments: args } = params || {};
       const callResult = handleToolCall(name, args || {});
+      const track = trackToolCall(name, env, request);
+      if (track && ctx) ctx.waitUntil(track);
       result = {
         content: [{ type: 'text', text: JSON.stringify(callResult, null, 2) }],
         isError: !!callResult.error,
