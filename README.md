@@ -112,7 +112,7 @@ data/
 ├── mods.json               ← mod library (10 entries)
 ├── games.json              ← games (3 entries)
 ├── engines.json            ← engine listings (2 entries)
-├── mcp-tools.json          ← MCP tool registry (16 tools)
+├── mcp-tools.json          ← MCP tool registry (42 tools, 6 namespaces)
 ├── news.json               ← news posts (13 entries)
 └── team.json               ← team members (4 entries)
 ```
@@ -124,7 +124,7 @@ Pages load `mg-loader.js` (shared modules) + their own page script. Data is fetc
 ### Changelog
 
 #### 2026-06-10
-- Deployed MCP tools server at tools.moddable.games (16 AI-callable tools across 3 engines)
+- Deployed MCP tools server at tools.moddable.games (42 AI-callable tools across 6 namespaces)
 - Serves MCP protocol (SSE), REST API, llms.txt, OpenAPI 3.1, .well-known/mcp.json discovery
 - New /developers/ section: landing page + /api/ sub-page + /examples/ sub-page
 - Purple section accent (#8b5cf6), SVG hero feature, unique OG images

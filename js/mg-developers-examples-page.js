@@ -33,10 +33,10 @@ var liveIntegrations = [
   {
     title: 'MCP Server',
     subtitle: 'tools.moddable.games',
-    description: '39 AI-callable tools across chess analysis, hex map generation, rules library queries, classic game engines, and utilities. MCP + REST.',
+    description: '42 AI-callable tools across chess analysis, hex map generation, piece gallery search, rules library queries, classic game engines, and utilities. MCP + REST.',
     stats: [
-      { label: 'Tools', value: '39' },
-      { label: 'Namespaces', value: '5' },
+      { label: 'Tools', value: '42' },
+      { label: 'Namespaces', value: '6' },
       { label: 'Protocols', value: 'MCP + REST' }
     ],
     accent: 'blue',

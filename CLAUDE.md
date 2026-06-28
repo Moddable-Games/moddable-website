@@ -32,7 +32,7 @@ One shared component library (`_mg.js` + `_mg.css`), one page per HTML file.
 │   ├── mods.json           ← mod library (10 entries)
 │   ├── games.json          ← games (3 entries)
 │   ├── engines.json        ← engine/SDK listings (2 entries)
-│   ├── mcp-tools.json      ← MCP tool registry (39 tools, 5 namespaces)
+│   ├── mcp-tools.json      ← MCP tool registry (42 tools, 6 namespaces)
 │   ├── news.json           ← news posts (13 entries)
 │   └── team.json           ← team members (4 entries)
 │
@@ -74,13 +74,14 @@ One shared component library (`_mg.js` + `_mg.css`), one page per HTML file.
     ├── index.js            ← forms API Worker (subscribe, submit)
     ├── wrangler.toml       ← Cloudflare config for moddable-api
     ├── discord/
-    │   ├── index.js        ← The House Discord bot (30 slash commands)
+    │   ├── index.js        ← The House Discord bot (31 slash commands)
     │   ├── register-commands.js ← Discord command registration script
     │   └── wrangler.toml   ← Cloudflare config for moddable-bot
     └── mcp/
-        ├── index.js        ← MCP tools Worker (39 tools, 5 namespaces)
+        ├── index.js        ← MCP tools Worker (42 tools, 6 namespaces)
         ├── chess-tools.js  ← re-exports from moddable-chess/mcp/tools.js
         ├── hex-tools.js    ← re-exports from moddable-hexmaps/mcp/tools.js
+        ├── piece-gallery.js ← piece gallery tools (imports gallery-index.json from moddable-chess)
         ├── game-tools.js   ← classic game engines (Mancala, Morris, Ur, Pachisi, etc)
         ├── rules-tools.js  ← rules library tools (queries rules-index.json)
         ├── rules-index.json← search index from moddable-rules/dist/
@@ -93,8 +94,8 @@ One shared component library (`_mg.js` + `_mg.css`), one page per HTML file.
 ## MCP Tools Worker
 
 The repo contains a Cloudflare Worker at `workers/mcp/` that serves 39
-AI-callable tools across 5 namespaces (Chess, Hexmaps, Rules, Game Tools,
-Utilities).
+AI-callable tools across 6 namespaces (Chess, Hexmaps, Piece Gallery, Rules,
+Game Tools, Utilities).
 
 **Live at:** `https://tools.moddable.games/`
 
@@ -103,6 +104,7 @@ Utilities).
 - `/mcp/message` — POST endpoint for MCP JSON-RPC messages
 - `/api/call` — REST API (`POST {"tool": "name", "args": {...}}`)
 - `/api/tools` — GET tool listing with schemas
+- `/api/pieces.png` — GET piece set preview grid as PNG (`?set=chessnut&size=64`)
 - `/llms.txt` — AI-readable discovery file
 - `/openapi.json` — OpenAPI 3.1 spec
 - `/.well-known/mcp.json` — MCP server discovery manifest
@@ -110,6 +112,7 @@ Utilities).
 **Namespaces:**
 - **moddable-chess** (9 tools) — variant listing, legal moves, analysis, puzzles, SVG render
 - **moddable-hexmaps** (6 tools) — map generation, pathfinding, FOV, SVG export
+- **piece-gallery** (3 tools) — piece set search, get details, aggregate stats (96 sets, 19 families)
 - **moddable-rules** (5 tools) — game/variant lookup, search, random
 - **game-tools** (12 tools) — TI4 objectives/agendas/draft, Mancala, Morris, Ur, Pachisi, Nukes setup, Colony odds
 - **moddable-tools** (7 tools) — dice roll, faction assign, coin flip, team split, jam status/timer/vote
@@ -133,7 +136,7 @@ rendered via `@resvg/resvg-wasm` at `/api/board.png`.
 The repo contains a Cloudflare Worker at `workers/discord/` that powers "The
 House" — the server bot for the Moddable.Games Discord.
 
-**30 registered slash commands** consuming all 39 MCP tools via the REST API
+**31 registered slash commands** consuming all 42 MCP tools via the REST API
 bridge (`callTool` → `POST tools.moddable.games/api/call`).
 
 **Command groups:** Dice & Utilities, Chess (8 commands), Hex Maps, Rules

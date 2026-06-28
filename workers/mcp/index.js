@@ -2,6 +2,7 @@ import { CHESS_TOOLS, handleChessToolCall } from './chess-tools.js';
 import { HEX_TOOLS, handleHexToolCall } from './hex-tools.js';
 import { RULES_TOOLS, handleRulesToolCall } from './rules-tools.js';
 import { GAME_TOOLS, handleGameToolCall } from './game-tools.js';
+import { PIECE_GALLERY_TOOLS, handlePieceGalleryToolCall, renderPieceGridSvg } from './piece-gallery.js';
 import PUZZLE_POOL from './puzzle-pool.json';
 import { GameRoom } from './game-room.js';
 import { Resvg, initWasm } from '@resvg/resvg-wasm';
@@ -155,13 +156,14 @@ const ALL_TOOLS = [
   ...HEX_TOOLS,
   ...RULES_TOOLS,
   ...GAME_TOOLS,
+  ...PIECE_GALLERY_TOOLS,
   ...SITE_TOOLS,
 ];
 
 const SERVER_INFO = {
   name: 'moddable-tools',
-  version: '1.5.0',
-  description: 'AI-callable tools for chess variant analysis, hex map generation, rules library queries, and board game utilities',
+  version: '1.6.0',
+  description: 'AI-callable tools for chess variant analysis, hex map generation, piece gallery search, rules library queries, and board game utilities',
 };
 
 const PROMPTS = [
@@ -207,6 +209,12 @@ const RESOURCES = [
     uri: 'tools://moddable-games/ti4-factions',
     name: 'TI4 Faction List',
     description: 'All Twilight Imperium 4e factions (base + Prophecy of Kings expansion)',
+    mimeType: 'application/json',
+  },
+  {
+    uri: 'tools://moddable-games/piece-gallery',
+    name: 'Piece Gallery Stats',
+    description: 'Aggregate statistics for the piece gallery: 96 sets, 2,550 SVGs across 19 game families',
     mimeType: 'application/json',
   },
 ];
@@ -313,6 +321,10 @@ export default {
       return handleBoardPng(url, corsHeaders);
     }
 
+    if (path === '/api/pieces.png') {
+      return handlePiecesPng(url, corsHeaders);
+    }
+
     if (path.startsWith('/api/call') && request.method === 'POST') {
       return handleRestCall(request, corsHeaders);
     }
@@ -333,6 +345,7 @@ function handleToolCall(name, args) {
   if (name.startsWith('chess_')) return handleChessToolCall(name, args);
   if (name.startsWith('hex_')) return handleHexToolCall(name, args);
   if (name.startsWith('rules_')) return handleRulesToolCall(name, args);
+  if (name.startsWith('piece_gallery_')) return handlePieceGalleryToolCall(name, args);
   if (GAME_TOOLS.some(t => t.name === name)) return handleGameToolCall(name, args);
   if (name === 'dice_roll') return diceRoll(args);
   if (name === 'ti4_random_factions') return ti4RandomFactions(args);
@@ -645,6 +658,43 @@ async function handleBoardPng(url, corsHeaders) {
   }
 }
 
+async function handlePiecesPng(url, corsHeaders) {
+  const setId = url.searchParams.get('set');
+  const size = parseInt(url.searchParams.get('size') || '64');
+
+  if (!setId) {
+    return json({ error: 'set parameter is required (e.g. ?set=chessnut)' }, corsHeaders, 400);
+  }
+
+  const svg = await renderPieceGridSvg(setId, Math.min(Math.max(size, 32), 128));
+  if (!svg) {
+    return json({ error: `Set "${setId}" not found or has no pieces` }, corsHeaders, 404);
+  }
+
+  try {
+    if (!wasmReady) {
+      await initWasm(resvgWasm);
+      wasmReady = true;
+    }
+
+    const resvg = new Resvg(svg, {
+      fitTo: { mode: 'original' },
+    });
+    const pngData = resvg.render();
+    const pngBuffer = pngData.asPng();
+
+    return new Response(pngBuffer, {
+      headers: {
+        'Content-Type': 'image/png',
+        'Cache-Control': 'public, max-age=86400',
+        ...corsHeaders,
+      },
+    });
+  } catch (e) {
+    return json({ error: `PNG render failed: ${e.message}` }, corsHeaders, 500);
+  }
+}
+
 function handleMcpSse(request, corsHeaders) {
   const encoder = new TextEncoder();
   const { readable, writable } = new TransformStream();
@@ -840,6 +890,12 @@ function readResource(uri) {
         mimeType: 'application/json',
         text: JSON.stringify({ base: TI4_FACTIONS_BASE, pok: TI4_FACTIONS_POK, total: TI4_FACTIONS_BASE.length + TI4_FACTIONS_POK.length }, null, 2),
       };
+    case 'tools://moddable-games/piece-gallery':
+      return {
+        uri,
+        mimeType: 'application/json',
+        text: JSON.stringify(handlePieceGalleryToolCall('piece_gallery_stats', {}), null, 2),
+      };
     default:
       return { error: `Unknown resource: ${uri}` };
   }
@@ -849,7 +905,7 @@ function generateLlmsTxt() {
   let txt = `# Moddable.Games — AI Tool Server\n`;
   txt += `# https://tools.moddable.games\n\n`;
   txt += `> Moddable.Games provides open-source board game engines as AI-callable tools.\n`;
-  txt += `> ${ALL_TOOLS.length} tools across chess variant analysis (70+ variants, 1,500+ puzzles), hex map generation (6 games), rules library queries (18 game families, 1,100+ indexed entries), and board game utilities.\n\n`;
+  txt += `> ${ALL_TOOLS.length} tools across chess variant analysis (70+ variants, 1,500+ puzzles), piece gallery (96 sets, 2,550 SVGs), hex map generation (6 games), rules library queries (18 game families, 1,100+ indexed entries), and board game utilities.\n\n`;
   txt += `## Endpoints\n\n`;
   txt += `- MCP (SSE): https://tools.moddable.games/mcp\n`;
   txt += `- MCP (message): POST https://tools.moddable.games/mcp/message\n`;
@@ -913,12 +969,14 @@ function generateOpenApi() {
 function generateIndexHtml() {
   const chessTools = ALL_TOOLS.filter(t => t.name.startsWith('chess_'));
   const hexTools = ALL_TOOLS.filter(t => t.name.startsWith('hex_'));
-  const siteTools = ALL_TOOLS.filter(t => !t.name.startsWith('chess_') && !t.name.startsWith('hex_'));
+  const pieceTools = ALL_TOOLS.filter(t => t.name.startsWith('piece_gallery_'));
+  const siteTools = ALL_TOOLS.filter(t => !t.name.startsWith('chess_') && !t.name.startsWith('hex_') && !t.name.startsWith('piece_gallery_'));
 
   function toolCard(t) {
     let accent = '#3a9928';
     if (t.name.startsWith('chess_')) accent = '#0c4f8d';
     else if (t.name.startsWith('hex_')) accent = '#3a9928';
+    else if (t.name.startsWith('piece_gallery_')) accent = '#8b5cf6';
     else accent = '#d11a1a';
     return `<div class="tool-card" style="border-left-color:${accent}"><span class="tool-name" style="color:${accent === '#0c4f8d' ? '#6fb5ff' : accent}">${t.name}</span><span class="tool-desc">${t.description}</span></div>`;
   }
@@ -932,16 +990,16 @@ function generateIndexHtml() {
 <link rel="icon" href="https://moddable.games/img/favicon-32x32.png" sizes="32x32" type="image/png">
 <meta name="theme-color" content="#0a0d2a">
 <title>Moddable.Games — Tools API</title>
-<meta name="description" content="${ALL_TOOLS.length} AI-callable tools for chess variant analysis, hex map generation, and board game utilities.">
+<meta name="description" content="${ALL_TOOLS.length} AI-callable tools for chess variant analysis, piece gallery search, hex map generation, and board game utilities.">
 <meta property="og:title" content="Moddable.Games Tools API">
-<meta property="og:description" content="${ALL_TOOLS.length} AI-callable tools for chess variant analysis, hex map generation, and board game utilities. Connect via MCP or REST.">
+<meta property="og:description" content="${ALL_TOOLS.length} AI-callable tools for chess variant analysis, piece gallery search, hex map generation, and board game utilities. Connect via MCP or REST.">
 <meta property="og:url" content="https://tools.moddable.games/">
 <meta property="og:type" content="website">
 <meta property="og:site_name" content="Moddable.Games">
 <meta property="og:image" content="https://moddable.games/img/og/developers-api.png?v=${SERVER_INFO.version}">
 <meta name="twitter:card" content="summary_large_image">
 <meta name="twitter:title" content="Moddable.Games Tools API">
-<meta name="twitter:description" content="${ALL_TOOLS.length} AI-callable tools for chess variant analysis, hex map generation, and board game utilities.">
+<meta name="twitter:description" content="${ALL_TOOLS.length} AI-callable tools for chess variant analysis, piece gallery search, hex map generation, and board game utilities.">
 <meta name="twitter:image" content="https://moddable.games/img/og/developers-api.png?v=${SERVER_INFO.version}">
 <link rel="preconnect" href="https://fonts.googleapis.com">
 <link href="https://fonts.googleapis.com/css2?family=Inter+Tight:wght@600;700&family=Inter:wght@400;500&family=JetBrains+Mono:wght@400;500&family=Press+Start+2P&display=swap" rel="stylesheet">
@@ -1022,7 +1080,7 @@ a:hover{text-decoration:underline}
 <div class="hero">
   <div class="hero__eyebrow">MODDABLE.GAMES</div>
   <h1 class="hero__title">Tools API</h1>
-  <p class="hero__lede">${ALL_TOOLS.length} AI-callable tools for chess variant analysis, hex map generation, and board game utilities. Connect from any MCP client or call via REST.</p>
+  <p class="hero__lede">${ALL_TOOLS.length} AI-callable tools for chess variant analysis, piece gallery search, hex map generation, and board game utilities. Connect from any MCP client or call via REST.</p>
   <div class="hero__connect">
     <code>claude mcp add --transport http moddable-tools https://tools.moddable.games/mcp</code>
     <button class="hero__connect-copy" onclick="navigator.clipboard.writeText('claude mcp add --transport http moddable-tools https://tools.moddable.games/mcp');this.textContent='Copied';setTimeout(()=>this.textContent='Copy',2000)">Copy</button>
@@ -1067,6 +1125,14 @@ a:hover{text-decoration:underline}
     <div class="section__eyebrow">HEXMAPS &middot; ${hexTools.length} TOOLS</div>
     <h2 class="section__title">Map generation</h2>
     <div class="tools-grid">${hexTools.map(toolCard).join('')}</div>
+  </div>
+</div>
+
+<div class="section section--dark">
+  <div class="container">
+    <div class="section__eyebrow">PIECE GALLERY &middot; ${pieceTools.length} TOOLS</div>
+    <h2 class="section__title">Piece set discovery</h2>
+    <div class="tools-grid">${pieceTools.map(toolCard).join('')}</div>
   </div>
 </div>
 

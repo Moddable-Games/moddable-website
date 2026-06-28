@@ -128,6 +128,7 @@ async function handleCommand(interaction, env) {
     case 'morris': return cmdMorris(options, env);
     case 'ur': return cmdUr(options, env);
     case 'cowries': return cmdCowries(options, env);
+    case 'pieces': return cmdPieces(options, env);
     case 'help': return cmdHelp();
     default:
       return ephemeral(`Unknown command: \`/${name}\``);
@@ -417,6 +418,60 @@ async function cmdRandomGame(options, env) {
     });
   } catch (e) {
     return ephemeral(`Random game failed: ${e.message}`);
+  }
+}
+
+async function cmdPieces(options, env) {
+  const query = getOption(options, 'query') || undefined;
+  const family = getOption(options, 'family') || undefined;
+  const setId = getOption(options, 'set') || undefined;
+
+  if (setId) {
+    try {
+      const result = await callTool('piece_gallery_get_set', { id: setId }, env);
+      if (result.error) return ephemeral(result.error);
+      const previewUrl = `https://tools.moddable.games/api/pieces.png?set=${result.id}&size=80`;
+      let desc = `**Author:** ${result.author || 'Unknown'}`;
+      desc += `\n**License:** ${result.license || 'Unknown'}`;
+      desc += `\n**Family:** ${result.family}`;
+      desc += `\n**Pieces:** ${result.pieceCount}`;
+      desc += result.playable ? '\n✅ Playable on chess.moddable.games' : '';
+      desc += result.recolorable ? '\n🎨 Recolorable' : '';
+      if (result.source) desc += `\n\n[Source](${result.source})`;
+      desc += `\n[View in gallery](${result.galleryUrl})`;
+      return embedWithImage({
+        title: `🎨 ${result.name}`,
+        description: desc,
+        image: previewUrl,
+        footer: `${result.pieceCount} SVGs · ${result.family}`,
+        color: 0x8b5cf6,
+      });
+    } catch (e) {
+      return ephemeral(`Piece set lookup failed: ${e.message}`);
+    }
+  }
+
+  try {
+    const args = { limit: 10 };
+    if (query) args.query = query;
+    if (family) args.family = family;
+    const result = await callTool('piece_gallery_search', args, env);
+    if (!result.sets || result.sets.length === 0) {
+      return ephemeral(`No piece sets found${query ? ` matching "${query}"` : ''}${family ? ` in family "${family}"` : ''}.`);
+    }
+    const lines = result.sets.map(s =>
+      `**${s.name}** — ${s.family} · ${s.pieceCount} pieces · ${s.license}${s.playable ? ' ✅' : ''}`
+    );
+    let desc = lines.join('\n');
+    if (result.total > result.returned) desc += `\n\n*Showing ${result.returned} of ${result.total}. Use \`/pieces set:<id>\` for details.*`;
+    return embed({
+      title: `🎨 Piece Gallery${query ? `: "${query}"` : ''}${family ? ` (${family})` : ''}`,
+      description: desc,
+      footer: `${result.total} sets found · 96 total in gallery`,
+      color: 0x8b5cf6,
+    });
+  } catch (e) {
+    return ephemeral(`Piece gallery search failed: ${e.message}`);
   }
 }
 
@@ -797,6 +852,10 @@ function cmdHelp() {
       '`/search` — Search rules by keyword',
       '`/randomgame` — Random game or variant',
       '',
+      '**Piece Gallery**',
+      '`/pieces` — Browse 96 piece sets (search, filter by family)',
+      '`/pieces set:<id>` — View a specific set with preview image',
+      '',
       '**Twilight Imperium**',
       '`/factions` — Random faction assignment',
       '`/draft` — Milty draft with pick pools',
@@ -817,7 +876,7 @@ function cmdHelp() {
       '`/jam vote` — Vote standings',
       '',
     ].join('\n'),
-    footer: 'The House always wins. · 39 tools at tools.moddable.games',
+    footer: 'The House always wins. · 42 tools at tools.moddable.games',
     color: 0x0a0d2a,
   });
 }

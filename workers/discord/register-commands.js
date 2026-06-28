@@ -239,6 +239,28 @@ const commands = [
     ],
   },
   {
+    name: 'pieces',
+    description: 'Browse the piece gallery (96 sets, 2,550 SVGs across 19 game families)',
+    options: [
+      { name: 'set', type: 3, description: 'Get details + preview for a specific set ID (e.g. chessnut, kahu-shogi-international)', required: false },
+      { name: 'query', type: 3, description: 'Search by name, author, or ID', required: false },
+      { name: 'family', type: 3, description: 'Filter by game family', required: false, choices: [
+        { name: 'Chess', value: 'chess' },
+        { name: 'Shogi', value: 'shogi' },
+        { name: 'Xiangqi', value: 'xiangqi' },
+        { name: 'Draughts', value: 'draughts' },
+        { name: 'Janggi', value: 'janggi' },
+        { name: 'Go', value: 'go' },
+        { name: 'Oware', value: 'oware' },
+        { name: 'Abalone', value: 'abalone' },
+        { name: 'Othello', value: 'othello' },
+        { name: 'Backgammon', value: 'backgammon' },
+        { name: 'Emoji', value: 'emoji' },
+        { name: 'Fairy Chess', value: 'fairy-chess' },
+      ]},
+    ],
+  },
+  {
     name: 'help',
     description: 'Show all available commands',
     options: [],

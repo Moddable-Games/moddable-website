@@ -144,6 +144,32 @@
     ]
   },
   {
+    "namespace": "piece-gallery",
+    "engine": "Piece Gallery",
+    "engineUrl": "https://chess.moddable.games/docs/pieces.html",
+    "accent": "blue",
+    "tools": [
+      {
+        "name": "piece_gallery_search",
+        "description": "Search and filter piece sets from the gallery (96 sets, 2,550 SVGs across 19 game families). Filter by family, license, author, or search by name.",
+        "example": "Find all CC0-licensed shogi piece sets",
+        "returns": "Array of matching sets with metadata, piece counts, and preview URLs"
+      },
+      {
+        "name": "piece_gallery_get_set",
+        "description": "Get full details for a specific piece set including all piece files, SVG URLs, license info, and a rendered PNG preview.",
+        "example": "Show me the Chessnut piece set details",
+        "returns": "Full manifest with piece list, direct SVG URLs, preview image URL"
+      },
+      {
+        "name": "piece_gallery_stats",
+        "description": "Get aggregate statistics for the piece gallery: set counts by family, license distribution, author breakdown.",
+        "example": "How many piece sets are in the gallery?",
+        "returns": "Total sets, total SVGs, family/license/author breakdowns"
+      }
+    ]
+  },
+  {
     "namespace": "game-tools",
     "engine": "Game Tools",
     "engineUrl": "https://tools.moddable.games/",
