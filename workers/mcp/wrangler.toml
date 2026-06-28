@@ -1,7 +1,12 @@
 name = "moddable-tools"
 main = "index.js"
 compatibility_date = "2024-01-01"
+compatibility_flags = ["nodejs_compat"]
 workers_dev = true
+
+[[rules]]
+type = "Text"
+globs = ["**/*.svg"]
 
 [vars]
 ALLOWED_ORIGINS = "https://moddable.games,https://chess.moddable.games,https://hex.moddable.games,https://tools.moddable.games"

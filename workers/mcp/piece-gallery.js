@@ -252,25 +252,42 @@ export async function renderPieceGridSvg(setId, size) {
   );
   const svgTexts = await Promise.all(fetches);
 
-  let svg = `<svg xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink" width="${gridWidth}" height="${gridHeight}" viewBox="0 0 ${gridWidth} ${gridHeight}">`;
-  svg += `<rect width="${gridWidth}" height="${gridHeight}" fill="#1a1a2e" rx="4"/>`;
+  const defs = [];
+  const uses = [];
 
   for (let i = 0; i < keys.length; i++) {
     const col = i % cols;
     const row = Math.floor(i / cols);
     const x = col * (cellSize + padding);
     const y = row * (cellSize + padding);
-    svg += `<rect x="${x}" y="${y}" width="${cellSize}" height="${cellSize}" fill="#2a2a4a" rx="3"/>`;
+    uses.push(`<rect x="${x}" y="${y}" width="${cellSize}" height="${cellSize}" fill="#2a2a4a" rx="3"/>`);
 
     const raw = svgTexts[i];
     if (raw) {
       const vbMatch = raw.match(/viewBox=["']([^"']+)["']/);
       const vb = vbMatch ? vbMatch[1] : '0 0 45 45';
-      let inner = raw.replace(/<\?xml[^?]*\?>/g, '').replace(/<svg[^>]*>/, '').replace(/<\/svg>/, '').trim();
-      svg += `<svg x="${x + 4}" y="${y + 4}" width="${cellSize - 8}" height="${cellSize - 8}" viewBox="${vb}">${inner}</svg>`;
+      let inner = raw
+        .replace(/<\?xml[^?]*\?>/g, '')
+        .replace(/<!DOCTYPE[^>]*>/gi, '')
+        .replace(/<!--[\s\S]*?-->/g, '')
+        .replace(/<svg[\s\S]*?>/, '')
+        .replace(/<\/svg>\s*$/, '')
+        .replace(/\s*xmlns:\w+="[^"]*"/g, '')
+        .replace(/\s+(?!xlink:href)\w+:\w[\w.-]*="[^"]*"/g, '')
+        .replace(/<\w+:\w+[^>]*?\/>/g, '')
+        .replace(/<\w+:\w+[^>]*?>[\s\S]*?<\/\w+:\w+>/g, '')
+        .replace(/<metadata[\s\S]*?<\/metadata>/gi, '')
+        .trim();
+      const symbolId = `p${i}`;
+      defs.push(`<symbol id="${symbolId}" viewBox="${vb}">${inner}</symbol>`);
+      uses.push(`<use href="#${symbolId}" x="${x + 4}" y="${y + 4}" width="${cellSize - 8}" height="${cellSize - 8}"/>`);
     }
   }
 
+  let svg = `<svg xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink" width="${gridWidth}" height="${gridHeight}" viewBox="0 0 ${gridWidth} ${gridHeight}">`;
+  svg += `<defs>${defs.join('')}</defs>`;
+  svg += `<rect width="${gridWidth}" height="${gridHeight}" fill="#1a1a2e" rx="4"/>`;
+  svg += uses.join('');
   svg += `</svg>`;
   return svg;
 }
