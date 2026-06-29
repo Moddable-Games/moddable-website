@@ -79,137 +79,51 @@ data.get('chess-variants').then(function(raw) {
     const dims = v.board.split('×').map(Number);
     const cols = dims[0] || 8;
     const rows = dims[1] || 8;
-    iframe.src = CHESS_BASE + '?variant=' + v.key + '&embed=1&theme=light&radius=8px&boardonly=1&mode=solo';
+    iframe.src = CHESS_BASE + '?variant=' + v.key + '&embed=1&theme=light&radius=0&boardonly=1&mode=solo';
     iframe.className = 'chess-explorer__iframe';
     iframe.style.aspectRatio = cols + ' / ' + rows;
     iframe.setAttribute('title', 'Play ' + v.name);
     iframe.setAttribute('scrolling', 'no');
     embedWrap.appendChild(iframe);
     body.appendChild(embedWrap);
+
+    const statusBar = el('div', { class: 'chess-explorer__status', id: 'explorer-status' }, 'White to move');
+    body.appendChild(statusBar);
+
+    const analyzeToggle = el('details', { class: 'chess-explorer__analyze' });
+    const summary = el('summary', { class: 'chess-explorer__analyze-summary' }, 'Analyze a position');
+    analyzeToggle.appendChild(summary);
+
+    const analyzeForm = el('div', { class: 'chess-explorer__analyze-form' });
+    const fenInput = document.createElement('input');
+    fenInput.type = 'text';
+    fenInput.className = 'chess-explorer__analyze-input';
+    fenInput.placeholder = 'Paste FEN (or leave empty for starting position)';
+    analyzeForm.appendChild(fenInput);
+    analyzeForm.appendChild(btn('Analyze', 'red', function() { runAnalysis(v.key, fenInput.value.trim()); }));
+    analyzeToggle.appendChild(analyzeForm);
+
+    const analyzeResult = el('div', { class: 'chess-explorer__analyze-result', id: 'analyzer-result' });
+    analyzeToggle.appendChild(analyzeResult);
+    body.appendChild(analyzeToggle);
   }
 
-  function makeInfoCell(label, value) {
-    const cell = el('div', { class: 'chess-explorer__cell' });
-    cell.appendChild(el('span', { class: 'chess-explorer__cell-label' }, label));
-    cell.appendChild(el('span', { class: 'chess-explorer__cell-value' }, value));
-    return cell;
-  }
-
-  renderExplorer();
-
-  const countEl = document.getElementById('variant-count');
-  if (countEl) countEl.textContent = VARIANTS.length;
-});
-
-(function() {
-  const body = document.getElementById('chess-puzzle-body');
-  let puzzleData = null;
-
-  function renderPuzzle() {
-    body.innerHTML = '';
-    if (!puzzleData) {
-      body.appendChild(el('div', { class: 'chess-puzzle__loading' }, 'Loading puzzle...'));
-      return;
-    }
-    const p = puzzleData;
-    const meta = el('div', { class: 'chess-puzzle__meta' });
-    if (p.variant) meta.appendChild(el('span', { class: 'chess-puzzle__tag' }, p.variant));
-    if (p.type) meta.appendChild(el('span', { class: 'chess-puzzle__tag' }, p.type));
-    if (p.rating) meta.appendChild(el('span', { class: 'chess-puzzle__tag' }, 'Rating: ' + p.rating));
-    body.appendChild(meta);
-
-    if (p.svg) {
-      const board = el('div', { class: 'chess-puzzle__board' });
-      board.innerHTML = p.svg;
-      body.appendChild(board);
-    }
-
-    if (p.fen) {
-      const fen = el('div', { class: 'chess-puzzle__fen' });
-      fen.appendChild(el('span', { class: 'chess-puzzle__fen-label' }, 'FEN'));
-      fen.appendChild(el('code', { class: 'chess-puzzle__fen-value' }, p.fen));
-      body.appendChild(fen);
-    }
-
-    const hint = el('div', { class: 'chess-puzzle__hint' });
-    hint.appendChild(el('span', {}, p.toMove ? p.toMove + ' to move.' : 'Find the best move.'));
-    body.appendChild(hint);
-
-    if (p.solution) {
-      const solBtn = btn('Show solution', 'outline-light', function() {
-        solBtn.replaceWith(el('div', { class: 'chess-puzzle__solution' }, p.solution));
-      });
-      body.appendChild(solBtn);
-    }
-
-    body.appendChild(btn('New puzzle', 'blue', loadPuzzle));
-  }
-
-  async function loadPuzzle() {
-    puzzleData = null;
-    renderPuzzle();
-    try {
-      const res = await fetch(API_BASE + '/api/call', {
-        method: 'POST',
-        headers: { 'Content-Type': 'application/json' },
-        body: JSON.stringify({ tool: 'chess_generate_puzzle', args: { include_svg: true } })
-      });
-      const json = await res.json();
-      puzzleData = json.result || json;
-      renderPuzzle();
-    } catch (e) {
-      body.innerHTML = '';
-      body.appendChild(el('div', { class: 'chess-puzzle__error' }, 'Could not load puzzle. Try again.'));
-      body.appendChild(btn('Retry', 'blue', loadPuzzle));
-    }
-  }
-
-  loadPuzzle();
-})();
-
-(function() {
-  const body = document.getElementById('chess-analyzer-body');
-
-  const form = el('div', { class: 'chess-analyzer__form' });
-  const fenInput = document.createElement('input');
-  fenInput.type = 'text';
-  fenInput.className = 'chess-analyzer__input';
-  fenInput.placeholder = 'Paste FEN (or leave empty for starting position)';
-  form.appendChild(fenInput);
-
-  const varRow = el('div', { class: 'chess-analyzer__row' });
-  varRow.appendChild(el('span', { class: 'chess-analyzer__label' }, 'Variant:'));
-  const varInput = document.createElement('input');
-  varInput.type = 'text';
-  varInput.className = 'chess-analyzer__input chess-analyzer__input--small';
-  varInput.placeholder = 'standard';
-  varInput.value = 'standard';
-  varRow.appendChild(varInput);
-  form.appendChild(varRow);
-
-  form.appendChild(btn('Analyze', 'red', runAnalysis));
-  body.appendChild(form);
-
-  const resultArea = el('div', { class: 'chess-analyzer__result', id: 'analyzer-result' });
-  body.appendChild(resultArea);
-
-  async function runAnalysis() {
+  async function runAnalysis(variant, fen) {
     const result = document.getElementById('analyzer-result');
     result.innerHTML = '<div class="chess-analyzer__loading">Analyzing...</div>';
-    const fen = fenInput.value.trim() || undefined;
-    const variant = varInput.value.trim() || 'standard';
+    const fenArg = fen || undefined;
 
     try {
       const evalRes = await fetch(API_BASE + '/api/call', {
         method: 'POST',
         headers: { 'Content-Type': 'application/json' },
-        body: JSON.stringify({ tool: 'chess_analyze_position', args: { variant, fen, depth: 4 } })
+        body: JSON.stringify({ tool: 'chess_analyze_position', args: { variant, fen: fenArg, depth: 4 } })
       });
       const evaluation = await evalRes.json();
       const movesRes = await fetch(API_BASE + '/api/call', {
         method: 'POST',
         headers: { 'Content-Type': 'application/json' },
-        body: JSON.stringify({ tool: 'chess_get_legal_moves', args: { variant, fen } })
+        body: JSON.stringify({ tool: 'chess_get_legal_moves', args: { variant, fen: fenArg } })
       });
       const moves = await movesRes.json();
 
@@ -223,7 +137,7 @@ data.get('chess-variants').then(function(raw) {
       const svgRes = await fetch(API_BASE + '/api/call', {
         method: 'POST',
         headers: { 'Content-Type': 'application/json' },
-        body: JSON.stringify({ tool: 'chess_render_svg', args: { variant, fen, highlights } })
+        body: JSON.stringify({ tool: 'chess_render_svg', args: { variant, fen: fenArg, highlights } })
       });
       const svgJson = await svgRes.json();
       const svgData = svgJson.result || svgJson;
@@ -262,7 +176,215 @@ data.get('chess-variants').then(function(raw) {
       result.appendChild(el('div', { class: 'chess-analyzer__error' }, 'Analysis failed: ' + e.message));
     }
   }
+
+  function makeInfoCell(label, value) {
+    const cell = el('div', { class: 'chess-explorer__cell' });
+    cell.appendChild(el('span', { class: 'chess-explorer__cell-label' }, label));
+    cell.appendChild(el('span', { class: 'chess-explorer__cell-value' }, value));
+    return cell;
+  }
+
+  renderExplorer();
+
+  window.addEventListener('message', function(e) {
+    if (!e.data || e.data.type !== 'chess:status') return;
+    const statusEl = document.getElementById('explorer-status');
+    if (statusEl) statusEl.textContent = e.data.text;
+  });
+
+  const countEl = document.getElementById('variant-count');
+  if (countEl) countEl.textContent = VARIANTS.length;
+});
+
+(function() {
+  const body = document.getElementById('chess-puzzle-body');
+  let allPuzzles = [];
+  let variants = [];
+  let variantInfo = {};
+  let currentVariant = '';
+  let filtered = [];
+  let currentIdx = 0;
+  let svgCache = {};
+
+  function keyToSlug(key) {
+    return key.replace(/([A-Z])/g, '-$1').toLowerCase().replace(/^-/, '');
+  }
+
+  async function init() {
+    body.innerHTML = '';
+    body.appendChild(el('div', { class: 'chess-puzzle__loading' }, 'Loading puzzles...'));
+    try {
+      const [raw, varData] = await Promise.all([
+        data.get('puzzles-variants'),
+        data.get('chess-variants')
+      ]);
+      allPuzzles = raw.puzzles || raw;
+      varData.forEach(function(v) {
+        const key = v.key || slugToKey(v.slug);
+        variantInfo[key] = { special: v.special || '', win: v.win || '', board: v.board || '' };
+      });
+      const varSet = new Set(allPuzzles.map(p => p.variant));
+      variants = Array.from(varSet).sort();
+      currentVariant = '';
+      applyFilter();
+      render();
+    } catch (e) {
+      body.innerHTML = '';
+      body.appendChild(el('div', { class: 'chess-puzzle__error' }, 'Could not load puzzles.'));
+    }
+  }
+
+  function applyFilter() {
+    filtered = currentVariant
+      ? allPuzzles.filter(p => p.variant === currentVariant)
+      : allPuzzles;
+    currentIdx = 0;
+  }
+
+  function variantLabel(key) {
+    return key.replace(/([A-Z])/g, ' $1').replace(/^./, c => c.toUpperCase()).trim();
+  }
+
+  function render() {
+    body.innerHTML = '';
+
+    const controls = el('div', { class: 'chess-puzzle__controls' });
+    const sel = document.createElement('select');
+    sel.className = 'chess-puzzle__select';
+    const allOpt = document.createElement('option');
+    allOpt.value = '';
+    allOpt.textContent = 'All variants (' + allPuzzles.length + ')';
+    if (!currentVariant) allOpt.selected = true;
+    sel.appendChild(allOpt);
+    variants.forEach(function(v) {
+      const count = allPuzzles.filter(p => p.variant === v).length;
+      const opt = document.createElement('option');
+      opt.value = v;
+      opt.textContent = variantLabel(v) + ' (' + count + ')';
+      if (v === currentVariant) opt.selected = true;
+      sel.appendChild(opt);
+    });
+    sel.addEventListener('change', function() {
+      currentVariant = sel.value;
+      applyFilter();
+      render();
+      loadBoard();
+      if (track) track('puzzle_variant_select', { variant: currentVariant || 'all' });
+    });
+    controls.appendChild(sel);
+    body.appendChild(controls);
+
+    if (!filtered.length) {
+      body.appendChild(el('div', { class: 'chess-puzzle__loading' }, 'No puzzles found.'));
+      return;
+    }
+
+    const p = filtered[currentIdx];
+
+    const meta = el('div', { class: 'chess-puzzle__meta' });
+    meta.appendChild(el('span', { class: 'chess-puzzle__tag' }, variantLabel(p.variant)));
+    if (p.puzzleType) meta.appendChild(el('span', { class: 'chess-puzzle__tag chess-puzzle__tag--type' }, p.puzzleType));
+    if (p.rating) meta.appendChild(el('span', { class: 'chess-puzzle__tag' }, 'Rating: ' + p.rating));
+    body.appendChild(meta);
+
+    const info = variantInfo[p.variant];
+    if (info && info.special) {
+      body.appendChild(el('div', { class: 'chess-puzzle__variant-desc' }, info.special));
+    }
+
+    const boardWrap = el('div', { class: 'chess-puzzle__board', id: 'puzzle-board' });
+    const cached = svgCache[p.id];
+    if (cached) {
+      boardWrap.innerHTML = cached;
+    } else {
+      boardWrap.appendChild(el('div', { class: 'chess-puzzle__loading' }, 'Rendering board...'));
+    }
+    body.appendChild(boardWrap);
+
+    if (p.fen) {
+      const fen = el('div', { class: 'chess-puzzle__fen' });
+      fen.appendChild(el('span', { class: 'chess-puzzle__fen-label' }, 'FEN'));
+      fen.appendChild(el('code', { class: 'chess-puzzle__fen-value' }, p.fen));
+      body.appendChild(fen);
+    }
+
+    const toMove = p.fen ? (p.fen.split(' ')[1] === 'w' ? 'White' : 'Black') : '';
+    const hint = el('div', { class: 'chess-puzzle__hint' });
+    hint.appendChild(el('span', {}, toMove ? toMove + ' to move. Find the winning move.' : 'Find the winning move.'));
+    body.appendChild(hint);
+
+    const solWrap = el('div', { class: 'chess-puzzle__sol-wrap' });
+    const solBtn = btn('Show solution', 'outline-light', function() {
+      const moves = Array.isArray(p.solution) ? p.solution.join(', ') : p.solution;
+      solBtn.replaceWith(el('div', { class: 'chess-puzzle__solution' }, moves));
+      loadBoardWithHighlight(p);
+    });
+    solWrap.appendChild(solBtn);
+    body.appendChild(solWrap);
+
+    const nav = el('div', { class: 'chess-puzzle__nav' });
+    const prevBtn = btn('Prev', 'outline-light', function() {
+      currentIdx = (currentIdx - 1 + filtered.length) % filtered.length;
+      render();
+      loadBoard();
+    });
+    const counter = el('span', { class: 'chess-puzzle__counter' }, (currentIdx + 1) + ' / ' + filtered.length);
+    const nextBtn = btn('Next', 'outline-light', function() {
+      currentIdx = (currentIdx + 1) % filtered.length;
+      render();
+      loadBoard();
+    });
+    nav.appendChild(prevBtn);
+    nav.appendChild(counter);
+    nav.appendChild(nextBtn);
+    body.appendChild(nav);
+
+    if (!cached) loadBoard();
+  }
+
+  async function loadBoard() {
+    const p = filtered[currentIdx];
+    if (!p || svgCache[p.id]) return;
+    try {
+      const res = await fetch(API_BASE + '/api/call', {
+        method: 'POST',
+        headers: { 'Content-Type': 'application/json' },
+        body: JSON.stringify({ tool: 'chess_render_svg', args: { variant: p.variant, fen: p.fen } })
+      });
+      const json = await res.json();
+      const svg = (json.result || json).svg;
+      if (svg) {
+        svgCache[p.id] = svg;
+        const boardEl = document.getElementById('puzzle-board');
+        if (boardEl && filtered[currentIdx] && filtered[currentIdx].id === p.id) {
+          boardEl.innerHTML = svg;
+        }
+      }
+    } catch (e) {}
+  }
+
+  async function loadBoardWithHighlight(p) {
+    const move = Array.isArray(p.solution) ? p.solution[0] : p.solution;
+    if (!move) return;
+    const highlights = [move.slice(0, 2), move.slice(2, 4)];
+    try {
+      const res = await fetch(API_BASE + '/api/call', {
+        method: 'POST',
+        headers: { 'Content-Type': 'application/json' },
+        body: JSON.stringify({ tool: 'chess_render_svg', args: { variant: p.variant, fen: p.fen, highlights } })
+      });
+      const json = await res.json();
+      const svg = (json.result || json).svg;
+      if (svg) {
+        const boardEl = document.getElementById('puzzle-board');
+        if (boardEl) boardEl.innerHTML = svg;
+      }
+    } catch (e) {}
+  }
+
+  init();
 })();
+
 
 const engineBtns = document.getElementById('engine-btns');
 if (engineBtns) {
