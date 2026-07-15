@@ -1,4 +1,4 @@
-export { VERSION, T, F, HEX_BG, HEX_BG_RED, HEX_BG_GREEN, CATEGORY_COLORS, el, css, cubeSVG, url, rulesUrl, data, isLocal } from './mg-core.js';
+export { VERSION, T, F, HEX_BG, HEX_BG_RED, HEX_BG_GREEN, CATEGORY_COLORS, el, css, cubeSVG, url, rulesUrl, data, isLocal, API_BASE } from './mg-core.js';
 export { track } from './mg-analytics.js';
 export { btn, linkBtn } from './mg-buttons.js';
 export { modCard, pageHero } from './mg-cards.js';

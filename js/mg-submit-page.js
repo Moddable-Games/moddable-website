@@ -1,4 +1,4 @@
-import { T, el, url, track, btn, linkBtn, navbar, footer, sectionHero } from './mg.js';
+import { T, el, url, track, btn, linkBtn, navbar, footer, sectionHero, API_BASE } from './mg.js';
 document.getElementById('nav-root').appendChild(navbar('Mods'));
 document.getElementById('footer-root').appendChild(footer());
 
@@ -118,7 +118,7 @@ if (!document.getElementById('agree-check').checked) { alert('Please confirm the
 if (!formData.email || formData.email.indexOf('@') === -1) { alert('Please provide a valid email address in step 2.'); return; }
 submitBtn.disabled = true;
 submitBtn.textContent = 'Submitting...';
-fetch(url('/api/submit'), {
+fetch(API_BASE + '/api/submit', {
   method: 'POST',
   headers: { 'Content-Type': 'application/json' },
   body: JSON.stringify({

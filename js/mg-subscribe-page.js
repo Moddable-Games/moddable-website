@@ -1,4 +1,4 @@
-import { T, el, url, data, track, btn, navbar, footer, sectionHero } from './mg.js';
+import { T, el, url, data, track, btn, navbar, footer, sectionHero, API_BASE } from './mg.js';
 document.getElementById('nav-root').appendChild(navbar('About'));
 document.getElementById('footer-root').appendChild(footer());
 document.getElementById('page-hero').appendChild(sectionHero({
@@ -43,7 +43,7 @@ if (!email || email.indexOf('@') === -1) {
 }
 submitBtn.disabled = true;
 submitBtn.textContent = 'Subscribing...';
-fetch(url('/api/subscribe'), {
+fetch(API_BASE + '/api/subscribe', {
   method: 'POST',
   headers: { 'Content-Type': 'application/json' },
   body: JSON.stringify({ email: email, source: 'subscribe-page' })

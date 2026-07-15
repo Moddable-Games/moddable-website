@@ -1,10 +1,11 @@
-const VERSION = '1.5.0';
+const VERSION = '1.5.1';
 const META_BASE = (document.querySelector('meta[name="mg-base"]') || {}).content;
 const BASE = META_BASE != null ? META_BASE
   : location.pathname.includes('/MODDABLE/moddable-website')
     ? '/MODDABLE/moddable-website' : '';
 
 export function url(path) { return BASE + path; }
+export const API_BASE = 'https://moddable-website.neuroware.workers.dev';
 
 export const T = {
   red:"#d11a1a", redBright:"#e63232", redDeep:"#a31212",
