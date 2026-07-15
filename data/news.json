@@ -1,5 +1,37 @@
 [
   {
+    "slug": "the-civilization-loop",
+    "tags": ["Civilization", "Tech Trees", "Game History"],
+    "date": "Jul 2026",
+    "cover": "#1a3680",
+    "img": "the-civilization-loop.jpg",
+    "title": "The Civilization Loop",
+    "heroTitle": "The <em>Civilization</em> Loop.",
+    "lede": "How one board game invented the tech tree, became a video game, and then a board game again.",
+    "excerpt": "In 1980, a RAF radio instructor in Wales published a board game that invented the technology tree. Eleven years later, it became the most influential strategy franchise in computing history. Then it came back to cardboard.",
+    "theme": "blue",
+    "category": "ESSAY",
+    "readTime": "8 min read",
+    "author": "Mark Smalley",
+    "authorHandle": "Founder · moddable team",
+    "teamSlug": "mark",
+    "toc": [
+      { "label": "Wales, 1974", "id": "wales-1974" },
+      { "label": "The digital leap", "id": "the-digital-leap" },
+      { "label": "The detour", "id": "the-detour" },
+      { "label": "The loop closes", "id": "the-loop-closes" },
+      { "label": "The return", "id": "the-return" },
+      { "label": "Why this matters", "id": "why-this-matters" }
+    ],
+    "modCard": {
+      "eyebrow": "THE ENGINE",
+      "title": "Moddable Chess",
+      "version": "v0.10.0 · 75 variants",
+      "href": "/engines/moddable-chess/",
+      "btnLabel": "Try It"
+    }
+  },
+  {
     "slug": "the-infrastructure-behind-the-games",
     "tags": [
       "Chess",
