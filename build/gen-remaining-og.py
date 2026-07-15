@@ -174,7 +174,7 @@ def gen_news():
         layer = Image.new('RGBA', (WIDTH, HEIGHT), (0, 0, 0, 0))
         layer.paste(bordered, (cx, cy), bordered)
         img = Image.alpha_composite(img, layer)
-    add_text(img, 'NEWS', 'From the Table', '13 articles on modding, design and play', accent=NEWS)
+    add_text(img, 'NEWS', 'From the Table', 'Essays on modding, design and play', accent=NEWS)
     save(img, 'img/og/news.png')
 
 
