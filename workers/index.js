@@ -2,7 +2,8 @@ export default {
   async fetch(request, env) {
     const url = new URL(request.url);
     const origin = request.headers.get('Origin') || '';
-    const allowed = env.ALLOWED_ORIGIN || 'https://moddable.games';
+    const allowedOrigins = ['https://moddable.games', 'https://www.moddable.games'];
+    const allowed = allowedOrigins.includes(origin) ? origin : allowedOrigins[0];
 
     const corsHeaders = {
       'Access-Control-Allow-Origin': allowed,

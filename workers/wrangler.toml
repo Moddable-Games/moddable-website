@@ -2,6 +2,11 @@ name = "moddable-api"
 main = "index.js"
 compatibility_date = "2024-01-01"
 
+routes = [
+  { pattern = "moddable.games/api/*", zone_name = "moddable.games" },
+  { pattern = "www.moddable.games/api/*", zone_name = "moddable.games" }
+]
+
 [vars]
 ALLOWED_ORIGIN = "https://moddable.games"
 
