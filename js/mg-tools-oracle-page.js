@@ -7,8 +7,8 @@ document.getElementById('page-hero').appendChild(sectionHero({
   tier: 2,
   hexColor: 'blue',
   eyebrow: 'ORACLES',
-  title: 'Scene <em>Forge</em>',
-  lede: 'Compose narrative seeds from Starforged, Ironsworn, and D&D oracle tables.',
+  title: 'Roll the <em>narrative</em>',
+  lede: 'Scene generation, oracle rolls, and narrative threading for Starforged, Ironsworn, and D&D.',
 }));
 
 const TOOLS_API = 'https://tools.moddable.games/api/call';
@@ -225,6 +225,7 @@ function renderAskResult(panel) {
 
 // --- Thread Weaver ---
 function renderWeaver(panel) {
+  panel.innerHTML = '';
   const title = el('h2', { class: 'oracle-section-title' }, 'Thread Weaver');
   const sub = el('p', { class: 'oracle-section-sub' }, 'Maintain narrative threads. Roll in context and build connected stories.');
   panel.appendChild(title);
