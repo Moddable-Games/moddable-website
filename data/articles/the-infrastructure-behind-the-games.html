@@ -17,12 +17,12 @@
 <p><a href="/engines/moddable-hexmaps/">Hexmaps</a> is that platform made real. It generates, renders, and edits hex-based game boards via Canvas. Flat-top or pointy-top, any ring count, seeded RNG for reproducible generation, click-to-edit, JSON export/import, and a full URL param API for embedding. Six games already consume it:</p>
 
 <ul>
-  <li><strong>Nukes</strong> — territory maps with terrain generation across 2-6 rings</li>
-  <li><strong>Talisman Worlds</strong> — ring-based adventure boards with encounters</li>
-  <li><strong>Twilight Imperium</strong> — galaxy layouts from 3 to 8 players</li>
+  <li><strong><a href="/games/nukes/">Nukes</a></strong> — territory maps with terrain generation across 2-6 rings</li>
+  <li><strong><a href="/mods/talisman-worlds/">Talisman Worlds</a></strong> — ring-based adventure boards with encounters</li>
+  <li><strong><a href="/mods/hyper-imperium/">Twilight Imperium</a></strong> — galaxy layouts from 3 to 8 players</li>
   <li><strong>Colony</strong> — Seafarers-style terrain with number token constraints</li>
-  <li><strong>Planet Mongo</strong> — 127-hex planetary conquest maps</li>
-  <li><strong>Endless Skies</strong> — frontier exploration with wormholes and nebulae</li>
+  <li><strong><a href="/games/planet-mongo/">Planet Mongo</a></strong> — 127-hex planetary conquest maps</li>
+  <li><strong><a href="/games/endless-skies/">Endless Skies</a></strong> — frontier exploration with wormholes and nebulae</li>
 </ul>
 
 <p>Each game registers through <code>HexApp.registerGame</code> with its own terrain palette, generation rules, and editor controls. The engine handles coordinate math, rendering, sidebar UI, and embed bridging. The game plugin handles flavour.</p>
@@ -47,7 +47,7 @@
 
 <p>The third pillar in our open engine architecture is still in development. Moddable Rules is a shared rulebook system that builds themed, paginated rulebooks from structured content. Every game and mod gets a versioned rulebook built from the same design tokens, fonts, and layout components.</p>
 
-<p>It already ships rulebooks for Nukes, Hyper Imperium, Econopoly, Dungeon Chess, and Talisman Worlds. The build system generates OG images, search indices, and print-ready PDFs from the same source files. When it stabilises, it becomes the content layer that feeds into everything else. The engines handle play. The rules handle publishing. One game definition, multiple outputs.</p>
+<p>It already ships rulebooks for <a href="/games/nukes/">Nukes</a>, <a href="/mods/hyper-imperium/">Hyper Imperium</a>, <a href="/mods/econopoly/">Econopoly</a>, <a href="/mods/dungeon-chess/">Dungeon Chess</a>, and <a href="/mods/talisman-worlds/">Talisman Worlds</a>. The build system generates OG images, search indices, and print-ready PDFs from the same source files. When it stabilises, it becomes the content layer that feeds into everything else. The engines handle play. The rules handle publishing. One game definition, multiple outputs.</p>
 
 <h2 id="plugin-architecture">Plugin architecture</h2>
 
