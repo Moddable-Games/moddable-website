@@ -83,6 +83,109 @@ const RECIPES = {
   },
 };
 
+const NARRATIVE_TEMPLATES = {
+  starforged_scene: [
+    'A {descriptor} {focus} demands you {action} — the {theme} of this place runs deep.',
+    'Something here seeks to {action} the very {theme} you depend on. Before you: a {descriptor} {focus}.',
+    'You discover a {descriptor} {focus}. To press on, you must {action} what binds it to {theme}.',
+    'The {focus} is {descriptor}, pulsing with {theme}. Every instinct says: {action}, now.',
+    'Traces of {theme} linger around a {descriptor} {focus}. Someone tried to {action} it — and failed.',
+    '{theme} made manifest: a {descriptor} {focus} that will force you to {action} or be consumed.',
+    'A {descriptor} {focus} blocks the way. It radiates {theme}. You know you must {action}.',
+    'The signal resolves into a {descriptor} {focus}. Its {theme} is unmistakable. Will you {action}?',
+    'Here, {theme} takes the shape of a {descriptor} {focus}. You can {action} it, or let it consume you.',
+    'What was meant to {action} has become a {descriptor} {focus}, steeped in {theme}.',
+    'You arrive at a {descriptor} {focus} — someone tried to {action} the {theme} here and left only ruin.',
+    'The path forward demands you {action}. A {descriptor} {focus} stands between you and the {theme} you seek.',
+    'A {descriptor} {focus} hums with residual {theme}. The only move is to {action}.',
+    'Before you: proof that {theme} cannot be contained. A {descriptor} {focus}, waiting for someone to {action}.',
+    'You feel it before you see it — {theme}, concentrated in a {descriptor} {focus}. Time to {action}.',
+  ],
+  npc_encounter: [
+    '{name_given} {name_family}, callsign "{name_callsign}" — a {role} who appears {first_look}. Their manner is {initial_disposition}.',
+    'You meet {name_given} "{name_callsign}" {name_family}. {first_look} and clearly a {role}. They seem {initial_disposition}.',
+    'A {role} steps forward — {first_look}, {initial_disposition}. They introduce themselves as {name_given} {name_family}. On the comms, they go by "{name_callsign}".',
+    'The {role} called "{name_callsign}" is {first_look} and {initial_disposition}. Full name: {name_given} {name_family}.',
+    '{name_given} "{name_callsign}" {name_family} — {first_look}, a {role} by trade. Right now, they are {initial_disposition}.',
+  ],
+  starship_encounter: [
+    'A {type} hails you — the {starship_name}. First contact reads as {initial_contact}. They appear to be on a mission of {mission}.',
+    'Sensors lock onto a {type}: the {starship_name}. Their posture is {initial_contact}. Mission profile suggests {mission}.',
+    'The {starship_name}, a {type}, drops into range. Initial contact: {initial_contact}. Intelligence suggests their purpose is {mission}.',
+  ],
+  settlement_intro: [
+    '{name} — a {location} settlement of {population}. Authority here is {authority}. First impressions: {first_look}. Current focus: {projects}.',
+    'You arrive at {name}. {location}, population {population}. The authority is {authority}, and the place is focused on {projects}. It looks {first_look}.',
+    'Settlement {name}: {first_look}, {location}, home to {population}. Governance is {authority}. Primary industry: {projects}.',
+  ],
+  creature_encounter: [
+    'A creature emerges from the {environment} — {scale} in size, {first_look}. Its behaviour is {encountered_behavior}.',
+    '{first_look} and {scale}, this {environment} creature displays {encountered_behavior} behaviour.',
+    'From the {environment}: something {scale}, {first_look}. It seems {encountered_behavior}.',
+  ],
+  space_sighting: [
+    'Long-range sensors pick up a {sighting} near a {stellar_object}.',
+    'You spot a {sighting} — silhouetted against a {stellar_object}.',
+    'A {sighting} registers on the scope, drifting near a {stellar_object}.',
+  ],
+  faction_intro: [
+    'A {type} faction with {influence} influence. They call themselves the {name_legacy} {name_identity}. Current project: {projects}.',
+    'The {name_legacy} {name_identity} — a {type} organisation wielding {influence} influence. They are pursuing {projects}.',
+    'You learn of the {name_legacy} {name_identity}: {type}, {influence} influence, currently focused on {projects}.',
+  ],
+  sector_name: [
+    'The {sector_name_prefix} {sector_name_suffix}.',
+  ],
+  story_hook: [
+    'Complication: {story_complication}. But there is a clue — {story_clue}.',
+    'A thread unravels: {story_complication}. Follow the trail: {story_clue}.',
+    'Things fall apart — {story_complication}. Yet something remains: {story_clue}.',
+  ],
+  ironsworn_encounter: [
+    'The situation demands you {action}. The stakes: {theme}.',
+    'You must {action}. Everything hinges on {theme}.',
+    '{theme} drives what comes next — you must {action} or pay the price.',
+  ],
+  ironsworn_consequence: [
+    'The price: {pay-the-price}. And then the twist — {major-plot-twist}.',
+    'You pay dearly: {pay-the-price}. Worse still, {major-plot-twist}.',
+  ],
+};
+
+function aOrAn(word) {
+  return /^[aeiou]/i.test(word) ? 'an' : 'a';
+}
+
+function lowerFirst(word) {
+  if (!word) return '';
+  return word.charAt(0).toLowerCase() + word.slice(1);
+}
+
+function composeNarrative(recipeId, elements) {
+  const templates = NARRATIVE_TEMPLATES[recipeId];
+  if (!templates || !templates.length) return elements.map(e => e.result).join(' · ');
+
+  const template = templates[Math.floor(Math.random() * templates.length)];
+  const values = {};
+  for (const elem of elements) {
+    const key = elem.table.replace(/-/g, '_');
+    values[key] = elem.result;
+  }
+
+  const filled = template.replace(/\{([^}]+)\}/g, (_, key) => {
+    const k = key.replace(/-/g, '_');
+    if (values[k]) return values[k];
+    const lower = k.toLowerCase();
+    const match = elements.find(e => e.table.toLowerCase().includes(lower) || (e.tableName || '').toLowerCase().includes(lower));
+    return match ? match.result : key;
+  });
+
+  // Fix "a/an" before vowels
+  const withArticles = filled.replace(/\b(a) ([AEIOU])/g, 'an $2');
+
+  return withArticles;
+}
+
 function getTable(game, tableId) {
   const g = ORACLE_DATA[game || 'starforged'];
   if (!g) return null;
@@ -253,7 +356,7 @@ function oracleScene(args) {
       game: recipe.game,
       region: recipe.region_variants ? region : null,
       elements,
-      narrative: elements.map(e => e.result).join(' · '),
+      narrative: composeNarrative(args.recipe, elements),
     };
   }
 
