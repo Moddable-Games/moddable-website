@@ -6,7 +6,7 @@ export function footer() {
     { title:'Games',     href:url('/games/'),     links:[['Endless Skies',url('/games/endless-skies/')],['Planet Mongo',url('/games/planet-mongo/')],['Nukes',url('/games/nukes/')],['Rulebooks','https://rules.moddable.games/']] },
     { title:'Engines',   href:url('/engines/'),   links:[['Chess',url('/engines/moddable-chess/')],['Hexmaps',url('/engines/moddable-hexmaps/')]] },
     { title:'Developers', href:url('/developers/'), links:[['Tools API',url('/developers/api/')],['Examples',url('/developers/examples/')],['Live Server','https://tools.moddable.games/'],['GitHub','https://github.com/Moddable-Games']] },
-    { title:'Tools',     href:url('/tools/'),     links:[['Twilight',url('/tools/ti/')],['Talisman',url('/tools/talisman/')],['Nukes',url('/tools/nukes/')],['Dice',url('/tools/dice/')],['Decks',url('/tools/decks/')],['Chess',url('/tools/chess/')]] },
+    { title:'Tools',     href:url('/tools/'),     links:[['Twilight',url('/tools/ti/')],['Talisman',url('/tools/talisman/')],['Nukes',url('/tools/nukes/')],['Dice',url('/tools/dice/')],['Decks',url('/tools/decks/')],['Chess',url('/tools/chess/')],['Oracles',url('/tools/oracles/')]] },
     { title:'Community', href:url('/community/'), links:[['News',url('/news/')],['About',url('/about/')],['Roadmap',url('/about/roadmap/')],['Team',url('/team/')],['Press',url('/press/')],['Subscribe',url('/subscribe/')]] },
   ];
 

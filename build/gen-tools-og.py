@@ -67,6 +67,13 @@ TOOLS = [
         'color': (111, 181, 255),
         'icon': 'galaxy',
     },
+    {
+        'slug': 'tools-oracles',
+        'title': 'Oracles',
+        'subtitle': 'Scene Forge · Ask the Oracle · Thread Weaver',
+        'color': (111, 181, 255),
+        'icon': 'spiral',
+    },
 ]
 
 
