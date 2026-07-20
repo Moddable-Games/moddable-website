@@ -152,13 +152,36 @@ const NARRATIVE_TEMPLATES = {
   ],
 };
 
+function pickVariant(text) {
+  if (!text.includes(' / ')) return text;
+  const parts = text.split(' / ');
+  return parts[Math.floor(Math.random() * parts.length)].trim();
+}
+
+function mergeCompoundResults(resolved) {
+  const results = resolved.map(r => pickVariant(r.result));
+  const unique = [...new Set(results)];
+  if (unique.length === 1) return unique[0];
+  const fromActionTheme = resolved.some(r => r.table === 'action' || r.table === 'theme' || r.table === 'descriptor' || r.table === 'focus');
+  if (fromActionTheme && unique.length === 2) {
+    return unique[0] + ' ' + unique[1];
+  }
+  if (unique.length === 2) return unique[0] + ', also ' + unique[1].toLowerCase();
+  return unique.join(', ');
+}
+
 function sanitiseValue(text) {
   if (!text) return '';
-  return text
+  let val = text
     .replace(/\s*[—–]\s*.+$/, '')    // strip " — description" suffixes
     .replace(/\s*\([^)]*\)/g, '')     // strip all (parentheticals)
     .replace(/\.+$/, '')              // strip trailing periods
     .trim();
+  if (val.includes(' / ')) {
+    const parts = val.split(' / ');
+    val = parts[Math.floor(Math.random() * parts.length)].trim();
+  }
+  return val;
 }
 
 function composeNarrative(recipeId, elements) {
@@ -350,7 +373,7 @@ function oracleScene(args) {
       const r = rollOnTable(table);
       if (isCompoundResult(r.result)) {
         const resolved = resolveCompound(recipe.game, r.result, tid, 0);
-        elements.push({ table: tid, tableName: table.name, roll: r.roll, die: r.die, result: resolved.map(x => x.result).join(' and ') });
+        elements.push({ table: tid, tableName: table.name, roll: r.roll, die: r.die, result: mergeCompoundResults(resolved) });
       } else {
         elements.push({ table: tid, tableName: table.name, ...r });
       }
