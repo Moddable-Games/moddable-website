@@ -119,13 +119,17 @@
 }
 .oracle-forge-btn:hover { background: #2a2d34; }
 
-/* Result cards grid */
+/* Result cards grid — adapts to card count via JS class */
 .oracle-results {
   display: grid;
   grid-template-columns: repeat(4, 1fr);
   gap: 12px;
   margin-top: 24px;
 }
+.oracle-results--cols-3 { grid-template-columns: repeat(3, 1fr); }
+.oracle-results--cols-5 { grid-template-columns: repeat(5, 1fr); }
+.oracle-results--cols-6 { grid-template-columns: repeat(3, 1fr); }
+.oracle-results--cols-2 { grid-template-columns: repeat(2, 1fr); }
 .oracle-result-card {
   background: #f5f4ef;
   border: 1px solid #e6e3d8;
