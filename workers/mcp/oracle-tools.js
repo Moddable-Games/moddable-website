@@ -181,7 +181,9 @@ function composeNarrative(recipeId, elements) {
   });
 
   // Fix "a/an" before vowels
-  const withArticles = filled.replace(/\b(a) ([AEIOU])/g, 'an $2');
+  const withArticles = filled
+    .replace(/\bA ([AEIOU])/g, 'An $1')
+    .replace(/\ba ([AEIOUaeiou])/g, 'an $1');
 
   return withArticles;
 }
