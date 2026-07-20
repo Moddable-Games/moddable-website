@@ -112,7 +112,7 @@ data/
 ├── mods.json               ← mod library (10 entries)
 ├── games.json              ← games (3 entries)
 ├── engines.json            ← engine listings (2 entries)
-├── mcp-tools.json          ← MCP tool registry (42 tools, 6 namespaces)
+├── mcp-tools.json          ← MCP tool registry (50 tools, 7 namespaces)
 ├── news.json               ← news posts (13 entries)
 └── team.json               ← team members (4 entries)
 ```
@@ -122,6 +122,15 @@ Pages load `mg-loader.js` (shared modules) + their own page script. Data is fetc
 ---
 
 ### Changelog
+
+#### 2026-07-20
+- Added GA4 analytics tracking to all untracked interactive modules
+- API playground: tool select, category expand, tool run events
+- Hex embed: layout, size, player, style changes and map generation
+- TI Dashboard: game start, strategy picks, pass, Mecatol claims, agenda draw/resolve, game over
+- Registered `tool_name` custom dimension in GA4 for per-MCP-tool breakdowns
+- D&D Encounter Builder, Discord oracle commands, and /test suite (from prior session)
+- Closed issues #131, #132, #135
 
 #### 2026-06-10
 - Deployed MCP tools server at tools.moddable.games (42 AI-callable tools across 6 namespaces)
