@@ -32,7 +32,7 @@ One shared component library (`_mg.js` + `_mg.css`), one page per HTML file.
 │   ├── mods.json           ← mod library (10 entries)
 │   ├── games.json          ← games (3 entries)
 │   ├── engines.json        ← engine/SDK listings (2 entries)
-│   ├── mcp-tools.json      ← MCP tool registry (49 tools, 7 namespaces)
+│   ├── mcp-tools.json      ← MCP tool registry (50 tools, 7 namespaces)
 │   ├── news.json           ← news posts (13 entries)
 │   └── team.json           ← team members (4 entries)
 │
@@ -79,7 +79,7 @@ One shared component library (`_mg.js` + `_mg.css`), one page per HTML file.
     │   ├── register-commands.js ← Discord command registration script
     │   └── wrangler.toml   ← Cloudflare config for moddable-bot
     └── mcp/
-        ├── index.js        ← MCP tools Worker (49 tools, 7 namespaces)
+        ├── index.js        ← MCP tools Worker (50 tools, 7 namespaces)
         ├── chess-tools.js  ← re-exports from moddable-chess/mcp/tools.js
         ├── hex-tools.js    ← re-exports from moddable-hexmaps/mcp/tools.js
         ├── piece-gallery.js ← piece gallery tools (imports gallery-index.json from moddable-chess)
@@ -97,7 +97,7 @@ One shared component library (`_mg.js` + `_mg.css`), one page per HTML file.
 
 ## MCP Tools Worker
 
-The repo contains a Cloudflare Worker at `workers/mcp/` that serves 49
+The repo contains a Cloudflare Worker at `workers/mcp/` that serves 50
 AI-callable tools across 7 namespaces (Chess, Hexmaps, Piece Gallery, Rules,
 Game Tools, Oracles, Utilities).
 
@@ -141,7 +141,7 @@ rendered via `@resvg/resvg-wasm` at `/api/board.png`.
 The repo contains a Cloudflare Worker at `workers/discord/` that powers "The
 House" — the server bot for the Moddable.Games Discord.
 
-**31 registered slash commands** consuming all 42 MCP tools via the REST API
+**33 registered slash commands** consuming all 50 MCP tools via the REST API
 bridge (`callTool` → `POST tools.moddable.games/api/call`).
 
 **Command groups:** Dice & Utilities, Chess (8 commands), Hex Maps, Rules

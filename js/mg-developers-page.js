@@ -10,7 +10,7 @@ document.getElementById('page-hero').appendChild(sectionHero({
   hexColor: 'purple',
   eyebrow: 'DEVELOPERS',
   title: 'Board game engines as <em>AI</em> tools',
-  lede: '42 callable tools across six namespaces. Connect from any MCP client, call via REST, or build bots for Telegram, Slack, and Discord.',
+  lede: '50 callable tools across seven namespaces. Connect from any MCP client, call via REST, or build bots for Telegram, Slack, and Discord.',
   feature: buildHeroFeature('developers')
 }));
 
@@ -18,9 +18,9 @@ document.getElementById('page-hero').appendChild(sectionHero({
 var destinations = [
   {
     title: 'Tools API',
-    body: '42 tools for chess, hex maps, piece gallery, rules queries, classic game engines, and utilities. Connect in one command via MCP or call via REST.',
+    body: '50 tools for chess, hex maps, piece gallery, rules queries, oracles, classic game engines, and utilities. Connect in one command via MCP or call via REST.',
     href: url('/developers/api/'),
-    stat: '42 tools',
+    stat: '50 tools',
     accent: 'blue'
   },
   {

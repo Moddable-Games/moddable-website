@@ -375,6 +375,110 @@
   font-size: 0.9rem;
 }
 
+/* Encounter Builder */
+.oracle-encounter-controls { margin-bottom: 24px; }
+.oracle-encounter-row {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 12px;
+  margin-bottom: 12px;
+}
+.oracle-encounter-field { display: flex; flex-direction: column; gap: 4px; flex: 1; min-width: 100px; }
+.oracle-encounter-field__label {
+  font-family: var(--mg-font-mono);
+  font-size: 0.65rem;
+  color: #6b6e76;
+  text-transform: uppercase;
+  letter-spacing: 0.5px;
+}
+.oracle-encounter-field__input {
+  background: #fff;
+  border: 1px solid #e6e3d8;
+  border-radius: 8px;
+  padding: 10px 12px;
+  color: #14161c;
+  font-family: var(--mg-font-body);
+  font-size: 0.875rem;
+  outline: none;
+  width: 100%;
+  box-sizing: border-box;
+}
+.oracle-encounter-field__input:focus { border-color: #14161c; }
+
+.oracle-encounter-results { margin-top: 24px; }
+
+.oracle-encounter-header {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 10px;
+  align-items: center;
+  margin-top: 16px;
+  margin-bottom: 16px;
+}
+.oracle-encounter-badge {
+  font-family: var(--mg-font-mono);
+  font-size: 0.7rem;
+  font-weight: 600;
+  padding: 4px 10px;
+  border-radius: 9999px;
+  color: #fff;
+}
+.oracle-encounter-badge--easy { background: #3a9928; }
+.oracle-encounter-badge--medium { background: #d4a017; }
+.oracle-encounter-badge--hard { background: #d46017; }
+.oracle-encounter-badge--deadly { background: #d11a1a; }
+.oracle-encounter-terrain {
+  font-family: var(--mg-font-display);
+  font-size: 0.9rem;
+  font-weight: 600;
+  color: #14161c;
+}
+.oracle-encounter-xp {
+  font-family: var(--mg-font-mono);
+  font-size: 0.75rem;
+  color: #6b6e76;
+}
+
+.oracle-encounter-loot {
+  margin-top: 20px;
+  padding-top: 16px;
+  border-top: 1px solid #e6e3d8;
+}
+.oracle-encounter-loot__title {
+  font-family: var(--mg-font-mono);
+  font-size: 0.7rem;
+  color: #6b6e76;
+  text-transform: uppercase;
+  letter-spacing: 0.5px;
+  margin-bottom: 10px;
+}
+.oracle-encounter-loot__item {
+  display: flex;
+  align-items: center;
+  gap: 10px;
+  padding: 6px 0;
+}
+.oracle-encounter-loot__name {
+  font-family: var(--mg-font-display);
+  font-size: 0.9rem;
+  font-weight: 500;
+  color: #14161c;
+}
+.oracle-encounter-loot__rarity {
+  font-family: var(--mg-font-mono);
+  font-size: 0.65rem;
+  padding: 2px 8px;
+  border-radius: 9999px;
+  border: 1px solid #e6e3d8;
+  color: #6b6e76;
+}
+.oracle-encounter-loot__rarity--common { color: #6b6e76; border-color: #e6e3d8; }
+.oracle-encounter-loot__rarity--uncommon { color: #3a9928; border-color: #3a9928; }
+.oracle-encounter-loot__rarity--rare { color: #0c4f8d; border-color: #0c4f8d; }
+.oracle-encounter-loot__rarity--very-rare { color: #7b5ea7; border-color: #7b5ea7; }
+.oracle-encounter-loot__rarity--legendary { color: #d4a017; border-color: #d4a017; }
+.oracle-encounter-loot__rarity--artifact { color: #d11a1a; border-color: #d11a1a; }
+
 /* Mobile */
 @media (max-width: 768px) {
   .oracle-body { padding: 36px 20px 64px; }
@@ -384,4 +488,6 @@
   .oracle-controls { flex-direction: column; align-items: stretch; }
   .oracle-select { min-width: 0; }
   .oracle-answer__verdict { font-size: 2.5rem; }
+  .oracle-encounter-row { flex-direction: column; }
+  .oracle-encounter-field { min-width: 0; }
 }

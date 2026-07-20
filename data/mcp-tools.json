@@ -250,6 +250,62 @@
     ]
   },
   {
+    "namespace": "oracles",
+    "engine": "Oracles",
+    "engineUrl": "https://moddable.games/tools/oracles/",
+    "accent": "blue",
+    "tools": [
+      {
+        "name": "oracle_list_tables",
+        "description": "List all oracle tables for Starforged or Ironsworn, optionally filtered by category.",
+        "example": "What oracle tables are available for Starforged?",
+        "returns": "Array of tables with IDs, names, roll types, and categories"
+      },
+      {
+        "name": "oracle_roll",
+        "description": "Roll on a specific Starforged or Ironsworn oracle table.",
+        "example": "Roll on the Starforged Action oracle",
+        "returns": "Dice roll and result text from the table"
+      },
+      {
+        "name": "oracle_ask",
+        "description": "Ask the Oracle a yes/no question with likelihood modifier. Implements match detection for twists.",
+        "example": "Ask the oracle with 'likely' likelihood: does the NPC cooperate?",
+        "returns": "Verdict (yes/no/strong yes/strong no), roll, match status"
+      },
+      {
+        "name": "oracle_scene",
+        "description": "Generate a narrative seed by rolling multiple oracle tables using named recipes or custom table lists.",
+        "example": "Generate a Starforged NPC encounter in the Outlands",
+        "returns": "Composed narrative paragraph with individual roll elements"
+      },
+      {
+        "name": "oracle_list_recipes",
+        "description": "List predefined scene recipes — curated multi-table compositions for narrative prompts.",
+        "example": "What oracle recipes are available?",
+        "returns": "Array of recipes with ID, name, game, description, tables"
+      },
+      {
+        "name": "oracle_interpret",
+        "description": "Resolve oracle cross-references like 'Action + Theme' or 'Roll twice'.",
+        "example": "Interpret the oracle result 'Descriptor + Focus'",
+        "returns": "Expanded results from following the reference chain"
+      },
+      {
+        "name": "oracle_table_view",
+        "description": "View the complete contents of an oracle table with all roll ranges and results.",
+        "example": "Show me the full Starforged Theme oracle table",
+        "returns": "All entries with min/max roll ranges and result text"
+      },
+      {
+        "name": "oracle_encounter",
+        "description": "Generate a D&D 5e encounter with CR-appropriate monsters, terrain, and loot from the SRD.",
+        "example": "Generate a hard encounter for 4 level-7 players in a dungeon",
+        "returns": "Monster group, terrain, XP budget, and magic item loot"
+      }
+    ]
+  },
+  {
     "namespace": "moddable-tools",
     "engine": "Moddable Tools",
     "engineUrl": "https://moddable.games/tools/",

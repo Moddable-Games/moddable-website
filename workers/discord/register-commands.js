@@ -261,6 +261,33 @@ const commands = [
     ],
   },
   {
+    name: 'oracle',
+    description: 'Roll Starforged/Ironsworn oracles — scene forge, ask the oracle, or roll a table',
+    options: [
+      { name: 'mode', type: 3, description: 'What to do', required: true, choices: [{ name: 'Forge a scene', value: 'forge' }, { name: 'Ask yes/no', value: 'ask' }, { name: 'Roll a table', value: 'roll' }] },
+      { name: 'recipe', type: 3, description: 'Scene recipe (for forge mode)', required: false },
+      { name: 'likelihood', type: 3, description: 'Likelihood (for ask mode)', required: false, choices: [{ name: 'Almost Certain', value: 'almost_certain' }, { name: 'Likely', value: 'likely' }, { name: '50/50', value: 'fifty_fifty' }, { name: 'Unlikely', value: 'unlikely' }, { name: 'Small Chance', value: 'small_chance' }] },
+      { name: 'table', type: 3, description: 'Table ID (for roll mode, e.g. "action", "theme")', required: false },
+      { name: 'question', type: 3, description: 'Your question (for ask mode)', required: false },
+    ],
+  },
+  {
+    name: 'encounter',
+    description: 'Generate a D&D 5e encounter with CR-appropriate monsters and loot',
+    options: [
+      { name: 'difficulty', type: 3, description: 'Encounter difficulty', required: false, choices: [{ name: 'Easy', value: 'easy' }, { name: 'Medium', value: 'medium' }, { name: 'Hard', value: 'hard' }, { name: 'Deadly', value: 'deadly' }] },
+      { name: 'level', type: 4, description: 'Party level (1-20)', required: false },
+      { name: 'players', type: 4, description: 'Number of players (1-10)', required: false },
+      { name: 'type', type: 3, description: 'Monster type filter', required: false, choices: [{ name: 'Undead', value: 'undead' }, { name: 'Dragon', value: 'dragon' }, { name: 'Fiend', value: 'fiend' }, { name: 'Beast', value: 'beast' }, { name: 'Humanoid', value: 'humanoid' }, { name: 'Aberration', value: 'aberration' }, { name: 'Monstrosity', value: 'monstrosity' }, { name: 'Elemental', value: 'elemental' }, { name: 'Construct', value: 'construct' }, { name: 'Giant', value: 'giant' }] },
+      { name: 'terrain', type: 3, description: 'Terrain type', required: false, choices: [{ name: 'Forest', value: 'Forest' }, { name: 'Cavern', value: 'Cavern' }, { name: 'Dungeon', value: 'Dungeon' }, { name: 'Swamp', value: 'Swamp' }, { name: 'Mountain', value: 'Mountain' }, { name: 'Desert', value: 'Desert' }, { name: 'Urban', value: 'Urban' }, { name: 'Arctic', value: 'Arctic' }] },
+    ],
+  },
+  {
+    name: 'test',
+    description: 'Run the full tool test suite — calls every tool and reports pass/fail',
+    options: [],
+  },
+  {
     name: 'help',
     description: 'Show all available commands',
     options: [],

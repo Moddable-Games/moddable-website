@@ -21,6 +21,7 @@ const TABS = [
   { id: 'forge', label: 'Scene Forge' },
   { id: 'ask', label: 'Ask the Oracle' },
   { id: 'weaver', label: 'Thread Weaver' },
+  { id: 'encounter', label: 'Encounter Builder' },
 ];
 
 let activeTab = 'forge';
@@ -30,6 +31,8 @@ let selectedRegion = 'terminus';
 let lastScene = null;
 let askLikelihood = 'fifty_fifty';
 let lastAnswer = null;
+let encounterSettings = { partyLevel: 5, partySize: 4, difficulty: 'medium', monsterType: '', terrain: '', lootTier: 'medium' };
+let lastEncounter = null;
 
 const THREADS_KEY = 'mg_oracle_threads';
 let threads = JSON.parse(localStorage.getItem(THREADS_KEY) || '[]');
@@ -64,6 +67,7 @@ function renderPanel() {
   if (activeTab === 'forge') renderForge(panel);
   else if (activeTab === 'ask') renderAsk(panel);
   else if (activeTab === 'weaver') renderWeaver(panel);
+  else if (activeTab === 'encounter') renderEncounter(panel);
 }
 
 // --- Scene Forge ---
@@ -321,6 +325,138 @@ function renderWeaver(panel) {
     });
     panel.appendChild(rollsList);
   }
+}
+
+// --- Encounter Builder ---
+const MONSTER_TYPES = ['any','aberration','beast','celestial','construct','dragon','elemental','fey','fiend','giant','humanoid','monstrosity','ooze','plant','undead'];
+const TERRAINS = ['Random','Forest','Cavern','Dungeon','Swamp','Mountain','Desert','Coastal','Arctic','Urban','Planar','Underwater','Grassland'];
+const DIFFICULTIES = ['easy','medium','hard','deadly'];
+const LOOT_TIERS = ['none','low','medium','high','legendary'];
+
+function renderEncounter(panel) {
+  panel.innerHTML = '';
+  const title = el('h2', { class: 'oracle-section-title' }, 'Encounter Builder');
+  const sub = el('p', { class: 'oracle-section-sub' }, 'Generate CR-appropriate D&D 5e encounters with terrain and loot.');
+  panel.appendChild(title);
+  panel.appendChild(sub);
+
+  const controls = el('div', { class: 'oracle-encounter-controls' });
+
+  const row1 = el('div', { class: 'oracle-encounter-row' });
+  row1.appendChild(makeNumberInput('Level', encounterSettings.partyLevel, 1, 20, v => { encounterSettings.partyLevel = v; }));
+  row1.appendChild(makeNumberInput('Party', encounterSettings.partySize, 1, 10, v => { encounterSettings.partySize = v; }));
+  row1.appendChild(makeSelect('Difficulty', DIFFICULTIES, encounterSettings.difficulty, v => { encounterSettings.difficulty = v; }));
+  controls.appendChild(row1);
+
+  const row2 = el('div', { class: 'oracle-encounter-row' });
+  row2.appendChild(makeSelect('Monster Type', MONSTER_TYPES, encounterSettings.monsterType || 'any', v => { encounterSettings.monsterType = v === 'any' ? '' : v; }));
+  row2.appendChild(makeSelect('Terrain', TERRAINS, encounterSettings.terrain || 'Random', v => { encounterSettings.terrain = v === 'Random' ? '' : v; }));
+  row2.appendChild(makeSelect('Loot Tier', LOOT_TIERS, encounterSettings.lootTier, v => { encounterSettings.lootTier = v; }));
+  controls.appendChild(row2);
+
+  const generateBtn = document.createElement('button');
+  generateBtn.className = 'oracle-forge-btn';
+  generateBtn.textContent = 'Generate Encounter';
+  generateBtn.addEventListener('click', async () => {
+    generateBtn.textContent = '...';
+    const args = {
+      party_level: encounterSettings.partyLevel,
+      party_size: encounterSettings.partySize,
+      difficulty: encounterSettings.difficulty,
+      loot_tier: encounterSettings.lootTier,
+    };
+    if (encounterSettings.monsterType) args.monster_type = encounterSettings.monsterType;
+    if (encounterSettings.terrain) args.terrain = encounterSettings.terrain;
+    const result = await callTool('oracle_encounter', args);
+    lastEncounter = result;
+    track('oracle_encounter', { difficulty: encounterSettings.difficulty, level: encounterSettings.partyLevel });
+    renderEncounterResults(panel);
+    generateBtn.textContent = 'Generate Encounter';
+  });
+  controls.appendChild(generateBtn);
+  panel.appendChild(controls);
+
+  if (lastEncounter) renderEncounterResults(panel);
+}
+
+function makeNumberInput(label, value, min, max, onChange) {
+  const wrap = el('div', { class: 'oracle-encounter-field' });
+  wrap.appendChild(el('label', { class: 'oracle-encounter-field__label' }, label));
+  const input = document.createElement('input');
+  input.type = 'number';
+  input.className = 'oracle-encounter-field__input';
+  input.min = min;
+  input.max = max;
+  input.value = value;
+  input.addEventListener('change', () => { onChange(parseInt(input.value, 10) || min); });
+  wrap.appendChild(input);
+  return wrap;
+}
+
+function makeSelect(label, options, current, onChange) {
+  const wrap = el('div', { class: 'oracle-encounter-field' });
+  wrap.appendChild(el('label', { class: 'oracle-encounter-field__label' }, label));
+  const select = document.createElement('select');
+  select.className = 'oracle-select';
+  options.forEach(opt => {
+    const o = document.createElement('option');
+    o.value = opt;
+    o.textContent = opt.charAt(0).toUpperCase() + opt.slice(1);
+    if (opt === current) o.selected = true;
+    select.appendChild(o);
+  });
+  select.addEventListener('change', () => { onChange(select.value); });
+  wrap.appendChild(select);
+  return wrap;
+}
+
+function renderEncounterResults(panel) {
+  let existing = panel.querySelector('.oracle-encounter-results');
+  if (existing) existing.remove();
+
+  if (!lastEncounter || lastEncounter.error) {
+    if (lastEncounter?.error) {
+      const err = el('div', { class: 'oracle-encounter-results' });
+      err.appendChild(el('div', { class: 'oracle-empty' }, lastEncounter.error));
+      panel.appendChild(err);
+    }
+    return;
+  }
+
+  const results = el('div', { class: 'oracle-encounter-results' });
+
+  const narrative = el('div', { class: 'oracle-narrative' }, lastEncounter.narrative);
+  results.appendChild(narrative);
+
+  const header = el('div', { class: 'oracle-encounter-header' });
+  header.appendChild(el('span', { class: 'oracle-encounter-badge oracle-encounter-badge--' + lastEncounter.difficulty }, lastEncounter.difficulty.toUpperCase()));
+  header.appendChild(el('span', { class: 'oracle-encounter-terrain' }, lastEncounter.terrain));
+  header.appendChild(el('span', { class: 'oracle-encounter-xp' }, 'XP ' + lastEncounter.xp.adjusted.toLocaleString()));
+  results.appendChild(header);
+
+  const monsterGrid = el('div', { class: 'oracle-results' });
+  lastEncounter.monsters.forEach(m => {
+    const card = el('div', { class: 'oracle-result-card' });
+    card.appendChild(el('div', { class: 'oracle-result-card__label' }, m.type + ' · CR ' + m.cr));
+    card.appendChild(el('div', { class: 'oracle-result-card__value' }, (m.count > 1 ? m.count + '× ' : '') + m.name));
+    card.appendChild(el('div', { class: 'oracle-result-card__roll' }, m.size + ' · AC ' + m.ac + ' · HP ' + m.hp));
+    monsterGrid.appendChild(card);
+  });
+  results.appendChild(monsterGrid);
+
+  if (lastEncounter.loot.length > 0) {
+    const lootSection = el('div', { class: 'oracle-encounter-loot' });
+    lootSection.appendChild(el('div', { class: 'oracle-encounter-loot__title' }, 'Loot'));
+    lastEncounter.loot.forEach(item => {
+      const lootItem = el('div', { class: 'oracle-encounter-loot__item' });
+      lootItem.appendChild(el('span', { class: 'oracle-encounter-loot__name' }, item.name));
+      lootItem.appendChild(el('span', { class: 'oracle-encounter-loot__rarity oracle-encounter-loot__rarity--' + item.rarity.toLowerCase().replace(/\s+/g, '-') }, item.rarity));
+      lootSection.appendChild(lootItem);
+    });
+    results.appendChild(lootSection);
+  }
+
+  panel.appendChild(results);
 }
 
 init();

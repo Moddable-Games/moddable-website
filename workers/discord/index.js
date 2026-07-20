@@ -8,7 +8,7 @@ const InteractionResponseType = {
 };
 
 export default {
-  async fetch(request, env) {
+  async fetch(request, env, ctx) {
     if (request.method !== 'POST') {
       return new Response('Method not allowed', { status: 405 });
     }
@@ -29,7 +29,7 @@ export default {
     }
 
     if (interaction.type === InteractionType.APPLICATION_COMMAND) {
-      return handleCommand(interaction, env);
+      return handleCommand(interaction, env, ctx);
     }
 
     return json({ type: InteractionResponseType.CHANNEL_MESSAGE, data: { content: 'Unknown interaction.' } });
@@ -96,7 +96,7 @@ async function checkHousePostReplies(env) {
 
 // --- Command routing ---
 
-async function handleCommand(interaction, env) {
+async function handleCommand(interaction, env, ctx) {
   const { name, options } = interaction.data;
 
   switch (name) {
@@ -129,6 +129,9 @@ async function handleCommand(interaction, env) {
     case 'ur': return cmdUr(options, env);
     case 'cowries': return cmdCowries(options, env);
     case 'pieces': return cmdPieces(options, env);
+    case 'oracle': return cmdOracle(options, env);
+    case 'encounter': return cmdEncounter(options, env);
+    case 'test': return cmdTest(interaction, env, ctx);
     case 'help': return cmdHelp();
     default:
       return ephemeral(`Unknown command: \`/${name}\``);
@@ -821,6 +824,149 @@ async function cmdCowries(options, env) {
 }
 
 
+async function cmdOracle(options, env) {
+  const mode = getOption(options, 'mode') || 'forge';
+  if (mode === 'ask') {
+    const likelihood = getOption(options, 'likelihood') || 'fifty_fifty';
+    const question = getOption(options, 'question') || null;
+    const result = await callTool('oracle_ask', { likelihood, question }, env);
+    const verdictLabel = { yes: 'YES', no: 'NO', strong_yes: 'STRONG YES', strong_no: 'STRONG NO' };
+    let desc = `**${verdictLabel[result.verdict] || result.verdict}**\nRolled ${result.roll} against ${result.threshold}`;
+    if (result.match) desc += '\n⚡ **MATCH** — envision a twist';
+    if (result.question) desc += `\n\n_"${result.question}"_`;
+    return embed({ title: '🔮 Ask the Oracle', description: desc, color: result.verdict.includes('yes') ? 0x3a9928 : 0xd11a1a });
+  }
+  if (mode === 'roll') {
+    const table = getOption(options, 'table') || 'action';
+    const result = await callTool('oracle_roll', { game: 'starforged', table }, env);
+    if (result.error) return embed({ title: '🎲 Oracle Roll', description: result.error, color: 0xd11a1a });
+    const rolls = result.rolls || [];
+    const desc = rolls.map(r => `**${r.result}** (${r.die} → ${r.roll})`).join('\n');
+    return embed({ title: `🎲 ${result.tableName || table}`, description: desc || 'No result', color: 0x6fb5ff });
+  }
+  const recipe = getOption(options, 'recipe') || 'starforged_scene';
+  const result = await callTool('oracle_scene', { recipe, region: 'terminus' }, env);
+  if (result.error) return embed({ title: '✨ Scene Forge', description: result.error, color: 0xd11a1a });
+  let desc = result.narrative || '';
+  if (result.elements) {
+    desc += '\n\n' + result.elements.map(e => `**${e.tableName || e.table}:** ${e.result}`).join('\n');
+  }
+  return embed({ title: '✨ Scene Forge', description: desc, color: 0x6fb5ff });
+}
+
+async function cmdEncounter(options, env) {
+  const difficulty = getOption(options, 'difficulty') || 'medium';
+  const level = getOption(options, 'level') || 5;
+  const players = getOption(options, 'players') || 4;
+  const monsterType = getOption(options, 'type') || null;
+  const terrain = getOption(options, 'terrain') || null;
+  const args = { party_level: level, party_size: players, difficulty };
+  if (monsterType) args.monster_type = monsterType;
+  if (terrain) args.terrain = terrain;
+  const result = await callTool('oracle_encounter', args, env);
+  if (result.error) return embed({ title: '⚔️ Encounter', description: result.error, color: 0xd11a1a });
+  const diffColors = { easy: 0x3a9928, medium: 0xd4a017, hard: 0xd46017, deadly: 0xd11a1a };
+  let desc = result.narrative + '\n\n**Monsters:**\n';
+  desc += result.monsters.map(m => `• ${m.count > 1 ? m.count + '× ' : ''}**${m.name}** — CR ${m.cr}, AC ${m.ac}, HP ${m.hp}`).join('\n');
+  if (result.loot.length > 0) {
+    desc += '\n\n**Loot:**\n';
+    desc += result.loot.map(l => `• ${l.name} _(${l.rarity})_`).join('\n');
+  }
+  return embed({ title: `⚔️ ${difficulty.charAt(0).toUpperCase() + difficulty.slice(1)} Encounter — ${result.terrain}`, description: desc, color: diffColors[difficulty] || 0x0a0d2a });
+}
+
+const TEST_CASES = [
+  { tool: 'dice_roll', args: { notation: '2d6+1' } },
+  { tool: 'coin_flip', args: {} },
+  { tool: 'team_split', args: { players: ['Alice', 'Bob', 'Carol', 'Dan'] } },
+  { tool: 'ti4_random_factions', args: { players: 4 } },
+  { tool: 'ti4_draw_objectives', args: { stage: 1, count: 2 } },
+  { tool: 'ti4_draw_agendas', args: { count: 1 } },
+  { tool: 'ti4_draft_factions', args: { players: 4, choices: 2 } },
+  { tool: 'chess_list_variants', args: {} },
+  { tool: 'chess_get_legal_moves', args: { variant: 'standard' } },
+  { tool: 'chess_validate_move', args: { move: 'e2e4', variant: 'standard' } },
+  { tool: 'chess_analyze_position', args: { variant: 'standard' } },
+  { tool: 'chess_make_moves', args: { moves: ['e2e4', 'e7e5'], variant: 'standard' } },
+  { tool: 'chess_get_opening_book', args: { variant: 'standard' } },
+  { tool: 'chess_generate_puzzle', args: { variant: 'standard' } },
+  { tool: 'chess_list_puzzle_types', args: {} },
+  { tool: 'chess_render_svg', args: { variant: 'standard' } },
+  { tool: 'hex_list_games', args: {} },
+  { tool: 'hex_generate_map', args: { game: 'nukes', players: 4 } },
+  { tool: 'hex_pathfind', args: { game: 'nukes', from: '0,0', to: '2,1' } },
+  { tool: 'hex_export_svg', args: { game: 'nukes', players: 4 } },
+  { tool: 'rules_list_games', args: {} },
+  { tool: 'rules_search', args: { query: 'dice' } },
+  { tool: 'rules_random', args: {} },
+  { tool: 'piece_gallery_search', args: {} },
+  { tool: 'piece_gallery_stats', args: {} },
+  { tool: 'mancala_simulate_move', args: { pit: 3 } },
+  { tool: 'morris_legal_moves', args: {} },
+  { tool: 'ur_roll_dice', args: {} },
+  { tool: 'pachisi_roll_cowries', args: {} },
+  { tool: 'nukes_setup_generator', args: { players: 4 } },
+  { tool: 'colony_dice_odds', args: { numbers: [5, 6, 8, 9] } },
+  { tool: 'oracle_list_tables', args: {} },
+  { tool: 'oracle_roll', args: { table: 'action' } },
+  { tool: 'oracle_ask', args: { likelihood: 'fifty_fifty' } },
+  { tool: 'oracle_scene', args: { recipe: 'starforged_scene' } },
+  { tool: 'oracle_list_recipes', args: {} },
+  { tool: 'oracle_encounter', args: { party_level: 5, party_size: 4, difficulty: 'medium' } },
+  { tool: 'jam_status', args: {} },
+];
+
+async function cmdTest(interaction, env, ctx) {
+  const token = interaction.token;
+  const appId = env.DISCORD_APP_ID;
+
+  ctx.waitUntil(runTestSuite(token, appId, env));
+
+  return json({ type: InteractionResponseType.DEFERRED_CHANNEL_MESSAGE });
+}
+
+async function runTestSuite(token, appId, env) {
+  const results = [];
+  for (const tc of TEST_CASES) {
+    const start = Date.now();
+    try {
+      const result = await callTool(tc.tool, tc.args, env);
+      const hasError = result && result.error;
+      const ms = Date.now() - start;
+      const preview = JSON.stringify(result).slice(0, 80);
+      results.push({ tool: tc.tool, pass: !hasError, ms, preview: hasError ? result.error : preview });
+    } catch (e) {
+      results.push({ tool: tc.tool, pass: false, ms: Date.now() - start, preview: e.message });
+    }
+  }
+
+  const passed = results.filter(r => r.pass).length;
+  const failed = results.filter(r => !r.pass).length;
+  const total = results.length;
+
+  let desc = `**${passed}/${total} passed** · ${failed} failed\n\n`;
+  for (const r of results) {
+    const icon = r.pass ? '✅' : '❌';
+    desc += `${icon} \`${r.tool}\` (${r.ms}ms)\n`;
+    if (!r.pass) desc += `  → ${r.preview.slice(0, 100)}\n`;
+  }
+
+  if (desc.length > 4000) desc = desc.slice(0, 3950) + '\n... (truncated)';
+
+  await fetch(`${DISCORD_API}/webhooks/${appId}/${token}`, {
+    method: 'POST',
+    headers: { 'Content-Type': 'application/json' },
+    body: JSON.stringify({
+      embeds: [{
+        title: `🧪 Tool Test Suite — ${passed}/${total}`,
+        description: desc,
+        color: failed === 0 ? 0x3a9928 : 0xd11a1a,
+        footer: { text: `${total} tools tested · tools.moddable.games` },
+      }],
+    }),
+  });
+}
+
 function cmdHelp() {
   return embed({
     title: '🏠 The House — Commands',
@@ -870,13 +1016,19 @@ function cmdHelp() {
       '`/ur` — Roll Royal Ur dice',
       '`/cowries` — Roll Pachisi shells',
       '',
+      '**Oracles**',
+      '`/oracle forge` — Generate a Starforged/Ironsworn scene',
+      '`/oracle ask` — Yes/no with likelihood',
+      '`/oracle roll` — Roll a specific oracle table',
+      '`/encounter` — D&D 5e encounter builder',
+      '',
       '**Mod Jam**',
       '`/jam status` — Current jam state',
       '`/jam timer` — Time remaining',
       '`/jam vote` — Vote standings',
       '',
     ].join('\n'),
-    footer: 'The House always wins. · 42 tools at tools.moddable.games',
+    footer: 'The House always wins. · 50 tools at tools.moddable.games',
     color: 0x0a0d2a,
   });
 }

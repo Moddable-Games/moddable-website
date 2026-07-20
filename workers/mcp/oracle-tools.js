@@ -1,4 +1,6 @@
 import ORACLE_DATA from './oracle-data.json';
+import MONSTERS from './dnd-monsters.json';
+import LOOT from './dnd-loot.json';
 
 const THRESHOLDS = {
   almost_certain: 90,
@@ -448,6 +450,134 @@ function oracleTableView(args) {
   };
 }
 
+// --- D&D Encounter Builder ---
+
+const TERRAINS = [
+  'Forest', 'Cavern', 'Dungeon', 'Swamp', 'Mountain', 'Desert',
+  'Coastal', 'Arctic', 'Urban', 'Planar', 'Underwater', 'Grassland',
+];
+
+const CR_XP = {
+  0: 10, 0.125: 25, 0.25: 50, 0.5: 100, 1: 200, 2: 450, 3: 700, 4: 1100,
+  5: 1800, 6: 2300, 7: 2900, 8: 3900, 9: 5000, 10: 5900, 11: 7200,
+  12: 8400, 13: 10000, 14: 11500, 15: 13000, 16: 15000, 17: 18000,
+  19: 22000, 20: 25000, 21: 33000, 22: 41000, 23: 50000, 24: 62000, 30: 155000,
+};
+
+const DIFFICULTY_THRESHOLDS = {
+  easy:   [25,50,75,125,250,300,350,450,550,600,800,1000,1100,1250,1400,1600,2000,2100,2400,2800],
+  medium: [50,100,150,250,500,600,750,900,1100,1200,1600,2000,2200,2500,2800,3200,3900,4200,4900,5700],
+  hard:   [75,150,225,375,750,900,1100,1400,1600,1900,2400,3000,3400,3800,4300,4800,5900,6300,7300,8500],
+  deadly: [100,200,400,500,1100,1400,1700,2100,2400,2800,3600,4500,5100,5700,6400,7200,8800,9500,10900,12700],
+};
+
+function getXpThreshold(level, difficulty) {
+  const thresholds = DIFFICULTY_THRESHOLDS[difficulty];
+  return thresholds[Math.min(level - 1, 19)] || thresholds[19];
+}
+
+function getMonsterXp(cr) {
+  return CR_XP[cr] || 0;
+}
+
+const LOOT_TIERS = {
+  none: [],
+  low: ['Common', 'Uncommon'],
+  medium: ['Uncommon', 'Rare'],
+  high: ['Rare', 'Very Rare'],
+  legendary: ['Very Rare', 'Legendary', 'Artifact'],
+};
+
+function oracleEncounter(args) {
+  const partyLevel = Math.max(1, Math.min(20, args?.party_level || 5));
+  const partySize = Math.max(1, Math.min(10, args?.party_size || 4));
+  const difficulty = args?.difficulty || 'medium';
+  const monsterType = args?.monster_type || null;
+  const terrain = args?.terrain || TERRAINS[Math.floor(Math.random() * TERRAINS.length)];
+  const lootTier = args?.loot_tier || 'medium';
+
+  if (!DIFFICULTY_THRESHOLDS[difficulty]) {
+    return { error: `Unknown difficulty "${difficulty}". Options: easy, medium, hard, deadly.` };
+  }
+
+  const xpBudget = getXpThreshold(partyLevel, difficulty) * partySize;
+
+  const maxCR = partyLevel + 3;
+  let pool = MONSTERS.filter(m => m.cr <= maxCR && m.cr > 0);
+  if (monsterType) {
+    pool = pool.filter(m => m.type.toLowerCase() === monsterType.toLowerCase());
+  }
+
+  if (pool.length === 0) {
+    return { error: `No monsters found matching criteria (type: ${monsterType || 'any'}, max CR: ${maxCR}).` };
+  }
+
+  const group = [];
+  let xpSpent = 0;
+  const maxMonsters = Math.min(8, Math.ceil(partySize * 1.5));
+  let attempts = 0;
+
+  while (xpSpent < xpBudget * 0.7 && group.length < maxMonsters && attempts < 50) {
+    attempts++;
+    const remaining = xpBudget - xpSpent;
+    const eligible = pool.filter(m => getMonsterXp(m.cr) <= remaining && getMonsterXp(m.cr) > 0);
+    if (eligible.length === 0) break;
+
+    const monster = eligible[Math.floor(Math.random() * eligible.length)];
+    const existing = group.find(g => g.name === monster.name);
+    if (existing) {
+      existing.count++;
+    } else {
+      group.push({ ...monster, count: 1 });
+    }
+    xpSpent += getMonsterXp(monster.cr);
+  }
+
+  const encounterMultiplier = group.reduce((sum, g) => sum + g.count, 0) <= 1 ? 1
+    : group.reduce((sum, g) => sum + g.count, 0) <= 2 ? 1.5
+    : group.reduce((sum, g) => sum + g.count, 0) <= 6 ? 2
+    : group.reduce((sum, g) => sum + g.count, 0) <= 10 ? 2.5 : 3;
+  const adjustedXp = Math.round(xpSpent * encounterMultiplier);
+
+  let loot = [];
+  const tierRarities = LOOT_TIERS[lootTier] || LOOT_TIERS.medium;
+  if (tierRarities.length > 0) {
+    const lootPool = LOOT.filter(item => tierRarities.includes(item.rarity));
+    const lootCount = difficulty === 'easy' ? 1 : difficulty === 'deadly' ? 3 : 2;
+    for (let i = 0; i < lootCount && lootPool.length > 0; i++) {
+      const item = lootPool[Math.floor(Math.random() * lootPool.length)];
+      loot.push({ name: item.name, rarity: item.rarity, category: item.category });
+    }
+  }
+
+  const monsters = group.map(m => ({
+    name: m.name,
+    count: m.count,
+    cr: m.cr,
+    type: m.type,
+    size: m.size,
+    hp: m.hp,
+    ac: m.ac,
+    xp: getMonsterXp(m.cr),
+  }));
+
+  const totalMonsters = monsters.reduce((sum, m) => sum + m.count, 0);
+  const narrative = `A ${difficulty} encounter for ${partySize} level-${partyLevel} adventurers. ` +
+    `${totalMonsters} creature${totalMonsters !== 1 ? 's' : ''} in ${terrain.toLowerCase()} terrain. ` +
+    `Adjusted XP: ${adjustedXp.toLocaleString()} (budget: ${xpBudget.toLocaleString()}).`;
+
+  return {
+    difficulty,
+    party: { level: partyLevel, size: partySize },
+    terrain,
+    monsters,
+    totalMonsters,
+    xp: { raw: xpSpent, adjusted: adjustedXp, budget: xpBudget, multiplier: encounterMultiplier },
+    loot,
+    narrative,
+  };
+}
+
 // --- Tool definitions ---
 
 export const ORACLE_TOOLS = [
@@ -534,6 +664,21 @@ export const ORACLE_TOOLS = [
       required: ['table'],
     },
   },
+  {
+    name: 'oracle_encounter',
+    description: 'Generate a D&D 5e encounter. Selects CR-appropriate monsters for party level/size, picks terrain, and rolls loot from the SRD magic item tables. Returns a structured encounter block.',
+    inputSchema: {
+      type: 'object',
+      properties: {
+        party_level: { type: 'number', description: 'Average party level (1-20). Defaults to 5.' },
+        party_size: { type: 'number', description: 'Number of players (1-10). Defaults to 4.' },
+        difficulty: { type: 'string', enum: ['easy', 'medium', 'hard', 'deadly'], description: 'Encounter difficulty. Defaults to "medium".' },
+        monster_type: { type: 'string', description: 'Filter monsters by type (e.g. "undead", "dragon", "beast"). Omit for any.' },
+        terrain: { type: 'string', description: 'Terrain type (e.g. "Forest", "Cavern", "Dungeon"). Omit for random.' },
+        loot_tier: { type: 'string', enum: ['none', 'low', 'medium', 'high', 'legendary'], description: 'Loot rarity tier. Defaults to "medium".' },
+      },
+    },
+  },
 ];
 
 export function handleOracleToolCall(name, args) {
@@ -545,6 +690,7 @@ export function handleOracleToolCall(name, args) {
     case 'oracle_list_recipes': return oracleListRecipes(args);
     case 'oracle_interpret': return oracleInterpret(args);
     case 'oracle_table_view': return oracleTableView(args);
+    case 'oracle_encounter': return oracleEncounter(args);
     default: return { error: `Unknown oracle tool: ${name}` };
   }
 }
