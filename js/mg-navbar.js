@@ -7,7 +7,7 @@ export function navbar(activeId) {
     { id:'Mods', href:url('/mods/'), accent:'#e63232', children:[['Conversions',url('/mods/#Conversion')],['Rebalances',url('/mods/#Rebalance')],['Reskins',url('/mods/#Reskin')],['Submit Mod',url('/submit/')]] },
     { id:'Engines', href:url('/engines/'), accent:'#06b6d4', children:[['Chess',url('/engines/moddable-chess/')],['Hexmaps',url('/engines/moddable-hexmaps/')]] },
     { id:'Games', href:url('/games/'), accent:'#e8a91a', children:[['Nukes',url('/games/nukes/')],['Planet Mongo',url('/games/planet-mongo/')],['Endless Skies',url('/games/endless-skies/')]] },
-    { id:'Tools', href:url('/tools/'), accent:'#3a9928', children:[['Twilight',url('/tools/ti/')],['Talisman',url('/tools/talisman/')],['Nukes',url('/tools/nukes/')],['Dice',url('/tools/dice/')],['Decks',url('/tools/decks/')],['Chess',url('/tools/chess/')]] },
+    { id:'Tools', href:url('/tools/'), accent:'#3a9928', children:[['Twilight',url('/tools/ti/')],['Talisman',url('/tools/talisman/')],['Nukes',url('/tools/nukes/')],['Dice',url('/tools/dice/')],['Decks',url('/tools/decks/')],['Chess',url('/tools/chess/')],['Oracles',url('/tools/oracles/')]] },
     { id:'Developers', href:url('/developers/'), accent:'#8b5cf6', children:[['Tools API',url('/developers/api/')],['Examples',url('/developers/examples/')],['Live Server','https://tools.moddable.games/']] },
     { id:'About', href:url('/about/'), accent:'#6fb5ff', children:[['Team',url('/team/')],['Roadmap',url('/about/roadmap/')],['Community',url('/community/')],['Press',url('/press/')]] },
     { id:'News', href:url('/news/'), accent:'#e11d89' },
