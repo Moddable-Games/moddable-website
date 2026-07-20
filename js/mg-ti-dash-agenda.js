@@ -1,4 +1,4 @@
-import { el, data, btn } from './mg.js';
+import { el, data, btn, track } from './mg.js';
 import * as State from './mg-ti-dash-state.js';
 let agendaPool = [];
 
@@ -133,6 +133,7 @@ function performDrawOne() {
     const shuffled = [...available].sort(() => Math.random() - 0.5);
     if (shuffled.length) {
       s.agenda.current = [{ ...shuffled[0], _forVotes: 0, _againstVotes: 0 }];
+      track('ti_dash_agenda_draw', { agenda_title: shuffled[0].title });
     }
   });
 }
@@ -176,6 +177,7 @@ function showTiebreakerModal(agenda) {
 function doResolve(outcome) {
   State.update(s => {
     if (!s.agenda.current || !s.agenda.current.length) return;
+    track('ti_dash_agenda_resolve', { outcome: outcome, agenda_title: s.agenda.current[0].title });
     const resolved = { ...s.agenda.current[0], _outcome: outcome };
     s.agenda.seen = [...(s.agenda.seen || []), resolved];
     const isLaw = (resolved.type || '').toLowerCase() === 'law';

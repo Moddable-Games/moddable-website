@@ -1,4 +1,4 @@
-import { el, data, btn } from './mg.js';
+import { el, data, btn, track } from './mg.js';
 import * as State from './mg-ti-dash-state.js';
 let factions = [];
 let objectivesData = null;
@@ -208,6 +208,7 @@ function randomiseFactions() {
 }
 
 function startGame() {
+  track('ti_dash_start', { player_count: cfg.playerCount, vp_target: cfg.vpTarget, expansions: cfg.expansions.join(',') });
   const players = cfg.players.map(p => ({ ...p }));
   State.create({ players, vpTarget: cfg.vpTarget, expansions: cfg.expansions, speakerIdx: cfg.speakerIdx });
   initObjectivePools();

@@ -1,4 +1,4 @@
-import { el, btn, linkBtn, url } from './mg.js';
+import { el, btn, linkBtn, track, url } from './mg.js';
 
 (function() {
 var HEX_BASE = location.hostname === 'localhost'
@@ -102,6 +102,7 @@ if (useLayouts) {
       });
       layoutSel.addEventListener('change', function() {
         currentLayout = layoutSel.value;
+        track('hex_layout_change', { game: game, layout: currentLayout });
         if (iframe && iframe.contentWindow) {
           iframe.contentWindow.postMessage({ type: 'hexmap:regenerate', layout: currentLayout, style: currentStyle, random: true }, '*');
         } else { renderFrame(); }
@@ -122,6 +123,7 @@ if (useLayouts) {
         });
         sizeSel.addEventListener('change', function() {
           currentSize = parseInt(sizeSel.value);
+          track('hex_size_change', { game: game, size: currentSize });
           if (iframe && iframe.contentWindow) {
             iframe.contentWindow.postMessage({ type: 'hexmap:regenerate', size: currentSize, players: currentPlayers, style: currentStyle, random: true }, '*');
           } else { renderFrame(); }
@@ -143,6 +145,7 @@ if (useLayouts) {
         });
         playerSel.addEventListener('change', function() {
           currentPlayers = parseInt(playerSel.value);
+          track('hex_player_change', { game: game, players: currentPlayers });
           if (iframe && iframe.contentWindow) {
             iframe.contentWindow.postMessage({ type: 'hexmap:regenerate', size: currentSize, players: currentPlayers, style: currentStyle, random: true }, '*');
           } else { renderFrame(); }
@@ -166,6 +169,7 @@ if (useLayouts) {
       });
       styleSel.addEventListener('change', function() {
         currentStyle = styleSel.value;
+        track('hex_style_change', { game: game, style: currentStyle });
         if (iframe && iframe.contentWindow) {
           iframe.contentWindow.postMessage({ type: 'hexmap:setStyle', style: currentStyle }, '*');
         } else { renderFrame(); }
@@ -197,6 +201,7 @@ if (useLayouts) {
     actionsEl.innerHTML = '';
 actionsEl.appendChild(btn('New Map', 'dark', function() {
       currentSeed = Math.floor(Math.random() * 9999);
+      track('hex_new_map', { game: game });
       regenerate();
     }));
     actionsEl.appendChild(btn('Copy Seed', 'outline-light', function() {

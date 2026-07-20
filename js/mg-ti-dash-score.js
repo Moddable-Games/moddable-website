@@ -138,6 +138,7 @@ function renderVictoryScreen(state) {
 
   const winner = state.players[state.winner];
   const winnerVP = State.getPlayerVP(state.winner);
+  track('ti_dash_game_over', { winner: winner.name, faction: winner.faction || '', vp: winnerVP, rounds: state.round });
 
   screen.appendChild(el('div', { class: 'td-victory__eyebrow' }, 'GAME OVER'));
   const title = el('h1', { class: 'td-victory__title' }, winner.name + ' wins');
@@ -416,6 +417,7 @@ function assignCardToCurrentPicker(cardNum) {
   if (owner !== null) return;
 
   const playerIdx = pickOrder[picksDone];
+  track('ti_dash_strategy_pick', { card: State.STRATEGY_CARDS[cardNum - 1].name, player: state.players[playerIdx].name });
   State.update(s => {
     if (!s.strategyCards[playerIdx]) s.strategyCards[playerIdx] = [];
     s.strategyCards[playerIdx].push(cardNum);
@@ -477,6 +479,7 @@ function nextTurn() {
 }
 
 function passPlayer(idx) {
+  track('ti_dash_pass', { player: State.get().players[idx].name });
   State.update(s => {
     if (!s.passedPlayers.includes(idx)) {
       s.passedPlayers.push(idx);
@@ -555,6 +558,7 @@ function showMecatolClaimModal() {
   if (!isTransfer) box.appendChild(el('p', { class: 'td-modal__subtitle' }, '+1 VP (Custodians token)'));
   state.players.forEach((p, i) => {
     const btn = el('button', { class: 'td-modal__player-btn', onClick: () => {
+      track('ti_dash_mecatol', { player: p.name, is_first_claim: !state.mecatolClaimed });
       State.update(s => {
         if (!s.mecatolClaimed) {
           s.mecatolClaimed = true;

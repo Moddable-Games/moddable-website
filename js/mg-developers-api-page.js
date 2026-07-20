@@ -1,4 +1,4 @@
-import { el, data, navbar, footer, sectionHero } from './mg.js';
+import { el, data, track, navbar, footer, sectionHero } from './mg.js';
 
 document.getElementById('nav-root').appendChild(navbar('Developers'));
 document.getElementById('footer-root').appendChild(footer());
@@ -104,6 +104,7 @@ function renderSidebar(sidebar, initialTool) {
       if (wasCollapsed) {
         list.classList.remove('api-sidebar__list--collapsed');
         header.classList.remove('api-sidebar__ns--collapsed');
+        track('api_category_expand', { namespace: ns });
       }
     });
 
@@ -113,6 +114,7 @@ function renderSidebar(sidebar, initialTool) {
 
 function selectTool(tool) {
   selectedTool = tool;
+  track('api_tool_select', { tool_name: tool.name, namespace: getNamespace(tool.name) });
   document.querySelectorAll('.api-sidebar__tool--active').forEach(e => e.classList.remove('api-sidebar__tool--active'));
   const active = document.querySelector(`[data-tool="${tool.name}"]`);
   if (active) active.classList.add('api-sidebar__tool--active');
@@ -259,6 +261,7 @@ function updateCurl() {
 
 async function runTool(tool) {
   const args = getFormArgs();
+  track('api_tool_run', { tool_name: tool.name, namespace: getNamespace(tool.name) });
   const responseSection = document.getElementById('api-response-section');
   const responseEl = document.getElementById('api-response');
   responseSection.style.display = '';
