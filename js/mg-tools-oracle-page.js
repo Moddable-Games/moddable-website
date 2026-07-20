@@ -81,7 +81,7 @@ function renderForge(panel) {
   recipes.forEach(r => {
     const opt = document.createElement('option');
     opt.value = r.id;
-    opt.textContent = r.name + (r.regionAware ? ' *' : '');
+    opt.textContent = r.name;
     if (r.id === selectedRecipe) opt.selected = true;
     select.appendChild(opt);
   });
