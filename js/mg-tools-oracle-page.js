@@ -123,9 +123,7 @@ function renderForgeResults(panel) {
 
   if (!lastScene || !lastScene.elements) return;
 
-  const count = lastScene.elements.length;
-  const colClass = count <= 2 ? 'oracle-results--cols-2' : count === 3 ? 'oracle-results--cols-3' : count === 5 ? 'oracle-results--cols-5' : count >= 6 ? 'oracle-results--cols-3' : '';
-  const grid = el('div', { class: 'oracle-results' + (colClass ? ' ' + colClass : '') });
+  const grid = el('div', { class: 'oracle-results' });
   lastScene.elements.forEach((elem, idx) => {
     const card = el('div', { class: 'oracle-result-card' });
     card.appendChild(el('div', { class: 'oracle-result-card__label' }, elem.tableName || elem.table));
