@@ -123,6 +123,9 @@ function renderForgeResults(panel) {
 
   if (!lastScene || !lastScene.elements) return;
 
+  const narrative = el('div', { class: 'oracle-narrative' }, lastScene.narrative);
+  panel.appendChild(narrative);
+
   const grid = el('div', { class: 'oracle-results' });
   lastScene.elements.forEach((elem, idx) => {
     const card = el('div', { class: 'oracle-result-card' });
@@ -145,9 +148,6 @@ function renderForgeResults(panel) {
     grid.appendChild(card);
   });
   panel.appendChild(grid);
-
-  const narrative = el('div', { class: 'oracle-narrative' }, lastScene.narrative);
-  panel.appendChild(narrative);
 }
 
 // --- Ask the Oracle ---
