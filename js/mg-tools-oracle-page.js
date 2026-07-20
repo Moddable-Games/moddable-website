@@ -68,6 +68,7 @@ function renderPanel() {
 
 // --- Scene Forge ---
 function renderForge(panel) {
+  panel.innerHTML = '';
   const title = el('h2', { class: 'oracle-section-title' }, 'Compose a scene');
   const sub = el('p', { class: 'oracle-section-sub' }, 'Pick a recipe and region, then forge your narrative seed.');
   panel.appendChild(title);
@@ -92,7 +93,7 @@ function renderForge(panel) {
     const pill = document.createElement('button');
     pill.className = 'oracle-region-pill' + (selectedRegion === r ? ' oracle-region-pill--active' : '');
     pill.textContent = r.charAt(0).toUpperCase() + r.slice(1);
-    pill.addEventListener('click', () => { selectedRegion = r; renderForge(panel); });
+    pill.addEventListener('click', () => { selectedRegion = r; renderPanel(); });
     regionPills.appendChild(pill);
   });
   controls.appendChild(regionPills);
@@ -151,6 +152,7 @@ function renderForgeResults(panel) {
 
 // --- Ask the Oracle ---
 function renderAsk(panel) {
+  panel.innerHTML = '';
   const title = el('h2', { class: 'oracle-section-title' }, 'Ask the Oracle');
   const sub = el('p', { class: 'oracle-section-sub' }, 'Set a likelihood, ask your question, and let fate decide.');
   panel.appendChild(title);
@@ -168,7 +170,7 @@ function renderAsk(panel) {
     const pill = document.createElement('button');
     pill.className = 'oracle-likelihood-pill' + (askLikelihood === l.id ? ' oracle-likelihood-pill--active' : '');
     pill.textContent = l.label + ' (' + l.pct + ')';
-    pill.addEventListener('click', () => { askLikelihood = l.id; renderAsk(panel); });
+    pill.addEventListener('click', () => { askLikelihood = l.id; renderPanel(); });
     pills.appendChild(pill);
   });
   panel.appendChild(pills);
