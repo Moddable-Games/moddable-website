@@ -3,6 +3,7 @@ import { HEX_TOOLS, handleHexToolCall } from './hex-tools.js';
 import { RULES_TOOLS, handleRulesToolCall } from './rules-tools.js';
 import { GAME_TOOLS, handleGameToolCall } from './game-tools.js';
 import { PIECE_GALLERY_TOOLS, handlePieceGalleryToolCall, renderPieceGridSvg } from './piece-gallery.js';
+import { ORACLE_TOOLS, handleOracleToolCall } from './oracle-tools.js';
 import PUZZLE_POOL from './puzzle-pool.json';
 import { GameRoom } from './game-room.js';
 import { Resvg, initWasm } from '@resvg/resvg-wasm';
@@ -179,6 +180,7 @@ const ALL_TOOLS = [
   ...RULES_TOOLS,
   ...GAME_TOOLS,
   ...PIECE_GALLERY_TOOLS,
+  ...ORACLE_TOOLS,
   ...SITE_TOOLS,
 ];
 
@@ -368,6 +370,7 @@ function handleToolCall(name, args) {
   if (name.startsWith('hex_')) return handleHexToolCall(name, args);
   if (name.startsWith('rules_')) return handleRulesToolCall(name, args);
   if (name.startsWith('piece_gallery_')) return handlePieceGalleryToolCall(name, args);
+  if (name.startsWith('oracle_')) return handleOracleToolCall(name, args);
   if (GAME_TOOLS.some(t => t.name === name)) return handleGameToolCall(name, args);
   if (name === 'dice_roll') return diceRoll(args);
   if (name === 'ti4_random_factions') return ti4RandomFactions(args);
