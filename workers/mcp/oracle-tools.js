@@ -350,7 +350,7 @@ function oracleScene(args) {
       const r = rollOnTable(table);
       if (isCompoundResult(r.result)) {
         const resolved = resolveCompound(recipe.game, r.result, tid, 0);
-        elements.push({ table: tid, tableName: table.name, roll: r.roll, die: r.die, result: resolved.map(x => x.result).join(' + ') });
+        elements.push({ table: tid, tableName: table.name, roll: r.roll, die: r.die, result: resolved.map(x => x.result).join(' and ') });
       } else {
         elements.push({ table: tid, tableName: table.name, ...r });
       }
