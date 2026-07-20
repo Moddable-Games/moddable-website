@@ -610,46 +610,40 @@ renderRoles();
 /* ── RULES LOOKUP ── */
 (function() {
 const body = document.getElementById('rules-body');
-let rulesIndex = null;
-let rulesLoading = false;
+const TOOLS_API = 'https://tools.moddable.games/api/call';
+let games = null;
 let activeGame = 'all';
 let query = '';
+let searchTimeout = null;
+let lastResults = null;
+let searching = false;
 
-const RULES_API = 'https://rules.moddable.games/dist/rules-index.json';
-
-function loadIndex() {
-  if (rulesIndex || rulesLoading) return;
-  rulesLoading = true;
-  fetch(RULES_API)
-    .then(r => r.json())
-    .then(data => { rulesIndex = data; rulesLoading = false; render(); })
-    .catch(() => { rulesLoading = false; render(); });
+function callTool(tool, args) {
+  return fetch(TOOLS_API, {
+    method: 'POST',
+    headers: { 'Content-Type': 'application/json' },
+    body: JSON.stringify({ tool, args }),
+  }).then(r => r.json());
 }
 
-function getGames() {
-  if (!rulesIndex) return [];
-  const seen = new Set();
-  return rulesIndex.filter(e => { if (seen.has(e.game)) return false; seen.add(e.game); return true; }).map(e => ({ key: e.game, label: e.gameTitle }));
+function loadGames() {
+  callTool('rules_list_games', { status: 'all' })
+    .then(data => { games = data.games || []; render(); })
+    .catch(() => { games = []; render(); });
 }
 
-function searchIndex() {
-  if (!rulesIndex) return [];
-  const q = query.toLowerCase().trim();
-  if (!q) return [];
-  let pool = activeGame === 'all' ? rulesIndex : rulesIndex.filter(e => e.game === activeGame);
-  const terms = q.split(/\s+/);
-  const scored = pool.map(entry => {
-    let score = 0;
-    for (const t of terms) {
-      if (entry.heading.toLowerCase().includes(t)) score += 3;
-      else if (entry.section.toLowerCase().includes(t)) score += 2;
-      else if (entry.content.toLowerCase().includes(t)) score += 1;
-      else return null;
-    }
-    return { entry, score };
-  }).filter(Boolean);
-  scored.sort((a, b) => b.score - a.score);
-  return scored.slice(0, 12).map(s => s.entry);
+function doSearch() {
+  const q = query.trim();
+  if (!q) { lastResults = null; searching = false; renderResults(); return; }
+  searching = true;
+  renderResults();
+  callTool('rules_search', { query: q, limit: 20 })
+    .then(data => {
+      lastResults = data;
+      searching = false;
+      renderResults();
+    })
+    .catch(() => { lastResults = { results: [], total: 0 }; searching = false; renderResults(); });
 }
 
 function render() {
@@ -657,23 +651,35 @@ function render() {
 
   const search = document.createElement('input');
   search.className = 'rules-lookup__search';
-  search.placeholder = 'Search rules...';
+  search.placeholder = 'Search rules, spells, oracles...';
   search.value = query;
-  search.addEventListener('input', () => { query = search.value; renderResults(); });
+  search.addEventListener('input', () => {
+    query = search.value;
+    clearTimeout(searchTimeout);
+    if (query.trim().length >= 2) {
+      searchTimeout = setTimeout(doSearch, 300);
+    } else {
+      lastResults = null;
+      renderResults();
+    }
+  });
+  search.addEventListener('keydown', (e) => {
+    if (e.key === 'Enter') { clearTimeout(searchTimeout); doSearch(); }
+  });
   body.appendChild(search);
 
-  if (rulesIndex) {
+  if (games && games.length > 0) {
     const filters = el('div',{class:'rules-lookup__filters'});
     const allBtn = document.createElement('button');
     allBtn.className = 'rules-lookup__filter' + (activeGame === 'all' ? ' rules-lookup__filter--active' : '');
     allBtn.textContent = 'All';
-    allBtn.addEventListener('click', () => { activeGame = 'all'; render(); });
+    allBtn.addEventListener('click', () => { activeGame = 'all'; render(); if (query.trim()) doSearch(); });
     filters.appendChild(allBtn);
-    getGames().forEach(g => {
+    games.forEach(g => {
       const b = document.createElement('button');
-      b.className = 'rules-lookup__filter' + (activeGame === g.key ? ' rules-lookup__filter--active' : '');
-      b.textContent = g.label;
-      b.addEventListener('click', () => { activeGame = g.key; render(); });
+      b.className = 'rules-lookup__filter' + (activeGame === g.slug ? ' rules-lookup__filter--active' : '');
+      b.textContent = g.title;
+      b.addEventListener('click', () => { activeGame = g.slug; render(); if (query.trim()) doSearch(); });
       filters.appendChild(b);
     });
     body.appendChild(filters);
@@ -691,34 +697,36 @@ function renderResults() {
   if (!container) return;
   container.innerHTML = '';
 
-  if (rulesLoading) {
-    container.appendChild(el('div',{class:'rules-lookup__status'}, 'Loading...'));
-    return;
-  }
-  if (!rulesIndex) {
-    container.appendChild(el('div',{class:'rules-lookup__status'}, 'Could not load rules index.'));
+  if (searching) {
+    container.appendChild(el('div',{class:'rules-lookup__status'}, 'Searching...'));
     return;
   }
   if (!query.trim()) {
     const hint = el('div',{class:'rules-lookup__empty'});
-    hint.appendChild(el('div',{class:'rules-lookup__empty-count'}, rulesIndex.length + ' rules indexed'));
-    hint.appendChild(el('div',{class:'rules-lookup__empty-hint'}, 'Try "cannon mechanic", "victory", or "infantry movement"'));
+    hint.appendChild(el('div',{class:'rules-lookup__empty-hint'}, 'Try "Acid Arrow", "Dancer", "cannon mechanic", or "infantry movement"'));
     container.appendChild(hint);
     return;
   }
+  if (!lastResults) return;
 
-  const hits = searchIndex();
+  let hits = lastResults.results || [];
+  if (activeGame !== 'all') {
+    hits = hits.filter(e => e.game === activeGame);
+  }
+
   if (hits.length === 0) {
     container.appendChild(el('div',{class:'rules-lookup__status'}, 'No results for "' + query.trim() + '"'));
     return;
   }
 
-  const count = el('div',{class:'rules-lookup__count'}, hits.length + ' result' + (hits.length === 1 ? '' : 's'));
+  const showing = activeGame !== 'all' ? hits.length : lastResults.showing;
+  const total = activeGame !== 'all' ? hits.length : lastResults.total;
+  const count = el('div',{class:'rules-lookup__count'}, showing + ' of ' + total + ' result' + (total === 1 ? '' : 's'));
   container.appendChild(count);
 
   const terms = query.toLowerCase().trim().split(/\s+/).filter(Boolean);
   function highlight(text) {
-    if (!terms.length) return text;
+    if (!terms.length || !text) return text || '';
     const escaped = terms.map(t => t.replace(/[.*+?^${}()|[\]\\]/g, '\\$&'));
     const re = new RegExp('(' + escaped.join('|') + ')', 'gi');
     return text.replace(re, '<mark>$1</mark>');
@@ -744,7 +752,7 @@ function renderResults() {
   });
 }
 
-loadIndex();
+loadGames();
 render();
 })();
 

@@ -30,7 +30,7 @@ const SEARCH_INDEX = [
 ];
 
 let newsIndex = null;
-let rulesIndex = null;
+const TOOLS_API = 'https://tools.moddable.games/api/call';
 
 function loadNewsIndex() {
   if (newsIndex) return;
@@ -39,25 +39,25 @@ function loadNewsIndex() {
   });
 }
 
-function loadRulesIndex() {
-  if (rulesIndex) return;
-  fetch('https://rules.moddable.games/dist/rules-index.json')
+function searchRulesAPI(query) {
+  return fetch(TOOLS_API, {
+    method: 'POST',
+    headers: { 'Content-Type': 'application/json' },
+    body: JSON.stringify({ tool: 'rules_search', args: { query, limit: 8 } }),
+  })
     .then(r => r.json())
-    .then(d => {
-      rulesIndex = d.map(entry => ({
-        type: 'rule',
-        title: entry.heading,
-        desc: entry.gameTitle + ' — ' + entry.section,
-        href: 'https://rules.moddable.games/' + (entry.variantUrl || ('dist/' + entry.game + '/')) + '#' + entry.anchor
-      }));
-    })
-    .catch(() => {});
+    .then(d => (d.results || []).map(entry => ({
+      type: 'rule',
+      title: entry.heading,
+      desc: entry.gameTitle + ' — ' + entry.section,
+      href: 'https://rules.moddable.games/' + (entry.variantUrl || ('dist/' + entry.game + '/')) + '#' + entry.anchor
+    })))
+    .catch(() => []);
 }
 
 function getSearchIndex() {
   let idx = SEARCH_INDEX;
   if (newsIndex) idx = idx.concat(newsIndex);
-  if (rulesIndex) idx = idx.concat(rulesIndex);
   return idx;
 }
 
@@ -65,7 +65,6 @@ let searchOverlay = null;
 
 export function openSearch() {
   loadNewsIndex();
-  loadRulesIndex();
   if (searchOverlay) { searchOverlay.remove(); searchOverlay = null; }
 
   const overlay = el('div', {class:'mg-search-overlay'});
@@ -88,19 +87,20 @@ export function openSearch() {
 
   requestAnimationFrame(() => { overlay.classList.add('mg-search-overlay--visible'); input.focus(); });
 
-  function renderResults(query) {
+  function renderResults(query, rulesHits) {
     results.innerHTML = '';
     if (!query) {
       results.innerHTML = '<div class="mg-search-panel__empty"><div class="mg-search-panel__empty-title">Start typing to search</div><div class="mg-search-panel__empty-hint">Mods, games, rules, news, and tools</div></div>';
       return;
     }
     const q = query.toLowerCase();
-    const matches = getSearchIndex().filter(item => item.title.toLowerCase().includes(q) || item.desc.toLowerCase().includes(q));
+    const localMatches = getSearchIndex().filter(item => item.title.toLowerCase().includes(q) || item.desc.toLowerCase().includes(q));
+    const matches = localMatches.concat(rulesHits || []).slice(0, 10);
     if (matches.length === 0) {
       results.innerHTML = '<div class="mg-search-panel__empty"><div class="mg-search-panel__empty-title">No results</div><div class="mg-search-panel__empty-hint">Try a different search term</div></div>';
       return;
     }
-    matches.slice(0, 8).forEach((item, i) => {
+    matches.forEach((item, i) => {
       const a = el('a', {href:item.href, class:'mg-search-result' + (i===0?' mg-search-result--active':'')});
       a.addEventListener('click', function() { track('select_content', { content_type: item.type, item_id: item.title }); });
       const badge = el('span', {class:'mg-search-result__type mg-search-result__type--'+item.type}, item.type);
@@ -113,12 +113,19 @@ export function openSearch() {
     });
   }
 
-  renderResults('');
+  renderResults('', []);
   let searchDebounce = null;
+  let rulesDebounce = null;
   input.addEventListener('input', () => {
     const val = input.value.trim();
-    renderResults(val);
+    renderResults(val, []);
     clearTimeout(searchDebounce);
+    clearTimeout(rulesDebounce);
+    if (val.length >= 2) {
+      rulesDebounce = setTimeout(() => {
+        searchRulesAPI(val).then(rulesHits => { renderResults(val, rulesHits); });
+      }, 300);
+    }
     if (val.length >= 3) {
       searchDebounce = setTimeout(() => { track('search', { search_term: val }); }, 800);
     }
