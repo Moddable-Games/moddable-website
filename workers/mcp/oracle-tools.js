@@ -24,8 +24,8 @@ const RECIPES = {
   starship_encounter: {
     name: 'Starship Encounter',
     game: 'starforged',
-    description: 'A ship with type, name, initial contact, and mission.',
-    tables: ['type', 'starship_name', 'initial_contact'],
+    description: 'A ship with name, first look, initial contact, and mission.',
+    tables: ['starship_name', 'starships_first_look', 'starships_initial_contact'],
     region_table: 'mission',
     region_variants: { terminus: 'mission_terminus', outlands: 'mission_outlands', expanse: 'mission_expanse' },
   },
@@ -33,15 +33,15 @@ const RECIPES = {
     name: 'Settlement Introduction',
     game: 'starforged',
     description: 'A settlement with name, location, population, authority, and projects.',
-    tables: ['name', 'location', 'authority', 'first_look', 'projects'],
+    tables: ['name', 'settlements_location', 'authority', 'settlements_first_look', 'settlements_projects'],
     region_table: 'population',
     region_variants: { terminus: 'population_terminus', outlands: 'population_outlands', expanse: 'population_expanse' },
   },
   creature_encounter: {
     name: 'Creature Encounter',
     game: 'starforged',
-    description: 'A creature with environment, scale, appearance, and behavior.',
-    tables: ['environment', 'scale', 'first_look', 'encountered_behavior'],
+    description: 'A creature with environment, scale, form, appearance, and behavior.',
+    tables: ['environment', 'scale', 'basic_form_land', 'creatures_first_look', 'encountered_behavior'],
   },
   space_sighting: {
     name: 'Space Sighting',
@@ -85,80 +85,80 @@ const RECIPES = {
 
 const NARRATIVE_TEMPLATES = {
   starforged_scene: [
-    'A {descriptor} {focus} demands you {action} — the {theme} of this place runs deep.',
+    'A {descriptor} {focus} demands you {action} — the stakes are {theme}.',
     'Something here seeks to {action} the very {theme} you depend on. Before you: a {descriptor} {focus}.',
     'You discover a {descriptor} {focus}. To press on, you must {action} what binds it to {theme}.',
     'The {focus} is {descriptor}, pulsing with {theme}. Every instinct says: {action}, now.',
-    'Traces of {theme} linger around a {descriptor} {focus}. Someone tried to {action} it — and failed.',
+    'Traces of {theme} linger around a {descriptor} {focus}. Someone tried to {action} — and failed.',
     '{theme} made manifest: a {descriptor} {focus} that will force you to {action} or be consumed.',
     'A {descriptor} {focus} blocks the way. It radiates {theme}. You know you must {action}.',
-    'The signal resolves into a {descriptor} {focus}. Its {theme} is unmistakable. Will you {action}?',
-    'Here, {theme} takes the shape of a {descriptor} {focus}. You can {action} it, or let it consume you.',
+    'The signal resolves into a {descriptor} {focus}. Its connection to {theme} is unmistakable. Will you {action}?',
+    'Here, {theme} takes the shape of a {descriptor} {focus}. You can {action}, or let it consume you.',
     'What was meant to {action} has become a {descriptor} {focus}, steeped in {theme}.',
-    'You arrive at a {descriptor} {focus} — someone tried to {action} the {theme} here and left only ruin.',
-    'The path forward demands you {action}. A {descriptor} {focus} stands between you and the {theme} you seek.',
+    'You arrive at a {descriptor} {focus}. Someone tried to {action} the {theme} here and left only ruin.',
+    'The path forward demands you {action}. A {descriptor} {focus} stands between you and {theme}.',
     'A {descriptor} {focus} hums with residual {theme}. The only move is to {action}.',
-    'Before you: proof that {theme} cannot be contained. A {descriptor} {focus}, waiting for someone to {action}.',
-    'You feel it before you see it — {theme}, concentrated in a {descriptor} {focus}. Time to {action}.',
+    'Before you: proof that {theme} cannot be contained. A {descriptor} {focus}, waiting for someone bold enough to {action}.',
+    'You feel it before you see it: {theme}, concentrated in a {descriptor} {focus}. Time to {action}.',
   ],
   npc_encounter: [
-    '{name_given} {name_family}, callsign "{name_callsign}" — a {role} who appears {first_look}. Their manner is {initial_disposition}.',
-    'You meet {name_given} "{name_callsign}" {name_family}. {first_look} and clearly a {role}. They seem {initial_disposition}.',
-    'A {role} steps forward — {first_look}, {initial_disposition}. They introduce themselves as {name_given} {name_family}. On the comms, they go by "{name_callsign}".',
-    'The {role} called "{name_callsign}" is {first_look} and {initial_disposition}. Full name: {name_given} {name_family}.',
-    '{name_given} "{name_callsign}" {name_family} — {first_look}, a {role} by trade. Right now, they are {initial_disposition}.',
+    '{name_given} {name_family}, callsign "{name_callsign}." A {role}. {first_look}. Their disposition: {initial_disposition}.',
+    'You meet {name_given} "{name_callsign}" {name_family} — a {role}. {first_look}. They seem {initial_disposition}.',
+    'A {role} steps forward. {first_look}. {initial_disposition}. They introduce themselves: {name_given} {name_family}, "{name_callsign}" on the comms.',
+    '"{name_callsign}" — real name {name_given} {name_family}. {role}. {first_look}. Right now: {initial_disposition}.',
+    '{name_given} "{name_callsign}" {name_family}. {first_look}. A {role} by trade. Their manner: {initial_disposition}.',
   ],
   starship_encounter: [
-    'A {type} hails you — the {starship_name}. First contact reads as {initial_contact}. They appear to be on a mission of {mission}.',
-    'Sensors lock onto a {type}: the {starship_name}. Their posture is {initial_contact}. Mission profile suggests {mission}.',
-    'The {starship_name}, a {type}, drops into range. Initial contact: {initial_contact}. Intelligence suggests their purpose is {mission}.',
+    'The {starship_name} hails you. {first_look}. First contact reads as {initial_contact}. Their mission: {mission}.',
+    'Sensors lock onto a vessel: the {starship_name}. {first_look}. Posture: {initial_contact}. Mission profile suggests they intend to {mission}.',
+    'The {starship_name} drops into range. {first_look}. Contact: {initial_contact}. Intelligence suggests their purpose is to {mission}.',
   ],
   settlement_intro: [
-    '{name} — a {location} settlement of {population}. Authority here is {authority}. First impressions: {first_look}. Current focus: {projects}.',
-    'You arrive at {name}. {location}, population {population}. The authority is {authority}, and the place is focused on {projects}. It looks {first_look}.',
-    'Settlement {name}: {first_look}, {location}, home to {population}. Governance is {authority}. Primary industry: {projects}.',
+    '{name}. {location}, population: {population}. Authority: {authority}. First impressions: {first_look}. Current focus: {projects}.',
+    'You arrive at {name}. A {location} settlement, population {population}. {first_look}. Authority here is {authority}. Primary industry: {projects}.',
+    'Settlement {name}: {first_look}. {location}. Home to {population}. Governance: {authority}. They are focused on {projects}.',
   ],
   creature_encounter: [
-    'A creature emerges from the {environment} — {scale} in size, {first_look}. Its behaviour is {encountered_behavior}.',
-    '{first_look} and {scale}, this {environment} creature displays {encountered_behavior} behaviour.',
-    'From the {environment}: something {scale}, {first_look}. It seems {encountered_behavior}.',
+    'A {basic_form_land} emerges. {scale}. Habitat: {environment}. {first_look}. Behaviour: {encountered_behavior}.',
+    'From the {environment}: a {basic_form_land}. {scale}. {first_look}. It acts as a {encountered_behavior}.',
+    'You encounter a {basic_form_land} in the {environment}. {scale}. {first_look}. Its behaviour suggests: {encountered_behavior}.',
   ],
   space_sighting: [
     'Long-range sensors pick up a {sighting} near a {stellar_object}.',
-    'You spot a {sighting} — silhouetted against a {stellar_object}.',
+    'You spot a {sighting}, silhouetted against a {stellar_object}.',
     'A {sighting} registers on the scope, drifting near a {stellar_object}.',
   ],
   faction_intro: [
-    'A {type} faction with {influence} influence. They call themselves the {name_legacy} {name_identity}. Current project: {projects}.',
-    'The {name_legacy} {name_identity} — a {type} organisation wielding {influence} influence. They are pursuing {projects}.',
-    'You learn of the {name_legacy} {name_identity}: {type}, {influence} influence, currently focused on {projects}.',
+    'The {name_legacy} {name_identity}. {type}. {influence}. Current project: {projects}.',
+    'You learn of the {name_legacy} {name_identity}: {type}. {influence}. They are pursuing {projects}.',
+    'A faction called the {name_legacy} {name_identity}. {type}. {influence}. Focus: {projects}.',
   ],
   sector_name: [
     'The {sector_name_prefix} {sector_name_suffix}.',
   ],
   story_hook: [
-    'Complication: {story_complication}. But there is a clue — {story_clue}.',
-    'A thread unravels: {story_complication}. Follow the trail: {story_clue}.',
-    'Things fall apart — {story_complication}. Yet something remains: {story_clue}.',
+    '{story_complication}. But there is a clue: {story_clue}.',
+    'A thread unravels: {story_complication}. The trail: {story_clue}.',
+    'Things fall apart. {story_complication}. Yet something remains: {story_clue}.',
   ],
   ironsworn_encounter: [
     'The situation demands you {action}. The stakes: {theme}.',
     'You must {action}. Everything hinges on {theme}.',
-    '{theme} drives what comes next — you must {action} or pay the price.',
+    '{theme} drives what comes next. You must {action} or pay the price.',
   ],
   ironsworn_consequence: [
-    'The price: {pay-the-price}. And then the twist — {major-plot-twist}.',
-    'You pay dearly: {pay-the-price}. Worse still, {major-plot-twist}.',
+    '{pay_the_price}. And then the twist: {major_plot_twist}.',
+    'You pay dearly. {pay_the_price}. Worse still: {major_plot_twist}.',
   ],
 };
 
-function aOrAn(word) {
-  return /^[aeiou]/i.test(word) ? 'an' : 'a';
-}
-
-function lowerFirst(word) {
-  if (!word) return '';
-  return word.charAt(0).toLowerCase() + word.slice(1);
+function sanitiseValue(text) {
+  if (!text) return '';
+  return text
+    .replace(/\s*[—–]\s*.+$/, '')    // strip " — description" suffixes
+    .replace(/\s*\([^)]*\)/g, '')     // strip all (parentheticals)
+    .replace(/\.+$/, '')              // strip trailing periods
+    .trim();
 }
 
 function composeNarrative(recipeId, elements) {
@@ -174,10 +174,14 @@ function composeNarrative(recipeId, elements) {
 
   const filled = template.replace(/\{([^}]+)\}/g, (_, key) => {
     const k = key.replace(/-/g, '_');
-    if (values[k]) return values[k];
-    const lower = k.toLowerCase();
-    const match = elements.find(e => e.table.toLowerCase().includes(lower) || (e.tableName || '').toLowerCase().includes(lower));
-    return match ? match.result : key;
+    let val = values[k];
+    if (!val) {
+      const lower = k.toLowerCase();
+      const match = elements.find(e => e.table.replace(/-/g, '_').toLowerCase().includes(lower) || (e.tableName || '').toLowerCase().includes(lower));
+      val = match ? match.result : null;
+    }
+    if (!val) return key;
+    return sanitiseValue(val);
   });
 
   // Fix "a/an" before vowels

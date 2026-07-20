@@ -16,6 +16,7 @@ for (const game of GAMES) {
 
   const files = readdirSync(oraclesDir).filter(f => f.endsWith('.json') && f !== 'schema.json');
 
+  const seen = new Set();
   for (const file of files) {
     const raw = JSON.parse(readFileSync(resolve(oraclesDir, file), 'utf8'));
     const categoryId = file.replace('.json', '');
@@ -23,10 +24,15 @@ for (const game of GAMES) {
 
     if (!fileTables.length) continue;
 
-    categories[categoryId] = fileTables.map(t => t.id);
-
+    const catIds = [];
     for (const table of fileTables) {
-      tables[table.id] = {
+      let id = table.id;
+      if (seen.has(id)) {
+        id = categoryId + '_' + id;
+      }
+      seen.add(id);
+      catIds.push(id);
+      tables[id] = {
         name: table.name,
         roll_type: table.roll_type,
         category: categoryId,
@@ -34,6 +40,7 @@ for (const game of GAMES) {
         entries: table.entries,
       };
     }
+    categories[categoryId] = catIds;
   }
 
   result[game] = { categories, tables };
