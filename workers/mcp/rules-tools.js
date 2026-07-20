@@ -43,6 +43,7 @@ function getGameMeta(slug) {
 function listGames(args) {
   const status = args?.status || 'published';
   const results = [];
+  const seen = new Set();
   for (const [slug, sync] of Object.entries(GAMES_SYNC)) {
     if (status === 'published' && !sync.published) continue;
     if (status !== 'all' && status !== 'published' && sync.status !== status) continue;
@@ -58,7 +59,23 @@ function listGames(args) {
       variantCount: indexed ? indexed.variantCount : 0,
       rulesUrl: indexed ? `https://rules.moddable.games/${slug}/` : null,
     });
+    seen.add(slug);
   }
+  for (const [slug, indexed] of Object.entries(GAME_MAP)) {
+    if (seen.has(slug)) continue;
+    results.push({
+      slug,
+      title: indexed.title,
+      tagline: null,
+      type: null,
+      status: 'indexed',
+      players: null,
+      duration: null,
+      variantCount: indexed.variantCount,
+      rulesUrl: `https://rules.moddable.games/${slug}/`,
+    });
+  }
+  results.sort((a, b) => a.title.localeCompare(b.title));
   return { games: results, total: results.length };
 }
 
