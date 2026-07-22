@@ -75,13 +75,22 @@ function getVariant(args) {
     );
   } else {
     const title = meta?.title || indexed.title || '';
-    const attempts = ['how to play', game.toLowerCase(), title.toLowerCase()];
-    for (const attempt of attempts) {
+    const exactAttempts = ['how to play', game.toLowerCase(), title.toLowerCase()];
+    for (const attempt of exactAttempts) {
       if (!attempt) continue;
       sectionKey = Object.keys(indexed.sections).find(
-        s => s.toLowerCase() === attempt || s.toLowerCase().includes(attempt)
+        s => s.toLowerCase() === attempt
       );
       if (sectionKey) break;
+    }
+    if (!sectionKey) {
+      for (const attempt of exactAttempts) {
+        if (!attempt) continue;
+        sectionKey = Object.keys(indexed.sections).find(
+          s => s.toLowerCase().startsWith(attempt) || attempt.startsWith(s.toLowerCase())
+        );
+        if (sectionKey) break;
+      }
     }
     if (!sectionKey) {
       const allSections = Object.keys(indexed.sections).filter(s => s !== 'Variant Library' && s !== 'Attribution');
