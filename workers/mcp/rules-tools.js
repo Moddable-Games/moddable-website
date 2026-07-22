@@ -117,13 +117,17 @@ function getVariant(args) {
   }
   const entries = indexed.sections[sectionKey];
   const content = entries.map(e => `## ${e.heading}\n${e.content}`).join('\n\n');
+  const variantPath = entries[0]?.variantUrl || entries[0]?.variant;
+  const rulesUrl = variantPath
+    ? `https://rules.moddable.games/${variantPath.replace(/^dist\//, '')}`
+    : `https://rules.moddable.games/${game}/`;
   return {
     game,
     gameTitle: indexed.title,
     variant: sectionKey,
     content,
     entryCount: entries.length,
-    rulesUrl: `https://rules.moddable.games/${game}/variants/${sectionKey.toLowerCase().replace(/[^a-z0-9]+/g, '-').replace(/-+$/, '')}/`,
+    rulesUrl,
   };
 }
 
