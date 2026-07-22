@@ -343,6 +343,8 @@ async function cmdMap(options, env) {
 
 async function cmdRules(options, env) {
   const game = getOption(options, 'game');
+  const page = Math.max(1, getOption(options, 'page') || 1);
+  const PAGE_SIZE = 30;
   if (!game) {
     try {
       const result = await callTool('rules_list_games', { status: 'published' }, env);
@@ -372,22 +374,18 @@ async function cmdRules(options, env) {
       desc += preview + (result.howToPlay.length > 800 ? '…' : '') + '\n\n';
     }
     if (result.variants && result.variants.length > 0) {
-      const variantLines = result.variants.map(v =>
+      const allVariants = result.variants.map(v =>
         typeof v === 'string' ? v : `\`${v.slug}\` ${v.title}`
       );
-      const maxChars = 3600 - desc.length;
-      let variantText = variantLines.join('\n');
-      if (variantText.length > maxChars) {
-        const fitting = [];
-        let len = 0;
-        for (const line of variantLines) {
-          if (len + line.length + 1 > maxChars) break;
-          fitting.push(line);
-          len += line.length + 1;
-        }
-        variantText = fitting.join('\n') + `\n… and ${result.variants.length - fitting.length} more`;
+      const totalPages = Math.ceil(allVariants.length / PAGE_SIZE);
+      const start = (page - 1) * PAGE_SIZE;
+      const pageVariants = allVariants.slice(start, start + PAGE_SIZE);
+      let variantText = pageVariants.join('\n');
+      const pageInfo = totalPages > 1 ? ` · page ${page}/${totalPages}` : '';
+      desc += `**Variants (${allVariants.length}${pageInfo}):**\n${variantText}`;
+      if (totalPages > 1 && page < totalPages) {
+        desc += `\n\nUse \`/rules game:${game} page:${page + 1}\` for more`;
       }
-      desc += `**Variants (${result.variants.length}):**\n${variantText}`;
     }
     if (result.rulesUrl) desc += `\n\n[📖 Full rulebook](${result.rulesUrl})`;
     return embed({

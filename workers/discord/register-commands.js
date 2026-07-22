@@ -93,6 +93,7 @@ const commands = [
     description: 'Browse the rules library or get details on a game',
     options: [
       { name: 'game', type: 3, description: 'Game slug (e.g. backgammon, draughts, nukes). Omit to list all.', required: false },
+      { name: 'page', type: 4, description: 'Page number for long variant lists (30 per page)', required: false },
     ],
   },
   {
