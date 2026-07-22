@@ -257,14 +257,14 @@
     "tools": [
       {
         "name": "oracle_list_tables",
-        "description": "List all oracle tables for Starforged or Ironsworn, optionally filtered by category.",
-        "example": "What oracle tables are available for Starforged?",
+        "description": "List all oracle tables for a game system (Starforged, Ironsworn, or Maze Rats), optionally filtered by category.",
+        "example": "What oracle tables are available for Maze Rats?",
         "returns": "Array of tables with IDs, names, roll types, and categories"
       },
       {
         "name": "oracle_roll",
-        "description": "Roll on a specific Starforged or Ironsworn oracle table.",
-        "example": "Roll on the Starforged Action oracle",
+        "description": "Roll on a specific oracle table from Starforged, Ironsworn, or Maze Rats.",
+        "example": "Roll on the Maze Rats dungeon-rooms table",
         "returns": "Dice roll and result text from the table"
       },
       {
@@ -275,14 +275,14 @@
       },
       {
         "name": "oracle_scene",
-        "description": "Generate a narrative seed by rolling multiple oracle tables using named recipes or custom table lists.",
-        "example": "Generate a Starforged NPC encounter in the Outlands",
+        "description": "Generate a narrative seed by rolling multiple oracle tables using named recipes or custom table lists. Supports Starforged, Ironsworn, and Maze Rats.",
+        "example": "Generate a Maze Rats dungeon room",
         "returns": "Composed narrative paragraph with individual roll elements"
       },
       {
         "name": "oracle_list_recipes",
-        "description": "List predefined scene recipes — curated multi-table compositions for narrative prompts.",
-        "example": "What oracle recipes are available?",
+        "description": "List predefined scene recipes across Starforged, Ironsworn, and Maze Rats.",
+        "example": "What Maze Rats recipes are available?",
         "returns": "Array of recipes with ID, name, game, description, tables"
       },
       {
@@ -299,8 +299,8 @@
       },
       {
         "name": "oracle_encounter",
-        "description": "Generate a D&D 5e encounter with CR-appropriate monsters, terrain, and loot from the SRD.",
-        "example": "Generate a hard encounter for 4 level-7 players in a dungeon",
+        "description": "Generate a D&D 5e or Pathfinder 1e encounter with CR-appropriate monsters, terrain, and loot.",
+        "example": "Generate a hard Pathfinder encounter for 4 level-7 players in a dungeon",
         "returns": "Monster group, terrain, XP budget, and magic item loot"
       }
     ]

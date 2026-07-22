@@ -186,8 +186,8 @@ const ALL_TOOLS = [
 
 const SERVER_INFO = {
   name: 'moddable-tools',
-  version: '1.6.0',
-  description: 'AI-callable tools for chess variant analysis, hex map generation, piece gallery search, rules library queries, RPG oracles, and board game utilities',
+  version: '1.7.0',
+  description: 'AI-callable tools for chess variant analysis, hex map generation, piece gallery search, rules library queries, RPG oracles (Starforged, Ironsworn, Maze Rats), encounter building (D&D 5e, Pathfinder 1e), and board game utilities',
 };
 
 const PROMPTS = [
@@ -934,7 +934,7 @@ function generateLlmsTxt() {
   let txt = `# Moddable.Games — AI Tool Server\n`;
   txt += `# https://tools.moddable.games\n\n`;
   txt += `> Moddable.Games provides open-source board game engines as AI-callable tools.\n`;
-  txt += `> ${ALL_TOOLS.length} tools across chess variant analysis (70+ variants, 1,500+ puzzles), piece gallery (96 sets, 2,550 SVGs), hex map generation (6 games), rules library queries (18 game families, 1,100+ indexed entries), RPG oracles (Starforged, Ironsworn, D&D 5e encounters), and board game utilities.\n\n`;
+  txt += `> ${ALL_TOOLS.length} tools across chess variant analysis (70+ variants, 1,500+ puzzles), piece gallery (96 sets, 2,550 SVGs), hex map generation (6 games), rules library queries (41 game families, 8,400+ indexed entries), RPG oracles (Starforged, Ironsworn, Maze Rats, D&D 5e + Pathfinder 1e encounters), and board game utilities.\n\n`;
   txt += `## Endpoints\n\n`;
   txt += `- MCP (SSE): https://tools.moddable.games/mcp\n`;
   txt += `- MCP (message): POST https://tools.moddable.games/mcp/message\n`;

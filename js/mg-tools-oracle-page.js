@@ -8,7 +8,7 @@ document.getElementById('page-hero').appendChild(sectionHero({
   hexColor: 'blue',
   eyebrow: 'ORACLES',
   title: 'Roll the <em>narrative</em>',
-  lede: 'Scene generation, oracle rolls, and narrative threading for Starforged, Ironsworn, and D&D.',
+  lede: 'Scene generation, oracle rolls, and narrative threading for Starforged, Ironsworn, Maze Rats, and more.',
 }));
 
 const TOOLS_API = 'https://tools.moddable.games/api/call';
@@ -19,6 +19,7 @@ async function callTool(tool, args) {
 
 const TABS = [
   { id: 'forge', label: 'Scene Forge' },
+  { id: 'maze-rats', label: 'Maze Rats' },
   { id: 'ask', label: 'Ask the Oracle' },
   { id: 'weaver', label: 'Thread Weaver' },
   { id: 'encounter', label: 'Encounter Builder' },
@@ -26,12 +27,15 @@ const TABS = [
 
 let activeTab = 'forge';
 let recipes = [];
+let mazeRatsRecipes = [];
 let selectedRecipe = '';
+let selectedMRRecipe = '';
 let selectedRegion = 'terminus';
 let lastScene = null;
+let lastMRScene = null;
 let askLikelihood = 'fifty_fifty';
 let lastAnswer = null;
-let encounterSettings = { partyLevel: 5, partySize: 4, difficulty: 'medium', monsterType: '', terrain: '', lootTier: 'medium' };
+let encounterSettings = { system: 'dnd-5e', partyLevel: 5, partySize: 4, difficulty: 'medium', monsterType: '', terrain: '', lootTier: 'medium' };
 let lastEncounter = null;
 
 const THREADS_KEY = 'mg_oracle_threads';
@@ -40,11 +44,13 @@ let activeThreadId = null;
 
 function saveThreads() { localStorage.setItem(THREADS_KEY, JSON.stringify(threads)); }
 
-// --- Init ---
 async function init() {
   const data = await callTool('oracle_list_recipes', {});
-  recipes = data.recipes || [];
+  const all = data.recipes || [];
+  recipes = all.filter(r => r.game !== 'maze-rats');
+  mazeRatsRecipes = all.filter(r => r.game === 'maze-rats');
   if (recipes.length) selectedRecipe = recipes[0].id;
+  if (mazeRatsRecipes.length) selectedMRRecipe = mazeRatsRecipes[0].id;
   renderTabs();
   renderPanel();
 }
@@ -65,6 +71,7 @@ function renderPanel() {
   const panel = document.getElementById('oracle-panel');
   panel.innerHTML = '';
   if (activeTab === 'forge') renderForge(panel);
+  else if (activeTab === 'maze-rats') renderMazeRats(panel);
   else if (activeTab === 'ask') renderAsk(panel);
   else if (activeTab === 'weaver') renderWeaver(panel);
   else if (activeTab === 'encounter') renderEncounter(panel);
@@ -72,7 +79,6 @@ function renderPanel() {
 
 // --- Scene Forge ---
 function renderForge(panel) {
-  panel.innerHTML = '';
   const title = el('h2', { class: 'oracle-section-title' }, 'Compose a scene');
   const sub = el('p', { class: 'oracle-section-sub' }, 'Pick a recipe and region, then forge your narrative seed.');
   panel.appendChild(title);
@@ -144,8 +150,81 @@ function renderForgeResults(panel) {
       const r = await callTool('oracle_roll', { game: lastScene.game || 'starforged', table: elem.table });
       if (r.rolls && r.rolls[0]) {
         lastScene.elements[idx] = { table: elem.table, tableName: r.tableName, ...r.rolls[0] };
-        lastScene.narrative = lastScene.elements.map(e => e.result).join(' · ');
+        lastScene.narrative = lastScene.elements.map(e => e.result).join(' \xb7 ');
         renderForgeResults(panel);
+      }
+    });
+    card.appendChild(rerollBtn);
+    grid.appendChild(card);
+  });
+  panel.appendChild(grid);
+}
+
+// --- Maze Rats ---
+function renderMazeRats(panel) {
+  const title = el('h2', { class: 'oracle-section-title' }, 'Maze Rats Generator');
+  const sub = el('p', { class: 'oracle-section-sub' }, 'Procedural tables for NPCs, spells, dungeons, wilderness, and more.');
+  panel.appendChild(title);
+  panel.appendChild(sub);
+
+  const controls = el('div', { class: 'oracle-controls' });
+
+  const select = document.createElement('select');
+  select.className = 'oracle-select';
+  mazeRatsRecipes.forEach(r => {
+    const opt = document.createElement('option');
+    opt.value = r.id;
+    opt.textContent = r.name;
+    if (r.id === selectedMRRecipe) opt.selected = true;
+    select.appendChild(opt);
+  });
+  select.addEventListener('change', () => { selectedMRRecipe = select.value; });
+  controls.appendChild(select);
+
+  const forgeBtn = document.createElement('button');
+  forgeBtn.className = 'oracle-forge-btn';
+  forgeBtn.textContent = 'Generate';
+  forgeBtn.addEventListener('click', async () => {
+    forgeBtn.textContent = '...';
+    const result = await callTool('oracle_scene', { recipe: selectedMRRecipe });
+    lastMRScene = result;
+    track('oracle_maze_rats', { recipe: selectedMRRecipe });
+    renderMRResults(panel);
+    forgeBtn.textContent = 'Generate';
+  });
+  controls.appendChild(forgeBtn);
+  panel.appendChild(controls);
+
+  if (lastMRScene) renderMRResults(panel);
+}
+
+function renderMRResults(panel) {
+  let existing = panel.querySelector('.oracle-results');
+  if (existing) existing.remove();
+  let existingNarr = panel.querySelector('.oracle-narrative');
+  if (existingNarr) existingNarr.remove();
+
+  if (!lastMRScene || !lastMRScene.elements) return;
+
+  const narrative = el('div', { class: 'oracle-narrative' }, lastMRScene.narrative);
+  panel.appendChild(narrative);
+
+  const grid = el('div', { class: 'oracle-results' });
+  lastMRScene.elements.forEach((elem, idx) => {
+    const card = el('div', { class: 'oracle-result-card' });
+    card.appendChild(el('div', { class: 'oracle-result-card__label' }, elem.tableName || elem.table));
+    card.appendChild(el('div', { class: 'oracle-result-card__value' }, elem.result));
+    card.appendChild(el('div', { class: 'oracle-result-card__roll' }, elem.die + ' → ' + elem.roll));
+
+    const rerollBtn = document.createElement('button');
+    rerollBtn.className = 'oracle-result-card__reroll';
+    rerollBtn.textContent = '↻';
+    rerollBtn.addEventListener('click', async () => {
+      const r = await callTool('oracle_roll', { game: 'maze-rats', table: elem.table });
+      if (r.rolls && r.rolls[0]) {
+        lastMRScene.elements[idx] = { table: elem.table, tableName: r.tableName, ...r.rolls[0] };
+        lastMRScene.narrative = lastMRScene.elements.map(e => e.result).join(' \xb7 ');
+        renderMRResults(panel);
       }
     });
     card.appendChild(rerollBtn);
@@ -156,7 +235,6 @@ function renderForgeResults(panel) {
 
 // --- Ask the Oracle ---
 function renderAsk(panel) {
-  panel.innerHTML = '';
   const title = el('h2', { class: 'oracle-section-title' }, 'Ask the Oracle');
   const sub = el('p', { class: 'oracle-section-sub' }, 'Set a likelihood, ask your question, and let fate decide.');
   panel.appendChild(title);
@@ -221,7 +299,7 @@ function renderAskResult(panel) {
   }
 
   if (lastAnswer.question) {
-    answer.appendChild(el('div', { class: 'oracle-answer__question' }, '"' + lastAnswer.question + '"'));
+    answer.appendChild(el('div', { class: 'oracle-answer__question' }, '“' + lastAnswer.question + '”'));
   }
 
   panel.appendChild(answer);
@@ -229,7 +307,6 @@ function renderAskResult(panel) {
 
 // --- Thread Weaver ---
 function renderWeaver(panel) {
-  panel.innerHTML = '';
   const title = el('h2', { class: 'oracle-section-title' }, 'Thread Weaver');
   const sub = el('p', { class: 'oracle-section-sub' }, 'Maintain narrative threads. Roll in context and build connected stories.');
   panel.appendChild(title);
@@ -289,10 +366,11 @@ function renderWeaver(panel) {
   const threadControls = el('div', { class: 'oracle-controls' });
   const recipeSelect = document.createElement('select');
   recipeSelect.className = 'oracle-select';
-  recipes.forEach(r => {
+  const allRecipes = [...recipes, ...mazeRatsRecipes];
+  allRecipes.forEach(r => {
     const opt = document.createElement('option');
     opt.value = r.id;
-    opt.textContent = r.name;
+    opt.textContent = r.name + (r.game === 'maze-rats' ? ' (MR)' : '');
     recipeSelect.appendChild(opt);
   });
   threadControls.appendChild(recipeSelect);
@@ -318,9 +396,9 @@ function renderWeaver(panel) {
     active.rolls.slice().reverse().forEach(r => {
       const rollEl = el('div', { class: 'oracle-thread-roll' });
       rollEl.appendChild(el('div', { class: 'oracle-thread-roll__result' }, r.narrative));
-      const recipeName = recipes.find(x => x.id === r.recipe)?.name || r.recipe;
+      const recipeName = allRecipes.find(x => x.id === r.recipe)?.name || r.recipe;
       const time = new Date(r.timestamp).toLocaleTimeString([], { hour: '2-digit', minute: '2-digit' });
-      rollEl.appendChild(el('div', { class: 'oracle-thread-roll__meta' }, recipeName + ' · ' + time));
+      rollEl.appendChild(el('div', { class: 'oracle-thread-roll__meta' }, recipeName + ' \xb7 ' + time));
       rollsList.appendChild(rollEl);
     });
     panel.appendChild(rollsList);
@@ -328,19 +406,32 @@ function renderWeaver(panel) {
 }
 
 // --- Encounter Builder ---
-const MONSTER_TYPES = ['any','aberration','beast','celestial','construct','dragon','elemental','fey','fiend','giant','humanoid','monstrosity','ooze','plant','undead'];
+const MONSTER_TYPES_DND = ['any','aberration','beast','celestial','construct','dragon','elemental','fey','fiend','giant','humanoid','monstrosity','ooze','plant','undead'];
+const MONSTER_TYPES_PF = ['any','Aberration','Animal','Construct','Dragon','Fey','Humanoid','Magical Beast','Monstrous Humanoid','Ooze','Outsider','Plant','Undead','Vermin'];
 const TERRAINS = ['Random','Forest','Cavern','Dungeon','Swamp','Mountain','Desert','Coastal','Arctic','Urban','Planar','Underwater','Grassland'];
 const DIFFICULTIES = ['easy','medium','hard','deadly'];
 const LOOT_TIERS = ['none','low','medium','high','legendary'];
+const SYSTEMS = [
+  { id: 'dnd-5e', label: 'D&D 5e' },
+  { id: 'pathfinder-1e', label: 'Pathfinder 1e' },
+];
 
 function renderEncounter(panel) {
-  panel.innerHTML = '';
   const title = el('h2', { class: 'oracle-section-title' }, 'Encounter Builder');
-  const sub = el('p', { class: 'oracle-section-sub' }, 'Generate CR-appropriate D&D 5e encounters with terrain and loot.');
+  const sub = el('p', { class: 'oracle-section-sub' }, 'Generate CR-appropriate encounters with terrain and loot.');
   panel.appendChild(title);
   panel.appendChild(sub);
 
   const controls = el('div', { class: 'oracle-encounter-controls' });
+
+  const systemRow = el('div', { class: 'oracle-encounter-row' });
+  systemRow.appendChild(makeSelect('System', SYSTEMS.map(s => s.label), SYSTEMS.find(s => s.id === encounterSettings.system).label, v => {
+    encounterSettings.system = SYSTEMS.find(s => s.label === v).id;
+    renderPanel();
+  }));
+  controls.appendChild(systemRow);
+
+  const monsterTypes = encounterSettings.system === 'pathfinder-1e' ? MONSTER_TYPES_PF : MONSTER_TYPES_DND;
 
   const row1 = el('div', { class: 'oracle-encounter-row' });
   row1.appendChild(makeNumberInput('Level', encounterSettings.partyLevel, 1, 20, v => { encounterSettings.partyLevel = v; }));
@@ -349,7 +440,7 @@ function renderEncounter(panel) {
   controls.appendChild(row1);
 
   const row2 = el('div', { class: 'oracle-encounter-row' });
-  row2.appendChild(makeSelect('Monster Type', MONSTER_TYPES, encounterSettings.monsterType || 'any', v => { encounterSettings.monsterType = v === 'any' ? '' : v; }));
+  row2.appendChild(makeSelect('Monster Type', monsterTypes, encounterSettings.monsterType || 'any', v => { encounterSettings.monsterType = v === 'any' ? '' : v; }));
   row2.appendChild(makeSelect('Terrain', TERRAINS, encounterSettings.terrain || 'Random', v => { encounterSettings.terrain = v === 'Random' ? '' : v; }));
   row2.appendChild(makeSelect('Loot Tier', LOOT_TIERS, encounterSettings.lootTier, v => { encounterSettings.lootTier = v; }));
   controls.appendChild(row2);
@@ -360,6 +451,7 @@ function renderEncounter(panel) {
   generateBtn.addEventListener('click', async () => {
     generateBtn.textContent = '...';
     const args = {
+      system: encounterSettings.system,
       party_level: encounterSettings.partyLevel,
       party_size: encounterSettings.partySize,
       difficulty: encounterSettings.difficulty,
@@ -369,7 +461,7 @@ function renderEncounter(panel) {
     if (encounterSettings.terrain) args.terrain = encounterSettings.terrain;
     const result = await callTool('oracle_encounter', args);
     lastEncounter = result;
-    track('oracle_encounter', { difficulty: encounterSettings.difficulty, level: encounterSettings.partyLevel });
+    track('oracle_encounter', { system: encounterSettings.system, difficulty: encounterSettings.difficulty, level: encounterSettings.partyLevel });
     renderEncounterResults(panel);
     generateBtn.textContent = 'Generate Encounter';
   });
@@ -437,9 +529,9 @@ function renderEncounterResults(panel) {
   const monsterGrid = el('div', { class: 'oracle-results' });
   lastEncounter.monsters.forEach(m => {
     const card = el('div', { class: 'oracle-result-card' });
-    card.appendChild(el('div', { class: 'oracle-result-card__label' }, m.type + ' · CR ' + m.cr));
+    card.appendChild(el('div', { class: 'oracle-result-card__label' }, m.type + ' \xb7 CR ' + m.cr));
     card.appendChild(el('div', { class: 'oracle-result-card__value' }, (m.count > 1 ? m.count + '× ' : '') + m.name));
-    card.appendChild(el('div', { class: 'oracle-result-card__roll' }, m.size + ' · AC ' + m.ac + ' · HP ' + m.hp));
+    card.appendChild(el('div', { class: 'oracle-result-card__roll' }, m.size + ' \xb7 AC ' + m.ac + ' \xb7 HP ' + m.hp));
     monsterGrid.appendChild(card);
   });
   results.appendChild(monsterGrid);

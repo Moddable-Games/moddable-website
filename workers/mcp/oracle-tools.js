@@ -1,6 +1,8 @@
 import ORACLE_DATA from './oracle-data.json';
 import MONSTERS from './dnd-monsters.json';
 import LOOT from './dnd-loot.json';
+import PF_MONSTERS from './pf-monsters.json';
+import PF_LOOT from './pf-loot.json';
 
 const THRESHOLDS = {
   almost_certain: 90,
@@ -83,6 +85,66 @@ const RECIPES = {
     description: 'Pay the Price combined with a plot twist for dramatic turns.',
     tables: ['pay-the-price', 'major-plot-twist'],
   },
+  maze_rats_npc: {
+    name: 'Random NPC',
+    game: 'maze-rats',
+    description: 'Generate an NPC with name, appearance, personality, and secret.',
+    tables: ['male-names', 'lowerclass-surnames', 'appearances', 'personalities', 'secrets'],
+  },
+  maze_rats_spell: {
+    name: 'Magic Spell',
+    game: 'maze-rats',
+    description: 'Generate a random magic spell from ethereal or physical components.',
+    tables: ['physical-effects', 'physical-elements', 'physical-forms'],
+  },
+  maze_rats_monster: {
+    name: 'Monster',
+    game: 'maze-rats',
+    description: 'Generate a creature with features, traits, abilities, and tactics.',
+    tables: ['terrestrial-animals', 'monster-features', 'monster-traits', 'monster-abilities', 'monster-tactics'],
+  },
+  maze_rats_dungeon_room: {
+    name: 'Dungeon Room',
+    game: 'maze-rats',
+    description: 'Generate a dungeon room with form, details, activities, and hazards.',
+    tables: ['dungeon-forms', 'dungeon-rooms', 'dungeon-room-details', 'dungeon-activities'],
+  },
+  maze_rats_wilderness: {
+    name: 'Wilderness Encounter',
+    game: 'maze-rats',
+    description: 'Generate a wilderness scene with region, landmark, discovery, and hazard.',
+    tables: ['wilderness-regions', 'wilderness-landmarks', 'wilderness-discoveries', 'wilderness-hazards'],
+  },
+  maze_rats_city_event: {
+    name: 'City Encounter',
+    game: 'maze-rats',
+    description: 'Generate a city scene with district, building, activity, and event.',
+    tables: ['district-themes', 'lower-class-buildings', 'city-activities', 'city-events'],
+  },
+  maze_rats_treasure: {
+    name: 'Treasure Hoard',
+    game: 'maze-rats',
+    description: 'Generate a treasure collection with items, traits, and materials.',
+    tables: ['treasure-items', 'treasure-traits', 'valuable-materials', 'potions'],
+  },
+  maze_rats_inn: {
+    name: 'Inn',
+    game: 'maze-rats',
+    description: 'Generate a tavern with name parts and a quirk.',
+    tables: ['inn-adjectives', 'inn-nouns', 'inn-quirks'],
+  },
+  maze_rats_faction: {
+    name: 'Faction',
+    game: 'maze-rats',
+    description: 'Generate a faction with identity, traits, and goals.',
+    tables: ['factions', 'faction-traits', 'faction-goals'],
+  },
+  maze_rats_trap: {
+    name: 'Trap',
+    game: 'maze-rats',
+    description: 'Generate a trap with trigger and effect.',
+    tables: ['trap-triggers', 'trap-effects'],
+  },
 };
 
 const NARRATIVE_TEMPLATES = {
@@ -151,6 +213,56 @@ const NARRATIVE_TEMPLATES = {
   ironsworn_consequence: [
     '{pay_the_price}. And then the twist: {major_plot_twist}.',
     'You pay dearly. {pay_the_price}. Worse still: {major_plot_twist}.',
+  ],
+  maze_rats_npc: [
+    '{male_names} {lowerclass_surnames}. {appearances}. {personalities}. Secret: {secrets}.',
+    'A {personalities} figure named {male_names} {lowerclass_surnames}. {appearances}. They conceal: {secrets}.',
+    '{male_names} {lowerclass_surnames} — {appearances}, {personalities}. What they hide: {secrets}.',
+  ],
+  maze_rats_spell: [
+    'Spell of {physical_effects} {physical_elements}: takes the form of {physical_forms}.',
+    'A {physical_effects} {physical_forms} infused with {physical_elements}.',
+    '{physical_effects} {physical_elements}, manifesting as {physical_forms}.',
+  ],
+  maze_rats_monster: [
+    'A {terrestrial_animals} with {monster_features}. {monster_traits}. It can {monster_abilities}. Tactics: {monster_tactics}.',
+    '{monster_features} {terrestrial_animals}. {monster_traits}. Ability: {monster_abilities}. Fights by {monster_tactics}.',
+    'Creature: {terrestrial_animals}. Distinctive: {monster_features}, {monster_traits}. Power: {monster_abilities}. Approach: {monster_tactics}.',
+  ],
+  maze_rats_dungeon_room: [
+    'A {dungeon_forms} room used for {dungeon_rooms}. {dungeon_room_details}. Activity: {dungeon_activities}.',
+    '{dungeon_forms} chamber. Purpose: {dungeon_rooms}. Notable: {dungeon_room_details}. Currently: {dungeon_activities}.',
+    'You enter a {dungeon_forms} {dungeon_rooms}. {dungeon_room_details}. Signs of {dungeon_activities}.',
+  ],
+  maze_rats_wilderness: [
+    'The {wilderness_regions} stretches before you. A {wilderness_landmarks} marks the way. Discovery: {wilderness_discoveries}. Danger: {wilderness_hazards}.',
+    'In the {wilderness_regions}: a {wilderness_landmarks}. You find {wilderness_discoveries}. Beware: {wilderness_hazards}.',
+    '{wilderness_regions} terrain. Landmark: {wilderness_landmarks}. {wilderness_discoveries}. Hazard: {wilderness_hazards}.',
+  ],
+  maze_rats_city_event: [
+    'The {district_themes} district. A {lower_class_buildings} where {city_activities}. Event: {city_events}.',
+    'In a {district_themes} quarter, near a {lower_class_buildings}. {city_activities}. Then: {city_events}.',
+    '{district_themes} streets. Building: {lower_class_buildings}. Activity: {city_activities}. Complication: {city_events}.',
+  ],
+  maze_rats_treasure: [
+    'A {treasure_traits} {treasure_items} made of {valuable_materials}. Also found: {potions}.',
+    '{treasure_items} — {treasure_traits}, wrought from {valuable_materials}. Alongside: {potions}.',
+    'Treasure: {treasure_traits} {treasure_items} of {valuable_materials}. Potion: {potions}.',
+  ],
+  maze_rats_inn: [
+    'The {inn_adjectives} {inn_nouns}. Quirk: {inn_quirks}.',
+    'Welcome to The {inn_adjectives} {inn_nouns}. {inn_quirks}.',
+    'The {inn_adjectives} {inn_nouns} — {inn_quirks}.',
+  ],
+  maze_rats_faction: [
+    'The {factions}. {faction_traits}. They seek to {faction_goals}.',
+    'A faction: {factions}. Known for being {faction_traits}. Goal: {faction_goals}.',
+    '{factions} — {faction_traits}. Current objective: {faction_goals}.',
+  ],
+  maze_rats_trap: [
+    'Triggered by: {trap_triggers}. Effect: {trap_effects}.',
+    '{trap_triggers} activates a {trap_effects} trap.',
+    'Trap: {trap_effects}, set off by {trap_triggers}.',
   ],
 };
 
@@ -224,7 +336,8 @@ function getTable(game, tableId) {
 }
 
 function rollDie(type) {
-  const max = type === 'd100' ? 100 : type === 'd10' ? 10 : 6;
+  const match = type && type.match(/d(\d+)/);
+  const max = match ? parseInt(match[1], 10) : 6;
   return Math.floor(Math.random() * max) + 1;
 }
 
@@ -283,7 +396,7 @@ function resolveCompound(game, text, sourceTableId, depth) {
 function oracleListTables(args) {
   const game = args?.game || 'starforged';
   const g = ORACLE_DATA[game];
-  if (!g) return { error: `Unknown game: "${game}". Available: starforged, ironsworn` };
+  if (!g) return { error: `Unknown game: "${game}". Available: ${Object.keys(ORACLE_DATA).join(', ')}` };
 
   const category = args?.category;
   let tableList;
@@ -488,7 +601,32 @@ const LOOT_TIERS = {
   legendary: ['Very Rare', 'Legendary', 'Artifact'],
 };
 
+const PF_CR_XP = {
+  0.25: 100, 0.5: 200, 1: 400, 2: 600, 3: 800, 4: 1200,
+  5: 1600, 6: 2400, 7: 3200, 8: 4800, 9: 6400, 10: 9600,
+  11: 12800, 12: 19200, 13: 25600, 14: 38400, 15: 51200,
+  16: 76800, 17: 102400, 18: 153600, 19: 204800, 20: 307200,
+  21: 409600, 22: 614400, 23: 819200, 24: 1228800, 25: 1638400,
+};
+
+const PF_DIFFICULTY_THRESHOLDS = {
+  easy:   [50,100,200,300,400,600,800,1200,1600,2400,3200,4800,6400,9600,12800,19200,25600,38400,51200,76800],
+  medium: [75,150,300,500,600,900,1200,1800,2400,3600,4800,7200,9600,14400,19200,28800,38400,57600,76800,115200],
+  hard:   [100,200,400,600,800,1200,1600,2400,3200,4800,6400,9600,12800,19200,25600,38400,51200,76800,102400,153600],
+  deadly: [150,300,600,900,1200,1800,2400,3600,4800,7200,9600,14400,19200,28800,38400,57600,76800,115200,153600,230400],
+};
+
+function getPfXpThreshold(level, difficulty) {
+  const thresholds = PF_DIFFICULTY_THRESHOLDS[difficulty];
+  return thresholds[Math.min(level - 1, 19)] || thresholds[19];
+}
+
+function getPfMonsterXp(cr) {
+  return PF_CR_XP[cr] || 0;
+}
+
 function oracleEncounter(args) {
+  const system = args?.system || 'dnd-5e';
   const partyLevel = Math.max(1, Math.min(20, args?.party_level || 5));
   const partySize = Math.max(1, Math.min(10, args?.party_size || 4));
   const difficulty = args?.difficulty || 'medium';
@@ -500,16 +638,22 @@ function oracleEncounter(args) {
     return { error: `Unknown difficulty "${difficulty}". Options: easy, medium, hard, deadly.` };
   }
 
-  const xpBudget = getXpThreshold(partyLevel, difficulty) * partySize;
+  const isPF = system === 'pathfinder-1e';
+  const monsterPool = isPF ? PF_MONSTERS : MONSTERS;
+  const lootSource = isPF ? PF_LOOT : LOOT;
+  const xpBudget = isPF
+    ? getPfXpThreshold(partyLevel, difficulty) * partySize
+    : getXpThreshold(partyLevel, difficulty) * partySize;
+  const getXp = isPF ? getPfMonsterXp : getMonsterXp;
 
   const maxCR = partyLevel + 3;
-  let pool = MONSTERS.filter(m => m.cr <= maxCR && m.cr > 0);
+  let pool = monsterPool.filter(m => m.cr <= maxCR && m.cr > 0);
   if (monsterType) {
     pool = pool.filter(m => m.type.toLowerCase() === monsterType.toLowerCase());
   }
 
   if (pool.length === 0) {
-    return { error: `No monsters found matching criteria (type: ${monsterType || 'any'}, max CR: ${maxCR}).` };
+    return { error: `No ${isPF ? 'Pathfinder' : 'D&D'} monsters found matching criteria (type: ${monsterType || 'any'}, max CR: ${maxCR}).` };
   }
 
   const group = [];
@@ -520,7 +664,7 @@ function oracleEncounter(args) {
   while (xpSpent < xpBudget * 0.7 && group.length < maxMonsters && attempts < 50) {
     attempts++;
     const remaining = xpBudget - xpSpent;
-    const eligible = pool.filter(m => getMonsterXp(m.cr) <= remaining && getMonsterXp(m.cr) > 0);
+    const eligible = pool.filter(m => getXp(m.cr) <= remaining && getXp(m.cr) > 0);
     if (eligible.length === 0) break;
 
     const monster = eligible[Math.floor(Math.random() * eligible.length)];
@@ -530,19 +674,20 @@ function oracleEncounter(args) {
     } else {
       group.push({ ...monster, count: 1 });
     }
-    xpSpent += getMonsterXp(monster.cr);
+    xpSpent += getXp(monster.cr);
   }
 
-  const encounterMultiplier = group.reduce((sum, g) => sum + g.count, 0) <= 1 ? 1
-    : group.reduce((sum, g) => sum + g.count, 0) <= 2 ? 1.5
-    : group.reduce((sum, g) => sum + g.count, 0) <= 6 ? 2
-    : group.reduce((sum, g) => sum + g.count, 0) <= 10 ? 2.5 : 3;
+  const totalCount = group.reduce((sum, g) => sum + g.count, 0);
+  const encounterMultiplier = totalCount <= 1 ? 1
+    : totalCount <= 2 ? 1.5
+    : totalCount <= 6 ? 2
+    : totalCount <= 10 ? 2.5 : 3;
   const adjustedXp = Math.round(xpSpent * encounterMultiplier);
 
   let loot = [];
   const tierRarities = LOOT_TIERS[lootTier] || LOOT_TIERS.medium;
   if (tierRarities.length > 0) {
-    const lootPool = LOOT.filter(item => tierRarities.includes(item.rarity));
+    const lootPool = lootSource.filter(item => tierRarities.includes(item.rarity));
     const lootCount = difficulty === 'easy' ? 1 : difficulty === 'deadly' ? 3 : 2;
     for (let i = 0; i < lootCount && lootPool.length > 0; i++) {
       const item = lootPool[Math.floor(Math.random() * lootPool.length)];
@@ -558,15 +703,17 @@ function oracleEncounter(args) {
     size: m.size,
     hp: m.hp,
     ac: m.ac,
-    xp: getMonsterXp(m.cr),
+    xp: getXp(m.cr),
   }));
 
+  const systemLabel = isPF ? 'Pathfinder 1e' : 'D&D 5e';
   const totalMonsters = monsters.reduce((sum, m) => sum + m.count, 0);
-  const narrative = `A ${difficulty} encounter for ${partySize} level-${partyLevel} adventurers. ` +
+  const narrative = `A ${difficulty} ${systemLabel} encounter for ${partySize} level-${partyLevel} adventurers. ` +
     `${totalMonsters} creature${totalMonsters !== 1 ? 's' : ''} in ${terrain.toLowerCase()} terrain. ` +
     `Adjusted XP: ${adjustedXp.toLocaleString()} (budget: ${xpBudget.toLocaleString()}).`;
 
   return {
+    system,
     difficulty,
     party: { level: partyLevel, size: partySize },
     terrain,
@@ -583,23 +730,23 @@ function oracleEncounter(args) {
 export const ORACLE_TOOLS = [
   {
     name: 'oracle_list_tables',
-    description: 'List all available oracle tables for Starforged or Ironsworn, optionally filtered by category. Returns table IDs, names, and roll types.',
+    description: 'List all available oracle tables for a game system, optionally filtered by category. Returns table IDs, names, and roll types.',
     inputSchema: {
       type: 'object',
       properties: {
-        game: { type: 'string', enum: ['starforged', 'ironsworn'], description: 'Game system. Defaults to "starforged".' },
-        category: { type: 'string', description: 'Filter by category (e.g. "core", "characters", "space", "planets"). Omit to list all.' },
+        game: { type: 'string', enum: ['starforged', 'ironsworn', 'maze-rats'], description: 'Game system. Defaults to "starforged".' },
+        category: { type: 'string', description: 'Filter by category (e.g. "core", "characters", "magic", "maze"). Omit to list all.' },
       },
     },
   },
   {
     name: 'oracle_roll',
-    description: 'Roll on a specific Starforged or Ironsworn oracle table. Returns the dice roll and result text. Use oracle_list_tables to discover table IDs.',
+    description: 'Roll on a specific oracle table. Returns the dice roll and result text. Use oracle_list_tables to discover table IDs.',
     inputSchema: {
       type: 'object',
       properties: {
-        game: { type: 'string', enum: ['starforged', 'ironsworn'], description: 'Game system. Defaults to "starforged".' },
-        table: { type: 'string', description: 'Table ID (e.g. "action", "theme", "name_given", "sighting_terminus").' },
+        game: { type: 'string', enum: ['starforged', 'ironsworn', 'maze-rats'], description: 'Game system. Defaults to "starforged".' },
+        table: { type: 'string', description: 'Table ID (e.g. "action", "theme", "ethereal-effects", "dungeon-rooms").' },
         count: { type: 'number', description: 'Number of rolls (1-5). Defaults to 1.' },
       },
       required: ['table'],
@@ -618,24 +765,24 @@ export const ORACLE_TOOLS = [
   },
   {
     name: 'oracle_scene',
-    description: 'Generate a narrative seed by rolling on multiple oracle tables. Use a named recipe (e.g. "npc_encounter", "starforged_scene") or provide a custom array of table IDs. Auto-resolves cross-references.',
+    description: 'Generate a narrative seed by rolling on multiple oracle tables. Use a named recipe (e.g. "npc_encounter", "maze_rats_dungeon_room") or provide a custom array of table IDs. Auto-resolves cross-references.',
     inputSchema: {
       type: 'object',
       properties: {
         recipe: { type: 'string', description: 'Recipe ID. Use oracle_list_recipes to see options.' },
         tables: { type: 'array', items: { type: 'string' }, description: 'Custom table IDs to roll. Ignored if recipe is provided.' },
-        game: { type: 'string', enum: ['starforged', 'ironsworn'], description: 'Game system. Defaults to "starforged".' },
-        region: { type: 'string', enum: ['terminus', 'outlands', 'expanse'], description: 'Region for tables with regional variants. Defaults to "terminus".' },
+        game: { type: 'string', enum: ['starforged', 'ironsworn', 'maze-rats'], description: 'Game system. Defaults to "starforged".' },
+        region: { type: 'string', enum: ['terminus', 'outlands', 'expanse'], description: 'Region for tables with regional variants (Starforged only). Defaults to "terminus".' },
       },
     },
   },
   {
     name: 'oracle_list_recipes',
-    description: 'List all predefined scene recipes — curated multi-table compositions that produce coherent narrative prompts.',
+    description: 'List all predefined scene recipes — curated multi-table compositions that produce coherent narrative prompts. Covers Starforged, Ironsworn, and Maze Rats.',
     inputSchema: {
       type: 'object',
       properties: {
-        game: { type: 'string', enum: ['starforged', 'ironsworn'], description: 'Filter by game. Omit to see all.' },
+        game: { type: 'string', enum: ['starforged', 'ironsworn', 'maze-rats'], description: 'Filter by game. Omit to see all.' },
       },
     },
   },
@@ -647,7 +794,7 @@ export const ORACLE_TOOLS = [
       properties: {
         result: { type: 'string', description: 'Oracle result text to interpret (e.g. "Action + Theme", "Descriptor + Focus", "Roll twice").' },
         source_table: { type: 'string', description: 'Table ID the result came from (needed for "Roll twice" re-rolls).' },
-        game: { type: 'string', enum: ['starforged', 'ironsworn'], description: 'Game system. Defaults to "starforged".' },
+        game: { type: 'string', enum: ['starforged', 'ironsworn', 'maze-rats'], description: 'Game system. Defaults to "starforged".' },
       },
       required: ['result'],
     },
@@ -658,7 +805,7 @@ export const ORACLE_TOOLS = [
     inputSchema: {
       type: 'object',
       properties: {
-        game: { type: 'string', enum: ['starforged', 'ironsworn'], description: 'Game system. Defaults to "starforged".' },
+        game: { type: 'string', enum: ['starforged', 'ironsworn', 'maze-rats'], description: 'Game system. Defaults to "starforged".' },
         table: { type: 'string', description: 'Table ID to view.' },
       },
       required: ['table'],
@@ -666,14 +813,15 @@ export const ORACLE_TOOLS = [
   },
   {
     name: 'oracle_encounter',
-    description: 'Generate a D&D 5e encounter. Selects CR-appropriate monsters for party level/size, picks terrain, and rolls loot from the SRD magic item tables. Returns a structured encounter block.',
+    description: 'Generate a tabletop RPG encounter (D&D 5e or Pathfinder 1e). Selects CR-appropriate monsters for party level/size, picks terrain, and rolls loot. Returns a structured encounter block.',
     inputSchema: {
       type: 'object',
       properties: {
+        system: { type: 'string', enum: ['dnd-5e', 'pathfinder-1e'], description: 'Game system. Defaults to "dnd-5e".' },
         party_level: { type: 'number', description: 'Average party level (1-20). Defaults to 5.' },
         party_size: { type: 'number', description: 'Number of players (1-10). Defaults to 4.' },
         difficulty: { type: 'string', enum: ['easy', 'medium', 'hard', 'deadly'], description: 'Encounter difficulty. Defaults to "medium".' },
-        monster_type: { type: 'string', description: 'Filter monsters by type (e.g. "undead", "dragon", "beast"). Omit for any.' },
+        monster_type: { type: 'string', description: 'Filter monsters by type (e.g. "undead", "dragon", "beast", "Outsider", "Construct"). Omit for any.' },
         terrain: { type: 'string', description: 'Terrain type (e.g. "Forest", "Cavern", "Dungeon"). Omit for random.' },
         loot_tier: { type: 'string', enum: ['none', 'low', 'medium', 'high', 'legendary'], description: 'Loot rarity tier. Defaults to "medium".' },
       },
