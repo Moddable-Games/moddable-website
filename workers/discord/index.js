@@ -372,7 +372,10 @@ async function cmdRules(options, env) {
       desc += preview + (result.howToPlay.length > 800 ? '…' : '') + '\n\n';
     }
     if (result.variants && result.variants.length > 0) {
-      desc += `**Variants:** ${result.variants.join(', ')}`;
+      const variantLines = result.variants.map(v =>
+        typeof v === 'string' ? v : `\`${v.slug}\` ${v.title}`
+      );
+      desc += `**Variants (${result.variants.length}):**\n${variantLines.join('\n')}`;
     }
     if (result.rulesUrl) desc += `\n\n[📖 Full rulebook](${result.rulesUrl})`;
     return embed({

@@ -51,7 +51,7 @@ function getGame(args) {
     status: meta?.status || null,
     variantHub: meta?.variantHub || false,
     variantCount: meta?.variants?.length || 0,
-    variants: (meta?.variants || []).map(v => v.title),
+    variants: meta?.variants || [],
     sections: meta?.sections || [],
     howToPlay: meta?.howToPlay || null,
     rulesUrl: `https://rules.moddable.games/dist/${slug}/`,
