@@ -103,16 +103,32 @@ function getVariant(args) {
   const game = args?.game;
   const variant = args?.variant;
   if (!game) return { error: 'Required: game (e.g. "backgammon")' };
-  if (!variant) return { error: 'Required: variant (e.g. "Acey-Deucey", "Standard Rules")' };
   const indexed = GAME_MAP[game];
   if (!indexed) return { error: `Unknown game: "${game}". Use rules_list_games to see available options.` };
-  const variantLower = variant.toLowerCase();
-  const sectionKey = Object.keys(indexed.sections).find(
-    s => s.toLowerCase() === variantLower || s.toLowerCase().includes(variantLower)
-  );
+
+  let sectionKey;
+  if (variant) {
+    const variantLower = variant.toLowerCase();
+    sectionKey = Object.keys(indexed.sections).find(
+      s => s.toLowerCase() === variantLower || s.toLowerCase().includes(variantLower)
+    );
+  } else {
+    const attempts = ['how to play', game.toLowerCase(), (indexed.title || '').toLowerCase()];
+    for (const attempt of attempts) {
+      if (!attempt) continue;
+      sectionKey = Object.keys(indexed.sections).find(
+        s => s.toLowerCase() === attempt || s.toLowerCase().includes(attempt)
+      );
+      if (sectionKey) break;
+    }
+    if (!sectionKey) {
+      const first = indexed.variants[0];
+      if (first) sectionKey = Object.keys(indexed.sections).find(s => s === first);
+    }
+  }
   if (!sectionKey) {
     return {
-      error: `Variant "${variant}" not found in ${game}. Available: ${indexed.variants.slice(0, 20).join(', ')}`,
+      error: `Variant "${variant || 'default'}" not found in ${game}. Available: ${indexed.variants.slice(0, 20).join(', ')}`,
     };
   }
   const entries = indexed.sections[sectionKey];

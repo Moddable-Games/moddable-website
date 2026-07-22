@@ -383,49 +383,16 @@ async function cmdHowToPlay(options, env) {
   const variant = getOption(options, 'variant');
   if (!game) return ephemeral('Required: `/howtoplay game:<slug>` (e.g. `game:backgammon`)');
   try {
-    if (variant) {
-      const result = await callTool('rules_get_variant', { game, variant }, env);
-      if (result.error) return ephemeral(result.error);
-      let desc = result.content || 'No rules content available.';
-      if (desc.length > 3900) desc = desc.slice(0, 3900) + '…';
-      if (result.rulesUrl) desc += `\n\n[📖 Full rules](${result.rulesUrl})`;
-      return embed({
-        title: `📖 ${result.gameTitle}: ${result.variant}`,
-        description: desc,
-        color: 0xd11a1a,
-      });
-    }
-    const gameInfo = await callTool('rules_get_game', { slug: game }, env);
-    if (gameInfo.error) return ephemeral(gameInfo.error);
-
-    const tryVariants = ['How to Play', game, gameInfo.title];
-    let found = null;
-    for (const attempt of tryVariants) {
-      if (!attempt) continue;
-      const r = await callTool('rules_get_variant', { game, variant: attempt }, env);
-      if (r && !r.error && r.content) { found = r; break; }
-    }
-
-    if (found) {
-      let desc = found.content;
-      if (desc.length > 3900) desc = desc.slice(0, 3900) + '…';
-      if (found.rulesUrl) desc += `\n\n[📖 Full rules](${found.rulesUrl})`;
-      return embed({
-        title: `📖 ${found.gameTitle || gameInfo.title || game}`,
-        description: desc,
-        color: 0xd11a1a,
-      });
-    }
-
-    let desc = gameInfo.summary ? gameInfo.summary + '\n\n' : '';
-    if (gameInfo.variants && gameInfo.variants.length > 0) {
-      desc += `**Variants:** ${gameInfo.variants.slice(0, 15).join(', ')}\n\nUse \`/howtoplay game:${game} variant:<name>\` for specific variant rules.`;
-    }
+    const args = { game };
+    if (variant) args.variant = variant;
+    const result = await callTool('rules_get_variant', args, env);
+    if (result.error) return ephemeral(result.error);
+    let desc = result.content || 'No rules content available.';
     if (desc.length > 3900) desc = desc.slice(0, 3900) + '…';
-    if (gameInfo.rulesUrl) desc += `\n\n[📖 Full rulebook](${gameInfo.rulesUrl})`;
+    if (result.rulesUrl) desc += `\n\n[📖 Full rules](${result.rulesUrl})`;
     return embed({
-      title: `📖 ${gameInfo.title || game}`,
-      description: desc || 'No overview available. Try specifying a variant.',
+      title: `📖 ${result.gameTitle}${result.variant ? ': ' + result.variant : ''}`,
+      description: desc,
       color: 0xd11a1a,
     });
   } catch (e) {
