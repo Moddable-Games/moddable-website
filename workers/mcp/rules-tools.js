@@ -70,9 +70,12 @@ function getVariant(args) {
   let sectionKey;
   if (variant) {
     const variantLower = variant.toLowerCase();
-    sectionKey = Object.keys(indexed.sections).find(
-      s => s.toLowerCase() === variantLower || s.toLowerCase().includes(variantLower)
-    );
+    const variantSlug = variantLower.replace(/[^a-z0-9]+/g, '-').replace(/-+$/, '');
+    sectionKey = Object.keys(indexed.sections).find(s => {
+      const sLower = s.toLowerCase();
+      const sSlug = sLower.replace(/[^a-z0-9]+/g, '-').replace(/-+$/, '');
+      return sLower === variantLower || sSlug === variantSlug || sLower.includes(variantLower) || sSlug.includes(variantSlug);
+    });
   } else {
     const title = meta?.title || indexed.title || '';
     const exactAttempts = ['how to play', game.toLowerCase(), title.toLowerCase()];
