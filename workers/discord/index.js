@@ -136,6 +136,7 @@ async function handleCommand(interaction, env, ctx) {
     case 'pieces': return cmdPieces(options, env);
     case 'oracle': return cmdOracle(options, env);
     case 'encounter': return cmdEncounter(options, env);
+    case 'rpg': return cmdRpg(options, env);
     case 'test': return cmdTest(interaction, env, ctx);
     case 'help': return cmdHelp();
     default:
@@ -894,7 +895,8 @@ async function cmdOracle(options, env) {
   }
   if (mode === 'roll') {
     const table = getOption(options, 'table') || 'action';
-    const result = await callTool('oracle_roll', { game: 'starforged', table }, env);
+    const game = getOption(options, 'recipe') || 'starforged';
+    const result = await callTool('oracle_roll', { game, table }, env);
     if (result.error) return embed({ title: '🎲 Oracle Roll', description: result.error, color: 0xd11a1a });
     const rolls = result.rolls || [];
     const desc = rolls.map(r => `**${r.result}** (${r.die} → ${r.roll})`).join('\n');
@@ -951,6 +953,92 @@ async function cmdEncounter(options, env) {
   return embed({ title: `⚔️ ${difficulty.charAt(0).toUpperCase() + difficulty.slice(1)} ${systemLabel} Encounter — ${result.terrain}`, description: desc, color: diffColors[difficulty] || 0x0a0d2a });
 }
 
+async function cmdRpg(options, env) {
+  const mode = getOption(options, 'mode') || 'games';
+  const game = getOption(options, 'game') || null;
+  const query = getOption(options, 'query') || null;
+  const category = getOption(options, 'category') || null;
+  const name = getOption(options, 'name') || null;
+
+  if (mode === 'games') {
+    const result = await callTool('oracle_list_games', {}, env);
+    if (result.error) return embed({ title: '📚 RPG Systems', description: result.error, color: 0xd11a1a });
+    const lines = (result.games || []).map(g => {
+      const features = g.features.join(', ');
+      const counts = [g.tables ? `${g.tables} tables` : null, g.entities ? `${g.entities} entities` : null].filter(Boolean).join(', ');
+      return `\`${g.id}\` **${g.label}** — ${counts}`;
+    });
+    return embed({ title: '📚 RPG Systems', description: lines.join('\n'), footer: `${result.total} systems · Use game ID in /rpg mode:browse game:<id>`, color: 0x6fb5ff });
+  }
+
+  if (mode === 'browse') {
+    if (!game) return ephemeral('Provide a game (e.g. `dnd-5e`, `cairn`, `pathfinder-1e`). Use `/rpg mode:games` to see all.');
+    if (!category) {
+      const result = await callTool('rpg_list_categories', { game }, env);
+      if (result.error) return embed({ title: '📂 Categories', description: result.error, color: 0xd11a1a });
+      const cats = result.categories || [];
+      const lines = cats.map(c => `\`${c.id}\` **${c.label}** — ${c.count} entries`);
+      return embed({ title: `📂 ${result.label || game}`, description: lines.join('\n'), footer: `Use /rpg mode:browse game:${game} category:<id>`, color: 0x6fb5ff });
+    }
+    const result = await callTool('rpg_browse', { game, category, page_size: 15 }, env);
+    if (result.error) return embed({ title: '📖 Browse', description: result.error, color: 0xd11a1a });
+    const lines = (result.items || []).map(item => {
+      const extras = Object.entries(item).filter(([k]) => k !== 'name').slice(0, 2).map(([k, v]) => `${k}: ${String(v).slice(0, 40)}`).join(' · ');
+      return `• **${item.name}**${extras ? ` — ${extras}` : ''}`;
+    });
+    let desc = lines.join('\n');
+    if (result.totalPages > 1) desc += `\n\nPage ${result.page}/${result.totalPages} (${result.totalItems} total)`;
+    return embed({ title: `📖 ${result.gameLabel} — ${result.categoryLabel}`, description: desc || 'Empty category.', color: 0x6fb5ff });
+  }
+
+  if (mode === 'search') {
+    if (!query) return ephemeral('Provide a search term: `/rpg mode:search query:fireball`');
+    const args = { query, limit: 10 };
+    if (game) args.game = game;
+    if (category) args.category = category;
+    const result = await callTool('rpg_search', args, env);
+    if (result.error) return embed({ title: '🔍 RPG Search', description: result.error, color: 0xd11a1a });
+    const items = result.results || [];
+    if (items.length === 0) return embed({ title: '🔍 RPG Search', description: `No results for "${query}".`, color: 0x6fb5ff });
+    const lines = items.map(item => {
+      const extras = Object.entries(item).filter(([k]) => !['game', 'gameLabel', 'category', 'categoryLabel', 'name'].includes(k)).slice(0, 2).map(([k, v]) => `${String(v).slice(0, 50)}`).join(' · ');
+      return `• **${item.name}** _(${item.gameLabel}, ${item.categoryLabel})_${extras ? `\n  ${extras}` : ''}`;
+    });
+    let desc = lines.join('\n');
+    if (desc.length > 3900) desc = desc.slice(0, 3900) + '…';
+    return embed({ title: `🔍 "${query}" — ${result.total} results`, description: desc, color: 0x6fb5ff });
+  }
+
+  if (mode === 'lookup') {
+    if (!game || !name) return ephemeral('Provide game and name: `/rpg mode:lookup game:dnd-5e name:Fireball`');
+    const args = { game, name };
+    if (category) args.category = category;
+    const result = await callTool('rpg_get_entity', args, env);
+    if (result.error) return embed({ title: '📋 Lookup', description: result.error, color: 0xd11a1a });
+    const fields = Object.entries(result).filter(([k]) => !['game', 'gameLabel', 'category', 'categoryLabel', 'name', 'note'].includes(k));
+    let desc = fields.map(([k, v]) => `**${k}:** ${String(v).slice(0, 200)}`).join('\n');
+    if (result.note) desc += `\n\n_${result.note}_`;
+    if (desc.length > 3900) desc = desc.slice(0, 3900) + '…';
+    return embed({ title: `📋 ${result.name}`, description: desc || 'No details.', footer: `${result.gameLabel} — ${result.categoryLabel}`, color: 0x6fb5ff });
+  }
+
+  if (mode === 'random') {
+    if (!game) return ephemeral('Provide a game: `/rpg mode:random game:cairn`');
+    const args = { game, count: 3 };
+    if (category) args.category = category;
+    const result = await callTool('rpg_random', args, env);
+    if (result.error) return embed({ title: '🎲 Random', description: result.error, color: 0xd11a1a });
+    const picks = result.results || [];
+    const lines = picks.map(item => {
+      const fields = Object.entries(item).filter(([k]) => !['game', 'category', 'categoryLabel', 'name'].includes(k)).slice(0, 3).map(([k, v]) => `${k}: ${String(v).slice(0, 60)}`).join(' · ');
+      return `• **${item.name}** _(${item.categoryLabel})_${fields ? `\n  ${fields}` : ''}`;
+    });
+    return embed({ title: `🎲 Random — ${result.gameLabel}`, description: lines.join('\n') || 'No results.', color: 0x6fb5ff });
+  }
+
+  return ephemeral('Unknown mode. Options: `games`, `browse`, `search`, `lookup`, `random`.');
+}
+
 const TEST_CASES = [
   { tool: 'dice_roll', args: { notation: '2d6+1' } },
   { tool: 'coin_flip', args: {} },
@@ -999,6 +1087,12 @@ const TEST_CASES = [
   { tool: 'oracle_interpret', args: { result: 'Action + Theme' } },
   { tool: 'oracle_table_view', args: { table: 'action' } },
   { tool: 'oracle_encounter', args: { party_level: 5, party_size: 4, difficulty: 'medium' } },
+  { tool: 'oracle_list_games', args: {} },
+  { tool: 'rpg_list_categories', args: { game: 'dnd-5e' } },
+  { tool: 'rpg_search', args: { query: 'fire', game: 'dnd-5e', limit: 3 } },
+  { tool: 'rpg_browse', args: { game: 'cairn', category: 'bestiary', page_size: 5 } },
+  { tool: 'rpg_get_entity', args: { game: 'dnd-5e', name: 'Fireball' } },
+  { tool: 'rpg_random', args: { game: 'pathfinder-1e', count: 2 } },
   { tool: 'jam_status', args: {} },
   { tool: 'jam_timer', args: {} },
   { tool: 'jam_vote', args: {} },
@@ -1105,10 +1199,17 @@ function cmdHelp() {
       '`/cowries` — Roll Pachisi shells',
       '',
       '**Oracles**',
-      '`/oracle forge` — Generate a scene (Starforged, Ironsworn, Maze Rats)',
+      '`/oracle forge` — Generate a scene (6 systems)',
       '`/oracle ask` — Yes/no with likelihood',
       '`/oracle roll` — Roll a specific oracle table',
       '`/encounter` — Encounter builder (D&D 5e, Pathfinder 1e)',
+      '',
+      '**RPG Library**',
+      '`/rpg games` — Browse all 10 RPG systems',
+      '`/rpg browse` — Explore categories and entities',
+      '`/rpg search` — Search spells, monsters, equipment',
+      '`/rpg lookup` — Get full entity details',
+      '`/rpg random` — Random entity for inspiration',
       '',
       '**Mod Jam**',
       '`/jam status` — Current jam state',
@@ -1116,7 +1217,7 @@ function cmdHelp() {
       '`/jam vote` — Vote standings',
       '',
     ].join('\n'),
-    footer: 'The House always wins. · 50 tools at tools.moddable.games',
+    footer: 'The House always wins. · 56 tools at tools.moddable.games',
     color: 0x0a0d2a,
   });
 }

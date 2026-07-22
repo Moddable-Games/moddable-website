@@ -263,7 +263,7 @@ const commands = [
   },
   {
     name: 'oracle',
-    description: 'Roll RPG oracles (Starforged, Ironsworn, Maze Rats) — scene forge, ask, or roll a table',
+    description: 'Roll RPG oracles (6 systems: Starforged, Ironsworn, Maze Rats, Cairn, Dungeon World, Knave)',
     options: [
       { name: 'mode', type: 3, description: 'What to do', required: true, choices: [{ name: 'Forge a scene', value: 'forge' }, { name: 'Ask yes/no', value: 'ask' }, { name: 'Roll a table', value: 'roll' }, { name: 'List recipes', value: 'recipes' }, { name: 'List tables', value: 'tables' }] },
       { name: 'recipe', type: 3, description: 'Scene recipe (for forge mode)', required: false },
@@ -282,6 +282,23 @@ const commands = [
       { name: 'players', type: 4, description: 'Number of players (1-10)', required: false },
       { name: 'type', type: 3, description: 'Monster type filter', required: false, choices: [{ name: 'Undead', value: 'undead' }, { name: 'Dragon', value: 'dragon' }, { name: 'Fiend', value: 'fiend' }, { name: 'Beast', value: 'beast' }, { name: 'Humanoid', value: 'humanoid' }, { name: 'Aberration', value: 'aberration' }, { name: 'Monstrosity', value: 'monstrosity' }, { name: 'Elemental', value: 'elemental' }, { name: 'Construct', value: 'construct' }, { name: 'Giant', value: 'giant' }] },
       { name: 'terrain', type: 3, description: 'Terrain type', required: false, choices: [{ name: 'Forest', value: 'Forest' }, { name: 'Cavern', value: 'Cavern' }, { name: 'Dungeon', value: 'Dungeon' }, { name: 'Swamp', value: 'Swamp' }, { name: 'Mountain', value: 'Mountain' }, { name: 'Desert', value: 'Desert' }, { name: 'Urban', value: 'Urban' }, { name: 'Arctic', value: 'Arctic' }] },
+    ],
+  },
+  {
+    name: 'rpg',
+    description: 'Browse RPG content — 10 systems, 3000+ entities (spells, monsters, classes, gear)',
+    options: [
+      { name: 'mode', type: 3, description: 'What to do', required: true, choices: [
+        { name: 'List all systems', value: 'games' },
+        { name: 'Browse categories/entities', value: 'browse' },
+        { name: 'Search entities', value: 'search' },
+        { name: 'Look up by name', value: 'lookup' },
+        { name: 'Random entity', value: 'random' },
+      ]},
+      { name: 'game', type: 3, description: 'Game system (e.g. dnd-5e, cairn, pathfinder-1e, dungeon-world)', required: false },
+      { name: 'category', type: 3, description: 'Category to browse (e.g. spells, monsters, bestiary)', required: false },
+      { name: 'query', type: 3, description: 'Search term (for search mode)', required: false },
+      { name: 'name', type: 3, description: 'Entity name (for lookup mode)', required: false },
     ],
   },
   {

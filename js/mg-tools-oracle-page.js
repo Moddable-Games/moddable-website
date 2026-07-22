@@ -23,6 +23,7 @@ const TABS = [
   { id: 'ask', label: 'Ask the Oracle' },
   { id: 'weaver', label: 'Thread Weaver' },
   { id: 'encounter', label: 'Encounter Builder' },
+  { id: 'library', label: 'RPG Library' },
 ];
 
 let activeTab = 'forge';
@@ -75,6 +76,7 @@ function renderPanel() {
   else if (activeTab === 'ask') renderAsk(panel);
   else if (activeTab === 'weaver') renderWeaver(panel);
   else if (activeTab === 'encounter') renderEncounter(panel);
+  else if (activeTab === 'library') renderLibrary(panel);
 }
 
 // --- Scene Forge ---
@@ -549,6 +551,180 @@ function renderEncounterResults(panel) {
   }
 
   panel.appendChild(results);
+}
+
+// --- RPG Library ---
+let libraryGames = null;
+let libraryGame = '';
+let libraryCategory = '';
+let libraryResults = null;
+let libraryPage = 1;
+let librarySearch = '';
+
+async function renderLibrary(panel) {
+  const title = el('h2', { class: 'oracle-section-title' }, 'RPG Library');
+  const sub = el('p', { class: 'oracle-section-sub' }, 'Browse and search spells, monsters, classes, equipment, and more across 10 RPG systems.');
+  panel.appendChild(title);
+  panel.appendChild(sub);
+
+  if (!libraryGames) {
+    const data = await callTool('oracle_list_games', {});
+    libraryGames = (data.games || []).filter(g => g.entities > 0);
+    if (libraryGames.length && !libraryGame) libraryGame = libraryGames[0].id;
+  }
+
+  const controls = el('div', { class: 'oracle-controls' });
+
+  const gameSelect = document.createElement('select');
+  gameSelect.className = 'oracle-select';
+  libraryGames.forEach(g => {
+    const opt = document.createElement('option');
+    opt.value = g.id;
+    opt.textContent = `${g.label} (${g.entities})`;
+    if (g.id === libraryGame) opt.selected = true;
+    gameSelect.appendChild(opt);
+  });
+  gameSelect.addEventListener('change', async () => {
+    libraryGame = gameSelect.value;
+    libraryCategory = '';
+    libraryResults = null;
+    libraryPage = 1;
+    renderPanel();
+  });
+  controls.appendChild(gameSelect);
+
+  const searchInput = document.createElement('input');
+  searchInput.className = 'oracle-question-input';
+  searchInput.placeholder = 'Search entities (e.g. "fire", "dragon")...';
+  searchInput.value = librarySearch;
+  searchInput.addEventListener('keydown', async (e) => {
+    if (e.key === 'Enter') {
+      librarySearch = searchInput.value.trim();
+      if (librarySearch) {
+        const args = { query: librarySearch, game: libraryGame, limit: 20 };
+        if (libraryCategory) args.category = libraryCategory;
+        libraryResults = await callTool('rpg_search', args);
+        renderLibraryResults(panel);
+      }
+    }
+  });
+  controls.appendChild(searchInput);
+
+  const searchBtn = document.createElement('button');
+  searchBtn.className = 'oracle-forge-btn';
+  searchBtn.textContent = 'Search';
+  searchBtn.addEventListener('click', async () => {
+    librarySearch = searchInput.value.trim();
+    if (librarySearch) {
+      searchBtn.textContent = '...';
+      const args = { query: librarySearch, game: libraryGame, limit: 20 };
+      if (libraryCategory) args.category = libraryCategory;
+      libraryResults = await callTool('rpg_search', args);
+      track('rpg_search', { game: libraryGame, query: librarySearch });
+      renderLibraryResults(panel);
+      searchBtn.textContent = 'Search';
+    }
+  });
+  controls.appendChild(searchBtn);
+  panel.appendChild(controls);
+
+  const catRow = el('div', { class: 'oracle-region-pills' });
+  const cats = await callTool('rpg_list_categories', { game: libraryGame });
+  const categories = cats.categories || [];
+  const allPill = document.createElement('button');
+  allPill.className = 'oracle-region-pill' + (!libraryCategory ? ' oracle-region-pill--active' : '');
+  allPill.textContent = 'All';
+  allPill.addEventListener('click', () => { libraryCategory = ''; libraryPage = 1; libraryResults = null; renderPanel(); });
+  catRow.appendChild(allPill);
+  categories.forEach(c => {
+    const pill = document.createElement('button');
+    pill.className = 'oracle-region-pill' + (libraryCategory === c.id ? ' oracle-region-pill--active' : '');
+    pill.textContent = `${c.label} (${c.count})`;
+    pill.addEventListener('click', async () => {
+      libraryCategory = c.id;
+      libraryPage = 1;
+      librarySearch = '';
+      const data = await callTool('rpg_browse', { game: libraryGame, category: libraryCategory, page: libraryPage, page_size: 20 });
+      libraryResults = data;
+      renderLibraryResults(panel);
+    });
+    catRow.appendChild(pill);
+  });
+  panel.appendChild(catRow);
+
+  if (libraryResults) renderLibraryResults(panel);
+}
+
+function renderLibraryResults(panel) {
+  let existing = panel.querySelector('.oracle-library-results');
+  if (existing) existing.remove();
+
+  if (!libraryResults) return;
+
+  const wrap = el('div', { class: 'oracle-library-results' });
+
+  if (libraryResults.error) {
+    wrap.appendChild(el('div', { class: 'oracle-empty' }, libraryResults.error));
+    panel.appendChild(wrap);
+    return;
+  }
+
+  const items = libraryResults.results || libraryResults.items || [];
+  if (items.length === 0) {
+    wrap.appendChild(el('div', { class: 'oracle-empty' }, 'No results found.'));
+    panel.appendChild(wrap);
+    return;
+  }
+
+  const grid = el('div', { class: 'oracle-results' });
+  items.forEach(item => {
+    const card = el('div', { class: 'oracle-result-card' });
+    const name = item.name || item._name || '?';
+    card.appendChild(el('div', { class: 'oracle-result-card__value' }, name));
+
+    const meta = Object.entries(item)
+      .filter(([k]) => !['name', '_name', 'game', 'gameLabel', 'category', 'categoryLabel'].includes(k))
+      .slice(0, 3)
+      .map(([k, v]) => `${k}: ${String(v).slice(0, 60)}`)
+      .join(' · ');
+    if (meta) card.appendChild(el('div', { class: 'oracle-result-card__roll' }, meta));
+
+    if (item.categoryLabel) {
+      card.appendChild(el('div', { class: 'oracle-result-card__label' }, item.categoryLabel));
+    }
+    grid.appendChild(card);
+  });
+  wrap.appendChild(grid);
+
+  if (libraryResults.totalPages && libraryResults.totalPages > 1) {
+    const pager = el('div', { class: 'oracle-controls' });
+    if (libraryPage > 1) {
+      const prev = document.createElement('button');
+      prev.className = 'oracle-forge-btn';
+      prev.textContent = '← Prev';
+      prev.addEventListener('click', async () => {
+        libraryPage--;
+        libraryResults = await callTool('rpg_browse', { game: libraryGame, category: libraryCategory, page: libraryPage, page_size: 20 });
+        renderLibraryResults(panel);
+      });
+      pager.appendChild(prev);
+    }
+    pager.appendChild(el('span', { class: 'oracle-encounter-xp' }, `Page ${libraryResults.page}/${libraryResults.totalPages}`));
+    if (libraryPage < libraryResults.totalPages) {
+      const next = document.createElement('button');
+      next.className = 'oracle-forge-btn';
+      next.textContent = 'Next →';
+      next.addEventListener('click', async () => {
+        libraryPage++;
+        libraryResults = await callTool('rpg_browse', { game: libraryGame, category: libraryCategory, page: libraryPage, page_size: 20 });
+        renderLibraryResults(panel);
+      });
+      pager.appendChild(next);
+    }
+    wrap.appendChild(pager);
+  }
+
+  panel.appendChild(wrap);
 }
 
 init();

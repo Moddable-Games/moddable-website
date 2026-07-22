@@ -479,6 +479,11 @@
 .oracle-encounter-loot__rarity--legendary { color: #d4a017; border-color: #d4a017; }
 .oracle-encounter-loot__rarity--artifact { color: #d11a1a; border-color: #d11a1a; }
 
+/* RPG Library */
+.oracle-library-results { margin-top: 24px; }
+.oracle-library-results .oracle-results { flex-wrap: wrap; }
+.oracle-library-results .oracle-result-card { flex: 1 1 calc(33.33% - 12px); min-width: 180px; }
+
 /* Mobile */
 @media (max-width: 768px) {
   .oracle-body { padding: 36px 20px 64px; }

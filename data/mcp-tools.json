@@ -251,20 +251,26 @@
   },
   {
     "namespace": "oracles",
-    "engine": "Oracles",
+    "engine": "RPG Oracles & Entities",
     "engineUrl": "https://moddable.games/tools/oracles/",
     "accent": "blue",
     "tools": [
       {
+        "name": "oracle_list_games",
+        "description": "List all 10 supported RPG systems with available features (tables, entities).",
+        "example": "What RPG systems are available?",
+        "returns": "Array of games with IDs, labels, table counts, entity counts"
+      },
+      {
         "name": "oracle_list_tables",
-        "description": "List all oracle tables for a game system (Starforged, Ironsworn, or Maze Rats), optionally filtered by category.",
-        "example": "What oracle tables are available for Maze Rats?",
+        "description": "List oracle/random tables for a game system (Starforged, Ironsworn, Maze Rats, Cairn, Dungeon World, Knave).",
+        "example": "What oracle tables are available for Cairn?",
         "returns": "Array of tables with IDs, names, roll types, and categories"
       },
       {
         "name": "oracle_roll",
-        "description": "Roll on a specific oracle table from Starforged, Ironsworn, or Maze Rats.",
-        "example": "Roll on the Maze Rats dungeon-rooms table",
+        "description": "Roll on a specific oracle/random table from any supported system.",
+        "example": "Roll on the Cairn dungeon-themes table",
         "returns": "Dice roll and result text from the table"
       },
       {
@@ -275,14 +281,14 @@
       },
       {
         "name": "oracle_scene",
-        "description": "Generate a narrative seed by rolling multiple oracle tables using named recipes or custom table lists. Supports Starforged, Ironsworn, and Maze Rats.",
-        "example": "Generate a Maze Rats dungeon room",
+        "description": "Generate a narrative seed using recipes (Starforged, Ironsworn, Maze Rats, Cairn, Dungeon World, Knave) or custom table lists.",
+        "example": "Generate a Cairn NPC encounter",
         "returns": "Composed narrative paragraph with individual roll elements"
       },
       {
         "name": "oracle_list_recipes",
-        "description": "List predefined scene recipes across Starforged, Ironsworn, and Maze Rats.",
-        "example": "What Maze Rats recipes are available?",
+        "description": "List predefined scene recipes across all RPG systems with tables and game support.",
+        "example": "What Cairn recipes are available?",
         "returns": "Array of recipes with ID, name, game, description, tables"
       },
       {
@@ -302,6 +308,36 @@
         "description": "Generate a D&D 5e or Pathfinder 1e encounter with CR-appropriate monsters, terrain, and loot.",
         "example": "Generate a hard Pathfinder encounter for 4 level-7 players in a dungeon",
         "returns": "Monster group, terrain, XP budget, and magic item loot"
+      },
+      {
+        "name": "rpg_list_categories",
+        "description": "List entity categories for an RPG: spells, monsters, classes, equipment, skills, bestiary, etc.",
+        "example": "What browseable content does D&D 5e have?",
+        "returns": "Array of categories with IDs, labels, and item counts"
+      },
+      {
+        "name": "rpg_search",
+        "description": "Full-text search across RPG entities: spells, monsters, equipment, classes, and more.",
+        "example": "Search for 'fire' spells in Pathfinder",
+        "returns": "Matching entities with game, category, and key fields"
+      },
+      {
+        "name": "rpg_browse",
+        "description": "Browse entities in a category with pagination. Explore spells, monsters, equipment.",
+        "example": "Browse D&D 5e monsters, page 2",
+        "returns": "Paginated entity list with total count and page info"
+      },
+      {
+        "name": "rpg_get_entity",
+        "description": "Get full details of a specific RPG entity by name with exact and fuzzy matching.",
+        "example": "Look up the spell Fireball in D&D 5e",
+        "returns": "Complete entity data with all available fields"
+      },
+      {
+        "name": "rpg_random",
+        "description": "Get random entities from an RPG system for inspiration or encounter prep.",
+        "example": "Give me 3 random Cairn monsters",
+        "returns": "Random entity picks with full detail"
       }
     ]
   },

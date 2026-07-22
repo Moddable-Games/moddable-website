@@ -1,8 +1,13 @@
 import ORACLE_DATA from './oracle-data.json';
+import ENTITY_DATA from './rpg-entities.json';
 import MONSTERS from './dnd-monsters.json';
 import LOOT from './dnd-loot.json';
 import PF_MONSTERS from './pf-monsters.json';
 import PF_LOOT from './pf-loot.json';
+
+const ORACLE_GAMES = Object.keys(ORACLE_DATA);
+const ENTITY_GAMES = Object.keys(ENTITY_DATA);
+const ALL_RPG_GAMES = [...new Set([...ORACLE_GAMES, ...ENTITY_GAMES])].sort();
 
 const THRESHOLDS = {
   almost_certain: 90,
@@ -144,6 +149,36 @@ const RECIPES = {
     game: 'maze-rats',
     description: 'Generate a trap with trigger and effect.',
     tables: ['trap-triggers', 'trap-effects'],
+  },
+  cairn_npc: {
+    name: 'Cairn NPC',
+    game: 'cairn',
+    description: 'Generate a Cairn NPC with name, quirk, background, and goals.',
+    tables: ['npc-names-1', 'npc-names-2', 'npc-quirks', 'npc-background', 'npc-goals'],
+  },
+  cairn_dungeon: {
+    name: 'Cairn Dungeon Seed',
+    game: 'cairn',
+    description: 'Generate a dungeon seed with purpose, construction, ruination, and room contents.',
+    tables: ['dungeon-purpose', 'dungeon-construction', 'dungeon-ruination', 'dungeon-room-special'],
+  },
+  cairn_forest: {
+    name: 'Cairn Forest',
+    game: 'cairn',
+    description: 'Generate a forest with name elements and terrain.',
+    tables: ['forest-name-adjectives', 'forest-name-nouns', 'terrain-synonyms'],
+  },
+  dungeon_world_npc: {
+    name: 'Dungeon World NPC',
+    game: 'dungeon-world',
+    description: 'Generate a quick NPC with instinct and knack.',
+    tables: ['instincts', 'knacks'],
+  },
+  knave_character: {
+    name: 'Knave Character',
+    game: 'knave',
+    description: 'Generate character traits for a Knave PC.',
+    tables: ['physique', 'face', 'speech', 'virtue', 'vice', 'background'],
   },
 };
 
@@ -287,9 +322,9 @@ function mergeCompoundResults(resolved) {
 function sanitiseValue(text) {
   if (!text) return '';
   let val = text
-    .replace(/\s*[—–]\s*.+$/, '')    // strip " — description" suffixes
-    .replace(/\s*\([^)]*\)/g, '')     // strip all (parentheticals)
-    .replace(/\.+$/, '')              // strip trailing periods
+    .replace(/\s*[—–]\s*.+$/, '')
+    .replace(/\s*\([^)]*\)/g, '')
+    .replace(/\.+$/, '')
     .trim();
   if (val.includes(' / ')) {
     const parts = val.split(' / ');
@@ -321,7 +356,6 @@ function composeNarrative(recipeId, elements) {
     return sanitiseValue(val);
   });
 
-  // Fix "a/an" before vowels
   const withArticles = filled
     .replace(/\bA ([AEIOU])/g, 'An $1')
     .replace(/\ba ([AEIOUaeiou])/g, 'an $1');
@@ -393,10 +427,32 @@ function resolveCompound(game, text, sourceTableId, depth) {
 
 // --- Tool handlers ---
 
+function oracleListGames() {
+  const games = ALL_RPG_GAMES.map(g => {
+    const hasTables = !!ORACLE_DATA[g];
+    const hasEntities = !!ENTITY_DATA[g];
+    const tableCount = hasTables ? Object.keys(ORACLE_DATA[g].tables).length : 0;
+    const entityCount = hasEntities
+      ? Object.values(ENTITY_DATA[g].categories).reduce((sum, c) => sum + c.count, 0)
+      : 0;
+    return {
+      id: g,
+      label: (ENTITY_DATA[g]?.label) || g,
+      tables: tableCount,
+      entities: entityCount,
+      features: [
+        hasTables ? 'tables' : null,
+        hasEntities ? 'entities' : null,
+      ].filter(Boolean),
+    };
+  });
+  return { games, total: games.length };
+}
+
 function oracleListTables(args) {
   const game = args?.game || 'starforged';
   const g = ORACLE_DATA[game];
-  if (!g) return { error: `Unknown game: "${game}". Available: ${Object.keys(ORACLE_DATA).join(', ')}` };
+  if (!g) return { error: `Unknown game: "${game}". Available: ${ORACLE_GAMES.join(', ')}` };
 
   const category = args?.category;
   let tableList;
@@ -561,6 +617,193 @@ function oracleTableView(args) {
     entries: table.entries,
     entryCount: table.entries.length,
   };
+}
+
+// --- Entity tools ---
+
+function rpgListCategories(args) {
+  const game = args?.game;
+  if (game) {
+    const g = ENTITY_DATA[game];
+    if (!g) return { error: `No entity data for "${game}". Available: ${ENTITY_GAMES.join(', ')}` };
+    const cats = Object.entries(g.categories).map(([id, cat]) => ({
+      id, label: cat.label, count: cat.count, color: cat.color,
+    }));
+    return { game, label: g.label, categories: cats, total: cats.length };
+  }
+  const all = ENTITY_GAMES.map(gid => {
+    const g = ENTITY_DATA[gid];
+    return {
+      game: gid,
+      label: g.label,
+      categories: Object.entries(g.categories).map(([id, cat]) => ({
+        id, label: cat.label, count: cat.count,
+      })),
+    };
+  });
+  return { games: all, total: ENTITY_GAMES.length };
+}
+
+function rpgSearch(args) {
+  const game = args?.game;
+  const query = (args?.query || '').toLowerCase().trim();
+  const category = args?.category;
+  const limit = Math.min(Math.max(args?.limit || 10, 1), 25);
+
+  if (!query) return { error: 'Required: query (search term, e.g. "fireball", "dragon", "healing")' };
+
+  const results = [];
+  const gamesToSearch = game ? [game] : ENTITY_GAMES;
+
+  for (const gid of gamesToSearch) {
+    const g = ENTITY_DATA[gid];
+    if (!g) continue;
+
+    const catsToSearch = category
+      ? (g.categories[category] ? [[category, g.categories[category]]] : [])
+      : Object.entries(g.categories);
+
+    for (const [catId, cat] of catsToSearch) {
+      for (const item of cat.items) {
+        const searchText = Object.values(item).join(' ').toLowerCase();
+        if (searchText.includes(query)) {
+          results.push({
+            game: gid,
+            gameLabel: g.label,
+            category: catId,
+            categoryLabel: cat.label,
+            name: item._name,
+            ...Object.fromEntries(Object.entries(item).filter(([k]) => k !== '_name').slice(0, 5)),
+          });
+          if (results.length >= limit) break;
+        }
+      }
+      if (results.length >= limit) break;
+    }
+    if (results.length >= limit) break;
+  }
+
+  return { query, results, total: results.length, limit };
+}
+
+function rpgBrowse(args) {
+  const game = args?.game;
+  const category = args?.category;
+  const page = Math.max(1, args?.page || 1);
+  const pageSize = Math.min(Math.max(args?.page_size || 20, 5), 50);
+
+  if (!game) return { error: `Required: game. Available: ${ENTITY_GAMES.join(', ')}` };
+  if (!category) return { error: `Required: category. Use rpg_list_categories to discover them.` };
+
+  const g = ENTITY_DATA[game];
+  if (!g) return { error: `No entity data for "${game}". Available: ${ENTITY_GAMES.join(', ')}` };
+
+  const cat = g.categories[category];
+  if (!cat) return { error: `Category "${category}" not found in ${game}. Available: ${Object.keys(g.categories).join(', ')}` };
+
+  const start = (page - 1) * pageSize;
+  const items = cat.items.slice(start, start + pageSize).map(item => ({
+    name: item._name,
+    ...Object.fromEntries(Object.entries(item).filter(([k]) => k !== '_name')),
+  }));
+
+  return {
+    game,
+    gameLabel: g.label,
+    category,
+    categoryLabel: cat.label,
+    page,
+    pageSize,
+    totalItems: cat.count,
+    totalPages: Math.ceil(cat.count / pageSize),
+    items,
+  };
+}
+
+function rpgGetEntity(args) {
+  const game = args?.game;
+  const category = args?.category;
+  const name = (args?.name || '').toLowerCase().trim();
+
+  if (!game) return { error: `Required: game. Available: ${ENTITY_GAMES.join(', ')}` };
+  if (!name) return { error: 'Required: name (entity name to look up)' };
+
+  const g = ENTITY_DATA[game];
+  if (!g) return { error: `No entity data for "${game}". Available: ${ENTITY_GAMES.join(', ')}` };
+
+  const catsToSearch = category
+    ? (g.categories[category] ? [[category, g.categories[category]]] : [])
+    : Object.entries(g.categories);
+
+  for (const [catId, cat] of catsToSearch) {
+    const item = cat.items.find(i => i._name.toLowerCase() === name);
+    if (item) {
+      return {
+        game,
+        gameLabel: g.label,
+        category: catId,
+        categoryLabel: cat.label,
+        name: item._name,
+        ...Object.fromEntries(Object.entries(item).filter(([k]) => k !== '_name')),
+      };
+    }
+  }
+
+  // Fuzzy match: try contains
+  for (const [catId, cat] of catsToSearch) {
+    const item = cat.items.find(i => i._name.toLowerCase().includes(name));
+    if (item) {
+      return {
+        game,
+        gameLabel: g.label,
+        category: catId,
+        categoryLabel: cat.label,
+        name: item._name,
+        ...Object.fromEntries(Object.entries(item).filter(([k]) => k !== '_name')),
+        note: 'Fuzzy match (partial name)',
+      };
+    }
+  }
+
+  return { error: `Entity "${args.name}" not found in ${game}${category ? '/' + category : ''}. Try rpg_search for broader results.` };
+}
+
+function rpgRandom(args) {
+  const game = args?.game;
+  const category = args?.category;
+  const count = Math.min(Math.max(args?.count || 1, 1), 10);
+
+  if (!game) return { error: `Required: game. Available: ${ENTITY_GAMES.join(', ')}` };
+
+  const g = ENTITY_DATA[game];
+  if (!g) return { error: `No entity data for "${game}". Available: ${ENTITY_GAMES.join(', ')}` };
+
+  const catsToSearch = category
+    ? (g.categories[category] ? [[category, g.categories[category]]] : [])
+    : Object.entries(g.categories);
+
+  const allItems = [];
+  for (const [catId, cat] of catsToSearch) {
+    for (const item of cat.items) {
+      allItems.push({ ...item, _category: catId, _categoryLabel: cat.label });
+    }
+  }
+
+  if (allItems.length === 0) return { error: `No entities found in ${game}${category ? '/' + category : ''}.` };
+
+  const picks = [];
+  for (let i = 0; i < count; i++) {
+    const item = allItems[Math.floor(Math.random() * allItems.length)];
+    picks.push({
+      game,
+      category: item._category,
+      categoryLabel: item._categoryLabel,
+      name: item._name,
+      ...Object.fromEntries(Object.entries(item).filter(([k]) => !k.startsWith('_'))),
+    });
+  }
+
+  return { game, gameLabel: g.label, count: picks.length, results: picks };
 }
 
 // --- D&D Encounter Builder ---
@@ -729,24 +972,29 @@ function oracleEncounter(args) {
 
 export const ORACLE_TOOLS = [
   {
+    name: 'oracle_list_games',
+    description: 'List all supported RPG game systems with their available features (tables, entities). Returns game IDs for use in other tools.',
+    inputSchema: { type: 'object', properties: {} },
+  },
+  {
     name: 'oracle_list_tables',
-    description: 'List all available oracle tables for a game system, optionally filtered by category. Returns table IDs, names, and roll types.',
+    description: 'List all available oracle/random tables for a game system, optionally filtered by category. Returns table IDs, names, and roll types.',
     inputSchema: {
       type: 'object',
       properties: {
-        game: { type: 'string', enum: ['starforged', 'ironsworn', 'maze-rats'], description: 'Game system. Defaults to "starforged".' },
-        category: { type: 'string', description: 'Filter by category (e.g. "core", "characters", "magic", "maze"). Omit to list all.' },
+        game: { type: 'string', description: `Game system ID. Defaults to "starforged". Available: ${ORACLE_GAMES.join(', ')}` },
+        category: { type: 'string', description: 'Filter by category. Omit to list all.' },
       },
     },
   },
   {
     name: 'oracle_roll',
-    description: 'Roll on a specific oracle table. Returns the dice roll and result text. Use oracle_list_tables to discover table IDs.',
+    description: 'Roll on a specific oracle/random table. Returns the dice roll and result text. Use oracle_list_tables to discover table IDs.',
     inputSchema: {
       type: 'object',
       properties: {
-        game: { type: 'string', enum: ['starforged', 'ironsworn', 'maze-rats'], description: 'Game system. Defaults to "starforged".' },
-        table: { type: 'string', description: 'Table ID (e.g. "action", "theme", "ethereal-effects", "dungeon-rooms").' },
+        game: { type: 'string', description: `Game system ID. Available: ${ORACLE_GAMES.join(', ')}` },
+        table: { type: 'string', description: 'Table ID (e.g. "action", "theme", "dungeon-themes").' },
         count: { type: 'number', description: 'Number of rolls (1-5). Defaults to 1.' },
       },
       required: ['table'],
@@ -754,7 +1002,7 @@ export const ORACLE_TOOLS = [
   },
   {
     name: 'oracle_ask',
-    description: 'Ask the Oracle a yes/no question with a likelihood modifier. Implements the Ironsworn/Starforged mechanic with match detection (extreme twist on matching d10 digits).',
+    description: 'Ask the Oracle a yes/no question with a likelihood modifier. Implements the Ironsworn/Starforged mechanic with match detection.',
     inputSchema: {
       type: 'object',
       properties: {
@@ -765,24 +1013,24 @@ export const ORACLE_TOOLS = [
   },
   {
     name: 'oracle_scene',
-    description: 'Generate a narrative seed by rolling on multiple oracle tables. Use a named recipe (e.g. "npc_encounter", "maze_rats_dungeon_room") or provide a custom array of table IDs. Auto-resolves cross-references.',
+    description: 'Generate a narrative seed by rolling on multiple oracle tables. Use a named recipe or provide a custom array of table IDs. Auto-resolves cross-references.',
     inputSchema: {
       type: 'object',
       properties: {
         recipe: { type: 'string', description: 'Recipe ID. Use oracle_list_recipes to see options.' },
         tables: { type: 'array', items: { type: 'string' }, description: 'Custom table IDs to roll. Ignored if recipe is provided.' },
-        game: { type: 'string', enum: ['starforged', 'ironsworn', 'maze-rats'], description: 'Game system. Defaults to "starforged".' },
-        region: { type: 'string', enum: ['terminus', 'outlands', 'expanse'], description: 'Region for tables with regional variants (Starforged only). Defaults to "terminus".' },
+        game: { type: 'string', description: `Game system ID. Available: ${ORACLE_GAMES.join(', ')}` },
+        region: { type: 'string', enum: ['terminus', 'outlands', 'expanse'], description: 'Region for tables with regional variants (Starforged only).' },
       },
     },
   },
   {
     name: 'oracle_list_recipes',
-    description: 'List all predefined scene recipes — curated multi-table compositions that produce coherent narrative prompts. Covers Starforged, Ironsworn, and Maze Rats.',
+    description: 'List all predefined scene recipes — curated multi-table compositions that produce coherent narrative prompts.',
     inputSchema: {
       type: 'object',
       properties: {
-        game: { type: 'string', enum: ['starforged', 'ironsworn', 'maze-rats'], description: 'Filter by game. Omit to see all.' },
+        game: { type: 'string', description: 'Filter by game. Omit to see all.' },
       },
     },
   },
@@ -792,9 +1040,9 @@ export const ORACLE_TOOLS = [
     inputSchema: {
       type: 'object',
       properties: {
-        result: { type: 'string', description: 'Oracle result text to interpret (e.g. "Action + Theme", "Descriptor + Focus", "Roll twice").' },
+        result: { type: 'string', description: 'Oracle result text to interpret.' },
         source_table: { type: 'string', description: 'Table ID the result came from (needed for "Roll twice" re-rolls).' },
-        game: { type: 'string', enum: ['starforged', 'ironsworn', 'maze-rats'], description: 'Game system. Defaults to "starforged".' },
+        game: { type: 'string', description: `Game system ID. Available: ${ORACLE_GAMES.join(', ')}` },
       },
       required: ['result'],
     },
@@ -805,7 +1053,7 @@ export const ORACLE_TOOLS = [
     inputSchema: {
       type: 'object',
       properties: {
-        game: { type: 'string', enum: ['starforged', 'ironsworn', 'maze-rats'], description: 'Game system. Defaults to "starforged".' },
+        game: { type: 'string', description: `Game system ID. Available: ${ORACLE_GAMES.join(', ')}` },
         table: { type: 'string', description: 'Table ID to view.' },
       },
       required: ['table'],
@@ -813,7 +1061,7 @@ export const ORACLE_TOOLS = [
   },
   {
     name: 'oracle_encounter',
-    description: 'Generate a tabletop RPG encounter (D&D 5e or Pathfinder 1e). Selects CR-appropriate monsters for party level/size, picks terrain, and rolls loot. Returns a structured encounter block.',
+    description: 'Generate a tabletop RPG encounter (D&D 5e or Pathfinder 1e). Selects CR-appropriate monsters, picks terrain, and rolls loot.',
     inputSchema: {
       type: 'object',
       properties: {
@@ -821,16 +1069,81 @@ export const ORACLE_TOOLS = [
         party_level: { type: 'number', description: 'Average party level (1-20). Defaults to 5.' },
         party_size: { type: 'number', description: 'Number of players (1-10). Defaults to 4.' },
         difficulty: { type: 'string', enum: ['easy', 'medium', 'hard', 'deadly'], description: 'Encounter difficulty. Defaults to "medium".' },
-        monster_type: { type: 'string', description: 'Filter monsters by type (e.g. "undead", "dragon", "beast", "Outsider", "Construct"). Omit for any.' },
-        terrain: { type: 'string', description: 'Terrain type (e.g. "Forest", "Cavern", "Dungeon"). Omit for random.' },
+        monster_type: { type: 'string', description: 'Filter monsters by type (e.g. "undead", "dragon", "beast").' },
+        terrain: { type: 'string', description: 'Terrain type (e.g. "Forest", "Cavern"). Omit for random.' },
         loot_tier: { type: 'string', enum: ['none', 'low', 'medium', 'high', 'legendary'], description: 'Loot rarity tier. Defaults to "medium".' },
       },
+    },
+  },
+  {
+    name: 'rpg_list_categories',
+    description: 'List entity categories for an RPG system (or all systems). Shows browseable content: spells, monsters, classes, equipment, skills, bestiary, etc.',
+    inputSchema: {
+      type: 'object',
+      properties: {
+        game: { type: 'string', description: `Game system ID. Available: ${ENTITY_GAMES.join(', ')}. Omit for all games.` },
+      },
+    },
+  },
+  {
+    name: 'rpg_search',
+    description: 'Search RPG entities across games and categories. Full-text search over names, descriptions, and metadata.',
+    inputSchema: {
+      type: 'object',
+      properties: {
+        query: { type: 'string', description: 'Search term (e.g. "fireball", "dragon", "healing", "two-handed").' },
+        game: { type: 'string', description: `Filter to a specific game. Available: ${ENTITY_GAMES.join(', ')}` },
+        category: { type: 'string', description: 'Filter to a specific category (e.g. "spells", "monsters", "equipment").' },
+        limit: { type: 'number', description: 'Max results (1-25). Defaults to 10.' },
+      },
+      required: ['query'],
+    },
+  },
+  {
+    name: 'rpg_browse',
+    description: 'Browse entities in a category with pagination. Good for exploring what is available in a game system.',
+    inputSchema: {
+      type: 'object',
+      properties: {
+        game: { type: 'string', description: `Game system ID. Required. Available: ${ENTITY_GAMES.join(', ')}` },
+        category: { type: 'string', description: 'Category ID (e.g. "spells", "monsters", "classes"). Required.' },
+        page: { type: 'number', description: 'Page number (1-based). Defaults to 1.' },
+        page_size: { type: 'number', description: 'Items per page (5-50). Defaults to 20.' },
+      },
+      required: ['game', 'category'],
+    },
+  },
+  {
+    name: 'rpg_get_entity',
+    description: 'Get full details of a specific RPG entity by name. Supports exact and fuzzy (partial) matching.',
+    inputSchema: {
+      type: 'object',
+      properties: {
+        game: { type: 'string', description: `Game system ID. Required. Available: ${ENTITY_GAMES.join(', ')}` },
+        name: { type: 'string', description: 'Entity name to look up (e.g. "Fireball", "Ancient Red Dragon", "Longsword").' },
+        category: { type: 'string', description: 'Narrow search to a specific category. Optional.' },
+      },
+      required: ['game', 'name'],
+    },
+  },
+  {
+    name: 'rpg_random',
+    description: 'Get random entities from an RPG system. Great for inspiration, encounter prep, or NPC generation.',
+    inputSchema: {
+      type: 'object',
+      properties: {
+        game: { type: 'string', description: `Game system ID. Required. Available: ${ENTITY_GAMES.join(', ')}` },
+        category: { type: 'string', description: 'Category to draw from. Omit for any category.' },
+        count: { type: 'number', description: 'Number of random picks (1-10). Defaults to 1.' },
+      },
+      required: ['game'],
     },
   },
 ];
 
 export function handleOracleToolCall(name, args) {
   switch (name) {
+    case 'oracle_list_games': return oracleListGames();
     case 'oracle_list_tables': return oracleListTables(args);
     case 'oracle_roll': return oracleRoll(args);
     case 'oracle_ask': return oracleAsk(args);
@@ -839,6 +1152,11 @@ export function handleOracleToolCall(name, args) {
     case 'oracle_interpret': return oracleInterpret(args);
     case 'oracle_table_view': return oracleTableView(args);
     case 'oracle_encounter': return oracleEncounter(args);
+    case 'rpg_list_categories': return rpgListCategories(args);
+    case 'rpg_search': return rpgSearch(args);
+    case 'rpg_browse': return rpgBrowse(args);
+    case 'rpg_get_entity': return rpgGetEntity(args);
+    case 'rpg_random': return rpgRandom(args);
     default: return { error: `Unknown oracle tool: ${name}` };
   }
 }

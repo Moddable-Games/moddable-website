@@ -32,7 +32,7 @@ One shared component library (`_mg.js` + `_mg.css`), one page per HTML file.
 │   ├── mods.json           ← mod library (10 entries)
 │   ├── games.json          ← games (3 entries)
 │   ├── engines.json        ← engine/SDK listings (2 entries)
-│   ├── mcp-tools.json      ← MCP tool registry (50 tools, 7 namespaces, v1.7.0)
+│   ├── mcp-tools.json      ← MCP tool registry (56 tools, 7 namespaces, v1.8.0)
 │   ├── news.json           ← news posts (13 entries)
 │   └── team.json           ← team members (4 entries)
 │
@@ -59,7 +59,7 @@ One shared component library (`_mg.js` + `_mg.css`), one page per HTML file.
 │   ├── dice/index.html     ← Dice lab (multi-system roller)
 │   ├── decks/index.html    ← Deck builder
 │   ├── chess/index.html    ← Chess variant explorer
-│   └── oracles/index.html  ← Oracles (Scene Forge, Maze Rats, Ask the Oracle, Thread Weaver, Encounter Builder)
+│   └── oracles/index.html  ← Oracles (Scene Forge, Maze Rats, Ask the Oracle, Thread Weaver, Encounter Builder, RPG Library)
 ├── submit/index.html       ← 3-step mod submission form
 ├── subscribe/index.html    ← email subscribe page
 ├── about/
@@ -86,8 +86,9 @@ One shared component library (`_mg.js` + `_mg.css`), one page per HTML file.
         ├── game-tools.js   ← classic game engines (Mancala, Morris, Ur, Pachisi, etc)
         ├── rules-tools.js  ← rules library tools (queries rules-index.json)
         ├── rules-index.json← search index from moddable-rules/dist/
-        ├── oracle-tools.js ← oracle tools (Starforged, Ironsworn, Maze Rats; D&D 5e + PF1e encounters)
-        ├── oracle-data.json← aggregated oracle tables from moddable-rules (362 tables)
+        ├── oracle-tools.js ← oracle + RPG entity tools (10 systems, 305 tables, 3385 entities)
+        ├── oracle-data.json← aggregated oracle/random tables from moddable-rules (305 tables, 6 games)
+        ├── rpg-entities.json← RPG entity index from moddable-rules (3385 entities, 7 games)
         ├── pf-monsters.json← Pathfinder 1e monster pool (336 creatures)
         ├── pf-loot.json    ← Pathfinder 1e magic item loot table
         ├── build-oracles.mjs← build script for oracle-data.json
@@ -99,9 +100,9 @@ One shared component library (`_mg.js` + `_mg.css`), one page per HTML file.
 
 ## MCP Tools Worker
 
-The repo contains a Cloudflare Worker at `workers/mcp/` that serves 50
+The repo contains a Cloudflare Worker at `workers/mcp/` that serves 56
 AI-callable tools across 7 namespaces (Chess, Hexmaps, Piece Gallery, Rules,
-Game Tools, Oracles, Utilities).
+Game Tools, Oracles/RPG, Utilities).
 
 **Live at:** `https://tools.moddable.games/`
 
@@ -121,7 +122,7 @@ Game Tools, Oracles, Utilities).
 - **piece-gallery** (3 tools) — piece set search, get details, aggregate stats (96 sets, 19 families)
 - **moddable-rules** (5 tools) — game/variant lookup, search, random
 - **game-tools** (12 tools) — TI4 objectives/agendas/draft, Mancala, Morris, Ur, Pachisi, Nukes setup, Colony odds
-- **oracles** (8 tools) — oracle roll, ask (yes/no), scene compose, recipes, interpret, table view, encounter builder (Starforged, Ironsworn, Maze Rats; D&D 5e + Pathfinder 1e encounters)
+- **oracles** (14 tools) — oracle roll/ask/scene/recipes/interpret/table view, encounter builder, RPG entity browser (list games, list categories, search, browse, get entity, random) across 10 systems (Starforged, Ironsworn, Maze Rats, Cairn, Dungeon World, Knave, D&D 5e, Pathfinder 1e, BRP, Fate Core)
 - **moddable-tools** (7 tools) — dice roll, faction assign, coin flip, team split, jam status/timer/vote
 
 **Architecture:** The Worker imports tool handlers from sibling repos
@@ -143,7 +144,7 @@ rendered via `@resvg/resvg-wasm` at `/api/board.png`.
 The repo contains a Cloudflare Worker at `workers/discord/` that powers "The
 House" — the server bot for the Moddable.Games Discord.
 
-**33 registered slash commands** consuming all 50 MCP tools via the REST API
+**34 registered slash commands** consuming all 56 MCP tools via the REST API
 bridge (`callTool` → `POST tools.moddable.games/api/call`).
 
 **Command groups:** Dice & Utilities, Chess (8 commands), Hex Maps, Rules
