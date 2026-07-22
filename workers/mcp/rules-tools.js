@@ -93,7 +93,11 @@ function getVariant(args) {
     }
     if (!sectionKey) {
       const allSections = Object.keys(indexed.sections).filter(s => s !== 'Variant Library' && s !== 'Attribution');
-      if (allSections.length) sectionKey = allSections[0];
+      const preferred = allSections.find(s => {
+        const l = s.toLowerCase();
+        return l.includes('standard') || l.includes('classic') || l.includes('international') || l.includes('official');
+      });
+      sectionKey = preferred || allSections[0] || null;
     }
   }
   if (!sectionKey) {
