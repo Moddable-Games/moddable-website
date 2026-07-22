@@ -494,7 +494,7 @@ async function cmdPieces(options, env) {
       return ephemeral(`No piece sets found${query ? ` matching "${query}"` : ''}${family ? ` in family "${family}"` : ''}.`);
     }
     const lines = result.sets.map(s =>
-      `**${s.name}** — ${s.family} · ${s.pieceCount} pieces · ${s.license}${s.playable ? ' ✅' : ''}`
+      `\`${s.id}\` **${s.name}** — ${s.family} · ${s.pieceCount} pieces · ${s.license}${s.playable ? ' ✅' : ''}`
     );
     let desc = lines.join('\n');
     if (result.total > result.returned) desc += `\n\n*Showing ${result.returned} of ${result.total}. Use \`/pieces set:<id>\` for details.*`;
