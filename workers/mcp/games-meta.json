@@ -1,0 +1,2004 @@
+[
+  {
+    "slug": "agon",
+    "title": "Agon",
+    "players": "2",
+    "duration": "20–40 min",
+    "age": "10+",
+    "tagline": "Guide your Queen to the centre of a 91-hex board",
+    "type": "standalone",
+    "status": "live",
+    "updated": "2026-07-06",
+    "variantHub": false,
+    "variants": [
+      {
+        "slug": "standard",
+        "title": "Agon (Standard)"
+      }
+    ],
+    "sections": [
+      "Agon"
+    ],
+    "howToPlay": null
+  },
+  {
+    "slug": "asalto",
+    "title": "Asalto",
+    "players": "2",
+    "duration": "15–30 min",
+    "age": "8+",
+    "tagline": "Officers defend a fortress against a siege of soldiers",
+    "type": "hub",
+    "status": "live",
+    "updated": "2026-07-06",
+    "variantHub": false,
+    "variants": [
+      {
+        "slug": "royal-garrison",
+        "title": "Royal Garrison"
+      },
+      {
+        "slug": "standard",
+        "title": "Asalto (Standard)"
+      }
+    ],
+    "sections": [
+      "Variants in this Hub"
+    ],
+    "howToPlay": null
+  },
+  {
+    "slug": "backgammon",
+    "title": "Backgammon",
+    "players": "2",
+    "duration": "15–60 min",
+    "age": "8+",
+    "tagline": "Five thousand years of race, risk, and probability",
+    "type": "classic",
+    "status": "live",
+    "updated": "2026-06-15",
+    "variantHub": true,
+    "variants": [
+      {
+        "slug": "acey-deucey",
+        "title": "Acey-Deucey"
+      },
+      {
+        "slug": "chouette",
+        "title": "Chouette"
+      },
+      {
+        "slug": "fevga",
+        "title": "Fevga"
+      },
+      {
+        "slug": "hypergammon",
+        "title": "Hypergammon"
+      },
+      {
+        "slug": "nackgammon",
+        "title": "Nackgammon"
+      },
+      {
+        "slug": "nardi",
+        "title": "Nardi"
+      },
+      {
+        "slug": "plakoto",
+        "title": "Plakoto"
+      },
+      {
+        "slug": "standard",
+        "title": "Standard Backgammon"
+      }
+    ],
+    "sections": [
+      "Variant Library"
+    ],
+    "howToPlay": null
+  },
+  {
+    "slug": "bavarian-32",
+    "title": "Bavarian 32-Card Games",
+    "players": "3",
+    "duration": "30–60 min",
+    "age": "12+",
+    "tagline": "Trick-taking games for the 32-card Skat deck",
+    "type": "component",
+    "status": "live",
+    "updated": "2026-07-21",
+    "variantHub": false,
+    "variants": [],
+    "sections": [
+      "The Deck",
+      "Games",
+      "Hub Notes"
+    ],
+    "howToPlay": null
+  },
+  {
+    "slug": "chaupar",
+    "title": "Chaupar",
+    "players": "4",
+    "duration": "45–120 min",
+    "age": "10+",
+    "tagline": "The ancient Indian game of the Mahabharata — three long dice, super-pieces, and split throws",
+    "type": "classic",
+    "status": "live",
+    "updated": "2026-06-18",
+    "variantHub": false,
+    "variants": [
+      {
+        "slug": "standard",
+        "title": "Chaupar (Standard)"
+      }
+    ],
+    "sections": [
+      "History",
+      "The Board",
+      "Equipment",
+      "Setup",
+      "Throwing the Dice",
+      "Movement",
+      "Super-Pieces (Conglomerate Pieces)",
+      "Capture",
+      "Team Home Order",
+      "Winning",
+      "Attribution"
+    ],
+    "howToPlay": null
+  },
+  {
+    "slug": "dnd-5e",
+    "title": "Dungeons & Dragons 5th Edition SRD",
+    "players": "2–8",
+    "duration": "varies",
+    "age": "13+",
+    "tagline": "The open core rules for the world's most popular roleplaying game",
+    "type": "rpg",
+    "status": "live",
+    "updated": "2026-07-04",
+    "variantHub": false,
+    "variants": [],
+    "sections": [
+      "Dungeons & Dragons 5th Edition SRD"
+    ],
+    "howToPlay": null
+  },
+  {
+    "slug": "dou-shou-qi",
+    "title": "Dou Shou Qi (斗兽棋 / Jungle)",
+    "players": "2",
+    "duration": "20–40 min",
+    "age": "8+",
+    "tagline": "Animals battle across rivers and traps to reach the enemy den",
+    "type": "standalone",
+    "status": "live",
+    "updated": "2026-07-06",
+    "variantHub": false,
+    "variants": [
+      {
+        "slug": "standard",
+        "title": "Dou Shou Qi (Standard)"
+      }
+    ],
+    "sections": [
+      "Dou Shou Qi (斗兽棋 / Jungle)"
+    ],
+    "howToPlay": null
+  },
+  {
+    "slug": "double-six-dominoes",
+    "title": "Double-Six Dominoes",
+    "players": "2–8",
+    "duration": "15–60 min",
+    "age": "7+",
+    "tagline": "Match the pips, build the chain, score the ends",
+    "type": "component",
+    "status": "live",
+    "updated": "2026-07-21",
+    "variantHub": false,
+    "variants": [],
+    "sections": [
+      "Double-Six Dominoes",
+      "Games",
+      "Attribution"
+    ],
+    "howToPlay": null
+  },
+  {
+    "slug": "draughts",
+    "title": "Draughts",
+    "players": "2",
+    "duration": "15–60 min",
+    "age": "6+",
+    "tagline": "The world's oldest family of capture games",
+    "type": "classic",
+    "status": "live",
+    "updated": "2026-06-20",
+    "variantHub": true,
+    "variants": [
+      {
+        "slug": "alquerque",
+        "title": "Alquerque"
+      },
+      {
+        "slug": "bashni",
+        "title": "Bashni"
+      },
+      {
+        "slug": "brazilian",
+        "title": "Brazilian Draughts"
+      },
+      {
+        "slug": "canadian",
+        "title": "Canadian Draughts"
+      },
+      {
+        "slug": "czech",
+        "title": "Czech Draughts"
+      },
+      {
+        "slug": "dameo",
+        "title": "Dameo"
+      },
+      {
+        "slug": "diagonal",
+        "title": "Diagonal Draughts"
+      },
+      {
+        "slug": "english",
+        "title": "English Draughts"
+      },
+      {
+        "slug": "frisian",
+        "title": "Frisian Draughts"
+      },
+      {
+        "slug": "german",
+        "title": "German Draughts"
+      },
+      {
+        "slug": "ghanaian",
+        "title": "Ghanaian Draughts"
+      },
+      {
+        "slug": "international",
+        "title": "International Draughts"
+      },
+      {
+        "slug": "italian",
+        "title": "Italian Draughts"
+      },
+      {
+        "slug": "lasca",
+        "title": "Lasca"
+      },
+      {
+        "slug": "pool",
+        "title": "Pool Checkers"
+      },
+      {
+        "slug": "russian",
+        "title": "Russian Draughts"
+      },
+      {
+        "slug": "spanish",
+        "title": "Spanish Draughts"
+      },
+      {
+        "slug": "spantsiretti",
+        "title": "Spantsiretti"
+      },
+      {
+        "slug": "thai",
+        "title": "Thai Draughts"
+      },
+      {
+        "slug": "turkish-draughts",
+        "title": "Turkish Draughts"
+      }
+    ],
+    "sections": [
+      "Variant Library"
+    ],
+    "howToPlay": null
+  },
+  {
+    "slug": "dungeon-chess",
+    "title": "Dungeon Chess",
+    "players": "2–4",
+    "duration": "30–120 min",
+    "age": "12+",
+    "tagline": "Asymmetric fantasy strategy on modular dungeon boards",
+    "type": "mod",
+    "status": "alpha",
+    "updated": "2026-06-12",
+    "variantHub": false,
+    "variants": [
+      {
+        "slug": "compact",
+        "title": "Dungeon Chess (Compact Skirmish (10×10))"
+      },
+      {
+        "slug": "four-player",
+        "title": "Dungeon Chess (Four Player (20×20))"
+      },
+      {
+        "slug": "two-player",
+        "title": "Dungeon Chess (Two Player (20×8))"
+      }
+    ],
+    "sections": [
+      "What Is Dungeon Chess?",
+      "The Four Factions",
+      "Unit Roster",
+      "The Cannon Mechanic",
+      "Terrain",
+      "Army Drafting",
+      "How to Play",
+      "Maps"
+    ],
+    "howToPlay": "### Setup\n\n1. Agree on a map and lay it out between all players\n2. Each player chooses a faction (no duplicates)\n3. Each player secretly drafts their army within the 80 XP budget\n4. Determine turn order (youngest first, or roll a die)\n5. Starting with the first player, each player deploys their army in their spawn zone (the 2 rows nearest their edge of the board)\n\nDeployment is simultaneous if all players agree, or sequential in turn order if preferred.\n\n### On Your Turn\n\nEach turn you perform exactly one action: move or attack with one unit. If a unit's movement brings it onto an enemy-occupied square, that is both a move and a capture in a single action.\n\nPlay proceeds clockwise. In a 2-player game, turns simply alternate.\n\n### Check\n\n- A King is in check if an enemy unit could capture it next turn.\n- You cannot make a move that leaves your own King in check.\n- You must resolve check on your turn — move your King, block the threat, or capture the attacker.\n- There is no checkmate or stalemate. The game ends only when a King is actually captured.\n\n### Winning the Game\n\nCapture an enemy King. The game ends immediately when any King is taken.\n\nIn a 4-player game, an eliminated player removes all their remaining pieces from the board. Play continues among surviving players until one King remains.\n\n\n\nMaps"
+  },
+  {
+    "slug": "econopoly",
+    "title": "Econopoly",
+    "players": "2–6",
+    "duration": "60 min",
+    "age": "10+",
+    "tagline": "Euro-style resource management meets Monopoly",
+    "type": "mod",
+    "status": "playtest",
+    "updated": "2026-06-19",
+    "variantHub": false,
+    "variants": [
+      {
+        "slug": "standard",
+        "title": "Econopoly (Standard)"
+      }
+    ],
+    "sections": [
+      "How to Play in 5 Minutes",
+      "Why This Exists",
+      "Rule Changes",
+      "Components",
+      "Linked Resources",
+      "Winning Conditions",
+      "Event Cards"
+    ],
+    "howToPlay": "Econopoly transforms Monopoly into a euro-style game by introducing resource collection, victory point scoring, and unique objectives that change every session. No more player elimination marathons.\n\n\n★ Read This First — The Three Core Changes\n\n1. Choose your action. On your turn you may either move, trade, or build — not all three. Every turn is a meaningful decision.\n\n2. Resources replace luck. Community Chest becomes a Resource Deck. Chance becomes an Event Deck. Collecting and combining resources is how you score victory points.\n\n3. Victory points win. The game ends when a player goes bankrupt or a deck empties. Most VP wins — not most cash. Everyone stays in until the end.\n\n\n\n\n\nDesign Goals"
+  },
+  {
+    "slug": "fanorona",
+    "title": "Fanorona",
+    "players": "2",
+    "duration": "20–40 min",
+    "age": "8+",
+    "tagline": "The national game of Madagascar: capture by approach and withdrawal",
+    "type": "classic",
+    "status": "live",
+    "updated": "2026-06-23",
+    "variantHub": false,
+    "variants": [
+      {
+        "slug": "standard",
+        "title": "Fanorona (Standard)"
+      }
+    ],
+    "sections": [
+      "History",
+      "The Board",
+      "Equipment",
+      "Setup",
+      "Movement",
+      "Capturing",
+      "Continuation Captures",
+      "Winning",
+      "Attribution"
+    ],
+    "howToPlay": null
+  },
+  {
+    "slug": "flower-48",
+    "title": "Flower 48",
+    "players": "2–4",
+    "duration": "15–60 min",
+    "age": "10+",
+    "tagline": "Japanese flower cards: 12 monthly suits, 48 cards",
+    "type": "component",
+    "status": "live",
+    "updated": "2026-07-21",
+    "variantHub": false,
+    "variants": [],
+    "sections": [
+      "Hanafuda",
+      "Games",
+      "Attribution"
+    ],
+    "howToPlay": null
+  },
+  {
+    "slug": "go",
+    "title": "Go",
+    "players": "2",
+    "duration": "15–180 min",
+    "age": "8+",
+    "tagline": "Four thousand years of emergent complexity from one rule",
+    "type": "classic",
+    "status": "live",
+    "updated": "2026-06-22",
+    "variantHub": true,
+    "variants": [
+      {
+        "slug": "13x13",
+        "title": "13×13 Go"
+      },
+      {
+        "slug": "9x9",
+        "title": "9×9 Go"
+      },
+      {
+        "slug": "capture-go",
+        "title": "Capture Go"
+      },
+      {
+        "slug": "gomoku",
+        "title": "Gomoku"
+      },
+      {
+        "slug": "ninuki-renju",
+        "title": "Ninuki-Renju"
+      },
+      {
+        "slug": "one-colour",
+        "title": "One-Colour Go"
+      },
+      {
+        "slug": "phantom-go",
+        "title": "Phantom Go"
+      },
+      {
+        "slug": "rengo",
+        "title": "Rengo"
+      },
+      {
+        "slug": "renju",
+        "title": "Renju"
+      },
+      {
+        "slug": "standard",
+        "title": "Standard Go (19×19)"
+      },
+      {
+        "slug": "stoical",
+        "title": "Stoical Go"
+      },
+      {
+        "slug": "sunjang",
+        "title": "Sunjang Baduk"
+      },
+      {
+        "slug": "tibetan",
+        "title": "Tibetan Go"
+      },
+      {
+        "slug": "toroidal-go",
+        "title": "Toroidal Go"
+      }
+    ],
+    "sections": [
+      "Variant Library"
+    ],
+    "howToPlay": null
+  },
+  {
+    "slug": "halma",
+    "title": "Halma",
+    "players": "2–4",
+    "duration": "15–45 min",
+    "age": "8+",
+    "tagline": "Race your pieces across the board before your opponent",
+    "type": "classic",
+    "status": "live",
+    "updated": "2026-06-19",
+    "variantHub": true,
+    "variants": [
+      {
+        "slug": "standard-2p",
+        "title": "Standard 2-Player Halma"
+      },
+      {
+        "slug": "standard-4p",
+        "title": "Standard 4-Player Halma"
+      }
+    ],
+    "sections": [
+      "Variant Library"
+    ],
+    "howToPlay": null
+  },
+  {
+    "slug": "hex",
+    "title": "Hex",
+    "players": "2",
+    "duration": "15–45 min",
+    "age": "8+",
+    "tagline": "Connect your two edges across a diamond of hexagons",
+    "type": "classic",
+    "status": "live",
+    "updated": "2026-07-04",
+    "variantHub": false,
+    "variants": [
+      {
+        "slug": "13x13",
+        "title": "Hex (13×13)"
+      },
+      {
+        "slug": "14x14",
+        "title": "Hex (14×14)"
+      },
+      {
+        "slug": "19x19",
+        "title": "Hex (19×19)"
+      },
+      {
+        "slug": "9x9",
+        "title": "Hex (9×9)"
+      },
+      {
+        "slug": "standard",
+        "title": "Hex (11×11)"
+      },
+      {
+        "slug": "y-game",
+        "title": "Y"
+      },
+      {
+        "slug": "y-large",
+        "title": "Y (Large — 15)"
+      },
+      {
+        "slug": "y-small",
+        "title": "Y (Small — 9)"
+      }
+    ],
+    "sections": [
+      "Overview",
+      "Variants",
+      "Attribution"
+    ],
+    "howToPlay": null
+  },
+  {
+    "slug": "hyper-imperium",
+    "title": "Hyper Imperium",
+    "players": "4–6",
+    "duration": "4–6 hr",
+    "age": "14+",
+    "tagline": "3D exploration and mercenary factions for Twilight Imperium",
+    "type": "mod",
+    "status": "playtest",
+    "updated": "2026-06-19",
+    "variantHub": false,
+    "variants": [],
+    "sections": [
+      "How to Play in 5 Minutes",
+      "Hyper Movement",
+      "Hyper Trades",
+      "Shared Secrets",
+      "Hyperlanes",
+      "Setup",
+      "Movement",
+      "Components",
+      "Hyper Agendas",
+      "Forced Promissory Note Exchange",
+      "Mercenary Factions",
+      "Hyper Factions",
+      "Faction Abilities (100 points)",
+      "Flagship Abilities",
+      "Mech Abilities",
+      "Leaders",
+      "Promissory Note",
+      "Unit Upgrades"
+    ],
+    "howToPlay": "Hyper Imperium is a collection of home-brewed modifications and variants designed for the 4th Edition of Twilight Imperium. It requires the Prophecy of Kings expansion, which is where hyper-lanes are officially introduced.\n\n\n★ Read This First — The Five Hypers\n\n1. Hyper Movement — Home systems leave the outer ring. An extra ring is added. Units can cross between opposite outer rings, simulating 3D space.\n\n2. Hyper Trades — Trade anything if both parties hold each other's promissory notes. No more waiting for the Trade strategy card.\n\n3. Hyper Objectives — Secret objectives become shared secrets. When scored, a new secret is drawn and shared with those who haven't scored it.\n\n4. Hyper Factions — Two new factions (The Remnant, The Wanderers) plus a 100-point mercenary faction builder.\n\n5. Hyper Agendas — Blind voting via influence cards. Personal Agenda deck for the Speaker. Discussion Deck controls how many agendas fire per round.\n\n\nEach of these modifications can be played in isolation or collectively as Hyper Imperium.\n\n### Design Objectives\n\nThe primary design objectives were as follows:\n\n- More accurately recreate the experience of exploring three-dimensional space\n- Fully utilise available hyper-lanes and additional tiles from Prophecy of Kings\n- Only introduce features that reduce setup time or length of game play\n\n\n\n\nCore Rules"
+  },
+  {
+    "slug": "ironsworn",
+    "title": "Ironsworn",
+    "players": "1–4",
+    "duration": "60–240 min",
+    "age": "14+",
+    "tagline": "A perilous quest through the Ironlands, guided by vows and oracle tables",
+    "type": "rpg",
+    "status": "live",
+    "updated": "2026-07-04",
+    "variantHub": false,
+    "variants": [],
+    "sections": [
+      "Ironsworn"
+    ],
+    "howToPlay": null
+  },
+  {
+    "slug": "landlords-game",
+    "title": "The Landlord's Game",
+    "players": "2–6",
+    "duration": "60–120 min",
+    "age": "10+",
+    "tagline": "Elizabeth Magie's 1904 economic satire — five variants spanning the game's full history from patent to Prosperity",
+    "type": "classic",
+    "status": "live",
+    "updated": "2026-07-04",
+    "variantHub": false,
+    "variants": [
+      {
+        "slug": "1904-original",
+        "title": "1904 Original"
+      },
+      {
+        "slug": "1906-commercial",
+        "title": "1906 Commercial Edition"
+      },
+      {
+        "slug": "monarch-of-the-world",
+        "title": "Monarch of the World"
+      },
+      {
+        "slug": "prosperity",
+        "title": "Prosperity"
+      },
+      {
+        "slug": "single-tax",
+        "title": "Single Tax"
+      }
+    ],
+    "sections": [
+      "History",
+      "The Board",
+      "Equipment",
+      "Variant Library",
+      "Board Data",
+      "Attribution"
+    ],
+    "howToPlay": null
+  },
+  {
+    "slug": "lattaque",
+    "title": "L'Attaque",
+    "players": "2",
+    "duration": "20–60 min",
+    "age": "10+",
+    "tagline": "Hidden-rank warfare — the original family that spawned Stratego",
+    "type": "hub",
+    "status": "live",
+    "updated": "2026-07-08",
+    "variantHub": false,
+    "variants": [
+      {
+        "slug": "aviation",
+        "title": "Aviation"
+      },
+      {
+        "slug": "dover-patrol",
+        "title": "Dover Patrol"
+      },
+      {
+        "slug": "standard",
+        "title": "L'Attaque (Standard)"
+      },
+      {
+        "slug": "tri-tactics",
+        "title": "Tri-Tactics"
+      }
+    ],
+    "sections": [
+      "Variants in this Hub"
+    ],
+    "howToPlay": null
+  },
+  {
+    "slug": "mahjong",
+    "title": "Mahjong",
+    "players": "4",
+    "duration": "30–120 min",
+    "age": "10+",
+    "tagline": "A tile-matching game of skill, strategy, and fortune",
+    "type": "component",
+    "status": "live",
+    "updated": "2026-07-21",
+    "variantHub": false,
+    "variants": [],
+    "sections": [
+      "Mahjong"
+    ],
+    "howToPlay": null
+  },
+  {
+    "slug": "mancala",
+    "title": "Mancala",
+    "players": "2",
+    "duration": "5–30 min",
+    "age": "6+",
+    "tagline": "The world's most-played family of count-and-capture games",
+    "type": "classic",
+    "status": "live",
+    "updated": "2026-06-15",
+    "variantHub": true,
+    "variants": [
+      {
+        "slug": "ayo",
+        "title": "Ayo"
+      },
+      {
+        "slug": "bao",
+        "title": "Bao"
+      },
+      {
+        "slug": "congkak",
+        "title": "Congkak"
+      },
+      {
+        "slug": "kalah",
+        "title": "Kalah"
+      },
+      {
+        "slug": "oware",
+        "title": "Oware"
+      },
+      {
+        "slug": "pallanguzhi",
+        "title": "Pallanguzhi"
+      },
+      {
+        "slug": "sungka",
+        "title": "Sungka"
+      },
+      {
+        "slug": "toguz-korgool",
+        "title": "Toguz Korgool"
+      }
+    ],
+    "sections": [
+      "Variant Library"
+    ],
+    "howToPlay": null
+  },
+  {
+    "slug": "maze-rats",
+    "title": "Maze Rats",
+    "players": "2–5",
+    "duration": "60–180 min",
+    "age": "12+",
+    "tagline": "A minimalist toolkit for old-school-style sandbox adventuring",
+    "type": "rpg",
+    "status": "live",
+    "updated": "2026-07-21",
+    "variantHub": false,
+    "variants": [],
+    "sections": [
+      "Maze Rats"
+    ],
+    "howToPlay": null
+  },
+  {
+    "slug": "moddable-chess",
+    "title": "Moddable Chess",
+    "players": "2-6",
+    "duration": "10-120 min",
+    "age": "10+",
+    "tagline": "Every chess variant, one engine",
+    "type": "platform",
+    "status": "alpha",
+    "updated": "2026-07-08",
+    "variantHub": true,
+    "variants": [
+      {
+        "slug": "absorption",
+        "title": "Absorption Chess"
+      },
+      {
+        "slug": "alice",
+        "title": "Alice Chess"
+      },
+      {
+        "slug": "almost-chess",
+        "title": "Almost Chess"
+      },
+      {
+        "slug": "amazon-chess",
+        "title": "Amazon Chess"
+      },
+      {
+        "slug": "andernach",
+        "title": "Andernach Chess"
+      },
+      {
+        "slug": "anti-king-chess-2",
+        "title": "Anti-King Chess II"
+      },
+      {
+        "slug": "antichess",
+        "title": "Antichess"
+      },
+      {
+        "slug": "archchess",
+        "title": "Archchess"
+      },
+      {
+        "slug": "asean",
+        "title": "ASEAN Chess"
+      },
+      {
+        "slug": "atomic",
+        "title": "Atomic Chess"
+      },
+      {
+        "slug": "avalanche",
+        "title": "Avalanche Chess"
+      },
+      {
+        "slug": "balbos-chess",
+        "title": "Balbo's Chess"
+      },
+      {
+        "slug": "benedict",
+        "title": "Benedict Chess"
+      },
+      {
+        "slug": "berolina-chess",
+        "title": "Berolina Chess"
+      },
+      {
+        "slug": "berserk",
+        "title": "Berserk Chess"
+      },
+      {
+        "slug": "birds-chess",
+        "title": "Bird's Chess"
+      },
+      {
+        "slug": "blind-chess",
+        "title": "Blind Chess (Banqi)"
+      },
+      {
+        "slug": "breakthrough",
+        "title": "Breakthrough"
+      },
+      {
+        "slug": "brusky",
+        "title": "Brusky's Hexagonal Chess"
+      },
+      {
+        "slug": "byzantine-chess",
+        "title": "Byzantine Chess"
+      },
+      {
+        "slug": "capablanca",
+        "title": "Capablanca Chess"
+      },
+      {
+        "slug": "carrera",
+        "title": "Carrera's Chess"
+      },
+      {
+        "slug": "centennial-chess",
+        "title": "Centennial Chess"
+      },
+      {
+        "slug": "chak",
+        "title": "Chak"
+      },
+      {
+        "slug": "chancellor-chess",
+        "title": "Chancellor Chess"
+      },
+      {
+        "slug": "chaturanga",
+        "title": "Chaturanga"
+      },
+      {
+        "slug": "checkless",
+        "title": "Checkless Chess"
+      },
+      {
+        "slug": "chennis",
+        "title": "Chennis"
+      },
+      {
+        "slug": "chigorin",
+        "title": "Chigorin"
+      },
+      {
+        "slug": "circular-chess",
+        "title": "Circular Chess"
+      },
+      {
+        "slug": "citadel-chess",
+        "title": "Citadel Chess"
+      },
+      {
+        "slug": "codrus",
+        "title": "Codrus"
+      },
+      {
+        "slug": "congo",
+        "title": "Congo"
+      },
+      {
+        "slug": "courier",
+        "title": "Courier Chess"
+      },
+      {
+        "slug": "crazy-38s",
+        "title": "Crazy 38's"
+      },
+      {
+        "slug": "crazyhouse",
+        "title": "Crazyhouse"
+      },
+      {
+        "slug": "cylinder-chess",
+        "title": "Cylinder Chess"
+      },
+      {
+        "slug": "cylindrical-chess",
+        "title": "Cylindrical Chess"
+      },
+      {
+        "slug": "dark-chess",
+        "title": "Dark Chess"
+      },
+      {
+        "slug": "de-vasa",
+        "title": "De Vasa's Hexagonal Chess"
+      },
+      {
+        "slug": "delirious-bughouse",
+        "title": "Delirious Bughouse"
+      },
+      {
+        "slug": "diana",
+        "title": "Diana Chess"
+      },
+      {
+        "slug": "dice-chess",
+        "title": "Dice Chess"
+      },
+      {
+        "slug": "displacement-chess",
+        "title": "Displacement Chess"
+      },
+      {
+        "slug": "djambi",
+        "title": "Djambi"
+      },
+      {
+        "slug": "dragon-chess",
+        "title": "Dragon Chess"
+      },
+      {
+        "slug": "duck-chess",
+        "title": "Duck Chess"
+      },
+      {
+        "slug": "einstein-chess",
+        "title": "Einstein Chess"
+      },
+      {
+        "slug": "empire",
+        "title": "Empire Chess"
+      },
+      {
+        "slug": "endgame-chess",
+        "title": "Endgame Chess"
+      },
+      {
+        "slug": "extinction",
+        "title": "Extinction Chess"
+      },
+      {
+        "slug": "fanorona-chess",
+        "title": "Fanorona Chess"
+      },
+      {
+        "slug": "fischer-random",
+        "title": "Fischer Random (Chess960)"
+      },
+      {
+        "slug": "five-check",
+        "title": "Five-Check"
+      },
+      {
+        "slug": "flip-chess",
+        "title": "Flip Chess"
+      },
+      {
+        "slug": "fog-of-war",
+        "title": "Fog of War Chess"
+      },
+      {
+        "slug": "four-handed-chess",
+        "title": "Four-Handed Chess (Chaturaji)"
+      },
+      {
+        "slug": "giveaway",
+        "title": "Giveaway"
+      },
+      {
+        "slug": "glinski",
+        "title": "Glinski's Hexagonal Chess"
+      },
+      {
+        "slug": "grand",
+        "title": "Grand Chess"
+      },
+      {
+        "slug": "grande-acedrex",
+        "title": "Grande Acedrex"
+      },
+      {
+        "slug": "grasshopper",
+        "title": "Standard Grasshopper Chess"
+      },
+      {
+        "slug": "grid-chess",
+        "title": "Grid Chess"
+      },
+      {
+        "slug": "gustav-iii-chess",
+        "title": "Gustav III's Chess"
+      },
+      {
+        "slug": "gygax",
+        "title": "Gygax Chess"
+      },
+      {
+        "slug": "half-chess",
+        "title": "Half Chess"
+      },
+      {
+        "slug": "hexapawn",
+        "title": "Hexapawn"
+      },
+      {
+        "slug": "hole-chess",
+        "title": "Hole Chess"
+      },
+      {
+        "slug": "hoppel-poppel",
+        "title": "Hoppel-Poppel"
+      },
+      {
+        "slug": "horde",
+        "title": "Horde Chess"
+      },
+      {
+        "slug": "hostage-chess",
+        "title": "Hostage Chess"
+      },
+      {
+        "slug": "immunization-chess",
+        "title": "Immunization Chess"
+      },
+      {
+        "slug": "janus",
+        "title": "Janus Chess"
+      },
+      {
+        "slug": "khans-chess",
+        "title": "Khan's Chess"
+      },
+      {
+        "slug": "king-of-the-hill",
+        "title": "King of the Hill"
+      },
+      {
+        "slug": "klein-bottle-chess",
+        "title": "Klein Bottle Chess"
+      },
+      {
+        "slug": "knightmate",
+        "title": "Knightmate"
+      },
+      {
+        "slug": "kriegspiel",
+        "title": "Kriegspiel"
+      },
+      {
+        "slug": "legan-chess",
+        "title": "Legan Chess"
+      },
+      {
+        "slug": "los-alamos-vierschach",
+        "title": "Los Alamos Vierschach"
+      },
+      {
+        "slug": "los-alamos",
+        "title": "Los Alamos"
+      },
+      {
+        "slug": "madrasi",
+        "title": "Madrasi Chess"
+      },
+      {
+        "slug": "maharaja",
+        "title": "Maharaja & Sepoys"
+      },
+      {
+        "slug": "makpong",
+        "title": "Makpong"
+      },
+      {
+        "slug": "makruk",
+        "title": "Makruk"
+      },
+      {
+        "slug": "mansindam",
+        "title": "Mansindam (Pantheon Tale)"
+      },
+      {
+        "slug": "marseillais",
+        "title": "Marseillais Chess"
+      },
+      {
+        "slug": "mccooey",
+        "title": "McCooey's Hexagonal Chess"
+      },
+      {
+        "slug": "medusa-chess",
+        "title": "Medusa Chess"
+      },
+      {
+        "slug": "metamachy",
+        "title": "Metamachy"
+      },
+      {
+        "slug": "mini-hexchess",
+        "title": "Mini Hexchess"
+      },
+      {
+        "slug": "minichess",
+        "title": "Minichess"
+      },
+      {
+        "slug": "mobius-strip-chess",
+        "title": "Möbius Strip Chess"
+      },
+      {
+        "slug": "monster-chess",
+        "title": "Monster Chess"
+      },
+      {
+        "slug": "nightrider",
+        "title": "Standard Nightrider Chess"
+      },
+      {
+        "slug": "no-castling",
+        "title": "No Castling Chess"
+      },
+      {
+        "slug": "no-retreat",
+        "title": "No Retreat"
+      },
+      {
+        "slug": "oblong-chess",
+        "title": "Oblong Chess"
+      },
+      {
+        "slug": "omega-chess",
+        "title": "Omega Chess"
+      },
+      {
+        "slug": "omnicide",
+        "title": "Omnicide"
+      },
+      {
+        "slug": "orda-chess",
+        "title": "Orda Chess"
+      },
+      {
+        "slug": "orda-mirror",
+        "title": "Orda Mirror"
+      },
+      {
+        "slug": "ouk-chaktrang",
+        "title": "Ouk Chaktrang (Cambodian Chess)"
+      },
+      {
+        "slug": "patrol",
+        "title": "Patrol Chess"
+      },
+      {
+        "slug": "pawns-only",
+        "title": "Pawns Only"
+      },
+      {
+        "slug": "peasants-revolt",
+        "title": "Peasants' Revolt"
+      },
+      {
+        "slug": "petty",
+        "title": "Petty Chess"
+      },
+      {
+        "slug": "placement-chess",
+        "title": "Placement Chess"
+      },
+      {
+        "slug": "pocket-knight",
+        "title": "Pocket Knight Chess"
+      },
+      {
+        "slug": "poison-chess",
+        "title": "Poison Chess"
+      },
+      {
+        "slug": "progressive",
+        "title": "Progressive"
+      },
+      {
+        "slug": "racing-kings",
+        "title": "Racing Kings"
+      },
+      {
+        "slug": "raumschach",
+        "title": "Raumschach"
+      },
+      {
+        "slug": "recruitment-chess",
+        "title": "Recruitment Chess"
+      },
+      {
+        "slug": "rifle",
+        "title": "Rifle Chess"
+      },
+      {
+        "slug": "rollerball",
+        "title": "Rollerball"
+      },
+      {
+        "slug": "romanchenkos-chess",
+        "title": "Romanchenko's Chess"
+      },
+      {
+        "slug": "s-chess",
+        "title": "S-Chess (Seirawan Chess)"
+      },
+      {
+        "slug": "senterej",
+        "title": "Senterej"
+      },
+      {
+        "slug": "shafran",
+        "title": "Shafran's Hexagonal Chess"
+      },
+      {
+        "slug": "shako",
+        "title": "Shako"
+      },
+      {
+        "slug": "shatar",
+        "title": "Shatar"
+      },
+      {
+        "slug": "shatranj-kamil",
+        "title": "Shatranj Kamil"
+      },
+      {
+        "slug": "shatranj",
+        "title": "Shatranj"
+      },
+      {
+        "slug": "shinobi",
+        "title": "Shinobi Chess"
+      },
+      {
+        "slug": "shinobiplus",
+        "title": "Shinobi+"
+      },
+      {
+        "slug": "shogun",
+        "title": "Shogun Chess"
+      },
+      {
+        "slug": "single-check",
+        "title": "Single-Check"
+      },
+      {
+        "slug": "sittuyin",
+        "title": "Sittuyin"
+      },
+      {
+        "slug": "spartan",
+        "title": "Spartan Chess"
+      },
+      {
+        "slug": "spherical-chess",
+        "title": "Spherical Chess"
+      },
+      {
+        "slug": "stalemate-wins",
+        "title": "Stalemate Wins"
+      },
+      {
+        "slug": "standard",
+        "title": "Standard Chess"
+      },
+      {
+        "slug": "stupidhouse",
+        "title": "Stupidhouse"
+      },
+      {
+        "slug": "suicide-chess",
+        "title": "Suicide Chess"
+      },
+      {
+        "slug": "synochess",
+        "title": "Synochess"
+      },
+      {
+        "slug": "tamerlane",
+        "title": "Tamerlane Chess"
+      },
+      {
+        "slug": "tandem-chess",
+        "title": "Tandem Chess"
+      },
+      {
+        "slug": "teleport-chess",
+        "title": "Teleportation Chess"
+      },
+      {
+        "slug": "three-check",
+        "title": "Three-Check"
+      },
+      {
+        "slug": "toroidal-byzantine",
+        "title": "Toroidal Byzantine Chess"
+      },
+      {
+        "slug": "toroidal-chess",
+        "title": "Gadsden's Toroidal Chess"
+      },
+      {
+        "slug": "torpedo",
+        "title": "Torpedo Chess"
+      },
+      {
+        "slug": "turkish-great-chess-ii",
+        "title": "Turkish Great Chess II (Atranj)"
+      },
+      {
+        "slug": "turkish-great-chess-iii",
+        "title": "Turkish Great Chess III"
+      },
+      {
+        "slug": "turkish-great-chess-iv",
+        "title": "Turkish Great Chess IV"
+      },
+      {
+        "slug": "ultima",
+        "title": "Ultima (Baroque Chess)"
+      },
+      {
+        "slug": "upside-down",
+        "title": "Upside-Down"
+      },
+      {
+        "slug": "vierschach",
+        "title": "Vierschach"
+      },
+      {
+        "slug": "weak",
+        "title": "Weak!"
+      },
+      {
+        "slug": "wildebeest",
+        "title": "Standard Wildebeest Chess"
+      },
+      {
+        "slug": "xiang-fu",
+        "title": "Xiang Fu"
+      },
+      {
+        "slug": "yalta-chess",
+        "title": "Yalta Chess"
+      }
+    ],
+    "sections": [
+      "Variant Library"
+    ],
+    "howToPlay": null
+  },
+  {
+    "slug": "morris",
+    "title": "Nine Men's Morris",
+    "players": "2",
+    "duration": "15–45 min",
+    "age": "7+",
+    "tagline": "The ancient mill game, played on stone, cloth, and wood across five continents",
+    "type": "classic",
+    "status": "live",
+    "updated": "2026-06-15",
+    "variantHub": true,
+    "variants": [
+      {
+        "slug": "lasker-morris",
+        "title": "Lasker Morris"
+      },
+      {
+        "slug": "morabaraba",
+        "title": "Morabaraba"
+      },
+      {
+        "slug": "nine-mens-morris",
+        "title": "Nine Men's Morris"
+      },
+      {
+        "slug": "shax",
+        "title": "Shax"
+      },
+      {
+        "slug": "six-mens-morris",
+        "title": "Six Men's Morris"
+      },
+      {
+        "slug": "three-mens-morris",
+        "title": "Three Men's Morris"
+      },
+      {
+        "slug": "twelve-mens-morris",
+        "title": "Twelve Men's Morris"
+      }
+    ],
+    "sections": [
+      "Variant Library"
+    ],
+    "howToPlay": null
+  },
+  {
+    "slug": "nukes",
+    "title": "Nukes: Official Rulebook",
+    "players": "2–3",
+    "duration": "45+ min",
+    "age": "12+",
+    "tagline": "Cold-war territory control on a hex map with nuclear brinkmanship",
+    "type": "game",
+    "status": "live",
+    "updated": "2026-06-27",
+    "variantHub": false,
+    "variants": [
+      {
+        "slug": "asymmetric-powers",
+        "title": "Nukes: Asymmetric Powers"
+      },
+      {
+        "slug": "fallout",
+        "title": "Nukes: Fallout"
+      },
+      {
+        "slug": "siege",
+        "title": "Nukes: Siege"
+      },
+      {
+        "slug": "standard",
+        "title": "Nukes: Standard"
+      }
+    ],
+    "sections": [
+      "How to Play in 5 Minutes",
+      "Components",
+      "Setting Up the Board",
+      "Victory Conditions",
+      "Turn Structure",
+      "Units & Platoons",
+      "Combat",
+      "Biomes",
+      "Variants"
+    ],
+    "howToPlay": "Nukes is a 2–3 player strategy game played on a board of hexagonal regions. You command armies across varied terrain, build fortified bases, and threaten opponents with nuclear strikes, all while managing a precarious supply of hostages that is simultaneously your resource and your countdown timer.\n\n\n★ Read This First: The Two Core Ideas\n\n1. Platoons are fluid. Tokens have no fixed type. The number of units in a region determines the platoon type: 1 = Infantry, 2 = Artillery, 3 = Airborne, 4+ = Base. This changes constantly as units join or leave regions, and it governs movement, combat, and terrainsafety.\n\n2. Hostages are your engine. You hold your opponents' tokens. Each turn you must return 1–3 of them to their owner's forces on the board. This earns you moves, but also reinforces your enemy. Your hostage supply is finite. When it runs out, youlose.\n\n\n### The Core Loop\n\n- Return 1–3 hostages to regions where their owner already has units, earning one move per token returned. You choose which of your units to move.\n- Move your platoons. Infantry chains through same-biome terrain. Artillery fires in straight lines over occupied regions. Airborne drops exactly two regions away and can slingshot through friendly Airborne or Bases.\n- Attack by moving into an enemy region, but only if you have strictly greater strength than the defender.\n- Capture enemy units as hostages instead of destroying them, sacrificing your own units to do so.\n- Build Bases (4+ units in one region) to convert units into isotopes andunlock additional nuclear strikes.\n- Win by destroying or occupying an opponent's city, or outlasting everyone else.\n\n\nNukes was designed around a single question: what if every aggressive move also strengthened your opponent? The hostage mechanic creates this tension. You need to return tokens to move, but every return reinforces the enemy. The game rewards players who find the tipping point between building momentum and over-extending.\n\n\n\n\n\nWhat's in the Box"
+  },
+  {
+    "slug": "nyout",
+    "title": "Nyout (유놓이 / Yut Nori)",
+    "players": "2–4",
+    "duration": "20–40 min",
+    "age": "6+",
+    "tagline": "Korean stick-throwing race across a circular track",
+    "type": "standalone",
+    "status": "live",
+    "updated": "2026-07-06",
+    "variantHub": false,
+    "variants": [
+      {
+        "slug": "standard",
+        "title": "Nyout (Standard)"
+      }
+    ],
+    "sections": [
+      "Nyout (Yut Nori / 유놓이)"
+    ],
+    "howToPlay": null
+  },
+  {
+    "slug": "pachisi",
+    "title": "Pachisi",
+    "players": "2–4",
+    "duration": "30–90 min",
+    "age": "8+",
+    "tagline": "The ancient Indian race game behind Ludo, Sorry!, and Trouble",
+    "type": "classic",
+    "status": "live",
+    "updated": "2026-06-18",
+    "variantHub": true,
+    "variants": [
+      {
+        "slug": "seven-shell",
+        "title": "Seven-Shell Pachisi"
+      },
+      {
+        "slug": "standard",
+        "title": "Pachisi (Standard)"
+      },
+      {
+        "slug": "two-player",
+        "title": "2-Player Pachisi"
+      }
+    ],
+    "sections": [
+      "Variant Library"
+    ],
+    "howToPlay": null
+  },
+  {
+    "slug": "pathfinder-1e",
+    "title": "Pathfinder 1st Edition (PFSRD)",
+    "players": "2–7",
+    "duration": "varies",
+    "age": "13+",
+    "tagline": "Paizo's fork of D&D 3.5, the most complete open ruleset in existence",
+    "type": "rpg",
+    "status": "live",
+    "updated": "2026-07-21",
+    "variantHub": false,
+    "variants": [],
+    "sections": [
+      "Pathfinder 1st Edition"
+    ],
+    "howToPlay": null
+  },
+  {
+    "slug": "reversi",
+    "title": "Reversi",
+    "players": "2",
+    "duration": "10–30 min",
+    "age": "7+",
+    "tagline": "Flip your opponent's discs to claim the board",
+    "type": "classic",
+    "status": "live",
+    "updated": "2026-06-19",
+    "variantHub": false,
+    "variants": [
+      {
+        "slug": "anti-reversi",
+        "title": "Anti-Reversi"
+      },
+      {
+        "slug": "six-by-six",
+        "title": "Six-by-Six Reversi"
+      },
+      {
+        "slug": "standard",
+        "title": "Standard Reversi"
+      }
+    ],
+    "sections": [
+      "Reversi"
+    ],
+    "howToPlay": null
+  },
+  {
+    "slug": "royal-ur",
+    "title": "Royal Game of Ur",
+    "players": "2",
+    "duration": "10–20 min",
+    "age": "6+",
+    "tagline": "The oldest known board game: reconstructed from 4,500-year-old clay tablets",
+    "type": "classic",
+    "status": "live",
+    "updated": "2026-06-15",
+    "variantHub": false,
+    "variants": [
+      {
+        "slug": "standard",
+        "title": "Royal Game of Ur (Standard)"
+      }
+    ],
+    "sections": [
+      "History",
+      "The Board",
+      "Equipment",
+      "Setup",
+      "Movement",
+      "Bearing Off",
+      "Winning",
+      "Historical Variants and Scholarly Notes",
+      "Attribution"
+    ],
+    "howToPlay": null
+  },
+  {
+    "slug": "senet",
+    "title": "Senet",
+    "players": "2",
+    "duration": "15–30 min",
+    "age": "8+",
+    "tagline": "Ancient Egyptian race game (c. 3500 BCE), reconstructed from archaeological evidence",
+    "type": "classic",
+    "status": "live",
+    "updated": "2026-07-21",
+    "variantHub": false,
+    "variants": [
+      {
+        "slug": "standard",
+        "title": "Senet (Kendall Reconstruction)"
+      }
+    ],
+    "sections": [
+      "Senet"
+    ],
+    "howToPlay": null
+  },
+  {
+    "slug": "shogi",
+    "title": "Shogi",
+    "players": "2",
+    "duration": "30–120 min",
+    "age": "8+",
+    "tagline": "Japan's classic strategy game where captured pieces change sides",
+    "type": "classic",
+    "status": "live",
+    "updated": "2026-07-08",
+    "variantHub": true,
+    "variants": [
+      {
+        "slug": "annan-shogi",
+        "title": "Annan Shogi"
+      },
+      {
+        "slug": "cannon-shogi",
+        "title": "Cannon Shogi"
+      },
+      {
+        "slug": "chu-shogi",
+        "title": "Chu Shogi"
+      },
+      {
+        "slug": "dai-shogi",
+        "title": "Dai Shogi"
+      },
+      {
+        "slug": "dobutsu",
+        "title": "Dobutsu Shogi"
+      },
+      {
+        "slug": "four-player-shogi",
+        "title": "Four Player Shogi"
+      },
+      {
+        "slug": "gorogoro-plus",
+        "title": "Gorogoro+"
+      },
+      {
+        "slug": "hasami-shogi",
+        "title": "Hasami Shogi"
+      },
+      {
+        "slug": "heian-shogi",
+        "title": "Heian Shogi"
+      },
+      {
+        "slug": "hex-shogi-91",
+        "title": "Hex Shogi 91"
+      },
+      {
+        "slug": "judkins-shogi",
+        "title": "Judkins' Shogi"
+      },
+      {
+        "slug": "kyoto-shogi",
+        "title": "Kyoto Shogi"
+      },
+      {
+        "slug": "maka-dai-dai-shogi",
+        "title": "Maka-Dai-Dai Shogi"
+      },
+      {
+        "slug": "minishogi",
+        "title": "Minishogi"
+      },
+      {
+        "slug": "mortal-shogi",
+        "title": "Mortal Shogi"
+      },
+      {
+        "slug": "sankaku-shogi",
+        "title": "Sankaku Shogi"
+      },
+      {
+        "slug": "sho-shogi",
+        "title": "Sho Shogi"
+      },
+      {
+        "slug": "standard",
+        "title": "Standard Shogi"
+      },
+      {
+        "slug": "tai-shogi",
+        "title": "Tai Shogi"
+      },
+      {
+        "slug": "taikyoku-shogi",
+        "title": "Taikyoku Shogi"
+      },
+      {
+        "slug": "tenjiku-shogi",
+        "title": "Tenjiku Shogi"
+      },
+      {
+        "slug": "tori-shogi",
+        "title": "Tori Shogi"
+      },
+      {
+        "slug": "wa-shogi",
+        "title": "Wa Shogi"
+      },
+      {
+        "slug": "yari-shogi",
+        "title": "Yari Shogi"
+      }
+    ],
+    "sections": [
+      "Variant Library"
+    ],
+    "howToPlay": null
+  },
+  {
+    "slug": "standard-52",
+    "title": "Standard 52-Card Deck",
+    "players": "1–8",
+    "duration": "10–120 min",
+    "age": "6+",
+    "tagline": "Every game a standard deck of cards can play",
+    "type": "component",
+    "status": "live",
+    "updated": "2026-07-21",
+    "variantHub": false,
+    "variants": [],
+    "sections": [
+      "Standard 52-Card Deck",
+      "Games",
+      "Attribution"
+    ],
+    "howToPlay": null
+  },
+  {
+    "slug": "standard-dice",
+    "title": "Standard Dice",
+    "players": "1–8",
+    "duration": "10–60 min",
+    "age": "6+",
+    "tagline": "Games built on standard six-sided dice",
+    "type": "component",
+    "status": "live",
+    "updated": "2026-07-21",
+    "variantHub": false,
+    "variants": [],
+    "sections": [
+      "Standard Dice",
+      "Games",
+      "Attribution"
+    ],
+    "howToPlay": null
+  },
+  {
+    "slug": "starforged",
+    "title": "Starforged",
+    "players": "1–4",
+    "duration": "60–240 min",
+    "age": "14+",
+    "tagline": "A perilous journey through the Forge, guided by moves and oracle tables",
+    "type": "rpg",
+    "status": "live",
+    "updated": "2026-07-19",
+    "variantHub": false,
+    "variants": [],
+    "sections": [
+      "Ironsworn: Starforged"
+    ],
+    "howToPlay": null
+  },
+  {
+    "slug": "stern-halma",
+    "title": "Stern-Halma",
+    "players": "2–6",
+    "duration": "20–45 min",
+    "age": "8+",
+    "tagline": "Race across the star board to claim the opposite point",
+    "type": "classic",
+    "status": "live",
+    "updated": "2026-07-04",
+    "variantHub": false,
+    "variants": [
+      {
+        "slug": "standard-2p",
+        "title": "Standard 2-Player Stern-Halma"
+      },
+      {
+        "slug": "standard-3p",
+        "title": "Standard 3-Player Stern-Halma"
+      },
+      {
+        "slug": "standard-4p",
+        "title": "Standard 4-Player Stern-Halma"
+      },
+      {
+        "slug": "standard-6p",
+        "title": "Standard 6-Player Stern-Halma"
+      },
+      {
+        "slug": "super-chinese-checkers",
+        "title": "Super Chinese Checkers"
+      }
+    ],
+    "sections": [
+      "Overview",
+      "The Board",
+      "Variants",
+      "Attribution"
+    ],
+    "howToPlay": null
+  },
+  {
+    "slug": "surakarta",
+    "title": "Surakarta",
+    "players": "2",
+    "duration": "10–30 min",
+    "age": "8+",
+    "tagline": "The loop-capture game of Java: capture through the corner arcs",
+    "type": "classic",
+    "status": "live",
+    "updated": "2026-06-23",
+    "variantHub": false,
+    "variants": [
+      {
+        "slug": "standard",
+        "title": "Surakarta (Standard)"
+      }
+    ],
+    "sections": [
+      "History",
+      "The Board",
+      "Equipment",
+      "Setup",
+      "Movement",
+      "Winning",
+      "Attribution"
+    ],
+    "howToPlay": null
+  },
+  {
+    "slug": "tafl",
+    "title": "Tafl",
+    "players": "2",
+    "duration": "10–45 min",
+    "age": "8+",
+    "tagline": "King against the horde: asymmetric Norse strategy games of the Viking Age",
+    "type": "classic",
+    "status": "live",
+    "updated": "2026-06-26",
+    "variantHub": true,
+    "variants": [
+      {
+        "slug": "brandubh",
+        "title": "Brandubh"
+      },
+      {
+        "slug": "hnefatafl",
+        "title": "Hnefatafl"
+      },
+      {
+        "slug": "standard",
+        "title": "Tablut"
+      },
+      {
+        "slug": "tawlbwrdd",
+        "title": "Tawlbwrdd"
+      }
+    ],
+    "sections": [
+      "Variant Library"
+    ],
+    "howToPlay": null
+  },
+  {
+    "slug": "talisman-worlds",
+    "title": "Talisman Worlds",
+    "players": "2–6",
+    "duration": "90 min",
+    "age": "13+",
+    "tagline": "A new hex board every game of Talisman",
+    "type": "mod",
+    "status": "playtest",
+    "updated": "2026-06-19",
+    "variantHub": false,
+    "variants": [],
+    "sections": [
+      "How to Play in 5 Minutes",
+      "Rules",
+      "Movement",
+      "Tiles",
+      "Special Tiles",
+      "Variations",
+      "The Dungeon",
+      "Special Tiles"
+    ],
+    "howToPlay": "Talisman Worlds replaces the game boards used by Talisman with individual hexagonal tiles. This ensures that every game of Talisman has a completely different setup, whilst also laying important foundations for more easily introducing new expansions that are not just limited to the four corners as they are in traditional games.\n\n\n★ What This Mod Does\n\nReplaces: The Talisman board (outer, middle, and inner regions) with 61 hexagonal tiles arranged in four concentric rings around a hidden ending tile.\n\nKeeps: All characters, adventure cards, spell decks, purchase cards, stranger cards, warlock quests, and core rules. Your entire encounter library is untouched.\n\nResult: A different board every session. Same game, completely different journey.\n\n\nThis mod has been built and tested for Talisman 4th Edition (revised) by Fantasy Flight Games.\n\n### The Original Board\n\nAs a reference, the original core board has the following spaces:\n\n- Outer region = 24 spaces\n- Middle region = 16 spaces\n- Inner region = 9 spaces\n- Crown of Command = central space\n- Total of 50 spaces\n\nConverting spaces to hexagons around a hidden ending tile results in the following four-ringed board, which requires exactly 61 hexagonal tiles to complete:\n\n- 4th ring (24 hexes) — randomly place all 24 outer region tiles face-up\n- 3rd ring (18 hexes) — randomly place 18 river region tiles face-up\n- 2nd ring (12 hexes) — randomly place 12 middle region tiles face-up\n- 1st ring (6 hexes) — randomly place 6 of the 9 available inner region tiles face-up\n- Middle — randomly place one of the eight available ending tiles face down\n\nAn additional 14 tiles must be added to the middle region choices to account for missing hexes, whilst also creating the infamous river that separates the outer and middle regions:\n\n- 10 water tiles (cannot be crossed without a raft)\n- 4 additional desert tiles (act as desert spaces from original Talisman)\n\n\n\n\nRule Changes"
+  },
+  {
+    "slug": "xiangqi",
+    "title": "Xiangqi",
+    "players": "2",
+    "duration": "15–45 min",
+    "age": "8+",
+    "tagline": "Ancient Chinese chess: cannon fire, palace tactics, and the river divide",
+    "type": "classic",
+    "status": "live",
+    "updated": "2026-07-16",
+    "variantHub": true,
+    "variants": [
+      {
+        "slug": "janggi",
+        "title": "Janggi"
+      },
+      {
+        "slug": "jieqi",
+        "title": "Jieqi"
+      },
+      {
+        "slug": "manchu-plus",
+        "title": "Manchu+"
+      },
+      {
+        "slug": "minixiangqi",
+        "title": "Minixiangqi"
+      },
+      {
+        "slug": "quang-trung",
+        "title": "Quang Trung Chess"
+      },
+      {
+        "slug": "san-kwo-ki",
+        "title": "San-kwo-k'i"
+      },
+      {
+        "slug": "standard",
+        "title": "Standard Xiangqi"
+      },
+      {
+        "slug": "xiangqi-42",
+        "title": "Xiangqi 42"
+      },
+      {
+        "slug": "yang-qi",
+        "title": "Yáng Qí"
+      }
+    ],
+    "sections": [
+      "Variant Library"
+    ],
+    "howToPlay": null
+  }
+]

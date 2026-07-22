@@ -346,9 +346,11 @@ async function cmdRules(options, env) {
   if (!game) {
     try {
       const result = await callTool('rules_list_games', { status: 'published' }, env);
-      const lines = (result.games || []).slice(0, 15).map(g =>
-        `**${g.title}** — ${g.tagline || `${g.players} players`}${g.variantCount > 0 ? ` · ${g.variantCount} variants` : ''}`
-      );
+      const lines = (result.games || []).slice(0, 20).map(g => {
+        const info = g.tagline || [g.players, g.duration].filter(Boolean).join(' · ') || '';
+        const variants = g.variantCount > 1 ? ` · ${g.variantCount} variants` : '';
+        return `**${g.title}** — ${info}${variants}`;
+      });
       return embed({
         title: '📚 Rules Library',
         description: lines.join('\n') || 'No games found.',
@@ -362,15 +364,19 @@ async function cmdRules(options, env) {
   try {
     const result = await callTool('rules_get_game', { slug: game }, env);
     if (result.error) return ephemeral(result.error);
-    const variants = (result.variants || []).slice(0, 20);
     let desc = result.tagline ? `*${result.tagline}*\n\n` : '';
-    if (result.summary) desc += result.summary + '\n\n';
-    if (variants.length > 0) desc += `**Variants (${result.variantCount}):**\n${variants.join(', ')}`;
+    if (result.howToPlay) {
+      const preview = result.howToPlay.slice(0, 800);
+      desc += preview + (result.howToPlay.length > 800 ? '…' : '') + '\n\n';
+    }
+    if (result.variants && result.variants.length > 0) {
+      desc += `**Variants:** ${result.variants.join(', ')}`;
+    }
     if (result.rulesUrl) desc += `\n\n[📖 Full rulebook](${result.rulesUrl})`;
     return embed({
       title: `📚 ${result.title || game}`,
       description: desc || 'No details available.',
-      footer: result.players ? `${result.players} players · ${result.duration || '?'}` : '',
+      footer: [result.players ? `${result.players} players` : '', result.duration || ''].filter(Boolean).join(' · ') || '',
       color: 0xd11a1a,
     });
   } catch (e) {

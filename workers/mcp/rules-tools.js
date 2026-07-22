@@ -1,80 +1,33 @@
 import RULES_INDEX from './rules-index.json';
-import GAMES_SYNC from '../../data/games-sync.json';
+import GAMES_META from './games-meta.json';
 
 function buildGameMap() {
   const map = {};
   for (const entry of RULES_INDEX) {
     const g = entry.game;
-    if (!map[g]) map[g] = { slug: g, title: entry.gameTitle, sections: {}, variants: new Set() };
+    if (!map[g]) map[g] = { slug: g, title: entry.gameTitle, sections: {} };
     const sec = entry.section;
     if (!map[g].sections[sec]) map[g].sections[sec] = [];
     map[g].sections[sec].push(entry);
-    if (sec !== 'Variant Library' && sec !== 'Attribution') {
-      map[g].variants.add(sec);
-    }
-  }
-  for (const g of Object.values(map)) {
-    g.variantCount = g.variants.size;
-    g.variants = [...g.variants].sort();
   }
   return map;
 }
 
 const GAME_MAP = buildGameMap();
-
-function getGameMeta(slug) {
-  const sync = GAMES_SYNC[slug];
-  if (!sync) return null;
-  return {
-    slug,
-    title: sync.title,
-    version: sync.version,
-    players: sync.players,
-    duration: sync.duration,
-    age: sync.age,
-    tagline: sync.tagline,
-    type: sync.type,
-    baseGame: sync.base_game,
-    status: sync.status,
-    published: sync.published,
-  };
-}
+const META_MAP = Object.fromEntries(GAMES_META.map(g => [g.slug, g]));
 
 function listGames(args) {
-  const status = args?.status || 'published';
-  const results = [];
-  const seen = new Set();
-  for (const [slug, sync] of Object.entries(GAMES_SYNC)) {
-    if (status === 'published' && !sync.published) continue;
-    if (status !== 'all' && status !== 'published' && sync.status !== status) continue;
-    const indexed = GAME_MAP[slug];
-    results.push({
-      slug,
-      title: sync.title,
-      tagline: sync.tagline,
-      type: sync.type,
-      status: sync.status,
-      players: sync.players,
-      duration: sync.duration,
-      variantCount: indexed ? indexed.variantCount : 0,
-      rulesUrl: indexed ? `https://rules.moddable.games/dist/${slug}/` : null,
-    });
-    seen.add(slug);
-  }
-  for (const [slug, indexed] of Object.entries(GAME_MAP)) {
-    if (seen.has(slug)) continue;
-    results.push({
-      slug,
-      title: indexed.title,
-      tagline: null,
-      type: null,
-      status: 'indexed',
-      players: null,
-      duration: null,
-      variantCount: indexed.variantCount,
-      rulesUrl: `https://rules.moddable.games/dist/${slug}/`,
-    });
-  }
+  const results = GAMES_META.map(g => ({
+    slug: g.slug,
+    title: g.title,
+    tagline: g.tagline,
+    type: g.type,
+    status: g.status,
+    players: g.players,
+    duration: g.duration,
+    variantCount: g.variants.length,
+    rulesUrl: `https://rules.moddable.games/dist/${g.slug}/`,
+  }));
   results.sort((a, b) => a.title.localeCompare(b.title));
   return { games: results, total: results.length };
 }
@@ -82,20 +35,26 @@ function listGames(args) {
 function getGame(args) {
   const slug = args?.slug;
   if (!slug) return { error: 'Required: slug (e.g. "backgammon", "draughts", "nukes")' };
-  const meta = getGameMeta(slug);
+  const meta = META_MAP[slug];
   const indexed = GAME_MAP[slug];
   if (!meta && !indexed) {
     return { error: `Unknown game: "${slug}". Use rules_list_games to see available options.` };
   }
-  const summary = indexed
-    ? indexed.sections['Variant Library']?.[0]?.content || null
-    : null;
   return {
-    ...(meta || { slug, title: indexed?.title }),
-    variantCount: indexed?.variantCount || 0,
-    variants: indexed?.variants || [],
-    summary,
-    rulesUrl: indexed ? `https://rules.moddable.games/dist/${slug}/` : null,
+    slug,
+    title: meta?.title || indexed?.title || slug,
+    players: meta?.players || null,
+    duration: meta?.duration || null,
+    age: meta?.age || null,
+    tagline: meta?.tagline || null,
+    type: meta?.type || null,
+    status: meta?.status || null,
+    variantHub: meta?.variantHub || false,
+    variantCount: meta?.variants?.length || 0,
+    variants: (meta?.variants || []).map(v => v.title),
+    sections: meta?.sections || [],
+    howToPlay: meta?.howToPlay || null,
+    rulesUrl: `https://rules.moddable.games/dist/${slug}/`,
   };
 }
 
@@ -104,7 +63,9 @@ function getVariant(args) {
   const variant = args?.variant;
   if (!game) return { error: 'Required: game (e.g. "backgammon")' };
   const indexed = GAME_MAP[game];
-  if (!indexed) return { error: `Unknown game: "${game}". Use rules_list_games to see available options.` };
+  const meta = META_MAP[game];
+  if (!indexed && !meta) return { error: `Unknown game: "${game}". Use rules_list_games to see available options.` };
+  if (!indexed) return { error: `Game "${game}" has metadata but no indexed content yet.` };
 
   let sectionKey;
   if (variant) {
@@ -113,7 +74,8 @@ function getVariant(args) {
       s => s.toLowerCase() === variantLower || s.toLowerCase().includes(variantLower)
     );
   } else {
-    const attempts = ['how to play', game.toLowerCase(), (indexed.title || '').toLowerCase()];
+    const title = meta?.title || indexed.title || '';
+    const attempts = ['how to play', game.toLowerCase(), title.toLowerCase()];
     for (const attempt of attempts) {
       if (!attempt) continue;
       sectionKey = Object.keys(indexed.sections).find(
@@ -122,13 +84,22 @@ function getVariant(args) {
       if (sectionKey) break;
     }
     if (!sectionKey) {
-      const first = indexed.variants[0];
-      if (first) sectionKey = Object.keys(indexed.sections).find(s => s === first);
+      const firstVariant = meta?.variants?.[0]?.title;
+      if (firstVariant) {
+        sectionKey = Object.keys(indexed.sections).find(
+          s => s.toLowerCase() === firstVariant.toLowerCase() || s.toLowerCase().includes(firstVariant.toLowerCase())
+        );
+      }
+    }
+    if (!sectionKey) {
+      const allSections = Object.keys(indexed.sections).filter(s => s !== 'Variant Library' && s !== 'Attribution');
+      if (allSections.length) sectionKey = allSections[0];
     }
   }
   if (!sectionKey) {
+    const available = meta?.variants?.map(v => v.title) || Object.keys(indexed.sections).slice(0, 20);
     return {
-      error: `Variant "${variant || 'default'}" not found in ${game}. Available: ${indexed.variants.slice(0, 20).join(', ')}`,
+      error: `Variant "${variant || 'default'}" not found in ${game}. Available: ${available.join(', ')}`,
     };
   }
   const entries = indexed.sections[sectionKey];
@@ -182,18 +153,17 @@ function searchRules(args) {
 function randomGame(args) {
   const family = args?.family;
   if (family) {
-    const indexed = GAME_MAP[family];
-    if (!indexed) return { error: `Unknown game: "${family}". Use rules_list_games to see available options.` };
-    const variants = indexed.variants;
-    if (!variants.length) return { error: `No variants indexed for "${family}".` };
-    const pick = variants[Math.floor(Math.random() * variants.length)];
-    return getVariant({ game: family, variant: pick });
+    const meta = META_MAP[family];
+    if (!meta) return { error: `Unknown game: "${family}". Use rules_list_games to see available options.` };
+    if (meta.variants.length > 0) {
+      const pick = meta.variants[Math.floor(Math.random() * meta.variants.length)];
+      return getVariant({ game: family, variant: pick.title });
+    }
+    return getVariant({ game: family });
   }
-  const published = Object.entries(GAMES_SYNC)
-    .filter(([, v]) => v.published)
-    .map(([k]) => k);
-  const slug = published[Math.floor(Math.random() * published.length)];
-  return getGame({ slug });
+  const all = GAMES_META.filter(g => g.status === 'live');
+  const pick = all[Math.floor(Math.random() * all.length)];
+  return getGame({ slug: pick.slug });
 }
 
 export const RULES_TOOLS = [
