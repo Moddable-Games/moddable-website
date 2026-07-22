@@ -346,15 +346,17 @@ async function cmdRules(options, env) {
   if (!game) {
     try {
       const result = await callTool('rules_list_games', { status: 'published' }, env);
-      const lines = (result.games || []).slice(0, 20).map(g => {
-        const info = g.tagline || [g.players, g.duration].filter(Boolean).join(' · ') || '';
-        const variants = g.variantCount > 1 ? ` · ${g.variantCount} variants` : '';
-        return `**${g.title}** — ${info}${variants}`;
+      const games = result.games || [];
+      const lines = games.map(g => {
+        const variants = g.variantCount > 1 ? ` (${g.variantCount})` : '';
+        return `\`${g.slug}\` **${g.title}**${variants} — ${g.players}p`;
       });
+      let desc = lines.join('\n');
+      if (desc.length > 3900) desc = desc.slice(0, 3900) + '\n…';
       return embed({
         title: '📚 Rules Library',
-        description: lines.join('\n') || 'No games found.',
-        footer: `${result.total || 0} games · Use /rules game:<slug> for details`,
+        description: desc || 'No games found.',
+        footer: `${result.total || 0} games · Use /rules game:<slug> or /howtoplay game:<slug>`,
         color: 0xd11a1a,
       });
     } catch (e) {
