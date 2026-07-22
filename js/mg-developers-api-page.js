@@ -27,6 +27,7 @@ const NAMESPACE_META = {
   'moddable-hexmaps': { label: 'Hexmaps', accent: '#22c55e' },
   'moddable-rules': { label: 'Rules', accent: '#f59e0b' },
   'game-tools': { label: 'Game Tools', accent: '#ef4444' },
+  'oracles': { label: 'RPG & Oracles', accent: '#6fb5ff' },
   'moddable-tools': { label: 'Utilities', accent: '#8b5cf6' }
 };
 
@@ -62,6 +63,7 @@ function getNamespace(toolName) {
   if (toolName.startsWith('hex_')) return 'moddable-hexmaps';
   if (toolName.startsWith('rules_')) return 'moddable-rules';
   if (/^(ti4|mancala|morris|ur|pachisi|nukes|colony)_/.test(toolName)) return 'game-tools';
+  if (toolName.startsWith('oracle_') || toolName.startsWith('rpg_')) return 'oracles';
   return 'moddable-tools';
 }
 

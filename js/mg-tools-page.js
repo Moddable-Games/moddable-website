@@ -54,7 +54,7 @@ const MOD_TOOLS = [
 { title:'Dice Lab',           sub:'Dice roller · Battle simulator · Risk · TI4 · Axis & Allies · X-Wing · Blood Bowl · Memoir \'44', color:'#d11a1a', href:url('/tools/dice/') },
 { title:'Card Deck Builder', sub:'Design · Shuffle · Deal — custom decks for any game', color:'#3a9928', href:url('/tools/decks/') },
 { title:'Chess Variants',    sub:'74 variants · Rules reference · Match setup', color:'#0c4f8d', href:url('/tools/chess/') },
-{ title:'Oracles',           sub:'Scene Forge · Maze Rats · Encounter Builder — Starforged, Ironsworn, D&D & Pathfinder', color:'#6fb5ff', href:url('/tools/oracles/') },
+{ title:'Oracles & RPG Library', sub:'Scene Forge · RPG Browser · Encounter Builder — 10 systems, 3000+ entities', color:'#6fb5ff', href:url('/tools/oracles/') },
 ];
 const mtg = document.getElementById('mod-tools-grid');
 MOD_TOOLS.forEach(t => {

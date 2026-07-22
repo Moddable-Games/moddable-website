@@ -8,7 +8,7 @@ document.getElementById('page-hero').appendChild(sectionHero({
   hexColor: 'blue',
   eyebrow: 'ORACLES',
   title: 'Roll the <em>narrative</em>',
-  lede: 'Scene generation, oracle rolls, and narrative threading for Starforged, Ironsworn, Maze Rats, and more.',
+  lede: 'Scene generation, oracle rolls, entity browsing, and narrative threading for 10 RPG systems.',
 }));
 
 const TOOLS_API = 'https://tools.moddable.games/api/call';
