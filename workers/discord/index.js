@@ -196,12 +196,13 @@ async function cmdVariants(options, env) {
     const result = await callTool('chess_list_variants', { group }, env);
     const variants = result.variants || result;
     const list = Array.isArray(variants) ? variants : [];
-    const lines = list.slice(0, 15).map(v => `**${v.label || v.title || v.name || v.key}** — ${v.description || `${v.board} board`}`);
-    const footer = list.length > 15 ? `Showing 15 of ${list.length}. Groups: Classic, Tactical, Alternate Rules, Asymmetric, Small Boards, Large Boards` : '';
+    const lines = list.slice(0, 30).map(v => `\`${v.key}\` **${v.label || v.title || v.name}** — ${v.description || `${v.board} board`}`);
+    let desc = lines.join('\n') || 'No variants found.';
+    if (list.length > 30) desc += `\n\n… and ${list.length - 30} more. Filter with \`/variants group:<name>\``;
     return embed({
-      title: '♟️ Chess Variants',
-      description: lines.join('\n') || 'No variants found.',
-      footer,
+      title: `♟️ Chess Variants${group ? ` (${group})` : ''}`,
+      description: desc,
+      footer: `${list.length} variants · Use variant key in /puzzle, /validate, /moves, /play`,
       color: 0x0c4f8d,
     });
   } catch (e) {
@@ -252,13 +253,15 @@ async function cmdHexGames(options, env) {
     const result = await callTool('hex_list_games', {}, env);
     const games = result.games || result;
     const lines = Array.isArray(games) ? games.map(g => {
-      const name = g.label || g.name || g.key;
+      const key = g.key;
+      const name = g.label || g.name || key;
       const sizes = Array.isArray(g.sizes) ? g.sizes.map(s => s.label || s.value).join(', ') : '';
-      return `**${name}** — ${g.orientation} · ${sizes}`;
+      return `\`${key}\` **${name}** — ${g.orientation} · ${sizes}`;
     }) : ['No games found.'];
     return embed({
       title: '🗺️ Hex Map Games',
       description: lines.join('\n'),
+      footer: 'Use game key in /map game:<key>',
       color: 0x3a9928,
     });
   } catch (e) {
@@ -857,6 +860,28 @@ async function cmdCowries(options, env) {
 
 async function cmdOracle(options, env) {
   const mode = getOption(options, 'mode') || 'forge';
+  if (mode === 'recipes') {
+    const result = await callTool('oracle_list_recipes', {}, env);
+    const recipes = result.recipes || [];
+    const grouped = {};
+    for (const r of recipes) { (grouped[r.game] = grouped[r.game] || []).push(r); }
+    let desc = '';
+    for (const [game, list] of Object.entries(grouped)) {
+      desc += `**${game}:**\n` + list.map(r => `\`${r.id}\` ${r.name}`).join('\n') + '\n\n';
+    }
+    if (desc.length > 3900) desc = desc.slice(0, 3900) + '…';
+    return embed({ title: '📜 Oracle Recipes', description: desc || 'No recipes.', footer: `${recipes.length} recipes · Use recipe ID in /oracle mode:forge recipe:<id>`, color: 0x6fb5ff });
+  }
+  if (mode === 'tables') {
+    const game = getOption(options, 'recipe') || 'starforged';
+    const result = await callTool('oracle_list_tables', { game }, env);
+    if (result.error) return embed({ title: '📋 Oracle Tables', description: result.error, color: 0xd11a1a });
+    const tables = result.tables || [];
+    const lines = tables.slice(0, 40).map(t => `\`${t.id}\` ${t.name}`);
+    let desc = lines.join('\n');
+    if (tables.length > 40) desc += `\n\n… and ${tables.length - 40} more`;
+    return embed({ title: `📋 Oracle Tables (${game})`, description: desc || 'No tables.', footer: `${result.total} tables · Use table ID in /oracle mode:roll table:<id>`, color: 0x6fb5ff });
+  }
   if (mode === 'ask') {
     const likelihood = getOption(options, 'likelihood') || 'fifty_fifty';
     const question = getOption(options, 'question') || null;

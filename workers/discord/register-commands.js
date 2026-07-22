@@ -265,7 +265,7 @@ const commands = [
     name: 'oracle',
     description: 'Roll RPG oracles (Starforged, Ironsworn, Maze Rats) — scene forge, ask, or roll a table',
     options: [
-      { name: 'mode', type: 3, description: 'What to do', required: true, choices: [{ name: 'Forge a scene', value: 'forge' }, { name: 'Ask yes/no', value: 'ask' }, { name: 'Roll a table', value: 'roll' }] },
+      { name: 'mode', type: 3, description: 'What to do', required: true, choices: [{ name: 'Forge a scene', value: 'forge' }, { name: 'Ask yes/no', value: 'ask' }, { name: 'Roll a table', value: 'roll' }, { name: 'List recipes', value: 'recipes' }, { name: 'List tables', value: 'tables' }] },
       { name: 'recipe', type: 3, description: 'Scene recipe (for forge mode)', required: false },
       { name: 'likelihood', type: 3, description: 'Likelihood (for ask mode)', required: false, choices: [{ name: 'Almost Certain', value: 'almost_certain' }, { name: 'Likely', value: 'likely' }, { name: '50/50', value: 'fifty_fifty' }, { name: 'Unlikely', value: 'unlikely' }, { name: 'Small Chance', value: 'small_chance' }] },
       { name: 'table', type: 3, description: 'Table ID (for roll mode, e.g. "action", "theme")', required: false },
