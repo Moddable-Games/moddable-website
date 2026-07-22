@@ -196,7 +196,7 @@ async function cmdVariants(options, env) {
     const result = await callTool('chess_list_variants', { group }, env);
     const variants = result.variants || result;
     const list = Array.isArray(variants) ? variants : [];
-    const lines = list.slice(0, 15).map(v => `**${v.name}** — ${v.description || `${v.board} board`}`);
+    const lines = list.slice(0, 15).map(v => `**${v.label || v.title || v.name || v.key}** — ${v.description || `${v.board} board`}`);
     const footer = list.length > 15 ? `Showing 15 of ${list.length}. Groups: Classic, Tactical, Alternate Rules, Asymmetric, Small Boards, Large Boards` : '';
     return embed({
       title: '♟️ Chess Variants',
@@ -251,7 +251,11 @@ async function cmdHexGames(options, env) {
   try {
     const result = await callTool('hex_list_games', {}, env);
     const games = result.games || result;
-    const lines = Array.isArray(games) ? games.map(g => `**${g.name || g.key}** — ${g.description || `${g.sizes || ''}`}`) : ['No games found.'];
+    const lines = Array.isArray(games) ? games.map(g => {
+      const name = g.label || g.name || g.key;
+      const sizes = Array.isArray(g.sizes) ? g.sizes.map(s => s.label || s.value).join(', ') : '';
+      return `**${name}** — ${g.orientation} · ${sizes}`;
+    }) : ['No games found.'];
     return embed({
       title: '🗺️ Hex Map Games',
       description: lines.join('\n'),
