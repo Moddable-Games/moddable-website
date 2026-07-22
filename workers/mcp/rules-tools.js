@@ -84,20 +84,25 @@ function getVariant(args) {
       if (sectionKey) break;
     }
     if (!sectionKey) {
-      const firstVariant = meta?.variants?.[0]?.title;
-      if (firstVariant) {
-        sectionKey = Object.keys(indexed.sections).find(
-          s => s.toLowerCase() === firstVariant.toLowerCase() || s.toLowerCase().includes(firstVariant.toLowerCase())
-        );
-      }
-    }
-    if (!sectionKey) {
       const allSections = Object.keys(indexed.sections).filter(s => s !== 'Variant Library' && s !== 'Attribution');
       const preferred = allSections.find(s => {
         const l = s.toLowerCase();
         return l.includes('standard') || l.includes('classic') || l.includes('international') || l.includes('official');
       });
-      sectionKey = preferred || allSections[0] || null;
+      if (preferred) {
+        sectionKey = preferred;
+      } else {
+        const metaVariants = meta?.variants || [];
+        const preferredVariant = metaVariants.find(v => {
+          const l = v.title.toLowerCase();
+          return l.includes('standard') || l.includes('classic') || l.includes('international') || l.includes('official');
+        });
+        const pick = preferredVariant?.title || metaVariants[0]?.title;
+        if (pick) {
+          sectionKey = allSections.find(s => s.toLowerCase() === pick.toLowerCase() || s.toLowerCase().includes(pick.toLowerCase()));
+        }
+        if (!sectionKey) sectionKey = allSections[0] || null;
+      }
     }
   }
   if (!sectionKey) {
