@@ -57,7 +57,7 @@ function listGames(args) {
       players: sync.players,
       duration: sync.duration,
       variantCount: indexed ? indexed.variantCount : 0,
-      rulesUrl: indexed ? `https://rules.moddable.games/${slug}/` : null,
+      rulesUrl: indexed ? `https://rules.moddable.games/dist/${slug}/` : null,
     });
     seen.add(slug);
   }
@@ -72,7 +72,7 @@ function listGames(args) {
       players: null,
       duration: null,
       variantCount: indexed.variantCount,
-      rulesUrl: `https://rules.moddable.games/${slug}/`,
+      rulesUrl: `https://rules.moddable.games/dist/${slug}/`,
     });
   }
   results.sort((a, b) => a.title.localeCompare(b.title));
@@ -95,7 +95,7 @@ function getGame(args) {
     variantCount: indexed?.variantCount || 0,
     variants: indexed?.variants || [],
     summary,
-    rulesUrl: indexed ? `https://rules.moddable.games/${slug}/` : null,
+    rulesUrl: indexed ? `https://rules.moddable.games/dist/${slug}/` : null,
   };
 }
 
@@ -119,8 +119,8 @@ function getVariant(args) {
   const content = entries.map(e => `## ${e.heading}\n${e.content}`).join('\n\n');
   const variantPath = entries[0]?.variantUrl || entries[0]?.variant;
   const rulesUrl = variantPath
-    ? `https://rules.moddable.games/${variantPath.replace(/^dist\//, '')}`
-    : `https://rules.moddable.games/${game}/`;
+    ? `https://rules.moddable.games/${variantPath}`
+    : `https://rules.moddable.games/dist/${game}/`;
   return {
     game,
     gameTitle: indexed.title,
