@@ -74,7 +74,9 @@ function getVariant(args) {
     sectionKey = Object.keys(indexed.sections).find(s => {
       const sLower = s.toLowerCase();
       const sSlug = sLower.replace(/[^a-z0-9]+/g, '-').replace(/-+$/, '');
-      return sLower === variantLower || sSlug === variantSlug || sLower.includes(variantLower) || sSlug.includes(variantSlug);
+      const entries = indexed.sections[s];
+      const entrySlug = entries[0]?.variant || '';
+      return sLower === variantLower || sSlug === variantSlug || entrySlug === variantLower || sLower.includes(variantLower) || sSlug.includes(variantSlug);
     });
   } else {
     const title = meta?.title || indexed.title || '';
