@@ -123,6 +123,13 @@ Pages load `mg-loader.js` (shared modules) + their own page script. Data is fetc
 
 ### Changelog
 
+#### 2026-07-22
+- Added Maze Rats (94 procedural tables) to oracle pipeline and oracles page
+- Encounter Builder now supports D&D 5e and Pathfinder 1e via system selector
+- Discord /encounter command uses autocomplete for future-proof system selection
+- Rebuilt rules-index.json (8,426 entries across 41 games, added table-type indexing)
+- MCP Worker bumped to v1.7.0
+
 #### 2026-07-20
 - Added GA4 analytics tracking to all untracked interactive modules
 - API playground: tool select, category expand, tool run events

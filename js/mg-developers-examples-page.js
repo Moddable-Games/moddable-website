@@ -63,10 +63,10 @@ var liveIntegrations = [
   {
     title: 'Rules Library',
     subtitle: 'rules.moddable.games',
-    description: '18 game families with full variant rulebooks, searchable and queryable via MCP. New games auto-propagate to all consumers.',
+    description: '41 game families with full variant rulebooks, searchable and queryable via MCP. New games auto-propagate to all consumers.',
     stats: [
-      { label: 'Games', value: '18' },
-      { label: 'Indexed entries', value: '1,149' },
+      { label: 'Games', value: '41' },
+      { label: 'Indexed entries', value: '8,426' },
       { label: 'MCP tools', value: '5' }
     ],
     accent: 'red',

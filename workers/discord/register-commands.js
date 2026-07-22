@@ -262,7 +262,7 @@ const commands = [
   },
   {
     name: 'oracle',
-    description: 'Roll Starforged/Ironsworn oracles — scene forge, ask the oracle, or roll a table',
+    description: 'Roll RPG oracles (Starforged, Ironsworn, Maze Rats) — scene forge, ask, or roll a table',
     options: [
       { name: 'mode', type: 3, description: 'What to do', required: true, choices: [{ name: 'Forge a scene', value: 'forge' }, { name: 'Ask yes/no', value: 'ask' }, { name: 'Roll a table', value: 'roll' }] },
       { name: 'recipe', type: 3, description: 'Scene recipe (for forge mode)', required: false },

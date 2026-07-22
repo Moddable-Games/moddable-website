@@ -32,7 +32,7 @@ One shared component library (`_mg.js` + `_mg.css`), one page per HTML file.
 │   ├── mods.json           ← mod library (10 entries)
 │   ├── games.json          ← games (3 entries)
 │   ├── engines.json        ← engine/SDK listings (2 entries)
-│   ├── mcp-tools.json      ← MCP tool registry (50 tools, 7 namespaces)
+│   ├── mcp-tools.json      ← MCP tool registry (50 tools, 7 namespaces, v1.7.0)
 │   ├── news.json           ← news posts (13 entries)
 │   └── team.json           ← team members (4 entries)
 │
@@ -59,7 +59,7 @@ One shared component library (`_mg.js` + `_mg.css`), one page per HTML file.
 │   ├── dice/index.html     ← Dice lab (multi-system roller)
 │   ├── decks/index.html    ← Deck builder
 │   ├── chess/index.html    ← Chess variant explorer
-│   └── oracles/index.html  ← Oracles (Scene Forge, Ask the Oracle, Thread Weaver)
+│   └── oracles/index.html  ← Oracles (Scene Forge, Maze Rats, Ask the Oracle, Thread Weaver, Encounter Builder)
 ├── submit/index.html       ← 3-step mod submission form
 ├── subscribe/index.html    ← email subscribe page
 ├── about/
@@ -79,15 +79,17 @@ One shared component library (`_mg.js` + `_mg.css`), one page per HTML file.
     │   ├── register-commands.js ← Discord command registration script
     │   └── wrangler.toml   ← Cloudflare config for moddable-bot
     └── mcp/
-        ├── index.js        ← MCP tools Worker (50 tools, 7 namespaces)
+        ├── index.js        ← MCP tools Worker (50 tools, 7 namespaces, v1.7.0)
         ├── chess-tools.js  ← re-exports from moddable-chess/mcp/tools.js
         ├── hex-tools.js    ← re-exports from moddable-hexmaps/mcp/tools.js
         ├── piece-gallery.js ← piece gallery tools (imports gallery-index.json from moddable-chess)
         ├── game-tools.js   ← classic game engines (Mancala, Morris, Ur, Pachisi, etc)
         ├── rules-tools.js  ← rules library tools (queries rules-index.json)
         ├── rules-index.json← search index from moddable-rules/dist/
-        ├── oracle-tools.js ← oracle tools (Starforged/Ironsworn scene forge, ask, roll)
-        ├── oracle-data.json← aggregated oracle tables from moddable-rules
+        ├── oracle-tools.js ← oracle tools (Starforged, Ironsworn, Maze Rats; D&D 5e + PF1e encounters)
+        ├── oracle-data.json← aggregated oracle tables from moddable-rules (362 tables)
+        ├── pf-monsters.json← Pathfinder 1e monster pool (336 creatures)
+        ├── pf-loot.json    ← Pathfinder 1e magic item loot table
         ├── build-oracles.mjs← build script for oracle-data.json
         ├── wrangler.toml   ← Cloudflare config for moddable-tools
         └── deploy.sh       ← deploy script
@@ -119,7 +121,7 @@ Game Tools, Oracles, Utilities).
 - **piece-gallery** (3 tools) — piece set search, get details, aggregate stats (96 sets, 19 families)
 - **moddable-rules** (5 tools) — game/variant lookup, search, random
 - **game-tools** (12 tools) — TI4 objectives/agendas/draft, Mancala, Morris, Ur, Pachisi, Nukes setup, Colony odds
-- **oracles** (7 tools) — oracle roll, ask (yes/no), scene compose, recipes, interpret, table view (Starforged + Ironsworn)
+- **oracles** (8 tools) — oracle roll, ask (yes/no), scene compose, recipes, interpret, table view, encounter builder (Starforged, Ironsworn, Maze Rats; D&D 5e + Pathfinder 1e encounters)
 - **moddable-tools** (7 tools) — dice roll, faction assign, coin flip, team split, jam status/timer/vote
 
 **Architecture:** The Worker imports tool handlers from sibling repos
