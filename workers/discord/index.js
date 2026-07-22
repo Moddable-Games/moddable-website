@@ -382,16 +382,30 @@ async function cmdHowToPlay(options, env) {
   const game = getOption(options, 'game');
   const variant = getOption(options, 'variant');
   if (!game) return ephemeral('Required: `/howtoplay game:<slug>` (e.g. `game:backgammon`)');
-  if (!variant) return ephemeral('Required: `/howtoplay game:<slug> variant:<name>` (e.g. `variant:Acey-Deucey`)');
   try {
-    const result = await callTool('rules_get_variant', { game, variant }, env);
+    if (variant) {
+      const result = await callTool('rules_get_variant', { game, variant }, env);
+      if (result.error) return ephemeral(result.error);
+      let desc = result.content || 'No rules content available.';
+      if (desc.length > 3900) desc = desc.slice(0, 3900) + '…';
+      if (result.rulesUrl) desc += `\n\n[📖 Full rules](${result.rulesUrl})`;
+      return embed({
+        title: `📖 ${result.gameTitle}: ${result.variant}`,
+        description: desc,
+        color: 0xd11a1a,
+      });
+    }
+    const result = await callTool('rules_get_game', { slug: game }, env);
     if (result.error) return ephemeral(result.error);
-    let desc = result.content || 'No rules content available.';
+    let desc = result.summary ? result.summary + '\n\n' : '';
+    if (result.variants && result.variants.length > 0) {
+      desc += `**Variants:** ${result.variants.slice(0, 15).join(', ')}\n\nUse \`/howtoplay game:${game} variant:<name>\` for specific variant rules.`;
+    }
     if (desc.length > 3900) desc = desc.slice(0, 3900) + '…';
-    if (result.rulesUrl) desc += `\n\n[📖 Full rules](${result.rulesUrl})`;
+    if (result.rulesUrl) desc += `\n\n[📖 Full rulebook](${result.rulesUrl})`;
     return embed({
-      title: `📖 ${result.gameTitle}: ${result.variant}`,
-      description: desc,
+      title: `📖 ${result.title || game}`,
+      description: desc || 'No overview available. Try specifying a variant.',
       color: 0xd11a1a,
     });
   } catch (e) {

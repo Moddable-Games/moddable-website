@@ -97,10 +97,10 @@ const commands = [
   },
   {
     name: 'howtoplay',
-    description: 'Get rules for a specific game variant',
+    description: 'Get rules for a game (or a specific variant)',
     options: [
-      { name: 'game', type: 3, description: 'Game slug (e.g. backgammon, draughts)', required: true },
-      { name: 'variant', type: 3, description: 'Variant name (e.g. Acey-Deucey, German Draughts)', required: true },
+      { name: 'game', type: 3, description: 'Game slug (e.g. backgammon, nukes, draughts)', required: true },
+      { name: 'variant', type: 3, description: 'Variant name (optional — omit for main rules)', required: false },
     ],
   },
   {
