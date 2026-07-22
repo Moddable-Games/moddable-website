@@ -375,7 +375,19 @@ async function cmdRules(options, env) {
       const variantLines = result.variants.map(v =>
         typeof v === 'string' ? v : `\`${v.slug}\` ${v.title}`
       );
-      desc += `**Variants (${result.variants.length}):**\n${variantLines.join('\n')}`;
+      const maxChars = 3600 - desc.length;
+      let variantText = variantLines.join('\n');
+      if (variantText.length > maxChars) {
+        const fitting = [];
+        let len = 0;
+        for (const line of variantLines) {
+          if (len + line.length + 1 > maxChars) break;
+          fitting.push(line);
+          len += line.length + 1;
+        }
+        variantText = fitting.join('\n') + `\n… and ${result.variants.length - fitting.length} more`;
+      }
+      desc += `**Variants (${result.variants.length}):**\n${variantText}`;
     }
     if (result.rulesUrl) desc += `\n\n[📖 Full rulebook](${result.rulesUrl})`;
     return embed({
