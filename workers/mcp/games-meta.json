@@ -108,7 +108,16 @@
     "status": "live",
     "updated": "2026-07-21",
     "variantHub": false,
-    "variants": [],
+    "variants": [
+      {
+        "slug": "schafkopf",
+        "title": "Schafkopf"
+      },
+      {
+        "slug": "skat",
+        "title": "Skat"
+      }
+    ],
     "sections": [
       "The Deck",
       "Games",
@@ -198,7 +207,24 @@
     "status": "live",
     "updated": "2026-07-21",
     "variantHub": false,
-    "variants": [],
+    "variants": [
+      {
+        "slug": "all-fives",
+        "title": "All Fives"
+      },
+      {
+        "slug": "block",
+        "title": "Block Dominoes"
+      },
+      {
+        "slug": "chickenfoot",
+        "title": "Chickenfoot"
+      },
+      {
+        "slug": "mexican-train",
+        "title": "Mexican Train"
+      }
+    ],
     "sections": [
       "Double-Six Dominoes",
       "Games",
@@ -410,7 +436,24 @@
     "status": "live",
     "updated": "2026-07-21",
     "variantHub": false,
-    "variants": [],
+    "variants": [
+      {
+        "slug": "go-stop",
+        "title": "Go-Stop"
+      },
+      {
+        "slug": "hana-awase",
+        "title": "Hana-Awase"
+      },
+      {
+        "slug": "koi-koi",
+        "title": "Koi-Koi"
+      },
+      {
+        "slug": "oicho-kabu",
+        "title": "Oicho-Kabu"
+      }
+    ],
     "sections": [
       "Hanafuda",
       "Games",
@@ -709,7 +752,28 @@
     "status": "live",
     "updated": "2026-07-21",
     "variantHub": false,
-    "variants": [],
+    "variants": [
+      {
+        "slug": "american-classic",
+        "title": "American Mahjong (Classic)"
+      },
+      {
+        "slug": "hong-kong",
+        "title": "Hong Kong Mahjong"
+      },
+      {
+        "slug": "riichi",
+        "title": "Riichi Mahjong"
+      },
+      {
+        "slug": "taiwanese",
+        "title": "Taiwanese 16-Tile Mahjong"
+      },
+      {
+        "slug": "zung-jung",
+        "title": "Zung Jung"
+      }
+    ],
     "sections": [
       "Mahjong"
     ],
@@ -1776,7 +1840,80 @@
     "status": "live",
     "updated": "2026-07-21",
     "variantHub": false,
-    "variants": [],
+    "variants": [
+      {
+        "slug": "big2",
+        "title": "Big 2"
+      },
+      {
+        "slug": "blackjack",
+        "title": "Blackjack (Twenty-One)"
+      },
+      {
+        "slug": "bridge",
+        "title": "Rubber Bridge"
+      },
+      {
+        "slug": "canasta",
+        "title": "Canasta (Classic)"
+      },
+      {
+        "slug": "crazy-eights",
+        "title": "Crazy Eights"
+      },
+      {
+        "slug": "cribbage",
+        "title": "Cribbage"
+      },
+      {
+        "slug": "euchre",
+        "title": "Euchre"
+      },
+      {
+        "slug": "freecell",
+        "title": "FreeCell"
+      },
+      {
+        "slug": "gin-rummy",
+        "title": "Gin Rummy"
+      },
+      {
+        "slug": "hearts",
+        "title": "Hearts"
+      },
+      {
+        "slug": "klondike",
+        "title": "Klondike Solitaire"
+      },
+      {
+        "slug": "poker",
+        "title": "Texas Hold'em Poker"
+      },
+      {
+        "slug": "president",
+        "title": "President"
+      },
+      {
+        "slug": "rummy",
+        "title": "Rummy"
+      },
+      {
+        "slug": "spades",
+        "title": "Spades"
+      },
+      {
+        "slug": "spider-solitaire",
+        "title": "Spider Solitaire"
+      },
+      {
+        "slug": "war",
+        "title": "War"
+      },
+      {
+        "slug": "whist",
+        "title": "Whist"
+      }
+    ],
     "sections": [
       "Standard 52-Card Deck",
       "Games",
@@ -1795,7 +1932,28 @@
     "status": "live",
     "updated": "2026-07-21",
     "variantHub": false,
-    "variants": [],
+    "variants": [
+      {
+        "slug": "bunco",
+        "title": "Bunco"
+      },
+      {
+        "slug": "craps",
+        "title": "Craps"
+      },
+      {
+        "slug": "farkle",
+        "title": "Farkle"
+      },
+      {
+        "slug": "liars-dice",
+        "title": "Liar's Dice"
+      },
+      {
+        "slug": "yahtzee",
+        "title": "Yahtzee"
+      }
+    ],
     "sections": [
       "Standard Dice",
       "Games",

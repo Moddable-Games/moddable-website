@@ -23580,6 +23580,3376 @@
     "variantUrl": "dist/xiangqi/variants/yang-qi/"
   },
   {
+    "game": "bavarian-32",
+    "gameTitle": "Bavarian 32-Card Games",
+    "section": "Schafkopf",
+    "heading": "Schafkopf",
+    "content": "Schafkopf pronounced SHAHF-kopf, meaning \"Sheepshead\" is the defining card game of Bavaria, Germany. Played seriously in clubs, tournaments, and casual settings throughout southern Germany, it is one of the most culturally embedded regional card games in Europe. The American game Sheepshead is derived from Schafkopf brought by German immigrants.",
+    "anchor": "schafkopf",
+    "variant": "schafkopf",
+    "variantUrl": "dist/bavarian-32/games/schafkopf/"
+  },
+  {
+    "game": "bavarian-32",
+    "gameTitle": "Bavarian 32-Card Games",
+    "section": "Schafkopf",
+    "heading": "The Deck",
+    "content": "32-card Bavarian pattern deck: 4 suits × 8 ranks. The suits are Acorns, Leaves, Hearts, and Bells equivalent to Clubs, Spades, Hearts, and Diamonds in French-suited decks. The ranks in each suit: Ace Sau, King, Ober, Unter, 10, 9, 8, 7. Card point values: Total card points in the deck: 120.\nCard — Points\nAce (Sau) — 11\n10 — 10\nKing — 4\nOber — 3\nUnter — 2\n9, 8, 7 — 0",
+    "anchor": "the-deck",
+    "variant": "schafkopf",
+    "variantUrl": "dist/bavarian-32/games/schafkopf/"
+  },
+  {
+    "game": "bavarian-32",
+    "gameTitle": "Bavarian 32-Card Games",
+    "section": "Schafkopf",
+    "heading": "Dealing",
+    "content": "All 32 cards are dealt to the 4 players — 8 cards each. No cards are set aside. Deal rotates clockwise each hand.",
+    "anchor": "dealing",
+    "variant": "schafkopf",
+    "variantUrl": "dist/bavarian-32/games/schafkopf/"
+  },
+  {
+    "game": "bavarian-32",
+    "gameTitle": "Bavarian 32-Card Games",
+    "section": "Schafkopf",
+    "heading": "Permanent Trump Hierarchy",
+    "content": "Unlike Skat, the top 8 trumps are always fixed regardless of the declared suit or game type: 1. Ober of Acorns highest trump 2. Ober of Leaves 3. Ober of Hearts 4. Ober of Bells 5. Unter of Acorns 6. Unter of Leaves 7. Unter of Hearts 8. Unter of Bells lowest of the 8 Matadors Below the Matadors, the Heart suit or the solo-declared suit forms the remaining trumps: Ace, 10, King, 9, 8, 7. Total trumps in a normal Rufspiel: 8 Matadors + 6 Hearts = 14 trumps.",
+    "anchor": "permanent-trump-hierarchy",
+    "variant": "schafkopf",
+    "variantUrl": "dist/bavarian-32/games/schafkopf/"
+  },
+  {
+    "game": "bavarian-32",
+    "gameTitle": "Bavarian 32-Card Games",
+    "section": "Schafkopf",
+    "heading": "Game Types",
+    "content": "Rufspiel Partner Game — most common: The declarer calls an Ace of a non-Heart suit e.g., \"I call the Ober of Leaves\" or \"I call the Ace of Bells\". The player holding that Ace is the secret partner. The declarer and partner work together to score 61+ card points, without revealing their partnership. The called Ace must be played if that suit is led, unless the holder plays a trump instead. Worth 2 game points per opponent. Solo: One player against three, with a named trump suit replacing Hearts as the lower trumps. The 8 Matadors remain fixed. Worth 3 game points per opponent. Wenz Wenzel: Only the four Unters are trump — no Obers, no suit trumps. Solo play. Worth 5 game points per opponent. Farbsolo Colour Solo: Solo with a named non-Heart trump suit. Worth 3 game points.",
+    "anchor": "game-types",
+    "variant": "schafkopf",
+    "variantUrl": "dist/bavarian-32/games/schafkopf/"
+  },
+  {
+    "game": "bavarian-32",
+    "gameTitle": "Bavarian 32-Card Games",
+    "section": "Schafkopf",
+    "heading": "Play",
+    "content": "The player to the dealer's left leads the first trick. Players must follow suit if possible; if unable, they may play any card. The highest trump wins a trump trick; the highest card of the led suit wins a plain-suit trick. The winner of each trick leads the next.",
+    "anchor": "play",
+    "variant": "schafkopf",
+    "variantUrl": "dist/bavarian-32/games/schafkopf/"
+  },
+  {
+    "game": "bavarian-32",
+    "gameTitle": "Bavarian 32-Card Games",
+    "section": "Schafkopf",
+    "heading": "Scoring",
+    "content": "After 8 tricks, the declaring side's total card points determine the result: Game points are settled per player at the table losers pay winners. A running score is kept across hands.\nCard points — Result\n61–90 — Normal win for declarers\n91–119 — **Schneider** — declarers win double\n120 — **Schwarz** — declarers win triple (all tricks taken)\n30–60 — Schneider — defenders win double\n0–29 — Schwarz — defenders win triple\n31–60 — Normal win for defenders",
+    "anchor": "scoring",
+    "variant": "schafkopf",
+    "variantUrl": "dist/bavarian-32/games/schafkopf/"
+  },
+  {
+    "game": "bavarian-32",
+    "gameTitle": "Bavarian 32-Card Games",
+    "section": "Schafkopf",
+    "heading": "Attribution",
+    "content": "Traditional Bavarian card game. Rules documented per the Bayerischer Schafkopf-Verein Bavarian Schafkopf Association standard ruleset.",
+    "anchor": "attribution",
+    "variant": "schafkopf",
+    "variantUrl": "dist/bavarian-32/games/schafkopf/"
+  },
+  {
+    "game": "bavarian-32",
+    "gameTitle": "Bavarian 32-Card Games",
+    "section": "Skat",
+    "heading": "Skat",
+    "content": "Skat is Germany’s national card game and one of the most strategically complex three-player card games in existence. One player the declarer competes alone against the two defenders. The declarer wins the auction, picks up a 2-card blind the Skat, discards 2 cards, and announces a game type — then tries to fulfil the contract. Origin: Altenburg, Germany, early 19th century. Codified by the Deutscher Skatverband German Skat Federation.",
+    "anchor": "skat",
+    "variant": "skat",
+    "variantUrl": "dist/bavarian-32/games/skat/"
+  },
+  {
+    "game": "bavarian-32",
+    "gameTitle": "Bavarian 32-Card Games",
+    "section": "Skat",
+    "heading": "The Deck",
+    "content": "32 cards: 4 suits × 8 ranks 7, 8, 9, 10, Jack, Queen, King, Ace. No Jokers. Card point values: Total: 120 card points in the deck.\nRank — Points\nAce — 11\n10 — 10\nKing — 4\nQueen — 3\nJack — 2\n9, 8, 7 — 0",
+    "anchor": "the-deck",
+    "variant": "skat",
+    "variantUrl": "dist/bavarian-32/games/skat/"
+  },
+  {
+    "game": "bavarian-32",
+    "gameTitle": "Bavarian 32-Card Games",
+    "section": "Skat",
+    "heading": "Roles",
+    "content": "- Forehand F: Player to the left of the dealer. First to speak in the auction; leads the first trick. - Middlehand M: Player to the left of Forehand. - Rearhand R: The dealer. Last to act in the auction. Roles rotate clockwise each deal.",
+    "anchor": "roles",
+    "variant": "skat",
+    "variantUrl": "dist/bavarian-32/games/skat/"
+  },
+  {
+    "game": "bavarian-32",
+    "gameTitle": "Bavarian 32-Card Games",
+    "section": "Skat",
+    "heading": "Deal",
+    "content": "Deal as follows: 3 cards each → 2 cards face-down to center the Skat → 4 cards each → 3 cards each. Result: 10 cards in each player’s hand; 2 cards in the Skat.",
+    "anchor": "deal",
+    "variant": "skat",
+    "variantUrl": "dist/bavarian-32/games/skat/"
+  },
+  {
+    "game": "bavarian-32",
+    "gameTitle": "Bavarian 32-Card Games",
+    "section": "Skat",
+    "heading": "The Auction (Bidding)",
+    "content": "Players bid the game value they believe they can achieve. Legal bids are multiples of the base game values. Minimum bid: 18 the lowest possible game value: Diamonds base 9 × multiplier 2. Bidding order: 1. Middlehand bids to Forehand: M names a value; F says “Yes” willing to play at least that high or “Pass.” Continue until one passes. 2. Rearhand bids to the winner of step 1 by the same method. 3. The final bidder becomes the declarer. If all three pass, the cards are redealt or Forehand must play Ramsch see Variants.",
+    "anchor": "the-auction-bidding",
+    "variant": "skat",
+    "variantUrl": "dist/bavarian-32/games/skat/"
+  },
+  {
+    "game": "bavarian-32",
+    "gameTitle": "Bavarian 32-Card Games",
+    "section": "Skat",
+    "heading": "Picking Up the Skat and Declaring",
+    "content": "The declarer picks up the 2-card Skat, looks at them, and discards any 2 cards face-down the new Skat. These 2 discarded cards count in the declarer’s trick pile at the end. The declarer then announces the game type:\nGame Type — Description — Base Value\n**Suit Game** — One of the four suits is trump (in addition to all four Jacks, which are always top trump). — Clubs=12, Spades=11, Hearts=10, Diamonds=9\n**Grand** — Only the four Jacks are trump. No suit trump. — 24\n**Null** — No trump. Declarer must win zero tricks. (Fixed game values; no Skat pickup unless Hand.) — 23\n**Null Hand** — Null without picking up the Skat. — 35\n**Null Ouvert** — Null with declarer’s hand exposed face-up. — 46\n**Null Ouvert Hand** — Null Hand with cards exposed. — 59",
+    "anchor": "picking-up-the-skat-and-declaring",
+    "variant": "skat",
+    "variantUrl": "dist/bavarian-32/games/skat/"
+  },
+  {
+    "game": "bavarian-32",
+    "gameTitle": "Bavarian 32-Card Games",
+    "section": "Skat",
+    "heading": "Trump Hierarchy (Suit Games and Grand)",
+    "content": "In Suit games and Grand, the four Jacks are always the top four trumps, outranking the trump suit: 1. Jack of Clubs J♣ — highest trump 2. Jack of Spades J♠ 3. Jack of Hearts J♥ 4. Jack of Diamonds J♦ 5. Ace of trump suit 6. 10 of trump suit 7. King of trump suit 8. Queen of trump suit 9. 9 of trump suit 10. 8 of trump suit 11. 7 of trump suit lowest trump In Grand, only positions 1–4 the four Jacks are trump. No suit rank 5–11 applies. Non-trump suit ranking high to low: A, 10, K, Q, 9, 8, 7. Jacks are always trump, never belong to their original suits.",
+    "anchor": "trump-hierarchy-suit-games-and-grand",
+    "variant": "skat",
+    "variantUrl": "dist/bavarian-32/games/skat/"
+  },
+  {
+    "game": "bavarian-32",
+    "gameTitle": "Bavarian 32-Card Games",
+    "section": "Skat",
+    "heading": "Matadors and the Multiplier",
+    "content": "The game value = base value × multiplier. The multiplier is based on Matadors consecutive top Jacks held or not held. Counting Matadors: 1. Does the declarer hold the J♣ Jack of Clubs? If yes: count how many consecutive top Jacks are held from J♣ downward. This is “with X.” 2. If the declarer does NOT hold J♣: count how many consecutive top Jacks are missing from J♣ downward. This is “without X.” Then add +1 for Game Spiel — always included. Additional multipliers each +1 to the multiplier: Example: Declarer plays Hearts game. Holds J♣, J♠, but not J♥ — so “with 2.” Hearts base = 10. Multiplier = 2 matadors + 1 game = 3. Game value = 10 × 3 = 30. The final game value must be ≥ the winning bid. If the game is made but the game value is lower than the bid, the game is lost and scored negatively.\nMatador count — Multiplier\nWith/Without 1 — +1\nWith/Without 2 — +2\nWith/Without 3 — +3\nWith/Without 4 — +4\nCondition — Multiplier bonus\nSchneider achieved (opponents score ≤30 card points) — +1\nS",
+    "anchor": "matadors-and-the-multiplier",
+    "variant": "skat",
+    "variantUrl": "dist/bavarian-32/games/skat/"
+  },
+  {
+    "game": "bavarian-32",
+    "gameTitle": "Bavarian 32-Card Games",
+    "section": "Skat",
+    "heading": "Playing Tricks",
+    "content": "Forehand leads the first trick. Players must follow suit if able. A player holding trump must follow trump if trump is led. If unable to follow suit, any card may be played including trump. Highest card of the led suit wins, unless trump has been played, in which case the highest trump wins. The trick winner leads the next trick. All three players play all 10 tricks. The declarer plays alone; the two defenders cooperate to prevent the declarer from making the bid.",
+    "anchor": "playing-tricks",
+    "variant": "skat",
+    "variantUrl": "dist/bavarian-32/games/skat/"
+  },
+  {
+    "game": "bavarian-32",
+    "gameTitle": "Bavarian 32-Card Games",
+    "section": "Skat",
+    "heading": "Win Conditions",
+    "content": "Suit game or Grand: - Declarer wins if their card point total tricks + Skat is 61 or more. - Schneider: declarer scores 90+, or defenders score 30 or fewer. - Schwarz: declarer wins all 10 tricks. - Declarer loses if defenders score 60+ or 61+ in some regional rules. Null games: - Declarer wins if they win zero tricks. - Declarer loses immediately upon winning any trick play ends; game scored as lost.",
+    "anchor": "win-conditions",
+    "variant": "skat",
+    "variantUrl": "dist/bavarian-32/games/skat/"
+  },
+  {
+    "game": "bavarian-32",
+    "gameTitle": "Bavarian 32-Card Games",
+    "section": "Skat",
+    "heading": "Scoring",
+    "content": "Declarer wins: - Score the game value positive. - If Schneider is achieved without announcing: score game value including Schneider multiplier. - If Schwarz is achieved without announcing: score game value including Schwarz multiplier. Declarer loses: - Score the game value negative −20 for a normal lost game, typically doubled: −2 × game value. - If the game value is less than the bid overbid: the next lower multiple of the base value that does exceed the bid is used for the negative score, and the game is still doubled. Null games scoring: - Made: +23, +35, +46, or +59 fixed values, not multiplied. - Lost: −23, −35, −46, or −59 doubled = −46, −70, −92, −118 in some scoring systems. Scores accumulate across multiple hands; a session typically ends when all players have dealt an equal number of times.",
+    "anchor": "scoring",
+    "variant": "skat",
+    "variantUrl": "dist/bavarian-32/games/skat/"
+  },
+  {
+    "game": "bavarian-32",
+    "gameTitle": "Bavarian 32-Card Games",
+    "section": "Skat",
+    "heading": "Hand Game",
+    "content": "A player may declare Hand before picking up the Skat leaving it face-down. The Hand bonus adds +1 to the multiplier. In a Hand game, the Skat cards are not revealed until after play and count in the declarer’s trick pile normally. Hand allows announcing Schneider or Schwarz for additional multiplier bonuses.",
+    "anchor": "hand-game",
+    "variant": "skat",
+    "variantUrl": "dist/bavarian-32/games/skat/"
+  },
+  {
+    "game": "bavarian-32",
+    "gameTitle": "Bavarian 32-Card Games",
+    "section": "Skat",
+    "heading": "Variants",
+    "content": "Ramsch: If all three players pass the auction, instead of a redeal, Ramsch may be played. In Ramsch: no declarer; all players try to win as FEW card points as possible. The player with the most card points at the end loses; they are scored negatively. Grand-jack-only trump applies same as Grand. Kontra and Rekontra: After the declarer announces the game type but before the first card is played, a defender may call Kontra doubles the game value for scoring purposes. The declarer may call Rekontra doubles again. The bid comparison uses the undoubled game value; only the score is affected.",
+    "anchor": "variants",
+    "variant": "skat",
+    "variantUrl": "dist/bavarian-32/games/skat/"
+  },
+  {
+    "game": "bavarian-32",
+    "gameTitle": "Bavarian 32-Card Games",
+    "section": "Skat",
+    "heading": "Attribution",
+    "content": "Skat. Originated in Altenburg, Germany, approximately 1810. National card game of Germany. Rules codified by the Deutscher Skatverband. Standard rules confirmed from skatorderules.com, Pagat.com, and the International Skat Players Association. Public domain rule set.",
+    "anchor": "attribution",
+    "variant": "skat",
+    "variantUrl": "dist/bavarian-32/games/skat/"
+  },
+  {
+    "game": "double-six-dominoes",
+    "gameTitle": "Double-Six Dominoes",
+    "section": "All Fives",
+    "heading": "All Fives",
+    "content": "Also called Muggins. A scoring domino game played with the double-6 set. Block rules apply, but players score points during play whenever the exposed ends of the chain sum to a multiple of 5. First to 61 short game or 121 long game wins.",
+    "anchor": "all-fives",
+    "variant": "all-fives",
+    "variantUrl": "dist/double-six-dominoes/games/all-fives/"
+  },
+  {
+    "game": "double-six-dominoes",
+    "gameTitle": "Double-Six Dominoes",
+    "section": "All Fives",
+    "heading": "Setup",
+    "content": "- 2 players: draw 7 tiles each; remainder = boneyard - 3–4 players: draw 5 tiles each; remainder = boneyard The player with the highest double starts.",
+    "anchor": "setup",
+    "variant": "all-fives",
+    "variantUrl": "dist/double-six-dominoes/games/all-fives/"
+  },
+  {
+    "game": "double-six-dominoes",
+    "gameTitle": "Double-Six Dominoes",
+    "section": "All Fives",
+    "heading": "Turn Structure",
+    "content": "On your turn, play a tile matching an open end. If you cannot play, draw from the boneyard until you can play or the boneyard is empty; if still unable, pass.",
+    "anchor": "turn-structure",
+    "variant": "all-fives",
+    "variantUrl": "dist/double-six-dominoes/games/all-fives/"
+  },
+  {
+    "game": "double-six-dominoes",
+    "gameTitle": "Double-Six Dominoes",
+    "section": "All Fives",
+    "heading": "Scoring During Play",
+    "content": "After placing a tile, count the pip total of all exposed ends of the chain: - If the total is a multiple of 5, score that many points immediately. Exposed ends: - The two free ends of the main chain contribute their pip values. - A double placed as the first tile the spinner has four open ends until all four branches are started; once all four branches have at least one tile, the double contributes 0 its halves are covered. Example: chain ends show 3 and 2 → total 5 → score 5 points. Ends show 5 and 5 → total 10 → score 10 points.",
+    "anchor": "scoring-during-play",
+    "variant": "all-fives",
+    "variantUrl": "dist/double-six-dominoes/games/all-fives/"
+  },
+  {
+    "game": "double-six-dominoes",
+    "gameTitle": "Double-Six Dominoes",
+    "section": "All Fives",
+    "heading": "Spinner",
+    "content": "The first double played becomes the spinner — tiles may branch off all four sides of it. This creates a cross-shaped layout. Non-spinner doubles are placed normally end-to-end, perpendicular, both halves exposed.",
+    "anchor": "spinner",
+    "variant": "all-fives",
+    "variantUrl": "dist/double-six-dominoes/games/all-fives/"
+  },
+  {
+    "game": "double-six-dominoes",
+    "gameTitle": "Double-Six Dominoes",
+    "section": "All Fives",
+    "heading": "End-of-Round Scoring",
+    "content": "If a player goes out empties their hand, they score the pip total of all opponents’ remaining tiles rounded to the nearest 5. If the game blocks, the player with the lowest pip total scores the sum of all other pip totals, rounded to the nearest 5.",
+    "anchor": "end-of-round-scoring",
+    "variant": "all-fives",
+    "variantUrl": "dist/double-six-dominoes/games/all-fives/"
+  },
+  {
+    "game": "double-six-dominoes",
+    "gameTitle": "Double-Six Dominoes",
+    "section": "All Fives",
+    "heading": "Winning",
+    "content": "First player to reach 61 points or 121 in the long game wins.",
+    "anchor": "winning",
+    "variant": "all-fives",
+    "variantUrl": "dist/double-six-dominoes/games/all-fives/"
+  },
+  {
+    "game": "double-six-dominoes",
+    "gameTitle": "Double-Six Dominoes",
+    "section": "All Fives",
+    "heading": "Attribution",
+    "content": "All Fives / Muggins. Traditional game, public domain. Source: Pagat.com All Fives; Wikipedia Muggins domino game.",
+    "anchor": "attribution",
+    "variant": "all-fives",
+    "variantUrl": "dist/double-six-dominoes/games/all-fives/"
+  },
+  {
+    "game": "double-six-dominoes",
+    "gameTitle": "Double-Six Dominoes",
+    "section": "Block Dominoes",
+    "heading": "Block Dominoes",
+    "content": "The simplest Western domino game and the foundation for all others. Players match tiles end-to-end to extend a chain. No drawing from the boneyard — if you cannot play, you pass. First to empty their hand wins.",
+    "anchor": "block-dominoes",
+    "variant": "block",
+    "variantUrl": "dist/double-six-dominoes/games/block/"
+  },
+  {
+    "game": "double-six-dominoes",
+    "gameTitle": "Double-Six Dominoes",
+    "section": "Block Dominoes",
+    "heading": "Setup",
+    "content": "Shuffle all 28 tiles face-down. - 2 players: draw 7 tiles each - 3–4 players: draw 5 tiles each Remaining tiles are set aside face-down not used in Block — no boneyard draws.",
+    "anchor": "setup",
+    "variant": "block",
+    "variantUrl": "dist/double-six-dominoes/games/block/"
+  },
+  {
+    "game": "double-six-dominoes",
+    "gameTitle": "Double-Six Dominoes",
+    "section": "Block Dominoes",
+    "heading": "Starting",
+    "content": "The player with the highest double plays it first. If no player holds a double, the player with the highest single tile starts. That tile becomes the first piece of the chain.",
+    "anchor": "starting",
+    "variant": "block",
+    "variantUrl": "dist/double-six-dominoes/games/block/"
+  },
+  {
+    "game": "double-six-dominoes",
+    "gameTitle": "Double-Six Dominoes",
+    "section": "Block Dominoes",
+    "heading": "Turn Structure",
+    "content": "On your turn, you must play one tile from your hand by matching one of its halves to an open end of the chain. The matching pip value must connect. - Doubles are placed perpendicular to the chain crosswise and both ends remain open. - If you cannot play, you pass. You may not draw.",
+    "anchor": "turn-structure",
+    "variant": "block",
+    "variantUrl": "dist/double-six-dominoes/games/block/"
+  },
+  {
+    "game": "double-six-dominoes",
+    "gameTitle": "Double-Six Dominoes",
+    "section": "Block Dominoes",
+    "heading": "Winning",
+    "content": "Go out: first player to play their last tile wins. They score the total pip count of all tiles remaining in opponents’ hands. Blocked game: if no player can play and no one has gone out, all players reveal their hands. The player with the lowest pip total wins, and scores the pip totals of all other players minus their own.",
+    "anchor": "winning",
+    "variant": "block",
+    "variantUrl": "dist/double-six-dominoes/games/block/"
+  },
+  {
+    "game": "double-six-dominoes",
+    "gameTitle": "Double-Six Dominoes",
+    "section": "Block Dominoes",
+    "heading": "Attribution",
+    "content": "Block Dominoes. Traditional game, public domain. Source: Pagat.com Domino games; Wikipedia Dominoes.",
+    "anchor": "attribution",
+    "variant": "block",
+    "variantUrl": "dist/double-six-dominoes/games/block/"
+  },
+  {
+    "game": "double-six-dominoes",
+    "gameTitle": "Double-Six Dominoes",
+    "section": "Chickenfoot",
+    "heading": "Chickenfoot",
+    "content": "Chickenfoot is a dominoes variant where doubles create a three-pronged branch called a chickenfoot — named for its resemblance to a chicken's foot. All three prongs must be filled before play can continue on any other open end of the layout.",
+    "anchor": "chickenfoot",
+    "variant": "chickenfoot",
+    "variantUrl": "dist/double-six-dominoes/games/chickenfoot/"
+  },
+  {
+    "game": "double-six-dominoes",
+    "gameTitle": "Double-Six Dominoes",
+    "section": "Chickenfoot",
+    "heading": "Setup",
+    "content": "Use a standard double-six set 28 tiles. Each player draws tiles: Remaining tiles form the boneyard.\nPlayers — Tiles drawn\n2–3 — 15 each\n4 — 12 each\n5–6 — 10 each\n7–8 — 7 each",
+    "anchor": "setup",
+    "variant": "chickenfoot",
+    "variantUrl": "dist/double-six-dominoes/games/chickenfoot/"
+  },
+  {
+    "game": "double-six-dominoes",
+    "gameTitle": "Double-Six Dominoes",
+    "section": "Chickenfoot",
+    "heading": "Starting the Round",
+    "content": "The player holding the double-six plays it to start the layout. If no player holds it, players draw from the boneyard until one does. On subsequent rounds, use double-five, double-four, down to double-zero.",
+    "anchor": "starting-the-round",
+    "variant": "chickenfoot",
+    "variantUrl": "dist/double-six-dominoes/games/chickenfoot/"
+  },
+  {
+    "game": "double-six-dominoes",
+    "gameTitle": "Double-Six Dominoes",
+    "section": "Chickenfoot",
+    "heading": "The Chickenfoot Rule",
+    "content": "When any player plays a double tile onto the layout, play pauses. That double becomes a chickenfoot junction with 3 open ends. All three ends must be filled — each with a tile matching the double's number — before any player may play on any other open end. During a chickenfoot phase, only tiles matching the double value may be played.",
+    "anchor": "the-chickenfoot-rule",
+    "variant": "chickenfoot",
+    "variantUrl": "dist/double-six-dominoes/games/chickenfoot/"
+  },
+  {
+    "game": "double-six-dominoes",
+    "gameTitle": "Double-Six Dominoes",
+    "section": "Chickenfoot",
+    "heading": "Normal Play",
+    "content": "When no chickenfoot is active, the current player may play a tile matching any open end of the layout. If unable to play, the player draws from the boneyard until they can play or the boneyard is exhausted then they pass.",
+    "anchor": "normal-play",
+    "variant": "chickenfoot",
+    "variantUrl": "dist/double-six-dominoes/games/chickenfoot/"
+  },
+  {
+    "game": "double-six-dominoes",
+    "gameTitle": "Double-Six Dominoes",
+    "section": "Chickenfoot",
+    "heading": "Scoring",
+    "content": "The round ends when one player plays their last tile, or when no player can play. The player with the lowest pip total remaining in hand wins the round and scores the total pips held by all other players. Play a round for each double double-six through double-zero. Lowest cumulative score after all rounds wins.",
+    "anchor": "scoring",
+    "variant": "chickenfoot",
+    "variantUrl": "dist/double-six-dominoes/games/chickenfoot/"
+  },
+  {
+    "game": "double-six-dominoes",
+    "gameTitle": "Double-Six Dominoes",
+    "section": "Mexican Train",
+    "heading": "Mexican Train",
+    "content": "A domino game for 2–8 players using a double-12 set 91 tiles. All trains radiate from a central double the hub. Each player builds their own personal train; a shared Mexican Train is always open for anyone to play on. A match consists of 13 rounds starting from double-12 down to double-0.",
+    "anchor": "mexican-train",
+    "variant": "mexican-train",
+    "variantUrl": "dist/double-six-dominoes/games/mexican-train/"
+  },
+  {
+    "game": "double-six-dominoes",
+    "gameTitle": "Double-Six Dominoes",
+    "section": "Mexican Train",
+    "heading": "Components",
+    "content": "- Double-12 set: 91 tiles pips 0–12 per half - Hub: a central station piece or an empty tile slot where trains begin - Train markers: one per player coins or tokens to mark an open personal train Double-9 55 tiles, 10 rounds is a common alternative for smaller groups.",
+    "anchor": "components",
+    "variant": "mexican-train",
+    "variantUrl": "dist/double-six-dominoes/games/mexican-train/"
+  },
+  {
+    "game": "double-six-dominoes",
+    "gameTitle": "Double-Six Dominoes",
+    "section": "Mexican Train",
+    "heading": "Setup",
+    "content": "1. Place the hub in the centre. 2. The starting double for the round double-12 in round 1, double-11 in round 2, etc. is placed on the hub. If no player holds it, draw from the boneyard until found. 3. Deal tiles to each player: Remaining tiles form the boneyard face-down draw pile.\nPlayers — Tiles per player\n2–3 — 16\n4 — 15\n5 — 14\n6 — 12\n7–8 — 10",
+    "anchor": "setup",
+    "variant": "mexican-train",
+    "variantUrl": "dist/double-six-dominoes/games/mexican-train/"
+  },
+  {
+    "game": "double-six-dominoes",
+    "gameTitle": "Double-Six Dominoes",
+    "section": "Mexican Train",
+    "heading": "Starting Trains",
+    "content": "In the first phase, starting with the player left of the dealer and proceeding clockwise, each player lays down as many tiles as they can to start their personal train from the hub. The train must begin with a tile whose pip matches the hub double. If a player cannot start their train, they draw one tile and play it if possible, or place a train marker on their train space.",
+    "anchor": "starting-trains",
+    "variant": "mexican-train",
+    "variantUrl": "dist/double-six-dominoes/games/mexican-train/"
+  },
+  {
+    "game": "double-six-dominoes",
+    "gameTitle": "Double-Six Dominoes",
+    "section": "Mexican Train",
+    "heading": "Turn Structure",
+    "content": "On your turn you must play at least one tile. You may play on: - Your own personal train always, if open or marked - The Mexican Train always open to everyone - Another player’s train only if it has a train marker on it it is open If you cannot play on any available train: 1. Draw one tile from the boneyard. 2. If it can be played, play it. 3. If not, place your train marker on your personal train marking it open for others. Removing your marker: when you successfully play on your own marked train, remove the marker. Your train becomes private again.",
+    "anchor": "turn-structure",
+    "variant": "mexican-train",
+    "variantUrl": "dist/double-six-dominoes/games/mexican-train/"
+  },
+  {
+    "game": "double-six-dominoes",
+    "gameTitle": "Double-Six Dominoes",
+    "section": "Mexican Train",
+    "heading": "Doubles",
+    "content": "Playing a double on any train immediately requires the player who placed it to play another tile on that same double before their turn ends. If they cannot no matching tile in hand, nothing drawable that matches, they draw once; if still unable, place a marker and the double remains open — all players must satisfy the open double before playing anywhere else on their turn.",
+    "anchor": "doubles",
+    "variant": "mexican-train",
+    "variantUrl": "dist/double-six-dominoes/games/mexican-train/"
+  },
+  {
+    "game": "double-six-dominoes",
+    "gameTitle": "Double-Six Dominoes",
+    "section": "Mexican Train",
+    "heading": "End of Round",
+    "content": "A round ends when a player plays their last tile goes out or no player can play blocked. Each player counts the pip total of their remaining tiles. Record scores. The player who went out scores 0.",
+    "anchor": "end-of-round",
+    "variant": "mexican-train",
+    "variantUrl": "dist/double-six-dominoes/games/mexican-train/"
+  },
+  {
+    "game": "double-six-dominoes",
+    "gameTitle": "Double-Six Dominoes",
+    "section": "Mexican Train",
+    "heading": "Match",
+    "content": "13 rounds double-12 through double-0. After all rounds, the player with the lowest cumulative pip total wins.",
+    "anchor": "match",
+    "variant": "mexican-train",
+    "variantUrl": "dist/double-six-dominoes/games/mexican-train/"
+  },
+  {
+    "game": "double-six-dominoes",
+    "gameTitle": "Double-Six Dominoes",
+    "section": "Mexican Train",
+    "heading": "Attribution",
+    "content": "Mexican Train. Origin disputed; popularised in the United States in the 1990s. Rules in the public domain. Source: Pagat.com Mexican Train; Wikipedia Mexican Train.",
+    "anchor": "attribution",
+    "variant": "mexican-train",
+    "variantUrl": "dist/double-six-dominoes/games/mexican-train/"
+  },
+  {
+    "game": "flower-48",
+    "gameTitle": "Flower 48",
+    "section": "Go-Stop",
+    "heading": "Go-Stop",
+    "content": "Go-Stop 고스톱, also called Godori or Hwatu is the most popular card game in South Korea, played with a Hwatu deck — the Korean version of the Japanese hanafuda deck. Like Koi-Koi, it uses matching by month and collection of scoring combinations. Its defining mechanic is the Go/Stop decision: after reaching a scoring threshold, the current player must choose whether to declare \"Stop\" take winnings or \"Go\" continue for bigger rewards at increasing risk.",
+    "anchor": "go-stop",
+    "variant": "go-stop",
+    "variantUrl": "dist/flower-48/games/go-stop/"
+  },
+  {
+    "game": "flower-48",
+    "gameTitle": "Flower 48",
+    "section": "Go-Stop",
+    "heading": "The Deck",
+    "content": "48 Hwatu cards in 12 suits months, 4 cards per month. Card types by value: - Bright 광, Gwang: 5 cards, one each in January Pine, March Cherry Blossom, August Full Moon, November Rain, and December Phoenix - Animal 열끻, Yeolggeut: 9 cards - Ribbon 때, Ddi: 10 cards, in three types: Red Poetry Jan, Feb, Mar, Blue Jun, Sep, Oct, and Plain - Junk 피, Pi: 24 cards; some months have a bonus double-junk card worth 2 junk",
+    "anchor": "the-deck",
+    "variant": "go-stop",
+    "variantUrl": "dist/flower-48/games/go-stop/"
+  },
+  {
+    "game": "flower-48",
+    "gameTitle": "Flower 48",
+    "section": "Go-Stop",
+    "heading": "The Deal (3-Player)",
+    "content": "Each player is dealt 7 cards. 6 cards are placed face-up on the field. Remaining cards form the draw pile.",
+    "anchor": "the-deal-3-player",
+    "variant": "go-stop",
+    "variantUrl": "dist/flower-48/games/go-stop/"
+  },
+  {
+    "game": "flower-48",
+    "gameTitle": "Flower 48",
+    "section": "Go-Stop",
+    "heading": "The Turn",
+    "content": "1. Play a card from hand: if it matches a field card's month, capture both; if no match, place it on the field 2. Draw from the pile: if the drawn card matches a field card's month, capture both; if no match, place it on the field 3. Check for Go/Stop: if the player now meets the scoring threshold, they must declare Go or Stop",
+    "anchor": "the-turn",
+    "variant": "go-stop",
+    "variantUrl": "dist/flower-48/games/go-stop/"
+  },
+  {
+    "game": "flower-48",
+    "gameTitle": "Flower 48",
+    "section": "Go-Stop",
+    "heading": "Special Captures",
+    "content": "Ttadak 따닥: if the card played from hand AND the drawn card both match field cards of the same month capturing two separate pairs in one turn, the player earns a bonus and each opponent pays 1 chip penalty. Triple field capture: if three cards of the same month are already on the field when you play the fourth, you capture all four.",
+    "anchor": "special-captures",
+    "variant": "go-stop",
+    "variantUrl": "dist/flower-48/games/go-stop/"
+  },
+  {
+    "game": "flower-48",
+    "gameTitle": "Flower 48",
+    "section": "Go-Stop",
+    "heading": "Scoring Combinations",
+    "content": "Brights: - 3 non-Rain Brights = 3 pts - 3 Brights including Rain November = 2 pts - 4 Brights = 4 pts - 5 Brights = 15 pts Animals: - 5 animals = 1 pt; +1 pt per additional animal - Godori 고도리: Cuckoo February + Bush Warbler April + Geese August = 5 pts Ribbons: - 5 ribbons = 1 pt; +1 pt per additional ribbon - Red Poetry ribbons Jan + Feb + Mar = 3 pts - Blue ribbons Jun + Sep + Oct = 3 pts Junk: - 10 junk cards = 1 pt; +1 pt per additional junk - Double-junk cards count as 2",
+    "anchor": "scoring-combinations",
+    "variant": "go-stop",
+    "variantUrl": "dist/flower-48/games/go-stop/"
+  },
+  {
+    "game": "flower-48",
+    "gameTitle": "Flower 48",
+    "section": "Go-Stop",
+    "heading": "The Go/Stop Decision",
+    "content": "When a player reaches 3 points or the agreed threshold, they must announce: - \"Stop\" 스톱: collect winnings. Other players pay the stopping player. Round ends. - \"Go\" 고: continue. Scoring accumulates. A player who has said \"Go\" cannot later collect fewer points than accrued. Risk of \"Go\": If another player stops first, or the draw pile is exhausted before the Go-player stops, the player who said \"Go\" pays double penalties to the winner. Each additional \"Go\" declaration multiplies the payout by 2. If the \"Go\" player successfully stops later without another player stopping first, they collect at a multiplied rate.",
+    "anchor": "the-gostop-decision",
+    "variant": "go-stop",
+    "variantUrl": "dist/flower-48/games/go-stop/"
+  },
+  {
+    "game": "flower-48",
+    "gameTitle": "Flower 48",
+    "section": "Go-Stop",
+    "heading": "Penalties",
+    "content": "Other players pay the winner chips based on the winner's total points. Bonus payments apply for winning with 7+ points, for opponents holding only junk, and for multiple \"Go\" declarations.",
+    "anchor": "penalties",
+    "variant": "go-stop",
+    "variantUrl": "dist/flower-48/games/go-stop/"
+  },
+  {
+    "game": "flower-48",
+    "gameTitle": "Flower 48",
+    "section": "Go-Stop",
+    "heading": "2-Player Go-Stop",
+    "content": "Each player receives 10 cards; 8 cards are placed on the field. Otherwise identical to 3-player.",
+    "anchor": "2-player-go-stop",
+    "variant": "go-stop",
+    "variantUrl": "dist/flower-48/games/go-stop/"
+  },
+  {
+    "game": "flower-48",
+    "gameTitle": "Flower 48",
+    "section": "Hana-Awase",
+    "heading": "Hana-Awase",
+    "content": "The foundational Hanafuda card-matching game from which Koi-Koi and other variants are derived. Players match cards by suit month and collect them; the player with the highest captured value at the end of the round wins.",
+    "anchor": "hana-awase",
+    "variant": "hana-awase",
+    "variantUrl": "dist/flower-48/games/hana-awase/"
+  },
+  {
+    "game": "flower-48",
+    "gameTitle": "Flower 48",
+    "section": "Hana-Awase",
+    "heading": "Setup",
+    "content": "2 players: deal 8 cards to each player, 8 to the field, 24 as draw pile. 3 players: deal 7 cards to each player, 6 to the field, 27 as draw pile. 4 players partnership: deal 5 cards to each, 8 to the field, 20 as draw pile.",
+    "anchor": "setup",
+    "variant": "hana-awase",
+    "variantUrl": "dist/flower-48/games/hana-awase/"
+  },
+  {
+    "game": "flower-48",
+    "gameTitle": "Flower 48",
+    "section": "Hana-Awase",
+    "heading": "Turn Structure",
+    "content": "Identical to Koi-Koi without the yaku declaration step: 1. Play a card from hand to the field. If it matches a field card by suit, capture both. 2. Flip the top draw card. If it matches a field card, capture both. 3. Unmatched cards remain in the field. Repeat until all hands and the draw pile are exhausted.",
+    "anchor": "turn-structure",
+    "variant": "hana-awase",
+    "variantUrl": "dist/flower-48/games/hana-awase/"
+  },
+  {
+    "game": "flower-48",
+    "gameTitle": "Flower 48",
+    "section": "Hana-Awase",
+    "heading": "Card Values",
+    "content": "Sum all captured card values. Highest total wins the round. Scoring benchmark: the full deck totals 264 points 5×20 + 9×10 + 10×5 + 24×1. In a two-player game, each player can score up to 132 points. Scores above 132 are a win; below 132 is a loss.\nType — Points\nBright — 20\nAnimal — 10\nRibbon — 5\nPlain — 1",
+    "anchor": "card-values",
+    "variant": "hana-awase",
+    "variantUrl": "dist/flower-48/games/hana-awase/"
+  },
+  {
+    "game": "flower-48",
+    "gameTitle": "Flower 48",
+    "section": "Hana-Awase",
+    "heading": "Attribution",
+    "content": "Hana-Awase ・花合わせ. Traditional Japanese card game. Rules in the public domain. Source: Pagat.com Hanafuda.",
+    "anchor": "attribution",
+    "variant": "hana-awase",
+    "variantUrl": "dist/flower-48/games/hana-awase/"
+  },
+  {
+    "game": "flower-48",
+    "gameTitle": "Flower 48",
+    "section": "Koi-Koi",
+    "heading": "Koi-Koi",
+    "content": "The most widely played Hanafuda game. Two players compete over 12 rounds one per month. Each round, players match cards from their hand to the table by suit, building a captured pile. When a player completes a scoring pattern yaku, they choose: declare a win and collect points, or say ”Koi-Koi” 「こいこい」, “come on” to continue playing for a higher score — at the cost of losing the bonus if the opponent scores first.",
+    "anchor": "koi-koi",
+    "variant": "koi-koi",
+    "variantUrl": "dist/flower-48/games/koi-koi/"
+  },
+  {
+    "game": "flower-48",
+    "gameTitle": "Flower 48",
+    "section": "Koi-Koi",
+    "heading": "Setup",
+    "content": "Shuffle the 48-card deck. Deal: - 8 cards face-down to each player hand - 8 cards face-up to the centre field/table - Remaining 24 cards face-down as the draw pile If either player is dealt a dealt yaku Teshi or Kuttsuki, see below, they may declare it immediately for an automatic win.",
+    "anchor": "setup",
+    "variant": "koi-koi",
+    "variantUrl": "dist/flower-48/games/koi-koi/"
+  },
+  {
+    "game": "flower-48",
+    "gameTitle": "Flower 48",
+    "section": "Koi-Koi",
+    "heading": "Turn Structure",
+    "content": "Players alternate. On your turn: 1. Play from hand: choose one card from your hand and place it face-up. - If it matches a field card by suit month, take both and add to your capture pile. - If two field cards match, you choose which to capture; if three match, you capture all three. - If no match, the card remains in the field. 2. Draw from pile: flip the top card of the draw pile. - Apply the same matching rules. - If it matches a field card, capture it. If not, it stays in the field. 3. Check for yaku: if your captures now complete one or more yaku, you must choose: - Declare win: the round ends; you score your yaku points. - Say Koi-Koi: play continues. If you later complete additional yaku, your total score grows. If you said Koi-Koi and the opponent completes a yaku before the round ends, the opponent scores double for that round. A round also ends when both players exhaust their hands and the draw pile. If neither player declared a win, the round is a draw no points scored.",
+    "anchor": "turn-structure",
+    "variant": "koi-koi",
+    "variantUrl": "dist/flower-48/games/koi-koi/"
+  },
+  {
+    "game": "flower-48",
+    "gameTitle": "Flower 48",
+    "section": "Koi-Koi",
+    "heading": "Bright Yaku",
+    "content": "\nYaku — Cards Required — Points\nGoko ・五光 (Five Brights) — All 5 Brights — 10\nShiko ・四光 (Four Brights) — Any 4 Brights, excluding Rain Man — 8\nAme-Shiko ・雨四光 (Rainy Four Brights) — Any 4 Brights, including Rain Man — 7\nSanko ・三光 (Three Brights) — Any 3 Brights, excluding Rain Man — 5",
+    "anchor": "bright-yaku",
+    "variant": "koi-koi",
+    "variantUrl": "dist/flower-48/games/koi-koi/"
+  },
+  {
+    "game": "flower-48",
+    "gameTitle": "Flower 48",
+    "section": "Koi-Koi",
+    "heading": "Viewing Yaku",
+    "content": "Note: Viewing yaku may be disabled by house rules in competitive play.\nYaku — Cards Required — Points\nTsukimi-de-Ippatsu ・月見で一杯 (Moon Viewing) — Full Moon (Aug) + Sake Cup (Sep) — 5\nHanami-de-Ippatsu ・花見で一杯 (Blossom Viewing) — Cherry Curtain (Mar) + Sake Cup (Sep) — 5",
+    "anchor": "viewing-yaku",
+    "variant": "koi-koi",
+    "variantUrl": "dist/flower-48/games/koi-koi/"
+  },
+  {
+    "game": "flower-48",
+    "gameTitle": "Flower 48",
+    "section": "Koi-Koi",
+    "heading": "Animal Yaku",
+    "content": "\nYaku — Cards Required — Points\nIno-Shika-Cho ・猪鹿蝶 (Boar–Deer–Butterfly) — Boar (Jul) + Deer (Oct) + Butterflies (Jun) — 5\nTane ・種 (Animals) — Any 5 Animals — 1 (+1 per additional)",
+    "anchor": "animal-yaku",
+    "variant": "koi-koi",
+    "variantUrl": "dist/flower-48/games/koi-koi/"
+  },
+  {
+    "game": "flower-48",
+    "gameTitle": "Flower 48",
+    "section": "Koi-Koi",
+    "heading": "Ribbon Yaku",
+    "content": "\nYaku — Cards Required — Points\nAkatan Aotan no Chofuku ・赤短・青短の重複 — All 3 Red Poetry + all 3 Blue ribbons — 10\nAkatan ・赤短 (Red Poetry) — Pine + Plum + Cherry Poetry ribbons — 5\nAotan ・青短 (Blue Ribbons) — Peony + Chrysanthemum + Maple ribbons — 5\nTan ・短 (Ribbons) — Any 5 Ribbons — 1 (+1 per additional)",
+    "anchor": "ribbon-yaku",
+    "variant": "koi-koi",
+    "variantUrl": "dist/flower-48/games/koi-koi/"
+  },
+  {
+    "game": "flower-48",
+    "gameTitle": "Flower 48",
+    "section": "Koi-Koi",
+    "heading": "Plain Yaku",
+    "content": "The Sake Cup Sep-Animal counts as both an Animal and a Plain in some house rules.\nYaku — Cards Required — Points\nKasu ・カス (Plains) — Any 10 Plains — 1 (+1 per additional)",
+    "anchor": "plain-yaku",
+    "variant": "koi-koi",
+    "variantUrl": "dist/flower-48/games/koi-koi/"
+  },
+  {
+    "game": "flower-48",
+    "gameTitle": "Flower 48",
+    "section": "Koi-Koi",
+    "heading": "Dealt Yaku",
+    "content": "Declared before play begins if dealt in the initial hand: If a dealt yaku occurs, the round is redealt or scored immediately per house rules.\nYaku — Condition — Points\nTeshi ・手四 — Four cards of the same month dealt to one player — 6 (or automatic win)\nKuttsuki ・くっつき — Four pairs (8 cards, 4 matched suits) dealt to one player — 6 (or automatic win)",
+    "anchor": "dealt-yaku",
+    "variant": "koi-koi",
+    "variantUrl": "dist/flower-48/games/koi-koi/"
+  },
+  {
+    "game": "flower-48",
+    "gameTitle": "Flower 48",
+    "section": "Koi-Koi",
+    "heading": "Scoring and Rounds",
+    "content": "A standard game is 12 rounds, one for each month. The player who dealt first in round 1 switches each round, or the previous round’s winner deals. If you declared Koi-Koi and won the round, your score is doubled. If you said Koi-Koi and the opponent wins the round, the opponent’s score is doubled. A target score e.g. 50 or 100 points over 12 rounds determines the match winner, or simply the highest total after 12 rounds.",
+    "anchor": "scoring-and-rounds",
+    "variant": "koi-koi",
+    "variantUrl": "dist/flower-48/games/koi-koi/"
+  },
+  {
+    "game": "flower-48",
+    "gameTitle": "Flower 48",
+    "section": "Koi-Koi",
+    "heading": "Attribution",
+    "content": "Koi-Koi ・こいこい. Traditional Japanese card game. Rules in the public domain. Primary source: Wikipedia Koi-Koi; secondary: Pagat.com Hanafuda.",
+    "anchor": "attribution",
+    "variant": "koi-koi",
+    "variantUrl": "dist/flower-48/games/koi-koi/"
+  },
+  {
+    "game": "flower-48",
+    "gameTitle": "Flower 48",
+    "section": "Oicho-Kabu",
+    "heading": "Oicho-Kabu",
+    "content": "A Japanese betting and gambling card game played with Hanafuda or dedicated Kabufuda cards. Unlike the matching games, Oicho-Kabu uses the cards’ month numbers as numeric values, not their suit imagery. The goal is to hold cards whose values sum to as close to 9 as possible — the word Kabu カブ means 9. The game is structurally similar to Baccarat and is the origin of the word Yakuza literally “8-9-3,” a losing hand.",
+    "anchor": "oicho-kabu",
+    "variant": "oicho-kabu",
+    "variantUrl": "dist/flower-48/games/oicho-kabu/"
+  },
+  {
+    "game": "flower-48",
+    "gameTitle": "Flower 48",
+    "section": "Oicho-Kabu",
+    "heading": "Card Values",
+    "content": "Each card’s value is the numeric value of its month: All four cards in a suit share the same value. October, November, and December count as zero. Hand value = sum of all card values mod 10. Only the final digit matters.\nMonth — Value\nJanuary — 1\nFebruary — 2\nMarch — 3\nApril — 4\nMay — 5\nJune — 6\nJuly — 7\nAugust — 8\nSeptember — 9\nOctober — 10 → 0\nNovember — 11 → 0\nDecember — 12 → 0",
+    "anchor": "card-values",
+    "variant": "oicho-kabu",
+    "variantUrl": "dist/flower-48/games/oicho-kabu/"
+  },
+  {
+    "game": "flower-48",
+    "gameTitle": "Flower 48",
+    "section": "Oicho-Kabu",
+    "heading": "Setup",
+    "content": "One player is the banker parent / oya. All other players are punters ko. Players place bets against the banker before cards are dealt. Shuffle all 48 cards. Deal two cards face-down to each player and the banker.",
+    "anchor": "setup",
+    "variant": "oicho-kabu",
+    "variantUrl": "dist/flower-48/games/oicho-kabu/"
+  },
+  {
+    "game": "flower-48",
+    "gameTitle": "Flower 48",
+    "section": "Oicho-Kabu",
+    "heading": "Play",
+    "content": "1. Players look at their two cards privately and calculate their hand value sum mod 10. 2. Each player may request a third card face-up to improve their hand, or stand. 3. The banker also has the option to draw a third card. 4. All hands are revealed. The player closest to 9 beats the banker. 5. An exact tie goes to the banker.",
+    "anchor": "play",
+    "variant": "oicho-kabu",
+    "variantUrl": "dist/flower-48/games/oicho-kabu/"
+  },
+  {
+    "game": "flower-48",
+    "gameTitle": "Flower 48",
+    "section": "Oicho-Kabu",
+    "heading": "Special Hands (Yaku)",
+    "content": "Certain hand combinations pay out at a bonus multiplier: Exact payout rules and yaku lists vary significantly by house rules. The above represents the most commonly documented version.\nYaku — Condition — Payout\nKabu ・カブ — Hand = 9 (two cards) — 2×\nOicho ・おいちょ — Hand = 8 (two cards) — 2×\nShichisan ・七三 — Two cards totaling 7 and 3 (i.e. one 7-value + one 3-value) — varies\nArashi ・嵐 (Storm) — Three cards of the same value (triplet) — 3×\nShippin ・四アイテン — Hand = 4 — varies\nYakuza ・ヤクザ — Hand = 8-9-3 specific combo (original meaning) — loses",
+    "anchor": "special-hands-yaku",
+    "variant": "oicho-kabu",
+    "variantUrl": "dist/flower-48/games/oicho-kabu/"
+  },
+  {
+    "game": "flower-48",
+    "gameTitle": "Flower 48",
+    "section": "Oicho-Kabu",
+    "heading": "Settlement",
+    "content": "All players who beat the banker receive their bet back plus an equal amount from the banker. Players who tie or lose pay their bet to the banker. Special hands pay at the applicable multiplier.",
+    "anchor": "settlement",
+    "variant": "oicho-kabu",
+    "variantUrl": "dist/flower-48/games/oicho-kabu/"
+  },
+  {
+    "game": "flower-48",
+    "gameTitle": "Flower 48",
+    "section": "Oicho-Kabu",
+    "heading": "Attribution",
+    "content": "Oicho-Kabu ・おいちょかぶ. Traditional Japanese card game. Public domain. Sources: Wikipedia Oicho-Kabu; Pagat.com Hanafuda. Note: detailed payout tables and regional yaku variations require a Japan-specific primary source for full accuracy.",
+    "anchor": "attribution",
+    "variant": "oicho-kabu",
+    "variantUrl": "dist/flower-48/games/oicho-kabu/"
+  },
+  {
+    "game": "mahjong",
+    "gameTitle": "Mahjong",
+    "section": "American Mahjong (Classic)",
+    "heading": "American Mahjong (Classic)",
+    "content": "American Mahjong is the distinctly American adaptation of Chinese Mahjong, shaped by a specific chain of people and events between 1920 and 1937. Joseph Park Babcock, a Standard Oil representative in Shanghai, began importing Mahjong sets to the United States in large numbers around 1920 and wrote simplified English rules — the Red Book — to make the game accessible to American players. The 1920s saw a nationwide Mahjong craze. By the mid-1920s, so many regional variations had developed that the 1924 Standardization Committee consolidated the American Official Laws of Mah-Jongg. The National Mah Jongg League published its own Official American Rules in 1935. Both sources form the basis of this Classic variant. In 1937, the NMJL introduced its annually-changing scorecard of winning hands, which has defined modern American Mahjong ever since. American Mahjong Classic preserves the pre-card-era game: the same 152-tile set, the same Charleston, the same joker rules — but with fixed classic",
+    "anchor": "american-mahjong-classic",
+    "variant": "american-classic",
+    "variantUrl": "dist/mahjong/games/american-classic/"
+  },
+  {
+    "game": "mahjong",
+    "gameTitle": "Mahjong",
+    "section": "American Mahjong (Classic)",
+    "heading": "The Tile Set (152 tiles)",
+    "content": "American Mahjong sets are identified by Arabic numerals on all tiles and English letters for wind direction E/S/W/N. ---\nCategory — Tiles — Detail\nDots (Circles) — 36 — Ranks 1–9, 4 tiles each\nBamboo (Bams) — 36 — Ranks 1–9, 4 tiles each; the 1-Bam tile traditionally shows a crane\nCharacters (Craks) — 36 — Ranks 1–9, 4 tiles each\nWinds — 16 — East/South/West/North, 4 each\nDragons — 12 — Red (中), Green (發), White (白/Soap), 4 each\nFlowers — 4 — Plum, Orchid, Chrysanthemum, Bamboo (numbered 1–4)\nSeasons — 4 — Spring, Summer, Autumn, Winter (numbered 1–4)\nJokers — 8 — Wild; may substitute for any tile in a meld\n**Total** — **152**",
+    "anchor": "the-tile-set-152-tiles",
+    "variant": "american-classic",
+    "variantUrl": "dist/mahjong/games/american-classic/"
+  },
+  {
+    "game": "mahjong",
+    "gameTitle": "Mahjong",
+    "section": "American Mahjong (Classic)",
+    "heading": "Melds and Tile Groups",
+    "content": "---\nGroup — Tiles — Notes\nPair — 2 identical — Cannot include a joker\nPung — 3 identical — May include jokers\nKong — 4 identical — May include jokers\nQuint — 5 identical — Requires jokers\nSextet — 6 identical — Requires jokers\nSequence — 3+ consecutive, same suit — May include jokers",
+    "anchor": "melds-and-tile-groups",
+    "variant": "american-classic",
+    "variantUrl": "dist/mahjong/games/american-classic/"
+  },
+  {
+    "game": "mahjong",
+    "gameTitle": "Mahjong",
+    "section": "American Mahjong (Classic)",
+    "heading": "Jokers",
+    "content": "Jokers are wild and may substitute for any tile within a pung, kong, quint, sextet, or sequence. Restrictions: - A joker cannot be used in a pair - A joker cannot be passed during the Charleston - Any player on their own turn may exchange a real matching tile for a joker in an exposed meld, taking the joker into their hand ---",
+    "anchor": "jokers",
+    "variant": "american-classic",
+    "variantUrl": "dist/mahjong/games/american-classic/"
+  },
+  {
+    "game": "mahjong",
+    "gameTitle": "Mahjong",
+    "section": "American Mahjong (Classic)",
+    "heading": "Setup",
+    "content": "1. Shuffle all 152 tiles face-down. Each player builds a row of 19 tiles stacked two high 38 tiles per wall section, 152 total forming a square wall 2. Roll dice to determine East dealer. East rolls again to find the break point in the wall 3. Deal clockwise from the break point: each player draws 13 tiles; East draws 14 4. Tiles are held upright on a rack, hidden from opponents ---",
+    "anchor": "setup",
+    "variant": "american-classic",
+    "variantUrl": "dist/mahjong/games/american-classic/"
+  },
+  {
+    "game": "mahjong",
+    "gameTitle": "Mahjong",
+    "section": "American Mahjong (Classic)",
+    "heading": "The Charleston",
+    "content": "The Charleston is the defining pre-game ritual of American Mahjong, conducted before the first discard. It does not exist in any Asian Mahjong variant. First Charleston: Blind pass: On the third pass of each Charleston, a player may take 1, 2, or 3 of the tiles just received and pass them on without looking at them. Second Charleston optional: If all four players agree, a second Charleston proceeds in reverse: Left → Across → Right. The same blind pass rule applies to the last pass. Courtesy Pass optional: After the Charlestons, players may agree to exchange 0–3 tiles with the player across. Both must agree on the number before passing. No blind tiles. ---\nPass — Direction — Notes\n1st — Right — Each player passes 3 unwanted tiles face-down to the right\n2nd — Across — Each player passes 3 unwanted tiles face-down to the player opposite\n3rd — Left — Each player passes 3 unwanted tiles face-down to the left; blind pass permitted",
+    "anchor": "the-charleston",
+    "variant": "american-classic",
+    "variantUrl": "dist/mahjong/games/american-classic/"
+  },
+  {
+    "game": "mahjong",
+    "gameTitle": "Mahjong",
+    "section": "American Mahjong (Classic)",
+    "heading": "Gameplay",
+    "content": "East discards a tile face-up to start play. Thereafter play proceeds clockwise. On your turn: 1. Draw the top tile from the wall 2. Discard one tile from your hand face-up to the centre, or declare Mahjong if your hand is complete Claiming a discard: Any player may claim the most recent discard before the next player draws to complete a meld or declare Mahjong. Announce the claim, take the tile, expose the completed meld on the rack, and discard. Mahjong claim takes priority over all other claims. Discards may only be claimed to complete an exposed meld or declare Mahjong — not to draw ahead in sequence. ---",
+    "anchor": "gameplay",
+    "variant": "american-classic",
+    "variantUrl": "dist/mahjong/games/american-classic/"
+  },
+  {
+    "game": "mahjong",
+    "gameTitle": "Mahjong",
+    "section": "American Mahjong (Classic)",
+    "heading": "Flowers and Seasons",
+    "content": "Flowers and Seasons are bonus tiles. When drawn, place the tile face-up on the rack and draw a replacement from the dead wall the reserved end tiles. They score bonus points and are not part of the hand structure. ---",
+    "anchor": "flowers-and-seasons",
+    "variant": "american-classic",
+    "variantUrl": "dist/mahjong/games/american-classic/"
+  },
+  {
+    "game": "mahjong",
+    "gameTitle": "Mahjong",
+    "section": "American Mahjong (Classic)",
+    "heading": "Winning",
+    "content": "A player wins by declaring Mahjong with a complete valid hand. Standard hand: 4 melds + 1 pair = 14 tiles plus any declared kongs. Classic Special Hands: ---\nHand — Description\nAll Pungs — Four pungs + one pair; no sequences\nAll Sequences — Four sequences + one pair; no pungs\nAll One Suit — Entire hand (excluding honours) in a single suit\nHonour Hand — Hand composed entirely of winds and dragons\nMixed Honour — One suit plus winds and/or dragons\nAll Green — 2, 3, 4, 6, 8 Bamboo and Green Dragon only\nNine Gates — 1-1-1-2-3-4-5-6-7-8-9-9-9 in one suit + any tile of that suit",
+    "anchor": "winning",
+    "variant": "american-classic",
+    "variantUrl": "dist/mahjong/games/american-classic/"
+  },
+  {
+    "game": "mahjong",
+    "gameTitle": "Mahjong",
+    "section": "American Mahjong (Classic)",
+    "heading": "Scoring",
+    "content": "The winning player collects from all three opponents. The player whose discard completes a winning hand pays double. Minimum to win: 25 points. ---\nElement — Points\nWinning (base) — 20\nSelf-draw win — +10\nEach pung of simples (2–8) — +2\nEach pung of terminals/honours — +4\nEach kong (exposed) — ×2 on pung value\nEach kong (concealed) — ×4 on pung value\nMatching flower/season — +4\nAll Pungs hand — ×2 multiplier\nAll One Suit hand — ×4 multiplier\nFully concealed hand — ×2 multiplier",
+    "anchor": "scoring",
+    "variant": "american-classic",
+    "variantUrl": "dist/mahjong/games/american-classic/"
+  },
+  {
+    "game": "mahjong",
+    "gameTitle": "Mahjong",
+    "section": "American Mahjong (Classic)",
+    "heading": "End of Hand",
+    "content": "If all wall tiles are drawn without a Mahjong declaration, the hand is a draw goulash — no points are exchanged. East retains the deal on a draw; otherwise the deal passes left. ---",
+    "anchor": "end-of-hand",
+    "variant": "american-classic",
+    "variantUrl": "dist/mahjong/games/american-classic/"
+  },
+  {
+    "game": "mahjong",
+    "gameTitle": "Mahjong",
+    "section": "American Mahjong (Classic)",
+    "heading": "Attribution",
+    "content": "Sources all public domain: - Joseph Park Babcock, Babcock's Rules for Mah-Jongg: The Red Book of Rules 1920, revised 1923 - 1924 Standardization Committee, American Official Laws of Mah-Jongg - NMJL, Official American Rules 1935, pre-card era",
+    "anchor": "attribution",
+    "variant": "american-classic",
+    "variantUrl": "dist/mahjong/games/american-classic/"
+  },
+  {
+    "game": "mahjong",
+    "gameTitle": "Mahjong",
+    "section": "Hong Kong Mahjong",
+    "heading": "Hong Kong Mahjong",
+    "content": "The most widely played Mahjong ruleset, originating in Guangdong Cantonese China. Four players compete to assemble a winning hand of melds and a pair from a shared pool of 144 tiles.",
+    "anchor": "hong-kong-mahjong",
+    "variant": "hong-kong",
+    "variantUrl": "dist/mahjong/games/hong-kong/"
+  },
+  {
+    "game": "mahjong",
+    "gameTitle": "Mahjong",
+    "section": "Hong Kong Mahjong",
+    "heading": "The Tiles",
+    "content": "Suited tiles 108: Three suits of nine values each, four copies per value. Honour tiles 28: Four copies of each. Bonus tiles 8: Set aside when drawn, not part of a winning hand. - Flowers: 1 Spring, 2 Summer, 3 Autumn, 4 Winter - Seasons: 1 Plum, 2 Orchid, 3 Chrysanthemum, 4 Bamboo Each bonus tile number corresponds to a seat: 1 = East, 2 = South, 3 = West, 4 = North.\nSuit — Name — Values\nCharacters (Wan, 萬) — Also called Man or Crack — 1–9\nBamboo (Sou, 索) — Also called Bam — 1–9\nCircles (Pin, 餅) — Also called Dot — 1–9\nType — Tiles\nWinds — East, South, West, North\nDragons — White (Bai), Green (Fa), Red (Zhong)",
+    "anchor": "the-tiles",
+    "variant": "hong-kong",
+    "variantUrl": "dist/mahjong/games/hong-kong/"
+  },
+  {
+    "game": "mahjong",
+    "gameTitle": "Mahjong",
+    "section": "Hong Kong Mahjong",
+    "heading": "Seating and Round Wind",
+    "content": "Seats are East, South, West, and North. East is the dealer and moves first. The round wind East, South, West, or North rotates after all four players have been dealer. The game covers at least one East round; full games include all four rounds.",
+    "anchor": "seating-and-round-wind",
+    "variant": "hong-kong",
+    "variantUrl": "dist/mahjong/games/hong-kong/"
+  },
+  {
+    "game": "mahjong",
+    "gameTitle": "Mahjong",
+    "section": "Hong Kong Mahjong",
+    "heading": "Dealing",
+    "content": "Shuffle all 144 tiles face down and build a wall of four sides, two tiles high and 18 tiles wide per side. East rolls dice to determine the break point. Each player draws 13 tiles clockwise from the wall, starting with East. East then draws one extra tile to begin the game or draws first on their turn. Bonus tiles are set aside immediately and a replacement tile is drawn from the live wall.",
+    "anchor": "dealing",
+    "variant": "hong-kong",
+    "variantUrl": "dist/mahjong/games/hong-kong/"
+  },
+  {
+    "game": "mahjong",
+    "gameTitle": "Mahjong",
+    "section": "Hong Kong Mahjong",
+    "heading": "Turn Structure",
+    "content": "On your turn: 1. Draw one tile from the wall or claim a discarded tile, see Claiming below. 2. Bonus tile: if the drawn tile is a flower or season, set it aside and draw a replacement. 3. Declare a winning hand if your 14 tiles form a valid hand see Winning. 4. Declare a Kong if you hold a complete set of four identical tiles, then draw a supplement tile and discard. 5. Discard one tile face-up to the centre.",
+    "anchor": "turn-structure",
+    "variant": "hong-kong",
+    "variantUrl": "dist/mahjong/games/hong-kong/"
+  },
+  {
+    "game": "mahjong",
+    "gameTitle": "Mahjong",
+    "section": "Hong Kong Mahjong",
+    "heading": "Claiming Discards",
+    "content": "After any discard, other players may claim it in priority order highest to lowest: 1. Win any player: claim the discard to complete a valid winning hand. 2. Kong any player: claim four identical tiles to declare an open Kong. Draw a supplement tile, then discard. 3. Pong any player: claim three identical tiles 2 in hand + discard. Discard one tile. 4. Chow left-hand player only: claim to complete a sequence of three consecutive suited tiles. Discard one tile. Only one player may claim each discard. If no one claims, the next player draws from the wall.",
+    "anchor": "claiming-discards",
+    "variant": "hong-kong",
+    "variantUrl": "dist/mahjong/games/hong-kong/"
+  },
+  {
+    "game": "mahjong",
+    "gameTitle": "Mahjong",
+    "section": "Hong Kong Mahjong",
+    "heading": "Melds",
+    "content": "ConcealedPongs and Kongs formed from drawn tiles, never claimed from a discard score higher than open melds. Robbing the Kong: when a player upgrades a Pong to a Kong by drawing the fourth tile, any other player who can win by taking that tile may declare an immediate win, robbing the Kong.\nMeld — Description — Notes\nChow — Sequence of 3 consecutive tiles of the same suit — From left player only; suited tiles only\nPong — 3 identical tiles — From any player\nKong — 4 identical tiles — From any player; draw supplement tile",
+    "anchor": "melds",
+    "variant": "hong-kong",
+    "variantUrl": "dist/mahjong/games/hong-kong/"
+  },
+  {
+    "game": "mahjong",
+    "gameTitle": "Mahjong",
+    "section": "Hong Kong Mahjong",
+    "heading": "Winning Hand",
+    "content": "A standard winning hand consists of 4 melds + 1 pair = 14 tiles. Alternate winning hands: Seven Pairs 7 different pairs, and certain limit hands defined by the scoring table. To declare a win, the hand must be worth a minimum of 3 faan. Win on wall Zimo: you draw the winning tile from the wall. All three opponents each pay the full hand value. Win on discard Ron: another player discards your winning tile. Only the discarder pays the full hand value.",
+    "anchor": "winning-hand",
+    "variant": "hong-kong",
+    "variantUrl": "dist/mahjong/games/hong-kong/"
+  },
+  {
+    "game": "mahjong",
+    "gameTitle": "Mahjong",
+    "section": "Hong Kong Mahjong",
+    "heading": "Bonus Tiles (Flowers and Seasons)",
+    "content": "Bonus tiles are set aside when drawn and are not part of the winning hand structure. They provide bonus faan:\nCondition — Faan\nOwn-seat flower or season (matching seat number) — 1\nAll four flowers — 5\nAll four seasons — 5\nAll eight bonus tiles — Automatic win (limit hand)",
+    "anchor": "bonus-tiles-flowers-and-seasons",
+    "variant": "hong-kong",
+    "variantUrl": "dist/mahjong/games/hong-kong/"
+  },
+  {
+    "game": "mahjong",
+    "gameTitle": "Mahjong",
+    "section": "Hong Kong Mahjong",
+    "heading": "Faan Scoring",
+    "content": "Each winning hand is valued by adding up the faan from completed patterns. Common patterns: Minimum to win: 3 faan. A hand below 3 faan cannot be declared.\nPattern — Faan\nSelf-draw win (Zimo) — 1\nFully concealed hand — 1\nAll Pongs — 3\nHalf Flush (one suit + honours) — 3\nFull Flush (one suit only) — 6\nMixed Terminals and Honours — 1\nAll Terminals and Honours — 5\nSeven Pairs — 3\nWinning on a supplement tile (after Kong) — 1\nWinning on last tile of the wall — 1\nRobbing a Kong — 1",
+    "anchor": "faan-scoring",
+    "variant": "hong-kong",
+    "variantUrl": "dist/mahjong/games/hong-kong/"
+  },
+  {
+    "game": "mahjong",
+    "gameTitle": "Mahjong",
+    "section": "Hong Kong Mahjong",
+    "heading": "Limit Hands",
+    "content": "Certain exceptional hands pay the maximum regardless of calculated faan. Examples: Thirteen Orphans, Four Concealed Pongs, All Kongs. When a limit hand is declared, each opponent pays the maximum limit amount.",
+    "anchor": "limit-hands",
+    "variant": "hong-kong",
+    "variantUrl": "dist/mahjong/games/hong-kong/"
+  },
+  {
+    "game": "mahjong",
+    "gameTitle": "Mahjong",
+    "section": "Hong Kong Mahjong",
+    "heading": "Payment",
+    "content": "Payment is in points chips or tallies. The East player dealer pays and receives double. - Win on discard: discarder pays full hand value; others pay nothing. - Win on wall: all three opponents each pay full hand value. - Dealer wins or loses: dealer pays or receives double the usual amount. The dealer role passes to the left South becomes dealer when the dealer does not win the hand. The dealer retains their seat if they win.",
+    "anchor": "payment",
+    "variant": "hong-kong",
+    "variantUrl": "dist/mahjong/games/hong-kong/"
+  },
+  {
+    "game": "mahjong",
+    "gameTitle": "Mahjong",
+    "section": "Hong Kong Mahjong",
+    "heading": "Attribution",
+    "content": "Hong Kong / Cantonese Mahjong. Traditional game originating in China. Rules in the public domain. Primary source: Wikipedia Mahjong, Hong Kong ruleset section.",
+    "anchor": "attribution",
+    "variant": "hong-kong",
+    "variantUrl": "dist/mahjong/games/hong-kong/"
+  },
+  {
+    "game": "mahjong",
+    "gameTitle": "Mahjong",
+    "section": "Riichi Mahjong",
+    "heading": "Riichi Mahjong",
+    "content": "The Japanese national form of Mahjong. Played with 136 tiles no flower or season bonus tiles. Introduces the Riichi declaration, the Furiten rule, yaku requirements, and a precise han-plus-fu scoring system with named limit hands.",
+    "anchor": "riichi-mahjong",
+    "variant": "riichi",
+    "variantUrl": "dist/mahjong/games/riichi/"
+  },
+  {
+    "game": "mahjong",
+    "gameTitle": "Mahjong",
+    "section": "Riichi Mahjong",
+    "heading": "Key Differences from Hong Kong",
+    "content": "\nRule — Hong Kong — Riichi\nTiles — 144 (with flowers/seasons) — 136 (no bonus tiles)\nWin requirement — 3 faan minimum — At least one yaku\nHand locking — None — Riichi declaration locks the hand\nFuriten — No — Yes (cannot win on a discard if your winning tile is in your discard pile)\nScoring — Faan table — Han + fu, with named limits\nDora — None — Yes (revealed indicator tiles grant bonus han)",
+    "anchor": "key-differences-from-hong-kong",
+    "variant": "riichi",
+    "variantUrl": "dist/mahjong/games/riichi/"
+  },
+  {
+    "game": "mahjong",
+    "gameTitle": "Mahjong",
+    "section": "Riichi Mahjong",
+    "heading": "Yaku",
+    "content": "A yaku is a scoring pattern. A hand must contain at least one yaku to win. Common yaku include:\nYaku — Han (open / closed) — Description\nRiichi — — / 1 — Closed tenpai hand with Riichi declaration\nTanyao — 1 / 1 — All simples (tiles 2–8 only, no terminals or honours)\nPinfu — — / 1 — All sequences, non-pair wait, non-yakuhai pair\nIipeiko — — / 1 — Two identical sequences\nYakuhai — 1 / 1 — A Pong of seat wind, round wind, or dragon\nChiitoi — — / 2 — Seven pairs\nHonitsu — 2 / 3 — Half flush (one suit + honours)\nChinitsu — 5 / 6 — Full flush (one suit only)",
+    "anchor": "yaku",
+    "variant": "riichi",
+    "variantUrl": "dist/mahjong/games/riichi/"
+  },
+  {
+    "game": "mahjong",
+    "gameTitle": "Mahjong",
+    "section": "Riichi Mahjong",
+    "heading": "Riichi",
+    "content": "A player with a closed no open melds tenpai hand one tile from winning may declare Riichi by placing a 1,000-point stake in the centre. After declaring: - The hand is locked; no tile swaps are permitted. - Any tile drawn from the wall may be used to win. - Uradora hidden bonus tiles are revealed if the player wins. - The 1,000-point stake goes to the winner of the hand.",
+    "anchor": "riichi",
+    "variant": "riichi",
+    "variantUrl": "dist/mahjong/games/riichi/"
+  },
+  {
+    "game": "mahjong",
+    "gameTitle": "Mahjong",
+    "section": "Riichi Mahjong",
+    "heading": "Dora",
+    "content": "Dora tiles are bonus tiles that add one han each. The dora indicator is revealed at the start of the hand; the dora is the next tile in sequence e.g., indicator = 3 Bamboo means dora = 4 Bamboo; indicator = 9 means dora = 1 of the same suit; indicator = North wind means dora = East. Uradora secret dora: revealed only when a Riichi player wins. One uradora indicator is revealed per Kong declared during the hand. Akadora red fives: in some games, one or more of each 5-tile are red; each red five held contributes 1 han.",
+    "anchor": "dora",
+    "variant": "riichi",
+    "variantUrl": "dist/mahjong/games/riichi/"
+  },
+  {
+    "game": "mahjong",
+    "gameTitle": "Mahjong",
+    "section": "Riichi Mahjong",
+    "heading": "Furiten",
+    "content": "A player is in Furiten if any of their winning tiles appears in their own discard pile. A player in Furiten: - Cannot win on another player's discard. - Can still win by self-draw Tsumo. Furiten clears when the player draws a winning tile and discards it temporary furiten or when they declare Riichi with a hand not in furiten.",
+    "anchor": "furiten",
+    "variant": "riichi",
+    "variantUrl": "dist/mahjong/games/riichi/"
+  },
+  {
+    "game": "mahjong",
+    "gameTitle": "Mahjong",
+    "section": "Riichi Mahjong",
+    "heading": "Scoring",
+    "content": "Hand value is determined by han from yaku and dora and fu from hand structure: meld types, wait type, pairs. The han-fu table produces a point value. Named limits apply at high han counts: Ron win on discard: discarder pays the full amount. Tsumo self-draw: all three opponents pay equal shares dealer pays double the others' share.\nLimit — Han threshold — Value\nMangan — 5 han (or 4 han at 30+ fu, 3 han at 70+ fu) — 8,000 (dealer 12,000)\nHaneman — 6–7 han — 12,000 (dealer 18,000)\nBaiman — 8–10 han — 16,000 (dealer 24,000)\nSanbaiman — 11–12 han — 24,000 (dealer 36,000)\nYakuman — 13+ han, or special hands — 32,000 (dealer 48,000)",
+    "anchor": "scoring",
+    "variant": "riichi",
+    "variantUrl": "dist/mahjong/games/riichi/"
+  },
+  {
+    "game": "mahjong",
+    "gameTitle": "Mahjong",
+    "section": "Riichi Mahjong",
+    "heading": "Abortive Draws",
+    "content": "A hand may end in an abortive draw no winner under these conditions: nine unique terminals and honours dealt to one player on the first draw by declaration, four Kongs declared without the same player winning, all four players discard the same wind on the first go-round, or exhaustion of the wall without a winner.",
+    "anchor": "abortive-draws",
+    "variant": "riichi",
+    "variantUrl": "dist/mahjong/games/riichi/"
+  },
+  {
+    "game": "mahjong",
+    "gameTitle": "Mahjong",
+    "section": "Riichi Mahjong",
+    "heading": "Attribution",
+    "content": "Riichi Mahjong. Traditional game with Japanese rules codified in the 20th century. Source: Wikipedia Japanese Mahjong. Public domain rules.",
+    "anchor": "attribution",
+    "variant": "riichi",
+    "variantUrl": "dist/mahjong/games/riichi/"
+  },
+  {
+    "game": "mahjong",
+    "gameTitle": "Mahjong",
+    "section": "Taiwanese 16-Tile Mahjong",
+    "heading": "Taiwanese 16-Tile Mahjong",
+    "content": "The dominant Mahjong form in Taiwan. Played with 144 tiles. Each player holds 16 tiles and forms five melds plus one pair, rather than the four melds plus one pair of Hong Kong Mahjong.",
+    "anchor": "taiwanese-16-tile-mahjong",
+    "variant": "taiwanese",
+    "variantUrl": "dist/mahjong/games/taiwanese/"
+  },
+  {
+    "game": "mahjong",
+    "gameTitle": "Mahjong",
+    "section": "Taiwanese 16-Tile Mahjong",
+    "heading": "Key Differences from Hong Kong",
+    "content": "\nRule — Hong Kong — Taiwanese 16-Tile\nTiles in hand — 13 (14 to win) — 16 (17 to win)\nHand structure — 4 melds + 1 pair — 5 melds + 1 pair\nMultiple winners — No — Yes (multiple players can claim a single discard to win)\nAll 8 bonus tiles — 5+5 faan — Automatic win\nDealing — 13 tiles each + dealer draws first — 16 tiles each",
+    "anchor": "key-differences-from-hong-kong",
+    "variant": "taiwanese",
+    "variantUrl": "dist/mahjong/games/taiwanese/"
+  },
+  {
+    "game": "mahjong",
+    "gameTitle": "Mahjong",
+    "section": "Taiwanese 16-Tile Mahjong",
+    "heading": "Dealing",
+    "content": "Each player draws 16 tiles at the start. Bonus tiles are set aside immediately and replacements drawn. East begins with 17 tiles effectively or draws first to reach 17.",
+    "anchor": "dealing",
+    "variant": "taiwanese",
+    "variantUrl": "dist/mahjong/games/taiwanese/"
+  },
+  {
+    "game": "mahjong",
+    "gameTitle": "Mahjong",
+    "section": "Taiwanese 16-Tile Mahjong",
+    "heading": "Hand Structure",
+    "content": "A winning hand consists of 5 melds + 1 pair = 17 tiles 16 in hand + the winning tile.",
+    "anchor": "hand-structure",
+    "variant": "taiwanese",
+    "variantUrl": "dist/mahjong/games/taiwanese/"
+  },
+  {
+    "game": "mahjong",
+    "gameTitle": "Mahjong",
+    "section": "Taiwanese 16-Tile Mahjong",
+    "heading": "Multiple Winners",
+    "content": "When a tile is discarded, multiple players may declare a win on that tile simultaneously. All winning declarations are honoured; the discarder pays each winner. Turn order does not restrict who can win.",
+    "anchor": "multiple-winners",
+    "variant": "taiwanese",
+    "variantUrl": "dist/mahjong/games/taiwanese/"
+  },
+  {
+    "game": "mahjong",
+    "gameTitle": "Mahjong",
+    "section": "Taiwanese 16-Tile Mahjong",
+    "heading": "Bonus Tiles",
+    "content": "All 8 bonus tiles in hand is an automatic win. Seat-matching bonus tiles and partial sets score faan per Hong Kong rules.",
+    "anchor": "bonus-tiles",
+    "variant": "taiwanese",
+    "variantUrl": "dist/mahjong/games/taiwanese/"
+  },
+  {
+    "game": "mahjong",
+    "gameTitle": "Mahjong",
+    "section": "Taiwanese 16-Tile Mahjong",
+    "heading": "Scoring",
+    "content": "Faan-based scoring, similar to Hong Kong Mahjong but calibrated for five-meld hands. Full scoring tables are specific to the regional variant; the content builder should source from a Taiwanese-specific rulebook. The fundamental faan system minimum threshold, limit hands applies.",
+    "anchor": "scoring",
+    "variant": "taiwanese",
+    "variantUrl": "dist/mahjong/games/taiwanese/"
+  },
+  {
+    "game": "mahjong",
+    "gameTitle": "Mahjong",
+    "section": "Taiwanese 16-Tile Mahjong",
+    "heading": "Attribution",
+    "content": "Taiwanese 16-Tile Mahjong. Traditional game. Source: Wikipedia Mahjong, Taiwanese variant section. Note: full scoring tables for this variant require a dedicated Taiwanese-specific source for complete accuracy.",
+    "anchor": "attribution",
+    "variant": "taiwanese",
+    "variantUrl": "dist/mahjong/games/taiwanese/"
+  },
+  {
+    "game": "mahjong",
+    "gameTitle": "Mahjong",
+    "section": "Zung Jung",
+    "heading": "Zung Jung",
+    "content": "Designed by Alan Kwan, a statistician. Used as the official ruleset for the World Series of Mahjong. Zung Jung replaces multiplicative faan scoring with a flat additive point system across 44 named patterns, eliminating most ambiguity in hand valuation.",
+    "anchor": "zung-jung",
+    "variant": "zung-jung",
+    "variantUrl": "dist/mahjong/games/zung-jung/"
+  },
+  {
+    "game": "mahjong",
+    "gameTitle": "Mahjong",
+    "section": "Zung Jung",
+    "heading": "Key Differences from Hong Kong",
+    "content": "\nRule — Hong Kong — Zung Jung\nTiles — 144 (with flowers/seasons) — 136 (no bonus tiles)\nScoring — Multiplicative faan — Additive points (44 patterns, fixed values)\nBasic points — None / implicit — None\nIncome formula — Varies — Total income = 3× pattern points\nPoint limit — Limit hands — 320 points\nMinimum to win — 3 faan — Optional 5-point minimum (competition)",
+    "anchor": "key-differences-from-hong-kong",
+    "variant": "zung-jung",
+    "variantUrl": "dist/mahjong/games/zung-jung/"
+  },
+  {
+    "game": "mahjong",
+    "gameTitle": "Mahjong",
+    "section": "Zung Jung",
+    "heading": "Scoring System",
+    "content": "Each winning hand is valued by identifying which of the 44 named patterns apply. Each pattern has a fixed point value. Values are additive, not multiplicative. The winner's income from each opponent is the total pattern value. Total income for the winner is 3× pattern points one payment from each of three opponents. The 320-point limit applies per opponent; a winning hand cannot earn more than 320 points from any single opponent. Common patterns illustrative, not exhaustive: Full pattern table: source from zj-mahjong.info official, version 3.3, licensed CC BY-NC-SA 3.0 HK. The content builder should extract all 44 patterns with their point values.\nPattern — Points — Description\nAll Simples — 2 — No terminals or honours\nAll Sequences — 5 — All four melds are sequences\nAll Pongs — 6 — All four melds are Pongs or Kongs\nHalf Flush — 6 — One suit plus honours\nFull Flush — 24 — One suit only\nSeven Pairs — 4 — Seven different pairs\nAll Terminals — 64 — Terminals and honours only, all Pongs",
+    "anchor": "scoring-system",
+    "variant": "zung-jung",
+    "variantUrl": "dist/mahjong/games/zung-jung/"
+  },
+  {
+    "game": "mahjong",
+    "gameTitle": "Mahjong",
+    "section": "Zung Jung",
+    "heading": "Same-Round Immunity",
+    "content": "Zung Jung includes a same-round immunity rule preventing unfair double-payment in specific edge cases. Consult the official rulebook at zj-mahjong.info for the precise definition.",
+    "anchor": "same-round-immunity",
+    "variant": "zung-jung",
+    "variantUrl": "dist/mahjong/games/zung-jung/"
+  },
+  {
+    "game": "mahjong",
+    "gameTitle": "Mahjong",
+    "section": "Zung Jung",
+    "heading": "Attribution",
+    "content": "Zung Jung Mahjong, designed by Alan Kwan. Official rules at zj-mahjong.info, version 3.3. Licensed Creative Commons BY-NC-SA 3.0 Hong Kong. Used with attribution for non-commercial game reference.",
+    "anchor": "attribution",
+    "variant": "zung-jung",
+    "variantUrl": "dist/mahjong/games/zung-jung/"
+  },
+  {
+    "game": "standard-52",
+    "gameTitle": "Standard 52-Card Deck",
+    "section": "Big 2",
+    "heading": "Big 2",
+    "content": "Also known as Deuces, Pusoy Dos, or Chinese Poker. A climbing card game for exactly four players. Each player receives 13 cards and tries to be the first to empty their hand by playing progressively higher combinations.",
+    "anchor": "big-2",
+    "variant": "big2",
+    "variantUrl": "dist/standard-52/games/big2/"
+  },
+  {
+    "game": "standard-52",
+    "gameTitle": "Standard 52-Card Deck",
+    "section": "Big 2",
+    "heading": "Setup",
+    "content": "- 4 players. Deal all 52 cards evenly 13 each. - Player with the 3 of Diamonds leads the first round. - Subsequent rounds: loser of previous round leads.",
+    "anchor": "setup",
+    "variant": "big2",
+    "variantUrl": "dist/standard-52/games/big2/"
+  },
+  {
+    "game": "standard-52",
+    "gameTitle": "Standard 52-Card Deck",
+    "section": "Big 2",
+    "heading": "Card Ranking",
+    "content": "Rank low to high: 3, 4, 5, 6, 7, 8, 9, 10, J, Q, K, A, 2 Suit low to high: Diamonds, Clubs, Hearts, Spades The 2 of Spades is the highest card in the game.",
+    "anchor": "card-ranking",
+    "variant": "big2",
+    "variantUrl": "dist/standard-52/games/big2/"
+  },
+  {
+    "game": "standard-52",
+    "gameTitle": "Standard 52-Card Deck",
+    "section": "Big 2",
+    "heading": "Combination Types",
+    "content": "Five-card hand ranking low to high: Straight, Flush, Full House, Four of a Kind, Straight Flush, Royal Flush.\nType — Cards — Ranking\nSingle — 1 card — By rank, then suit\nPair — 2 same rank — By rank of pair, then highest suit\nTriple — 3 same rank — By rank\nFive-card hand — 5 cards — By poker hand type, then by highest card",
+    "anchor": "combination-types",
+    "variant": "big2",
+    "variantUrl": "dist/standard-52/games/big2/"
+  },
+  {
+    "game": "standard-52",
+    "gameTitle": "Standard 52-Card Deck",
+    "section": "Big 2",
+    "heading": "Rules",
+    "content": "1. Lead player plays any valid combination. 2. Each subsequent player must play the same combination type at a higher value, or pass. 3. When all other players pass, the last player who played leads the next trick. 4. The first player to empty their hand wins. 5. Remaining players are ranked by finishing order.",
+    "anchor": "rules",
+    "variant": "big2",
+    "variantUrl": "dist/standard-52/games/big2/"
+  },
+  {
+    "game": "standard-52",
+    "gameTitle": "Standard 52-Card Deck",
+    "section": "Big 2",
+    "heading": "Passing",
+    "content": "A player who passes may play again when the turn comes back around unless the trick is already won. Passing is strategic, not permanent.",
+    "anchor": "passing",
+    "variant": "big2",
+    "variantUrl": "dist/standard-52/games/big2/"
+  },
+  {
+    "game": "standard-52",
+    "gameTitle": "Standard 52-Card Deck",
+    "section": "Big 2",
+    "heading": "Attribution",
+    "content": "Big 2. Traditional Chinese climbing card game, widespread across East and Southeast Asia. Public domain. Rules confirmed from Pagat.com and Wikipedia.",
+    "anchor": "attribution",
+    "variant": "big2",
+    "variantUrl": "dist/standard-52/games/big2/"
+  },
+  {
+    "game": "standard-52",
+    "gameTitle": "Standard 52-Card Deck",
+    "section": "Blackjack (Twenty-One)",
+    "heading": "Blackjack (Twenty-One)",
+    "content": "Blackjack is a casino card game in which each player competes independently against the dealer. The goal is to hold a hand with a total closer to 21 than the dealer’s without exceeding 21 busting. Blackjack an Ace + a 10-value card beats a regular 21 and pays 3:2. The standard casino game uses 6–8 decks shuffled together.",
+    "anchor": "blackjack-twenty-one",
+    "variant": "blackjack",
+    "variantUrl": "dist/standard-52/games/blackjack/"
+  },
+  {
+    "game": "standard-52",
+    "gameTitle": "Standard 52-Card Deck",
+    "section": "Blackjack (Twenty-One)",
+    "heading": "Card Values",
+    "content": "A soft hand contains an Ace counted as 11. A hard hand has no Ace, or an Ace counted as 1.\nCard — Value\n2–10 — Face value\nJ, Q, K — 10\nAce — 1 or 11 (player chooses; always the value that benefits the hand without busting)",
+    "anchor": "card-values",
+    "variant": "blackjack",
+    "variantUrl": "dist/standard-52/games/blackjack/"
+  },
+  {
+    "game": "standard-52",
+    "gameTitle": "Standard 52-Card Deck",
+    "section": "Blackjack (Twenty-One)",
+    "heading": "Setup and Betting",
+    "content": "- 1–6 players plus a dealer. - Casino: 6 or 8 standard decks in a shoe. Home game: 1–2 decks. - Each player places a bet before cards are dealt.",
+    "anchor": "setup-and-betting",
+    "variant": "blackjack",
+    "variantUrl": "dist/standard-52/games/blackjack/"
+  },
+  {
+    "game": "standard-52",
+    "gameTitle": "Standard 52-Card Deck",
+    "section": "Blackjack (Twenty-One)",
+    "heading": "Deal",
+    "content": "Dealer deals two cards to each player face-up, then deals themselves two cards: one face-up upcard and one face-down hole card.",
+    "anchor": "deal",
+    "variant": "blackjack",
+    "variantUrl": "dist/standard-52/games/blackjack/"
+  },
+  {
+    "game": "standard-52",
+    "gameTitle": "Standard 52-Card Deck",
+    "section": "Blackjack (Twenty-One)",
+    "heading": "Blackjack (Natural)",
+    "content": "If a player’s first two cards are an Ace and a 10-value card, they have Blackjack. The player wins immediately and is paid 3:2 on their bet, unless the dealer also has Blackjack in which case it is a push — bet returned, no win or loss. Insurance: If the dealer’s upcard is an Ace, players may place an insurance bet up to half the original bet that the dealer has Blackjack. If the dealer has Blackjack, insurance pays 2:1. If not, the insurance bet is lost and play continues.",
+    "anchor": "blackjack-natural",
+    "variant": "blackjack",
+    "variantUrl": "dist/standard-52/games/blackjack/"
+  },
+  {
+    "game": "standard-52",
+    "gameTitle": "Standard 52-Card Deck",
+    "section": "Blackjack (Twenty-One)",
+    "heading": "Player Actions",
+    "content": "Each player acts on their hand before the dealer plays. Options: Bust: If a hand total exceeds 21, the player busts and loses the bet immediately. The dealer does not need to play.\nAction — Description\n**Hit** — Take one additional card. May hit again as many times as desired (until standing or busting).\n**Stand** — Take no more cards; end the turn.\n**Double Down** — Double the bet and take exactly one more card. Only allowed on the initial two-card hand (some rules restrict to totals of 9, 10, or 11 only).\n**Split** — If the first two cards are of equal value, split them into two separate hands, each with its own bet equal to the original. Each hand is then played independently. Aces may only be split once and receive one card each; no further actions allowed after splitting Aces in most casinos.\n**Surrender** — Forfeit the hand and recover half the bet. Only on the initial two cards, before any other action. Not available at all tables.",
+    "anchor": "player-actions",
+    "variant": "blackjack",
+    "variantUrl": "dist/standard-52/games/blackjack/"
+  },
+  {
+    "game": "standard-52",
+    "gameTitle": "Standard 52-Card Deck",
+    "section": "Blackjack (Twenty-One)",
+    "heading": "Dealer Play",
+    "content": "After all players have acted, the dealer reveals the hole card. - Dealer must hit on any total of 16 or less. - Dealer must stand on any total of 17 or more. - Soft 17: Some rules require the dealer to hit on soft 17 Ace + 6 = 17 with the Ace as 11. Others require a stand. The rule in use should be stated. The dealer has no choices — their play is entirely rule-determined.",
+    "anchor": "dealer-play",
+    "variant": "blackjack",
+    "variantUrl": "dist/standard-52/games/blackjack/"
+  },
+  {
+    "game": "standard-52",
+    "gameTitle": "Standard 52-Card Deck",
+    "section": "Blackjack (Twenty-One)",
+    "heading": "Settlement",
+    "content": "After the dealer completes their hand:\nResult — Payout\nPlayer total > dealer total (no bust) — Player wins 1:1 (even money)\nPlayer Blackjack (natural 21) — Player wins 3:2\nPlayer total = dealer total — Push (bet returned)\nPlayer busts (exceeded 21) — Player loses bet\nDealer busts — All remaining players win 1:1\nDealer total > player total — Player loses bet",
+    "anchor": "settlement",
+    "variant": "blackjack",
+    "variantUrl": "dist/standard-52/games/blackjack/"
+  },
+  {
+    "game": "standard-52",
+    "gameTitle": "Standard 52-Card Deck",
+    "section": "Blackjack (Twenty-One)",
+    "heading": "Basic Strategy Summary",
+    "content": "Basic strategy is the set of statistically optimal player decisions for every hand combination given the dealer upcard. Key principles: - Always split Aces and 8s. - Never split 10-value cards or 5s. - Double down on 11 against dealer’s 2–10; on 10 against dealer’s 2–9. - Stand on hard 17+; hit on hard 8 or less. - Stand on soft 19+; always hit soft 17 or less.",
+    "anchor": "basic-strategy-summary",
+    "variant": "blackjack",
+    "variantUrl": "dist/standard-52/games/blackjack/"
+  },
+  {
+    "game": "standard-52",
+    "gameTitle": "Standard 52-Card Deck",
+    "section": "Blackjack (Twenty-One)",
+    "heading": "Card Counting (Informational)",
+    "content": "Card counting is a legal advantage technique where players track the ratio of high to low cards remaining in the shoe. A high count more 10s and Aces remaining favors the player; a low count favors the dealer. Casinos may bar known card counters from play but it is not illegal.",
+    "anchor": "card-counting-informational",
+    "variant": "blackjack",
+    "variantUrl": "dist/standard-52/games/blackjack/"
+  },
+  {
+    "game": "standard-52",
+    "gameTitle": "Standard 52-Card Deck",
+    "section": "Blackjack (Twenty-One)",
+    "heading": "Attribution",
+    "content": "Blackjack Twenty-One. Origins in 17th century France Vingt-et-Un. Modern casino rules standardized during the 20th century. Public domain rule set. Casino rules vary by establishment; house rules should be confirmed before play.",
+    "anchor": "attribution",
+    "variant": "blackjack",
+    "variantUrl": "dist/standard-52/games/blackjack/"
+  },
+  {
+    "game": "standard-52",
+    "gameTitle": "Standard 52-Card Deck",
+    "section": "Rubber Bridge",
+    "heading": "Rubber Bridge",
+    "content": "Rubber Bridge is the classic home and club form of Contract Bridge, played by four players in two partnerships North–South vs. East–West. Bridge combines a bidding phase — an auction to determine the contract — with a trick-taking phase where the declaring partnership attempts to fulfil the contract. A rubber is the best of three games.",
+    "anchor": "rubber-bridge",
+    "variant": "bridge",
+    "variantUrl": "dist/standard-52/games/bridge/"
+  },
+  {
+    "game": "standard-52",
+    "gameTitle": "Standard 52-Card Deck",
+    "section": "Rubber Bridge",
+    "heading": "Setup",
+    "content": "- 4 players in fixed partnerships: North–South and East–West. - Two standard 52-card decks alternated between deals. - Determine the first dealer by drawing a card; high card deals. The deal rotates clockwise.",
+    "anchor": "setup",
+    "variant": "bridge",
+    "variantUrl": "dist/standard-52/games/bridge/"
+  },
+  {
+    "game": "standard-52",
+    "gameTitle": "Standard 52-Card Deck",
+    "section": "Rubber Bridge",
+    "heading": "Deal",
+    "content": "Dealer distributes all 52 cards clockwise, one at a time, face down. Each player receives 13 cards.",
+    "anchor": "deal",
+    "variant": "bridge",
+    "variantUrl": "dist/standard-52/games/bridge/"
+  },
+  {
+    "game": "standard-52",
+    "gameTitle": "Standard 52-Card Deck",
+    "section": "Rubber Bridge",
+    "heading": "Card Rankings",
+    "content": "Within each suit high to low: A, K, Q, J, 10, 9, 8, 7, 6, 5, 4, 3, 2. Suit ranking for notrump and slam purposes: Spades > Hearts > Diamonds > Clubs. High Card Points HCP: Ace = 4, King = 3, Queen = 2, Jack = 1. A standard 52-card deck contains 40 HCP. An opening hand typically requires 12–13+ HCP.",
+    "anchor": "card-rankings",
+    "variant": "bridge",
+    "variantUrl": "dist/standard-52/games/bridge/"
+  },
+  {
+    "game": "standard-52",
+    "gameTitle": "Standard 52-Card Deck",
+    "section": "Rubber Bridge",
+    "heading": "The Auction (Bidding)",
+    "content": "Starting with the dealer, players bid in clockwise order. A bid names a number 1–7 and a strain Clubs, Diamonds, Hearts, Spades, or Notrump. The number represents how many tricks above 6 the partnership contracts to take e.g., a bid of 3 Hearts contracts for 9 tricks with Hearts as trump. Calls: Players may bid any legal bid higher than the previous, pass, double if the previous call was a bid by an opponent, or redouble if the previous call was a double by an opponent. Auction ends: Three consecutive passes end the auction. The final bid becomes the contract. If all four players pass immediately a passed-out hand, the hand is redealt with no score. The declarer: The first player on the contracting partnership who named the strain of the final contract becomes the declarer. The declarer’s left-hand opponent leads the first trick.",
+    "anchor": "the-auction-bidding",
+    "variant": "bridge",
+    "variantUrl": "dist/standard-52/games/bridge/"
+  },
+  {
+    "game": "standard-52",
+    "gameTitle": "Standard 52-Card Deck",
+    "section": "Rubber Bridge",
+    "heading": "The Play",
+    "content": "Dummy: After the opening lead, the declarer’s partner dummy lays all cards face-up on the table, arranged by suit. The dummy plays no active role; the declarer calls plays from dummy’s hand. Tricks: Each trick consists of four cards, one per player, played clockwise. A player must follow suit if able; if unable, may play any card. The highest card of the led suit wins the trick unless a trump card has been played, in which case the highest trump wins. Winner of each trick leads the next. Trump: The trump suit if any is named by the contract. In Notrump, there is no trump suit.",
+    "anchor": "the-play",
+    "variant": "bridge",
+    "variantUrl": "dist/standard-52/games/bridge/"
+  },
+  {
+    "game": "standard-52",
+    "gameTitle": "Standard 52-Card Deck",
+    "section": "Rubber Bridge",
+    "heading": "Scoring",
+    "content": "Scoring is cumulative on a scorecard divided into “below the line” trick points and “above the line” bonuses and penalties. Trick points below the line: Game: A partnership reaches game when their trick points below the line total 100 or more in a single game. The contract must be fulfilled to score below the line undertricks score only penalties above the line. Vulnerable: A partnership that has won one game in the current rubber is “vulnerable.” Bonuses and penalties are higher when vulnerable. Doubled and redoubled contracts: A doubled contract that is made scores trick points ×2 below the line. Redoubled: ×4. A “Insult bonus” of 50 above the line also applies for making a doubled or redoubled contract. Bonuses above the line: Overtricks above the line: Undertricks penalties, above the line against the declaring partnership:\nStrain — Per overtrick (value) — Per trick contracted\nClubs or Diamonds (minor suits) — 20 per trick — 20 per trick\nHearts or Spades (major suits) — 30 per tric",
+    "anchor": "scoring",
+    "variant": "bridge",
+    "variantUrl": "dist/standard-52/games/bridge/"
+  },
+  {
+    "game": "standard-52",
+    "gameTitle": "Standard 52-Card Deck",
+    "section": "Rubber Bridge",
+    "heading": "Rubber",
+    "content": "A rubber consists of up to three games. The first partnership to win two games wins the rubber. Game points are totalled; the partnership with the higher total wins.",
+    "anchor": "rubber",
+    "variant": "bridge",
+    "variantUrl": "dist/standard-52/games/bridge/"
+  },
+  {
+    "game": "standard-52",
+    "gameTitle": "Standard 52-Card Deck",
+    "section": "Rubber Bridge",
+    "heading": "Honours (Optional)",
+    "content": "If one player holds 4 of the 5 top honours A, K, Q, J, 10 in the trump suit, that player’s partnership scores 100 above the line. All 5 top honours in one hand: 150 above the line. In Notrump, 4 Aces in one hand: 150. Honours are scored regardless of which side wins the contract.",
+    "anchor": "honours-optional",
+    "variant": "bridge",
+    "variantUrl": "dist/standard-52/games/bridge/"
+  },
+  {
+    "game": "standard-52",
+    "gameTitle": "Standard 52-Card Deck",
+    "section": "Rubber Bridge",
+    "heading": "Attribution",
+    "content": "Contract Bridge. Formalized by Harold Vanderbilt, 1925–1926. Rubber Bridge scoring codified by the World Bridge Federation. Public domain rule set.",
+    "anchor": "attribution",
+    "variant": "bridge",
+    "variantUrl": "dist/standard-52/games/bridge/"
+  },
+  {
+    "game": "standard-52",
+    "gameTitle": "Standard 52-Card Deck",
+    "section": "Canasta (Classic)",
+    "heading": "Canasta (Classic)",
+    "content": "Canasta is a partnership rummy-style game for four players two teams of two. The game uses two standard 52-card decks plus 4 Jokers 108 cards total. Players build melds — groups of three or more cards of the same rank — aiming to form Canastas melds of 7 or more cards. The first partnership to reach 5000 points wins. Canasta originated in Uruguay in the 1940s and became internationally popular in the 1950s.",
+    "anchor": "canasta-classic",
+    "variant": "canasta",
+    "variantUrl": "dist/standard-52/games/canasta/"
+  },
+  {
+    "game": "standard-52",
+    "gameTitle": "Standard 52-Card Deck",
+    "section": "Canasta (Classic)",
+    "heading": "Card Values",
+    "content": "\nCard — Point Value\nJoker — 50\nAce or 2 — 20\nK, Q, J, 10, 9, 8 — 10\n7, 6, 5, 4 — 5\nBlack 3 (bonus/block card) — 5\nRed 3 (bonus card) — 100 (or 200 if all four are held)",
+    "anchor": "card-values",
+    "variant": "canasta",
+    "variantUrl": "dist/standard-52/games/canasta/"
+  },
+  {
+    "game": "standard-52",
+    "gameTitle": "Standard 52-Card Deck",
+    "section": "Canasta (Classic)",
+    "heading": "Wild Cards",
+    "content": "Wild cards: All four Jokers and all eight 2s Deuces are wild. Wild cards may substitute for any natural card in a meld. Rules for wild cards in melds: - A meld may contain at most 3 wild cards. - A meld must always contain more natural cards than wild cards e.g., 2 natural + 1 wild is fine; 2 natural + 2 wild is the maximum and only legal if there are 3 natural cards total.",
+    "anchor": "wild-cards",
+    "variant": "canasta",
+    "variantUrl": "dist/standard-52/games/canasta/"
+  },
+  {
+    "game": "standard-52",
+    "gameTitle": "Standard 52-Card Deck",
+    "section": "Canasta (Classic)",
+    "heading": "Special Cards",
+    "content": "Red 3s: When drawn or dealt, a Red 3 must be placed face-up on the table immediately and replaced by drawing from the stock. Red 3s score a bonus at the end of the game 100 each; 800 for all four held by one partnership. Red 3s count for the partnership only if they have at least one canasta; otherwise they count against. Black 3s: May not be melded during play except as the final card in a hand, see Going Out. Black 3s may be discarded to freeze the pile for one turn against the next player a one-turn block. Cannot be used as wild cards.",
+    "anchor": "special-cards",
+    "variant": "canasta",
+    "variantUrl": "dist/standard-52/games/canasta/"
+  },
+  {
+    "game": "standard-52",
+    "gameTitle": "Standard 52-Card Deck",
+    "section": "Canasta (Classic)",
+    "heading": "Setup",
+    "content": "- 4 players in fixed partnerships. Partners sit opposite. - Shuffle both decks together with all 4 Jokers for a 108-card deck. - Deal 11 cards each 44 total. Place the remaining cards as the stock. - Turn over the top card to begin the discard pile the pack. - If the initial upcard is a Joker, 2, or Red 3: bury it in the stock and turn another. - If the initial upcard is a Black 3: the first player may not pick up the pack on their first turn; the Black 3 remains.",
+    "anchor": "setup",
+    "variant": "canasta",
+    "variantUrl": "dist/standard-52/games/canasta/"
+  },
+  {
+    "game": "standard-52",
+    "gameTitle": "Standard 52-Card Deck",
+    "section": "Canasta (Classic)",
+    "heading": "Taking a Turn",
+    "content": "Each turn consists of: 1. Draw: Take the top card from the stock OR take the entire discard pile the pack — subject to restrictions below. 2. Meld: Optionally create or extend melds on the table. Red 3s must be immediately placed. 3. Discard: Place one card face-up onto the discard pile. Exception: do not discard when going out by melding all cards.",
+    "anchor": "taking-a-turn",
+    "variant": "canasta",
+    "variantUrl": "dist/standard-52/games/canasta/"
+  },
+  {
+    "game": "standard-52",
+    "gameTitle": "Standard 52-Card Deck",
+    "section": "Canasta (Classic)",
+    "heading": "Taking the Pack (Discard Pile)",
+    "content": "A player may take the entire discard pile if: - The top card of the pile is a natural card not wild, not Black 3. - The player holds at least two natural cards of the same rank as the top card and can immediately use them to meld with the top card. - The partnership has already made its initial meld see Initial Meld Requirement. Frozen Pack: The discard pile is frozen when a wild card or Red 3 has been placed on it. To take a frozen pack, the player must hold two natural cards matching the top card not just one plus a wild and the rules above still apply. The pile unfreezes when picked up.",
+    "anchor": "taking-the-pack-discard-pile",
+    "variant": "canasta",
+    "variantUrl": "dist/standard-52/games/canasta/"
+  },
+  {
+    "game": "standard-52",
+    "gameTitle": "Standard 52-Card Deck",
+    "section": "Canasta (Classic)",
+    "heading": "Initial Meld Requirement",
+    "content": "A partnership’s first melds of the game must meet a minimum point value based on their current score: Once the initial meld is made, subsequent melds have no minimum.\nPartnership’s current score — Minimum initial meld value\nNegative — 15\n0–1499 — 50\n1500‒2999 — 90\n3000+ — 120",
+    "anchor": "initial-meld-requirement",
+    "variant": "canasta",
+    "variantUrl": "dist/standard-52/games/canasta/"
+  },
+  {
+    "game": "standard-52",
+    "gameTitle": "Standard 52-Card Deck",
+    "section": "Canasta (Classic)",
+    "heading": "Melds",
+    "content": "A meld is three or more cards of the same rank, placed face-up in front of the partnership. Valid ranks: 4 through Ace 2s and Jokers are wild; 3s are special. Natural melds contain no wild cards. Mixed melds contain 1–3 wild cards. Partners share their melds: either partner may extend any of their partnership’s melds on their turn.",
+    "anchor": "melds",
+    "variant": "canasta",
+    "variantUrl": "dist/standard-52/games/canasta/"
+  },
+  {
+    "game": "standard-52",
+    "gameTitle": "Standard 52-Card Deck",
+    "section": "Canasta (Classic)",
+    "heading": "Canastas",
+    "content": "A Canasta is a complete meld of 7 or more cards. It is squared into a pile: - Natural Canasta Clean: 7 or more natural cards no wild cards. Marked with a red card on top. Bonus: 500 points. - Mixed Canasta Dirty: 7 or more cards including at least one wild card. Marked with a black card on top. Bonus: 300 points. A partnership must have at least one complete Canasta to go out.",
+    "anchor": "canastas",
+    "variant": "canasta",
+    "variantUrl": "dist/standard-52/games/canasta/"
+  },
+  {
+    "game": "standard-52",
+    "gameTitle": "Standard 52-Card Deck",
+    "section": "Canasta (Classic)",
+    "heading": "Going Out",
+    "content": "A player goes out by melding all remaining cards from their hand including the final discard, or by melding all without discarding. The partnership must have at least one Canasta. Asking permission: A player may ask their partner “Can I go out?” before going out; the partner must answer yes or no, and the decision is binding. This optional courtesy prevents surprise endings. Going out concealed: If a player melds their entire hand in one turn without having previously melded any cards, they have gone out concealed. Bonus: 100 extra points in addition to the standard 100 go-out bonus.",
+    "anchor": "going-out",
+    "variant": "canasta",
+    "variantUrl": "dist/standard-52/games/canasta/"
+  },
+  {
+    "game": "standard-52",
+    "gameTitle": "Standard 52-Card Deck",
+    "section": "Canasta (Classic)",
+    "heading": "Scoring (End of Hand)",
+    "content": "Going-out bonus: 100 points. Each partnership scores: - Value of all cards in completed melds and canastas - Canasta bonuses 500 per natural, 300 per mixed - Red 3 bonuses if at least one canasta held - Going-out bonus if applicable Minus: - Value of cards remaining in hand cards not melded - Red 3 penalties if no canasta held, Red 3s count against",
+    "anchor": "scoring-end-of-hand",
+    "variant": "canasta",
+    "variantUrl": "dist/standard-52/games/canasta/"
+  },
+  {
+    "game": "standard-52",
+    "gameTitle": "Standard 52-Card Deck",
+    "section": "Canasta (Classic)",
+    "heading": "End of Game",
+    "content": "The first partnership to accumulate 5000 or more points at the end of a hand wins.",
+    "anchor": "end-of-game",
+    "variant": "canasta",
+    "variantUrl": "dist/standard-52/games/canasta/"
+  },
+  {
+    "game": "standard-52",
+    "gameTitle": "Standard 52-Card Deck",
+    "section": "Canasta (Classic)",
+    "heading": "Attribution",
+    "content": "Canasta. Originated in Montevideo, Uruguay, approximately 1939. Popularized internationally in the 1950s. Standard North American rules confirmed from Pagat.com and Hoyle’s Rules of Games. Public domain rule set.",
+    "anchor": "attribution",
+    "variant": "canasta",
+    "variantUrl": "dist/standard-52/games/canasta/"
+  },
+  {
+    "game": "standard-52",
+    "gameTitle": "Standard 52-Card Deck",
+    "section": "Crazy Eights",
+    "heading": "Crazy Eights",
+    "content": "Crazy Eights is a shedding-type card game where players race to empty their hand by matching the top card of the discard pile by suit or rank. Eights are wild. It is the direct ancestor of Uno and Skip-Bo.",
+    "anchor": "crazy-eights",
+    "variant": "crazy-eights",
+    "variantUrl": "dist/standard-52/games/crazy-eights/"
+  },
+  {
+    "game": "standard-52",
+    "gameTitle": "Standard 52-Card Deck",
+    "section": "Crazy Eights",
+    "heading": "Players and Cards",
+    "content": "2–5 players. Standard 52-card deck use two decks for 5+ players.",
+    "anchor": "players-and-cards",
+    "variant": "crazy-eights",
+    "variantUrl": "dist/standard-52/games/crazy-eights/"
+  },
+  {
+    "game": "standard-52",
+    "gameTitle": "Standard 52-Card Deck",
+    "section": "Crazy Eights",
+    "heading": "The Deal",
+    "content": "Remaining cards form the stock face-down. Top card is turned face-up to start the discard pile. If it is an 8, bury it and reveal the next card.\nPlayers — Cards dealt\n2 — 7 each\n3–5 — 5 each",
+    "anchor": "the-deal",
+    "variant": "crazy-eights",
+    "variantUrl": "dist/standard-52/games/crazy-eights/"
+  },
+  {
+    "game": "standard-52",
+    "gameTitle": "Standard 52-Card Deck",
+    "section": "Crazy Eights",
+    "heading": "The Turn",
+    "content": "On each turn, a player must play one card from their hand onto the discard pile. A card is legal if it: - Matches the suit of the top discard, OR - Matches the rank of the top discard, OR - Is an 8 wild — always playable When playing an 8, the player declares any suit. The next player must play a card of that declared suit, or another 8. If a player cannot play, they draw from the stock one card at a time until they can play or the stock is exhausted. If the stock is exhausted and they still cannot play, they pass.",
+    "anchor": "the-turn",
+    "variant": "crazy-eights",
+    "variantUrl": "dist/standard-52/games/crazy-eights/"
+  },
+  {
+    "game": "standard-52",
+    "gameTitle": "Standard 52-Card Deck",
+    "section": "Crazy Eights",
+    "heading": "Winning",
+    "content": "The first player to empty their hand wins the round.",
+    "anchor": "winning",
+    "variant": "crazy-eights",
+    "variantUrl": "dist/standard-52/games/crazy-eights/"
+  },
+  {
+    "game": "standard-52",
+    "gameTitle": "Standard 52-Card Deck",
+    "section": "Crazy Eights",
+    "heading": "Scoring (optional)",
+    "content": "The winner scores points equal to the cards remaining in opponents' hands: each 8 = 50 points, face cards = 10 points, numbered cards = face value. Play to 100 or 200 points across multiple hands.",
+    "anchor": "scoring-optional",
+    "variant": "crazy-eights",
+    "variantUrl": "dist/standard-52/games/crazy-eights/"
+  },
+  {
+    "game": "standard-52",
+    "gameTitle": "Standard 52-Card Deck",
+    "section": "4-Player Cribbage (Partnership)",
+    "heading": "4-Player Cribbage (Partnership)",
+    "content": "4-Player Cribbage is a partnership game for two teams of two. Partners sit across from each other and combine their scores throughout the game.",
+    "anchor": "4-player-cribbage-partnership",
+    "variant": "four-player-cribbage",
+    "variantUrl": "dist/standard-52/games/four-player-cribbage/"
+  },
+  {
+    "game": "standard-52",
+    "gameTitle": "Standard 52-Card Deck",
+    "section": "4-Player Cribbage (Partnership)",
+    "heading": "The Deal",
+    "content": "Each player is dealt 5 cards and discards 1 card to the crib, giving each player a 4-card hand and a full 4-card crib.",
+    "anchor": "the-deal",
+    "variant": "four-player-cribbage",
+    "variantUrl": "dist/standard-52/games/four-player-cribbage/"
+  },
+  {
+    "game": "standard-52",
+    "gameTitle": "Standard 52-Card Deck",
+    "section": "4-Player Cribbage (Partnership)",
+    "heading": "Teams",
+    "content": "Players sit in alternating team order around the table: Team A — Team B — Team A — Team B. Partners' pegging scores and show scores are combined into a single team total on a shared cribbage board track.",
+    "anchor": "teams",
+    "variant": "four-player-cribbage",
+    "variantUrl": "dist/standard-52/games/four-player-cribbage/"
+  },
+  {
+    "game": "standard-52",
+    "gameTitle": "Standard 52-Card Deck",
+    "section": "4-Player Cribbage (Partnership)",
+    "heading": "Pegging and Show",
+    "content": "Identical to standard Cribbage. Pegging proceeds clockwise from the dealer's left. During the show, hands are scored clockwise from the dealer's left; each partner's points are added to their team's running total. The dealer scores their hand last, then scores the crib.",
+    "anchor": "pegging-and-show",
+    "variant": "four-player-cribbage",
+    "variantUrl": "dist/standard-52/games/four-player-cribbage/"
+  },
+  {
+    "game": "standard-52",
+    "gameTitle": "Standard 52-Card Deck",
+    "section": "4-Player Cribbage (Partnership)",
+    "heading": "Game",
+    "content": "First team to reach 121 points wins. Either partner reaching 121 on the shared track wins the game for the team.",
+    "anchor": "game",
+    "variant": "four-player-cribbage",
+    "variantUrl": "dist/standard-52/games/four-player-cribbage/"
+  },
+  {
+    "game": "standard-52",
+    "gameTitle": "Standard 52-Card Deck",
+    "section": "Cribbage",
+    "heading": "Cribbage",
+    "content": "Cribbage is a two-player card game in which the primary goal is to be the first to peg 121 points on a cribbage board. Points are scored in three phases: the deal crib, the pegging phase playing out cards alternately, and the show hand counting after play. Attributed to the poet Sir John Suckling England, early 17th century.",
+    "anchor": "cribbage",
+    "variant": "cribbage",
+    "variantUrl": "dist/standard-52/games/cribbage/"
+  },
+  {
+    "game": "standard-52",
+    "gameTitle": "Standard 52-Card Deck",
+    "section": "Cribbage",
+    "heading": "The Cribbage Board",
+    "content": "Each player has a track of 120 holes pegging twice around a 60-hole board plus a game hole at 121. Two pegs per player allow tracking from 0 to 121. The game ends immediately when any player’s front peg reaches or passes hole 121.",
+    "anchor": "the-cribbage-board",
+    "variant": "cribbage",
+    "variantUrl": "dist/standard-52/games/cribbage/"
+  },
+  {
+    "game": "standard-52",
+    "gameTitle": "Standard 52-Card Deck",
+    "section": "Cribbage",
+    "heading": "Card Values",
+    "content": "- Number cards A–10: Face value Ace = 1. - Face cards J, Q, K: All worth 10. - Ranking for sequences and cutting: A, 2, 3, 4, 5, 6, 7, 8, 9, 10, J, Q, K Ace is always low.",
+    "anchor": "card-values",
+    "variant": "cribbage",
+    "variantUrl": "dist/standard-52/games/cribbage/"
+  },
+  {
+    "game": "standard-52",
+    "gameTitle": "Standard 52-Card Deck",
+    "section": "Cribbage",
+    "heading": "Deal",
+    "content": "Deal 6 cards each. Each player discards 2 cards face-down to the crib — a second hand owned by the dealer. The crib is scored by the dealer at the end of the round. Strategy note: The non-dealer pone generally avoids giving good cards to the crib; the dealer welcomes strong crib contributions.",
+    "anchor": "deal",
+    "variant": "cribbage",
+    "variantUrl": "dist/standard-52/games/cribbage/"
+  },
+  {
+    "game": "standard-52",
+    "gameTitle": "Standard 52-Card Deck",
+    "section": "Cribbage",
+    "heading": "The Cut (Starter Card)",
+    "content": "After discarding, the non-dealer cuts the remaining deck. The dealer reveals the top card of the lower half — this is the starter card also called the turn-up. It is used in scoring all hands during the show. Nibs Heels: If the starter card is a Jack, the dealer immediately pegs 2 points “Two for his heels”.",
+    "anchor": "the-cut-starter-card",
+    "variant": "cribbage",
+    "variantUrl": "dist/standard-52/games/cribbage/"
+  },
+  {
+    "game": "standard-52",
+    "gameTitle": "Standard 52-Card Deck",
+    "section": "Cribbage",
+    "heading": "Pegging Phase",
+    "content": "Alternating starting with the non-dealer, players lay cards one at a time face-up, calling out the cumulative running total never exceeding 31. Pegging scores during play: Go rule: When a player cannot play without exceeding 31, they say “Go.” The opponent continues playing cards if they can. After a Go or when 31 is reached, the running total resets to 0 and the player who did not last play begins a new sequence.\nEvent — Points\nReaching exactly 15 (cumulative total) — 2\nReaching exactly 31 — 2\n“Go” (opponent cannot play without exceeding 31) — 1\nLast card played (if total is not 31) — 1\nPair (consecutive same-rank card) — 2\nThree of a kind (three consecutive same rank) — 6\nFour of a kind (four consecutive same rank) — 12\nRun of 3 (consecutive ranks in last 3+ cards played) — 3\nRun of 4 — 4\nRun of 5 — 5",
+    "anchor": "pegging-phase",
+    "variant": "cribbage",
+    "variantUrl": "dist/standard-52/games/cribbage/"
+  },
+  {
+    "game": "standard-52",
+    "gameTitle": "Standard 52-Card Deck",
+    "section": "Cribbage",
+    "heading": "The Show (Hand Scoring)",
+    "content": "After pegging, players score their hands using the starter card as a fifth card. The pone non-dealer scores first, then the dealer, then the dealer scores the crib. Scoring combinations each combination scores separately: Maximum hand: 29 points three 5s and a Jack in hand, starter is the 5 of the same suit as the Jack — allowing 8 fifteens, 6 pairs, one nobs.\nCombination — Points — Notes\n**Fifteen:** Any combination of cards summing to 15 — 2 per fifteen — Ace=1, J/Q/K=10\n**Pair:** Two cards of the same rank — 2 per pair\n**Pair Royal (Three of a kind):** — 6 (three pairs)\n**Double Pair Royal (Four of a kind):** — 12 (six pairs)\n**Run of 3:** Three cards in sequence — 3\n**Run of 4:** Four cards in sequence — 4\n**Run of 5:** Five cards in sequence — 5\n**Flush (4 cards same suit in hand):** — 4 — Starter card not required. Not counted in crib unless all 5 cards match.\n**Flush (5 cards same suit, including starter):** — 5\n**Nobs:** Jack of same suit as starter card — 1 — One Jack in hand ",
+    "anchor": "the-show-hand-scoring",
+    "variant": "cribbage",
+    "variantUrl": "dist/standard-52/games/cribbage/"
+  },
+  {
+    "game": "standard-52",
+    "gameTitle": "Standard 52-Card Deck",
+    "section": "Cribbage",
+    "heading": "Muggins (Optional)",
+    "content": "If a player fails to peg points they earned, the opponent may call “Muggins” and claim those points. Commonly used in competitive play; optional in casual games.",
+    "anchor": "muggins-optional",
+    "variant": "cribbage",
+    "variantUrl": "dist/standard-52/games/cribbage/"
+  },
+  {
+    "game": "standard-52",
+    "gameTitle": "Standard 52-Card Deck",
+    "section": "Cribbage",
+    "heading": "Game Variants",
+    "content": "Three-player Cribbage: 5 cards dealt each, 1 discarded to crib; extra card dealt directly to crib. Play proceeds clockwise. First to 121 wins. Four-player Cribbage: Teams of two partners sitting opposite. 5 cards each, 1 discarded to crib. Partners’ scores are combined. First team to 121 wins. Six-card Cribbage: Standard two-player game where 6 cards are dealt and 2 are discarded to the crib same as standard rules above.",
+    "anchor": "game-variants",
+    "variant": "cribbage",
+    "variantUrl": "dist/standard-52/games/cribbage/"
+  },
+  {
+    "game": "standard-52",
+    "gameTitle": "Standard 52-Card Deck",
+    "section": "Cribbage",
+    "heading": "Attribution",
+    "content": "Cribbage. Attributed to Sir John Suckling, England, early 17th century. Public domain. Standard rules confirmed from Pagat.com and the American Cribbage Congress.",
+    "anchor": "attribution",
+    "variant": "cribbage",
+    "variantUrl": "dist/standard-52/games/cribbage/"
+  },
+  {
+    "game": "standard-52",
+    "gameTitle": "Standard 52-Card Deck",
+    "section": "3-Player Cribbage",
+    "heading": "3-Player Cribbage",
+    "content": "3-Player Cribbage adapts standard Cribbage for three players. The scoring and pegging rules are identical to the 2-player game; only the deal and crib construction differ.",
+    "anchor": "3-player-cribbage",
+    "variant": "three-player-cribbage",
+    "variantUrl": "dist/standard-52/games/three-player-cribbage/"
+  },
+  {
+    "game": "standard-52",
+    "gameTitle": "Standard 52-Card Deck",
+    "section": "3-Player Cribbage",
+    "heading": "The Deal",
+    "content": "Each player is dealt 5 cards. Each player discards 1 card face-down to the crib. One additional card is dealt from the top of the deck directly to the crib, face-down. The crib contains 4 cards 1 from each player + 1 from the deck — the same size as in standard 2-player Cribbage. The crib belongs to the dealer and is scored by the dealer at the end of the hand. Deal rotates clockwise each hand.",
+    "anchor": "the-deal",
+    "variant": "three-player-cribbage",
+    "variantUrl": "dist/standard-52/games/three-player-cribbage/"
+  },
+  {
+    "game": "standard-52",
+    "gameTitle": "Standard 52-Card Deck",
+    "section": "3-Player Cribbage",
+    "heading": "Turn-Up (Starter Card)",
+    "content": "After discarding to the crib, the player to the dealer's left cuts the deck. The dealer turns up the top card of the lower half as the starter card. If it is a Jack, the dealer scores 2 points immediately His Heels.",
+    "anchor": "turn-up-starter-card",
+    "variant": "three-player-cribbage",
+    "variantUrl": "dist/standard-52/games/three-player-cribbage/"
+  },
+  {
+    "game": "standard-52",
+    "gameTitle": "Standard 52-Card Deck",
+    "section": "3-Player Cribbage",
+    "heading": "Pegging",
+    "content": "Players peg in clockwise order the player left of the dealer leads first. Rules are identical to 2-player Cribbage: - Play a card and announce the running total - Score points for pairs, runs, fifteens, and reaching exactly 31 - Say \"Go\" if unable to play without exceeding 31; the last player to play scores 1 point - After \"Go\", the count resets to zero - Last card played at the end of pegging scores 1 point Go or 31",
+    "anchor": "pegging",
+    "variant": "three-player-cribbage",
+    "variantUrl": "dist/standard-52/games/three-player-cribbage/"
+  },
+  {
+    "game": "standard-52",
+    "gameTitle": "Standard 52-Card Deck",
+    "section": "3-Player Cribbage",
+    "heading": "The Show",
+    "content": "After pegging, each player scores their hand 4 cards + starter, in clockwise order starting from the dealer's left. The dealer scores last, then turns up and scores the crib. Scoring is identical to standard Cribbage: fifteens 2 pts each, pairs/three-of-a-kind/four-of-a-kind, runs, flush 4+ cards of same suit in hand; 5 if starter matches, and Nobs Jack of starter's suit in hand = 1 pt.",
+    "anchor": "the-show",
+    "variant": "three-player-cribbage",
+    "variantUrl": "dist/standard-52/games/three-player-cribbage/"
+  },
+  {
+    "game": "standard-52",
+    "gameTitle": "Standard 52-Card Deck",
+    "section": "3-Player Cribbage",
+    "heading": "Game",
+    "content": "First player to reach 121 points wins. If a player reaches 121 during pegging, the game ends immediately.",
+    "anchor": "game",
+    "variant": "three-player-cribbage",
+    "variantUrl": "dist/standard-52/games/three-player-cribbage/"
+  },
+  {
+    "game": "standard-52",
+    "gameTitle": "Standard 52-Card Deck",
+    "section": "3-Player Cribbage",
+    "heading": "Skunk Rule (optional)",
+    "content": "A player not yet past 90 points when the winner reaches 121 is skunked loses double. Not yet past 60 is double-skunked loses triple.",
+    "anchor": "skunk-rule-optional",
+    "variant": "three-player-cribbage",
+    "variantUrl": "dist/standard-52/games/three-player-cribbage/"
+  },
+  {
+    "game": "standard-52",
+    "gameTitle": "Standard 52-Card Deck",
+    "section": "Euchre",
+    "heading": "Euchre",
+    "content": "Euchre is a partnership trick-taking game for four players using only the 24 highest-ranked cards from a standard deck remove all 2s through 8s. It is especially popular in the American Midwest and Ontario, Canada. The critical Euchre rule is the Bower system: the two Jacks of the trump suit and its same-color counterpart suit are the two most powerful cards in the game.",
+    "anchor": "euchre",
+    "variant": "euchre",
+    "variantUrl": "dist/standard-52/games/euchre/"
+  },
+  {
+    "game": "standard-52",
+    "gameTitle": "Standard 52-Card Deck",
+    "section": "Euchre",
+    "heading": "Deck",
+    "content": "Remove all 2s, 3s, 4s, 5s, 6s, 7s, and 8s. Play with the remaining 24 cards:\nSuit — Cards\nEach of 4 suits — 9, 10, J, Q, K, A",
+    "anchor": "deck",
+    "variant": "euchre",
+    "variantUrl": "dist/standard-52/games/euchre/"
+  },
+  {
+    "game": "standard-52",
+    "gameTitle": "Standard 52-Card Deck",
+    "section": "Euchre",
+    "heading": "Partnerships and Seating",
+    "content": "- 4 players in fixed partnerships: Player 1 & Player 3 vs. Player 2 & Player 4. - Partners sit opposite each other. - Dealer rotates clockwise each hand.",
+    "anchor": "partnerships-and-seating",
+    "variant": "euchre",
+    "variantUrl": "dist/standard-52/games/euchre/"
+  },
+  {
+    "game": "standard-52",
+    "gameTitle": "Standard 52-Card Deck",
+    "section": "Euchre",
+    "heading": "Deal",
+    "content": "Deal 5 cards to each player 20 total in two rounds of dealing — typically 2–3 or 3–2 cards per player per round exact dealing pattern is regional but the result is always 5 cards each. Turn the 21st card face-up on the table to propose trump. The remaining 3 cards are set aside the kitty or blind and are not used.",
+    "anchor": "deal",
+    "variant": "euchre",
+    "variantUrl": "dist/standard-52/games/euchre/"
+  },
+  {
+    "game": "standard-52",
+    "gameTitle": "Standard 52-Card Deck",
+    "section": "Euchre",
+    "heading": "Selecting Trump",
+    "content": "Round 1: Starting with the player left of the dealer, each player may order up tell the dealer to take the upcard, making its suit trump or pass. If a player orders up: - The dealer takes the upcard into hand and discards one card face-down the kitty. - The suit of the upcard becomes trump for this hand. - The player who ordered up or their partner becomes the maker. Round 2 if all pass in Round 1: The upcard is turned face-down and play proceeds to Round 2. Starting with the player left of the dealer, each player may name any suit except the suit of the turned-down upcard as trump or pass. The dealer must name trump if all others pass stuck the dealer. The player who names trump becomes the maker.",
+    "anchor": "selecting-trump",
+    "variant": "euchre",
+    "variantUrl": "dist/standard-52/games/euchre/"
+  },
+  {
+    "game": "standard-52",
+    "gameTitle": "Standard 52-Card Deck",
+    "section": "Euchre",
+    "heading": "Trump and the Bower System",
+    "content": "Once trump is set, the trump suit card rankings change: The Left Bower belongs to the trump suit for all purposes — it is played as trump, not as its original suit. Its original suit effectively loses its Jack for that hand. Non-trump suit rankings high to low: A, K, Q, J if not Left Bower, 10, 9.\nCard — Rank (in trump suit)\n**Right Bower** — Jack of trump suit — Highest trump card\n**Left Bower** — Jack of the same-color suit (e.g., if trump is Hearts, the Jack of Diamonds is Left Bower) — Second-highest trump card; treated as trump (not as its original suit)\nAce of trump — Third-highest trump card\nK, Q, 10, 9 of trump — In descending order",
+    "anchor": "trump-and-the-bower-system",
+    "variant": "euchre",
+    "variantUrl": "dist/standard-52/games/euchre/"
+  },
+  {
+    "game": "standard-52",
+    "gameTitle": "Standard 52-Card Deck",
+    "section": "Euchre",
+    "heading": "Playing Tricks",
+    "content": "The player to the left of the dealer leads the first trick. Players must follow suit if able. If unable, they may play any card including trump. The highest card of the led suit wins the trick, unless trump has been played, in which case the highest trump wins. The winner of each trick leads the next.",
+    "anchor": "playing-tricks",
+    "variant": "euchre",
+    "variantUrl": "dist/standard-52/games/euchre/"
+  },
+  {
+    "game": "standard-52",
+    "gameTitle": "Standard 52-Card Deck",
+    "section": "Euchre",
+    "heading": "Going Alone",
+    "content": "When a player orders up or names trump, they may declare “Going Alone” before the first lead. Their partner sits out the hand discards hand face-down. The lone player competes against both opponents. If a lone player wins all 5 tricks, they score 4 points. Winning 3–4 tricks: 1 point. Losing: opponents score 2 points.",
+    "anchor": "going-alone",
+    "variant": "euchre",
+    "variantUrl": "dist/standard-52/games/euchre/"
+  },
+  {
+    "game": "standard-52",
+    "gameTitle": "Standard 52-Card Deck",
+    "section": "Euchre",
+    "heading": "Scoring",
+    "content": "\nResult — Points\nMakers win 3 or 4 tricks — 1 point\nMakers win all 5 tricks (March) — 2 points\nMakers go alone and win 3–4 tricks — 1 point\nMakers go alone and win all 5 tricks — 4 points\nMakers win fewer than 3 tricks (Euchre) — Opponents score 2 points",
+    "anchor": "scoring",
+    "variant": "euchre",
+    "variantUrl": "dist/standard-52/games/euchre/"
+  },
+  {
+    "game": "standard-52",
+    "gameTitle": "Standard 52-Card Deck",
+    "section": "Euchre",
+    "heading": "First to 10 Points",
+    "content": "The first partnership to reach 10 points wins the game. Scoring is tracked with cards 5 of a suit covering a 6, or a 3 and 4 held together or any scoring method agreed upon.",
+    "anchor": "first-to-10-points",
+    "variant": "euchre",
+    "variantUrl": "dist/standard-52/games/euchre/"
+  },
+  {
+    "game": "standard-52",
+    "gameTitle": "Standard 52-Card Deck",
+    "section": "Euchre",
+    "heading": "Variants",
+    "content": "Bid Euchre Pepper: Players bid the exact number of tricks they expect to take; no upcard / Round 2 selection. Wider bidding options. Stick the Dealer: A mandatory rule in some regions — if all three players pass in Round 2, the dealer is forced to name trump cannot pass. This prevents passed-out hands and is common in North American play. No-trump declaration: In some variants, players may call “No Trump” in Round 2, in which case there is no trump suit for the hand.",
+    "anchor": "variants",
+    "variant": "euchre",
+    "variantUrl": "dist/standard-52/games/euchre/"
+  },
+  {
+    "game": "standard-52",
+    "gameTitle": "Standard 52-Card Deck",
+    "section": "Euchre",
+    "heading": "Attribution",
+    "content": "Euchre. Traditional card game, likely descended from the Alsatian game Juckerspiel. Widely played in North America since the 19th century. Public domain rule set confirmed from Pagat.com.",
+    "anchor": "attribution",
+    "variant": "euchre",
+    "variantUrl": "dist/standard-52/games/euchre/"
+  },
+  {
+    "game": "standard-52",
+    "gameTitle": "Standard 52-Card Deck",
+    "section": "FreeCell",
+    "heading": "FreeCell",
+    "content": "FreeCell is a solitaire card game where all 52 cards are dealt face-up at the start. Because every card is visible, almost every deal is solvable with optimal play. The game rewards careful planning over multiple moves.",
+    "anchor": "freecell",
+    "variant": "freecell",
+    "variantUrl": "dist/standard-52/games/freecell/"
+  },
+  {
+    "game": "standard-52",
+    "gameTitle": "Standard 52-Card Deck",
+    "section": "FreeCell",
+    "heading": "Layout",
+    "content": "Deal all 52 cards face-up into 8 tableau columns: - Columns 1–4: 7 cards each 28 cards - Columns 5–8: 6 cards each 24 cards Leave space for: - 4 free cells top left: single-card temporary storage, empty at start - 4 foundations top right: one per suit, empty at start",
+    "anchor": "layout",
+    "variant": "freecell",
+    "variantUrl": "dist/standard-52/games/freecell/"
+  },
+  {
+    "game": "standard-52",
+    "gameTitle": "Standard 52-Card Deck",
+    "section": "FreeCell",
+    "heading": "Foundations",
+    "content": "Build each foundation up by suit from Ace to King A→2→3→…→K. Cards moved to a foundation may not be moved back.",
+    "anchor": "foundations",
+    "variant": "freecell",
+    "variantUrl": "dist/standard-52/games/freecell/"
+  },
+  {
+    "game": "standard-52",
+    "gameTitle": "Standard 52-Card Deck",
+    "section": "FreeCell",
+    "heading": "Tableau Play",
+    "content": "Only the bottom card of each column is available to move. A card may be moved to: - A tableau column if it is one rank lower and opposite colour red on black, black on red - A free cell one card per free cell, any card - A foundation if it is the correct next card for that suit A card in a free cell may be moved to a tableau column following the colour/rank rule, to a foundation, or to an empty column. Any card may be moved to an empty tableau column.",
+    "anchor": "tableau-play",
+    "variant": "freecell",
+    "variantUrl": "dist/standard-52/games/freecell/"
+  },
+  {
+    "game": "standard-52",
+    "gameTitle": "Standard 52-Card Deck",
+    "section": "FreeCell",
+    "heading": "Supermove",
+    "content": "A sequence of cards in alternating colour and descending rank may be moved as a unit if there is enough free space. Maximum cards movable as a unit = free cells available + 1 × 2^empty tableau columns. Most software handles this automatically.",
+    "anchor": "supermove",
+    "variant": "freecell",
+    "variantUrl": "dist/standard-52/games/freecell/"
+  },
+  {
+    "game": "standard-52",
+    "gameTitle": "Standard 52-Card Deck",
+    "section": "FreeCell",
+    "heading": "Winning",
+    "content": "All 52 cards moved to the four foundations each built from Ace to King by suit. The game is lost when no legal moves remain.",
+    "anchor": "winning",
+    "variant": "freecell",
+    "variantUrl": "dist/standard-52/games/freecell/"
+  },
+  {
+    "game": "standard-52",
+    "gameTitle": "Standard 52-Card Deck",
+    "section": "Gin Rummy",
+    "heading": "Gin Rummy",
+    "content": "Gin Rummy is a two-player draw-and-discard card game. Players draw and discard to build melds sets and runs in their hand, aiming to reduce unmatched card value deadwood to zero or low enough to knock. The game was created by Elwood T. Baker and his son C. Graham Baker in 1909.",
+    "anchor": "gin-rummy",
+    "variant": "gin-rummy",
+    "variantUrl": "dist/standard-52/games/gin-rummy/"
+  },
+  {
+    "game": "standard-52",
+    "gameTitle": "Standard 52-Card Deck",
+    "section": "Gin Rummy",
+    "heading": "Deal",
+    "content": "Deal 10 cards to each player. Place the remaining cards face-down as the stock. Turn the top card face-up to start the discard pile.",
+    "anchor": "deal",
+    "variant": "gin-rummy",
+    "variantUrl": "dist/standard-52/games/gin-rummy/"
+  },
+  {
+    "game": "standard-52",
+    "gameTitle": "Standard 52-Card Deck",
+    "section": "Gin Rummy",
+    "heading": "Card Values (for deadwood)",
+    "content": "- Ace: 1 point - Number cards 2–10: Face value - Face cards J, Q, K: 10 points",
+    "anchor": "card-values-for-deadwood",
+    "variant": "gin-rummy",
+    "variantUrl": "dist/standard-52/games/gin-rummy/"
+  },
+  {
+    "game": "standard-52",
+    "gameTitle": "Standard 52-Card Deck",
+    "section": "Gin Rummy",
+    "heading": "Melds",
+    "content": "A meld is a matched set of cards that score no deadwood: - Set: Three or four cards of the same rank e.g., 7♥ 7♦ 7♣. - Run Sequence: Three or more cards of the same suit in consecutive rank order e.g., 4♥ 5♥ 6♥. Ace is always low A–2–3 is valid; Q–K–A is not. A card may belong to only one meld. Unmelded cards are deadwood.",
+    "anchor": "melds",
+    "variant": "gin-rummy",
+    "variantUrl": "dist/standard-52/games/gin-rummy/"
+  },
+  {
+    "game": "standard-52",
+    "gameTitle": "Standard 52-Card Deck",
+    "section": "Gin Rummy",
+    "heading": "Taking a Turn",
+    "content": "On each turn, a player must: 1. Draw: Take the top card from either the stock or the discard pile. 2. Discard: Place one card face-up on top of the discard pile may be the card just drawn from stock, but not the card drawn from the discard pile on the same turn. First turn exception: The non-dealer may take the face-up card or pass. If they pass, the dealer may take it or pass. If both pass, the non-dealer draws from stock and the game begins normally.",
+    "anchor": "taking-a-turn",
+    "variant": "gin-rummy",
+    "variantUrl": "dist/standard-52/games/gin-rummy/"
+  },
+  {
+    "game": "standard-52",
+    "gameTitle": "Standard 52-Card Deck",
+    "section": "Gin Rummy",
+    "heading": "Knocking",
+    "content": "After drawing but before discarding, a player may knock if their deadwood totals 10 points or less. They discard one card face-down the knock card and lay all their melds face-up. The opponent then lays off any cards from their hand onto the knocker’s melds to reduce their own deadwood, then reveals their remaining deadwood. Scoring the knock: - If the knocker’s deadwood < opponent’s deadwood after layoffs: Knocker scores the difference. - If the knocker’s deadwood ≥ opponent’s deadwood after layoffs: Undercut. Opponent scores the difference plus a 25-point undercut bonus.",
+    "anchor": "knocking",
+    "variant": "gin-rummy",
+    "variantUrl": "dist/standard-52/games/gin-rummy/"
+  },
+  {
+    "game": "standard-52",
+    "gameTitle": "Standard 52-Card Deck",
+    "section": "Gin Rummy",
+    "heading": "Going Gin",
+    "content": "If a player knocks with zero deadwood all 10 cards in melds, they have gone Gin. The opponent may not lay off cards. The Gin player scores the opponent’s full deadwood plus a 25-point Gin bonus.",
+    "anchor": "going-gin",
+    "variant": "gin-rummy",
+    "variantUrl": "dist/standard-52/games/gin-rummy/"
+  },
+  {
+    "game": "standard-52",
+    "gameTitle": "Standard 52-Card Deck",
+    "section": "Gin Rummy",
+    "heading": "Big Gin",
+    "content": "If a player can meld all 11 cards in hand after drawing, before discarding — i.e., all 11 form valid melds — they may declare Big Gin without discarding. Score: opponent’s deadwood + 31 points.",
+    "anchor": "big-gin",
+    "variant": "gin-rummy",
+    "variantUrl": "dist/standard-52/games/gin-rummy/"
+  },
+  {
+    "game": "standard-52",
+    "gameTitle": "Standard 52-Card Deck",
+    "section": "Gin Rummy",
+    "heading": "End of Stock",
+    "content": "If the stock reaches 2 cards and neither player has knocked, the hand ends in a draw with no points scored. The same dealer deals the next hand.",
+    "anchor": "end-of-stock",
+    "variant": "gin-rummy",
+    "variantUrl": "dist/standard-52/games/gin-rummy/"
+  },
+  {
+    "game": "standard-52",
+    "gameTitle": "Standard 52-Card Deck",
+    "section": "Gin Rummy",
+    "heading": "Game Scoring",
+    "content": "Play continues hand by hand until one player reaches 100 or more points. End-of-game bonuses: Final score = game points + box bonuses + shutout bonus if applicable. The player with more total points wins.\nBonus — Points\nGame bonus (winner) — 100\nBox bonus (per hand won) — 25 per hand\nShutout bonus (opponent scored 0) — Additional 100 (total game bonus becomes 200)",
+    "anchor": "game-scoring",
+    "variant": "gin-rummy",
+    "variantUrl": "dist/standard-52/games/gin-rummy/"
+  },
+  {
+    "game": "standard-52",
+    "gameTitle": "Standard 52-Card Deck",
+    "section": "Gin Rummy",
+    "heading": "Attribution",
+    "content": "Gin Rummy. Created by Elwood T. Baker and C. Graham Baker, 1909. Public domain. Standard rules confirmed from Pagat.com.",
+    "anchor": "attribution",
+    "variant": "gin-rummy",
+    "variantUrl": "dist/standard-52/games/gin-rummy/"
+  },
+  {
+    "game": "standard-52",
+    "gameTitle": "Standard 52-Card Deck",
+    "section": "Hearts",
+    "heading": "Hearts",
+    "content": "Hearts is a trick-avoidance game for four players. The goal is to end the game with the lowest score. Hearts cards and the Queen of Spades carry penalty points — players want to avoid winning tricks containing these cards. However, a player who collects every penalty card in a single hand “Shoots the Moon” and scores zero while opponents each receive 26 points.",
+    "anchor": "hearts",
+    "variant": "hearts",
+    "variantUrl": "dist/standard-52/games/hearts/"
+  },
+  {
+    "game": "standard-52",
+    "gameTitle": "Standard 52-Card Deck",
+    "section": "Hearts",
+    "heading": "Setup",
+    "content": "- 4 players. Standard 52-card deck, no jokers. - Shuffle and deal all 52 cards 13 per player.",
+    "anchor": "setup",
+    "variant": "hearts",
+    "variantUrl": "dist/standard-52/games/hearts/"
+  },
+  {
+    "game": "standard-52",
+    "gameTitle": "Standard 52-Card Deck",
+    "section": "Hearts",
+    "heading": "Passing",
+    "content": "Before play begins, each player selects 3 cards from their hand and passes them to another player. The passing direction rotates each hand: - Hand 1: Pass to the left - Hand 2: Pass to the right - Hand 3: Pass across opposite player - Hand 4: No passing hold all cards - Repeat cycle. Players receive cards from the appropriate direction before looking at what they were passed.",
+    "anchor": "passing",
+    "variant": "hearts",
+    "variantUrl": "dist/standard-52/games/hearts/"
+  },
+  {
+    "game": "standard-52",
+    "gameTitle": "Standard 52-Card Deck",
+    "section": "Hearts",
+    "heading": "Lead",
+    "content": "The player holding the 2 of Clubs leads it to begin the first trick. In subsequent tricks, the winner of the previous trick leads.",
+    "anchor": "lead",
+    "variant": "hearts",
+    "variantUrl": "dist/standard-52/games/hearts/"
+  },
+  {
+    "game": "standard-52",
+    "gameTitle": "Standard 52-Card Deck",
+    "section": "Hearts",
+    "heading": "Following Suit and Breaking Hearts",
+    "content": "- Must follow suit if able. If unable to follow suit, any card may be played. - Hearts may not be led until Hearts has been “broken” — that is, until a Heart has been discarded played off-suit on a previous trick. Exception: if a player has only Hearts remaining, they may lead a Heart regardless. - First trick restriction: No penalty cards Hearts or Queen of Spades may be played on the first trick, unless the player has no Clubs.",
+    "anchor": "following-suit-and-breaking-hearts",
+    "variant": "hearts",
+    "variantUrl": "dist/standard-52/games/hearts/"
+  },
+  {
+    "game": "standard-52",
+    "gameTitle": "Standard 52-Card Deck",
+    "section": "Hearts",
+    "heading": "Trick Winning",
+    "content": "Highest card of the led suit wins the trick. There is no trump suit. The winner of each trick collects the cards and leads the next trick.",
+    "anchor": "trick-winning",
+    "variant": "hearts",
+    "variantUrl": "dist/standard-52/games/hearts/"
+  },
+  {
+    "game": "standard-52",
+    "gameTitle": "Standard 52-Card Deck",
+    "section": "Hearts",
+    "heading": "Card Rankings",
+    "content": "Within each suit high to low: A, K, Q, J, 10, 9, 8, 7, 6, 5, 4, 3, 2.",
+    "anchor": "card-rankings",
+    "variant": "hearts",
+    "variantUrl": "dist/standard-52/games/hearts/"
+  },
+  {
+    "game": "standard-52",
+    "gameTitle": "Standard 52-Card Deck",
+    "section": "Hearts",
+    "heading": "Penalty Cards",
+    "content": "The Jack of Diamonds “Parker” or “Black Maria” variant sometimes awards −10 points to whoever wins it — this is optional and not part of the standard rules.\nCard — Penalty Points\nEach Heart — 1 point\nQueen of Spades — 13 points\n**Total per hand** — **26 points**",
+    "anchor": "penalty-cards",
+    "variant": "hearts",
+    "variantUrl": "dist/standard-52/games/hearts/"
+  },
+  {
+    "game": "standard-52",
+    "gameTitle": "Standard 52-Card Deck",
+    "section": "Hearts",
+    "heading": "Shooting the Moon",
+    "content": "If one player collects ALL 13 Hearts AND the Queen of Spades in a single hand, that player “Shoots the Moon.” Rather than scoring 26 points, the shooter may choose: - Add 26 points to each opponent’s score shooter scores 0, OR - Subtract 26 points from their own score. The shooter selects which option is more advantageous. If the shooter’s score would go below zero with the subtraction option, it becomes 0. Shooting the Sun optional: If the same player also wins all 13 tricks not just the penalty cards, they score 0 and all others receive 52 points double the moon. This is an optional rule.",
+    "anchor": "shooting-the-moon",
+    "variant": "hearts",
+    "variantUrl": "dist/standard-52/games/hearts/"
+  },
+  {
+    "game": "standard-52",
+    "gameTitle": "Standard 52-Card Deck",
+    "section": "Hearts",
+    "heading": "End of Hand",
+    "content": "After all 13 tricks are played, each player scores penalty points for the penalty cards in their won tricks. Scores are cumulative across hands.",
+    "anchor": "end-of-hand",
+    "variant": "hearts",
+    "variantUrl": "dist/standard-52/games/hearts/"
+  },
+  {
+    "game": "standard-52",
+    "gameTitle": "Standard 52-Card Deck",
+    "section": "Hearts",
+    "heading": "End of Game",
+    "content": "The game ends after the hand in which any player reaches 100 points or more. The player with the lowest score at that point wins. If two or more players tie for lowest, play continues until the tie is broken.",
+    "anchor": "end-of-game",
+    "variant": "hearts",
+    "variantUrl": "dist/standard-52/games/hearts/"
+  },
+  {
+    "game": "standard-52",
+    "gameTitle": "Standard 52-Card Deck",
+    "section": "Hearts",
+    "heading": "Variations",
+    "content": "Omnibus Hearts: Adds the Jack of Diamonds as a bonus card player who wins it subtracts 10 from their score. Makes Shooting the Moon include winning the Jack of Diamonds too for the full bonus. 3-Player Hearts: Remove the 2 of Clubs from the deck deal 17 cards each. The player with the 2 of Diamonds leads. 5-Player Hearts: Remove the 2 of Clubs and 2 of Diamonds deal 10 cards each.",
+    "anchor": "variations",
+    "variant": "hearts",
+    "variantUrl": "dist/standard-52/games/hearts/"
+  },
+  {
+    "game": "standard-52",
+    "gameTitle": "Standard 52-Card Deck",
+    "section": "Hearts",
+    "heading": "Attribution",
+    "content": "Hearts. Traditional American card game, widely popular from the 19th century onward. Public domain. Standard rules confirmed from Pagat.com.",
+    "anchor": "attribution",
+    "variant": "hearts",
+    "variantUrl": "dist/standard-52/games/hearts/"
+  },
+  {
+    "game": "standard-52",
+    "gameTitle": "Standard 52-Card Deck",
+    "section": "Klondike Solitaire",
+    "heading": "Klondike Solitaire",
+    "content": "Klondike is the most widely played solitaire patience game in the world and the game most people mean when they say “Solitaire.” The goal is to move all 52 cards to four foundation piles, one per suit, built from Ace to King.",
+    "anchor": "klondike-solitaire",
+    "variant": "klondike",
+    "variantUrl": "dist/standard-52/games/klondike/"
+  },
+  {
+    "game": "standard-52",
+    "gameTitle": "Standard 52-Card Deck",
+    "section": "Klondike Solitaire",
+    "heading": "Setup",
+    "content": "Foundations 4 piles, top right: Start empty. Each foundation is built up in suit from Ace ↓ to King ↑. Completed foundation: A, 2, 3, 4, 5, 6, 7, 8, 9, 10, J, Q, K. Tableau 7 columns: - Column 1: 1 card face-up - Column 2: 2 cards 1 face-down, 1 face-up - Column 3: 3 cards 2 face-down, 1 face-up - Column 4: 4 cards 3 face-down, 1 face-up - Column 5: 5 cards 4 face-down, 1 face-up - Column 6: 6 cards 5 face-down, 1 face-up - Column 7: 7 cards 6 face-down, 1 face-up Total dealt: 28 cards. The remaining 24 cards form the stock.",
+    "anchor": "setup",
+    "variant": "klondike",
+    "variantUrl": "dist/standard-52/games/klondike/"
+  },
+  {
+    "game": "standard-52",
+    "gameTitle": "Standard 52-Card Deck",
+    "section": "Klondike Solitaire",
+    "heading": "Building the Tableau",
+    "content": "Face-up cards in the tableau may be moved according to these rules: - Cards are stacked in descending rank King = high, Ace = low. - Colors must alternate: a red card on a black card, or a black card on a red card. - A face-up card or sequence of face-up cards may be moved onto any tableau card that is one rank higher and of the opposite color. - An empty tableau column may only receive a King or a sequence headed by a King. - When a face-down card is exposed all face-up cards above it have been moved, it is turned face-up. Example: A red 7 may be placed on a black 8. A black 6 may then be placed on that red 7, and so on.",
+    "anchor": "building-the-tableau",
+    "variant": "klondike",
+    "variantUrl": "dist/standard-52/games/klondike/"
+  },
+  {
+    "game": "standard-52",
+    "gameTitle": "Standard 52-Card Deck",
+    "section": "Klondike Solitaire",
+    "heading": "The Stock and Waste Pile",
+    "content": "When no more moves are available in the tableau, the player draws from the stock. Draw 1: Flip one card at a time from the stock to the waste pile. The top card of the waste pile is always available to play. Draw 3: Flip three cards at a time from the stock to the waste pile. Only the top card of the waste pile is available. This is the traditional rule and makes the game significantly harder. Recycling the stock: When the stock is exhausted, flip the waste pile over without shuffling to form a new stock and continue drawing. In classic Klondike, the stock may be recycled an unlimited number of times infinite pass — though many competitive versions limit redeals to 3 passes Draw 3 or 1 pass Draw 1 for scoring purposes.",
+    "anchor": "the-stock-and-waste-pile",
+    "variant": "klondike",
+    "variantUrl": "dist/standard-52/games/klondike/"
+  },
+  {
+    "game": "standard-52",
+    "gameTitle": "Standard 52-Card Deck",
+    "section": "Klondike Solitaire",
+    "heading": "Moving to Foundations",
+    "content": "Any available Ace may be moved to an empty foundation at any time. Subsequent cards move to a foundation only when they are one rank higher than the top card of that foundation and of the same suit. Cards may be moved from foundations back to the tableau if needed, though this is rarely advantageous.",
+    "anchor": "moving-to-foundations",
+    "variant": "klondike",
+    "variantUrl": "dist/standard-52/games/klondike/"
+  },
+  {
+    "game": "standard-52",
+    "gameTitle": "Standard 52-Card Deck",
+    "section": "Klondike Solitaire",
+    "heading": "Winning",
+    "content": "The game is won when all 52 cards are on the four foundations each foundation completed from A to K.",
+    "anchor": "winning",
+    "variant": "klondike",
+    "variantUrl": "dist/standard-52/games/klondike/"
+  },
+  {
+    "game": "standard-52",
+    "gameTitle": "Standard 52-Card Deck",
+    "section": "Klondike Solitaire",
+    "heading": "Scoring (Microsoft / Classic)",
+    "content": "Many digital implementations use a point system: Untimed scoring: Bonus = 700 − total time in seconds, multiplied by some factor in some implementations.\nAction — Points\nMoving a card from stock to tableau — 5\nMoving a card to a foundation — 10\nFlipping a face-down tableau card — 5\nMoving a card from waste to tableau — 5\nMoving a card back from foundation to tableau — ∡5\nEach 10 seconds elapsed — ∡2 (timed scoring)",
+    "anchor": "scoring-microsoft-classic",
+    "variant": "klondike",
+    "variantUrl": "dist/standard-52/games/klondike/"
+  },
+  {
+    "game": "standard-52",
+    "gameTitle": "Standard 52-Card Deck",
+    "section": "Klondike Solitaire",
+    "heading": "Variants",
+    "content": "Vegas Scoring: Players “buy” a deck for $52 and earn $5 per card moved to the foundations maximum $260. Recycling the stock costs $0 Draw 1 or is not permitted Draw 3. Net profit/loss is tracked. Thoughtful Klondike: All face-down cards are revealed at the start. Useful for analysis; reduces luck significantly. Double Klondike: Two decks, 9 or 10 tableau columns, 8 foundations. Harder; longer game.",
+    "anchor": "variants",
+    "variant": "klondike",
+    "variantUrl": "dist/standard-52/games/klondike/"
+  },
+  {
+    "game": "standard-52",
+    "gameTitle": "Standard 52-Card Deck",
+    "section": "Klondike Solitaire",
+    "heading": "Attribution",
+    "content": "Klondike. Name associated with the Klondike Gold Rush 1896–1899; exact origin unclear. Popularized globally through Microsoft Solitaire Windows 3.0, 1990. Public domain rule set.",
+    "anchor": "attribution",
+    "variant": "klondike",
+    "variantUrl": "dist/standard-52/games/klondike/"
+  },
+  {
+    "game": "standard-52",
+    "gameTitle": "Standard 52-Card Deck",
+    "section": "Texas Hold'em Poker",
+    "heading": "Texas Hold'em Poker",
+    "content": "Texas Hold'em is the most widely played poker variant in the world and the standard format for professional tournaments. Players combine two private hole cards with five shared community cards to make the best possible five-card poker hand.",
+    "anchor": "texas-holdem-poker",
+    "variant": "poker",
+    "variantUrl": "dist/standard-52/games/poker/"
+  },
+  {
+    "game": "standard-52",
+    "gameTitle": "Standard 52-Card Deck",
+    "section": "Texas Hold'em Poker",
+    "heading": "Setup",
+    "content": "- 2–10 players. - One standard 52-card deck, no jokers. - Designate a dealer button rotates clockwise each hand. - Blinds: The player immediately left of the dealer posts the small blind; the next player posts the big blind typically double the small blind. Blinds create forced starting action.",
+    "anchor": "setup",
+    "variant": "poker",
+    "variantUrl": "dist/standard-52/games/poker/"
+  },
+  {
+    "game": "standard-52",
+    "gameTitle": "Standard 52-Card Deck",
+    "section": "Texas Hold'em Poker",
+    "heading": "Deal",
+    "content": "Each player is dealt 2 private cards face down hole cards. Dealing begins with the player to the left of the dealer.",
+    "anchor": "deal",
+    "variant": "poker",
+    "variantUrl": "dist/standard-52/games/poker/"
+  },
+  {
+    "game": "standard-52",
+    "gameTitle": "Standard 52-Card Deck",
+    "section": "Texas Hold'em Poker",
+    "heading": "Betting Rounds",
+    "content": "There are four betting rounds. In each round, players may fold, check if no bet yet made, call match the current bet, raise increase the bet, or re-raise. 1. Preflop: After hole cards are dealt. The player left of the big blind acts first. The big blind acts last and may raise even if no one else has. 2. Flop: Three community cards are dealt face-up to the center. Betting begins with the first active player left of the dealer button. 3. Turn: A fourth community card is dealt face-up. Betting proceeds. 4. River: A fifth and final community card is dealt face-up. Final betting round.",
+    "anchor": "betting-rounds",
+    "variant": "poker",
+    "variantUrl": "dist/standard-52/games/poker/"
+  },
+  {
+    "game": "standard-52",
+    "gameTitle": "Standard 52-Card Deck",
+    "section": "Texas Hold'em Poker",
+    "heading": "Showdown",
+    "content": "If two or more players remain after the final betting round, all remaining players reveal their hole cards. The player with the best five-card hand wins the pot. Players may use any combination of their two hole cards and the five community cards to form the best five-card hand both hole cards, one hole card, or no hole cards — “playing the board”.",
+    "anchor": "showdown",
+    "variant": "poker",
+    "variantUrl": "dist/standard-52/games/poker/"
+  },
+  {
+    "game": "standard-52",
+    "gameTitle": "Standard 52-Card Deck",
+    "section": "Texas Hold'em Poker",
+    "heading": "Hand Rankings (high to low)",
+    "content": "Ties are broken by the highest card in the hand. If still tied, the pot is split.\nHand — Description — Example\nRoyal Flush — A, K, Q, J, 10 of one suit — A♥ K♥ Q♥ J♥ 10♥\nStraight Flush — Five consecutive cards, same suit — 7♠ 8♠ 9♠ 10♠ J♠\nFour of a Kind — Four cards of the same rank — K K K K 7\nFull House — Three of a kind + a pair — Q Q Q 4 4\nFlush — Five cards of the same suit — A 9 7 4 2 (all hearts)\nStraight — Five consecutive ranks, any suits — 5 6 7 8 9\nThree of a Kind — Three cards of the same rank — J J J 9 3\nTwo Pair — Two separate pairs — K K 7 7 A\nPair — One pair — 10 10 A K 3\nHigh Card — No combination — A J 8 5 2",
+    "anchor": "hand-rankings-high-to-low",
+    "variant": "poker",
+    "variantUrl": "dist/standard-52/games/poker/"
+  },
+  {
+    "game": "standard-52",
+    "gameTitle": "Standard 52-Card Deck",
+    "section": "Texas Hold'em Poker",
+    "heading": "Betting Formats",
+    "content": "- No-Limit: Players may bet any amount up to all their chips at any time. Standard for tournaments. - Pot-Limit: Maximum bet equals the current pot size. - Fixed-Limit: Bets and raises are fixed at a set amount per street smaller bet preflop/flop, larger on turn/river.",
+    "anchor": "betting-formats",
+    "variant": "poker",
+    "variantUrl": "dist/standard-52/games/poker/"
+  },
+  {
+    "game": "standard-52",
+    "gameTitle": "Standard 52-Card Deck",
+    "section": "Texas Hold'em Poker",
+    "heading": "All-In",
+    "content": "A player who cannot match a bet may go all-in, wagering all remaining chips. Side pots are created for any additional bets among players who still have chips.",
+    "anchor": "all-in",
+    "variant": "poker",
+    "variantUrl": "dist/standard-52/games/poker/"
+  },
+  {
+    "game": "standard-52",
+    "gameTitle": "Standard 52-Card Deck",
+    "section": "Texas Hold'em Poker",
+    "heading": "Tournament vs. Cash Game",
+    "content": "- Cash game ring game: Players buy in for real money or chips with cash value. Blinds are fixed. Players may leave or rebuy freely. - Tournament: Players start with equal chip stacks. Blinds increase on a schedule. Last player with chips wins.",
+    "anchor": "tournament-vs-cash-game",
+    "variant": "poker",
+    "variantUrl": "dist/standard-52/games/poker/"
+  },
+  {
+    "game": "standard-52",
+    "gameTitle": "Standard 52-Card Deck",
+    "section": "Texas Hold'em Poker",
+    "heading": "Attribution",
+    "content": "Texas Hold'em. Origin attributed to Texas early 20th century, popularized in Las Vegas from the 1960s onward. Public domain rules. World Series of Poker standard ruleset.",
+    "anchor": "attribution",
+    "variant": "poker",
+    "variantUrl": "dist/standard-52/games/poker/"
+  },
+  {
+    "game": "standard-52",
+    "gameTitle": "Standard 52-Card Deck",
+    "section": "President",
+    "heading": "President",
+    "content": "Also known as Scum, Asshole, or Capitalism. A multi-round climbing card game where finishing position in each round determines your role and advantages in the next.",
+    "anchor": "president",
+    "variant": "president",
+    "variantUrl": "dist/standard-52/games/president/"
+  },
+  {
+    "game": "standard-52",
+    "gameTitle": "Standard 52-Card Deck",
+    "section": "President",
+    "heading": "Setup",
+    "content": "- 4 to 8 players - Standard 52-card deck no jokers, dealt evenly discard remainders or give to President - First round: player with 3 of clubs leads. Subsequent rounds: Scum leads",
+    "anchor": "setup",
+    "variant": "president",
+    "variantUrl": "dist/standard-52/games/president/"
+  },
+  {
+    "game": "standard-52",
+    "gameTitle": "Standard 52-Card Deck",
+    "section": "President",
+    "heading": "Roles (from previous round)",
+    "content": "Middle positions in 5+ player games have no trading obligation.\nPosition — Role — Advantage\n1st out — President — Receives 2 best cards from Scum\n2nd out — Vice President — Receives 1 best card from Vice Scum\n2nd last — Vice Scum — Gives 1 best card to Vice President\nLast out — Scum — Gives 2 best cards to President",
+    "anchor": "roles-from-previous-round",
+    "variant": "president",
+    "variantUrl": "dist/standard-52/games/president/"
+  },
+  {
+    "game": "standard-52",
+    "gameTitle": "Standard 52-Card Deck",
+    "section": "President",
+    "heading": "Rules",
+    "content": "1. Lead player plays any valid combination single, pair, triple, or sequence 2. Each subsequent player must play the same combination type but higher value, or pass 3. When all players pass consecutively, the last player who played leads the next trick 4. First player to empty their hand finishes 1st, second finishes 2nd, etc. 5. Round ends when all but one player has emptied their hand — that player is Scum 6. Roles are assigned based on finishing order 7. Card trading occurs before the next round begins 8. Game continues for a set number of rounds or until a player accumulates enough \"President\" wins",
+    "anchor": "rules",
+    "variant": "president",
+    "variantUrl": "dist/standard-52/games/president/"
+  },
+  {
+    "game": "standard-52",
+    "gameTitle": "Standard 52-Card Deck",
+    "section": "President",
+    "heading": "Card Ranking",
+    "content": "2 > A > K > Q > J > 10 > 9 > 8 > 7 > 6 > 5 > 4 > 3 Same as Big 2 — 2 is highest",
+    "anchor": "card-ranking",
+    "variant": "president",
+    "variantUrl": "dist/standard-52/games/president/"
+  },
+  {
+    "game": "standard-52",
+    "gameTitle": "Standard 52-Card Deck",
+    "section": "President",
+    "heading": "Key Differences from Big 2",
+    "content": "\nConcept — Big 2 — President\nPlayers — 4 (fixed) — 4–8 (variable)\nRounds — Single — Multi-round with persistent roles\nCard trading — None — Forced exchange based on roles\nWho leads — 3 of diamonds — Scum (lowest rank)\nWin condition — First to empty hand — Accumulate President wins\nDeck — Standard 52 — Standard 52 (split evenly)\nCombinations — Singles, pairs, 5-card hands — Singles, pairs, triples, sequences",
+    "anchor": "key-differences-from-big-2",
+    "variant": "president",
+    "variantUrl": "dist/standard-52/games/president/"
+  },
+  {
+    "game": "standard-52",
+    "gameTitle": "Standard 52-Card Deck",
+    "section": "President",
+    "heading": "Why This Tests the Engine",
+    "content": "President forces the engine to handle: - Multi-round persistence — roles and scores carry between rounds - Asymmetric card dealing — trading phase modifies hands before play - Variable player count — same rules scale from 4 to 8 - Role-based turn order — who leads depends on previous round outcome - State between rounds — not just within a single game - Component interaction — deck deal + player state roles + game flow rounds",
+    "anchor": "why-this-tests-the-engine",
+    "variant": "president",
+    "variantUrl": "dist/standard-52/games/president/"
+  },
+  {
+    "game": "standard-52",
+    "gameTitle": "Standard 52-Card Deck",
+    "section": "Rummy",
+    "heading": "Rummy",
+    "content": "Rummy also called Basic Rummy or Standard Rummy is the foundational draw-and-discard game from which Gin Rummy, Canasta, and many other games descend. Unlike Gin Rummy, melds are placed face-up on the table during play and opponents may extend them.",
+    "anchor": "rummy",
+    "variant": "rummy",
+    "variantUrl": "dist/standard-52/games/rummy/"
+  },
+  {
+    "game": "standard-52",
+    "gameTitle": "Standard 52-Card Deck",
+    "section": "Rummy",
+    "heading": "Players and Cards",
+    "content": "2–6 players. Standard 52-card deck. Aces may be high or low agree before play. Face cards = 10 points; numbered cards = face value.",
+    "anchor": "players-and-cards",
+    "variant": "rummy",
+    "variantUrl": "dist/standard-52/games/rummy/"
+  },
+  {
+    "game": "standard-52",
+    "gameTitle": "Standard 52-Card Deck",
+    "section": "Rummy",
+    "heading": "The Deal",
+    "content": "Remaining cards form the stock face-down. Top card is turned up to start the discard pile.\nPlayers — Cards dealt\n2 — 10 each\n3–4 — 7 each\n5–6 — 6 each",
+    "anchor": "the-deal",
+    "variant": "rummy",
+    "variantUrl": "dist/standard-52/games/rummy/"
+  },
+  {
+    "game": "standard-52",
+    "gameTitle": "Standard 52-Card Deck",
+    "section": "Rummy",
+    "heading": "Melds",
+    "content": "A meld is either: - Set Group: 3 or 4 cards of the same rank e.g., three 7s - Run Sequence: 3 or more consecutive cards of the same suit e.g., 4♥–5♥–6♥",
+    "anchor": "melds",
+    "variant": "rummy",
+    "variantUrl": "dist/standard-52/games/rummy/"
+  },
+  {
+    "game": "standard-52",
+    "gameTitle": "Standard 52-Card Deck",
+    "section": "Rummy",
+    "heading": "The Turn",
+    "content": "On each turn a player must: 1. Draw — take the top card of the stock OR the top card of the discard pile 2. Meld optional — lay one or more melds face-up on the table 3. Lay off optional — add cards to any existing meld on the table your own or opponents' 4. Discard — place one card face-up on the discard pile may be omitted if going out with no remaining cards",
+    "anchor": "the-turn",
+    "variant": "rummy",
+    "variantUrl": "dist/standard-52/games/rummy/"
+  },
+  {
+    "game": "standard-52",
+    "gameTitle": "Standard 52-Card Deck",
+    "section": "Rummy",
+    "heading": "Going Out",
+    "content": "A player goes out by melding or laying off all cards in their hand, ending their turn with an empty hand.",
+    "anchor": "going-out",
+    "variant": "rummy",
+    "variantUrl": "dist/standard-52/games/rummy/"
+  },
+  {
+    "game": "standard-52",
+    "gameTitle": "Standard 52-Card Deck",
+    "section": "Rummy",
+    "heading": "Going Rummy",
+    "content": "If a player goes out in a single turn without having previously melded or laid off anything during the game, they \"go Rummy.\" All opponents score double penalty points for their unmelded cards.",
+    "anchor": "going-rummy",
+    "variant": "rummy",
+    "variantUrl": "dist/standard-52/games/rummy/"
+  },
+  {
+    "game": "standard-52",
+    "gameTitle": "Standard 52-Card Deck",
+    "section": "Rummy",
+    "heading": "Scoring",
+    "content": "When a player goes out, all other players count the face value of unmelded cards in their hands as penalty points. Scores accumulate across hands. The player who first reaches a target total e.g., 100 points loses; the player with the lowest cumulative score wins.",
+    "anchor": "scoring",
+    "variant": "rummy",
+    "variantUrl": "dist/standard-52/games/rummy/"
+  },
+  {
+    "game": "standard-52",
+    "gameTitle": "Standard 52-Card Deck",
+    "section": "Spades",
+    "heading": "Spades",
+    "content": "Spades is a partnership trick-taking game for four players two teams of two. Spades are permanently trump. Before each hand, each player bids how many tricks they expect to win, and the partnership must collectively make their bid to score positively. Bags overtricks accumulate toward a penalty.",
+    "anchor": "spades",
+    "variant": "spades",
+    "variantUrl": "dist/standard-52/games/spades/"
+  },
+  {
+    "game": "standard-52",
+    "gameTitle": "Standard 52-Card Deck",
+    "section": "Spades",
+    "heading": "Setup",
+    "content": "- 4 players in fixed partnerships North–South and East–West. - Standard 52-card deck. No jokers jokers are added in some variants; see below. - Partners sit opposite each other. - The player to the left of the dealer leads.",
+    "anchor": "setup",
+    "variant": "spades",
+    "variantUrl": "dist/standard-52/games/spades/"
+  },
+  {
+    "game": "standard-52",
+    "gameTitle": "Standard 52-Card Deck",
+    "section": "Spades",
+    "heading": "Deal",
+    "content": "Shuffle and deal all 52 cards clockwise 13 per player. The dealer rotates clockwise each hand.",
+    "anchor": "deal",
+    "variant": "spades",
+    "variantUrl": "dist/standard-52/games/spades/"
+  },
+  {
+    "game": "standard-52",
+    "gameTitle": "Standard 52-Card Deck",
+    "section": "Spades",
+    "heading": "Card Rankings",
+    "content": "Spades trump: High to low within Spades: A, K, Q, J, 10, 9, 8, 7, 6, 5, 4, 3, 2. Other suits: A, K, Q, J, 10, 9, 8, 7, 6, 5, 4, 3, 2 within each suit. Spades always beat non-Spades. Among Spades, higher rank wins.",
+    "anchor": "card-rankings",
+    "variant": "spades",
+    "variantUrl": "dist/standard-52/games/spades/"
+  },
+  {
+    "game": "standard-52",
+    "gameTitle": "Standard 52-Card Deck",
+    "section": "Spades",
+    "heading": "Bidding",
+    "content": "Starting with the player left of the dealer, each player bids the number of tricks they personally expect to win 0–13. The partnership’s bid is the sum of the two partners’ bids. Nil bid: A player may bid Nil zero, declaring they will win no tricks. If successful, the partnership scores 100 points bonus. If the Nil bidder wins any trick, the bid fails and the partnership scores −100 instead. The partner’s bid is scored separately. Blind Nil optional: A player with a very weak hand may bid Blind Nil before looking at their cards. Success: +200; failure: −200. Typically restricted to teams that are at least 100 points behind.",
+    "anchor": "bidding",
+    "variant": "spades",
+    "variantUrl": "dist/standard-52/games/spades/"
+  },
+  {
+    "game": "standard-52",
+    "gameTitle": "Standard 52-Card Deck",
+    "section": "Spades",
+    "heading": "Play",
+    "content": "The player left of the dealer leads first. Players must follow suit if able. If unable to follow suit, they may play any card including a Spade. Leading Spades: Spades may not be led until: - Spades have been “broken” a Spade has been played off-suit in a previous trick, OR - A player has only Spades remaining in hand. The highest card of the led suit wins the trick, unless one or more Spades have been played, in which case the highest Spade wins. The winner leads the next trick.",
+    "anchor": "play",
+    "variant": "spades",
+    "variantUrl": "dist/standard-52/games/spades/"
+  },
+  {
+    "game": "standard-52",
+    "gameTitle": "Standard 52-Card Deck",
+    "section": "Spades",
+    "heading": "Scoring",
+    "content": "At the end of each hand after all 13 tricks are played: Made bid: If the partnership won tricks ≥ their combined bid: - Score = bid × 10 for each trick bid and made - Each trick won above the bid overtrick / “bag” = +1 point per bag. Failed bid: If the partnership won tricks < their combined bid: - Score = −bid × 10 Bags penalty: Every 10 bags accumulated over the course of the game costs the partnership −100 points. The bag counter resets after each penalty. Nil bid scoring separate from partnership’s trick score:\nResult — Nil score\nNil made — +100\nNil failed — −100\nBlind Nil made — +200\nBlind Nil failed — −200",
+    "anchor": "scoring",
+    "variant": "spades",
+    "variantUrl": "dist/standard-52/games/spades/"
+  },
+  {
+    "game": "standard-52",
+    "gameTitle": "Standard 52-Card Deck",
+    "section": "Spades",
+    "heading": "End of Game",
+    "content": "Play continues until one or both partnerships reach 500 points. The partnership with 500+ points wins. If both reach 500 on the same hand, the one with the higher score wins. If tied, play additional hands until the tie breaks.",
+    "anchor": "end-of-game",
+    "variant": "spades",
+    "variantUrl": "dist/standard-52/games/spades/"
+  },
+  {
+    "game": "standard-52",
+    "gameTitle": "Standard 52-Card Deck",
+    "section": "Spades",
+    "heading": "Joker Variant",
+    "content": "Some versions add 2 Jokers: Big Joker highest Spade and Little Joker second-highest Spade. Rank order becomes: Big Joker > Little Joker > A♠ > K♠ … 2♠. One non-Spade card is removed from the deck to maintain 52 total typically the 2 of Clubs.",
+    "anchor": "joker-variant",
+    "variant": "spades",
+    "variantUrl": "dist/standard-52/games/spades/"
+  },
+  {
+    "game": "standard-52",
+    "gameTitle": "Standard 52-Card Deck",
+    "section": "Spades",
+    "heading": "Attribution",
+    "content": "Spades. Traditional American partnership card game, popularized in the 1930s–40s. Public domain. Standard rules confirmed from Pagat.com.",
+    "anchor": "attribution",
+    "variant": "spades",
+    "variantUrl": "dist/standard-52/games/spades/"
+  },
+  {
+    "game": "standard-52",
+    "gameTitle": "Standard 52-Card Deck",
+    "section": "Spider Solitaire",
+    "heading": "Spider Solitaire",
+    "content": "Spider Solitaire is a two-deck solitaire game played across 10 tableau columns. Complete 13-card sequences in the same suit King down to Ace are removed from play. It is one of the most widely played solitaire variants, popularised by its inclusion in Microsoft Windows.",
+    "anchor": "spider-solitaire",
+    "variant": "spider-solitaire",
+    "variantUrl": "dist/standard-52/games/spider-solitaire/"
+  },
+  {
+    "game": "standard-52",
+    "gameTitle": "Standard 52-Card Deck",
+    "section": "Spider Solitaire",
+    "heading": "Decks and Difficulty",
+    "content": "Uses 2 standard 52-card decks 104 cards total. Three difficulty settings: - 1-suit easy: only rank matters; suit is ignored for all rules - 2-suit medium: two suits in play - 4-suit hard: all four suits; full rules below",
+    "anchor": "decks-and-difficulty",
+    "variant": "spider-solitaire",
+    "variantUrl": "dist/standard-52/games/spider-solitaire/"
+  },
+  {
+    "game": "standard-52",
+    "gameTitle": "Standard 52-Card Deck",
+    "section": "Spider Solitaire",
+    "heading": "Layout",
+    "content": "Deal 54 cards face-down into 10 tableau columns: - Columns 1–4: 6 cards each - Columns 5–10: 5 cards each Flip the top card of each column face-up. The remaining 50 cards form the stock in 5 groups of 10.",
+    "anchor": "layout",
+    "variant": "spider-solitaire",
+    "variantUrl": "dist/standard-52/games/spider-solitaire/"
+  },
+  {
+    "game": "standard-52",
+    "gameTitle": "Standard 52-Card Deck",
+    "section": "Spider Solitaire",
+    "heading": "Tableau Rules",
+    "content": "Only face-up cards at the bottom of a column are in play. Face-down cards are revealed when the card above them is moved. You may: - Move a single face-up card onto any face-up card that is one rank higher suit need not match for placement - Move a same-suit descending sequence e.g., Q♥–J♥–10♥ as a unit onto a card one rank higher than the sequence's top card - Move any card or same-suit sequence to an empty column",
+    "anchor": "tableau-rules",
+    "variant": "spider-solitaire",
+    "variantUrl": "dist/standard-52/games/spider-solitaire/"
+  },
+  {
+    "game": "standard-52",
+    "gameTitle": "Standard 52-Card Deck",
+    "section": "Spider Solitaire",
+    "heading": "Completing a Sequence",
+    "content": "When a complete 13-card sequence in the same suit King at bottom through Ace on top is formed in a column, it is immediately removed as a completed sequence. 8 completed sequences = win.",
+    "anchor": "completing-a-sequence",
+    "variant": "spider-solitaire",
+    "variantUrl": "dist/standard-52/games/spider-solitaire/"
+  },
+  {
+    "game": "standard-52",
+    "gameTitle": "Standard 52-Card Deck",
+    "section": "Spider Solitaire",
+    "heading": "The Stock",
+    "content": "At any time, you may deal 10 cards from the stock — one face-up to each column. The stock may only be dealt when no column is empty. Five stock deals are available 50 cards.",
+    "anchor": "the-stock",
+    "variant": "spider-solitaire",
+    "variantUrl": "dist/standard-52/games/spider-solitaire/"
+  },
+  {
+    "game": "standard-52",
+    "gameTitle": "Standard 52-Card Deck",
+    "section": "Spider Solitaire",
+    "heading": "Winning",
+    "content": "All 8 sequences completed and removed from play.",
+    "anchor": "winning",
+    "variant": "spider-solitaire",
+    "variantUrl": "dist/standard-52/games/spider-solitaire/"
+  },
+  {
+    "game": "standard-52",
+    "gameTitle": "Standard 52-Card Deck",
+    "section": "War",
+    "heading": "War",
+    "content": "War is a 2-player card game of pure chance — there are no decisions to make. It is one of the most widely known card games in the world, particularly among children.",
+    "anchor": "war",
+    "variant": "war",
+    "variantUrl": "dist/standard-52/games/war/"
+  },
+  {
+    "game": "standard-52",
+    "gameTitle": "Standard 52-Card Deck",
+    "section": "War",
+    "heading": "Setup",
+    "content": "Shuffle a standard 52-card deck and deal all 26 cards face-down to each player. Neither player looks at their cards. Card values, lowest to highest: 2 through 10, Jack, Queen, King, Ace. Suits do not affect the outcome.",
+    "anchor": "setup",
+    "variant": "war",
+    "variantUrl": "dist/standard-52/games/war/"
+  },
+  {
+    "game": "standard-52",
+    "gameTitle": "Standard 52-Card Deck",
+    "section": "War",
+    "heading": "The Turn",
+    "content": "Both players simultaneously reveal the top card of their pile. The player whose card has the higher rank takes both cards and places them at the bottom of their pile.",
+    "anchor": "the-turn",
+    "variant": "war",
+    "variantUrl": "dist/standard-52/games/war/"
+  },
+  {
+    "game": "standard-52",
+    "gameTitle": "Standard 52-Card Deck",
+    "section": "War",
+    "heading": "War",
+    "content": "If both revealed cards have the same rank, War occurs: 1. Each player places 3 cards face-down 2. Each player reveals 1 card face-up 3. The higher face-up card wins all 10 cards 4. If the face-up cards also tie, War repeats from step 1",
+    "anchor": "war",
+    "variant": "war",
+    "variantUrl": "dist/standard-52/games/war/"
+  },
+  {
+    "game": "standard-52",
+    "gameTitle": "Standard 52-Card Deck",
+    "section": "War",
+    "heading": "Winning",
+    "content": "The player who collects all 52 cards wins. If a player runs out of cards mid-War unable to play the required cards, they lose immediately.",
+    "anchor": "winning",
+    "variant": "war",
+    "variantUrl": "dist/standard-52/games/war/"
+  },
+  {
+    "game": "standard-52",
+    "gameTitle": "Standard 52-Card Deck",
+    "section": "War",
+    "heading": "Notes",
+    "content": "War is a pure luck game; no strategy exists. A game can last indefinitely due to card cycling. Many players set a time limit and award the win to whoever holds more cards at that point.",
+    "anchor": "notes",
+    "variant": "war",
+    "variantUrl": "dist/standard-52/games/war/"
+  },
+  {
+    "game": "standard-52",
+    "gameTitle": "Standard 52-Card Deck",
+    "section": "Whist",
+    "heading": "Whist",
+    "content": "Whist is a classic 4-player partnership trick-taking game played with a standard 52-card deck. It is the direct ancestor of Bridge — Bridge added bidding and a dummy hand to Whist's core structure. Whist dominated European and North American card culture from approximately 1750 to 1900, documented in Edmond Hoyle's 1742 A Short Treatise on the Game of Whist.",
+    "anchor": "whist",
+    "variant": "whist",
+    "variantUrl": "dist/standard-52/games/whist/"
+  },
+  {
+    "game": "standard-52",
+    "gameTitle": "Standard 52-Card Deck",
+    "section": "Whist",
+    "heading": "Teams",
+    "content": "Four players in two partnerships: North/South vs East/West. Partners sit opposite each other.",
+    "anchor": "teams",
+    "variant": "whist",
+    "variantUrl": "dist/standard-52/games/whist/"
+  },
+  {
+    "game": "standard-52",
+    "gameTitle": "Standard 52-Card Deck",
+    "section": "Whist",
+    "heading": "The Deal",
+    "content": "The entire deck is dealt clockwise, one card at a time, to all four players 13 cards each. The last card dealt — given to the dealer — is turned face-up to establish the trump suit, then taken into the dealer's hand. Trumps beat all non-trump cards.",
+    "anchor": "the-deal",
+    "variant": "whist",
+    "variantUrl": "dist/standard-52/games/whist/"
+  },
+  {
+    "game": "standard-52",
+    "gameTitle": "Standard 52-Card Deck",
+    "section": "Whist",
+    "heading": "The Play",
+    "content": "The player to the dealer's left leads any card. Each player must follow suit if possible. If unable to follow suit, a player may play any card including a trump. The highest card of the led suit wins the trick unless a trump was played — the highest trump wins. The winner of each trick leads the next.",
+    "anchor": "the-play",
+    "variant": "whist",
+    "variantUrl": "dist/standard-52/games/whist/"
+  },
+  {
+    "game": "standard-52",
+    "gameTitle": "Standard 52-Card Deck",
+    "section": "Whist",
+    "heading": "Scoring",
+    "content": "A book is the first 6 tricks won by a partnership. Points are scored only for tricks above the book: - Each trick above 6 = 1 point - Maximum: 7 points per hand all 13 tricks Honors optional: The four highest trumps Ace, King, Queen, Jack are honors. A partnership holding 3 of the 4 honors scores 2 points; holding all 4 scores 4 points in some rules, 2 points. Honor scoring must be agreed before the game.",
+    "anchor": "scoring",
+    "variant": "whist",
+    "variantUrl": "dist/standard-52/games/whist/"
+  },
+  {
+    "game": "standard-52",
+    "gameTitle": "Standard 52-Card Deck",
+    "section": "Whist",
+    "heading": "Game and Rubber",
+    "content": "Short Whist: First partnership to 5 points wins the game. Long Whist: First partnership to 9 points wins. A rubber is the best of three games. The first partnership to win two games wins the rubber.",
+    "anchor": "game-and-rubber",
+    "variant": "whist",
+    "variantUrl": "dist/standard-52/games/whist/"
+  },
+  {
+    "game": "standard-52",
+    "gameTitle": "Standard 52-Card Deck",
+    "section": "Whist",
+    "heading": "Variants",
+    "content": "- Long Whist: 9-point game - Short Whist: 5-point game standard above - Bid Whist: adds a bidding round before play, transitional form toward Bridge",
+    "anchor": "variants",
+    "variant": "whist",
+    "variantUrl": "dist/standard-52/games/whist/"
+  },
+  {
+    "game": "standard-dice",
+    "gameTitle": "Standard Dice",
+    "section": "Bunco",
+    "heading": "Bunco",
+    "content": "Bunco is a social dice game for 12 players or any multiple of 4, organised into 3 tables of 4 players each. It is fast-paced, requires no skill, and is designed for social gatherings — parties, charity events, and group outings throughout North America.",
+    "anchor": "bunco",
+    "variant": "bunco",
+    "variantUrl": "dist/standard-dice/games/bunco/"
+  },
+  {
+    "game": "standard-dice",
+    "gameTitle": "Standard Dice",
+    "section": "Bunco",
+    "heading": "Setup",
+    "content": "- 12 players at 3 tables: Head Table, Middle Table, and Losing Table - Each table has 2 teams of 2 — partners sit across from each other - Each table has 3 dice and a scorekeeper",
+    "anchor": "setup",
+    "variant": "bunco",
+    "variantUrl": "dist/standard-dice/games/bunco/"
+  },
+  {
+    "game": "standard-dice",
+    "gameTitle": "Standard Dice",
+    "section": "Bunco",
+    "heading": "The Six Rounds",
+    "content": "The game has 6 rounds. The target number for each round matches the round number: Round 1 targets 1, Round 2 targets 2, …, Round 6 targets 6.",
+    "anchor": "the-six-rounds",
+    "variant": "bunco",
+    "variantUrl": "dist/standard-dice/games/bunco/"
+  },
+  {
+    "game": "standard-dice",
+    "gameTitle": "Standard Dice",
+    "section": "Bunco",
+    "heading": "A Set (Sub-Round)",
+    "content": "Within each round, teams alternate rolling all 3 dice. Each die showing the target number scores 1 point for the rolling team. The rolling team continues rolling as long as they score at least 1 point per roll. When a roll scores 0, the other team takes over rolling. Bunco: Rolling all 3 dice showing the target number = 21 points immediately; that set ends. The player records a Bunco tally. A set ends when one team reaches 21 points or scores a Bunco. That team wins the set.",
+    "anchor": "a-set-sub-round",
+    "variant": "bunco",
+    "variantUrl": "dist/standard-dice/games/bunco/"
+  },
+  {
+    "game": "standard-dice",
+    "gameTitle": "Standard Dice",
+    "section": "Bunco",
+    "heading": "Winning a Round",
+    "content": "The team with more set wins at the end of the round wins that round. At the Head Table, the winning team stays; the losing team moves down. At other tables, the winning team moves up and the losing team moves down.",
+    "anchor": "winning-a-round",
+    "variant": "bunco",
+    "variantUrl": "dist/standard-dice/games/bunco/"
+  },
+  {
+    "game": "standard-dice",
+    "gameTitle": "Standard Dice",
+    "section": "Bunco",
+    "heading": "Scoring",
+    "content": "After all 6 rounds, each player totals: - Number of round wins - Number of round losses - Number of Buncos Typical prizes: most wins, most Buncos, and a booby prize for most losses.",
+    "anchor": "scoring",
+    "variant": "bunco",
+    "variantUrl": "dist/standard-dice/games/bunco/"
+  },
+  {
+    "game": "standard-dice",
+    "gameTitle": "Standard Dice",
+    "section": "Bunco",
+    "heading": "Notes",
+    "content": "Bunco requires no strategy. The table rotation ensures players interact with all participants over the course of the game.",
+    "anchor": "notes",
+    "variant": "bunco",
+    "variantUrl": "dist/standard-dice/games/bunco/"
+  },
+  {
+    "game": "standard-dice",
+    "gameTitle": "Standard Dice",
+    "section": "Craps",
+    "heading": "Craps",
+    "content": "Craps is the definitive casino dice game, played with two six-sided dice. At a casino table, one player the shooter rolls while others bet on the outcomes. It can also be played informally without a table street craps.",
+    "anchor": "craps",
+    "variant": "craps",
+    "variantUrl": "dist/standard-dice/games/craps/"
+  },
+  {
+    "game": "standard-dice",
+    "gameTitle": "Standard Dice",
+    "section": "Craps",
+    "heading": "The Shooter",
+    "content": "The shooter is the player rolling the dice. In a casino, players take turns as shooter; the dice pass clockwise after a seven-out.",
+    "anchor": "the-shooter",
+    "variant": "craps",
+    "variantUrl": "dist/standard-dice/games/craps/"
+  },
+  {
+    "game": "standard-dice",
+    "gameTitle": "Standard Dice",
+    "section": "Craps",
+    "heading": "Come-Out Roll",
+    "content": "Each round begins with the come-out roll:\nResult — Outcome\n7 or 11 (natural) — **Pass** — Pass bettors win; Don't Pass bettors lose\n2 or 3 (craps) — **Don't Pass** — Pass bettors lose; Don't Pass bettors win\n12 (craps) — Pass bettors lose; Don't Pass bettors **push** (tie, money returned)\n4, 5, 6, 8, 9, or 10 — That number becomes the **Point**",
+    "anchor": "come-out-roll",
+    "variant": "craps",
+    "variantUrl": "dist/standard-dice/games/craps/"
+  },
+  {
+    "game": "standard-dice",
+    "gameTitle": "Standard Dice",
+    "section": "Craps",
+    "heading": "The Point Phase",
+    "content": "Once a Point is established, the shooter continues rolling:\nResult — Outcome\nPoint number again — **Pass** — Pass bettors win; round ends; shooter keeps dice\n7 (**Seven-Out**) — **Don't Pass** — Pass bettors lose; Don't Pass bettors win; round ends; dice pass\nAny other number — No decision; shooter rolls again",
+    "anchor": "the-point-phase",
+    "variant": "craps",
+    "variantUrl": "dist/standard-dice/games/craps/"
+  },
+  {
+    "game": "standard-dice",
+    "gameTitle": "Standard Dice",
+    "section": "Craps",
+    "heading": "Core Bets",
+    "content": "Pass Line: Bet before the come-out. Wins on natural; loses on craps; wins if Point is made before 7; loses on seven-out. Pays 1:1. House edge: 1.41%. Don't Pass: Opposite of Pass Line with the 12-push on the come-out. House edge: 1.36%. Come / Don't Come: Same as Pass / Don't Pass but placed after the Point is established; each come bet sets its own personal point. Odds Bet: Placed behind Pass/Don't Pass or Come/Don't Come after a Point is set. Pays true odds with zero house edge — the best bet in the casino:\nPoint — Odds pay (Pass/Come)\n4 or 10 — 2:1\n5 or 9 — 3:2\n6 or 8 — 6:5",
+    "anchor": "core-bets",
+    "variant": "craps",
+    "variantUrl": "dist/standard-dice/games/craps/"
+  },
+  {
+    "game": "standard-dice",
+    "gameTitle": "Standard Dice",
+    "section": "Craps",
+    "heading": "Other Bets (casino table)",
+    "content": "Rule of thumb: stick to Pass/Don't Pass with max Odds. Avoid proposition bets.\nBet — Description — Approx. house edge\nPlace (6 or 8) — That number before 7 — 1.52%\nPlace (5 or 9) — That number before 7 — 4.0%\nPlace (4 or 10) — That number before 7 — 6.67%\nField — Next roll is 2,3,4,9,10,11,12 — 2.8–5.6%\nHardways (6 or 8) — Doubles before 7 or easy way — 9.09%\nHardways (4 or 10) — Doubles before 7 or easy way — 11.1%\nAny 7 — Next roll is 7 — 16.67%\nAny Craps — Next roll is 2, 3, or 12 — 11.11%",
+    "anchor": "other-bets-casino-table",
+    "variant": "craps",
+    "variantUrl": "dist/standard-dice/games/craps/"
+  },
+  {
+    "game": "standard-dice",
+    "gameTitle": "Standard Dice",
+    "section": "Farkle",
+    "heading": "Farkle",
+    "content": "A press-your-luck dice game for 2–6 players. On your turn, roll 6 dice, set aside at least one scoring combination, then choose to bank your accumulated points or roll again with the remaining dice. If no dice score on any roll, you Farkle — losing all points accumulated that turn. First to 10,000 wins.",
+    "anchor": "farkle",
+    "variant": "farkle",
+    "variantUrl": "dist/standard-dice/games/farkle/"
+  },
+  {
+    "game": "standard-dice",
+    "gameTitle": "Standard Dice",
+    "section": "Farkle",
+    "heading": "Turn Structure",
+    "content": "1. Roll all 6 dice or remaining dice if some are set aside. 2. After the roll, you must set aside at least one scoring die or combination. 3. If no dice score — you Farkle: lose all unbanked points for the turn. Your turn ends. 4. If dice score, choose: - Bank: add accumulated turn points to your total score. Turn ends. - Roll again: roll remaining dice. Repeat from step 1. 5. Hot dice: if all 6 dice have been set aside and scored, you may roll all 6 again, adding to your turn total. The turn does not end.",
+    "anchor": "turn-structure",
+    "variant": "farkle",
+    "variantUrl": "dist/standard-dice/games/farkle/"
+  },
+  {
+    "game": "standard-dice",
+    "gameTitle": "Standard Dice",
+    "section": "Farkle",
+    "heading": "Scoring Combinations",
+    "content": "Combinations are scored per single roll, from dice not yet set aside. 1s and 5s only score individually when not part of a three-or-more-of-a-kind combination.\nCombination — Score\nSingle 1 — 100\nSingle 5 — 50\nThree 1s — 1,000\nThree 2s — 200\nThree 3s — 300\nThree 4s — 400\nThree 5s — 500\nThree 6s — 600\nFour of a kind — 2× three-of-a-kind value\nFive of a kind — 3× three-of-a-kind value\nSix of a kind — 4× three-of-a-kind value (or 3,000)\nStraight (1–2–3–4–5–6) — 1,500 (house rule variant: 3,000)\nThree pairs — 1,500",
+    "anchor": "scoring-combinations",
+    "variant": "farkle",
+    "variantUrl": "dist/standard-dice/games/farkle/"
+  },
+  {
+    "game": "standard-dice",
+    "gameTitle": "Standard Dice",
+    "section": "Farkle",
+    "heading": "Getting on the Board",
+    "content": "A player must score at least 500 points in a single turn to record their first score get on the board. Points below 500 cannot be banked until the first qualifying turn.",
+    "anchor": "getting-on-the-board",
+    "variant": "farkle",
+    "variantUrl": "dist/standard-dice/games/farkle/"
+  },
+  {
+    "game": "standard-dice",
+    "gameTitle": "Standard Dice",
+    "section": "Farkle",
+    "heading": "Winning",
+    "content": "When a player reaches 10,000 or more, each remaining player gets one final turn to try to exceed that score. The player with the highest score after all final turns wins. Ties are broken by a sudden-death roll-off.",
+    "anchor": "winning",
+    "variant": "farkle",
+    "variantUrl": "dist/standard-dice/games/farkle/"
+  },
+  {
+    "game": "standard-dice",
+    "gameTitle": "Standard Dice",
+    "section": "Farkle",
+    "heading": "Attribution",
+    "content": "Farkle. Traditional game; exact origin disputed. Rules in the public domain. Source: Wikipedia Farkle; Pagat.com.",
+    "anchor": "attribution",
+    "variant": "farkle",
+    "variantUrl": "dist/standard-dice/games/farkle/"
+  },
+  {
+    "game": "standard-dice",
+    "gameTitle": "Standard Dice",
+    "section": "Liar's Dice",
+    "heading": "Liar’s Dice",
+    "content": "A bluffing game for 2–6 players. Each player has 5 dice hidden under a cup. Players bid on how many dice of a given face value exist across all players’ dice combined — without seeing anyone else’s dice. Challenge a bid or raise it. The player who is wrong loses a die. Last player with at least one die wins.",
+    "anchor": "liars-dice",
+    "variant": "liars-dice",
+    "variantUrl": "dist/standard-dice/games/liars-dice/"
+  },
+  {
+    "game": "standard-dice",
+    "gameTitle": "Standard Dice",
+    "section": "Liar's Dice",
+    "heading": "Setup",
+    "content": "Each player takes 5 dice and a cup. All players simultaneously shake their dice under their cups, then lift to view their own dice only — keeping them hidden from others.",
+    "anchor": "setup",
+    "variant": "liars-dice",
+    "variantUrl": "dist/standard-dice/games/liars-dice/"
+  },
+  {
+    "game": "standard-dice",
+    "gameTitle": "Standard Dice",
+    "section": "Liar's Dice",
+    "heading": "Turn Structure",
+    "content": "The starting player makes a bid. Play proceeds clockwise. On your turn you must either: Raise the bid — the new bid must be strictly higher than the current one. A bid is higher if: - The quantity is higher any face, or - The quantity is the same and the face value is higher. Challenge “Liar!” — declare the current bid false. All players reveal their dice. Count the total number of dice showing the bid’s face value: - If the count meets or exceeds the bid → the challenger loses one die. - If the count is less than the bid → the bidder loses one die. After a challenge, all players re-roll their remaining dice and a new round begins. The player who lost a die makes the first bid.",
+    "anchor": "turn-structure",
+    "variant": "liars-dice",
+    "variantUrl": "dist/standard-dice/games/liars-dice/"
+  },
+  {
+    "game": "standard-dice",
+    "gameTitle": "Standard Dice",
+    "section": "Liar's Dice",
+    "heading": "Elimination",
+    "content": "A player with 0 dice is eliminated. The last player with any dice wins.",
+    "anchor": "elimination",
+    "variant": "liars-dice",
+    "variantUrl": "dist/standard-dice/games/liars-dice/"
+  },
+  {
+    "game": "standard-dice",
+    "gameTitle": "Standard Dice",
+    "section": "Liar's Dice",
+    "heading": "Aces Wild (Perudo variant)",
+    "content": "In the Perudo variant, 1s aces are wild and count as any face value. When bidding aces, the quantity threshold is halved rounded up. Bidding can switch between aces and another face value with specific raising rules. This variant is optional; standard Liar’s Dice uses no wild faces.",
+    "anchor": "aces-wild-perudo-variant",
+    "variant": "liars-dice",
+    "variantUrl": "dist/standard-dice/games/liars-dice/"
+  },
+  {
+    "game": "standard-dice",
+    "gameTitle": "Standard Dice",
+    "section": "Liar's Dice",
+    "heading": "Attribution",
+    "content": "Liar’s Dice. Traditional game; modern form popularised as Perudo Milton Bradley, 1993. Rules in the public domain. Source: Wikipedia Liar’s dice; Pagat.com.",
+    "anchor": "attribution",
+    "variant": "liars-dice",
+    "variantUrl": "dist/standard-dice/games/liars-dice/"
+  },
+  {
+    "game": "standard-dice",
+    "gameTitle": "Standard Dice",
+    "section": "Yahtzee",
+    "heading": "Yahtzee",
+    "content": "A dice game for 1–4 players in which each player completes a scorecard of 13 categories over 13 rounds. Each turn allows up to three rolls of five dice, with the player choosing which dice to keep after each roll. Highest total score wins.",
+    "anchor": "yahtzee",
+    "variant": "yahtzee",
+    "variantUrl": "dist/standard-dice/games/yahtzee/"
+  },
+  {
+    "game": "standard-dice",
+    "gameTitle": "Standard Dice",
+    "section": "Yahtzee",
+    "heading": "Turn Structure",
+    "content": "1. Roll all 5 dice. 2. Optionally keep any dice and re-roll the rest up to 2 more times. 3. After the final roll, choose one unfilled category on your scorecard and record the score which may be 0. Each category may only be filled once per game. All 13 categories must be filled.",
+    "anchor": "turn-structure",
+    "variant": "yahtzee",
+    "variantUrl": "dist/standard-dice/games/yahtzee/"
+  },
+  {
+    "game": "standard-dice",
+    "gameTitle": "Standard Dice",
+    "section": "Yahtzee",
+    "heading": "Upper Section",
+    "content": "The upper section bonus threshold of 63 corresponds to scoring exactly three of each number 3×1 + 3×2 + 3×3 + 3×4 + 3×5 + 3×6 = 63.\nCategory — Score\nAces — Sum of all 1s\nTwos — Sum of all 2s\nThrees — Sum of all 3s\nFours — Sum of all 4s\nFives — Sum of all 5s\nSixes — Sum of all 6s\n**Upper Bonus** — **+35 if upper section total ≥ 63**",
+    "anchor": "upper-section",
+    "variant": "yahtzee",
+    "variantUrl": "dist/standard-dice/games/yahtzee/"
+  },
+  {
+    "game": "standard-dice",
+    "gameTitle": "Standard Dice",
+    "section": "Yahtzee",
+    "heading": "Lower Section",
+    "content": "\nCategory — Requirement — Score\n3 of a Kind — At least three dice the same — Sum of all 5 dice\n4 of a Kind — At least four dice the same — Sum of all 5 dice\nFull House — Three of one number + two of another — 25\nSmall Straight — Four sequential values (e.g. 1–2–3–4) — 30\nLarge Straight — Five sequential values (1–2–3–4–5 or 2–3–4–5–6) — 40\nYahtzee — All five dice the same — 50\nChance — Any combination — Sum of all 5 dice",
+    "anchor": "lower-section",
+    "variant": "yahtzee",
+    "variantUrl": "dist/standard-dice/games/yahtzee/"
+  },
+  {
+    "game": "standard-dice",
+    "gameTitle": "Standard Dice",
+    "section": "Yahtzee",
+    "heading": "Yahtzee Bonus",
+    "content": "If you have already scored 50 in the Yahtzee box and roll another Yahtzee: - Score +100 bonus points. - You must also fill a category using Joker rules: use the Yahtzee as the matching upper section number if that box is empty; otherwise, fill any remaining lower section box treating it as a Full House, any Straight, or 3/4 of a Kind as applicable. If you scored 0 in the Yahtzee box, you do not receive the bonus.",
+    "anchor": "yahtzee-bonus",
+    "variant": "yahtzee",
+    "variantUrl": "dist/standard-dice/games/yahtzee/"
+  },
+  {
+    "game": "standard-dice",
+    "gameTitle": "Standard Dice",
+    "section": "Yahtzee",
+    "heading": "Attribution",
+    "content": "Yahtzee. Trademarked by Hasbro. Rules in the public domain widely documented. Standard rules via Wikipedia.",
+    "anchor": "attribution",
+    "variant": "yahtzee",
+    "variantUrl": "dist/standard-dice/games/yahtzee/"
+  },
+  {
     "game": "dnd-5e",
     "gameTitle": "D&D 5e SRD",
     "section": "Spells",
