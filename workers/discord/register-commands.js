@@ -273,8 +273,9 @@ const commands = [
   },
   {
     name: 'encounter',
-    description: 'Generate a D&D 5e encounter with CR-appropriate monsters and loot',
+    description: 'Generate a CR-appropriate RPG encounter with monsters and loot',
     options: [
+      { name: 'system', type: 3, description: 'Game system (D&D 5e, Pathfinder 1e)', required: false, autocomplete: true },
       { name: 'difficulty', type: 3, description: 'Encounter difficulty', required: false, choices: [{ name: 'Easy', value: 'easy' }, { name: 'Medium', value: 'medium' }, { name: 'Hard', value: 'hard' }, { name: 'Deadly', value: 'deadly' }] },
       { name: 'level', type: 4, description: 'Party level (1-20)', required: false },
       { name: 'players', type: 4, description: 'Number of players (1-10)', required: false },

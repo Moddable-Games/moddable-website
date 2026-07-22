@@ -1,10 +1,11 @@
 const DISCORD_API = 'https://discord.com/api/v10';
 
-const InteractionType = { PING: 1, APPLICATION_COMMAND: 2, MESSAGE_COMPONENT: 3 };
+const InteractionType = { PING: 1, APPLICATION_COMMAND: 2, MESSAGE_COMPONENT: 3, AUTOCOMPLETE: 4 };
 const InteractionResponseType = {
   PONG: 1,
   CHANNEL_MESSAGE: 4,
   DEFERRED_CHANNEL_MESSAGE: 5,
+  AUTOCOMPLETE_RESULT: 8,
 };
 
 export default {
@@ -30,6 +31,10 @@ export default {
 
     if (interaction.type === InteractionType.APPLICATION_COMMAND) {
       return handleCommand(interaction, env, ctx);
+    }
+
+    if (interaction.type === InteractionType.AUTOCOMPLETE) {
+      return handleAutocomplete(interaction, env);
     }
 
     return json({ type: InteractionResponseType.CHANNEL_MESSAGE, data: { content: 'Unknown interaction.' } });
@@ -854,13 +859,32 @@ async function cmdOracle(options, env) {
   return embed({ title: '✨ Scene Forge', description: desc, color: 0x6fb5ff });
 }
 
+const ENCOUNTER_SYSTEMS = [
+  { name: 'D&D 5e', value: 'dnd-5e' },
+  { name: 'Pathfinder 1e', value: 'pathfinder-1e' },
+];
+
+async function handleAutocomplete(interaction, env) {
+  const focused = interaction.data.options?.find(o => o.focused);
+  if (!focused) return json({ type: InteractionResponseType.AUTOCOMPLETE_RESULT, data: { choices: [] } });
+
+  if (interaction.data.name === 'encounter' && focused.name === 'system') {
+    const query = (focused.value || '').toLowerCase();
+    const filtered = ENCOUNTER_SYSTEMS.filter(s => s.name.toLowerCase().includes(query) || s.value.includes(query));
+    return json({ type: InteractionResponseType.AUTOCOMPLETE_RESULT, data: { choices: filtered } });
+  }
+
+  return json({ type: InteractionResponseType.AUTOCOMPLETE_RESULT, data: { choices: [] } });
+}
+
 async function cmdEncounter(options, env) {
+  const system = getOption(options, 'system') || 'dnd-5e';
   const difficulty = getOption(options, 'difficulty') || 'medium';
   const level = getOption(options, 'level') || 5;
   const players = getOption(options, 'players') || 4;
   const monsterType = getOption(options, 'type') || null;
   const terrain = getOption(options, 'terrain') || null;
-  const args = { party_level: level, party_size: players, difficulty };
+  const args = { system, party_level: level, party_size: players, difficulty };
   if (monsterType) args.monster_type = monsterType;
   if (terrain) args.terrain = terrain;
   const result = await callTool('oracle_encounter', args, env);
@@ -872,7 +896,8 @@ async function cmdEncounter(options, env) {
     desc += '\n\n**Loot:**\n';
     desc += result.loot.map(l => `• ${l.name} _(${l.rarity})_`).join('\n');
   }
-  return embed({ title: `⚔️ ${difficulty.charAt(0).toUpperCase() + difficulty.slice(1)} Encounter — ${result.terrain}`, description: desc, color: diffColors[difficulty] || 0x0a0d2a });
+  const systemLabel = system === 'pathfinder-1e' ? 'PF1e' : '5e';
+  return embed({ title: `⚔️ ${difficulty.charAt(0).toUpperCase() + difficulty.slice(1)} ${systemLabel} Encounter — ${result.terrain}`, description: desc, color: diffColors[difficulty] || 0x0a0d2a });
 }
 
 const TEST_CASES = [
