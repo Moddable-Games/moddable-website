@@ -94,19 +94,20 @@ function getVariant(args) {
     }
     if (!sectionKey) {
       const allSections = Object.keys(indexed.sections).filter(s => s !== 'Variant Library' && s !== 'Attribution');
-      const preferred = allSections.find(s => {
+      const candidates = allSections.filter(s => {
         const l = s.toLowerCase();
         return l.includes('standard') || l.includes('classic') || l.includes('international') || l.includes('official');
       });
+      const preferred = candidates.sort((a, b) => a.length - b.length)[0] || null;
       if (preferred) {
         sectionKey = preferred;
       } else {
         const metaVariants = meta?.variants || [];
-        const preferredVariant = metaVariants.find(v => {
+        const preferredCandidates = metaVariants.filter(v => {
           const l = v.title.toLowerCase();
           return l.includes('standard') || l.includes('classic') || l.includes('international') || l.includes('official');
-        });
-        const pick = preferredVariant?.title || metaVariants[0]?.title;
+        }).sort((a, b) => a.title.length - b.title.length);
+        const pick = preferredCandidates[0]?.title || metaVariants[0]?.title;
         if (pick) {
           sectionKey = allSections.find(s => s.toLowerCase() === pick.toLowerCase() || s.toLowerCase().includes(pick.toLowerCase()));
         }
