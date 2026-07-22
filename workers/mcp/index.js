@@ -476,12 +476,26 @@ function servePuzzleFromPool(args) {
   const idx = Math.floor(Math.random() * pool.length);
   const puzzle = pool[idx];
 
+  let puzzleFen = puzzle.fen;
+  let setupMoveApplied = null;
+  if (puzzle.setupMove) {
+    const moveResult = handleChessToolCall('chess_make_moves', { variant, fen: puzzle.fen, moves: [puzzle.setupMove] });
+    if (moveResult && moveResult.fen) {
+      puzzleFen = moveResult.fen;
+      setupMoveApplied = puzzle.setupMove;
+    }
+  }
+
+  const fenParts = puzzleFen.split(' ');
+  const turn = fenParts[1] === 'w' ? 'white' : 'black';
+
   const result = {
     variant,
     type,
     id: puzzle.id,
-    fen: puzzle.fen,
-    turn: puzzle.turn,
+    fen: puzzleFen,
+    turn,
+    setupMove: setupMoveApplied,
     solution: puzzle.solution,
     rating: puzzle.rating || null,
     themes: puzzle.themes || [],
@@ -490,12 +504,12 @@ function servePuzzleFromPool(args) {
   };
 
   if (includeSvg) {
-    const highlights = extractHighlightSquares(puzzle.solution[0]);
+    const lastMoveSquares = setupMoveApplied ? extractHighlightSquares(setupMoveApplied) : [];
     const svgResult = handleChessToolCall('chess_render_svg', {
       variant,
-      fen: puzzle.fen,
+      fen: puzzleFen,
       theme: 'classic',
-      highlights,
+      highlights: lastMoveSquares,
       size: 480,
     });
     if (svgResult && svgResult.svg) {
