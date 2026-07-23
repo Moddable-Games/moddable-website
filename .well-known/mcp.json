@@ -1,0 +1,17 @@
+{
+  "schema_version": "1.0",
+  "name": "Moddable.Games MCP Tools",
+  "description": "56 AI-callable tools for board game modding, chess variants, hex maps, RPG oracles, and game utilities. Free, open, no authentication required.",
+  "url": "https://tools.moddable.games/mcp",
+  "transport": "sse",
+  "homepage": "https://moddable.games/developers/",
+  "documentation": "https://tools.moddable.games/llms.txt",
+  "openapi": "https://tools.moddable.games/openapi.json",
+  "agent_skills": "https://tools.moddable.games/.well-known/agent-skills/index.json",
+  "configSchema": {
+    "type": "object",
+    "properties": {},
+    "additionalProperties": false,
+    "description": "No configuration required. All tools are free and open, no API keys needed."
+  }
+}

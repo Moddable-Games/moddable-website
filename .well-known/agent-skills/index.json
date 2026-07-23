@@ -1,0 +1,12 @@
+{
+  "$schema": "https://schemas.agentskills.io/discovery/0.2.0/schema.json",
+  "skills": [
+    {
+      "name": "moddable-games-tools",
+      "type": "skill-md",
+      "description": "56 AI-callable board game tools: chess variants, hex maps, piece gallery, rules library, RPG oracles, and game utilities via MCP",
+      "url": "https://tools.moddable.games/llms.txt",
+      "digest": "sha256:placeholder"
+    }
+  ]
+}

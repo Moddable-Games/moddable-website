@@ -37,6 +37,28 @@ These JSON files contain structured data about all our content:
 - **Rebalance**: Mechanical adjustments to improve gameplay (accent: green)
 - **Reskin**: Thematic/aesthetic changes preserving core rules (accent: blue)
 
+## AI Tool Access (MCP)
+
+This site provides 56 AI-callable tools via the Model Context Protocol (MCP) at:
+
+- **MCP endpoint:** https://tools.moddable.games/mcp (SSE transport)
+- **REST API:** https://tools.moddable.games/api/call (POST with `{"tool": "name", "args": {...}}`)
+- **OpenAPI spec:** https://tools.moddable.games/openapi.json
+- **Agent skills:** https://tools.moddable.games/.well-known/agent-skills.json
+- **Server card:** https://tools.moddable.games/.well-known/mcp/server-card.json
+
+No authentication required. All tools are free and open.
+
+### Tool Namespaces
+
+- **Chess** (9 tools): variant listing, legal moves, analysis, puzzles, SVG render
+- **Hex Maps** (6 tools): map generation, pathfinding, FOV, SVG export
+- **Piece Gallery** (3 tools): search/browse 96 chess piece sets
+- **Rules Library** (5 tools): game/variant lookup, search, random
+- **Game Tools** (12 tools): TI4 drafting, Mancala, Morris, Ur, Pachisi, Nukes, Colony
+- **Oracles & RPG** (14 tools): oracle tables, encounters, entity browser (10 RPG systems)
+- **Utilities** (7 tools): dice, coins, teams, factions, mod jam
+
 ## Open Source
 
 All engines and tools are MIT licensed. Game rules are CC-BY-SA 4.0. Source code available on GitHub.

@@ -49,4 +49,8 @@
   <url><loc>https://moddable.games/press/</loc><changefreq>monthly</changefreq><priority>0.6</priority></url>
   <url><loc>https://moddable.games/submit/</loc><changefreq>yearly</changefreq><priority>0.5</priority></url>
   <url><loc>https://moddable.games/subscribe/</loc><changefreq>yearly</changefreq><priority>0.5</priority></url>
+  <url><loc>https://moddable.games/developers/</loc><changefreq>monthly</changefreq><priority>0.8</priority></url>
+  <url><loc>https://moddable.games/llms.txt</loc><changefreq>monthly</changefreq><priority>0.7</priority></url>
+  <url><loc>https://moddable.games/.well-known/mcp.json</loc><changefreq>monthly</changefreq><priority>0.7</priority></url>
+  <url><loc>https://moddable.games/.well-known/agent-skills/index.json</loc><changefreq>monthly</changefreq><priority>0.7</priority></url>
 </urlset>

@@ -34,6 +34,37 @@ function trackToolCall(toolName, env, request) {
   ).catch(() => {});
 }
 
+function categoriseRequest(path, method) {
+  if (method === 'OPTIONS') return 'protocol';
+  if (path === '/llms.txt' || path.startsWith('/.well-known') || path === '/openapi.json' || path === '/api/tools' || path === '/api/catalog') return 'discovery';
+  if (path === '/mcp' || path === '/mcp/sse' || path === '/mcp/message') return 'protocol';
+  if (path.startsWith('/api/call')) return 'tool_call';
+  if (path === '/api/board.png' || path === '/api/pieces.png') return 'asset';
+  return 'page';
+}
+
+function trackRequest(path, method, env, request) {
+  const secret = env.GA_API_SECRET;
+  if (!secret) return null;
+  const clientId = request?.headers?.get('cf-connecting-ip') || 'anonymous';
+  const payload = {
+    client_id: clientId.replace(/[.:]/g, '_'),
+    events: [{
+      name: 'worker_request',
+      params: {
+        route: path,
+        method: method,
+        request_type: categoriseRequest(path, method),
+        engagement_time_msec: '1',
+      },
+    }],
+  };
+  return fetch(
+    `https://www.google-analytics.com/mp/collect?measurement_id=${GA_MEASUREMENT_ID}&api_secret=${secret}`,
+    { method: 'POST', body: JSON.stringify(payload) }
+  ).catch(() => {});
+}
+
 const PUZZLE_POOL_TOOL = {
   name: 'chess_generate_puzzle',
   description: 'Serve a random chess puzzle from a pool of 1,557 pre-generated puzzles across 66 variants (plus standard). Returns position, solution, metadata, and an SVG board image. Use chess_list_puzzle_types to discover available variant:type combinations.',
@@ -255,7 +286,11 @@ export default {
       'Access-Control-Allow-Origin': corsOrigin,
       'Access-Control-Allow-Methods': 'GET, POST, OPTIONS',
       'Access-Control-Allow-Headers': 'Content-Type',
+      'Link': '</.well-known/api-catalog>; rel="api-catalog", </openapi.json>; rel="service-desc", </llms.txt>; rel="describedby"',
     };
+
+    const track = trackRequest(path, request.method, env, request);
+    if (track) ctx.waitUntil(track);
 
     if (request.method === 'OPTIONS') {
       return new Response(null, { status: 204, headers: corsHeaders });
@@ -284,6 +319,19 @@ export default {
     if (path === '/openapi.json') {
       return new Response(JSON.stringify(generateOpenApi(), null, 2), {
         headers: { 'Content-Type': 'application/json', ...corsHeaders },
+      });
+    }
+
+    if (path === '/.well-known/api-catalog') {
+      return new Response(JSON.stringify({
+        linkset: [{
+          anchor: 'https://tools.moddable.games/',
+          'service-desc': [{ href: 'https://tools.moddable.games/openapi.json', type: 'application/openapi+json' }],
+          'service-doc': [{ href: 'https://tools.moddable.games/llms.txt', type: 'text/plain' }],
+          status: [{ href: 'https://tools.moddable.games/api/tools' }],
+        }],
+      }, null, 2), {
+        headers: { 'Content-Type': 'application/linkset+json', ...corsHeaders },
       });
     }
 
@@ -316,22 +364,51 @@ export default {
 
     if (path === '/.well-known/mcp/server-card.json') {
       return new Response(JSON.stringify({
-        name: SERVER_INFO.name,
-        version: SERVER_INFO.version,
-        description: SERVER_INFO.description,
-        homepage: 'https://moddable.games/developers/',
-        repository: 'https://github.com/Moddable-Games',
-        icon: 'https://moddable.games/img/favicon.svg',
-        transport: { type: 'http', url: 'https://tools.moddable.games/mcp' },
-        capabilities: {
-          tools: { count: ALL_TOOLS.length },
-          prompts: { count: PROMPTS.length },
-          resources: { count: RESOURCES.length },
+        serverInfo: {
+          name: SERVER_INFO.name,
+          version: SERVER_INFO.version,
+          description: SERVER_INFO.description,
+          homepage: 'https://moddable.games/developers/',
+          repository: 'https://github.com/Moddable-Games',
+          icon: 'https://moddable.games/img/favicon.svg',
         },
+        transport: {
+          endpoint: '/mcp',
+          type: 'streamable-http',
+          url: 'https://tools.moddable.games/mcp',
+        },
+        capabilities: ['tools', 'resources', 'prompts'],
         tools: ALL_TOOLS.map(t => ({ name: t.name, description: t.description })),
         prompts: PROMPTS.map(p => ({ name: p.name, description: p.description })),
         resources: RESOURCES.map(r => ({ uri: r.uri, name: r.name, description: r.description })),
-        config: { schema: { type: 'object', properties: {}, additionalProperties: false } },
+      }, null, 2), {
+        headers: { 'Content-Type': 'application/json', ...corsHeaders },
+      });
+    }
+
+    if (path.startsWith('/.well-known/agent-skills/') && path.endsWith('/SKILL.md')) {
+      const skillName = path.split('/')[3];
+      const skillMd = generateSkillMd(skillName);
+      if (skillMd) {
+        return new Response(skillMd, {
+          headers: { 'Content-Type': 'text/markdown', ...corsHeaders },
+        });
+      }
+      return json({ error: 'Skill not found' }, corsHeaders, 404);
+    }
+
+    if (path === '/.well-known/agent-skills/index.json' || path === '/.well-known/agent-skills') {
+      return new Response(JSON.stringify({
+        $schema: 'https://schemas.agentskills.io/discovery/0.2.0/schema.json',
+        skills: [
+          { name: 'chess-engine', type: 'skill-md', description: '75 playable chess variants with legal move generation, analysis, puzzles, and SVG rendering', url: 'https://tools.moddable.games/.well-known/agent-skills/chess-engine/SKILL.md', digest: 'sha256:placeholder' },
+          { name: 'hex-maps', type: 'skill-md', description: 'Procedural hex map generation, pathfinding, FOV calculation, and SVG export', url: 'https://tools.moddable.games/.well-known/agent-skills/hex-maps/SKILL.md', digest: 'sha256:placeholder' },
+          { name: 'piece-gallery', type: 'skill-md', description: 'Search and browse 96 chess piece sets (2,550 SVGs) across 19 game families', url: 'https://tools.moddable.games/.well-known/agent-skills/piece-gallery/SKILL.md', digest: 'sha256:placeholder' },
+          { name: 'rules-library', type: 'skill-md', description: 'Query game rules and variants from a library of board game rulesets', url: 'https://tools.moddable.games/.well-known/agent-skills/rules-library/SKILL.md', digest: 'sha256:placeholder' },
+          { name: 'game-tools', type: 'skill-md', description: 'TI4 drafting, Mancala, Morris, Ur, Pachisi, Nukes setup, and Colony odds calculators', url: 'https://tools.moddable.games/.well-known/agent-skills/game-tools/SKILL.md', digest: 'sha256:placeholder' },
+          { name: 'oracles-rpg', type: 'skill-md', description: 'Oracle tables, encounter building, and entity browsing across 10 RPG systems', url: 'https://tools.moddable.games/.well-known/agent-skills/oracles-rpg/SKILL.md', digest: 'sha256:placeholder' },
+          { name: 'utilities', type: 'skill-md', description: 'Dice rolling, coin flips, team splitting, faction assignment, mod jam tools', url: 'https://tools.moddable.games/.well-known/agent-skills/utilities/SKILL.md', digest: 'sha256:placeholder' },
+        ],
       }, null, 2), {
         headers: { 'Content-Type': 'application/json', ...corsHeaders },
       });
@@ -362,6 +439,62 @@ export default {
     return json({ error: 'Not found' }, corsHeaders, 404);
   }
 };
+
+function generateSkillMd(skillName) {
+  const skills = {
+    'chess-engine': {
+      title: 'Chess Engine',
+      desc: '75 playable chess variants with legal move generation, AI opponents, analysis, puzzles, and SVG board rendering.',
+      tools: ALL_TOOLS.filter(t => t.name.startsWith('chess_')),
+    },
+    'hex-maps': {
+      title: 'Hex Maps',
+      desc: 'Procedural hex map generation for tabletop games with pathfinding, field-of-view calculation, terrain types, and SVG export.',
+      tools: ALL_TOOLS.filter(t => t.name.startsWith('hex_')),
+    },
+    'piece-gallery': {
+      title: 'Piece Gallery',
+      desc: 'Search and browse 96 chess piece sets (2,550 SVGs) across 19 game families. Get set details, previews, and aggregate statistics.',
+      tools: ALL_TOOLS.filter(t => t.name.startsWith('piece_gallery_')),
+    },
+    'rules-library': {
+      title: 'Rules Library',
+      desc: 'Query board game rules and variants from a structured markdown library. Search by game, category, or keyword.',
+      tools: ALL_TOOLS.filter(t => t.name.startsWith('rules_')),
+    },
+    'game-tools': {
+      title: 'Game Tools',
+      desc: 'Classic and modern board game utilities: TI4 faction drafting and objectives, Mancala, Nine Mens Morris, Royal Game of Ur, Pachisi, Nukes setup, and Colony odds calculators.',
+      tools: GAME_TOOLS,
+    },
+    'oracles-rpg': {
+      title: 'Oracles & RPG',
+      desc: 'Oracle/random tables, encounter building, and entity browsing across 10 RPG systems (Starforged, Ironsworn, Maze Rats, Cairn, Dungeon World, Knave, D&D 5e, Pathfinder 1e, BRP, Fate Core). 305 tables, 3385 entities.',
+      tools: ALL_TOOLS.filter(t => t.name.startsWith('oracle_') || t.name.startsWith('rpg_')),
+    },
+    'utilities': {
+      title: 'Utilities',
+      desc: 'General-purpose gaming utilities: dice rolling (any notation), coin flips, team splitting, faction assignment, and mod jam management.',
+      tools: ALL_TOOLS.filter(t => ['dice_roll', 'coin_flip', 'team_split', 'ti4_random_factions', 'jam_status', 'jam_timer', 'jam_vote'].includes(t.name)),
+    },
+  };
+  const skill = skills[skillName];
+  if (!skill) return null;
+  let md = `# ${skill.title}\n\n${skill.desc}\n\n`;
+  md += `## Connection\n\n- **MCP endpoint:** https://tools.moddable.games/mcp\n- **REST API:** POST https://tools.moddable.games/api/call with \`{"tool": "name", "args": {...}}\`\n- **Authentication:** None required\n\n`;
+  md += `## Tools\n\n`;
+  for (const t of skill.tools) {
+    md += `### ${t.name}\n\n${t.description}\n\n`;
+    if (t.inputSchema && t.inputSchema.properties) {
+      md += '**Parameters:**\n\n';
+      for (const [key, val] of Object.entries(t.inputSchema.properties)) {
+        md += `- \`${key}\` (${val.type || 'string'}): ${val.description || ''}\n`;
+      }
+      md += '\n';
+    }
+  }
+  return md;
+}
 
 function handleToolCall(name, args) {
   if (name === 'chess_generate_puzzle') return servePuzzleFromPool(args);
