@@ -18,6 +18,7 @@ const heroHex = document.getElementById('hero-hex');
 const heroGlow = document.getElementById('hero-glow');
 const heroBotFade = document.getElementById('hero-bot-fade');
 const heroWash = document.getElementById('hero-wash');
+var heroScrollActive = false;
 window.addEventListener('scroll', () => {
   const rect = heroSection.getBoundingClientRect();
   const scrolled = Math.max(0, -rect.top);
@@ -93,6 +94,7 @@ setTimeout(function() {
   var wordIdx = 0;
   var colorIdx = 0;
   var charIdx = WORDS[0].length;
+  var deleting = true;
 
   function showCursor() { tw.classList.add('typing'); }
   function hideCursor() { tw.classList.remove('typing'); }
