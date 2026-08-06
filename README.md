@@ -1,5 +1,7 @@
 # Moddable.Games
 
+[![MCP Queen operational grade](https://mcpqueen.com/badge/games.moddable.tools/moddable-games-tools.svg)](https://mcpqueen.com/s/games.moddable.tools/moddable-games-tools)
+
 **Creating games you already own.**
 
 A multi-page marketing site and tools platform for an open-source board game modding workshop. Ten mods. Three original games. Two open-source engines. One Discord.
